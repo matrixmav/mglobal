@@ -23,6 +23,31 @@ class SiteController extends Controller
 			),
 		);
 	}
+        /**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -30,48 +55,14 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($action = '')
 	{   
-//            $this->layout = '';
-//            $detector = new Mobile_Detect;
-//            if($detector->isMobile() || $detector->isTablet())
-//                $this->redirect(array('/mobile'));
-//			
-//            $myIdAddress =  '208.109.223.173'; //$_SERVER['REMOTE_ADDR']
-//            
-//            // geo-localize your visitors
-////            $visitorsGeoLocalize = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$myIdAddress));
-//            
-//            //$cityName = $visitorsGeoLocalize['geoplugin_city'];
-//            //$stateName = $visitorsGeoLocalize['geoplugin_city']
-//            //$countryName = $visitorsGeoLocalize['geoplugin_countryName'];
-//            
-//            $hotelModel = Hotel::model();
-//            $homeBannerModel = HomeBanner::model();
-//            $cityModel = City::model();
-//            
-//           
-//            $cityName = 'new-york'; //TODO: get from geo location
-//            $stateName = 'new-york';  
-//            $countryName = 'USA';
-//            
-//            //set localization details in session
-//            Yii::app()->session['localization'] = array(
-//                'country'=>$countryName,
-//                'state'=>$stateName,
-//                'city'=>$cityName,
-//            );
-//            $action = $this->getAction()->getId();
-//            $this->loadMetas($action);
-//            $condition = array ("slug" => $cityName);
-//            //read geo location city
-//            $cityObject = $cityModel->getCityByName($condition);
-//            // get top 8 cities with the hotel count
-//            
-//            $stateCondition = array("id" => $stateName);
-//            $stateObject = $stateModel = State::model()->getStateByName($stateCondition);
+           
            $packageObject = Package::model()->findAll(array('limit' => '3'));
-           $this->render('index',array('packageObject'=>$packageObject));
+           $profileObject = UserProfile::model()->findAll(array('condition'=>'testimonial_status=1'));
+           $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$profileObject));
 	}
-	
+        
+                    
+        
        
         /**
 	 *This is action label
