@@ -149,11 +149,10 @@ class MoneyTransferController extends Controller
 		  
 			 }
         }   
-	}
 	else
 	{
 		$this->redirect(Yii::app()->getHomeUrl());
-	}		
+}}		
 		
 		 public function actionAutocomplete(){
 			 if($_GET['username']){
