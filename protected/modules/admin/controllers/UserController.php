@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet'),
+                                    'creditwallet','list'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -135,9 +135,18 @@ class UserController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
-	{
-            $model = new User;
+        public function actionIndex() {
+            $userObject = array();
+            if (!empty($_POST['search'])) {
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['search']));
+            }
+            $this->render('searchUser', array(
+                'userObject' => $userObject,
+            ));
+        }
+
+        public function actionList(){
+           $model = new User;
             $pageSize = 10;
             
             $dataProvider=new CActiveDataProvider('User', array(
@@ -148,8 +157,8 @@ class UserController extends Controller
             }
             $this->render('index',array(
                     'dataProvider'=>$dataProvider,
-            ));
-	}
+            )); 
+        }
 
         public function actionWallet() {
             $model = new User();
