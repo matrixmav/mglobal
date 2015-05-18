@@ -204,14 +204,25 @@ class PackageController extends Controller
             
             $rightbar .='</ul>
              </form>';
-            if(Yii::app()->session['amount'] !='')
-            {
+             
             $rightbar .='<div class="amountWrapper">
-            Total Amount:<br>
+            Package Amount:<br>
             <div class="cart-total">
             <span id="total_curr">
             <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
-            $rightbar .= Yii::app()->session['amount'];
+            $rightbar .= $packageObject->amount.".00";
+             $rightbar .='</span>
+             </div>
+             </div>';
+            
+            if(Yii::app()->session['amount'] !='')
+            {
+            $rightbar .='<div class="amountWrapper">
+            Domain Amount:<br>
+            <div class="cart-total">
+            <span id="total_curr">
+            <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
+            $rightbar .= Yii::app()->session['amount'].".00";
             
             $rightbar .='</span></span>&nbsp;
             </span><br>
