@@ -292,12 +292,12 @@ License: You must have a valid license purchased only from themeforest(the above
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" || $curControllerLower == "order") {
+                                if ($curControllerLower == "transaction" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'profile' && $curActionLower == 'order')
+                                if ($curControllerLower == 'transaction' && $curActionLower == 'rpwallet' || $curActionLower == 'commisionwallet' || $curActionLower == 'fundwallet')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -305,7 +305,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Summery</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'transaction') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'rpwallet') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -349,7 +349,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 );
                                 ?>
                                 <li
-                                    class="<?php echo (($curControllerLower == 'transaction') || ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Fund </span>
                                         <span class="selected"></span> <span
