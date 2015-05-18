@@ -144,7 +144,31 @@ class TransactionController extends Controller
         {
            $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
                                         'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid']),'order'=>'id DESC',
+                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=1'),'order'=>'id DESC',
+                                        )));
+            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+        }
+        
+         /*
+         * this will fetch commision wallet
+         */
+        public function actionCommisionWallet()
+        {
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=2'),'order'=>'id DESC',
+                                        )));
+            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+        }
+        
+         /*
+         * this will fetch fund wallet
+         */
+        public function actionFundWallet()
+        {
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=3'),'order'=>'id DESC',
                                         )));
             $this->render('rpwallet',array('dataProvider'=>$dataProvider));
         }
