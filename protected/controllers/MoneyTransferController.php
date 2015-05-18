@@ -372,6 +372,8 @@ class MoneyTransferController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        
+        
 
 	/**
 	 * Manages all models.

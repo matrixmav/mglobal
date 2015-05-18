@@ -28,7 +28,7 @@ class TransactionController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list'),
+				'actions'=>array('index','view','list','rpwallet','commisionwallet','fundwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -135,7 +135,19 @@ class TransactionController extends Controller
             $this->render('list',array('dataProvider'=>$dataProvider));
         }
         
-       
+        /*
+         * this will fetch rp wallet
+         */
+        public function actionRpWallet()
+        {
+           $dataProvider = new CActiveDataProvider('Transaction',array(
+                                        'criteria'=>array(
+                                                        'condition'=> ('user_id = '.Yii::app()->session['userid']),'order'=>'id DESC',
+                                        )));
+            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+        }
+
+        
 
 
 
