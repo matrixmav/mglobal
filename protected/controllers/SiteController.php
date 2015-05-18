@@ -57,8 +57,13 @@ class SiteController extends Controller
 	{   
            
            $packageObject = Package::model()->findAll(array('limit' => '3'));
-           $profileObject = UserProfile::model()->findAll(array('condition'=>'testimonial_status=1'));
-           $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$profileObject));
+            $userProfileObject =  UserProfile::model()->findAll(array('condition'=>'testimonial_status=1'));
+            
+          foreach ($userProfileObject as $userProfile){
+               echo $userProfile->user();
+           }
+                    
+           $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$userProfileObject)); 
 	}
         
                     
