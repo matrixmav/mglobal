@@ -22,9 +22,7 @@ $this->breadcrumbs=array(
                                             <input type="password" class="form-control" id="master_code" name="master_code" required >
 											<input type="hidden" class="form-control" 
 											value="<?php echo base64_decode($_GET['tu']); ?>" name="tu">
-											<input type="hidden" class="form-control" 
-											value="<?php echo base64_decode($_GET['ta']); ?>" name="ta">
-											
+																						
                                         </div>
                                         <span id="email_error"></span>
                                     </div>
