@@ -1,13 +1,17 @@
+<?php $curAction = @Yii::app()->getController()->getAction()->controller->action->id; 
+ if($curAction != 'loginregistration'){ ?>
 <div class="main">
   <div class="container">
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
+ <?php }?>
       <!-- BEGIN CONTENT -->
                 <div class="col-md-6 col-sm-6">
         <?php 
         if(!empty($msg)){
             echo $msg; 
         } ?>
+         <?php if(!empty($successMsg)){ echo $successMsg; } ?>                
         <h1>Login</h1>
         <div class="content-form-page">
           <div class="row">
@@ -69,10 +73,12 @@
         </div>
       </div>
       <!-- END CONTENT -->
+      <?php if($curAction != 'loginregistration'){ ?>
    </div>
     <!-- END SIDEBAR & CONTENT -->
   </div>
 </div>
+      <?php }?>
 <script>
  function validateFrm() {
     $("#name_error").html("");

@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Orders List',
+	'Wallet Summery',
 );
 
 $this->menu=array(
@@ -75,24 +75,8 @@ $this->menu=array(
 					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
 					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/redirect/", array("id"=>$data->id)): ""',
 				),
-                             
-                       ),
+			),
 		),
-            
-            array( 
-			'class'=>'CButtonColumn',
-			'template'=>'{Invoice}',
-			'htmlOptions'=>array('width'=>'23%'),
-			'buttons'=>array(
-				'Invoice' => array(
-					'label'=>'Download Invoice',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice/", array("id"=>$data->id)): ""',
-				),
-                       ),
-		),
-            
-            
 	),
 )); ?>
                     

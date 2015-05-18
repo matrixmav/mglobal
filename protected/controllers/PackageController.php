@@ -54,12 +54,16 @@ class PackageController extends Controller
         {
              $response ='';
             $percentage = 10;
+            $couponObject = Coupon::model()->findByAttributes(array('status'=>'1'));
             $packageObject = Package::model()->findByPK(Yii::app()->session['package_id']);
-           if($packageObject->coupon_code==$_REQUEST['coupon_code'])
+           if($couponObject->coupon_code==$_REQUEST['coupon_code'])
            {
               Yii::app()->session['coupon_code'] =  $_REQUEST['coupon_code'];
-              $DiscountAmount = $packageObject->amount - $packageObject->amount * $percentage / 100 + Yii::app()->session['amount'];
-               $response .=  $DiscountAmount;
+              
+               $packageamount = $packageObject->amount;
+               $discountedAmount = $packageObject->amount * $percentage / 100 + Yii::app()->session['amount'];
+               $discountAmountfinal = $packageamount - $discountedAmount;
+               $response .=  $discountAmountfinal."_".$discountedAmount;
            }else{
                $response .= 0 ;
            }
@@ -200,14 +204,25 @@ class PackageController extends Controller
             
             $rightbar .='</ul>
              </form>';
-            if(Yii::app()->session['amount'] !='')
-            {
+             
             $rightbar .='<div class="amountWrapper">
-            Total Amount:<br>
+            Package Amount:<br>
             <div class="cart-total">
             <span id="total_curr">
             <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
-            $rightbar .= Yii::app()->session['amount'];
+            $rightbar .= $packageObject->amount.".00";
+             $rightbar .='</span>
+             </div>
+             </div>';
+            
+            if(Yii::app()->session['amount'] !='')
+            {
+            $rightbar .='<div class="amountWrapper">
+            Domain Amount:<br>
+            <div class="cart-total">
+            <span id="total_curr">
+            <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
+            $rightbar .= Yii::app()->session['amount'].".00";
             
             $rightbar .='</span></span>&nbsp;
             </span><br>

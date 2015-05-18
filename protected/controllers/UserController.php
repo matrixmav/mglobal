@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration'),
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted'),
  
 				'users'=>array('*'),
 			),
@@ -56,9 +56,9 @@ class UserController extends Controller
 
                 $model = new User;
                 $error = "";
-                $username = $_POST['name'];
+                $username =  $_POST['name'];
                 $password =  $_POST['password'];
-                $masterkey =  12345;//$_POST['masterkey'];
+                $masterkey = $_POST['masterkey'];
 
                 if((!empty($username)) && (!empty($password))  && (!empty($masterkey))) {
                     $getUserObject = User::model()->findByAttributes(array('name'=>$username,'status'=>1));
@@ -95,30 +95,61 @@ class UserController extends Controller
 
             }
                 $this->render("login",array("msg"=>$error));
-	}
+ }
         
         /* User Registration Strat Here */
         public function actionRegistration(){
             
             if($_POST){              
-                   
-               //echo substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d']  ; die;
+                
+                //echo substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d']  ; die;
                 $masterPin = mt_rand(100000,999999);
                 $model = new User;
                 $model->attributes = $_POST;
                 $model->sponsor_id = substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d'] ;
                 $model->password = BaseClass::md5Encryption($_POST['password']);  
                 $model->master_pin = md5($masterPin);
-                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d'];
-                $model->user_sponsor_id = $_POST['sponsor_id'];
+                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d'];              
                 $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
                 
-                if(count($userObject) > 1 ){
-                    
+                /* Find for parent user ID */
+                $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id']));
+                //echo "<pre>"; print_r($userObject);
+                
+                /* Condition for they have the child or not */
+                $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
+                //echo "<pre>"; print_r($geneObject);
+                //die;
+                if(count($geneObject)){
+                    $userId = "";
+                    for($i = 1; $i <= 1000 ; $i++ ){                    
+                        
+                        if( $i == 1 ){                       
+                            $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $_POST['position'] ) );
+                            if(count($geneObjectNode)){                               
+                                echo $userId = $geneObjectNode->user_id ;                        
+                            }else{                                
+                                echo $userId =  $geneObject->user_id;  
+                                break;
+                            }
+                            
+                        }else{                        
+                            $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId ,'position' => $_POST['position'] ) );                            
+                            if(count($geneObjectNode)){
+                                $userId = "";
+                                $userId .= $geneObjectNode->user_id;                            
+                            }else{                                
+                                echo $userId ;
+                                break;
+                            }
+                        }
+                    } 
+                
                 }else{
-                  //$model->sponsor_id = $_POST['sponsor_id']; 
-                }
-                             
+                   $userId =  $userObject->id; 
+                }              
+                         
+                
                 $rand= rand (date('YmdHis'),5); // For the activation link
                 $model->activation_key = $rand ;
                                
@@ -136,12 +167,12 @@ class UserController extends Controller
                 $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ));
                 //echo 
                 $modelGenealogy = new Genealogy();
-                $modelGenealogy->parent = $userObjectId->id; 
+                $modelGenealogy->parent = $userId ; 
                 $modelGenealogy->user_id = $model->id ; 
                 $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
                 $modelGenealogy->position = $_POST['position'];                 
                 $modelGenealogy->save(false); 
-                
+                $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>"; 
                 /*  For Genealogy Data */
                 
                 /*$modelGenealogy = new Genealogy();
@@ -158,7 +189,7 @@ class UserController extends Controller
 //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
 //                var_dump($config);
 //                CommonHelper::sendMail($config);
-                $this->redirect('login');
+                $this->render('login', array('successMsg'=> $successMsg));
             }
             $spnId = "";
             if($_GET){
@@ -246,6 +277,18 @@ class UserController extends Controller
                 }
             }
         }
+        
+        public function actionIsEmailExisted(){            
+            if($_POST){
+                $userObject = User::model()->findByAttributes(array('email' => $_POST['email']));
+                if(count($userObject) > 0){
+                    echo "1"; exit;
+                } else {
+                    echo "0"; exit;
+                }
+            }
+        }
+        
         
        public function actionloginregistration()
        {
@@ -354,8 +397,10 @@ class UserController extends Controller
 			'model'=>$model,
 		));
 	}
+        
 
-	/**
+
+        /**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded

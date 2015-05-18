@@ -150,3 +150,18 @@
             }
         });
     }
+
+    function isEmailExisted() {
+        
+        $.ajax({
+            type: "post",
+            url: "/user/isemailexisted",
+            data: "email=" + $("#email").val(),
+            success: function (msg) {
+                $("#email_error").html("");
+                if(msg == 1){
+                    $("#email_error").html("Existed!!!");
+                }
+            }
+        });
+    }
