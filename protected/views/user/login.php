@@ -11,6 +11,7 @@
         if(!empty($msg)){
             echo $msg; 
         } ?>
+         <?php if(!empty($successMsg)){ echo $successMsg; } ?>                
         <h1>Login</h1>
         <div class="content-form-page">
           <div class="row">

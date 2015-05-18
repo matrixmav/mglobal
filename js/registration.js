@@ -150,3 +150,17 @@
             }
         });
     }
+
+    function getCountryCode(id){ 
+         $.ajax({
+            type: "post",
+            url: "/country/getcountry",
+            data: "id=" + id,
+            success: function (msg) { 
+                $("#country_code").val("");
+                if(msg){
+                    $("#country_code").val(msg);
+                }
+            }
+        });
+    }
