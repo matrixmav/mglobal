@@ -45,35 +45,28 @@ $this->breadcrumbs = array(
             <div class="form-group" id="stateList"  style="display: <?php if(!empty($profileObject) && count($stateObject) > 0){ echo "block";}else{ echo "none";}?>">
                 <label class="col-lg-4 control-label" for="email">State <span class="require">*</span></label>
                 <div class="col-lg-8">
-
-                    <select id="stateId" name="UserProfile[state_id]" onchange="showCity(this.value);" class="form-control">
-                       <option value="">Select State</option>
-                       <?php if(count($stateObject)>0){?>
-                       <?php foreach ( $stateObject as  $state) { ?>
-                            <option value="<?php echo $state->id; ?>" <?php if( $state->id== (!empty($profileObject)) ? $profileObject->state_id :  ""){?>selected="selected"<?php }?>><?php echo $state->name; ?></option>
-                            <?php } ?>
-                       <?php }?>
-                    </select>
-                </div></div>
+                   <input type="text" id="state_id" class="form-control" name="UserProfile[state_id]" value="<?php echo (!empty($profileObject)) ?  $profileObject->state_id : ""; ?>">
+                 </div>
+                 </div>
             
-            <div class="form-group" id="cityList" style="display: <?php if(!empty($profileObject) && count($cityObject) > 0){ echo "block";}else{ echo "none";}?>"">
+            <div class="form-group" id="cityList">
                 <label class="col-lg-4 control-label" for="email">City <span class="require">*</span></label>
                 <div class="col-lg-8">
-
-                    <select id="cityId" name="UserProfile[city_id] " class="form-control">
-                       <option value="">Select State</option>
-                       <?php if(count($cityObject)>0){?>
-                       <?php foreach ( $cityObject as  $city) { ?>
-                            <option value="<?php echo $city->id; ?>" <?php if( $city->id == (!empty($profileObject)) ? $profileObject->city_id :  ""){?>selected="selected"<?php }?>><?php echo $city->name; ?></option>
-                            <?php } ?>
-                       <?php }?>
-                    </select>
-                </div></div>
+                    <input type="text" id="city_id" class="form-control" name="UserProfile[city_id]" value="<?php echo (!empty($profileObject)) ?  $profileObject->city_id : ""; ?>">
+                 </div>
+            </div>
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Zip Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="zip_code" class="form-control" name="UserProfile[zip_code]" value="<?php echo (!empty($profileObject)) ?  $profileObject->zip_code : ""; ?>">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
                 </div>
             </div>
             
@@ -118,18 +111,18 @@ $this->breadcrumbs = array(
             document.getElementById("country_id").focus();
             return false;
         }
-        if(document.getElementById("stateId").value=='')
+        if(document.getElementById("state_id").value=='')
         {
             document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please select state.";
-            document.getElementById("stateId").focus();
+            document.getElementById("error_msg").innerHTML = "Please enter state.";
+            document.getElementById("state_id").focus();
             return false;
         }
-        if(document.getElementById("cityId").value=='')
+        if(document.getElementById("city_id").value=='')
         {
             document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please select city.";
-            document.getElementById("cityId").focus();
+            document.getElementById("error_msg").innerHTML = "Please enter city.";
+            document.getElementById("city_id").focus();
             return false;
         }
         if(document.getElementById("zip_code").value=='')
@@ -139,9 +132,17 @@ $this->breadcrumbs = array(
             document.getElementById("zip_code").focus();
             return false;
         }
+         if(document.getElementById("master_pin").value=='')
+        {
+            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg").innerHTML = "Please enter master pin.";
+            document.getElementById("master_pin").focus();
+            return false;
+        }
         
     }
-    function getStateList(country_id)
+    </script>
+    <!--function getStateList(country_id)
     {
         var country_id = country_id;
         
@@ -177,5 +178,5 @@ $this->breadcrumbs = array(
                 }
             }
         });
-    }
+    }*/
 </script>    
