@@ -53,6 +53,9 @@ class Transaction extends CActiveRecord
 		return array(
                     'usertable' => array(self::BELONGS_TO, 'User', 'user_id'),
                     'usertable' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'touser' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'fromuser' => array(self::BELONGS_TO, 'MoneyTransfer', 'id'),
+                    'moneytransfer' => array(self::BELONGS_TO, 'MoneyTransfer', 'id')
 		);
 	}
 

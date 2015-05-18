@@ -49,7 +49,8 @@ class MoneyTransfer extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'touser' => array(self::BELONGS_TO, 'User', 'to_user_id'),
-                    'fromuser' => array(self::BELONGS_TO, 'User', 'from_user_id')
+                    'fromuser' => array(self::BELONGS_TO, 'User', 'from_user_id'),
+                    'touser' => array(self::BELONGS_TO, 'MoneyTransfer', 'to_user_id')
 		);
 	}
 	
