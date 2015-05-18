@@ -32,7 +32,7 @@ class SiteController extends Controller
 	{   
            $userProfileObject =  UserProfile::model()->findAll();
            foreach ($userProfileObject as $userProfile){
-               echo $userProfile->user()->full_name;
+               
            }
 //            $this->layout = '';
 //            $detector = new Mobile_Detect;
