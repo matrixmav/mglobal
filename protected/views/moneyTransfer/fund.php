@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 ?>                        <div class="col-md-7 col-sm-7">
 						<div class="error" id="error_msg" style="display: none;"></div>
-                            <form class="form-horizontal" role="form" method="post" action="">
+                            <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" >
                                 <fieldset> 
                                     <legend>Add Fund</legend>
                                     
@@ -16,7 +16,8 @@ $this->breadcrumbs=array(
                                            <select id="transactiontype" name="transactiontype">
 										    <option value="">Select Option</option>
 										   <option value="1">Cash</option>
-										   <option value="2">RP Wallet</option>										   
+										   <option value="2">RP Wallet</option>
+										   <option value="3">Commission Points</option>										   
 										   </select>
                                         </div>
                                        
