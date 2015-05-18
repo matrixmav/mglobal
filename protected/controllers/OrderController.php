@@ -28,7 +28,7 @@ class OrderController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list','redirect'),
+				'actions'=>array('index','view','list','redirect','invoice'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -158,8 +158,30 @@ class OrderController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        
+        /*
+         * function to generate invoice
+         */
+        public function actionInvoice()
+        {
+             
+        $pdf = Yii::createComponent('application.extensions.tcpdf.ETcPdf', 
+                                    'P', 'cm', 'A4', true, 'UTF-8');
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor("Nicola Asuni");
+        $pdf->SetTitle("TCPDF Example 002");
+        $pdf->SetSubject("TCPDF Tutorial");
+        $pdf->SetKeywords("TCPDF, PDF, example, test, guide");
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont("times", "BI", 20);
+        $pdf->Cell(0,10,"Example 002",1,1,'C');
+        $pdf->Output("example_002.pdf", "I");
+        }        
 
-	/**
+        /**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
