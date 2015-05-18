@@ -12,7 +12,7 @@ $this->menu=array(
 );
  
 ?>
-    <?php //echo "<pre>"; print_r($moneytransfer);?>
+    <?php //echo "<pre>"; print_r($orderObject);?>
        <div class="main">
       <div class="container">
 
@@ -40,12 +40,31 @@ $this->menu=array(
 	),	
 	'columns'=>array(
 		//'idJob',
-	
+		array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Transfer To &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data->touser->name)?$data->touser->name:""',
+		),
+            array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Transfer From &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data->fromuser->name)?$data->fromuser->name:""',
+		),
+                array(
+                    'name'=>'transaction_id',
+                    'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$data->transaction->paid_amount',
+		),
+            array(
+                    'name'=>'domain',
+                    'header'=>'<span style="white-space: nowrap;">Transfer Date &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$data->created_at',
+		),
             
              array(
                     'name'=>'domain',
                     'header'=>'<span style="white-space: nowrap;">Comment &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->moneytransfer->comment',
+                    'value'=>'$data->comment',
 		),
 		 
 	),
