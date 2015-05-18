@@ -65,7 +65,7 @@ $this->menu=array(
 		array(
                    'name'=>'slug',
                     'header'=>'<span style="white-space: nowrap;">Transaction ID &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->tranaction_id',
+                    'value'=>'$data->transaction_id',
 		),
 		array(
                    'name'=>'slug',
