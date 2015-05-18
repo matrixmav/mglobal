@@ -140,7 +140,8 @@ class TransactionController extends Controller
          */
         public function actionRpWallet()
         {
-           $dataProvider = new CActiveDataProvider('Transaction',array(
+           $model = new Transaction();
+           $dataProvider = new CActiveDataProvider($model,array(
                                         'criteria'=>array(
                                                         'condition'=> ('user_id = '.Yii::app()->session['userid']),'order'=>'id DESC',
                                         )));
