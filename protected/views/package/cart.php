@@ -61,7 +61,7 @@ Domain
 <td class="pPrice CartSubTotal tbl-pd">
 <div class="pos_hlp itemblock topRow">
 <p class="price ItemSubTotal">
-<span class="WebRupee"></span> <span id=""><?php if(Yii::app()->session['amount']!=''){ ?> $<?php echo Yii::app()->session['amount'].".00";?><?php }else{?> N/A<?php }?></span>
+<span class="WebRupee"></span> <span id=""><?php if(Yii::app()->session['amount']!=''){ ?> $<?php echo number_format(Yii::app()->session['amount'],2);?><?php }else{?> N/A<?php }?></span>
 </p>
 </div>
  </td>
@@ -99,7 +99,7 @@ Domain
 <p>Subtotal:</p>
 </td>
 <td class="itemAmount">
-<p id="CartTotal"><span class="WebRupee">$</span> <span id="total"><?php echo $packageObject->amount + Yii::app()->session['amount'].".00";?></span></p>
+<p id="CartTotal"><span class="WebRupee">$</span> <span id="total"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'],2);?></span></p>
 </td>
 </tr>
  
@@ -108,7 +108,7 @@ Domain
 <p>Coupon Discount:</p>
 </td>
 <td class="itemAmount">
-<p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo $packageObject->amount + Yii::app()->session['amount'].".00";?></span></p>
+<p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'],2);?></span></p>
 </td>
 </tr> 
 <tr class="ItemTotalAfterDiscount">
@@ -117,7 +117,7 @@ Domain
 <p>Total Amount:</p>
 </td>
 <td class="itemAmount">
-<p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo $packageObject->amount + Yii::app()->session['amount'].".00";?></span></p>
+<p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'],2);?></span></p>
 </td>
 </tr>
 </tbody></table>
