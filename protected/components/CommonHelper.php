@@ -322,6 +322,29 @@ class CommonHelper {
         return $dataProvider;
     }
   
+        public static function getSearchCriteria($value, $model, $columns, $with=array(), $selected="") {
+  	$pageSize = Yii::app()->params['defaultPageSize'];
+  	if($selected && $selected=="status_active"){
+  		$selected="status";$value = 1;
+  	}elseif ($selected && $selected=="status_inactive"){
+  		$selected="status";$value = 0;
+  	}
+  	$condition = $selected." like '%".$value."%'";
+  	
+  	if(!$selected) {
+            $condition = "";
+            foreach ($columns as $column){
+                    $condition .= " OR ".$column." like '%".$value."%' ";
+            }
+            $condition = substr($condition, 3);
+  	}
+        $criteria=new CDbCriteria(array(
+                        'condition'=>$condition,
+                        'with'=>$with,
+        ));
+        
+        return $criteria;
+    }
   
 	/**
 	 * Function to get the Recent Search items

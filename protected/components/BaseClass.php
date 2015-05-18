@@ -41,6 +41,35 @@ class BaseClass extends Controller {
         	$this->redirect('/admin');
         }*/
     }
+    function isLoggedIn() {
+        $userId = Yii::app()->session['userid'];
+        $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
+        if (!$adminObject) {
+            $this->redirect('/login');
+        }
+    }
+
+    function isAdmin() {
+        $userId = Yii::app()->session['userid'];
+        $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '2'));
+        if (!$adminObject) {
+            $this->redirect('/admin');
+        }
+    }
+
+    /*
+     * method for getting the list of admins
+     * 
+     */
+    function getAdmin() {
+
+        $records = User::model()->findAll(array('condition' => "`role_id` = 1"));
+        $adminArr = array();
+        foreach ($records as $record) {
+            $adminArr[] = $record->email;
+        }
+        return $adminArr;
+    }
     /*
      * method for getting the list of admins
      * 
