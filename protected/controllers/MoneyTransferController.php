@@ -62,7 +62,7 @@ class MoneyTransferController extends Controller
             $this->render('list',array('dataProvider'=>$dataProvider));
         }   
       public function actionTransfer(){
-		$userid=3;		 
+		$userid= Yii::app()->session['userid'];		 
 		$adminid=1;			
 			 if(isset($_POST['transfer'])){
 				 $percentage = ($_POST['paid_amount'])/100;
