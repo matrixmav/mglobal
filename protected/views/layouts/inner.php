@@ -138,8 +138,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="header-inner">
+                <span class="home-link"><a href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank">Home</a></span>
                 <!-- BEGIN LOGO -->
-                <a class="navbar-brand" href="/admin/">
+               <?php /* <a class="navbar-brand" href="/admin/">
                     <?php
                     $access = Yii::app()->user->getState('access');
                     if ($access == "manager") {
@@ -150,7 +151,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <img src="#" alt="logo"
                              class="img-responsive" />
                          <?php } ?>
-                </a>
+                </a>*/?>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
                 <a href="javascript:;" class="navbar-toggle" data-toggle="collapse"
@@ -280,43 +281,61 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-
                             
-                            $reservation_pmenu = 8;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    "genealogy/" => "Genealogy",
+                           $hotel_pmenu = 6;
+                            if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
+                                $hotel_subsection = array(
+                                    "transaction/rpwallet" => "RP Wallet",
+                                    "transaction/commisionwallet" => "Commision Wallet",
+                                    "transaction/fundwallet" => "Fund Wallet",
+                                     
+//                                    "profile/summery" => "Summery",
                                 );
+                                $activecls = 'active';
+                                if ($curControllerLower == "profile" || $curControllerLower == "order") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                if ($curControllerLower == 'profile' && $curActionLower == 'order')
+                                    $activecls = 'active';
+                                if ($curActionLower == 'simplename')
+                                    $activecls = '';
                                 ?>
-                                <li
-                                    class="<?php echo (($curControllerLower == 'genealogy') || ($curControllerLower == 'genealogy')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Genealogy</span>
+                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
+                                            class="leftmenu-hotel"></span> <span class="title">Summery</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'genealogy') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'transaction') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
+                                    $menusections ['sections'] = $hotel_subsection;
                                     echo '<ul class="sub-menu">';
-                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
-                                            if ($ctName == "search/create") {
-                                                $ctName = "search/create/type/details";
+                                    foreach ($hotel_subsection as $hotName => $hotTitle) {
+                                        if (in_array($hotTitle, $menusections ['sections'])) {
+                                            if ($hotName == 'admin') {
+                                                $hotName = '/index';
                                             }
-                                            if ($ctName == "reservation" && $curControllerLower == "reservation")
-                                                $class_content = 'class="active"';
-                                            else
-                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-
+                                            if ($curActionLower == 'create') {
+                                                $curActionLower = 'create/type/details';
+                                            }
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
                                             echo '<li ' . $class_content . '>';
-                                            echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
                                             echo '</li>';
-                                            if ($ctName == "search/create/type/details") {
-                                                $ctName = "search/create";
+                                            if ($hotName == 'admin/index') {
+                                                $hotName = 'admin';
                                             }
+
+                                            /*
+                                             * if($hotName == "admin")
+                                             * echo '</ul>';
+                                             */
+                                        }
                                     }
                                     echo '</ul>';
-                                    ?>			
-                                </li>
+                                    ?>					
+                                </li>	
                                 <?php
                             }
                            

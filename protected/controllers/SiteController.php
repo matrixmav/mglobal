@@ -23,6 +23,31 @@ class SiteController extends Controller
 			),
 		);
 	}
+        /**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -30,10 +55,7 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($action = '')
 	{   
-           $userProfileObject =  UserProfile::model()->findAll();
-           foreach ($userProfileObject as $userProfile){
-               
-           }
+
 //            $this->layout = '';
 //            $detector = new Mobile_Detect;
 //            if($detector->isMobile() || $detector->isTablet())
@@ -72,10 +94,14 @@ class SiteController extends Controller
 //            
 //            $stateCondition = array("id" => $stateName);
 //            $stateObject = $stateModel = State::model()->getStateByName($stateCondition);
+
            $packageObject = Package::model()->findAll(array('limit' => '3'));
-           $this->render('index',array('packageObject'=>$packageObject));
+           $userProfileObject =  UserProfile::model()->findAll();
+          $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$userProfileObject,)); 
 	}
-	
+        
+                    
+        
        
         /**
 	 *This is action label

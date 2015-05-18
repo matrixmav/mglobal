@@ -570,7 +570,7 @@
           <h2>CHECK OUT ADMIN THEME! <em>Most Full Featured &amp; Powerfull Admin Theme</em></h2>
         </div>
         <div class="col-md-2 text-right">
-          <a href="http://www.keenthemes.com/preview/index.php?theme=metronic_admin&amp;page=index.html" target="_blank" class="btn btn-primary">Live preview</a>
+          <a href="#" target="_blank" class="btn btn-primary">Live preview</a>
         </div>
       </div>
     </div>
@@ -653,29 +653,20 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <!-- Carousel items -->
-          <div class="active item">
-            <blockquote>
-              <p>This is the most awesome, full featured, easy, costomizeble theme. It’s extremely responsive and very helpful to all suggestions.</p>
-            </blockquote>
-            <span class="testimonials-name">Mark Doe</span>
-          </div>
+           <?php $i=1;foreach($profileObject as $testimonial){ ?>
           <!-- Carousel items -->
-          <div class="item">
+          <div class="item <?php if($i=='1'){ echo "active"; }else{ echo "";}?>">
             <blockquote>
-              <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.</p>
+              <p><?php echo $testimonial->testimonials;?></p>
             </blockquote>
-            <span class="testimonials-name">Joe Smith</span>
+            <span class="testimonials-name"><?php echo $testimonial->user()->full_name;?></span>
           </div>
-          <!-- Carousel items -->
-          <div class="item">
-            <blockquote>
-              <p>Williamsburg carles vegan helvetica. Cosby sweater eu banh mi, qui irure terry richardson ex squid Aliquip placeat salvia cillum iphone.</p>
-            </blockquote>
-            <span class="testimonials-name">Linda Adams</span>
-          </div>
+          <?php $i++;}?>
         </div>
         <!-- Indicators -->
-       <ol class="carousel-indicators">
+      
+        <ol class="carousel-indicators">
+         
           <li data-target="#testimonials-block" data-slide-to="0" class="active"></li>
           <li data-target="#testimonials-block" data-slide-to="1"></li>
           <li data-target="#testimonials-block" data-slide-to="2"></li>

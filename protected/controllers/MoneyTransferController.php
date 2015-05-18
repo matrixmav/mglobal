@@ -411,5 +411,4 @@ class MoneyTransferController extends Controller {
             Yii::app()->end();
         }
     }
-
 }

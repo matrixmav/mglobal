@@ -28,7 +28,7 @@ class TransactionController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list'),
+				'actions'=>array('index','view','list','rpwallet','commisionwallet','fundwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -134,13 +134,23 @@ class TransactionController extends Controller
 	    				'pagination' => array('pageSize' => 10),
 				));
             $this->render('list',array('dataProvider'=>$dataProvider));
-			 }
-		else
-		{
-			$this->redirect(Yii::app()->getHomeUrl());
-		}	
-    }
-	/**
+        }
+        }
+        
+        /*
+         * this will fetch rp wallet
+         */
+        public function actionRpWallet()
+        {
+          $loggedInUserId = Yii::app()->session['userid'];
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+                'criteria'=>array(
+                                'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId),'order'=>'id DESC',
+                )));
+            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+        }
+
+        /*
 	 * Manages all models.
 	 */
 	public function actionAdmin()
