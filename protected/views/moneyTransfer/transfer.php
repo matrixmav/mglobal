@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 
                         <div class="col-md-7 col-sm-7">
 						<div class="error" id="error_msg" style="display: none;"></div>
-                            <form class="form-horizontal" role="form" method="post" action="">
+                            <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" >
                                 <fieldset> 
                                     <legend>Select User</legend>
                                     <?php 
@@ -40,7 +40,8 @@ $this->breadcrumbs=array(
                                            <select id="transactiontype" name="transactiontype">
 										    <option value="">Select Option</option>
 										   <option value="1">Cash</option>
-										   <option value="2">RP Wallet</option>										   
+										   <option value="2">RP Wallet</option>	 
+										   <option value="3">Commission Points</option>									   
 										   </select>
                                         </div>
                                        
@@ -89,7 +90,7 @@ $this->breadcrumbs=array(
                                         <label for="paid_amount" class="col-lg-4 control-label">Amount Value <span class="require">*</span></label>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" id="paid_amount" name="paid_amount"  required >
-											<input type="hidden" value="<?php echo $rpPoints; ?>" name="total_rp" id="total_rp">
+											<input type="hidden" value="<?php echo $rpPoints; ?>" name="rp_points" id="rp_points">
 											<input type="hidden" value="<?php echo $commissionPoints; ?>" name="commission_points" id="commission_points">
                                         </div>
                                         <span id="email_error"></span>

@@ -1,5 +1,4 @@
 var MIN_LENGTH = 3;
-
 	jQuery(document).ready(function($){
 	$("#username").keyup(function() {
 		var username = $("#username").val();
@@ -48,12 +47,11 @@ var MIN_LENGTH = 3;
 			var paid_amount = $("#paid_amount").val();
 			var wallet_points = $("#wallet_points").val();
 			var commission_points = $("#commission_points").val();	
-			var total_rp = $("#total_rp").val();
+			var rp_points = $("#rp_points").val();
 			var paid_amount_percentage = (parseFloat(paid_amount)/100)+parseFloat(paid_amount);
-			total_rp = parseFloat(total_rp) + parseFloat(commission_points);
 			if(transactiontype == 2)
 			{
-				if(parseFloat(paid_amount_percentage) >= parseFloat(total_rp))
+				if(parseFloat(paid_amount_percentage) >= parseFloat(rp_points))
 				{				
 			document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Insufficient Funds.";
@@ -61,9 +59,21 @@ var MIN_LENGTH = 3;
             return false;
 					
 				}
-			}else
+			}
+			if(transactiontype == 1)
 			{			
 				if(parseFloat(paid_amount_percentage) >= parseFloat(wallet_points))
+				{				
+			document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg").innerHTML = "Insufficient Funds.";
+            document.getElementById("paid_amount").focus();
+            return false;
+						
+				}	
+			}
+			if(transactiontype == 3)
+			{			
+				if(parseFloat(paid_amount_percentage) >= parseFloat(commission_points))
 				{				
 			document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Insufficient Funds.";
@@ -76,7 +86,7 @@ var MIN_LENGTH = 3;
 		if(document.getElementById("transactiontype").value=='')
         {
             document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter Transaction Type.";
+            document.getElementById("error_msg").innerHTML = "Please select Transaction Type.";
             document.getElementById("transactiontype").focus();
             return false;
         }
@@ -120,7 +130,7 @@ var MIN_LENGTH = 3;
 		if(document.getElementById("transactiontype").value=='')
         {
             document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter Transaction Type.";
+            document.getElementById("error_msg").innerHTML = "Please select Transaction Type.";
             document.getElementById("transactiontype").focus();
             return false;
         }

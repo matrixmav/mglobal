@@ -55,15 +55,11 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($action = '')
 	{   
+
            
            $packageObject = Package::model()->findAll(array('limit' => '3'));
-            $userProfileObject =  UserProfile::model()->findAll(array('condition'=>'testimonial_status=1'));
-            
-          foreach ($userProfileObject as $userProfile){
-               echo $userProfile->user();
-           }
-                    
-           $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$userProfileObject)); 
+           $userProfileObject =  UserProfile::model()->findAll();
+          $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
                     

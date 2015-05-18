@@ -79,8 +79,8 @@ class MoneyTransferController extends Controller
 				$transactionObjuser->gateway_id=1;
 				$transactionObjuser->actual_amount =$actualamount;
 				$transactionObjuser->paid_amount = $_POST['paid_amount'];
-				$transactionObjuser->total_rp = $_POST['total_rp'];
-				$transactionObjuser->used_rp = $actualamount;
+				$transactionObjuser->total_rp = $_POST['rp_points'];
+				$transactionObjuser->used_rp = 0;
 				$transactionObjuser->status =0;
 				$transactionObjuser->created_at = $createdtime;
 				$transactionObjuser->updated_at = $createdtime;
@@ -93,8 +93,8 @@ class MoneyTransferController extends Controller
 				$transactionObjuser2->gateway_id=1;
 				$transactionObjuser2->actual_amount =$actualamount;
 				$transactionObjuser2->paid_amount = $percentage;
-				$transactionObjuser2->total_rp = $_POST['total_rp'];
-				$transactionObjuser2->used_rp = $actualamount;
+				$transactionObjuser2->total_rp = $_POST['rp_points'];
+				$transactionObjuser2->used_rp = 0;
 				$transactionObjuser2->status =0;
 				$transactionObjuser2->created_at = $createdtime;
 				$transactionObjuser2->updated_at = $createdtime;
@@ -121,7 +121,7 @@ class MoneyTransferController extends Controller
 				$moneyTransferadmObj->to_user_id = $adminid;
 				$moneyTransferadmObj->transaction_id = $transactionObjuser2->id;
 				$moneyTransferadmObj->fund_type = $_POST['transactiontype'];
-				$moneyTransferadmObj->comment =$percentage.'commission to admin';
+				$moneyTransferadmObj->comment =$percentage.' commission to admin';
 				$moneyTransferadmObj->status =0;
 				$moneyTransferadmObj->created_at = $createdtime;
 				$moneyTransferadmObj->updated_at = $createdtime;				
@@ -183,7 +183,7 @@ class MoneyTransferController extends Controller
 					$awalletSenderObj = new Wallet;
 					$awalletSenderObj->type = $transactionObj->mode;
 					$awalletSenderObj->user_id = $moneyobj->to_user_id;
-					$awalletSenderObj->fund =($transactionObj->actual_amount);
+					$awalletSenderObj->fund =($transactionObj->paid_amount);
 					$awalletSenderObj->status = 1;
 					$awalletSenderObj->created_at = $createdtime;
 					$awalletSenderObj->updated_at = $createdtime;	
@@ -192,13 +192,16 @@ class MoneyTransferController extends Controller
 						}	
 					}
 					else{					
-					$walletadmObj->fund =($walletadmObj->fund) +($transactionObj->actual_amount);
+					$walletadmObj->fund =($walletadmObj->fund) +($transactionObj->paid_amount);
 					$walletadmObj->user_id = $moneyobj->to_user_id;
 					$walletadmObj->status = 1;
                     $walletadmObj->save();
 					}
 					$moneyobj->status = 1;                                        
 					$moneyobj->update();
+					
+					$transactionObj->status = 1;                                        
+					$transactionObj->update();
 					
 				$transaction2Obj = Transaction::model()->findByAttributes(array('id' => $_POST['ta']));
 			
@@ -227,6 +230,9 @@ class MoneyTransferController extends Controller
 					
 					$money2obj->status = 1;                                        
 					$money2obj->update();
+					
+					$transaction2Obj->status = 1;                                        
+					$transaction2Obj->update();
 					
 					/* for from user wallet minus*/
 					$walletRecvObj = Wallet::model()->findByAttributes(array('user_id' => $moneyobj->from_user_id,'type' => $transactionObj->mode));
