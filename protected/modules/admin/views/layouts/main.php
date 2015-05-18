@@ -314,19 +314,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "report/" => "Registration",
                                     "report/address" => "Member Address",
                                     "report/adminsponsor" => "Admin Sponsor",
-                                    "report/inbox3" => "Package",
-                                    "report/inbox4" => "Binary",
-                                    "report/inbox5" => "Deposit",
-                                    "report/inbox6" => "Check Investments",
-                                    "report/inbox7" => "Member  Verification",
-                                    "report/inbox8" => "Invite referrals",
-                                    "report/inbox9" => "Social profile",
+                                    "report/package" => "Package",
+//                                    "report/inbox4" => "Binary",
+//                                    "report/inbox5" => "Deposit",
+//                                    "report/inbox6" => "Check Investments",
+                                    "report/verification" => "Member  Verification",
+//                                    "report/inbox8" => "Invite referrals",
+                                    "report/socialaccount" => "Social profile",
                                     "report/inbox10" => "Contact",
-                                    "report/inbox11" => "Bug",
-                                    "report/inbox12" => "Call back",
-                                    "report/inbox13" => "feed back",
-                                    "report/inbox14" => "Recharge Wallet",
-                                    "report/inbox15" => "Deduct Wallet"
+//                                    "report/inbox11" => "Bug",
+//                                    "report/inbox12" => "Call back",
+//                                    "report/inbox13" => "feed back",
+//                                    "report/inbox14" => "Recharge Wallet",
+//                                    "report/inbox15" => "Deduct Wallet"
                                 );
                                 ?>
                                 <li

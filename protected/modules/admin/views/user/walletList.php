@@ -46,12 +46,7 @@ $this->breadcrumbs = array(
                     'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->phone',
                 ),
-                array(
-                    'name' => 'email',
-                    'header' => '<span style="white-space: nowrap;">Email &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->email',
-                ),
-                array(
+                 array(
                     'name' => 'sponsor_id',
                     'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->sponsor_id',
@@ -67,16 +62,16 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'class' => 'CButtonColumn',
-                    'template' => '{Edit}{Delete}',
-                    'htmlOptions' => array('width' => '23%'),
+                    'template' => '{Recharge}{Deduct}',
+                    'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
-                        'Edit' => array(
-                            'label' => 'Edit',
+                        'Recharge' => array(
+                            'label' => 'Recharge',
                             'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
                             'url' => 'Yii::app()->createUrl("admin/user/creditwallet", array("id"=>$data->id))',
                         ),
-                        'Delete' => array(
-                            'label' => Yii::t('translation', 'Change Status'),
+                        'Deduct' => array(
+                            'label' => Yii::t('translation', 'Deduct'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/debitwallet", array("id"=>$data->id))',
                         ),

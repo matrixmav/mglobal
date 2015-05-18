@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Reports' => array('/admin/report/address'),'Member Address'
+     'Reports' => array('/admin/report/verification'),'Verification'
 );
 ?>
 
@@ -74,7 +74,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'status',
-                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
+                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Verified\') : Yii::t(\'translation\', \'Pending\')',
                 ),
             ),
         ));

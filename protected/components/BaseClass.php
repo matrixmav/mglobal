@@ -56,6 +56,14 @@ class BaseClass extends Controller {
             $this->redirect('/admin');
         }
     }
+    
+    function getWalletList(){
+        return array(
+            '1'=>'Cash',
+            '2'=> 'RP Wallet',
+            '3'=>'Commission'
+        );
+    }
 
     /*
      * method for getting the list of admins

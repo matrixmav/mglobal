@@ -3,13 +3,13 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Reports' => array('/admin/report/address'),'Member Address'
+    'Reports' => array('/admin/report/package'),'Package'
 );
 ?>
 
 <div class="expiration margin-topDefault">
     <!--<p>Client/ Hotel/ Bill : <?php //echo $clientObject->name; ?></p>-->
-    <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/report/address" />
+    <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/report/package" />
     <div class="col-md-3">
         <input type="text" name="search" id="search" class="form-control" value="" />
     </div>
@@ -37,40 +37,35 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
-                    'name' => 'full_name',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->user->full_name',
+                    'name' => 'name',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->name',
                 ),
-                
-                array(
-                    'name' => 'email',
-                    'header' => '<span style="white-space: nowrap;">Address 1 &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->street',
-                ),
-                array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address 2 &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->address',
+                 array(
+                    'name' => 'amount',
+                    'header' => '<span style="white-space: nowrap;">Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->amount',
                 ),
                 array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">City &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->city_id',
+                    'name' => 'start_date',
+                    'header' => '<span style="white-space: nowrap;">Start Date&nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->start_date',
                 ),
                 array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">State &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->state_id',
+                    'name' => 'end_date',
+                    'header' => '<span style="white-space: nowrap;">End Date &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->end_date',
                 ),
                 array(
-                    'name' => 'country_id',
-                    'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->country->name',
+                    'name' => 'coupon_code',
+                    'header' => '<span style="white-space: nowrap;">Coupon Code &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->coupon_code',
                 ),
+               
                 array(
-                    'name' => 'phone',
-                    'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->user->phone',
+                    'name' => 'Description',
+                    'header' => '<span style="white-space: nowrap;">Description &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->Description',
                 ),
                 array(
                     'name' => 'status',
