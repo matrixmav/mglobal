@@ -28,7 +28,7 @@ class TransactionController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list','rpwallet','commisionwallet','fundwallet'),
+				'actions'=>array('index','view','list'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -135,18 +135,7 @@ class TransactionController extends Controller
             $this->render('list',array('dataProvider'=>$dataProvider));
         }
         
-        /*
-         * 
-         */
-        public function actionRpWallet()
-        {
-            $dataProvider = new CActiveDataProvider('Transaction', array(
-	    				'pagination' => array('pageSize' => 10),
-				));
-            $this->render('../wallet/rpwallet',array('dataProvider'=>$dataProvider));
-        }
-
-        
+       
 
 
 
