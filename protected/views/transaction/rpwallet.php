@@ -60,7 +60,11 @@ $this->menu=array(
                     'header'=>'<span style="white-space: nowrap;">Transfer Date &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->created_at',
 		),
-            
+            array(
+                    'name'=>'wallet_id',
+                    'header'=>'<span style="white-space: nowrap;">Wallet &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$data->wallet->id',
+		),
              array(
                     'name'=>'domain',
                     'header'=>'<span style="white-space: nowrap;">Comment &nbsp; &nbsp; &nbsp;</span>',

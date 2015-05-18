@@ -142,10 +142,11 @@ class TransactionController extends Controller
          */
         public function actionRpWallet()
         {
+          $loggedInUserId = Yii::app()->session['userid'];
            $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
-                                        'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid']),'order'=>'id DESC',
-                                        )));
+                'criteria'=>array(
+                                'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId),'order'=>'id DESC',
+                )));
             $this->render('rpwallet',array('dataProvider'=>$dataProvider));
         }
 

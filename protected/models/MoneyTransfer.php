@@ -31,12 +31,12 @@ class MoneyTransfer extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('to_user_id, from_user_id,transaction_id, fund_type, comment, created_at, updated_at', 'required'),
+			array('to_user_id, from_user_id,wallet_id,transaction_id, fund_type, comment, created_at, updated_at', 'required'),
 			array('to_user_id, from_user_id, transaction_id,fund_type, status', 'numerical', 'integerOnly'=>true),
 			array('comment', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, to_user_id, from_user_id, fund_type,transaction_id, comment, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, to_user_id, from_user_id, fund_type,transaction_id, wallet_id,comment, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,7 +50,8 @@ class MoneyTransfer extends CActiveRecord
 		return array(
                     'touser' => array(self::BELONGS_TO, 'User', 'to_user_id'),
                     'fromuser' => array(self::BELONGS_TO, 'User', 'from_user_id'),
-                    'transaction' => array(self::BELONGS_TO, 'Transaction', 'transaction_id')
+                    'transaction' => array(self::BELONGS_TO, 'Transaction', 'transaction_id'),
+                    'wallet' => array(self::BELONGS_TO, 'Wallet', 'to_user_id'),
 		);
 	}
 	
@@ -67,6 +68,7 @@ class MoneyTransfer extends CActiveRecord
 			'comment' => 'Comment',
 			'status' => 'Status',
                         'transaction_id'=> 'Transaction',
+                        'wallet_id'=> 'Wallet',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -97,6 +99,7 @@ class MoneyTransfer extends CActiveRecord
 		$criteria->compare('comment',$this->comment,true);
 		$criteria->compare('status',$this->status);
                 $criteria->compare('transaction_id',$this->transaction_id);
+                $criteria->compare('wallet_id',$this->wallet_id);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 
