@@ -63,7 +63,7 @@ class UserProfile extends CActiveRecord
                     'city' => array(self::BELONGS_TO, 'City', 'city_id'),
                     'state' => array(self::BELONGS_TO, 'State', 'state_id'),
 		    'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
-                    'userObject' => array(self::BELONGS_TO, 'User', 'user_id'),
+                   'user' => array(self::BELONGS_TO, 'User', 'id')
 		);
 	}
 
