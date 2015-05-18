@@ -627,7 +627,7 @@ a:hover {
 
 /* About- block */
 .about-block {
-  padding-top: 60px;
+  padding-top:  0px;
 }
 .about-block h4 {
   margin-bottom: 43px;
@@ -692,7 +692,7 @@ a:hover {
   border-right: none;
 }
 .services-block .fa {
-  background: #e85425;
+ background: #e85425;
   color: #fff;
   width: 99px;
   height: 99px;  
@@ -1041,7 +1041,7 @@ a:hover {
   min-height: 470px;
   height: auto;
   padding: 57px 0 0;
-  z-index: 0;
+  z-index: -1;
   background: #fff url(../img/facts.jpg) no-repeat fixed;
   position: relative;
   color: #fff;
@@ -1086,8 +1086,8 @@ a:hover {
   min-height: 457px;
   height: auto;
   padding: 0 0 50px;
-  z-index: 0;
-  background: #292F34 url(../img/quote.jpg) no-repeat fixed;
+  z-index: -1;
+  background-image:url(../images/banner1.jpg);
   position: relative;
 }
 /*.message-block:after {
@@ -1613,3 +1613,194 @@ Styler Panel
   top: 2px;
   position: relative;
 }
+
+
+/*---------social media-------*/
+
+
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+[class*="entypo-"]:before {
+	font-family: 'entypo', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+
+
+#social-sidebar a { text-decoration: none; }
+
+
+
+#social-sidebar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* ---------- Social Sidebar ---------- */
+
+
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+[class*="entypo-"]:before {
+	font-family: 'entypo', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+
+
+#social-sidebar a { text-decoration: none; }
+
+
+
+#social-sidebar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* ---------- Social Sidebar ---------- */
+
+#social-sidebar {
+	right: 0;
+	margin-top: -157px; /* (li * a:width) / -2 */
+	position: fixed;
+	top: 50%;
+        z-index:9999;
+}
+
+#social-sidebar ul li:first-child a { border-radius: 0 5px 0 0; }
+#social-sidebar ul li:last-child a { border-radius: 0 0 5px 0; }
+
+
+
+#social-sidebar ul li a img{
+	background: #121212;
+	color: #fff;
+	display: block;
+	height: 50px;
+	font-size: 18px;
+	line-height: 50px;
+	position: relative;
+	text-align: center;
+	width: 50px;
+	  margin-bottom: 2px;
+}
+
+
+#social-sidebar ul li a:hover span {
+	right: 120%;
+	opacity: 1;
+}
+
+#social-sidebar ul li a span {
+	border-radius: 3px;
+	line-height: 24px;
+	right: -100%;
+	margin-top: -0px;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	padding: 4px 8px;
+	position: absolute;
+	-webkit-transition: opacity .3s, left .4s;
+	-moz-transition: opacity .3s, left .4s;
+	-ms-transition: opacity .3s, left .4s;
+	-o-transition: opacity .3s, left .4s;
+	transition: opacity .3s, left .4s;
+	top: 50%;
+	z-index: -1;
+}
+
+#social-sidebar ul li a img span:before {
+	content: "";
+	display: block;
+	height: 8px;
+	
+	left: -4px;
+	margin-top: -4px;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	width: 8px;
+	z-index: -2;
+}
+
+#social-sidebar ul li a img[class*="twitter"]:hover,
+#social-sidebar ul li a img[class*="twitter"] span,
+#social-sidebar ul li a img[class*="twitter"] span:before { background: #6CDFEA; }
+
+#social-sidebar ul li a[class*="gplus"]:hover,
+#social-sidebar ul li a[class*="gplus"] span,
+#social-sidebar ul li a[class*="gplus"] span:before { background: #E34429; }
+
+#social-sidebar ul li a[class*="tumblr"]:hover,
+#social-sidebar ul li a[class*="tumblr"] span,
+#social-sidebar ul li a[class*="tumblr"] span:before { background: #1769ff; }
+
+#social-sidebar ul li a[class*="facebook"]:hover,
+#social-sidebar ul li a[class*="facebook"] span,
+#social-sidebar ul li a[class*="facebook"] span:before { background: #234999; }
+
+#social-sidebar ul li a[class*="rss"]:hover,
+#social-sidebar ul li a[class*="rss"] span,
+#social-sidebar ul li a[class*="rss"] span:before { background: #f57b05; }
+/*]]>*/
+.whts{ width:200px; background-color:#09C; margin-top:-150px!important; box-shadow: 3px 3px 3px #000!important; color:#fff;}
+.fcb{width:200px; background-color:#09C; margin-top:-95px!important; box-shadow: 3px 3px 3px #000!important; color:#fff;}
+.skp{width:200px; background-color:#09C; margin-top:-45px!important; box-shadow: 3px 3px 3px #000!important; color:#fff;}
+.twt{width:200px; background-color:#09C; margin-top:10px!important; box-shadow: 3px 3px 3px #000!important; color:#fff;}
+.lnkd{width:200px; background-color:#09C; margin-top:60px!important; box-shadow: 3px 3px 3px #000!important; color:#fff;}
+.yut{width:200px; background-color:#09C; margin-top:110px!important; box-shadow: 3px 3px 3px #000!important; color:#fff;}
+
+
+/*--------------sub-header-------------*/
+/***
+Pre-Header and pre-header elements
+***/
+.pre-header {
+	color: #616b76;
+	border-bottom: 1px solid #eee;
+	padding-top: 10px;
+	line-height: 1.2;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	
+}
+.pre-header a {
+	color: #616b76;
+}
+.pre-header a:hover {
+	color: #E02222;
+}
+.pre-header a:focus {
+	text-decoration: none;
+}
+.pre-header li {
+	padding-left: 11px;
+	padding-right: 15px;
+	border-right: solid 1px #d8d8d8;
+}
+.pre-header li:last-child {
+	border: none;
+}
+
+.header-index{
+ padding-bottom: 8px!important;
+}
+.btn-h{width:100px;height:30px; background:#0055AA; color:#fff;}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  width: 100%!important;
+  margin: auto;
+}
+
+.bg-s{  margin-top: -37px!important;}
+.h-pd{  padding-top: 9%!important;}
+.testi-bg{ background-image: url(images/)}

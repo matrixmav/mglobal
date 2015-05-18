@@ -31,12 +31,12 @@ class MoneyTransfer extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('to_user_id, from_user_id,wallet_id,transaction_id, fund_type, comment, created_at, updated_at', 'required'),
-			array('to_user_id, from_user_id, transaction_id,fund_type, status', 'numerical', 'integerOnly'=>true),
+			array('to_user_id, from_user_id,transaction_id,wallet_id, fund_type, comment, created_at, updated_at', 'required'),
+			array('to_user_id, from_user_id, transaction_id,wallet_id,fund_type, status', 'numerical', 'integerOnly'=>true),
 			array('comment', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, to_user_id, from_user_id, fund_type,transaction_id, wallet_id,comment, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, to_user_id, from_user_id,wallet_id, fund_type,transaction_id, comment, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,8 +67,8 @@ class MoneyTransfer extends CActiveRecord
 			'fund_type' => '1:RP,2:Amount',
 			'comment' => 'Comment',
 			'status' => 'Status',
+                        'wallet_id'=>'Wallet',
                         'transaction_id'=> 'Transaction',
-                        'wallet_id'=> 'Wallet',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);

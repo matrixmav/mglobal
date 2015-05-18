@@ -28,7 +28,7 @@ class OrderController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list','redirect'),
+				'actions'=>array('index','view','list','redirect','invoice'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -158,8 +158,19 @@ class OrderController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        
+        /*
+         * function to generate invoice
+         */
+        public function actionInvoice()
+        {
+         $dataProvider =  "";   
+         $html2pdf = Yii::app()->ePdf->HTML2PDF();
+         $html2pdf->writeHTML('testingvggg');
+	 $html2pdf->output('etc2.pdf',EYiiPdf::OUTPUT_TO_BROWSER);
+        }        
 
-	/**
+        /**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
