@@ -30,6 +30,10 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($action = '')
 	{   
+           $userProfileObject =  UserProfile::model()->findAll();
+           foreach ($userProfileObject as $userProfile){
+               echo $userProfile->user()->full_name;
+           }
 //            $this->layout = '';
 //            $detector = new Mobile_Detect;
 //            if($detector->isMobile() || $detector->isTablet())
