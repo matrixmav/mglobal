@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="email" name="email">
+                                            <input type="text" class="form-control" id="email" name="email" onchange="isEmailExisted()">
                                         
                                         <span id="email_error" class="clrred"></span></div>
                                     </div>

@@ -1,4 +1,4 @@
-<!-- BEGIN STYLE CUSTOMIZER -->
+<!-- BEGIN STYLE CUSTOMIZER --
   <div class="color-panel">
     <div class="color-mode-icons icon-color"></div>
     <div class="color-mode-icons icon-color-close"></div>
@@ -23,10 +23,41 @@
   <!-- Header BEGIN -->
   <div class="header header-mobi-ext">
     <div class="container">
-      <div class="row">
+        <!-----sub-header------>
+        
+        <div class="pre-header">
+        <div class="container">
+          <div class="row">
+                <!-- BEGIN TOP BAR LEFT PART -->
+            <div class="col-md-6 col-sm-6 additional-shop-info">
+                    <ul class="list-unstyled list-inline">
+                        <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
+                        <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
+                        <li><button id="checkout" class="btn-flat-green btn-orange btn-h" onclick="RedirectCart();">Call Us</button></li>
+                    </ul>
+              </div>
+            <div class="col-md-6 col-sm-6 additional-nav">
+                    <ul class="list-unstyled list-inline pull-right">
+                        <li><a href="user/login">Log In</a></li>
+                        <li><a href="user/registration">Registration</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>        
+    </div>
+        
+        
+        
+        
+        <!-----sub header ends---->
+        
+        
+        
+        
+      <div class="row header-index">
         <!-- Logo BEGIN -->
         <div class="col-md-2 col-sm-2">
-          <a class="scroll site-logo" href="#promo-block"><img src="/images/logo/red.png" alt="Metronic One Page"></a>
+          <a class="scroll site-logo" href="#promo-block"><!---<img src="/images/logo/red" alt="Metronic One Page">---->Maverick Global</a>
         </div>
         <!-- Logo END -->
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
@@ -38,11 +69,13 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
+           
             <li><a href="#benefits">Benefits</a></li>
             <li><a href="#prices">Pricing</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="user/login">Login</a></li>
-            <li><a href="user/registration">Registration</a></li>
+             <li><a href="#">FAQ</a></li>
+            <!----<li><a href="user/login">Login</a></li>
+            <li><a href="user/registration">Registration</a></li>----->
           </ul>
         </div>
         <!-- Navigation END -->
