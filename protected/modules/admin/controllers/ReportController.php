@@ -145,7 +145,7 @@ class ReportController extends Controller
 
             $dataProvider = new CActiveDataProvider('Contact',array(
                     'criteria'=>array(
-                                    'condition'=> ('s+tatus = 1'  ),'order'=>'id DESC'),
+                                    'condition'=> ('status = 1'  ),'order'=>'id DESC'),
                                     'pagination' => array('pageSize' => $pageSize),
                     ));
             if(!empty($_POST['search'])) { 
