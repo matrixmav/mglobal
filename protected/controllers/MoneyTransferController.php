@@ -56,14 +56,23 @@ class MoneyTransferController extends Controller
 		));
 	}
     public function actionList(){
+		if(isset(Yii::app()->session['userid'])){
              $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
 	    				'pagination' => array('pageSize' => 10),
 				));
             $this->render('list',array('dataProvider'=>$dataProvider));
-        }   
+        }
+		else
+		{
+			$this->redirect(Yii::app()->getHomeUrl());
+		}		
+	}
+	
+	
       public function actionTransfer(){
-		$userid= Yii::app()->session['userid'];		 
-		$adminid=1;			
+		  if(isset(Yii::app()->session['userid'])){
+			$userid= Yii::app()->session['userid'];		 
+			$adminid=1;			
 			 if(isset($_POST['transfer'])){
 				 $percentage = ($_POST['paid_amount'])/100;
 				 $actualamount = ($_POST['paid_amount'] + $percentage);
@@ -139,7 +148,12 @@ class MoneyTransferController extends Controller
           $this->render('transfer',array('walletObject'=>$walletObject));
 		  
 			 }
-        }
+        }   
+	}
+	else
+	{
+		$this->redirect(Yii::app()->getHomeUrl());
+	}		
 		
 		 public function actionAutocomplete(){
 			 if($_GET['username']){
@@ -166,10 +180,11 @@ class MoneyTransferController extends Controller
         }
 		
 		 public function actionConfirm(){
+			   if(isset(Yii::app()->session['userid'])){
 			 $createdtime = new CDbExpression('NOW()');
 			// echo "<pre>"; print_r($_REQUEST);exit;
 			 if(isset($_POST['confirm'])){
-				 $userObject = User::model()->findByAttributes(array('id' =>1));
+				 $userObject = User::model()->findByAttributes(array('id' =>Yii::app()->session['userid']));
 				 if($userObject->master_pin == md5($_POST['master_code'])){
 				$transactionObj = Transaction::model()->findByAttributes(array('id' => $_POST['tu']));
 			
@@ -248,32 +263,43 @@ class MoneyTransferController extends Controller
 				}
 			 }
 			 $this->render('confirm');
-        
+           }
+			else
+			{
+				$this->redirect(Yii::app()->getHomeUrl());
+			}		
 		 }
 		
 		public function actionStatus(){
+			  if(isset(Yii::app()->session['userid'])){
 			
-			 $this->render('status');
+				$this->render('status');
+			 }
+			else
+			{
+				$this->redirect(Yii::app()->getHomeUrl());
+			}		
         }
 		public function actionFund(){
-			
-			if(isset($_POST['addfund'])){
-				 $createdtime = new CDbExpression('NOW()');
-				 $userObject = User::model()->findByAttributes(array('name' => $_POST['username']));
-				if(empty($userObject))
+			if(isset(Yii::app()->session['userid'])){			
+				if(isset($_POST['addfund']))
 				{
-					$this->redirect(array('moneytransfer/status', 'status'=>'U'));
-				}	
-				$walletSenderObj = Wallet::model()->findByAttributes(array('user_id' => $userObject->id,'type' => $_POST['transactiontype']));	
+					 $createdtime = new CDbExpression('NOW()');
+					 $userObject = User::model()->findByAttributes(array('name' => $_POST['username']));
+					if(empty($userObject))
+					{
+						$this->redirect(array('moneytransfer/status', 'status'=>'U'));
+					}	
+					$walletSenderObj = Wallet::model()->findByAttributes(array('user_id' => $userObject->id,'type' => $_POST['transactiontype']));	
 					if(empty($walletSenderObj))						
 					{
-					$awalletSenderObj = new Wallet;
-					$awalletSenderObj->type = $_POST['transactiontype'];
-					$awalletSenderObj->user_id = $userObject->id;
-					$awalletSenderObj->fund =$_POST['paid_amount'];
-					$awalletSenderObj->status = 1;
-					$awalletSenderObj->created_at = $createdtime;
-					$awalletSenderObj->updated_at = $createdtime;	
+						$awalletSenderObj = new Wallet;
+						$awalletSenderObj->type = $_POST['transactiontype'];
+						$awalletSenderObj->user_id = $userObject->id;
+						$awalletSenderObj->fund =$_POST['paid_amount'];
+						$awalletSenderObj->status = 1;
+						$awalletSenderObj->created_at = $createdtime;
+						$awalletSenderObj->updated_at = $createdtime;	
 						if(!$awalletSenderObj->save()){
 						echo "<pre>"; print_r($awalletSenderObj->getErrors());exit;
 						}	
@@ -290,6 +316,11 @@ class MoneyTransferController extends Controller
 					
 			}
 			 $this->render('fund');
+			}
+			else
+			{
+				$this->redirect(Yii::app()->getHomeUrl());
+			}		
         }
 		public function actionUserExists(){
 			 $userObject = User::model()->findByAttributes(array('name' => $_GET['u']));
