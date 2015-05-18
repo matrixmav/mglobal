@@ -151,15 +151,16 @@
         });
     }
 
-    function getCountryCode(id){ 
-         $.ajax({
+    function isEmailExisted() {
+        
+        $.ajax({
             type: "post",
-            url: "/country/getcountry",
-            data: "id=" + id,
-            success: function (msg) { 
-                $("#country_code").val("");
-                if(msg){
-                    $("#country_code").val(msg);
+            url: "/user/isemailexisted",
+            data: "email=" + $("#email").val(),
+            success: function (msg) {
+                $("#email_error").html("");
+                if(msg == 1){
+                    $("#email_error").html("Existed!!!");
                 }
             }
         });
