@@ -57,10 +57,16 @@ class WalletController extends Controller
 	}
 	
 	public function actionList(){
+		if(isset(Yii::app()->session['userid'])){
              $dataProvider = new CActiveDataProvider('Wallet', array(
 	    				'pagination' => array('pageSize' => 10),
 				));
             $this->render('list',array('dataProvider'=>$dataProvider));
+		}
+		else
+		{
+			$this->redirect(Yii::app()->getHomeUrl());
+		}	
     } 
 
 	/**

@@ -129,10 +129,12 @@ class TransactionController extends Controller
 	}
 
 	public function actionList(){
+		if(isset(Yii::app()->session['userid'])){
              $dataProvider = new CActiveDataProvider('Transaction', array(
 	    				'pagination' => array('pageSize' => 10),
 				));
             $this->render('list',array('dataProvider'=>$dataProvider));
+        }
         }
         
         /*
@@ -147,11 +149,7 @@ class TransactionController extends Controller
             $this->render('rpwallet',array('dataProvider'=>$dataProvider));
         }
 
-        
-
-
-
-        /**
+        /*
 	 * Manages all models.
 	 */
 	public function actionAdmin()
