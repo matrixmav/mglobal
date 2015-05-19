@@ -7,6 +7,10 @@ class TransactionController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='inner';
+        
+        public function init() {
+        BaseClass::isLoggedIn();
+        }
 
 	/**
 	 * @return array action filters
@@ -150,7 +154,7 @@ class TransactionController extends Controller
            $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
 
                                         'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=1'),'order'=>'id DESC',
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=1'),'order'=>'id DESC',
                                         )));
             $this->render('rpwallet',array('dataProvider'=>$dataProvider));
         }
@@ -160,11 +164,12 @@ class TransactionController extends Controller
          */
         public function actionCommisionWallet()
         {
+            $loggedInUserId = Yii::app()->session['userid'];
            $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
                                         'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=2'),'order'=>'id DESC',
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=2'),'order'=>'id DESC',
                                         )));
-            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+            $this->render('commisionwallet',array('dataProvider'=>$dataProvider));
         }
         
          /*
@@ -172,11 +177,12 @@ class TransactionController extends Controller
          */
         public function actionFundWallet()
         {
+            $loggedInUserId = Yii::app()->session['userid'];
            $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
                                         'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=3'),'order'=>'id DESC',
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=3'),'order'=>'id DESC',
                                         )));
-            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+            $this->render('fundwallet',array('dataProvider'=>$dataProvider));
         }
 
         /*

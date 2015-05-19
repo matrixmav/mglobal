@@ -21,6 +21,28 @@ var MIN_LENGTH = 3;
 			$('#results').html('');
 		}
 	});
+	
+	$("#adusername").keyup(function() {
+		var adusername = $("#adusername").val();
+		if (adusername.length >= MIN_LENGTH) {
+			$.get( "/MoneyTransfer/autoadmin", { adusername: adusername } )
+			.done(function( data ) {
+				$('#results').html('');
+				var results = jQuery.parseJSON(data);
+				$(results).each(function(key, value) {
+					$('#results').append('<div class="item">' + value + '</div>');
+				})
+
+			    $('.item').click(function() {
+			    	var text = $(this).html();
+			    	$('#adusername').val(text);
+			    })
+
+			});
+		} else {
+			$('#results').html('');
+		}
+	});
 
     $("#username").blur(function(){
     		$("#results").fadeOut(500);
@@ -109,7 +131,7 @@ var MIN_LENGTH = 3;
         {
             document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please enter valid Amount.";
-            document.getElementById("username").focus();
+            document.getElementById("paid_amount").focus();
             return false;
         }
 	}); 
@@ -142,19 +164,19 @@ var MIN_LENGTH = 3;
 		
 	});	
 	$("#addfund").click(function() {
-		var username = $("#username").val();
+		var adusername = $("#adusername").val();
 			$.ajax( {
-                  url:'/MoneyTransfer/userexists?u='+username,
+                  url:'/MoneyTransfer/userexists?u='+adusername,
                   success:function(data) {
 					  if(data=='notexists'){
 			document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Username does not Exist.";
-            document.getElementById("username").focus();
+            document.getElementById("adusername").focus();
             return false;
 					  }
                   }
                });
-						
+								
 		if(document.getElementById("transactiontype").value=='')
         {
             document.getElementById("error_msg").style.display="block";
@@ -162,11 +184,11 @@ var MIN_LENGTH = 3;
             document.getElementById("transactiontype").focus();
             return false;
         }
-	if(document.getElementById("username").value=='')
+	if(document.getElementById("adusername").value=='')
         {
             document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please enter Username.";
-            document.getElementById("username").focus();
+            document.getElementById("adusername").focus();
             return false;
         }
 	var paid_amount = document.getElementById('paid_amount');
@@ -181,7 +203,7 @@ var MIN_LENGTH = 3;
         {
             document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please enter valid Amount.";
-            document.getElementById("username").focus();
+            document.getElementById("paid_amount").focus();
             return false;
         }
 	}); 

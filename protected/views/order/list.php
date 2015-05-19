@@ -50,6 +50,16 @@ $this->menu=array(
                     'header'=>'<span style="white-space: nowrap;">Domain &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->domain',
 		),
+               array(
+                    'name'=>'domain_price',
+                    'header'=>'<span style="white-space: nowrap;">Domain Price &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->domain_price) ? number_format($data->domain_price,2) : "N/A"',
+		),
+               array(
+                    'name'=>'coupon_discount',
+                    'header'=>'<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->transaction->coupon_discount) ? number_format($data->transaction->coupon_discount,2) : "N/A"',
+		),
                 array(
                     'name'=>'start_date',
                     'header'=>'<span style="white-space: nowrap;">Start Date &nbsp; &nbsp; &nbsp;</span>',
@@ -81,13 +91,13 @@ $this->menu=array(
             
             array( 
 			'class'=>'CButtonColumn',
-			'template'=>'{Invoice}',
+                        'template'=>'{Invoice}',
 			'htmlOptions'=>array('width'=>'23%'),
 			'buttons'=>array(
 				'Invoice' => array(
-					'label'=>'Download Invoice',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice/", array("id"=>$data->id)): ""',
+					'label'=>'Invoice',
+					'options'=>array('class'=>'btn purple fa fa-edit margin-right15','target'=>'_blank'),
+					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice?id=$data->id"): ""',
 				),
                        ),
 		),

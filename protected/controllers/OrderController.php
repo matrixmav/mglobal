@@ -7,6 +7,10 @@ class OrderController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='inner';
+        
+        public function init() {
+        BaseClass::isLoggedIn();
+        }
 
 	/**
 	 * @return array action filters
@@ -164,10 +168,18 @@ class OrderController extends Controller
          */
         public function actionInvoice()
         {
-         $dataProvider =  "";   
+           if(!empty($_GET))
+           {
+               $order_id = $_GET['id'];
+           }
+            $orderObject = ORDER::model()->findByPK($order_id);
+            $this->renderPartial('invoice',array(
+			'orderObject'=>$orderObject,
+		));
+            /*$dataProvider =  "";   
          $html2pdf = Yii::app()->ePdf->HTML2PDF();
          $html2pdf->writeHTML('testingvggg');
-	 $html2pdf->output('etc2.pdf',EYiiPdf::OUTPUT_TO_BROWSER);
+	 $html2pdf->output('etc2.pdf',EYiiPdf::OUTPUT_TO_BROWSER);*/
         }        
 
         /**

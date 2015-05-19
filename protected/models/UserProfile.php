@@ -38,14 +38,14 @@ class UserProfile extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, street, city_id, state_id, country_id, zip_code, id_proof, address_proff, referral_banner_id, testimonials, status, created_at, updated_at', 'required'),
-			array('user_id, city_id, state_id, country_id, referral_banner_id, status', 'numerical', 'integerOnly'=>true),
+			array('user_id, street, city_name, state_name, country_id, zip_code, id_proof, address_proff, referral_banner_id, testimonials, status, created_at, updated_at', 'required'),
+			array('user_id, city_name, state_name, country_id, referral_banner_id, status', 'numerical', 'integerOnly'=>true),
 			array('address', 'length', 'max'=>255),
 			array('street, id_proof, address_proff', 'length', 'max'=>100),
 			array('zip_code', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, address, street, city_id, state_id, country_id, zip_code, id_proof, address_proff, referral_banner_id, testimonials, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, user_id, address, street, city_name, state_name, country_id, zip_code, id_proof, address_proff, referral_banner_id, testimonials, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		        array('image', 'file','types'=>'jpg, gif, png', 'allowEmpty'=>false, 'on'=>'insert,update'),
                     );
 	}
@@ -76,8 +76,8 @@ class UserProfile extends CActiveRecord
 			'user_id' => 'User',
 			'address' => 'Address',
 			'street' => 'Street',
-			'city_id' => 'City',
-			'state_id' => 'State',
+			'city_name' => 'City',
+			'state_name' => 'State',
 			'country_id' => 'Country',
 			'zip_code' => 'Zip Code',
 			'id_proof' => 'Id Proof',
@@ -112,8 +112,8 @@ class UserProfile extends CActiveRecord
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('address',$this->address,true);
 		$criteria->compare('street',$this->street,true);
-		$criteria->compare('city_id',$this->city_id);
-		$criteria->compare('state_id',$this->state_id);
+		$criteria->compare('city_name',$this->city_name);
+		$criteria->compare('state_name',$this->state_name);
 		$criteria->compare('country_id',$this->country_id);
 		$criteria->compare('zip_code',$this->zip_code,true);
 		$criteria->compare('id_proof',$this->id_proof,true);
