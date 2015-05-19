@@ -7,6 +7,8 @@ class OrderController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='inner';
+        
+        
 
 	/**
 	 * @return array action filters
