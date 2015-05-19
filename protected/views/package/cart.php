@@ -138,7 +138,7 @@ Domain
 </div>
 </div>
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount'];?>">
-<input type="hidden" id="coupon_discount_price" value="1"> 
+<input type="hidden" id="coupon_discount_price" value=""> 
 <script type="text/javascript">
     
 function Couponapply(){
