@@ -80,11 +80,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link rel="stylesheet" type="text/css"
               href="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.css" />
         
-        <link href="/metronic/assets/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
-
-        <link href="/metronic/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-        <link href="/metronic/assets/css/layout.css" rel="stylesheet" type="text/css"/>
-        <link href="/metronic/assets/css/component.css" rel="stylesheet" type="text/css"/>
+        
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->
         <!--[if lt IE 9]>
