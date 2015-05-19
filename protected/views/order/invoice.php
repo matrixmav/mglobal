@@ -15,14 +15,14 @@
 <tr class="productBlock CartItemRow domain" id="" name="product_items[]">
 <td class="pName">
 <div class="name itemblock topRow vCenter">
-<?php echo $packageObject->name;?>
+<?php echo $orderObject->package->name;?>
    
  
 </div>
      
 </td>
 <td class="pDescription">
-<p class="description itemblock topRow vCenter"><?php echo substr($packageObject->Description,0,100);?></p>
+<p class="description itemblock topRow vCenter"><?php echo substr($orderObject->package->Description,0,100);?></p>
 </td>
 <td class="pDuration">
 <div class="itemblock topRow">
@@ -35,7 +35,7 @@
 <td class="pPrice CartSubTotal tbl-pd">
 <div class="pos_hlp itemblock topRow">
 <p class="price ItemSubTotal">
-<span class="WebRupee">$</span> <span id=""><?php echo Yii::app()->format->number($packageObject->amount).".00";?> </span>
+<span class="WebRupee">$</span> <span id=""><?php echo number_format($orderObject->package->amount,2);?> </span>
 </p>
 </div>
  </td>
@@ -48,7 +48,7 @@ Domain
 </div>
 </td>
 <td class="pDescription">
-<p class="description itemblock topRow vCenter"><?php echo Yii::app()->session['domain'];?></p>
+<p class="description itemblock topRow vCenter"><?php echo $orderObject->domain;?></p>
 </td>
 <td class="pDuration">
 <div class="itemblock topRow">
