@@ -41,35 +41,13 @@ $this->breadcrumbs = array(
                     </div>
 
                 </div>
-                <div class="form-group">
+				 <div class="form-group">
                     <label for="totalcash" class="col-lg-4 control-label">Total Cash <span class="require">*</span></label>
                     <input type="hidden" value="<?php echo $walletPoints; ?>" name="wallet_points" id="wallet_points">
                     <div class="col-lg-8">
-    <?php
-    echo $walletPoints;
-    ?>
-                    </div>
-
-                </div>
-
-
-
-                <div class="form-group">
-                    <label for="lastname" class="col-lg-4 control-label">RP Wallet <span class="require">*</span></label>
-                    <div class="col-lg-8">
-    <?php echo $rpPoints; ?>
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <label for="lastname" class="col-lg-4 control-label">Commission Points <span class="require">*</span></label>
-                    <div class="col-lg-8">
-    <?php
-    echo $commissionPoints;
-    ?>
-                    </div>
-
-                </div>
+					<div id="transaction_data" name="transaction_data">0</div>
+                    </div></div>
+         
 
 
                 <div class="form-group">
