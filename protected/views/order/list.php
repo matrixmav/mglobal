@@ -81,12 +81,12 @@ $this->menu=array(
             
             array( 
 			'class'=>'CButtonColumn',
-			'template'=>'{Invoice}',
+                        'template'=>'{Invoice}',
 			'htmlOptions'=>array('width'=>'23%'),
 			'buttons'=>array(
 				'Invoice' => array(
 					'label'=>'Invoice',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
+					'options'=>array('class'=>'btn purple fa fa-edit margin-right15','target'=>'_blank'),
 					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice?id=$data->id"): ""',
 				),
                        ),
