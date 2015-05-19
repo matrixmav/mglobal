@@ -103,7 +103,8 @@ class UserController extends Controller
             if($_POST){              
                 
                 //echo substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d']  ; die;
-                $masterPin = BaseClass::getUniqInt(5);
+                
+                $masterPin = BaseClass::getUniqInt(5); die;
                 $model = new User;
                 $model->attributes = $_POST;
                 $model->sponsor_id = substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d'] ;
@@ -151,7 +152,7 @@ class UserController extends Controller
                 }              
                          
                 
-                $rand= rand (date('YmdHis'),5); // For the activation link
+                $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
                 $model->activation_key = $rand ;
                                
                 
