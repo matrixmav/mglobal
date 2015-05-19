@@ -101,10 +101,8 @@ class UserController extends Controller
         public function actionRegistration(){
             
             if($_POST){              
-                
-                //echo substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d']  ; die;
-                
-                $masterPin = BaseClass::getUniqInt(5); die;
+               
+                $masterPin = BaseClass::getUniqInt(5); 
                 $model = new User;
                 $model->attributes = $_POST;
                 $model->sponsor_id = substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d'] ;
@@ -149,8 +147,7 @@ class UserController extends Controller
                 
                 }else{
                    $userId =  $userObject->id; 
-                }              
-                         
+                }       
                 
                 $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
                 $model->activation_key = $rand ;
