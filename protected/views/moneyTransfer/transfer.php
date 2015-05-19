@@ -32,7 +32,7 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="transactiontype" class="col-lg-4 control-label">Choose Type of Transaction<span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <select id="transactiontype" name="transactiontype">
+                        <select id="transactiontype" name="transactiontype" class="form-control">
                             <option value="">Select Option</option>
                             <option value="1">Cash</option>
                             <option value="2">RP Wallet</option>	 
@@ -45,7 +45,7 @@ $this->breadcrumbs = array(
                     <label for="totalcash" class="col-lg-4 control-label">Total Cash <span class="require">*</span></label>
                     <input type="hidden" value="<?php echo $walletPoints; ?>" name="wallet_points" id="wallet_points">
                     <div class="col-lg-8">
-					<div id="transaction_data" name="transaction_data">0</div>
+					<div id="transaction_data" name="transaction_data" class="form-control">0</div>
                     </div></div>
          
 
@@ -53,7 +53,7 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <input type="text" value="" placeholder="Search" id="username" name="username" required >
+                        <input type="text" value="" placeholder="Search" id="username" name="username" required class="form-control">
                         <div id="results" >
 
                         </div>
@@ -62,7 +62,7 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="paid_amount" class="col-lg-4 control-label">Amount Value <span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" id="paid_amount" name="paid_amount"  required >
+                        <input type="text" class="form-control" id="paid_amount" name="paid_amount"  required class="form-control">
                         <input type="hidden" value="<?php echo $rpPoints; ?>" name="rp_points" id="rp_points">
                         <input type="hidden" value="<?php echo $commissionPoints; ?>" name="commission_points" id="commission_points">
                     </div>
@@ -73,7 +73,7 @@ $this->breadcrumbs = array(
             </fieldset>
             <div class="row">
                 <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">  
-                    <input type="submit"  name="transfer" id="transfer" class="btn btn-primary" value="Transfer Funds" />                     
+                    <input type="submit"  name="transfer" id="transfer" class="btn" value="Transfer Funds" />                     
 
                     <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
