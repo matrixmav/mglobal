@@ -179,6 +179,7 @@ class MoneyTransferController extends Controller {
                     $wallettoObj->fund = ($wallettoObj->fund) + ($transactionObj->paid_amount);
                     $wallettoObj->status = 1;
                     $wallettoObj->save();
+				$moneyobj->comment = $_POST['comment'];
                 $moneyobj->status = 1;
 				$moneyobj->wallet_id = $wallettoObj->id;
                 $moneyobj->update();
