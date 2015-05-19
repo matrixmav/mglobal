@@ -113,6 +113,25 @@ var MIN_LENGTH = 3;
             return false;
         }
 	}); 
+	$("#transactiontype").change(function() {
+		var transactiontype = $("#transactiontype").val();
+		if(transactiontype == 2)
+			{
+				var rp_points = $("#rp_points").val();
+				  $('#transaction_data').html(rp_points);
+			}
+			if(transactiontype == 1)
+			{			
+				var wallet_points = $("#wallet_points").val();
+				  $('#transaction_data').html(wallet_points);
+			}
+			if(transactiontype == 3)
+			{			
+				var commission_points = $("#commission_points").val();
+				  $('#transaction_data').html(commission_points);	
+			}
+		
+	});	
 	$("#addfund").click(function() {
 		var username = $("#username").val();
 			$.ajax( {
