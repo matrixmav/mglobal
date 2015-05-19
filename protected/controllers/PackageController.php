@@ -82,6 +82,7 @@ class PackageController extends Controller
               
              $transactionObject1 = Transaction::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
               
+              
              if(count($transactionObject1) > 0)
              { 
                  
@@ -100,7 +101,7 @@ class PackageController extends Controller
                     $transactionObject->mode = 'paypal';
                     $transactionObject->actual_amount = $_REQUEST['totalAmount'];
                     $transactionObject->paid_amount = $_REQUEST['totalAmount'];
-                    $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
+                    $transactionObject->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject->total_rp = 0;
                     $transactionObject->used_rp = 0;
                     $transactionObject->status = 0;
