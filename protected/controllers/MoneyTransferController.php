@@ -30,7 +30,7 @@ class MoneyTransferController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 'confirm', 'status', 'userexists', 'fund'),
+                'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 'confirm', 'status', 'userexists', 'fund','transactions'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -63,6 +63,13 @@ class MoneyTransferController extends Controller {
             'pagination' => array('pageSize' => 10),
         ));
         $this->render('list', array('dataProvider' => $dataProvider));
+    }
+	public function actionTransactions() {
+
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'pagination' => array('pageSize' => 10),
+        ));
+        $this->render('transactions', array('dataProvider' => $dataProvider));
     }
 
     public function actionTransfer() {
