@@ -45,14 +45,14 @@ $this->breadcrumbs = array(
             <div class="form-group" id="stateList"  style="display: <?php if(!empty($profileObject) && count($stateObject) > 0){ echo "block";}else{ echo "none";}?>">
                 <label class="col-lg-4 control-label" for="email">State <span class="require">*</span></label>
                 <div class="col-lg-8">
-                   <input type="text" id="state_id" class="form-control" name="UserProfile[state_id]" value="<?php echo (!empty($profileObject)) ?  $profileObject->state_id : ""; ?>">
+                   <input type="text" id="state_id" class="form-control" name="UserProfile[state_name]" value="<?php echo (!empty($profileObject)) ?  $profileObject->state_name : ""; ?>">
                  </div>
                  </div>
             
             <div class="form-group" id="cityList">
                 <label class="col-lg-4 control-label" for="email">City <span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="city_id" class="form-control" name="UserProfile[city_id]" value="<?php echo (!empty($profileObject)) ?  $profileObject->city_id : ""; ?>">
+                    <input type="text" id="city_id" class="form-control" name="UserProfile[city_name]" value="<?php echo (!empty($profileObject)) ?  $profileObject->city_name : ""; ?>">
                  </div>
             </div>
             
