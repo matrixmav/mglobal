@@ -168,10 +168,16 @@ class OrderController extends Controller
          */
         public function actionInvoice()
         {
-         $dataProvider =  "";   
+            
+         $package_id = Yii::app()->session['package_id'];
+            $packageObject = Package::model()->findByPK($package_id);
+            $this->render('cart',array(
+			'packageObject'=>$packageObject,
+		));
+            /*$dataProvider =  "";   
          $html2pdf = Yii::app()->ePdf->HTML2PDF();
          $html2pdf->writeHTML('testingvggg');
-	 $html2pdf->output('etc2.pdf',EYiiPdf::OUTPUT_TO_BROWSER);
+	 $html2pdf->output('etc2.pdf',EYiiPdf::OUTPUT_TO_BROWSER);*/
         }        
 
         /**
