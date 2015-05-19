@@ -17,6 +17,7 @@ $access = Yii::app()->user->getState('access');
 $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState ( 'username' ) );
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
+$baseURL = "http://localhost";
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +39,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
-        <title>HK-Base | Admin</title>
+        <title>mGlobal | Admin</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <meta content="" name="description" />
@@ -71,6 +72,7 @@ License: You must have a valid license purchased only from themeforest(the above
               type="text/css" />
         <link href="/metronic/custom/custom.css" rel="stylesheet"
               type="text/css" />
+        
 
         <link href="/metronic/custom/custom-pagination.css" rel="stylesheet"
               type="text/css" />
@@ -111,8 +113,10 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END CORE PLUGINS -->
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/additional-methods.min.js"></script>
-        <script src="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.js"></script>
-        <script src="/metronic/assets/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script
+        src="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.js"></script>
+        <script src="/metronic/assets/plugins/bootbox/bootbox.min.js"
+        type="text/javascript"></script>
 
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
@@ -120,10 +124,10 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript">
-//            jQuery(document).ready(function () {
-//                App.init();
+            jQuery(document).ready(function () {
+                App.init();
 //                checkLoginTime();
-//            });
+            });
 
         </script>
         <!-- END JAVASCRIPTS -->
@@ -199,8 +203,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
                 <div class="pull-right inlineBlock"
                      style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
-                    <img
-                        src="<?php echo Yii::app()->request->baseUrl . "/images/admin/"; ?>"><br />Admin
+                    <!--<img src="<?php //echo Yii::app()->request->baseUrl . "/images/admin/"; ?>"><br />-->
+                    Admin
                 </div>
 
                 <!-- END TOP NAVIGATION MENU -->
@@ -229,7 +233,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $hotel_subsection = array(
                                     "user/index" => "Member Management",
                                     "user/wallet" => "Wallet",
-                                    "#1" => "Generate binary",
+                                    "user/genealogy" => "Genealogy binary",
                                 );
                                 $activecls = 'active';
                                 if ($curControllerLower == "user" || $curControllerLower == "admin") {
@@ -237,7 +241,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'invoice' && $curActionLower == 'bills')
+                                if ($curControllerLower == 'user' && $curActionLower == 'bills')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -245,7 +249,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Operation</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'hotel') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'user') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -278,7 +282,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-
+                            
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
                                 $billing_subsection = array(
@@ -302,11 +306,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                         $class_billing_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
                                         echo '<li ' . $class_billing_content . '>';
                                         echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                        echo '</li>';
+                                            echo '</li>';
 //                                        }
-                                    }
+                                            }
                                     echo '</ul>';
-                                    ?>						
+                                    ?>					
                                 </li>	
                                 <?php
                             }
@@ -332,7 +336,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 );
                                 ?>
                                 <li
-                                    class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'reservation')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Reports</span>
                                         <span class="selected"></span> <span
@@ -344,20 +348,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                     echo '<ul class="sub-menu">';
                                     foreach ($reservation_subsection as $ctName => $ctTitle) {
 //                                        if (in_array($ctTitle, $menusections ['sections'])) {
-                                        if ($ctName == "search/create") {
-                                            $ctName = "search/create/type/details";
-                                        }
-                                        if ($ctName == "reservation" && $curControllerLower == "reservation")
-                                            $class_content = 'class="active"';
-                                        else
-                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($ctName == "report" && $curControllerLower == "report")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
 
-                                        echo '<li ' . $class_content . '>';
+                                            echo '<li ' . $class_content . '>';
                                         echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                        echo '</li>';
-                                        if ($ctName == "search/create/type/details") {
-                                            $ctName = "search/create";
-                                        }
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
 //                                        }
                                     }
                                     echo '</ul>';
@@ -365,6 +369,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                                    
+                            $bases_pmenu = 4;
+                            
                         } else {
                             ?>
                             <li
@@ -472,8 +479,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <li>
                                         <?php
                                         $this->widget('zii.widgets.CBreadcrumbs', array(
-                                            'homeLink' => CHtml::link('Admin', array(
-                                                '/admin'
+                                            'homeLink' => CHtml::link('User', array(
+                                                '/user'
                                             )),
                                             'links' => $this->breadcrumbs
                                         ));
@@ -501,7 +508,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">
-                <?php echo date("Y"); ?> &copy; HK-Base
+                <?php echo date("Y"); ?> &copy; mGlobal
             </div>
             <div class="footer-tools">
                 <span class="go-top"> <i class="fa fa-angle-up"></i>

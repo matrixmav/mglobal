@@ -64,18 +64,18 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
-                    'name' => 'full_name',
+                    'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
                 
                 array(
-                    'name' => 'email',
+                    'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Address Proof &nbsp; &nbsp; &nbsp;</span>',
                     'value' => array($this,'gridAddressImagePopup'),
                 ),
                 array(
-                    'name' => 'sponsor_id',
+                    'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Id Proof &nbsp; &nbsp; &nbsp;</span>',
                     'value' => array($this,'gridIdImagePopup'),
                 ),
@@ -95,7 +95,7 @@ $this->breadcrumbs = array(
                     'value' => 'isset($data->country->name)?$data->country->name:""',
                 ),
                 array(
-                    'name' => 'phone',
+                    'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->user->phone',
                 ),

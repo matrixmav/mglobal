@@ -174,10 +174,11 @@ class ProfileController extends Controller
          public function actionDocumentVerification() {
             $error = "";
             $success = "";
-                $userObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
-                $profileObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+            $profileObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+            $userObject = $profileObject->userprofile();
+               
           if($_POST)
-          { 
+          {  
            $userObject->id_proof = time().$_FILES['id_proof']['name'];
            $userObject->address_proff = time().$_FILES['address_proof']['name']; 
             if($_FILES)

@@ -344,137 +344,11 @@ License: You must have a valid license purchased only from themeforest(the above
                             }
                            
                             $reservation_pmenu = 8;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    "transaction/list" => "Transaction List",
-//                                    "moneytransfer/list" => "Moneytransfer List",
-                                    "MoneyTransfer/transfer" => "Transfer",
-                                    
-                                );
-                                ?>
-                                <li
-                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Fund </span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'transaction') ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
-                                            if ($ctName == "search/create") {
-                                                $ctName = "search/create/type/details";
-                                            }
-                                            if ($ctName == "transaction" && $curControllerLower == "moneytransfer")
-                                                $class_content = 'class="active"';
-                                            else
-                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-
-                                            echo '<li ' . $class_content . '>';
-                                            echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                            echo '</li>';
-                                            if ($ctName == "search/create/type/details") {
-                                                $ctName = "search/create";
-                                            }
-                                    }
-                                    echo '</ul>';
-                                    ?>			
-                                </li>
-                                <?php
-                            }
+                            
                             $reservation_pmenu = 8;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    "wallet/list" => "Wallet",
-                                    
-                                );
-                                ?>
-                                <li
-                                    class="<?php echo (($curControllerLower == 'wallet') || ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Wallet </span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'wallet') ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
-                                            if ($ctName == "search/create") {
-                                                $ctName = "search/create/type/details";
-                                            }
-                                            if ($ctName == "transaction" && $curControllerLower == "wallet")
-                                                $class_content = 'class="active"';
-                                            else
-                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-
-                                            echo '<li ' . $class_content . '>';
-                                            echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                            echo '</li>';
-                                            if ($ctName == "search/create/type/details") {
-                                                $ctName = "search/create";
-                                            }
-                                    }
-                                    echo '</ul>';
-                                    ?>			
-                                </li>
-                                <?php
-                            }
+                            
                             $bases_pmenu = 4;
-                            if ((in_array($bases_pmenu, $menusections ['psections'])) || (in_array($bases_pmenu, $menusections ['section_ids']))) {
-                                $bases_subsection = array(
-                                    "portal" => "Portals",
-                                    "bank" => "Banks",
-                                    "group" => "Groups",
-                                    "theme" => "Themes",
-                                    "optionType" => "Option Type",
-                                    "option" => "Options",
-                                    "equipment" => "Equipments",
-                                    "origin" => "Origines",
-                                    "country" => "Countries",
-                                    "state" => "States",
-                                    "city" => "Cities",
-                                    "area" => "Area",
-                                    "homeBanner" => "Home Banner",
-                                    "homeAdBanner" => "Home Ad Banner",
-                                    "ourSelection" => "Our Selection",
-                                    "dayuseBenefits" => "Dayuse Benefits"
-                                );
-
-                                $keys = array_keys($bases_subsection);
-                                $bases_active = array_search($curController, $keys);
-                                ?>
-                                <li class="<?php echo ($bases_active !== false) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-bases"></span> <span
-                                            class="title"><?php echo Yii::t('translation', 'Bases') ?> </span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($bases_active !== false) ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($bases_subsection as $ctName => $ctTitle) {
-
-                                        if (in_array($ctTitle, $menusections ['sections'])) {
-                                            // if($ctName == "portal")
-                                            // echo '<ul class="sub-menu">';
-
-                                            $class_content = ($curController == $ctName) ? 'class="active"' : '';
-
-                                            echo '<li ' . $class_content . '>';
-                                            echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                            echo '</li>';
-
-                                            // if($ctName == "dayuseBenefits")
-                                            // echo '</ul>';
-                                        }
-                                    }
-                                    echo '</ul>';
-                                    ?>						
-                                </li>
-                                <?php
-                            }
+                            
                         } else {
                             ?>
                             <li
@@ -611,7 +485,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">
-                <?php echo date("Y"); ?> &copy; HK-Base
+                <?php echo date("Y"); ?> &copy; mGlobal
             </div>
             <div class="footer-tools">
                 <span class="go-top"> <i class="fa fa-angle-up"></i>
