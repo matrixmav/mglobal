@@ -183,7 +183,17 @@ class ProfileController extends Controller
             if($_FILES)
             {
              if(md5($_POST['UserProfile']['master_pin'])== $profileObject->master_pin)
-             {   
+             {
+                 $ext1 = end((explode(".", $userObject->id_proof)));
+                 $ext2 = end((explode(".", $userObject->address_proff)));
+            
+              if($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg"
+&& $ext1 != "pdf" || $ext2 != "jpg" && $ext2 != "png" && $ext2 != "jpeg"
+&& $ext2 != "pdf")  
+              {
+                  $error = "Please upload mentioned file type."; 
+              }else{
+               
             if($userObject->update())
             {   
 	       $path = Yii::getPathOfAlias('webroot')."/upload/verification-document/";
@@ -191,13 +201,16 @@ class ProfileController extends Controller
                 BaseClass::uploadFile($_FILES['address_proof']['tmp_name'],$path,time().$_FILES['address_proof']['name']);
                $success = "Documents Updated Successfully";
             }
+            }
              }else{
                $error .= "Incorrect master pin.";  
              }
-            }else{
+            }
+            else{
               $error = "Please fill required(*) marked fields."; 
             }
           }
+            
               
           $this->render('/user/verification', array('success' => $success,'error' => $error,'userObject'=>$userObject));
         }
