@@ -4,7 +4,7 @@ class ProfileController extends Controller
 {
       public $layout='inner';
       
-      public function init() {
+       public function init() {
         BaseClass::isLoggedIn();
         }
       
