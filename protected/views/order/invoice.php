@@ -1,7 +1,12 @@
+ <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form/bootstrap.min202.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/customcss/style.css">
+ <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/customcss/style1.css">
+ <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/customcss/style2.css">
 <div class="container">
 <div class="col-lg-12">    
 <div id="maincontent" class="pageWrp checkout abtest">
 <div class="sectionWrp summary open">
+    
     <p class="title"><span class="txt">Invoice</span></p>
 <div class="contentBlock CartSection" id="cartDiv">
  <table class="cartItemsWrp" cellspacing="0" cellpadding="0">
@@ -82,7 +87,7 @@ Domain
 </td>
 </tr>
  
-<tr class="ItemConvertedSubtotal" id="coupon_discount" style= display:<?php (!empty($orderObject->transaction->coupon_discount)) ? "none" :"block";?>">
+<tr class="ItemConvertedSubtotal" id="coupon_discount" style="display:<?php (!empty($orderObject->transaction->coupon_discount)) ? "none" :"block";?>">
 <td class="itemText">
 <p>Coupon Discount:</p>
 </td>
@@ -103,10 +108,13 @@ Domain
 </div>
  
 </div>
+
+</div>
+
+</div>
+         <a onClick="window.print();" class="btn-flat-green">Print Invoice</a>
+</div>
  
-</div>
-</div>
-</div>
 </div>
  
  
