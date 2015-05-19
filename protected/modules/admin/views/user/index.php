@@ -16,6 +16,7 @@ $this->breadcrumbs = array(
     <input type="submit" class="btn btn-primary" value="OK" name="submit" id="submit"/>
     </form>
 </div>
+
 <div class="row">
     <div class="col-md-12">
         <?php
@@ -59,7 +60,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'sponsor_id',
                     'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->userprofile->address',
+                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:""   ',
                 ),
                 array(
                     'name' => 'status',
@@ -67,15 +68,15 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'class' => 'CButtonColumn',
-                    'template' => '{Edit}{Delete}',
-                    'htmlOptions' => array('width' => '23%'),
+                    'template' => '{Change}',
+                    'htmlOptions' => array('width' => '30%'),
                     'buttons' => array(
-                        'Edit' => array(
-                            'label' => 'Edit',
-                            'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
-                            'url' => 'Yii::app()->createUrl("admin/state/update", array("id"=>$data->id))',
-                        ),
-                        'Delete' => array(
+//                        'Edit' => array(
+//                            'label' => 'Edit',
+//                            'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
+//                            'url' => 'Yii::app()->createUrl("admin/state/update", array("id"=>$data->id))',
+//                        ),
+                        'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',

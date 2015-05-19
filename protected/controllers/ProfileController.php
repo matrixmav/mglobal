@@ -4,6 +4,10 @@ class ProfileController extends Controller
 {
       public $layout='inner';
       
+       public function init() {
+        BaseClass::isLoggedIn();
+        }
+      
 	public function actionIndex()
 	{
                
@@ -57,8 +61,8 @@ class ProfileController extends Controller
                {
                 $profileObject->address = $_POST['UserProfile']['address'];
                 $profileObject->street = $_POST['UserProfile']['street'];
-                $profileObject->city_id = $_POST['UserProfile']['city_id'];
-                $profileObject->state_id = $_POST['UserProfile']['state_id'];
+                $profileObject->city_name = $_POST['UserProfile']['city_name'];
+                $profileObject->state_name = $_POST['UserProfile']['state_name'];
                 $profileObject->country_id = $_POST['UserProfile']['country_id'];
                 $profileObject->zip_code = $_POST['UserProfile']['zip_code'];
 
@@ -179,21 +183,34 @@ class ProfileController extends Controller
             if($_FILES)
             {
              if(md5($_POST['UserProfile']['master_pin'])== $profileObject->master_pin)
-             {   
+             {
+                 $ext1 = end((explode(".", $userObject->id_proof)));
+                 $ext2 = end((explode(".", $userObject->address_proff)));
+            
+              if($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg"
+&& $ext1 != "pdf" || $ext2 != "jpg" && $ext2 != "png" && $ext2 != "jpeg"
+&& $ext2 != "pdf")  
+              {
+                  $error = "Please upload mentioned file type."; 
+              }else{
+               
             if($userObject->update())
             {   
-	       $path = Yii::getPathOfAlias('webroot')."/uploads/verification-document/";
+	       $path = Yii::getPathOfAlias('webroot')."/upload/verification-document/";
                 BaseClass::uploadFile($_FILES['id_proof']['tmp_name'],$path,time().$_FILES['id_proof']['name']);
                 BaseClass::uploadFile($_FILES['address_proof']['tmp_name'],$path,time().$_FILES['address_proof']['name']);
                $success = "Documents Updated Successfully";
             }
+            }
              }else{
                $error .= "Incorrect master pin.";  
              }
-            }else{
+            }
+            else{
               $error = "Please fill required(*) marked fields."; 
             }
           }
+            
               
           $this->render('/user/verification', array('success' => $success,'error' => $error,'userObject'=>$userObject));
         }
@@ -201,7 +218,7 @@ class ProfileController extends Controller
 
     /*
          * To fetch state name according to country
-         */
+          
         public function actionFetchState()
         {
             
@@ -217,7 +234,7 @@ class ProfileController extends Controller
         
          /*
          * To fetch state name according to country
-         */
+        
         public function actionFetchCity()
         {
           $cityObject = City::model()->findAll(array('condition'=>'state_id='.$_REQUEST['state_id']));  

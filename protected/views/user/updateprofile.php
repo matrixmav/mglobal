@@ -49,7 +49,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" value="<?php echo $userObject->country_code;?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>" <?php if($edit=='no'){ ?>readonly="readonly" <?php }?> style="width:88%;float:right;">
+                    <input type="text" value="<?php echo (!empty($userObject))? $userObject->country_code:"";?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>" <?php if($edit=='no'){ ?>readonly="readonly" <?php }?> style="width:88%;float:right;">
                 </div>
             </div>
              <div class="form-group">

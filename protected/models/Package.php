@@ -32,11 +32,11 @@ class Package extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, start_date, end_date, coupon_code, amount, status, created_at, update_at', 'required'),
+			array('name, start_date, end_date,coupon_discount, amount, status, created_at, update_at', 'required'),
 			array('name, coupon_code, amount, status', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, start_date, end_date, coupon_code, amount, status, created_at, update_at', 'safe', 'on'=>'search'),
+			array('id, name, start_date, end_date,coupon_discount, amount, status, created_at, update_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +61,8 @@ class Package extends CActiveRecord
 			'name' => 'Name',
 			'start_date' => 'Start Date',
 			'end_date' => 'End Date',
-			'coupon_code' => 'Coupon Code',
+			 
+                        'coupon_discount' => 'Coupon price',
 			'amount' => 'Amount',
 			'status' => 'Status',
 			'created_at' => 'Created At',
@@ -91,8 +92,9 @@ class Package extends CActiveRecord
 		$criteria->compare('name',$this->name);
 		$criteria->compare('start_date',$this->start_date,true);
 		$criteria->compare('end_date',$this->end_date,true);
-		$criteria->compare('coupon_code',$this->coupon_code);
-		$criteria->compare('amount',$this->amount);
+		 
+                $criteria->compare('coupon_discount',$this->coupon_discount);
+                $criteria->compare('amount',$this->amount);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('update_at',$this->update_at,true);

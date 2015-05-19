@@ -45,7 +45,7 @@ class BaseClass extends Controller {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if (!$adminObject) {
-            $this->redirect('/login');
+            $this->redirect('/user/login');
         }
     }
 

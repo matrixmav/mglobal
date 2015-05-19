@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Wallet Summery',
-        'RP Wallet',
+        'Commision Wallet',
 );
 
 $this->menu=array(
@@ -61,11 +61,12 @@ $this->menu=array(
                     'header'=>'<span style="white-space: nowrap;">Transfer Date &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->created_at',
 		),
-             array(
+            array(
                     'name'=>'status',
                     'header'=>'<span style="white-space: nowrap;">Transfer Status &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->status == 1) ? "Transfered" : "Pending"',
 		),
+            
              array(
                     'name'=>'comment',
                     'header'=>'<span style="white-space: nowrap;">Comment &nbsp; &nbsp; &nbsp;</span>',

@@ -82,12 +82,14 @@ class PackageController extends Controller
               
              $transactionObject1 = Transaction::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
               
+              
              if(count($transactionObject1) > 0)
              { 
                  
                     $transactionObject1->mode = 'paypal';
                     $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
                     $transactionObject1->paid_amount = $_REQUEST['totalAmount'];
+                    $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject1->total_rp = 0;
                     $transactionObject1->used_rp = 0;
                     $transactionObject1->status = 0;
@@ -99,6 +101,7 @@ class PackageController extends Controller
                     $transactionObject->mode = 'paypal';
                     $transactionObject->actual_amount = $_REQUEST['totalAmount'];
                     $transactionObject->paid_amount = $_REQUEST['totalAmount'];
+                    $transactionObject->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject->total_rp = 0;
                     $transactionObject->used_rp = 0;
                     $transactionObject->status = 0;
@@ -124,8 +127,9 @@ class PackageController extends Controller
                     $orderObject1->user_id = Yii::app()->session['userid'];
                     $orderObject1->package_id = Yii::app()->session['package_id'];
                     $orderObject1->domain = Yii::app()->session['domain'];
+                    $orderObject1->domain_price = Yii::app()->session['amount'];
                     $orderObject1->transaction_id = Yii::app()->session['transaction_id'];
-                    $orderObject1->status = 1;
+                    $orderObject1->status = 0;
                     $orderObject1->start_date = new CDbExpression('NOW()');
                     $orderObject1->end_date = new CDbExpression('NOW()');
                     $orderObject1->updated_at = new CDbExpression('NOW()');
@@ -134,8 +138,9 @@ class PackageController extends Controller
                     $orderObject->user_id = Yii::app()->session['userid'];
                     $orderObject->package_id = Yii::app()->session['package_id'];
                     $orderObject->domain = Yii::app()->session['domain'];
+                    $orderObject->domain_price = Yii::app()->session['amount'];
                     $orderObject->transaction_id = Yii::app()->session['transaction_id'];
-                    $orderObject->status = 1;
+                    $orderObject->status = 0;
                     $orderObject->start_date = new CDbExpression('NOW()');
                     $orderObject->end_date = new CDbExpression('NOW()');
                     $orderObject->created_at = new CDbExpression('NOW()');
@@ -170,11 +175,9 @@ class PackageController extends Controller
         
         public function actionDomainSearch()
         {
-         //Yii::app()->session['package_id'] = $_REQUEST['package_id'];     
         
-        $Package_id = Yii::app()->session['package_id'];
-        if($Package_id!='')
-        {
+      $Package_id = Yii::app()->session['package_id'];
+        
         $packageObject = Package::model()->findByPK($Package_id);
         
         $rightbar = '<div id="dca_cart" class="cart-wrapper">
@@ -209,8 +212,8 @@ class PackageController extends Controller
             Package Amount:<br>
             <div class="cart-total">
             <span id="total_curr">
-            <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
-            $rightbar .= $packageObject->amount.".00";
+            <span id="total"><span class="WebRupee"></span>$<span id="tottal_amt">';
+            $rightbar .= number_format($packageObject->amount,2);
              $rightbar .='</span>
              </div>
              </div>';
@@ -222,7 +225,7 @@ class PackageController extends Controller
             <div class="cart-total">
             <span id="total_curr">
             <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
-            $rightbar .= Yii::app()->session['amount'].".00";
+            $rightbar .= number_format(Yii::app()->session['amount'],2);
             
             $rightbar .='</span></span>&nbsp;
             </span><br>
@@ -284,9 +287,7 @@ class PackageController extends Controller
 			'rightbar'=>$rightbar,
                         'suggestedDomain'=>$SuggestedDomain,
 		));
-        }else{
-           $this->render('domainsearchError'); 
-        }
+         
         }
         
         

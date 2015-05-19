@@ -7,14 +7,41 @@ $this->breadcrumbs = array(
 );
 ?>
 
-<div class="expiration margin-topDefault">
-    <!--<p>Client/ Hotel/ Bill : <?php //echo $clientObject->name; ?></p>-->
-    <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/report/address" />
-    <div class="col-md-3">
-        <input type="text" name="search" id="search" class="form-control" value="" />
+<style>
+    .confirmBtn{left: 333px;
+    position: absolute;
+    top: 0;}
+    
+    .confirmOk{left: 610px;
+    position: absolute;
+    top: 8px;}
+    .confirmMenu{position: relative;}
+</style>
+<div class="col-md-12">
+    
+        <div class="expiration margin-topDefault confirmMenu">
+                    
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report/address">
+    <div class="input-group input-large date-picker input-daterange">
+        <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
+        <span class="input-group-addon">
+        to </span>
+        <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
     </div>
-    <input type="submit" class="btn btn-primary" value="OK" name="submit" id="submit"/>
+    <?php 
+    $statusId =   1;
+    if(isset($_REQUEST['res_filter'])){
+      $statusId =   $_REQUEST['res_filter'];
+    } ?>
+    
+    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
+                <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Active</option>
+                <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >In Active</option>
+            </select>
+    </div>
+    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
     </form>
+
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -37,28 +64,28 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
-                    'name' => 'full_name',
+                    'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
                 
                 array(
-                    'name' => 'email',
+                    'name' => 'address',
                     'header' => '<span style="white-space: nowrap;">Address 1 &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->street',
                 ),
                 array(
-                    'name' => 'sponsor_id',
+                    'name' => 'street',
                     'header' => '<span style="white-space: nowrap;">Address 2 &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->address',
                 ),
                 array(
-                    'name' => 'id',
+                    'name' => 'city_name',
                     'header' => '<span style="white-space: nowrap;">City &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->city_name',
                 ),
                 array(
-                    'name' => 'id',
+                    'name' => 'state_name',
                     'header' => '<span style="white-space: nowrap;">State &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->state_name',
                 ),
@@ -68,9 +95,9 @@ $this->breadcrumbs = array(
                     'value' => 'isset($data->country->name)?$data->country->name:""',
                 ),
                 array(
-                    'name' => 'phone',
+                    'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->user->phone',
+                    'value' => 'isset($data->user->phone)?$data->user->phone:""',
                 ),
                 array(
                     'name' => 'status',

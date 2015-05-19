@@ -79,7 +79,7 @@ Domain
 <div class="couponError" style="display: none;" id="coupon_error"></div>
  
 
-<div style="font-size: 12px; padding-top: 8px">*Discounts not applicable on .BIZ &amp; .ASIA domains</div>
+ 
 <div class="offerBlurb" style="display: none;">
 <div class="blurbTop"></div>
 <div class="blurbBody"></div>
@@ -89,7 +89,7 @@ Domain
 <div class="socialBtnWrp lfloat">
 <div class="fbConnect">
 <span id="fbButton" class="fbbtn"></span>
-<span id="followBigRock"></span> <span class="txt">Share on Facebook to get 10% off*</span>
+ 
 </div>
 </div>
 <table class="cartTotalWrp rfloat tbl-2" cellpadding="0" cellspacing="0" border="0">
@@ -138,7 +138,7 @@ Domain
 </div>
 </div>
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount'];?>">
- 
+<input type="hidden" id="coupon_discount_price" value=""> 
 <script type="text/javascript">
     
 function Couponapply(){
@@ -168,9 +168,10 @@ success: function(html){
  document.getElementById("coupon_success").style.display="block";
  document.getElementById("coupon_success").innerHTML = "Coupon code applied";
  document.getElementById("totalpayable").innerHTML = htmlTag[0];
- document.getElementById("coupon_discount").style.display="block";
+ document.getElementById("coupon_discount").style.display="";
  document.getElementById("total-discount").innerHTML = htmlTag[1];
  document.getElementById("totalAmount").value=htmlTag[0];
+ document.getElementById("coupon_discount_price").value = htmlTag[1];
  $("#coupon_success").fadeOut(5000);
  }  
  }
@@ -181,8 +182,9 @@ success: function(html){
 }
 function proceedPayment()
 {
+var coupon_discount = $('#coupon_discount_price').val();
 var totalAmount = $('#totalAmount').val(); 
-var dataString = 'datasave=yes&totalAmount='+totalAmount;    
+var dataString = 'datasave=yes&totalAmount='+totalAmount+'&coupon_discount='+coupon_discount;    
 $.ajax({
 type: "GET",
 url: "orderadd",
