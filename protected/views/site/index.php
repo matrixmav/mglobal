@@ -3,7 +3,7 @@
 <div id='social-sidebar'>
 <ul>
 <li>
-<a ><img src="images/whts1.png"tw.png" />
+<a ><img src="images/whts1.png" />
 <span class="whts">whats up</span>
 </a>
 </li>
