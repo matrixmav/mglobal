@@ -28,7 +28,7 @@ $this->breadcrumbs=array(
 									 <div class="form-group">
                                        <label for="username" class="col-lg-4 control-label">Select User <span class="require">*</span></label>
                                         <div class="col-lg-8">
-										 <input type="text" value="" placeholder="Search" id="username" name="username" required class="form-control">
+										 <input type="text" value="" placeholder="Search" id="adusername" name="username" required class="form-control">
 										 <div id="results" >
 										
 										 </div>
