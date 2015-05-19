@@ -168,7 +168,7 @@ success: function(html){
  document.getElementById("coupon_success").style.display="block";
  document.getElementById("coupon_success").innerHTML = "Coupon code applied";
  document.getElementById("totalpayable").innerHTML = htmlTag[0];
- document.getElementById("coupon_discount").style.display="block";
+ document.getElementById("coupon_discount").style.display="";
  document.getElementById("total-discount").innerHTML = htmlTag[1];
  document.getElementById("totalAmount").value=htmlTag[0];
  document.getElementById("coupon_discount_price").value = htmlTag[1];
