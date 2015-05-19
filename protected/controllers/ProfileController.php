@@ -4,6 +4,10 @@ class ProfileController extends Controller
 {
       public $layout='inner';
       
+      public function init() {
+        BaseClass::isLoggedIn();
+        }
+      
 	public function actionIndex()
 	{
                
