@@ -82,7 +82,7 @@ Domain
 </td>
 </tr>
  
-<tr class="ItemConvertedSubtotal" id="coupon_discount" style="display:none;">
+<tr class="ItemConvertedSubtotal" id="coupon_discount" style= display:<?php (!empty($orderObject->transaction->coupon_discount)) ? "none" :"block";?>">
 <td class="itemText">
 <p>Coupon Discount:</p>
 </td>
