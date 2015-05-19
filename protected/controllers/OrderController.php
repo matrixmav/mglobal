@@ -170,9 +170,9 @@ class OrderController extends Controller
         {
             
          $package_id = Yii::app()->session['package_id'];
-            $packageObject = Order::model()->findByPK($package_id);
+            $orderObject = ORDER::model()->findByPK($package_id);
             $this->renderPartial('invoice',array(
-			'packageObject'=>$packageObject,
+			'orderObject'=>$orderObject,
 		));
             /*$dataProvider =  "";   
          $html2pdf = Yii::app()->ePdf->HTML2PDF();
