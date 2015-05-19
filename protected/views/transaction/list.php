@@ -55,7 +55,7 @@ $this->menu=array(
 		array(
                    'name'=>'slug',
                     'header'=>'<span style="white-space: nowrap;">Receiver &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->usertable->full_name',
+                    'value'=>'$data->user->full_name',
 		),
 		array(
                    'name'=>'slug',
