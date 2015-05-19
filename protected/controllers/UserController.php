@@ -103,12 +103,12 @@ class UserController extends Controller
             if($_POST){              
                 
                 //echo substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d']  ; die;
-                $masterPin = mt_rand(100000,999999);
+                $masterPin = BaseClass::getUniqInt(5);
                 $model = new User;
                 $model->attributes = $_POST;
                 $model->sponsor_id = substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d'] ;
                 $model->password = BaseClass::md5Encryption($_POST['password']);  
-                $model->master_pin = md5($masterPin);
+                $model->master_pin = BaseClass::md5Encryption($masterPin);
                 $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d'];              
                 $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
                 
