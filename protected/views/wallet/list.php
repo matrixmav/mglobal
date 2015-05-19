@@ -53,43 +53,26 @@ $this->menu=array(
 		//'idJob',
 		
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">User Name &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->usertable->full_name',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Total Fund &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->fund',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Type &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->type',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->status',
 		),
 		
-		array( 
-			'class'=>'CButtonColumn',
-			'template'=>'{Edit}{Delete}',
-			'htmlOptions'=>array('width'=>'23%'),
-			'buttons'=>array(
-				'Edit' => array(
-					'label'=>'Edit',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
-					'url'=>'Yii::app()->createUrl("wallet/view", array("id"=>$data->id))',
-				),
-				'Delete' => array(
-					'label'=>Yii::t('translation', 'Change Status'),
-					'options'=>array('class'=>'fa fa-success btn default black delete'),
-					'url'=>'Yii::app()->createUrl("wallet/view", array("id"=>$data->id))',
-				),
-			),
-		),
 	),
 )); ?>
                     
