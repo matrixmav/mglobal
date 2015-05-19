@@ -188,7 +188,7 @@ class UserController extends Controller
 //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
 //                var_dump($config);
 //                CommonHelper::sendMail($config);
-                $this->render('login', array('successMsg'=> $successMsg));
+                $this->redirect('login', array('successMsg'=> $successMsg));
             }
             $spnId = "";
             if($_GET){
