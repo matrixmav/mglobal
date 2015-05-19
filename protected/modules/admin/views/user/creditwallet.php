@@ -17,14 +17,27 @@ if(!empty($error)){
     <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
         <p><?php echo (!empty($userObject))? $userObject->full_name : ""; ?></p>
-        <span class="error" style="color:red"  id="first_name_error"></span>
+        <span style="color:red"  id="first_name_error"></span>
     </div>
 </div>
+<?php $walletList = BaseClass::getWalletList(); ?>
+<div class="col-md-12 form-group">
+    <label class="col-md-2">Wallet Type: </label>
+    <div class="col-md-6">
+        <select name="wallet_type" id="wallet_type" class="form-control dvalid">
+            <?php foreach ($walletList as $key=>$value) { ?>
+            <option value="<?php echo $key;?>" ><?php echo $value;?></option>
+            <?php } ?>
+        </select>
+        <span style="color:red"  id="first_name_error"></span>
+    </div>
+</div>
+<!--BaseClass::getWalletList()-->
 <div class="col-md-12 form-group">
     <label class="col-md-2">Add Fund *</label>
     <div class="col-md-6">
         <input type="text" class="form-control dvalid" name="fund" id="fund" size="60" maxlength="75" value="<?php echo (!empty($walletObject)) ? $walletObject->touser->email : ""; ?>" />
-        <span class="error" style="color:red"  id="first_name_error"></span>
+        <span style="color:red"  id="fund_error"></span>
     </div>
 </div>
 <div class="col-md-12 form-group">
@@ -36,6 +49,12 @@ if(!empty($error)){
 </form>
 <script language = "Javascript">
     function validateForm(){
-        alert("cool");
+        if ($("#fund").val() == "") {
+            $("#fund_error").html("Please Add Fund!");
+            return false;
+        }
+        if (isNaN($('#fund').val())){
+            return false;
+        }
     }
 </script>
