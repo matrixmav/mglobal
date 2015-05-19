@@ -160,7 +160,7 @@ class TransactionController extends Controller
                                         'criteria'=>array(
                                                         'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=2'),'order'=>'id DESC',
                                         )));
-            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+            $this->render('commisionwallet',array('dataProvider'=>$dataProvider));
         }
         
          /*
@@ -172,7 +172,7 @@ class TransactionController extends Controller
                                         'criteria'=>array(
                                                         'condition'=> ('to_user_id = '.Yii::app()->session['userid']. ' OR from_user_id = '.Yii::app()->session['userid'].' AND wallet_id=3'),'order'=>'id DESC',
                                         )));
-            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+            $this->render('fundwallet',array('dataProvider'=>$dataProvider));
         }
 
         /*
