@@ -61,6 +61,11 @@ $this->menu=array(
                     'header'=>'<span style="white-space: nowrap;">Transfer Date &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->created_at',
 		),
+            array(
+                    'name'=>'status',
+                    'header'=>'<span style="white-space: nowrap;">Transfer Status &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->status == 1) ? "Transfered" : "Pending"',
+		),
             
              array(
                     'name'=>'comment',
