@@ -85,9 +85,9 @@ $this->menu=array(
 			'htmlOptions'=>array('width'=>'23%'),
 			'buttons'=>array(
 				'Invoice' => array(
-					'label'=>'Download Invoice',
+					'label'=>'Invoice',
 					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice/", array("id"=>$data->id)): ""',
+					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice/"): ""',
 				),
                        ),
 		),
