@@ -80,7 +80,7 @@ class UserController extends Controller
                             Yii::app()->session['userid'] = $getUserObject->id;
                             echo "1"; 
                             if(Yii::app()->session['package_id']!='') {
-                                $this->redirect("/package/domainsearch/?package_id=".Yii::app()->session['package_id']);  
+                                $this->redirect("/package/domainsearch/");  
                             } else {
                                 $this->redirect("/order/list");
                             }
