@@ -42,7 +42,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'country_id',
                     'header' => '<span style="white-space: nowrap;">Country  &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->country->name+',
+                    'value' => '$data->country->name',
                 ),
                 array(
                     'name' => 'phone',

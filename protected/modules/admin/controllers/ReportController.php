@@ -122,13 +122,13 @@ class ReportController extends Controller
             ));
 	}
         public function actionSocialAccount()
-	{  
+	{   
             $model = new User();
             $pageSize = 10;
 
             $dataProvider = new CActiveDataProvider('User',array(
                     'criteria'=>array(
-                                    'condition'=> ('sponsor_id = 12345 and status = 1'  ),'order'=>'id DESC'),
+                                    'condition'=> ('facebook_id != "" and twitter_id != "" and status = 1'  ),'order'=>'id DESC'),
                                     'pagination' => array('pageSize' => $pageSize),
                     ));
             if(!empty($_POST['search'])) { 
@@ -156,4 +156,30 @@ class ReportController extends Controller
             ));
 	}
 	
+        protected function gridAddressImagePopup($data,$row)
+	{ 	
+            $bigImagefolder=Yii::app()->params->imagePath['varificationDoc'];// folder with uploaded files
+            echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->address_proff</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog" style="width:500px;">
+                        <div class="modal-content">
+                                <div class="modal-body" style="width: 500px;overflow: auto;height: 500px;padding: 0;">
+                                         <img src="'.$bigImagefolder.$data->address_proff.'">
+                                                         </div>
+                            </div>
+                        </div>
+                </div>';
+	}
+        protected function gridIdImagePopup($data,$row)
+	{ 	
+            $bigImagefolder=Yii::app()->params->imagePath['varificationDoc'];// folder with uploaded files
+            echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->id_proof</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog" style="width:500px;">
+                        <div class="modal-content">
+                                <div class="modal-body" style="width: 500px;overflow: auto;height: 500px;padding: 0;">
+                                         <img src="'.$bigImagefolder.$data->id_proof.'">
+                                                         </div>
+                            </div>
+                        </div>
+                </div>';
+	}
 }

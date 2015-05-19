@@ -321,7 +321,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "report/verification" => "Member  Verification",
 //                                    "report/inbox8" => "Invite referrals",
                                     "report/socialaccount" => "Social profile",
-                                    "report/inbox10" => "Contact",
+                                    "report/contact" => "Contact",
 //                                    "report/inbox11" => "Bug",
 //                                    "report/inbox12" => "Call back",
 //                                    "report/inbox13" => "feed back",

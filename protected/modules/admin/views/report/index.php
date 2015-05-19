@@ -59,7 +59,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'sponsor_id',
                     'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->userprofile->address',
+                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:""',
                 ),
                 array(
                     'name' => 'status',

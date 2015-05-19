@@ -6,8 +6,8 @@ return array(
     'imagePath' => array(
         'homePageSlider' => '/upload/homepageSlider/',
         'upload' => 'upload/',
-        'hotel' => '/upload/hotel/',
-    	'hoteldropzone' => 'upload/hotel/',
+        'hotel' => '/upload/profile/',
+    	'varificationDoc' => '/upload/varification-document/',
     	'homeBanner' => '/upload/homepageSlider/',
     	'homeAdBanner' => '/upload/ads/',
     	'homepageSliderPath'=>array("city","state","country","general"),
