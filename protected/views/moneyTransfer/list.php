@@ -53,52 +53,36 @@ $this->menu=array(
 		//'idJob',
 		
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->fromuser->full_name',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Receiver &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->touser->full_name',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Transaction ID &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->transaction_id',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Fund Type &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->fund_type',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Comment &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->comment',
 		),
 		array(
-                   'name'=>'slug',
+                   'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->status',
 		),
-		array( 
-			'class'=>'CButtonColumn',
-			'template'=>'{Edit}{Delete}',
-			'htmlOptions'=>array('width'=>'23%'),
-			'buttons'=>array(
-				'Edit' => array(
-					'label'=>'Edit',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
-					'url'=>'Yii::app()->createUrl("moneytransfer/view", array("id"=>$data->id))',
-				),
-				'Delete' => array(
-					'label'=>Yii::t('translation', 'Change Status'),
-					'options'=>array('class'=>'fa fa-success btn default black delete'),
-					'url'=>'Yii::app()->createUrl("moneytransfer/view", array("id"=>$data->id))',
-				),
-			),
-		),
+		
 	),
 ));
                       ?>

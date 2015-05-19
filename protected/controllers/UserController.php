@@ -86,10 +86,10 @@ class UserController extends Controller
                             }
                         }else {
                            // echo "0"; 
-                            $error = "<h1>Invalid Information</h1>"; 
+                            $error = "<p class='error'>Invalid Information</p>"; 
                         }
                     }else{
-                    $error = "<h1>Invalid User Name</h1>"; 
+                    $error = "<p class='error'>Invalid User Name</p>"; 
                     }
                 }
 
@@ -101,15 +101,16 @@ class UserController extends Controller
         public function actionRegistration(){
             
             if($_POST){              
-                
-                //echo substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d']  ; die;
-                $masterPin = BaseClass::getUniqInt(5);
+               
+                $masterPin = BaseClass::getUniqInt(5); 
                 $model = new User;
                 $model->attributes = $_POST;
                 $model->sponsor_id = substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d'] ;
                 $model->password = BaseClass::md5Encryption($_POST['password']);  
                 $model->master_pin = BaseClass::md5Encryption($masterPin);
-                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d'];              
+                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
+                $model->created_at = date('Y-m-d') ;
+                $model->role_id = 1 ; 
                 $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
                 
                 /* Find for parent user ID */
@@ -147,10 +148,9 @@ class UserController extends Controller
                 
                 }else{
                    $userId =  $userObject->id; 
-                }              
-                         
+                }       
                 
-                $rand= rand (date('YmdHis'),5); // For the activation link
+                $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
                 $model->activation_key = $rand ;
                                
                 
@@ -160,6 +160,7 @@ class UserController extends Controller
                 
                 $modelUserProfile = new UserProfile();
                 $modelUserProfile->user_id = $model->id ;
+                $modelUserProfile->created_at = date('Y-m-d') ;
                 $modelUserProfile->referral_banner_id = 1 ;
                 $modelUserProfile->save(false);
                 
@@ -190,6 +191,7 @@ class UserController extends Controller
 //                var_dump($config);
 //                CommonHelper::sendMail($config);
                 $this->render('login', array('successMsg'=> $successMsg));
+                $this->redirect('login');
             }
             $spnId = "";
             if($_GET){

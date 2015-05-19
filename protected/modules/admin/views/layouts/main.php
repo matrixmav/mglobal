@@ -111,17 +111,19 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END CORE PLUGINS -->
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/additional-methods.min.js"></script>
-        <script
-        src="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.js"></script>
-        <script src="/metronic/assets/plugins/bootbox/bootbox.min.js"
-        type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.js"></script>
+        <script src="/metronic/assets/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 
+        <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+
+        <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function () {
-                App.init();
-                checkLoginTime();
-            });
+//            jQuery(document).ready(function () {
+//                App.init();
+//                checkLoginTime();
+//            });
 
         </script>
         <!-- END JAVASCRIPTS -->
@@ -363,55 +365,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-
-                            $bases_pmenu = 4;
-                            if ((in_array($bases_pmenu, $menusections ['psections'])) || (in_array($bases_pmenu, $menusections ['section_ids']))) {
-                                $bases_subsection = array(
-                                    "portal" => "Portals",
-                                    "bank" => "Banks",
-                                    "group" => "Groups",
-                                    "theme" => "Themes",
-                                    "optionType" => "Option Type",
-                                    "option" => "Options",
-                                    "equipment" => "Equipments",
-                                    "origin" => "Origines",
-                                    "country" => "Countries",
-                                    "state" => "States",
-                                    "city" => "Cities",
-                                    "area" => "Area",
-                                    "homeBanner" => "Home Banner",
-                                    "homeAdBanner" => "Home Ad Banner",
-                                    "ourSelection" => "Our Selection",
-                                    "dayuseBenefits" => "Dayuse Benefits"
-                                );
-
-                                $keys = array_keys($bases_subsection);
-                                $bases_active = array_search($curController, $keys);
-                                ?>
-                                <li class="<?php echo ($bases_active !== false) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-bases"></span> <span
-                                            class="title"><?php echo Yii::t('translation', 'Bases') ?> </span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($bases_active !== false) ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($bases_subsection as $ctName => $ctTitle) {
-
-                                        $class_content = ($curController == $ctName) ? 'class="active"' : '';
-
-                                        echo '<li ' . $class_content . '>';
-                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                        echo '</li>';
-                                    }
-                                    echo '</ul>';
-                                    ?>						
-                                </li>
-                                    <?php
-                                }
-                            } else {
-                                ?>
+                        } else {
+                            ?>
                             <li
                                 class="<?php echo ($curControllerLower == 'hotel') ? "active" : ''; ?>">
                                 <a href="/admin/hotel/index"> <i class="fa fa-cogs"></i> <span
@@ -427,13 +382,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="selected"></span> </span>
                                 </a>
                             </li>
-    <?php
-    $billing_subsection = array(
-        "invoice/index" => "Invoice Reservation",
-        "invoice/hotelbills" => "Invoices Listing",
-        "invoice/regulationstatus" => "Payment History"
-    );
-    ?>
+                            <?php
+                            $billing_subsection = array(
+                                "invoice/index" => "Invoice Reservation",
+                                "invoice/hotelbills" => "Invoices Listing",
+                                "invoice/regulationstatus" => "Payment History"
+                            );
+                            ?>
                             <li
                                 class="<?php echo ($curControllerLower == 'invoice') ? "active" : ''; ?>">
                                 <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
@@ -441,28 +396,28 @@ License: You must have a valid license purchased only from themeforest(the above
                                         class="arrow <?php echo ($curControllerLower == 'invoice') ? "open" : ''; ?>">
                                     </span>
                                 </a>
-    <?php
-    foreach ($billing_subsection as $hotName => $hotTitle) {
-        if ($hotName == "invoice/index")
-            echo '<ul class="sub-menu">';
-
-        $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-
-        echo '<li ' . $class_content . '>';
-        echo '<a href="/admin/' . $hotName . '">' . $hotTitle . '</a>';
-        echo '</li>';
-
-        if ($hotName == "invoice/regulationstatus")
-            echo '</ul>';
-    }
-    ?>						
-                            </li>
                                 <?php
-                                $reservation_subsection = array(
-                                    "reservation/onrequest" => "On Request",
-                                    "reservation/viewconfirmed" => "Confirmed"
-                                );
-                                ?>
+                                foreach ($billing_subsection as $hotName => $hotTitle) {
+                                    if ($hotName == "invoice/index")
+                                        echo '<ul class="sub-menu">';
+
+                                    $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+
+                                    echo '<li ' . $class_content . '>';
+                                    echo '<a href="/admin/' . $hotName . '">' . $hotTitle . '</a>';
+                                    echo '</li>';
+
+                                    if ($hotName == "invoice/regulationstatus")
+                                        echo '</ul>';
+                                }
+                                ?>						
+                            </li>
+                            <?php
+                            $reservation_subsection = array(
+                                "reservation/onrequest" => "On Request",
+                                "reservation/viewconfirmed" => "Confirmed"
+                            );
+                            ?>
                             <li
                                 class="<?php echo ($curControllerLower == 'reservation') ? "active" : ''; ?>">
                                 <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
@@ -471,23 +426,23 @@ License: You must have a valid license purchased only from themeforest(the above
                                         class="arrow <?php echo ($curControllerLower == 'reservation') ? "open" : ''; ?>">
                                     </span>
                                 </a>
-    <?php
-    foreach ($reservation_subsection as $hotName => $hotTitle) {
-        if ($hotName == "reservation/onrequest")
-            echo '<ul class="sub-menu">';
+                                <?php
+                                foreach ($reservation_subsection as $hotName => $hotTitle) {
+                                    if ($hotName == "reservation/onrequest")
+                                        echo '<ul class="sub-menu">';
 
-        $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+                                    $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
 
-        echo '<li ' . $class_content . '>';
-        echo '<a href="/admin/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
-        echo '</li>';
+                                    echo '<li ' . $class_content . '>';
+                                    echo '<a href="/admin/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
+                                    echo '</li>';
 
-        if ($hotName == "admin")
-            echo '</ul>';
-    }
-    ?>						
+                                    if ($hotName == "admin")
+                                        echo '</ul>';
+                                }
+                                ?>						
                             </li>                                
-                            <?php } ?>				
+                        <?php } ?>				
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
@@ -503,38 +458,38 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!-- END STYLE CUSTOMIZER -->
                     <!-- BEGIN PAGE HEADER-->
-<?php
-$header_curController = @Yii::app()->controller->id;
-$header_curAction = @Yii::app()->getController()->getAction()->controller->action->id;
-$menu_cond = ($header_curController == "hotel" && $header_curAction == "index") ? false : true;
-if ($menu_cond) {
-    ?>
+                    <?php
+                    $header_curController = @Yii::app()->controller->id;
+                    $header_curAction = @Yii::app()->getController()->getAction()->controller->action->id;
+                    $menu_cond = ($header_curController == "hotel" && $header_curAction == "index") ? false : true;
+                    if ($menu_cond) {
+                        ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                                 <ul class="page-breadcrumb breadcrumb">
 
                                     <li>
-    <?php
-    $this->widget('zii.widgets.CBreadcrumbs', array(
-        'homeLink' => CHtml::link('Admin', array(
-            '/admin'
-        )),
-        'links' => $this->breadcrumbs
-    ));
-    ?>
+                                        <?php
+                                        $this->widget('zii.widgets.CBreadcrumbs', array(
+                                            'homeLink' => CHtml::link('Admin', array(
+                                                '/admin'
+                                            )),
+                                            'links' => $this->breadcrumbs
+                                        ));
+                                        ?>
                                     </li>
 
                                 </ul>
                                 <!-- END PAGE TITLE & BREADCRUMB-->
                             </div>
                         </div>
-<?php } ?>
+                    <?php } ?>
                     <!-- END PAGE HEADER-->
                     <!-- BEGIN PAGE CONTENT-->
                     <div class="row">
                         <div class="col-md-12">
-<?php echo $content; ?>
+                            <?php echo $content; ?>
                         </div>
                     </div>
                     <!-- END PAGE CONTENT-->
@@ -546,7 +501,7 @@ if ($menu_cond) {
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">
-<?php echo date("Y"); ?> &copy; HK-Base
+                <?php echo date("Y"); ?> &copy; HK-Base
             </div>
             <div class="footer-tools">
                 <span class="go-top"> <i class="fa fa-angle-up"></i>
@@ -573,6 +528,11 @@ if ($menu_cond) {
                 $.notific8('zindex', 11500);
                 $.notific8($.trim(msg), settings);
             }
+            $(function () {
+                $('.datepicker').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
+            });
         </script>
     </body>
     <!-- END BODY -->

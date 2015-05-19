@@ -126,7 +126,7 @@ class MoneyTransferController extends Controller {
            
             $this->redirect(array('moneytransfer/confirm', 'tu' => base64_encode($transactionObjuser->id), 'a' => base64_encode($actualamount)));
         } else {
-            //$adminId = Yii::app()->params['adminId'];
+             //$adminId = Yii::app()->params['adminId'];
             $walletObject = Wallet::model()->findAllByAttributes(array('user_id' => $userid));
             $this->render('transfer', array('walletObject' => $walletObject));
         }
@@ -240,10 +240,10 @@ class MoneyTransferController extends Controller {
 				}
 				           
                 //exit();
-                $this->redirect(array('moneytransfer/status', 'status' => 'S'));
+                $this->redirect(array('MoneyTransfer/status', 'status' => 'S'));
             } else {
 
-                $this->redirect(array('moneytransfer/status', 'status' => 'F'));
+                $this->redirect(array('MoneyTransfer/status', 'status' => 'F'));
             }
         }
         $this->render('confirm');
@@ -261,7 +261,7 @@ class MoneyTransferController extends Controller {
             $createdtime = new CDbExpression('NOW()');
             $userObject = User::model()->findByAttributes(array('name' => $_POST['username']));
             if (empty($userObject)) {
-                $this->redirect(array('moneytransfer/status', 'status' => 'U'));
+                $this->redirect(array('MoneyTransfer/status', 'status' => 'U'));
             }
             $walletSenderObj = Wallet::model()->findByAttributes(array('user_id' => $userObject->id, 'type' => $_POST['transactiontype']));
             if (empty($walletSenderObj)) {

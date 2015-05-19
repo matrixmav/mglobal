@@ -131,7 +131,11 @@ class TransactionController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
-
+        
+	
+        /*
+         * this will fetch all transactions
+         */
 	public function actionList(){
 		if(isset(Yii::app()->session['userid'])){
              $dataProvider = new CActiveDataProvider('Transaction', array(

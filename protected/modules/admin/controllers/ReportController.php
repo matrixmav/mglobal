@@ -46,32 +46,45 @@ class ReportController extends Controller
 			),
 		);
 	}
-	public function actionIndex()
-	{
+	public function actionIndex() {
             $model = new User();
             $pageSize = 10;
-            $dataProvider=new CActiveDataProvider($model, array(
-                        'pagination' => array('pageSize' => $pageSize),
-            ));
-            if(!empty($_POST['search'])) { 
-                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
             }
-            $this->render('index',array(
-                    'dataProvider'=>$dataProvider,
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+
+            $this->render('index', array(
+                'dataProvider' => $dataProvider,
             ));
-	}
-        public function actionAddress()
+        }
+
+    public function actionAddress()
 	{
             $model = new UserProfile();
             $pageSize = 10;
-            
-            $testObject = UserProfile::model()->findAll();
-            $dataProvider=new CActiveDataProvider($model, array(
-                        'pagination' => array('pageSize' => $pageSize),
-            ));
-            if(!empty($_POST['search'])) { 
-                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
             }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
             $this->render('address',array(
                     'dataProvider'=>$dataProvider,
             ));
@@ -80,13 +93,19 @@ class ReportController extends Controller
         public function actionVerification(){
             $model = new UserProfile();
             $pageSize = 10;
-            
-            $dataProvider=new CActiveDataProvider($model, array(
-                        'pagination' => array('pageSize' => $pageSize),
-            ));
-            if(!empty($_POST['search'])) { 
-                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
             }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
             $this->render('verification',array(
                     'dataProvider'=>$dataProvider,
             ));
@@ -96,15 +115,19 @@ class ReportController extends Controller
 	{  
             $model = new User();
             $pageSize = 10;
-
-            $dataProvider = new CActiveDataProvider('User',array(
-                    'criteria'=>array(
-                                    'condition'=> ('sponsor_id = 12345 and status = 1'  ),'order'=>'id DESC'),
-                                    'pagination' => array('pageSize' => $pageSize),
-                    ));
-            if(!empty($_POST['search'])) { 
-                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
             }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id = 12345 AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
             $this->render('adminsponsor',array(
                     'dataProvider'=>$dataProvider,
             ));
@@ -113,9 +136,19 @@ class ReportController extends Controller
 	{
             $model = new Package();
             $pageSize = 10;
-            $dataProvider=new CActiveDataProvider($model, array(
-                        'pagination' => array('pageSize' => $pageSize),
-            ));
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+            }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
            
             $this->render('package',array(
                     'dataProvider'=>$dataProvider,
@@ -125,15 +158,20 @@ class ReportController extends Controller
 	{   
             $model = new User();
             $pageSize = 10;
-
-            $dataProvider = new CActiveDataProvider('User',array(
-                    'criteria'=>array(
-                                    'condition'=> ('facebook_id != "" and twitter_id != "" and status = 1'  ),'order'=>'id DESC'),
-                                    'pagination' => array('pageSize' => $pageSize),
-                    ));
-            if(!empty($_POST['search'])) { 
-                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
             }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('facebook_id != "" and twitter_id != ""  AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+            
             $this->render('socialaccount',array(
                     'dataProvider'=>$dataProvider,
             ));
@@ -142,15 +180,19 @@ class ReportController extends Controller
 	{  
             $model = new Contact();
             $pageSize = 10;
-
-            $dataProvider = new CActiveDataProvider('Contact',array(
-                    'criteria'=>array(
-                                    'condition'=> ('status = 1'  ),'order'=>'id DESC'),
-                                    'pagination' => array('pageSize' => $pageSize),
-                    ));
-            if(!empty($_POST['search'])) { 
-                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
             }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
             $this->render('contact',array(
                     'dataProvider'=>$dataProvider,
             ));

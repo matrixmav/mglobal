@@ -113,6 +113,34 @@ var MIN_LENGTH = 3;
             return false;
         }
 	}); 
+	$("#transactiontype").change(function() {
+		var transactiontype = $("#transactiontype").val();
+		if(transactiontype == 2)
+			{
+				var rp_points = $("#rp_points").val();
+				$("#transaction_data_label").html("RP Points");
+				  $('#transaction_data').html(rp_points);
+			}
+			if(transactiontype == 1)
+			{			
+				var wallet_points = $("#wallet_points").val();
+				$("#transaction_data_label").html("Total Cash");
+				  $('#transaction_data').html(wallet_points);
+			}
+			if(transactiontype == 3)
+			{			
+				var commission_points = $("#commission_points").val();
+				$("#transaction_data_label").html("Commission Points");
+				  $('#transaction_data').html(commission_points);	
+			}
+			if(transactiontype == '')
+			{			
+				var commission_points = 0;
+				$("#transaction_data_label").html("Total");
+				  $('#transaction_data').html(commission_points);	
+			}
+		
+	});	
 	$("#addfund").click(function() {
 		var username = $("#username").val();
 			$.ajax( {
