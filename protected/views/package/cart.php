@@ -138,7 +138,7 @@ Domain
 </div>
 </div>
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount'];?>">
- 
+<input type="hidden" id="coupon_discount" value=""> 
 <script type="text/javascript">
     
 function Couponapply(){
@@ -165,6 +165,7 @@ success: function(html){
  }else{
  htmlTag = html.split("_");   
  $('#coupon_code').val('');
+ $('#coupon_discount').val(htmlTag[1]);
  document.getElementById("coupon_success").style.display="block";
  document.getElementById("coupon_success").innerHTML = "Coupon code applied";
  document.getElementById("totalpayable").innerHTML = htmlTag[0];
@@ -181,8 +182,9 @@ success: function(html){
 }
 function proceedPayment()
 {
+var coupon_discount = $('#coupon_discount).val();
 var totalAmount = $('#totalAmount').val(); 
-var dataString = 'datasave=yes&totalAmount='+totalAmount;    
+var dataString = 'datasave=yes&totalAmount='+totalAmount+'&coupon_discount='+coupon_discount;    
 $.ajax({
 type: "GET",
 url: "orderadd",
