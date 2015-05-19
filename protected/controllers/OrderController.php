@@ -168,9 +168,11 @@ class OrderController extends Controller
          */
         public function actionInvoice()
         {
-            
-         $package_id = Yii::app()->session['package_id'];
-            $orderObject = ORDER::model()->findByPK($package_id);
+           if(!empty($_GET))
+           {
+               $order_id = $_GET['id'];
+           }
+            $orderObject = ORDER::model()->findByPK($order_id);
             $this->renderPartial('invoice',array(
 			'orderObject'=>$orderObject,
 		));
