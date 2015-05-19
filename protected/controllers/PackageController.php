@@ -175,12 +175,8 @@ class PackageController extends Controller
         
         public function actionDomainSearch()
         {
-         //Yii::app()->session['package_id'] = $_REQUEST['package_id'];     
-         if(!empty($_GET))
-         {
-         Yii::app()->session['package_id'] = $_GET['package_id'];
         
-        $Package_id = Yii::app()->session['package_id'];
+      $Package_id = Yii::app()->session['package_id'];
         
         $packageObject = Package::model()->findByPK($Package_id);
         
@@ -291,9 +287,7 @@ class PackageController extends Controller
 			'rightbar'=>$rightbar,
                         'suggestedDomain'=>$SuggestedDomain,
 		));
-        }else{
-           $this->render('domainsearchError'); 
-        }
+         
         }
         
         
