@@ -88,6 +88,7 @@ class PackageController extends Controller
                     $transactionObject1->mode = 'paypal';
                     $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
                     $transactionObject1->paid_amount = $_REQUEST['totalAmount'];
+                    $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject1->total_rp = 0;
                     $transactionObject1->used_rp = 0;
                     $transactionObject1->status = 0;
@@ -99,6 +100,7 @@ class PackageController extends Controller
                     $transactionObject->mode = 'paypal';
                     $transactionObject->actual_amount = $_REQUEST['totalAmount'];
                     $transactionObject->paid_amount = $_REQUEST['totalAmount'];
+                    $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject->total_rp = 0;
                     $transactionObject->used_rp = 0;
                     $transactionObject->status = 0;
