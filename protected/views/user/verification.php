@@ -22,7 +22,7 @@ $this->breadcrumbs = array(
                     <?php 
                     if(!empty($userObject) && $userObject->id_proof!=''){?>
                     <span class="example">
-                        <a href="/upload/verification-document/<?php echo $userObject->id_proof;?>"><img src="/upload/verification-document/<?php echo $userObject->id_proof;?>" width="50" height="50"></a></span>
+                        <a href="/upload/verification-document/<?php echo $userObject->id_proof;?>" target="_blank"><img src="/upload/verification-document/<?php echo $userObject->id_proof;?>" width="50" height="50"></a></span>
                     <?php }?>
                 </div>
             </div>
@@ -34,7 +34,7 @@ $this->breadcrumbs = array(
                          <span class="btn btn-primary btn-file btn-1"><input type="file" id="address_proof" class="form-control11" name="address_proof"></span></div>
                          <span class="example1">(Upload jpg ,png ,pdf files only)</span> 
                              <?php if(!empty($userObject) && $userObject->address_proff!=''){?>
-                    <span class="example"><a href="/upload/verification-document/<?php echo $userObject->address_proff;?>"><img src="/upload/verification-document/<?php echo $userObject->address_proff;?>" width="50" height="50"></a></span>
+                    <span class="example"><a href="/upload/verification-document/<?php echo $userObject->address_proff;?>" target="_blank"><img src="/upload/verification-document/<?php echo $userObject->address_proff;?>" width="50" height="50"></a></span>
                     <?php }?>
                 </div>
             </div>
