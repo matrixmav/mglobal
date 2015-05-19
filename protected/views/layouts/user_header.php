@@ -1,3 +1,6 @@
+<?php  $curController = @Yii::app()->controller->id;
+      $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
+?>
 <!-- BEGIN TOP BAR -->
 <div class="pre-header">
     <div class="container">
@@ -21,9 +24,17 @@
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/profile/dashboard">My Account</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/site/logout">Logout</a></li>
                     <?php }else{?>
+                    <?php if($curAction !='loginregistration'){ ?>
+                    <?php if($curAction=='registration'){ ?>
+                    <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/login">Log In</a></li>
+                    <?php }elseif($curAction=='login'){?>
+                    <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/registration">Registration</a></li>
+                    <?php }else{?>
+                    
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/login">Log In</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/registration">Registration</a></li>
                     <?php }?>
+                    <?php }}?>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
