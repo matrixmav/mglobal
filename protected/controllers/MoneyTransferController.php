@@ -87,6 +87,7 @@ class MoneyTransferController extends Controller {
             $transactionObjuser->user_id = $userObject->id;
             $transactionObjuser->mode = $_POST['transactiontype'];//remove
             $transactionObjuser->gateway_id = 1;
+            $transactionObjuser->coupon_discount = 0;
             $transactionObjuser->actual_amount = $actualamount;
             $transactionObjuser->paid_amount = $_POST['paid_amount'];
             $transactionObjuser->total_rp = $_POST['rp_points']; //remove
@@ -197,6 +198,7 @@ class MoneyTransferController extends Controller {
 				$transactionObjuser2->user_id = $adminid;
 				$transactionObjuser2->mode = $transactionObj->mode; //remove
 				$transactionObjuser2->gateway_id = 1;
+                                $transactionObjuser2->coupon_discount = 0;
 				$transactionObjuser2->actual_amount = (($transactionObj->actual_amount)-($transactionObj->paid_amount));
 				$transactionObjuser2->paid_amount = (($transactionObj->actual_amount)-($transactionObj->paid_amount));
 				$transactionObjuser2->total_rp = 0; //remove
