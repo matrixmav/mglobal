@@ -53,12 +53,12 @@ $this->menu=array(
                array(
                     'name'=>'domain_price',
                     'header'=>'<span style="white-space: nowrap;">Domain Price &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->domain_price) ? $data->domain_price : "N/A"',
+                    'value'=>'($data->domain_price) ? number_format($data->domain_price,2) : "N/A"',
 		),
                array(
                     'name'=>'coupon_discount',
                     'header'=>'<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->transaction->coupon_discount) ? $data->transaction->coupon_discount : "N/A"',
+                    'value'=>'($data->transaction->coupon_discount) ? number_format($data->transaction->coupon_discount,2) : "N/A"',
 		),
                 array(
                     'name'=>'start_date',
