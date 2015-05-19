@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet','list'),
+                                    'creditwallet','list','debitwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -136,13 +136,18 @@ class UserController extends Controller
 	 * Lists all models.
 	 */
         public function actionIndex() {
-            $userObject = array();
-            if (!empty($_POST['search'])) {
-                $userObject = User::model()->findByAttributes(array('name' => $_POST['search']));
-            }
-            $this->render('searchUser', array(
-                'userObject' => $userObject,
+            $model = new User;
+            $pageSize = 10;
+            
+            $dataProvider=new CActiveDataProvider('User', array(
+                        'pagination' => array('pageSize' => $pageSize),
             ));
+            if(!empty($_POST['search'])) { 
+                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+            }
+            $this->render('index',array(
+                    'dataProvider'=>$dataProvider,
+            )); 
         }
 
         public function actionList(){
@@ -161,6 +166,7 @@ class UserController extends Controller
         }
 
         public function actionWallet() {
+            
             $model = new User();
             $pageSize = 10;
             $dataProvider=new CActiveDataProvider($model, array(
@@ -174,25 +180,59 @@ class UserController extends Controller
             ));
         }
         
-        public function actionCreditWallet(){
+        public function actionCreditWallet(){ 
             if($_POST) { 
-                $walletObject = new Wallet;
-                $walletObject->user_id = Yii::app()->session['userid'];
-                $walletObject->fund = $_POST['fund'];
-                $walletObject->type = 3;//fund added by admin
+                $userId = $_POST['userId'];
+                $type = $_POST['wallet_type'];
+                $fundAmount = $_POST['fund'];
+                $walletObject = Wallet::model()->findByAttributes(array('user_id'=>$userId,'type'=>$type));
+                if(!empty($walletObject)){
+                  $fundAmount = ($fundAmount+$walletObject->fund);
+                } else {
+                    $walletObject = new Wallet;
+                }
+                $walletObject->user_id = $userId;
+                $walletObject->fund = $fundAmount;
+                $walletObject->type =$type;//fund added by admin
                 $walletObject->status = 1;//success
                 $walletObject->created_at = new CDbExpression('NOW()');
                 $walletObject->updated_at = new CDbExpression('NOW()');
                 if(!$walletObject->save()){
                     echo "<pre>"; print_r($walletObject->getErrors());exit;
                 }
-                $this->redirect('/user/wallet');
+                $this->redirect('/admin/user/wallet');
             }
             $userId = $_GET['id'];
             $userObject = User::model()->findByPk($userId);
-            $this->render('wallet',array('userObject'=>$userObject));
+            $this->render('creditwallet',array('userObject'=>$userObject));
         }
 
+        public function actionDebitWallet(){ 
+            if($_POST) { 
+                $userId = $_POST['userId'];
+                $type = $_POST['wallet_type'];
+                $fundAmount = $_POST['fund'];
+                $walletObject = Wallet::model()->findByAttributes(array('user_id'=>$userId,'type'=>$type));
+                if(!empty($walletObject)){
+                  $fundAmount = ($walletObject->fund-$fundAmount);
+                } else {
+                    $walletObject = new Wallet;
+                }
+                $walletObject->user_id = $userId;
+                $walletObject->fund = $fundAmount;
+                $walletObject->type =$type;//fund added by admin
+                $walletObject->status = 1;//success
+                $walletObject->created_at = new CDbExpression('NOW()');
+                $walletObject->updated_at = new CDbExpression('NOW()');
+                if(!$walletObject->save()){
+                    echo "<pre>"; print_r($walletObject->getErrors());exit;
+                }
+                $this->redirect('/admin/user/wallet');
+            }
+            $userId = $_GET['id'];
+            $userObject = User::model()->findByPk($userId);
+            $this->render('debitwallet',array('userObject'=>$userObject));
+        }
         /**
 	 * Manages all models.
 	 */
