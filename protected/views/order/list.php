@@ -50,6 +50,16 @@ $this->menu=array(
                     'header'=>'<span style="white-space: nowrap;">Domain &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->domain',
 		),
+               array(
+                    'name'=>'domain_price',
+                    'header'=>'<span style="white-space: nowrap;">Domain Price &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->domain_price) ? $data->domain_price : "N/A"',
+		),
+               array(
+                    'name'=>'coupon_discount',
+                    'header'=>'<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->transaction->coupon_discount) ? $data->transaction->coupon_discount : "N/A"',
+		),
                 array(
                     'name'=>'start_date',
                     'header'=>'<span style="white-space: nowrap;">Start Date &nbsp; &nbsp; &nbsp;</span>',
