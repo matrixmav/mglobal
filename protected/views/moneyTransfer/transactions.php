@@ -64,7 +64,7 @@ $this->menu=array(
              array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->transaction->status',
+                    'value'=>'(($data->transaction->status == 1) ? "Active" : "Inactive")',
 		),
 		 
 	),
