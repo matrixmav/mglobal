@@ -109,7 +109,8 @@ class UserController extends Controller
                 $model->sponsor_id = substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d'] ;
                 $model->password = BaseClass::md5Encryption($_POST['password']);  
                 $model->master_pin = BaseClass::md5Encryption($masterPin);
-                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d'];              
+                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
+                $model->role_id = 1 ; 
                 $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
                 
                 /* Find for parent user ID */
