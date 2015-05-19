@@ -266,7 +266,7 @@ class MoneyTransferController extends Controller {
     }
 
     public function actionFund() {
-
+		$success='';
         if (isset($_POST['addfund'])) {
             $createdtime = new CDbExpression('NOW()');
             $userObject = User::model()->findByAttributes(array('name' => $_POST['username']));
@@ -294,9 +294,10 @@ class MoneyTransferController extends Controller {
                 $walletSenderObj->status = 1;
                 $walletSenderObj->update();
             }
-            $this->redirect(array('../wallet/list'));
+             $success .= "Fund Added Successfully";
         }
-        $this->render('fund');
+        $this->render('fund', array('success' => $success));
+		
     }
 
     public function actionUserExists() {
