@@ -5,6 +5,7 @@ $this->breadcrumbs=array(
 	'Add Fund',
 );
 ?>                        <div class="col-md-7 col-sm-7">
+<?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
 						<div class="error" id="error_msg" style="display: none;"></div>
                             <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" >
                                 <fieldset> 
@@ -25,7 +26,7 @@ $this->breadcrumbs=array(
                                    									
 									 
 									 <div class="form-group">
-                                       <label for="lastname" class="col-lg-4 control-label">Select User <span class="require">*</span></label>
+                                       <label for="username" class="col-lg-4 control-label">Select User <span class="require">*</span></label>
                                         <div class="col-lg-8">
 										 <input type="text" value="" placeholder="Search" id="username" name="username" required class="form-control">
 										 <div id="results" >
