@@ -186,7 +186,7 @@ class ProfileController extends Controller
              {   
             if($userObject->update())
             {   
-	       $path = Yii::getPathOfAlias('webroot')."/uploads/verification-document/";
+	       $path = Yii::getPathOfAlias('webroot')."/upload/verification-document/";
                 BaseClass::uploadFile($_FILES['id_proof']['tmp_name'],$path,time().$_FILES['id_proof']['name']);
                 BaseClass::uploadFile($_FILES['address_proof']['tmp_name'],$path,time().$_FILES['address_proof']['name']);
                $success = "Documents Updated Successfully";
@@ -205,7 +205,7 @@ class ProfileController extends Controller
 
     /*
          * To fetch state name according to country
-         */
+          
         public function actionFetchState()
         {
             
@@ -221,7 +221,7 @@ class ProfileController extends Controller
         
          /*
          * To fetch state name according to country
-         */
+        
         public function actionFetchCity()
         {
           $cityObject = City::model()->findAll(array('condition'=>'state_id='.$_REQUEST['state_id']));  
