@@ -34,7 +34,9 @@
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/login">Log In</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/registration">Registration</a></li>
                     <?php }?>
-                    <?php }}?>
+                    <?php }
+                    
+                    }?>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
