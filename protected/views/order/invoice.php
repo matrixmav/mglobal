@@ -61,7 +61,7 @@ Domain
 <td class="pPrice CartSubTotal tbl-pd">
 <div class="pos_hlp itemblock topRow">
 <p class="price ItemSubTotal">
-<span class="WebRupee"></span> <span id=""><?php if(Yii::app()->session['amount']!=''){ ?> $<?php echo number_format(Yii::app()->session['amount'],2);?><?php }else{?> N/A<?php }?></span>
+<span class="WebRupee"></span> <span id=""><?php if($orderObject->domain_price!=''){ ?> $<?php echo number_format($orderObject->domain_price,2);?><?php }else{?> N/A<?php }?></span>
 </p>
 </div>
  </td>
@@ -71,27 +71,6 @@ Domain
 </tbody></table>
 </form>
 <div class="cartfooter">
-<form id="couponCodeContainer" class="couponWrp lfloat" method="post">
-<input type="text" name="coupon_code" id="coupon_code" placeholder="Please Enter Coupon Code">
-<input type="button" class="btn-flat-green ui-btn-grey" value="Apply" onclick="Couponapply();">
-
-<span class="couponWarning" style="display: none;" id="coupon_success"></span>
-<div class="couponError" style="display: none;" id="coupon_error"></div>
- 
-
-<div style="font-size: 12px; padding-top: 8px">*Discounts not applicable on .BIZ &amp; .ASIA domains</div>
-<div class="offerBlurb" style="display: none;">
-<div class="blurbTop"></div>
-<div class="blurbBody"></div>
-<div class="blurbBottom"></div>
-</div>
-</form>
-<div class="socialBtnWrp lfloat">
-<div class="fbConnect">
-<span id="fbButton" class="fbbtn"></span>
-<span id="followBigRock"></span> <span class="txt">Share on Facebook to get 10% off*</span>
-</div>
-</div>
 <table class="cartTotalWrp rfloat tbl-2" cellpadding="0" cellspacing="0" border="0">
 <tbody>
 <tr class="ItemConvertedSubtotal">
@@ -99,7 +78,7 @@ Domain
 <p>Subtotal:</p>
 </td>
 <td class="itemAmount">
-<p id="CartTotal"><span class="WebRupee">$</span> <span id="total"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'],2);?></span></p>
+<p id="CartTotal"><span class="WebRupee">$</span> <span id="total"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price,2);?></span></p>
 </td>
 </tr>
  
@@ -108,7 +87,7 @@ Domain
 <p>Coupon Discount:</p>
 </td>
 <td class="itemAmount">
-<p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'],2);?></span></p>
+<p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($orderObject->transaction->coupon_discount,2);?></span></p>
 </td>
 </tr> 
 <tr class="ItemTotalAfterDiscount">
@@ -117,7 +96,7 @@ Domain
 <p>Total Amount:</p>
 </td>
 <td class="itemAmount">
-<p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'],2);?></span></p>
+<p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price - $orderObject->transaction->coupon_discount,2);?></span></p>
 </td>
 </tr>
 </tbody></table>
