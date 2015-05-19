@@ -7,6 +7,10 @@ class TransactionController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='inner';
+        
+        public function init() {
+        BaseClass::isLoggedIn();
+        }
 
 	/**
 	 * @return array action filters
