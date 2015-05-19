@@ -20,8 +20,21 @@ $this->breadcrumbs = array(
                          <span class="btn btn-primary btn-file btn-1"><span class="fileupload-new"><input type="file" id="id_proof" class="form-control11" name="id_proof"></span></div>
                     <span class="example1">(Upload jpg ,png files only)</span> 
                     <?php 
-                    if(!empty($userObject) && $userObject->id_proof!=''){?>
-                    <span class="example"><a href="/uploads/verification-document/<?php echo $userObject->id_proof;?>"><img src="/uploads/verification-document/<?php echo $userObject->id_proof;?>" width="50" height="50"></a></span>
+                    if(!empty($userObject) && $userObject->id_proof!=''){
+                    $bigImagefolder=Yii::app()->params->imagePath['varificationDoc'];    
+                    ?>
+                    <span class="example">
+                        <?php  echo "<a data-toggle='modal' href='#$userObject->id'>$userObject->id_proof</a>".'<div class="modal fade" id="zoom_'.$userObject->id.'" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog" style="width:500px;">
+                        <div class="modal-content">
+                                <div class="modal-body" style="width: 500px;overflow: auto;height: 500px;padding: 0;">
+                                         <img src="'.$bigImagefolder.$userObject->id_proof.'">
+                                                         </div>
+                            </div>
+                        </div>
+                </div>';?>
+                        
+                        <a href="/uploads/verification-document/<?php echo $userObject->id_proof;?>"><img src="/uploads/verification-document/<?php echo $userObject->id_proof;?>" width="50" height="50"></a></span>
                     <?php }?>
                 </div>
             </div>
