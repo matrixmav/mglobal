@@ -186,7 +186,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <i class="fa fa-user"></i> My Profile
                             </a>
                     </li> -->
-                            <li><a href="/admin/admin/changepassword"> Change Password </a></li>
+                            <!--<li><a href="/admin/admin/changepassword"> Change Password </a></li>-->
                             <li>
                                 <?php if ($access == "manager") { ?>
                                     <a href="/admin/default/managerlogout"> <i class="fa fa-key"></i>

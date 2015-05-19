@@ -252,7 +252,7 @@ class ProfileController extends Controller
         public  function actionDashboard()
         { 
             $model = "";
-            $this->render('../user/dashboard',array(
+            $this->render('/user/dashboard',array(
 			'model'=>$model,
 		));
         }

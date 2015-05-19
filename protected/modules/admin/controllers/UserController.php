@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet','list','debitwallet'),
+                                    'creditwallet','list','debitwallet','genealogy'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -58,6 +58,25 @@ class UserController extends Controller
                 $this->redirect('/admin/user');
             }
             
+        }
+
+        public function actionGenealogy(){
+             if(!empty($_GET)){            
+                $currentUserId = $_GET['id'] ;        
+                $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);          
+                $this->render('viewGenealogy',array(
+                            'genealogyListObject'=>$genealogyListObject,
+                            'currentUserId'=>$currentUserId
+                ));
+            }else{                
+                $currentUserId = 1 ;        
+                $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);          
+                $this->render('viewGenealogy',array(
+                            'genealogyListObject'=>$genealogyListObject,
+                            'currentUserId'=>$currentUserId
+                ));
+            }
+                     
         }
 
         /**

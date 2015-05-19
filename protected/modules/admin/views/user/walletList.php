@@ -42,19 +42,9 @@ $this->breadcrumbs = array(
                     'value' => '$data->full_name',
                 ),
                 array(
-                    'name' => 'phone',
-                    'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->phone',
-                ),
-                 array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->sponsor_id',
-                ),
-                array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?data->userprofile->address:""',
+                    'name' => 'name',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->name',
                 ),
                 array(
                     'name' => 'status',
@@ -62,6 +52,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'class' => 'CButtonColumn',
+                    'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Recharge}{Deduct}',
                     'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(

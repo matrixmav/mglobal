@@ -200,7 +200,7 @@ class ReportController extends Controller
 	
         protected function gridAddressImagePopup($data,$row)
 	{ 	
-            $bigImagefolder=Yii::app()->params->imagePath['varificationDoc'];// folder with uploaded files
+            $bigImagefolder=Yii::app()->params->imagePath['verificationDoc'];// folder with uploaded files
             echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->address_proff</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
                         <div class="modal-dialog" style="width:500px;">
                         <div class="modal-content">
@@ -213,7 +213,7 @@ class ReportController extends Controller
 	}
         protected function gridIdImagePopup($data,$row)
 	{ 	
-            $bigImagefolder=Yii::app()->params->imagePath['varificationDoc'];// folder with uploaded files
+            $bigImagefolder=Yii::app()->params->imagePath['verificationDoc'];// folder with uploaded files
             echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->id_proof</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
                         <div class="modal-dialog" style="width:500px;">
                         <div class="modal-content">
