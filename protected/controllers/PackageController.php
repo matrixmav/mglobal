@@ -126,6 +126,7 @@ class PackageController extends Controller
                     $orderObject1->user_id = Yii::app()->session['userid'];
                     $orderObject1->package_id = Yii::app()->session['package_id'];
                     $orderObject1->domain = Yii::app()->session['domain'];
+                    $orderObject1->domain_price = Yii::app()->session['amount'];
                     $orderObject1->transaction_id = Yii::app()->session['transaction_id'];
                     $orderObject1->status = 1;
                     $orderObject1->start_date = new CDbExpression('NOW()');
@@ -136,6 +137,7 @@ class PackageController extends Controller
                     $orderObject->user_id = Yii::app()->session['userid'];
                     $orderObject->package_id = Yii::app()->session['package_id'];
                     $orderObject->domain = Yii::app()->session['domain'];
+                    $orderObject->domain_price = Yii::app()->session['amount'];
                     $orderObject->transaction_id = Yii::app()->session['transaction_id'];
                     $orderObject->status = 1;
                     $orderObject->start_date = new CDbExpression('NOW()');
