@@ -86,10 +86,10 @@ class UserController extends Controller
                             }
                         }else {
                            // echo "0"; 
-                            $error = "<h1>Invalid Information</h1>"; 
+                            $error = "<p class='error'>Invalid Information</p>"; 
                         }
                     }else{
-                    $error = "<h1>Invalid User Name</h1>"; 
+                    $error = "<p class='error'>Invalid User Name</p>"; 
                     }
                 }
 

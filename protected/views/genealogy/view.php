@@ -43,16 +43,12 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
                                                 $leftUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $leftGenealogyObject->user->sponsor_id)); 
                                                 $rightIdCount = count($leftCurrnetIdCount) >= 1 ? $treeVar.'?id='.$leftGenealogyObject->user->name : $leftUrl ;                                                                                               
                                                 $naUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id)); 
-                                                
-                                                if($leftGenealogyObject->position == 'left'){                                   
+                                               
+                                                if($leftGenealogyObject->position == 'left'){                                                                                       
                                                     echo $leftGenealogyObject->user_id ? '<li><a href='.$rightIdCount.'>'.$leftGenealogyObject->user->name."</a></li>" : ''; 
-                                                }else{
-                                                     echo '<li><a href="'.$naUrl.'">+</a></li>';
                                                 }
                                                 if($leftGenealogyObject->position == 'right'){              
                                                     echo $leftGenealogyObject->user_id ? '<li><a href='.$rightIdCount.'>'.$leftGenealogyObject->user->name."</a></li>" : '';
-                                                }else{
-                                                    echo '<li><a href="'.$naUrl.'">+</a></li>';
                                                 }                                
                                             }
                                         echo'</ul>
@@ -95,15 +91,11 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
                                                 
                                                 if($rightGenealogyObject->position == 'left'){                                                     
                                                     echo $rightGenealogyObject->user_id ? '<li><a href='.$rightIdCount.'>'. $rightGenealogyObject->user->name."</a></li>" : '';
-                                                }else{
-                                                    echo '<li><a href="'.$naUrl.'">+</a></li>';
                                                 }
                                                 
                                                 if($rightGenealogyObject->position == 'right'){                                    
                                                     echo $rightGenealogyObject->user_id ? '<li><a href='.$rightIdCount.'>'. $rightGenealogyObject->user->name."</a></li>" : '';
-                                                }else{
-                                                    echo '<li><a href="'.$naUrl.'">+</a></li>';
-                                                }                                 
+                                                }                                
                                              }                            
                                          }else{
                                             echo  '<li>';
