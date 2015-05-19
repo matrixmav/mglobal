@@ -42,7 +42,7 @@ $this->breadcrumbs = array(
 
                 </div>
 				 <div class="form-group">
-                    <label for="totalcash" class="col-lg-4 control-label">Total Cash <span class="require">*</span></label>
+                    <label for="totalcash" class="col-lg-4 control-label" id="transaction_data_label">Total<span class="require">*</span></label>
                     <input type="hidden" value="<?php echo $walletPoints; ?>" name="wallet_points" id="wallet_points">
                     <div class="col-lg-8">
 					<div id="transaction_data" name="transaction_data" class="form-control">0</div>
