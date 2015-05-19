@@ -61,8 +61,8 @@ class ProfileController extends Controller
                {
                 $profileObject->address = $_POST['UserProfile']['address'];
                 $profileObject->street = $_POST['UserProfile']['street'];
-                $profileObject->city_id = $_POST['UserProfile']['city_id'];
-                $profileObject->state_id = $_POST['UserProfile']['state_id'];
+                $profileObject->city_name = $_POST['UserProfile']['city_name'];
+                $profileObject->state_name = $_POST['UserProfile']['state_name'];
                 $profileObject->country_id = $_POST['UserProfile']['country_id'];
                 $profileObject->zip_code = $_POST['UserProfile']['zip_code'];
 
