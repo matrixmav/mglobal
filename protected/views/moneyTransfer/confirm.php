@@ -27,7 +27,15 @@ $this->breadcrumbs=array(
                                         </div>
                                         <span id="email_error"></span>
                                     </div>
-                                                                      
+                                    <div class="form-group">
+                                        <label for="master_code" class="col-lg-4 control-label">Comment<span class="require">*</span></label>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control" id="comment" name="comment" required> </textarea>
+											
+																						
+                                        </div>
+                                        <span id="email_error"></span>
+                                    </div>                                  
 
                                 </fieldset>
                                 <div class="row">
