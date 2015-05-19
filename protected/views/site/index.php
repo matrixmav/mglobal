@@ -653,7 +653,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <!-- Carousel items -->
-           <?php $i=1;foreach($profileObject as $testimonial){ ?>
+           <?php $i=1;if(!empty($profileObject)) { foreach($profileObject as $testimonial){ ?>
           <!-- Carousel items -->
           <div class="item <?php if($i=='1'){ echo "active"; }else{ echo "";}?>">
             <blockquote>
@@ -661,16 +661,11 @@
             </blockquote>
             <span class="testimonials-name"><?php echo $testimonial->user()->full_name;?></span>
           </div>
-          <?php $i++;}?>
+           <?php $i++;} }?>
         </div>
         <!-- Indicators -->
       
-        <ol class="carousel-indicators">
-         
-          <li data-target="#testimonials-block" data-slide-to="0" class="active"></li>
-          <li data-target="#testimonials-block" data-slide-to="1"></li>
-          <li data-target="#testimonials-block" data-slide-to="2"></li>
-        </ol>
+       
       </div>
     </div>
   </div>
