@@ -170,8 +170,8 @@ class OrderController extends Controller
         {
             
          $package_id = Yii::app()->session['package_id'];
-            $packageObject = Package::model()->findByPK($package_id);
-            $this->render('cart',array(
+            $packageObject = Order::model()->findByPK($package_id);
+            $this->renderPartial('invoice',array(
 			'packageObject'=>$packageObject,
 		));
             /*$dataProvider =  "";   
