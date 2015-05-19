@@ -21,7 +21,7 @@
                   <label for="email" class="col-lg-4 control-label">User Name <span class="require">*</span></label>
                   <div class="col-lg-8">
 
-                      <input type="text" class="form-control" id="name" name="name">
+                      <input type="text" class="form-control" id="login-name" name="name">
                   
                   <span id="name_error" class="clrred"></span></div>
                 </div>
@@ -29,7 +29,7 @@
                   <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                   <div class="col-lg-8">
 
-                      <input type="password" class="form-control" id="password" name="password">
+                      <input type="password" class="form-control" id="login-password" name="password">
                   
                   <span id="password_error" class="clrred"></span></div>
                 </div>
