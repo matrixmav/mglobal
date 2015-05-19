@@ -109,6 +109,7 @@ class UserController extends Controller
                 $model->password = BaseClass::md5Encryption($_POST['password']);  
                 $model->master_pin = BaseClass::md5Encryption($masterPin);
                 $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
+                $model->created_at = date('Y-m-d') ;
                 $model->role_id = 1 ; 
                 $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
                 
@@ -159,6 +160,7 @@ class UserController extends Controller
                 
                 $modelUserProfile = new UserProfile();
                 $modelUserProfile->user_id = $model->id ;
+                $modelUserProfile->created_at = date('Y-m-d') ;
                 $modelUserProfile->referral_banner_id = 1 ;
                 $modelUserProfile->save(false);
                 
