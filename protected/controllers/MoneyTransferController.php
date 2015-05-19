@@ -30,7 +30,7 @@ class MoneyTransferController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 'confirm', 'status', 'userexists', 'fund'),
+                'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 'confirm', 'status', 'userexists', 'fund','transactions'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -64,6 +64,13 @@ class MoneyTransferController extends Controller {
         ));
         $this->render('list', array('dataProvider' => $dataProvider));
     }
+	public function actionTransactions() {
+
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'pagination' => array('pageSize' => 10),
+        ));
+        $this->render('transactions', array('dataProvider' => $dataProvider));
+    }
 
     public function actionTransfer() {
 
@@ -80,6 +87,7 @@ class MoneyTransferController extends Controller {
             $transactionObjuser->user_id = $userObject->id;
             $transactionObjuser->mode = $_POST['transactiontype'];//remove
             $transactionObjuser->gateway_id = 1;
+            $transactionObjuser->coupon_discount = 0;
             $transactionObjuser->actual_amount = $actualamount;
             $transactionObjuser->paid_amount = $_POST['paid_amount'];
             $transactionObjuser->total_rp = $_POST['rp_points']; //remove
@@ -190,6 +198,7 @@ class MoneyTransferController extends Controller {
 				$transactionObjuser2->user_id = $adminid;
 				$transactionObjuser2->mode = $transactionObj->mode; //remove
 				$transactionObjuser2->gateway_id = 1;
+                                $transactionObjuser2->coupon_discount = 0;
 				$transactionObjuser2->actual_amount = (($transactionObj->actual_amount)-($transactionObj->paid_amount));
 				$transactionObjuser2->paid_amount = (($transactionObj->actual_amount)-($transactionObj->paid_amount));
 				$transactionObjuser2->total_rp = 0; //remove
