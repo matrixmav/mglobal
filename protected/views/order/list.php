@@ -87,7 +87,7 @@ $this->menu=array(
 				'Invoice' => array(
 					'label'=>'Invoice',
 					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice/", array("id"=>$data->id)): ""',
+					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice?id=$data->id"): ""',
 				),
                        ),
 		),
