@@ -3,13 +3,13 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Reports' => array('/admin/report/address'),'Member Address'
+    'Reports' => array('/admin/report/socialaccount'),'Social Account'
 );
 ?>
 
 <div class="expiration margin-topDefault">
     <!--<p>Client/ Hotel/ Bill : <?php //echo $clientObject->name; ?></p>-->
-    <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/report/address" />
+    <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/user" />
     <div class="col-md-3">
         <input type="text" name="search" id="search" class="form-control" value="" />
     </div>
@@ -39,38 +39,27 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'full_name',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
-                ),
-                
-                array(
-                    'name' => 'email',
-                    'header' => '<span style="white-space: nowrap;">Address 1 &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->street',
-                ),
-                array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address 2 &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->address',
-                ),
-                array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">City &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->city_name',
-                ),
-                array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">State &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->state_name',
-                ),
-                array(
-                    'name' => 'country_id',
-                    'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->country->name)?$data->country->name:""',
+                    'value' => '$data->full_name',
                 ),
                 array(
                     'name' => 'phone',
                     'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->user->phone',
+                    'value' => '$data->phone',
+                ),
+                array(
+                    'name' => 'email',
+                    'header' => '<span style="white-space: nowrap;">Email &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->email',
+                ),
+                array(
+                    'name' => 'sponsor_id',
+                    'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->sponsor_id',
+                ),
+                array(
+                    'name' => 'sponsor_id',
+                    'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->userprofile->address',
                 ),
                 array(
                     'name' => 'status',

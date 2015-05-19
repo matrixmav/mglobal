@@ -3,7 +3,7 @@ var MIN_LENGTH = 3;
 	$("#username").keyup(function() {
 		var username = $("#username").val();
 		if (username.length >= MIN_LENGTH) {
-			$.get( "/moneytransfer/autocomplete", { username: username } )
+			$.get( "/MoneyTransfer/autocomplete", { username: username } )
 			.done(function( data ) {
 				$('#results').html('');
 				var results = jQuery.parseJSON(data);
@@ -33,7 +33,7 @@ var MIN_LENGTH = 3;
 	$("#transfer").click(function() {
 		var username = $("#username").val();
 			$.ajax( {
-                  url:'/moneytransfer/userexists?u='+username,
+                  url:'/MoneyTransfer/userexists?u='+username,
                   success:function(data) {
 					  if(data=='notexists'){
 			document.getElementById("error_msg").style.display="block";
@@ -116,7 +116,7 @@ var MIN_LENGTH = 3;
 	$("#addfund").click(function() {
 		var username = $("#username").val();
 			$.ajax( {
-                  url:'/moneytransfer/userexists?u='+username,
+                  url:'/MoneyTransfer/userexists?u='+username,
                   success:function(data) {
 					  if(data=='notexists'){
 			document.getElementById("error_msg").style.display="block";

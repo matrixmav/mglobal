@@ -39,33 +39,33 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'full_name',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->user->full_name',
+                    'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
                 
                 array(
                     'name' => 'email',
-                    'header' => '<span style="white-space: nowrap;">Address 1 &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->street',
+                    'header' => '<span style="white-space: nowrap;">Address Proof &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => array($this,'gridAddressImagePopup'),
                 ),
                 array(
                     'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address 2 &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->address',
+                    'header' => '<span style="white-space: nowrap;">Id Proof &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => array($this,'gridIdImagePopup'),
                 ),
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">City &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->city_id',
+                    'value' => '$data->city_name',
                 ),
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">State &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->state_id',
+                    'value' => '$data->state_name',
                 ),
                 array(
                     'name' => 'country_id',
                     'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->country->name',
+                    'value' => 'isset($data->country->name)?$data->country->name:""',
                 ),
                 array(
                     'name' => 'phone',
