@@ -175,10 +175,12 @@ class PackageController extends Controller
         public function actionDomainSearch()
         {
          //Yii::app()->session['package_id'] = $_REQUEST['package_id'];     
+         if(!empty($_GET))
+         {
+         Yii::app()->session['package_id'] = $_GET['package_id'];
         
         $Package_id = Yii::app()->session['package_id'];
-        if($Package_id!='')
-        {
+        
         $packageObject = Package::model()->findByPK($Package_id);
         
         $rightbar = '<div id="dca_cart" class="cart-wrapper">
