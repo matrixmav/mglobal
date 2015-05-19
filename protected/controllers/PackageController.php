@@ -128,7 +128,7 @@ class PackageController extends Controller
                     $orderObject1->domain = Yii::app()->session['domain'];
                     $orderObject1->domain_price = Yii::app()->session['amount'];
                     $orderObject1->transaction_id = Yii::app()->session['transaction_id'];
-                    $orderObject1->status = 1;
+                    $orderObject1->status = 0;
                     $orderObject1->start_date = new CDbExpression('NOW()');
                     $orderObject1->end_date = new CDbExpression('NOW()');
                     $orderObject1->updated_at = new CDbExpression('NOW()');
@@ -139,7 +139,7 @@ class PackageController extends Controller
                     $orderObject->domain = Yii::app()->session['domain'];
                     $orderObject->domain_price = Yii::app()->session['amount'];
                     $orderObject->transaction_id = Yii::app()->session['transaction_id'];
-                    $orderObject->status = 1;
+                    $orderObject->status = 0;
                     $orderObject->start_date = new CDbExpression('NOW()');
                     $orderObject->end_date = new CDbExpression('NOW()');
                     $orderObject->created_at = new CDbExpression('NOW()');
@@ -215,8 +215,8 @@ class PackageController extends Controller
             Package Amount:<br>
             <div class="cart-total">
             <span id="total_curr">
-            <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
-            $rightbar .= $packageObject->amount.".00";
+            <span id="total"><span class="WebRupee"></span>$<span id="tottal_amt">';
+            $rightbar .= number_format($packageObject->amount,2);
              $rightbar .='</span>
              </div>
              </div>';
@@ -228,7 +228,7 @@ class PackageController extends Controller
             <div class="cart-total">
             <span id="total_curr">
             <span id="total"><span class="WebRupee"></span>$<span id="tottal">';
-            $rightbar .= Yii::app()->session['amount'].".00";
+            $rightbar .= number_format(Yii::app()->session['amount'],2);
             
             $rightbar .='</span></span>&nbsp;
             </span><br>
