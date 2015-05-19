@@ -79,7 +79,7 @@ Domain
 <div class="couponError" style="display: none;" id="coupon_error"></div>
  
 
-<div style="font-size: 12px; padding-top: 8px">*Discounts not applicable on .BIZ &amp; .ASIA domains</div>
+ 
 <div class="offerBlurb" style="display: none;">
 <div class="blurbTop"></div>
 <div class="blurbBody"></div>
@@ -89,7 +89,7 @@ Domain
 <div class="socialBtnWrp lfloat">
 <div class="fbConnect">
 <span id="fbButton" class="fbbtn"></span>
-<span id="followBigRock"></span> <span class="txt">Share on Facebook to get 10% off*</span>
+ 
 </div>
 </div>
 <table class="cartTotalWrp rfloat tbl-2" cellpadding="0" cellspacing="0" border="0">
