@@ -124,16 +124,20 @@ class GenealogyController extends Controller
            // print_r($_GET);
             if(!empty($_GET)){            
                 $currentUserId = $_GET['id'] ;        
-                $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);          
+                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
+                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
                 $this->render('view',array(
-                            'genealogyListObject'=>$genealogyListObject,
+                            'genealogyLeftListObject'=>$genealogyLeftListObject,
+                            'genealogyRightListObject'=>$genealogyRightListObject,
                             'currentUserId'=>$currentUserId
                 ));
             }else{                
                 $currentUserId = 1 ;        
-                $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);          
+                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
+                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
                 $this->render('view',array(
-                            'genealogyListObject'=>$genealogyListObject,
+                            'genealogyLeftListObject'=>$genealogyLeftListObject,
+                            'genealogyRightListObject'=>$genealogyRightListObject,
                             'currentUserId'=>$currentUserId
                 ));
                 
