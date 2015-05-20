@@ -1,7 +1,24 @@
-<?php
+<?php session_start();
+/*var_dump($_SESSION);
+if(!empty($_GET) && $_GET['user']!='')
+{
 $_SESSION['username'] = $_GET['user'];
+$_SESSION['order_id'] = $_GET['order_id'];
+}else{
+
+$_SESSION['username'] = $_SESSION['username'];
+}*/
+unset($_COOKIE);
+$strCookie =  $_SESSION['username']."~".md5('12345')."~".(time()+2400);
+setcookie("Auth",$strCookie);
 $AuthUserName = $_SESSION['username'] ;
 $AuthGroup = "Basic";
+/*$strSelect="SELECT * FROM ".$DBprefix."admin_users WHERE username='".$_SESSION['username']."' and password='".md5('12345')."'";
+$LoginResult=mysql_query($strSelect);
+if(mysql_num_rows($LoginResult)==0) {
+header('location:/');
+} */ 
+ //var_dump($_COOKIE);
 if(!isset($not_include_cofig)) include("../config.php");
 /*if((!isset($_COOKIE["Auth"]))||$_COOKIE["Auth"]=="")
 {
