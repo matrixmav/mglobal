@@ -144,7 +144,7 @@ $tableAlbum = DataTable("photo_images","WHERE photo_id='".$photo_id."'");
 while($rowAlbum = mysql_fetch_array($tableAlbum))
 	$customArr[] = $rowAlbum;		{
 }
-$countArray =  count($customArr);
+//$countArray =  count($customArr);
 if($countArray < 4)
 {
 AddNewForm_BA
