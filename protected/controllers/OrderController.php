@@ -59,28 +59,52 @@ class OrderController extends Controller
         }
         
         public function actionRedirect(){
-            
+             $orderID = end((explode("/", $_SERVER['REQUEST_URI'])));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            $builderObject = WebsiteadminAdminUsers::model()->findByAttributes($userObject->name);
-            if($builderObject)
+            $builderObject = WebsiteadminAdminUsers::model()->findByAttributes(array('username'=>$userObject->name.$orderID));
+            $builderweblogObject1 =  WebsiteadminWeblog::model()->findByAttributes(array('user'=>$userObject->name.$orderID));
+            $buildertemplateObject1 =  WebsiteadminUserTemplates::model()->findByAttributes(array('user'=>$userObject->name.$orderID));
+            if(count($builderObject) > 0)
             {
-               $orderID = end((explode("/", $_SERVER['REQUEST_URI'])));
+                
+                 $builderObject->first_name = $userObject->full_name;
+                 $builderObject->username = $userObject->name.$orderID ;
+                 $builderObject->type = "Basic" ;
+                 $builderObject->password = md5('12345');
+                 $builderObject->update();
+                 
+                 $buildertemplateObject1->name = $userObject->full_name;
+                 $buildertemplateObject1->user = $userObject->name.$orderID ;
+                 $buildertemplateObject1->update(); 
+                
+                /*User entry in builder weblog*/
+                
+                $builderweblogObject1->user = $userObject->name.$orderID ;
+                $builderweblogObject1->update(); 
+                     
                
-            }else{
+            } else{
                 
-                $orderID = end((explode("/", $_SERVER['REQUEST_URI'])));
+                 $builderObject1 = new WebsiteadminAdminUsers();
+                 $builderObject1->first_name = $userObject->full_name;
+                 $builderObject1->username = $userObject->name.$orderID ;
+                 $builderObject1->type = "Basic" ;
+                 $builderObject1->password = md5('12345');
+                 $builderObject1->save(false);
                 
-               /*User entry in builder templates*/
-                $buildertemplateObject = new WebsiteadminUserTemplates();
-                $buildertemplateObject->name = $_POST['full_name'];
-                $buildertemplateObject->user = $_POST['name'].$orderID;
-                $buildertemplateObject->save(false);
+                /*User entry in builder templates*/
+                 $buildertemplateObject = new WebsiteadminUserTemplates();
+                 $buildertemplateObject->name = $userObject->full_name;
+                 $buildertemplateObject->user = $userObject->name.$orderID ;
+                 $buildertemplateObject->save(false);
                 
                 /*User entry in builder weblog*/
                 $builderweblogObject = new WebsiteadminWeblog();
-                $builderweblogObject->user = $_POST['name'].$orderID;
+                $builderweblogObject->user = $userObject->name.$orderID ;
                 $builderweblogObject->save(false);  
+
             }
+            
             //$criteria = new CDbCriteria;
 //            $criteria->addCondition("status=1");
 //            $criteria->addCondition("country_id=".$country_id);
@@ -90,7 +114,9 @@ class OrderController extends Controller
 						//'criteria'=>$criteria,
 	    				//'pagination' => array('pageSize' => $pageSize),
 				//));
-          header('Location:/builder/USERSADMIN/index.php?category=home&user='.$userObject->name.'&order_id='.$orderID);
+            Yii::app()->session['order_id'] = $orderID;
+            Yii::app()->session['username'] = $userObject->name.$orderID;
+          header('Location:/builder/USERSADMIN/index.php?category=home&user='.$userObject->name.$orderID.'&order_id='.$orderID);
              //$orderObject = Order::model()->findAll();
              //echo "<pre>"; print_r();exit;
             //$this->render('list',array('dataProvider'=>$dataProvider));
