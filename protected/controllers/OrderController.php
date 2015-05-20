@@ -61,7 +61,22 @@ class OrderController extends Controller
         public function actionRedirect(){
             $orderID = end((explode("/", $_SERVER['REQUEST_URI'])));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-             
+            $builderObject = WebsiteadminAdminUsers::model()->findByAttributes($userObject->name);
+            if()
+            {
+                
+            }else{
+               /*User entry in builder templates*/
+                $buildertemplateObject = new WebsiteadminUserTemplates();
+                $buildertemplateObject->name = $_POST['full_name'];
+                $buildertemplateObject->user = $_POST['name'].$orderID;
+                $buildertemplateObject->save(false);
+                
+                /*User entry in builder weblog*/
+                $builderweblogObject = new WebsiteadminWeblog();
+                $builderweblogObject->user = $_POST['name'].$orderID;
+                $builderweblogObject->save(false);  
+            }
             //$criteria = new CDbCriteria;
 //            $criteria->addCondition("status=1");
 //            $criteria->addCondition("country_id=".$country_id);
