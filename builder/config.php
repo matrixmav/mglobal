@@ -1,11 +1,11 @@
 <?php
-$BLOG_DOMAIN = "urwebby.com";
+$BLOG_DOMAIN = "mglobal.dev";
 
 //MYSQL DATABASE ACCESS SETTINGS
 $DBHost="localhost";
 $DBUser="root";
 $DBPass="";
-$DBName="online";
+$DBName="mglobal";
 $DBprefix="websiteadmin_";
 
 //ACCEPTED IMAGE TYPES FOR THE BLOGGERS
