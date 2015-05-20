@@ -59,6 +59,7 @@ class OrderController extends Controller
         }
         
         public function actionRedirect(){
+            $orderID = end((explode("/", $_SERVER['REQUEST_URI'])));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
              
             //$criteria = new CDbCriteria;
@@ -70,7 +71,7 @@ class OrderController extends Controller
 						//'criteria'=>$criteria,
 	    				//'pagination' => array('pageSize' => $pageSize),
 				//));
-          header('Location:/builder/USERSADMIN/index.php?category=home&user='.$userObject->name);
+          header('Location:/builder/USERSADMIN/index.php?category=home&user='.$userObject->name.'&order_id='.$orderID);
              //$orderObject = Order::model()->findAll();
              //echo "<pre>"; print_r();exit;
             //$this->render('list',array('dataProvider'=>$dataProvider));
