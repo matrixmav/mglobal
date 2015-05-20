@@ -16,11 +16,11 @@
                                 <fieldset> 
                                     <legend>Your personal details</legend>
                                     <div class="form-group">
-                                        <label for="firstname" class="col-lg-4 control-label">Sponser Id <span class="require">*</span></label>
+                                        <label for="firstname" class="col-lg-4 control-label">Sponsor Id <span class="require">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" value="<?php echo (isset($spnId))?$spnId:""; ?>" name="sponsor_id" id="sponser_id" readonly="true">
+                                            <input type="text" class="form-control" value="<?php echo (isset($spnId))?$spnId:""; ?>" name="sponsor_id" id="sponsor_id" onchange="isSponsorExisted()">
                                             <a href="javascript:void(0)" class="btn btn-default" onclick="getSponId();">Get Sponser Id</a>
-                                            <span id="sponser_id_error" class="clrred"></span>
+                                            <span id="sponsor_id_error" class="clrred"></span>
                                         </div>
                                         
                                     </div>
@@ -155,7 +155,7 @@
 <?php }?>
 <script type="text/javascript">
  function getSponId(){ 
-    $("#sponser_id").val("<?php echo Yii::app()->params['adminSpnId']; ?>");
+    $("#sponsor_id").val("<?php echo Yii::app()->params['adminSpnId']; ?>");
     return false;
 }
 </script>

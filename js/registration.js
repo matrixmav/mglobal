@@ -133,6 +133,7 @@
                 $("#name_error").html("");
                 if(msg == 1){
                     $("#name_error").html("Existed!!!");
+                    return false ;
                 }
             }
         });
@@ -161,6 +162,21 @@
                 $("#email_error").html("");
                 if(msg == 1){
                     $("#email_error").html("Existed!!!");
+                }
+            }
+        });
+    }
+    
+    function isSponsorExisted() {   
+        $.ajax({
+            type: "post",
+            url: "/user/issponsorexisted",
+            data: "sponsor_id=" + $("#sponsor_id").val(),
+            success: function (msg) {
+                $("#sponsor_id_error").html("");
+                if(msg == 0){
+                    $("#sponsor_id_error").html("Not Existed!!!");
+                    
                 }
             }
         });
