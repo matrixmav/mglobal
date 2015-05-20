@@ -88,7 +88,7 @@ class MailController extends Controller
 //                    $emailBoday['body'] = $_POST['email_body'];
 //                    $emailBoday['from'] = Yii::app()->params['hkbAdminEmail'];
 //                    $result = CommonHelper::sendMail($emailBoday);
-                    if($result){ 
+//                    if($result){ 
                         $mailObject = new Mail();
                         $mailObject->to_user_id = $userObject->id;
                         $mailObject->from_user_id = Yii::app()->params['adminId'];
@@ -97,9 +97,10 @@ class MailController extends Controller
                         $mailObject->created_at = new CDbExpression('NOW()');
                         $mailObject->updated_at = new CDbExpression('NOW()');
                         $mailObject->save(false);
-                    } else {
-                        $this->render('compose',array('error'=>'Sent Failed. Please try Again!!!.'));
-                    }
+                         $this->redirect('/admin/mail');
+//                    } else {
+//                        $this->render('compose',array('error'=>'Sent Failed. Please try Again!!!.'));
+//                    }
                 }
                 $this->redirect('admin/mail');
             }

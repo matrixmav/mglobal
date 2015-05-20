@@ -30,7 +30,7 @@ class ReportController extends Controller
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','address','wallet',
                                     'creditwallet','package','adminsponsor','verification',
-                                    'socialaccount','contact'),
+                                    'socialaccount','contact','transaction'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -46,7 +46,30 @@ class ReportController extends Controller
 			),
 		);
 	}
-	public function actionIndex() {
+        
+        public function actionTransaction(){
+            $model = new MoneyTransfer();
+            $pageSize = 10;
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+            }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+
+            $this->render('transaction', array(
+                'dataProvider' => $dataProvider,
+            ));
+        }
+
+        public function actionIndex() {
             $model = new User();
             $pageSize = 10;
             $todayDate = date('Y-m-d');

@@ -321,6 +321,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "report/address" => "Member Address",
                                     "report/adminsponsor" => "Admin Sponsor",
                                     "report/package" => "Package",
+                                    "report/transaction"=>"Transaction",
 //                                    "report/inbox4" => "Binary",
 //                                    "report/inbox5" => "Deposit",
 //                                    "report/inbox6" => "Check Investments",

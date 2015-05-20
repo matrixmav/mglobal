@@ -186,16 +186,39 @@ class UserController extends Controller
 
         public function actionWallet() {
             
-            $model = new User();
+            $model = new Wallet;
             $pageSize = 10;
-            $dataProvider=new CActiveDataProvider($model, array(
-                        'pagination' => array('pageSize' => $pageSize),
-            ));
-            if(!empty($_POST['search'])) { 
-                $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
+//           $roomObject = Wallet::model()->with('user')->findByAttributes(array('name'=>1,'status'=>1));
+           
+           
+//            $roomOptionCondition = array('condition' => 'room_id =' . $roomId);
+            
+            $walletType = 1;//Cash wallet
+            if(!empty($_POST['walletType'])){
+                $walletType = $_POST['walletType'];
             }
+            
+           
+             $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('type = ' . $walletType . ' AND status = 1' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+             
+            if (!empty($_POST)) {
+                $userObject = User::model()->findByAttributes(array('name'=>$_POST['search']));
+                $condition = 'type = ' . $walletType ." AND status = 1";
+                if(!empty($userObject)){
+                    $condition = 'type = ' . $walletType . ' AND user_id = '. $userObject->id ." AND status = 1";
+                }
+                $dataProvider = new CActiveDataProvider($model, array(
+                    'criteria' => array(
+                    'condition' => ($condition), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+            }
+            
             $this->render('walletList',array(
                     'dataProvider'=>$dataProvider,
+                    'walletType'=>$walletType
             ));
         }
         
