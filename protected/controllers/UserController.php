@@ -172,7 +172,26 @@ class UserController extends Controller
                 $modelGenealogy->user_id = $model->id ; 
                 $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
                 $modelGenealogy->position = $_POST['position'];                 
-                $modelGenealogy->save(false); 
+                $modelGenealogy->save(false);
+                /*User entry in builder*/
+                
+                $builderObject = new WebsiteadminAdminUsers();
+                $builderObject->first_name = $_POST['full_name'] ;
+                $builderObject->username = $_POST['name'] ;
+                $builderObject->type = "Basic" ;
+                $builderObject->password = md5('12345');
+                $builderObject->save(false);
+                
+                /*User entry in builder templates*/
+                $buildertemplateObject = new WebsiteadminUserTemplates();
+                $buildertemplateObject->name = $_POST['full_name'];
+                $buildertemplateObject->user = $_POST['name'];
+                $buildertemplateObject->save(false);
+                
+                /*User entry in builder weblog*/
+                $builderweblogObject = new WebsiteadminWeblog();
+                $builderweblogObject->user = $_POST['name'];
+                $builderweblogObject->save(false);
                 $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>"; 
                 /*  For Genealogy Data */
                 
