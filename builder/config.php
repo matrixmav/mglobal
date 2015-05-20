@@ -1,5 +1,5 @@
 <?php
-$BLOG_DOMAIN = "mglobal.dev";
+$BLOG_DOMAIN = "localhost/builder";
 
 //MYSQL DATABASE ACCESS SETTINGS
 $DBHost="localhost";
