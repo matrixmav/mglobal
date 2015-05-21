@@ -377,6 +377,7 @@ if($proceedMainFlag)
 			else
 			if(isset($contact))
 			{
+			
 				$content .=' <table border="0" width="100%" cellpadding="6" class="blog_table">
 						<tr>
 							<td class=header>
@@ -1220,6 +1221,60 @@ if($proceedMainFlag)
 				$arrPage = DataArray("user_pages","user='".$user."' AND id=".$current_page."");
 				
 				$content .= "<br>".$arrPage["html_en"];
+                                if($arrPage["contact"]=='')
+                                {
+                                    $content .= '<br><div style="float:left;width:740px;text-align:left;height:100%;">
+	
+		<div style="margin-left:10px;">
+			<div id="main_content"> <table border="0" width="100%" cellpadding="6" class="blog_table">
+						<tr>
+							<td class=header>
+								
+								
+								Contact the author
+								
+							</td>
+						</tr>
+					</table>
+					<br>
+										<form method="post" action="http://www.wscreator.com/demo/site.php?user=demo" >
+												<input type="hidden" name="contact" value="1">
+												<input type="hidden" name="add_contact" value="yes">
+								
+												
+													Name:<br>
+													<input   id="name" name="name" >
+													<br><br>
+													Email:<br>
+													<input  id="email" name="email" >
+													<br><br>
+														
+												Message:<br>
+												<textarea  id="message" name="message" rows="10" cols="40"></textarea></p>
+									<br>
+											<table summary="" border="0">
+												<tr>
+													<td valign="top">
+													
+													<img src="http://www.wscreator.com/demo/include/sec_image.php"  >
+													Code:
+
+													<input type="text" name="captcha_code" value="" size=8>	
+													
+													</td>
+												</tr>
+											 </table>
+									
+									<br>
+													<input style="font-weight: bold;" type="submit"  name="post" value="&nbsp;Post&nbsp;" >
+												
+											</form></div> 
+		</div>
+		
+	</div>';
+		
+                                }
+                                }
 			
 			//HOME PAGE END
 		}
@@ -1749,7 +1804,7 @@ if($proceedMainFlag)
 		(
 			"user_statistics",
 			array("user","date","host","referer","page"),
-			array($user,date("F j, Y, g:i a"),$_SERVER["REMOTE_HOST"],(isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:""),(isset($page)?$page:"home"))
+			array($user,date("F j, Y, g:i a"),$_SERVER["REMOTE_ADDR"],(isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:""),(isset($page)?$page:"home"))
 		);
 	}
 
