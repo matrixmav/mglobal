@@ -631,10 +631,25 @@ arrDrawnObjects.push(Array("settings",500,-40,40,41));
 
 <?php
 
+
+$sql_statement = "SELECT `package_id` FROM `order` WHERE id = '{$_SESSION['order_id']}'";
+
+$dblink = mysql_connect($DBHost, $DBUser, $DBPass);
+mysql_select_db($DBName,$dblink);
+$qry = mysql_query($sql_statement,$dblink);
+$pageArr = mysql_fetch_assoc($qry);
+
+$sql_statement1 = "SELECT `no_of_pages` FROM `package` WHERE id ='{$pageArr['package_id']}'";
+
+$dblink1 = mysql_connect($DBHost, $DBUser, $DBPass);
+mysql_select_db($DBName,$dblink1);
+$qry1 = mysql_query($sql_statement1,$dblink1);
+$pagesFetch = mysql_fetch_assoc($qry1);
+
 $arrPages = DataTable("user_pages","WHERE parent_id=0 AND user='".($AuthUserName=="administrator"?"admin":$AuthUserName)."'  ORDER BY parent_id,id");
 
 $iPagesCounter = 0;
-$userpages = 5;
+$userpages = $pagesFetch['no_of_pages'];
 while($arrPage = mysql_fetch_array($arrPages))
 {
 
@@ -771,9 +786,10 @@ else{
 
 <?php
 }
-
  
-if($iPagesCounter < 5)
+
+
+ if($iPagesCounter < $pagesFetch['no_of_pages'])
 {?>
 <div id="root" style="left:715px; top:40px;">
 	<table border="0" id="handle" height="10" width="100%" cellpadding="0" cellspacing="0">
