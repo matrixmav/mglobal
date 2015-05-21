@@ -451,7 +451,7 @@ var strZXElementName = "";
 					else
 					if(who == "edit" || arrDrawnObjects[i][0] == "edit")
 					{
-					
+					 
 					
 						pageId = "";
 
