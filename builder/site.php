@@ -1221,8 +1221,9 @@ if($proceedMainFlag)
 				$arrPage = DataArray("user_pages","user='".$user."' AND id=".$current_page."");
 				
 				$content .= "<br>".$arrPage["html_en"];
-                                if($arrPage["contact"]=='')
+                                if($arrPage["contact"]=='1')
                                 {
+                                    
                                     $content .= '<br><div style="float:left;width:740px;text-align:left;height:100%;">
 	
 		<div style="margin-left:10px;">
@@ -1236,28 +1237,33 @@ if($proceedMainFlag)
 							</td>
 						</tr>
 					</table>
-					<br>
-										<form method="post" action="http://www.wscreator.com/demo/site.php?user=demo" >
+					<br>';
+										$content .= '
+										<form method="post" action="'.CreateLink("index.php").'" >
 												<input type="hidden" name="contact" value="1">
 												<input type="hidden" name="add_contact" value="yes">
 								
 												
-													Name:<br>
+													'.$M_NAME.':<br>
 													<input   id="name" name="name" >
 													<br><br>
-													Email:<br>
+													'.$M_EMAIL.':<br>
 													<input  id="email" name="email" >
 													<br><br>
 														
-												Message:<br>
-												<textarea  id="message" name="message" rows="10" cols="40"></textarea></p>
+												'.$M_MESSAGE2.':<br>
+												<textarea  id="message" name="message" rows="10" cols="40"></textarea></p>';
+												
+								//if($USE_SECURITY_IMAGES)
+								//{
+									$content .= '
 									<br>
 											<table summary="" border="0">
 												<tr>
 													<td valign="top">
 													
-													<img src="http://www.wscreator.com/demo/include/sec_image.php"  >
-													Code:
+													<img src="'.($USE_ABSOLUTE_URLS?'http://www.'.$BLOG_DOMAIN.'/':'').'include/sec_image.php"  >
+													'.$M_CODE.':
 
 													<input type="text" name="captcha_code" value="" size=8>	
 													
@@ -1265,20 +1271,19 @@ if($proceedMainFlag)
 												</tr>
 											 </table>
 									
-									<br>
-													<input style="font-weight: bold;" type="submit"  name="post" value="&nbsp;Post&nbsp;" >
+									';
+								//}							
 												
-											</form></div> 
-		</div>
-		
-	</div>';
+								$content .= '<br>
+													<input style="font-weight: bold;" type="submit"  name="post" value="&nbsp;'.$M_POST.'&nbsp;" >
+												
+											</form></div> </div></div>';
 		
                                 }
                                 }
 			
 			//HOME PAGE END
-		}
-			
+		 	
 			
 	/// blog author
 	array_push($OUTPUT_IMAGES, $arrWeblog["author_image"]);		
