@@ -1239,7 +1239,7 @@ if($proceedMainFlag)
 					</table>
 					<br>';
 										$content .= '
-										<form method="post" action="'.CreateLink("index.php").'" >
+										<form method="post" action="http://localhost/builder/site.php?user=roopl1" >
 												<input type="hidden" name="contact" value="1">
 												<input type="hidden" name="add_contact" value="yes">
 								
