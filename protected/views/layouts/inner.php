@@ -178,7 +178,10 @@ License: You must have a valid license purchased only from themeforest(the above
                     <li class="dropdown user"><a href="#" class="dropdown-toggle"
                                                  data-toggle="dropdown" data-hover="dropdown"
                                                  data-close-others="true"> <span class="username">
-                                                         <?php echo Yii::app()->user->getState('username'); ?>
+                                                         <?php 
+                                                         $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                                                         if($userObject){
+                                                         echo $userObject->full_name; }?>
                             </span> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -236,15 +239,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
+                                    "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" || $curControllerLower == "order") {
+                                if ($curControllerLower == "profile" || $curControllerLower == "genealogy") {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'profile' && $curActionLower == 'order')
+                                if ($curControllerLower == 'profile' && $curActionLower == 'genealogy')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -286,62 +290,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             
-                           $hotel_pmenu = 6;
-                            if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
-                                    "transaction/rpwallet" => "RP Wallet",
-                                    "transaction/commisionwallet" => "Commision Wallet",
-                                    "transaction/fundwallet" => "Fund Wallet",
-                                     
-//                                    "profile/summery" => "Summery",
-                                );
-                                $activecls = 'active';
-                                if ($curControllerLower == "transaction" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet') {
-                                    $activecls = 'active';
-                                } else {
-                                    $activecls = '';
-                                }
-                                if ($curControllerLower == 'transaction' && $curActionLower == 'rpwallet' || $curActionLower == 'commisionwallet' || $curActionLower == 'fundwallet')
-                                    $activecls = 'active';
-                                if ($curActionLower == 'simplename')
-                                    $activecls = '';
-                                ?>
-                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
-                                            class="leftmenu-hotel"></span> <span class="title">Summery</span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'rpwallet') ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-                                    <?php
-                                    $menusections ['sections'] = $hotel_subsection;
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($hotel_subsection as $hotName => $hotTitle) {
-                                        if (in_array($hotTitle, $menusections ['sections'])) {
-                                            if ($hotName == 'admin') {
-                                                $hotName = '/index';
-                                            }
-                                            if ($curActionLower == 'create') {
-                                                $curActionLower = 'create/type/details';
-                                            }
-                                            $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-                                            echo '<li ' . $class_content . '>';
-                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
-                                            echo '</li>';
-                                            if ($hotName == 'admin/index') {
-                                                $hotName = 'admin';
-                                            }
-
-                                            /*
-                                             * if($hotName == "admin")
-                                             * echo '</ul>';
-                                             */
-                                        }
-                                    }
-                                    echo '</ul>';
-                                    ?>					
-                                </li>	
-                                <?php
-                            }
+                           
                            
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
@@ -353,7 +302,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 );
                                 ?>
                                 <li
-                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction1')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Fund </span>
                                         <span class="selected"></span> <span
@@ -422,57 +371,60 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             $bases_pmenu = 4;
-                            if ((in_array($bases_pmenu, $menusections ['psections'])) || (in_array($bases_pmenu, $menusections ['section_ids']))) {
-                                $bases_subsection = array(
-                                    "portal" => "Portals",
-                                    "bank" => "Banks",
-                                    "group" => "Groups",
-                                    "theme" => "Themes",
-                                    "optionType" => "Option Type",
-                                    "option" => "Options",
-                                    "equipment" => "Equipments",
-                                    "origin" => "Origines",
-                                    "country" => "Countries",
-                                    "state" => "States",
-                                    "city" => "Cities",
-                                    "area" => "Area",
-                                    "homeBanner" => "Home Banner",
-                                    "homeAdBanner" => "Home Ad Banner",
-                                    "ourSelection" => "Our Selection",
-                                    "dayuseBenefits" => "Dayuse Benefits"
+                            $hotel_pmenu = 6;
+                            if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
+                                $hotel_subsection = array(
+                                    "transaction/rpwallet" => "RP Wallet",
+                                    "transaction/commisionwallet" => "Commision Wallet",
+                                    "transaction/fundwallet" => "Fund Wallet",
+                                     
+//                                    "profile/summery" => "Summery",
                                 );
-
-                                $keys = array_keys($bases_subsection);
-                                $bases_active = array_search($curController, $keys);
+                                $activecls = 'active';
+                                if ($curControllerLower == "transaction" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet') {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                if ($curControllerLower == 'transaction' && $curActionLower == 'rpwallet' || $curActionLower == 'commisionwallet' || $curActionLower == 'fundwallet')
+                                    $activecls = 'active';
+                                if ($curActionLower == 'simplename')
+                                    $activecls = '';
                                 ?>
-                                <li class="<?php echo ($bases_active !== false) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-bases"></span> <span
-                                            class="title"><?php echo Yii::t('translation', 'Bases') ?> </span>
+                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
+                                            class="leftmenu-hotel"></span> <span class="title">Summery</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($bases_active !== false) ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'rpwallet') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
+                                    $menusections ['sections'] = $hotel_subsection;
                                     echo '<ul class="sub-menu">';
-                                    foreach ($bases_subsection as $ctName => $ctTitle) {
-
-                                        if (in_array($ctTitle, $menusections ['sections'])) {
-                                            // if($ctName == "portal")
-                                            // echo '<ul class="sub-menu">';
-
-                                            $class_content = ($curController == $ctName) ? 'class="active"' : '';
-
+                                    foreach ($hotel_subsection as $hotName => $hotTitle) {
+                                        if (in_array($hotTitle, $menusections ['sections'])) {
+                                            if ($hotName == 'admin') {
+                                                $hotName = '/index';
+                                            }
+                                            if ($curActionLower == 'create') {
+                                                $curActionLower = 'create/type/details';
+                                            }
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
                                             echo '<li ' . $class_content . '>';
-                                            echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
                                             echo '</li>';
+                                            if ($hotName == 'admin/index') {
+                                                $hotName = 'admin';
+                                            }
 
-                                            // if($ctName == "dayuseBenefits")
-                                            // echo '</ul>';
+                                            /*
+                                             * if($hotName == "admin")
+                                             * echo '</ul>';
+                                             */
                                         }
                                     }
                                     echo '</ul>';
-                                    ?>						
-                                </li>
+                                    ?>					
+                                </li>	
                                 <?php
                             }
                         } else {
