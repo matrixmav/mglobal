@@ -7,7 +7,9 @@ class GenealogyController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='inner';
-
+        public function init() {
+            BaseClass::isLoggedIn();
+        }
 	/**
 	 * @return array action filters
 	 */
@@ -124,16 +126,20 @@ class GenealogyController extends Controller
            // print_r($_GET);
             if(!empty($_GET)){            
                 $currentUserId = $_GET['id'] ;        
-                $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);          
+                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
+                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
                 $this->render('view',array(
-                            'genealogyListObject'=>$genealogyListObject,
+                            'genealogyLeftListObject'=>$genealogyLeftListObject,
+                            'genealogyRightListObject'=>$genealogyRightListObject,
                             'currentUserId'=>$currentUserId
                 ));
             }else{                
-                $currentUserId = 1 ;        
-                $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);          
+                $currentUserId = Yii::app()->session['userid'] ;        
+                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
+                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
                 $this->render('view',array(
-                            'genealogyListObject'=>$genealogyListObject,
+                            'genealogyLeftListObject'=>$genealogyLeftListObject,
+                            'genealogyRightListObject'=>$genealogyRightListObject,
                             'currentUserId'=>$currentUserId
                 ));
             }

@@ -934,4 +934,9 @@ class BaseClass extends Controller {
         $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId ) );
         return $genealogyListObject;
     }
+    
+    public static function getGenoalogyTreeChild($userId,$position){
+        $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId .' AND position = '. $position,'order'=>'position asc') );
+        return $genealogyListObject;
+    }
 }

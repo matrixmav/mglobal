@@ -47,7 +47,7 @@ return array(
     
     'hkbAdminEmail' =>'ramhemareddy@gmail.com',
     'adminId' =>'1',
-    'adminSpnId' =>'12345',
+    'adminSpnId' =>'admin',
     'paymentGateway' => array( 
         'paypal' => array(
             'target_url'      => '',

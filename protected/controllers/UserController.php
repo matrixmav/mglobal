@@ -29,8 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted'),
- 
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted'), 
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -100,21 +99,20 @@ class UserController extends Controller
         /* User Registration Strat Here */
         public function actionRegistration(){
             
-            if($_POST){              
-               
+            if($_POST){ 
+                
                 $masterPin = BaseClass::getUniqInt(5); 
                 $model = new User;
                 $model->attributes = $_POST;
-                $model->sponsor_id = substr($_POST['name'], 0, 4).substr($_POST['y'], 2, 2).$_POST['m'].$_POST['d'] ;
                 $model->password = BaseClass::md5Encryption($_POST['password']);  
                 $model->master_pin = BaseClass::md5Encryption($masterPin);
                 $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
                 $model->created_at = date('Y-m-d') ;
                 $model->role_id = 1 ; 
-                $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
                 
                 /* Find for parent user ID */
-                $userObject = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id']));
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
                 //echo "<pre>"; print_r($userObject);
                 
                 /* Condition for they have the child or not */
@@ -128,9 +126,9 @@ class UserController extends Controller
                         if( $i == 1 ){                       
                             $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $_POST['position'] ) );
                             if(count($geneObjectNode)){                               
-                                echo $userId = $geneObjectNode->user_id ;                        
+                                $userId = $geneObjectNode->user_id ;                        
                             }else{                                
-                                echo $userId =  $geneObject->user_id;  
+                                $userId =  $geneObject->user_id;  
                                 break;
                             }
                             
@@ -140,7 +138,7 @@ class UserController extends Controller
                                 $userId = "";
                                 $userId .= $geneObjectNode->user_id;                            
                             }else{                                
-                                echo $userId ;
+                                $userId ;
                                 break;
                             }
                         }
@@ -302,6 +300,17 @@ class UserController extends Controller
         public function actionIsEmailExisted(){            
             if($_POST){
                 $userObject = User::model()->findByAttributes(array('email' => $_POST['email']));
+                if(count($userObject) > 0){
+                    echo "1"; exit;
+                } else {
+                    echo "0"; exit;
+                }
+            }
+        }
+        
+        public function actionIsSponsorExisted(){            
+            if($_POST){                                              
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));                
                 if(count($userObject) > 0){
                     echo "1"; exit;
                 } else {
