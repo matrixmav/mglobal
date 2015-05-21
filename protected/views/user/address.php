@@ -74,7 +74,7 @@ $this->breadcrumbs = array(
 
     <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Update" class="btn">
+                <input type="submit" name="submit" value="Update" class="btn red">
                  
             </div>
         </div>
@@ -88,7 +88,6 @@ $this->breadcrumbs = array(
 <script type="text/javascript">
     function validation()
     {
-         
         if(document.getElementById("address").value=='')
         {
             

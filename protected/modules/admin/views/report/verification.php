@@ -35,8 +35,8 @@ $this->breadcrumbs = array(
     } ?>
     
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
-                <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Active</option>
-                <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >In Active</option>
+                <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Approved</option>
+                <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >Pending</option>
             </select>
     </div>
     <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
@@ -64,18 +64,18 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
-                    'name' => 'full_name',
+                    'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
                 
                 array(
-                    'name' => 'email',
+                    'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Address Proof &nbsp; &nbsp; &nbsp;</span>',
                     'value' => array($this,'gridAddressImagePopup'),
                 ),
                 array(
-                    'name' => 'sponsor_id',
+                    'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Id Proof &nbsp; &nbsp; &nbsp;</span>',
                     'value' => array($this,'gridIdImagePopup'),
                 ),
@@ -95,13 +95,13 @@ $this->breadcrumbs = array(
                     'value' => 'isset($data->country->name)?$data->country->name:""',
                 ),
                 array(
-                    'name' => 'phone',
+                    'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->user->phone',
                 ),
                 array(
                     'name' => 'status',
-                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Verified\') : Yii::t(\'translation\', \'Pending\')',
+                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Approved\') : Yii::t(\'translation\', \'Pending\')',
                 ),
             ),
         ));

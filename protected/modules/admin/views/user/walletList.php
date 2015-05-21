@@ -7,14 +7,34 @@ $this->breadcrumbs = array(
 );
 ?>
 
-<div class="expiration margin-topDefault">
-    <!--<p>Client/ Hotel/ Bill : <?php //echo $clientObject->name; ?></p>-->
-    <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/user" />
-    <div class="col-md-3">
-        <input type="text" name="search" id="search" class="form-control" value="" />
+<style>
+    .confirmBtn{left: 333px;
+    position: absolute;
+    top: 0;}
+    
+    .confirmOk{left: 610px;
+    position: absolute;
+    top: 8px;}
+    .confirmMenu{position: relative;}
+</style>
+<div class="col-md-12">
+    
+        <div class="expiration margin-topDefault confirmMenu">
+                    
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/user/wallet">
+    <div class="input-group input-large date-picker input-daterange">
+        <input type="text" name="search" id="search" placeholder="Search" class="form-control" value="" />
     </div>
-    <input type="submit" class="btn btn-primary" value="OK" name="submit" id="submit"/>
+    <?php $walletList = BaseClass::getWalletList(); ?>
+    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="walletType">
+        <?php foreach ($walletList as $key=>$value) { ?>
+        <option value="<?php echo $key;?>" <?php echo ($walletType == $key)?"selected":"";?> ><?php echo $value;?></option>
+        <?php } ?>
+    </select>
+        </div>
+    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
     </form>
+
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -37,24 +57,19 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
-                    'name' => 'full_name',
+                    'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->full_name',
+                    'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
                 array(
-                    'name' => 'phone',
-                    'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->phone',
-                ),
-                 array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->sponsor_id',
+                    'name' => 'user_id',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->user->name)?$data->user->name:""',
                 ),
                 array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?data->userprofile->address:""',
+                    'name' => 'fund',
+                    'header' => '<span style="white-space: nowrap;">Wallet Fund &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->fund',
                 ),
                 array(
                     'name' => 'status',
@@ -62,6 +77,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'class' => 'CButtonColumn',
+                    'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Recharge}{Deduct}',
                     'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(

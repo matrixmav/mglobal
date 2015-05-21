@@ -68,10 +68,10 @@ $this->breadcrumbs = array(
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->full_name',
                 ),
-                array(
-                    'name' => 'phone',
-                    'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->phone',
+                 array(
+                    'name' => 'name',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->name',
                 ),
                 array(
                     'name' => 'email',
@@ -79,19 +79,21 @@ $this->breadcrumbs = array(
                     'value' => '$data->email',
                 ),
                 array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->sponsor_id',
+                    'name' => 'facebook_id',
+                    'header' => '<span style="white-space: nowrap;">Facebook Id &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->facebook_id',
                 ),
                 array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:""',
+                    'name' => 'twitter_id',
+                    'header' => '<span style="white-space: nowrap;">Twitter Id &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->twitter_id)?$data->twitter_id:""',
                 ),
-                array(
-                    'name' => 'status',
-                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
+                 array(
+                    'name' => 'skype_id',
+                    'header' => '<span style="white-space: nowrap;">Skype Id &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->skype_id',
                 ),
+                
             ),
         ));
         ?>

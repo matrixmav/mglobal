@@ -56,7 +56,7 @@ $this->menu=array(
                     'value'=>'($data->domain_price) ? number_format($data->domain_price,2) : "N/A"',
 		),
                array(
-                    'name'=>'coupon_discount',
+                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->transaction->coupon_discount) ? number_format($data->transaction->coupon_discount,2) : "N/A"',
 		),
@@ -89,7 +89,7 @@ $this->menu=array(
                        ),
 		),
             
-            array( 
+                array( 
 			'class'=>'CButtonColumn',
                         'template'=>'{Invoice}',
 			'htmlOptions'=>array('width'=>'23%'),

@@ -70,7 +70,9 @@ $this->menu=array(
 		array(
                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Fund Type &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->fund_type',
+                    'value'=>'(($data->fund_type == 1) ? "Fund Wallet" :
+   (($data->fund_type == 2) ? "RP Wallet" :
+    (($data->fund_type == 3) ? "Commission Wallet" : "")))',
 		),
 		array(
                    'name'=>'id',
@@ -80,7 +82,7 @@ $this->menu=array(
 		array(
                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->status',
+                    'value'=>'(($data->status == 1) ? "Active" : "Inactive")',
 		),
 		
 	),

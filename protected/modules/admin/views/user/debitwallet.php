@@ -61,8 +61,6 @@ if(!empty($error)){
         if (isNaN($('#fund').val())){
             return false;
         }
-        alert($("#existing_fund").html());
-        alert($("#existing_fund").html());
         if(($("#existing_fund").html())<($('#fund').val())){
             $("#fund_error").html("Deducting fund should not be more the existing fund!");
             return false;

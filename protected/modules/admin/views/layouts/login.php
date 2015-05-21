@@ -13,7 +13,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <head>
    <meta name="robots" content="noindex, nofollow" />
    <meta charset="utf-8" />
-   <title>HK-Base | Admin</title>
+   <title>mGlobal | Admin</title>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
    <meta content="" name="description" />
@@ -54,7 +54,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
    <!-- END LOGIN -->
    <!-- BEGIN COPYRIGHT -->
    <div class="copyright">
-      <?php echo date('Y');?> &copy; HK-Base
+      <?php echo date('Y');?> &copy; mGlobal    
    </div>
    <!-- END COPYRIGHT -->
    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

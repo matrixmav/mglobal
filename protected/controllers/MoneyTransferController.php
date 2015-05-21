@@ -349,7 +349,7 @@ class MoneyTransferController extends Controller {
                 exit;
             }
 			
-			/* adding a wallet if not exists */
+			/* adding a user wallet if not exists */
 			
              $wallettoObj = Wallet::model()->findByAttributes(array('user_id' => $userObject->id, 'type' => $_POST['transactiontype']));
                 if (empty($wallettoObj)) {
@@ -372,7 +372,31 @@ class MoneyTransferController extends Controller {
                 $wallettoObj->status = 1;
                 $wallettoObj->update();
             }
+			if($userObject->id  != $adminid ){
+			/* adding a admin wallet if not exists */
 			
+             $walletadmObj = Wallet::model()->findByAttributes(array('user_id' => $adminid , 'type' => $_POST['transactiontype']));
+                if (empty($wallettoObj)) {
+                    $walletadmObj = new Wallet;
+                    $walletadmObj->type = $transactionObjuser->mode;
+                    $walletadmObj->user_id = $userObject->id;
+                    $walletadmObj->fund = $_POST['paid_amount'];
+                    $walletadmObj->status = 1;
+                    $walletadmObj->created_at = $createdtime;
+                    $walletadmObj->updated_at = $createdtime;
+                    if (!$walletadmObj->save()) {
+                        echo "<pre>";
+                        print_r($walletadmObj->getErrors());
+                        exit;
+                    }
+                } else {
+                /* for to user wallet add */
+
+                $walletadmObj->fund = ($walletadmObj->fund) - ($_POST['paid_amount']);
+                $walletadmObj->status = 1;
+                $walletadmObj->update();
+            }
+			}
 			/* adding a money transfer object */
 			
             $moneyTransfertoObj = new MoneyTransfer;
@@ -381,7 +405,7 @@ class MoneyTransferController extends Controller {
             $moneyTransfertoObj->transaction_id = $transactionObjuser->id;
             $moneyTransfertoObj->fund_type = $_POST['transactiontype'];//1:RP,2:Cash
             $moneyTransfertoObj->comment = $_POST['paid_amount'] . ' to user'; //Ask input to the user
-            $moneyTransfertoObj->status = 0;
+            $moneyTransfertoObj->status = 1;
 			$moneyTransfertoObj->wallet_id = $wallettoObj->id;
             $moneyTransfertoObj->created_at = $createdtime;
             $moneyTransfertoObj->updated_at = $createdtime;
@@ -394,7 +418,9 @@ class MoneyTransferController extends Controller {
             
              $success .= "Fund Added Successfully";
         }
-        $this->render('fund', array('success' => $success));
+		    $userObject = User::model()->findByAttributes(array('id' => $adminid));
+            $walletObject = Wallet::model()->findAllByAttributes(array('user_id' => $adminid));
+            $this->render('fund', array('walletObject' => $walletObject,'success' => $success,'username'=>$userObject->name));
 		
     }
 

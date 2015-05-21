@@ -7,7 +7,7 @@ return array(
         'homePageSlider' => '/upload/homepageSlider/',
         'upload' => 'upload/',
         'hotel' => '/upload/profile/',
-    	'varificationDoc' => '/upload/varification-document/',
+    	'verificationDoc' => '/upload/verification-document/',
     	'homeBanner' => '/upload/homepageSlider/',
     	'homeAdBanner' => '/upload/ads/',
     	'homepageSliderPath'=>array("city","state","country","general"),
@@ -97,5 +97,5 @@ return array(
     ),
    'countrycode' => array("1"=>"US", "2"=>"can", "3"=>"in", "4"=>"FR"),
    'accountno'=>'4444',
-   'sitename'=>'HK-Base',
+   'sitename'=>'mGlobal',
 );
