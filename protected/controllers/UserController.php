@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted'), 
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou'), 
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -98,105 +98,100 @@ class UserController extends Controller
         
         /* User Registration Strat Here */
         public function actionRegistration(){
-            
+            $error = "";
             if($_POST){ 
                 
-                $masterPin = BaseClass::getUniqInt(5); 
-                $model = new User;
-                $model->attributes = $_POST;
-                $model->password = BaseClass::md5Encryption($_POST['password']);  
-                $model->master_pin = BaseClass::md5Encryption($masterPin);
-                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
-                $model->created_at = date('Y-m-d') ;
-                $model->role_id = 1 ; 
-                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id'] ,'position' => $_POST['position']));
-                
-                /* Find for parent user ID */
-                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
-                //echo "<pre>"; print_r($userObject);
-                
-                /* Condition for they have the child or not */
-                $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
-                //echo "<pre>"; print_r($geneObject);
-                //die;
-                if(count($geneObject)){
-                    $userId = "";
-                    for($i = 1; $i <= 1000 ; $i++ ){                    
-                        
-                        if( $i == 1 ){                       
-                            $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $_POST['position'] ) );
-                            if(count($geneObjectNode)){                               
-                                $userId = $geneObjectNode->user_id ;                        
-                            }else{                                
-                                $userId =  $geneObject->user_id;  
-                                break;
+               
+                    $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
+                    $masterPin = BaseClass::getUniqInt(5); 
+                    $model = new User;
+                    $model->attributes = $_POST;
+                    $model->password = BaseClass::md5Encryption($_POST['password']);  
+                    $model->sponsor_id = $_POST['sponsor_id'] ;
+                    $model->master_pin = BaseClass::md5Encryption($masterPin);
+                    $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
+                    $model->created_at = date('Y-m-d') ;
+                    $model->role_id = 1 ; 
+
+                    /* Condition for they have the child or not */
+                    $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
+                    //echo "<pre>"; print_r($geneObject);
+                    //die;
+                    if(count($geneObject)){
+                        $userId = "";
+                        for($i = 1; $i <= 1000 ; $i++ ){                    
+
+                            if( $i == 1 ){                       
+                                $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $_POST['position'] ) );
+                                if(count($geneObjectNode)){                               
+                                    $userId = $geneObjectNode->user_id ;                        
+                                }else{                                
+                                    $userId =  $geneObject->user_id;  
+                                    break;
+                                }
+                            }else{                        
+                                $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId ,'position' => $_POST['position'] ) );                            
+                                if(count($geneObjectNode)){
+                                    $userId = "";
+                                    $userId .= $geneObjectNode->user_id;                            
+                                }else{                                
+                                    $userId ;
+                                    break;
+                                }
                             }
-                            
-                        }else{                        
-                            $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId ,'position' => $_POST['position'] ) );                            
-                            if(count($geneObjectNode)){
-                                $userId = "";
-                                $userId .= $geneObjectNode->user_id;                            
-                            }else{                                
-                                $userId ;
-                                break;
-                            }
-                        }
-                    } 
-                
-                }else{
-                   $userId =  $userObject->id; 
-                }       
-                
-                $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
-                $model->activation_key = $rand ;
-                               
-                
-                if(!$model->save(false)){
-                    echo "<pre>"; print_r($model->getErrors());exit;
-                }
-                
-                $modelUserProfile = new UserProfile();
-                $modelUserProfile->user_id = $model->id ;
-                $modelUserProfile->created_at = date('Y-m-d') ;
-                $modelUserProfile->referral_banner_id = 1 ;
-                $modelUserProfile->save(false);
-                
-                /* Geneology */
-                $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ));
-                //echo 
-                $modelGenealogy = new Genealogy();
-                $modelGenealogy->parent = $userId ; 
-                $modelGenealogy->user_id = $model->id ; 
-                $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
-                $modelGenealogy->position = $_POST['position'];                 
-                $modelGenealogy->save(false); 
-                $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>"; 
-                /*  For Genealogy Data */
-                
-                /*$modelGenealogy = new Genealogy();
-                $modelGenealogy->user_id = $model->id ; 
-                $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
-                $modelGenealogy->position = $_POST['position'] ; 
-                $modelGenealogy->save(); */
-                
-//                $config['to'] = $model->email; 
-//                $config['subject'] = 'Registration Confirmation' ;
-//                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
-//                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-//                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
-//                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
-//                var_dump($config);
-//                CommonHelper::sendMail($config);
-                $this->render('login', array('successMsg'=> $successMsg));
-                $this->redirect('login');
+                        } 
+
+                    }else{
+                       $userId =  $userObject->id; 
+                    }       
+
+                    $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
+                    $model->activation_key = $rand ;                               
+
+                    if(!$model->save(false)){
+                        echo "<pre>"; print_r($model->getErrors());exit;
+                    }
+
+                    $modelUserProfile = new UserProfile();
+                    $modelUserProfile->user_id = $model->id ;
+                    $modelUserProfile->created_at = date('Y-m-d') ;
+                    $modelUserProfile->referral_banner_id = 1 ;
+                    $modelUserProfile->save(false);
+
+                    /* Geneology */
+                    $userObjectId = User::model()->findByAttributes(array('id' => $userObject->id ));
+
+                    $modelGenealogy = new Genealogy();
+                    $modelGenealogy->parent = $userId ; 
+                    $modelGenealogy->user_id = $model->id ; 
+                    $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
+                    $modelGenealogy->position = $_POST['position'];                 
+                    $modelGenealogy->save(false); 
+                    $successMsg = "You have successfully registered. Please check your email to activate your account"; 
+                    /*  For Genealogy Data */
+
+                    /*$modelGenealogy = new Genealogy();
+                    $modelGenealogy->user_id = $model->id ; 
+                    $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
+                    $modelGenealogy->position = $_POST['position'] ; 
+                    $modelGenealogy->save(); */
+
+    //                $config['to'] = $model->email; 
+    //                $config['subject'] = 'Registration Confirmation' ;
+    //                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
+    //                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
+    //                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
+    //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
+    //                var_dump($config);
+    //                CommonHelper::sendMail($config);
+                    $this->redirect(array('login','successMsg'=>$successMsg));                    
             }
             $spnId = "";
             if($_GET){
                 $spnId = $_GET['spid'];
             }
             $countryObject = Country::model()->findAll();
-            $this->render('registration',array('countryObject'=>$countryObject,'spnId'=>$spnId));
+            $this->render('registration',array('countryObject'=>$countryObject,'spnId'=>$spnId,'error'=>$error));
         }
 
         /* User Forget Password Strat Here */
@@ -265,6 +260,13 @@ class UserController extends Controller
             }              
             
             
+        }
+        
+        public function actionThankyou(){
+            $userId = 3 ;
+            $userObject = User::getUserById($userId);
+            $totalCommission = BaseClass::getDirectCommission($userObject->name);
+            $this->render('thankyou',array('getValue'=>$totalCommission ,'userObject'=>$userObject));            
         }
         
         public function actionIsUserExisted(){
