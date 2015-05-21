@@ -13,13 +13,17 @@
                     <div class="row">
                        <div class="col-md-12 col-sm-12">
                             <form class="form-horizontal" role="form" method="post" action="/user/registration"  onsubmit="return validateFrm()">
+                                <input type="hidden" id="nameExistedErrorFlag" name="nameExistedErrorFlag" value="0"/>
+                                <input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="0"/>
+                                <input type="hidden" id="sponsorIdExistedErrorFlag" name="sponsorIdExistedErrorFlag" value="0"/>
+                                
                                 <fieldset> 
                                     <legend>Your personal details</legend>
                                     <div class="form-group">
                                         <label for="firstname" class="col-lg-4 control-label">Sponsor Id <span class="require">*</span></label>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" value="<?php echo (isset($spnId))?$spnId:""; ?>" name="sponsor_id" id="sponsor_id" onchange="isSponsorExisted()">
-                                            <a href="javascript:void(0)" class="btn btn-default" onclick="getSponId();">Get Sponser Id</a>
+                                            <a href="javascript:void(0)" class="btn btn-default" onclick="getSponId();">Get Sponsor Id</a>
                                             <span id="sponsor_id_error" class="clrred"></span>
                                         </div>
                                         
@@ -152,6 +156,7 @@
     <!-- END SIDEBAR & CONTENT -->
   </div>
 </div>
+
 <?php }?>
 <script type="text/javascript">
  function getSponId(){ 

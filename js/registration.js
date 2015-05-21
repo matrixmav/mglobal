@@ -1,12 +1,36 @@
   function validateFrm() {
-      
-       
         
-        if ($("#sponser_id").val() == "") {
-            $("#sponser_id_error").html("Get Sponser Id");
+        if($("#sponsorIdExistedErrorFlag").val()==1){
+           $("#sponsor_id_error").html("Not Existed!!!");
+           $("#sponsor_id").focus(); 
+           return false;
+        }        
+        
+        if($("#nameExistedErrorFlag").val()==1){
+           $("#name_error").html("Existed!!!");
+           $("#name").focus(); 
+           return false;
+        }
+       
+        if($("#emailExistedErrorFlag").val()==1){
+           $("#email_error").html("Existed!!!");
+           $("#email").focus(); 
+           return false;
+        }
+        
+        if ($("#sponsor_id").val() == "") {
+            $("#sponsor_id_error").html("Get Sponsor Id");
+            $("#sponsor_id").focus();   
             return false;
         }
 
+        $("#sponsor_id_error").html("");
+        if ($("#sponsor_id").val() == "") {
+            $("#sponsor_id_error").html("Get Sponsor Id");
+            $("#sponsor_id").focus();            
+            return false;
+        }
+        
         $("#name_error").html("");
         if ($("#name").val() == "") {
             $("#name_error").html("Enter User Name");
@@ -131,9 +155,10 @@
             data: "username=" + $("#name").val(),
             success: function (msg) {
                 $("#name_error").html("");
+                $("#nameExistedErrorFlag").val("0");
                 if(msg == 1){
                     $("#name_error").html("Existed!!!");
-                    return false ;
+                    $("#nameExistedErrorFlag").val(1);
                 }
             }
         });
@@ -160,8 +185,10 @@
             data: "email=" + $("#email").val(),
             success: function (msg) {
                 $("#email_error").html("");
+                $("#emailExistedErrorFlag").val("0");
                 if(msg == 1){
                     $("#email_error").html("Existed!!!");
+                    $("#emailExistedErrorFlag").val(1);
                 }
             }
         });
@@ -174,9 +201,10 @@
             data: "sponsor_id=" + $("#sponsor_id").val(),
             success: function (msg) {
                 $("#sponsor_id_error").html("");
+                $("#sponsorIdExistedErrorFlag").val(0);
                 if(msg == 0){
                     $("#sponsor_id_error").html("Not Existed!!!");
-                    
+                    $("#sponsorIdExistedErrorFlag").val(1);    
                 }
             }
         });
