@@ -21,6 +21,28 @@ var MIN_LENGTH = 3;
 			$('#results').html('');
 		}
 	});
+	
+	$("#adusername").keyup(function() {
+		var adusername = $("#adusername").val();
+		if (adusername.length >= MIN_LENGTH) {
+			$.get( "/MoneyTransfer/autoadmin", { adusername: adusername } )
+			.done(function( data ) {
+				$('#results').html('');
+				var results = jQuery.parseJSON(data);
+				$(results).each(function(key, value) {
+					$('#results').append('<div class="item">' + value + '</div>');
+				})
+
+			    $('.item').click(function() {
+			    	var text = $(this).html();
+			    	$('#adusername').val(text);
+			    })
+
+			});
+		} else {
+			$('#results').html('');
+		}
+	});
 
     $("#username").blur(function(){
     		$("#results").fadeOut(500);
@@ -51,7 +73,7 @@ var MIN_LENGTH = 3;
 			var paid_amount_percentage = (parseFloat(paid_amount)/100)+parseFloat(paid_amount);
 			if(transactiontype == 2)
 			{
-				if(parseFloat(paid_amount_percentage) >= parseFloat(rp_points))
+				if(parseFloat(paid_amount_percentage) > parseFloat(rp_points))
 				{				
 			document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Insufficient Funds.";
@@ -62,7 +84,7 @@ var MIN_LENGTH = 3;
 			}
 			if(transactiontype == 1)
 			{			
-				if(parseFloat(paid_amount_percentage) >= parseFloat(wallet_points))
+				if(parseFloat(paid_amount_percentage) > parseFloat(wallet_points))
 				{				
 			document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Insufficient Funds.";
@@ -73,7 +95,7 @@ var MIN_LENGTH = 3;
 			}
 			if(transactiontype == 3)
 			{			
-				if(parseFloat(paid_amount_percentage) >= parseFloat(commission_points))
+				if(parseFloat(paid_amount_percentage) > parseFloat(commission_points))
 				{				
 			document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Insufficient Funds.";
@@ -109,7 +131,7 @@ var MIN_LENGTH = 3;
         {
             document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please enter valid Amount.";
-            document.getElementById("username").focus();
+            document.getElementById("paid_amount").focus();
             return false;
         }
 	}); 
@@ -142,19 +164,67 @@ var MIN_LENGTH = 3;
 		
 	});	
 	$("#addfund").click(function() {
-		var username = $("#username").val();
+		var adusername = $("#adusername").val();
 			$.ajax( {
-                  url:'/MoneyTransfer/userexists?u='+username,
+                  url:'/MoneyTransfer/userexists?u='+adusername,
                   success:function(data) {
 					  if(data=='notexists'){
 			document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Username does not Exist.";
-            document.getElementById("username").focus();
+            document.getElementById("adusername").focus();
             return false;
 					  }
                   }
                });
+			var transactiontype = $("#transactiontype").val();
+			var adminusername = $("#adminusername").val();
+			var paid_amount = $("#paid_amount").val();
+			var wallet_points = $("#wallet_points").val();
+			var commission_points = $("#commission_points").val();	
+			var rp_points = $("#rp_points").val();
+			if(transactiontype == 2)
+			{
+				if(parseFloat(paid_amount) > parseFloat(rp_points))
+				{	
+					if(adminusername != adusername)
+					{			
+					document.getElementById("error_msg").style.display="block";
+					document.getElementById("error_msg").innerHTML = "Insufficient Funds.You can add funds only to Admin. Please choose Admin to transfer Funds";
+					document.getElementById("adusername").focus();
+					return false;
+					}
+					
+				}
+			}
+			if(transactiontype == 1)
+			{			
+				if(parseFloat(paid_amount) > parseFloat(wallet_points))
+				{				
+					if(adminusername != adusername)
+						{			
+						document.getElementById("error_msg").style.display="block";
+						document.getElementById("error_msg").innerHTML = "Insufficient Funds.You can add funds only to Admin. Please choose Admin to transfer Funds";
+						document.getElementById("adusername").focus();
+						return false;
+						}
+							
+					}	
+			}
+			if(transactiontype == 3)
+			{			
+				if(parseFloat(paid_amount) > parseFloat(commission_points))
+				{				
+					if(adminusername != adusername)
+					{			
+					document.getElementById("error_msg").style.display="block";
+					document.getElementById("error_msg").innerHTML = "Insufficient Funds.You can add funds only to Admin. Please choose Admin to transfer Funds";
+					document.getElementById("adusername").focus();
+					return false;
+					}
 						
+				}	
+			}
+			
 		if(document.getElementById("transactiontype").value=='')
         {
             document.getElementById("error_msg").style.display="block";
@@ -162,11 +232,11 @@ var MIN_LENGTH = 3;
             document.getElementById("transactiontype").focus();
             return false;
         }
-	if(document.getElementById("username").value=='')
+	if(document.getElementById("adusername").value=='')
         {
             document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please enter Username.";
-            document.getElementById("username").focus();
+            document.getElementById("adusername").focus();
             return false;
         }
 	var paid_amount = document.getElementById('paid_amount');
@@ -181,8 +251,9 @@ var MIN_LENGTH = 3;
         {
             document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please enter valid Amount.";
-            document.getElementById("username").focus();
+            document.getElementById("paid_amount").focus();
             return false;
         }
 	}); 
+
 });

@@ -2,7 +2,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.min.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/autocomplete.js');
 $this->breadcrumbs = array(
-    'Funds Transfer',
+    'Transfer Funds',
 );
 ?>
 
@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
     <div class="error" id="error_msg" style="display: none;"></div>
     <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" >
         <fieldset> 
-            <legend>Select User</legend>
+            <legend>Transfer Funds</legend>
             <?php
             if (!empty($walletObject)) {
                 $walletPoints = 0;

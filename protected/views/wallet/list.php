@@ -65,12 +65,16 @@ $this->menu=array(
 		array(
                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Type &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->type',
+                    'value'=>'(($data->type == 1) ? "Fund Wallet" :
+   (($data->type == 2) ? "RP Wallet" :
+    (($data->type == 3) ? "Commission Wallet" : "")))',
+					
+  
 		),
 		array(
                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->status',
+                    'value'=>'(($data->status == 1) ? "Active" : "Inactive")',
 		),
 		
 	),
