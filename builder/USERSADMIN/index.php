@@ -94,6 +94,7 @@ echo "<br>";
 ms_w($category);
 if(isset($folder))
 {
+    
 	ms_w($folder);
 	ms_w($page);
 	if(file_exists($category."/".$folder."_".$page.".php"))
@@ -120,6 +121,7 @@ else
 }
 if($HTML=="")
 {
+   
 	$HTML = ob_get_contents();
 }
 
