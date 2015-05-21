@@ -170,6 +170,39 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+     <i class="glyphicon glyphicon-bell"></i>
+     <span class="badge badge-default">
+      7</span>
+     </a>
+     
+     
+    </li>
+    
+    
+    
+    <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+     <i class="glyphicon glyphicon-envelope"></i>
+     <span class="badge badge-default">
+      4</span>
+     </a>
+     
+      
+    </li>
+    
+    
+    
+    <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+     <i class="glyphicon glyphicon-th"></i>
+     <span class="badge badge-default">
+      3</span>
+     </a>
+     
+      
+    </li>
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
                     <!-- END NOTIFICATION DROPDOWN -->
