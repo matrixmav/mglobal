@@ -61,8 +61,8 @@ if(isset($pd_edit_id))
 				}
 				
 				
-					$arrNames=array("active_".strtolower($LANG),"name_".strtolower($LANG),"description_".strtolower($LANG),"keywords_".strtolower($LANG),"link_".strtolower($LANG));
-					$arrValues=array($active,$pName,$pDescription,$pKeywords,$pLink);
+					$arrNames=array("active_".strtolower($LANG),"name_".strtolower($LANG),"description_".strtolower($LANG),"keywords_".strtolower($LANG),"link_".strtolower($LANG),"form_type");
+					$arrValues=array($active,$pName,$pDescription,$pKeywords,$pLink,$contact);
 					SQLUpdate("user_pages",$arrNames,$arrValues," id=$id");
 					$HideFormFlag=true;
 					
@@ -114,6 +114,34 @@ if(isset($pd_edit_id))
 						<option value=1 <?php if($oArr['active_'.$lang]==1) echo "selected";?>><?php echo strtoupper($YES);?></option>
 						<option value=0 <?php if($oArr['active_'.$lang]==0) echo "selected";?>><?php echo strtoupper($NO);?></option>
 						</select>		
+				
+				  		</td>
+					</tr>
+                                        
+                                        <tr>
+						<td class=basictext width=150><b>Select form to insert in your page</b></td>
+						<td class=basictext>
+						
+						<select name=contact>
+                                                    <option value="">Select Form</option>
+                                                    <option value="contact" <?php if($oArr['form_type']=='contact') echo "selected";?>>Contact Form</option>
+                                                   <?php  $sql_statement = "SELECT `package_id` FROM `order` WHERE id = '{$_SESSION['order_id']}'";
+                                                            $dblink = mysql_connect($DBHost, $DBUser, $DBPass);
+                                                            mysql_select_db($DBName,$dblink);
+                                                            $qry = mysql_query($sql_statement,$dblink);
+                                                            $pageArr = mysql_fetch_assoc($qry);
+                                                            $sql_statement1 = "SELECT `no_of_forms` FROM `package` WHERE id ='{$pageArr['package_id']}'";
+                                                            $dblink1 = mysql_connect($DBHost, $DBUser, $DBPass);
+                                                            mysql_select_db($DBName,$dblink1);
+                                                            $qry1 = mysql_query($sql_statement1,$dblink1);
+                                                            $pagesFetch = mysql_fetch_assoc($qry1);
+                                                            ?>
+                                                    <?php if($pagesFetch['no_of_forms']=='2' || $pagesFetch['no_of_forms']=='3'){ ?>
+                                                    <option value="enquiry" <?php if($oArr['form_type']=='enquiry') echo "selected";?>>Enquiry Form</option>
+                                                    <?php }if($pagesFetch['no_of_forms']=='3'){ ?>
+                                                    <option value="feedback" <?php if($oArr['form_type']=='feedback') echo "selected";?>>Feedback Form</option>
+                                                    <?php }?>
+                                                </select>		
 				
 				  		</td>
 					</tr>
