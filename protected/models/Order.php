@@ -123,4 +123,11 @@ class Order extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getOrderById($id){
+             return Order::model()->findByPk($id);
+        }
+        public function getOrderByValue($field, $value){
+             return Order::model()->findByAttributes(array($field => $value ));
+        }
 }

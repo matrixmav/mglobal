@@ -158,4 +158,11 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getUserById($id){
+             return self::model()->findByPk($id);
+        }
+        public function getUserByValue($field, $value){
+             return self::model()->findByAttributes(array($field => $value ));
+        }
 }
