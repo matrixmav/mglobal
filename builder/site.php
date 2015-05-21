@@ -399,7 +399,9 @@ $content .=' <table border="0" width="100%" cellpadding="6" class="blog_table">
 
 if(isset($add_contact))
 {
-if($USE_SECURITY_IMAGES && ( (md5($CAPTCHA_SALT.$_POST['captcha_code'].$CAPTCHA_SALT) !=$_SESSION['code'])|| trim($_POST['captcha_code']) == "" ) )
+    
+  //var_dump($_SESSION);
+if((md5($CAPTCHA_SALT.$_POST['captcha_code'].$CAPTCHA_SALT) !=$_SESSION['code'] || trim($_POST['captcha_code']) == "" ) )
 {
 
 $content .= '<br>
@@ -1245,7 +1247,7 @@ $content .= '<br><div style="float:left;width:740px;text-align:left;height:100%;
 					</table>
 					<br>';
 $content .= '
-										<form method="post" action="http://localhost/builder/site.php?user=roopl1" >
+										<form method="post" action="" onSubmit="return validation();">
 												<input type="hidden" name="contact" value="1">
 												<input type="hidden" name="add_contact" value="yes">
 								
@@ -1271,7 +1273,7 @@ $content .= '
 													<img src="'.($USE_ABSOLUTE_URLS?'http://www.'.$BLOG_DOMAIN.'/':'').'include/sec_image.php"  >
 													'.$M_CODE.':
 
-													<input type="text" name="captcha_code" value="" size=8>	
+													<input type="text" name="captcha_code" value="" size=8 id="captcha_code">	
 													
 													</td>
 												</tr>
@@ -1302,7 +1304,7 @@ $content .= '<br><div style="float:left;width:740px;text-align:left;height:100%;
 					</table>
 					<br>';
 $content .= '
-										<form method="post" action="http://localhost/builder/site.php?user=roopl1" >
+										<form method="post" action="" onSubmit="return validation();">
 												<input type="hidden" name="contact" value="1">
 												<input type="hidden" name="add_contact" value="yes">
 								
@@ -1328,7 +1330,7 @@ $content .= '
 													<img src="'.($USE_ABSOLUTE_URLS?'http://www.'.$BLOG_DOMAIN.'/':'').'include/sec_image.php"  >
 													'.$M_CODE.':
 
-													<input type="text" name="captcha_code" value="" size=8>	
+													<input type="text" name="captcha_code" value="" size=8 id="captcha_code">	
 													
 													</td>
 												</tr>
@@ -1360,7 +1362,7 @@ $content .= '<br><div style="float:left;width:740px;text-align:left;height:100%;
 					</table>
 					<br>';
 $content .= '
-										<form method="post" action="http://localhost/builder/site.php?user=roopl1" >
+										<form method="post" action="" onSubmit="return validation();">
 												<input type="hidden" name="contact" value="1">
 												<input type="hidden" name="add_contact" value="yes">
 								
@@ -1386,7 +1388,7 @@ $content .= '
 													<img src="'.($USE_ABSOLUTE_URLS?'http://www.'.$BLOG_DOMAIN.'/':'').'include/sec_image.php"  >
 													'.$M_CODE.':
 
-													<input type="text" name="captcha_code" value="" size=8>	
+													<input type="text" name="captcha_code" value="" size=8  id="captcha_code">	
 													
 													</td>
 												</tr>
@@ -1975,3 +1977,41 @@ echo $STR_OUTPUT;
 
 }
 ?>
+<script>
+function validation()
+{
+ if(document.getElementById('name').value=='')
+  {
+      alert('Please enter your name');
+      document.getElementById('name').focus();
+      return false;
+  }
+  if(document.getElementById("email").value=='')
+        {
+             alert('Please enter your email');
+            document.getElementById("email").focus();
+            return false;
+        }
+        var email = document.getElementById('email');
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+        if (!filter.test(email.value)) {
+            alert('Please enter valid email');
+            document.getElementById("email").focus();
+            return false;
+        }
+  if(document.getElementById('message').value=='')
+  {
+      alert('Please enter your query');
+      document.getElementById('message').focus();
+      return false;
+  }
+  if(document.getElementById('captcha_code').value=='')
+  {
+      alert('Please enter captcha code');
+      document.getElementById('captcha_code').focus();
+      return false;
+  }
+  
+}
+</script>
