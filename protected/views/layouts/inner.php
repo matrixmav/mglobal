@@ -332,44 +332,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                            $reservation_pmenu = 8;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    "wallet/list" => "Wallet",
-                                    
-                                );
-                                ?>
-                                <li
-                                    class="<?php echo (($curControllerLower == 'wallet') || ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Wallet </span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'wallet') ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
-                                            if ($ctName == "search/create") {
-                                                $ctName = "search/create/type/details";
-                                            }
-                                            if ($ctName == "transaction" && $curControllerLower == "wallet")
-                                                $class_content = 'class="active"';
-                                            else
-                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
 
-                                            echo '<li ' . $class_content . '>';
-                                            echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                            echo '</li>';
-                                            if ($ctName == "search/create/type/details") {
-                                                $ctName = "search/create";
-                                            }
-                                    }
-                                    echo '</ul>';
-                                    ?>			
-                                </li>
-                                <?php
-                            }
+                            $reservation_pmenu = 8;
+                            
                             $bases_pmenu = 4;
                             $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
@@ -427,6 +392,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
+
                         } else {
                             ?>
                             <li
@@ -563,7 +529,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN FOOTER -->
         <div class="footer">
             <div class="footer-inner">
-                <?php echo date("Y"); ?> &copy; HK-Base
+                <?php echo date("Y"); ?> &copy; mGlobal
             </div>
             <div class="footer-tools">
                 <span class="go-top"> <i class="fa fa-angle-up"></i>

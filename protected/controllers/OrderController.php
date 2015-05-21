@@ -50,10 +50,15 @@ class OrderController extends Controller
 	}
         
         public function actionList(){
-             $dataProvider = new CActiveDataProvider('Order', array(
-	    				'pagination' => array('pageSize' => 10),
-				));
-            $orderObject = Order::model()->findAll(array('condition'=>'user_id=1'));
+            $userId = Yii::app()->session['userid'];
+            $pageSize = 10;
+            $dataProvider = new CActiveDataProvider('Order', array(
+                'criteria' => array(
+                    'condition' => ('user_id = ' . $userId ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+            
+             
+            $orderObject = Order::model()->findAll(array('condition'=>'user_id='.$userId));
              
             $this->render('list',array('dataProvider'=>$dataProvider,'orderObject'=>$orderObject));
         }
@@ -172,7 +177,7 @@ class OrderController extends Controller
            {
                $order_id = $_GET['id'];
            }
-            $orderObject = ORDER::model()->findByPK($order_id);
+            $orderObject = Order::model()->findByPK($order_id);
             $this->renderPartial('invoice',array(
 			'orderObject'=>$orderObject,
 		));

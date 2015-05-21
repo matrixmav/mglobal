@@ -3,33 +3,35 @@
     <div class="container">
       <div class="row bg-f1">
         <!-- BEGIN BOTTOM ABOUT BLOCK -->
+        <!-- BEGIN BOTTOM ABOUT BLOCK -->
         <div class="col-md-2 col-sm-6 pre-footer-col">
           <p class="f-font">Legal</p>
-          <p class="f-cnt">legal@xyz.com<br/> 
+          <p class="f-cnt"><a href="mailto:legal@xyz.com">legal@xyz.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Billing</p>
-          <p class="f-cnt">Billing@xyz.com<br/> 
+          <p class="f-cnt"><a href="mailto:billing@xyz.com">Billing@xyz.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Support</p>
-          <p class="f-cnt">support@xyz.com<br/> 
+          <p class="f-cnt"><a href="mailto:support@xyz.com">support@xyz.com</a><br/> 
           91-8500425185</p>
         </div>
+        <!-- END BOTTOM ABOUT BLOCK -->
         <!-- END BOTTOM ABOUT BLOCK -->
         <!-- BEGIN TWITTER BLOCK --> 
         <div class="col-md-2 col-sm-6 pre-footer-col">
        
           <p class="f-font">Member Enquiry</p>
-          <p class="f-cnt">memberenquiry@xyz.com<br/> 
+          <p class="f-cnt"><a href="mailto:memberenquiry@xyz.com">memberenquiry@xyz.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Sales</p>
-          <p class="f-cnt">sales@xyz.com<br/> 
+          <p class="f-cnt"><a href="mailto:sales@xyz.com">sales@xyz.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Info</p>
-          <p class="f-cnt">Info@xyz.com<br/> 
+          <p class="f-cnt"><a href="mailto:info@xyz.com">Info@xyz.com</a><br/> 
          91-8500425185</p>   
         </div>
          <div class="col-md-4 col-sm-6 pre-footer-col">
@@ -48,7 +50,7 @@
                 Opp.Jain University,<br/>
                 Bangalore 560 027, India<br/>
             
-            Email: <a href="mailto:info@metronic.com">maverickinfosoft@gmail.com</a><br>
+            Email: <a href="mailto:maverickinfosoft@gmail.com">maverickinfosoft@gmail.com</a><br>
             
           </address>
           <!-- END BOTTOM CONTACTS -->

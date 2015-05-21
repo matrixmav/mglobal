@@ -81,7 +81,7 @@ class UserController extends Controller
                             if(Yii::app()->session['package_id']!='') {
                                 $this->redirect("/package/domainsearch");  
                             } else {
-                                $this->redirect("/order/list");
+                                $this->redirect("/profile/dashboard");
                             }
                         }else {
                            // echo "0"; 

@@ -26,7 +26,16 @@
                                             <a href="javascript:void(0)" class="btn btn-default" onclick="getSponId();">Get Sponsor Id</a>
                                             <span id="sponsor_id_error" class="clrred"></span>
                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="position" class="col-lg-4 control-label">Position <span class="require">*</span></label>
+                                        <div class="col-lg-8">        
+                                            <input type="radio" name="position" id="position" value="right" checked/>
+                                            <label class="gender">Right</label>
+                                            <input type="radio" name="position" id="position" value="left"/>
+                                            <label class="gender">Left</label>
                                         
+                                        <span id="position_error" class="clrred"></span></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="lastname" class="col-lg-4 control-label">User Name <span class="require">*</span></label>
@@ -127,16 +136,7 @@
                                         <span id="confirm_password_error" class="clrred"></span></div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="position" class="col-lg-4 control-label">Position <span class="require">*</span></label>
-                                        <div class="col-lg-8">        
-                                            <input type="radio" name="position" id="position" value="right" checked/>
-                                            <label class="gender">Right</label>
-                                            <input type="radio" name="position" id="position" value="left"/>
-                                            <label class="gender">Left</label>
-                                        
-                                        <span id="position_error" class="clrred"></span></div>
-                                    </div>
+                                    
 
                                 </fieldset>
                                 <div class="row">

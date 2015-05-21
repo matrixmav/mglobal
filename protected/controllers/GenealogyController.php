@@ -142,7 +142,6 @@ class GenealogyController extends Controller
                             'genealogyRightListObject'=>$genealogyRightListObject,
                             'currentUserId'=>$currentUserId
                 ));
-                
             }
            
 	}

@@ -3,7 +3,7 @@
 <div id='social-sidebar'>
 <ul>
 <li>
-<a ><img src="images/whts1.png"tw.png" />
+<a ><img src="images/whts1.png" />
 <span class="whts">whats up</span>
 </a>
 </li>
@@ -645,6 +645,7 @@
   </div>
   <!-- Prices block END -->
   <!-- Testimonials block BEGIN -->
+  <!-- Testimonials block BEGIN -->
   <div class="testimonials-block content content-center margin-bottom-65 testi-bg">
     <div class="container">
       <h2>Customer <strong>testimonials</strong></h2>
@@ -653,7 +654,8 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <!-- Carousel items -->
-           <?php $i=1;foreach($profileObject as $testimonial){ ?>
+           <?php $i=1;if(!empty($profileObject)) { 
+               foreach($profileObject as $testimonial){ ?>
           <!-- Carousel items -->
           <div class="item <?php if($i=='1'){ echo "active"; }else{ echo "";}?>">
             <blockquote>
@@ -661,19 +663,15 @@
             </blockquote>
             <span class="testimonials-name"><?php echo $testimonial->user()->full_name;?></span>
           </div>
-          <?php $i++;}?>
+           <?php $i++;} }?>
         </div>
         <!-- Indicators -->
       
-        <ol class="carousel-indicators">
-         
-          <li data-target="#testimonials-block" data-slide-to="0" class="active"></li>
-          <li data-target="#testimonials-block" data-slide-to="1"></li>
-          <li data-target="#testimonials-block" data-slide-to="2"></li>
-        </ol>
+       
       </div>
     </div>
   </div>
+  <!-- Testimonials block END -->
   <!-- Testimonials block END -->
   <!-- Partners block BEGIN -->
   <div class="partners-block">

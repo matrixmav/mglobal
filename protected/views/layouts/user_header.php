@@ -47,7 +47,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="index.html"><h1>MaverickGlobal</h1></a>
+        <a class="site-logo" href="/#about"><h1>mGlobal</h1></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -55,79 +55,26 @@
         <div class="header-navigation pull-right font-transform-inherit">
             <ul>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                       Home 
-
-                    </a>
-
-                    <!---<ul class="dropdown-menu">
-                        <li><a href="#">Dropdown 1</a></li>
-                        <li><a href="#">Dropdown 2</a></li>
-                        <li><a href="#">Dropdown 3</a></li>
-                    </ul>---->
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/">Home </a>
                 </li>
                 <li class="dropdown dropdown-megamenu">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        About
-
-                    </a>
-                    <!---<ul class="dropdown-menu">
-                        <li><a href="#">Dropdown 1</a></li>
-                        <li><a href="#">Dropdown 2</a></li>
-                        <li><a href="#">Dropdown 3</a></li>
-                    </ul>---->
+                    <a class="dropdown-toggle" href="/#about">About </a>
                 </li>
                 <li class="dropdown active">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Services 
-
-                    </a>
-
-                   <!--- <ul class="dropdown-menu">
-                        <li><a href="#">Dropdown 1</a></li>
-                        <li><a href="#">Dropdown 2</a></li>
-                        <li><a href="#">Dropdown 3</a></li>
-                    </ul>----->
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Media centre 
-
-                    </a>
-
-                    <!---<ul class="dropdown-menu">
-                        <li><a href="#">Dropdown 1</a></li>
-                        <li><a href="#">Dropdown 2</a></li>
-                        <li><a href="#">Dropdown 3</a></li>
-                    </ul>----->
+                    <a class="dropdown-toggle" href="/#services"> Services  </a>
 
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                         Templates 
-
-                    </a>
-
-                    <!---<ul class="dropdown-menu">
-                        <li><a href="portfolio-4.html">Portfolio 4</a></li>
-                        <li><a href="portfolio-3.html">Portfolio 3</a></li>
-                        <li><a href="portfolio-2.html">Portfolio 2</a></li>
-                        <li><a href="portfolio-item.html">Portfolio Item</a></li>
-                    </ul>----->
+                    <a class="dropdown-toggle" href="/#team">Media centre </a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Benefits 
-
-                    </a>
-
-                    <!---<ul class="dropdown-menu">
-                        <li><a href="blog.html">Blog Page</a></li>
-                        <li><a href="blog-item.html">Blog Item</a></li>
-                    </ul>------>
+                    <a class="dropdown-toggle" href="javascript:;"> Templates </a>
                 </li>
-                <li><a href="#" target="_blank">Packages</a></li>
-                <li><a href="#" target="_blank">support centre</a></li>
+                <li class="dropdown">
+                    <a href="/#benefits" class="dropdown-toggle" >Benefits</a>
+                </li>
+                <!--<li><a href="#" target="_blank">Packages</a></li>-->
+                <li><a href="/#contact" target="_blank">support centre</a></li>
                
 
                 <!-- BEGIN TOP SEARCH -->
