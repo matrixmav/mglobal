@@ -76,6 +76,15 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link href="/metronic/custom/custom-pagination.css" rel="stylesheet"
               type="text/css" />
+        
+        <link href="/metronic/assets/css/component.css" rel="stylesheet"
+              type="text/css" />
+         
+        <link href="/metronic/assets/css/layout.css" rel="stylesheet"
+              type="text/css" />
+          
+           <link href="/metronic/assets/plugins/uniform/uniform.default.css" rel="stylesheet"
+              type="text/css" />
         <!-- END THEME STYLES -->
         <link rel="stylesheet" type="text/css"
               href="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.css" />
