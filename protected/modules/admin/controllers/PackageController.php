@@ -177,6 +177,7 @@ class PackageController extends Controller
           * Function to Delete Package list
           */
          public function actionDelete() {
+             
            if($_REQUEST['id']) {
                $packageObject = Package::model()->findByPK($_REQUEST['id']);
                 $packageObject->delete();
