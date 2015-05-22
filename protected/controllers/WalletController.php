@@ -56,20 +56,17 @@ class WalletController extends Controller
 		));
 	}
 	
-	public function actionList(){
-		if(isset(Yii::app()->session['userid'])){
-             $dataProvider = new CActiveDataProvider('Wallet', array(
-	    				'pagination' => array('pageSize' => 10),
-				));
-            $this->render('list',array('dataProvider'=>$dataProvider));
-		}
-		else
-		{
-			$this->redirect(Yii::app()->getHomeUrl());
-		}	
-    } 
+	public function actionList() {
+        $loggedInUserId = Yii::app()->session['userid'];
 
-	/**
+        $dataProvider = new CActiveDataProvider('Wallet', array(
+            'criteria' => array(
+                'condition' => ('user_id = ' . $loggedInUserId), 'order' => 'id DESC',
+        )));
+        $this->render('list', array('dataProvider' => $dataProvider));
+    }
+
+    /**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */

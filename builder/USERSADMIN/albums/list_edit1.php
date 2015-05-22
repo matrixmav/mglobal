@@ -74,32 +74,32 @@ $photo_id = $id;
 ms_i($photo_id);
  
 
+$sql_statement = "SELECT `package_id` FROM `order` WHERE id = '{$_SESSION['order_id']}'";
+$dblink = mysql_connect($DBHost, $DBUser, $DBPass);
+mysql_select_db($DBName,$dblink);
+$qry = mysql_query($sql_statement,$dblink);
+$pageArr = mysql_fetch_assoc($qry);
 
-if(OverQuota())
+
+$sql_statement1 = "SELECT `no_of_images` FROM `package` WHERE id ='{$pageArr['package_id']}'";
+$dblink1 = mysql_connect($DBHost, $DBUser, $DBPass);
+mysql_select_db($DBName,$dblink1);
+$qry1 = mysql_query($sql_statement1,$dblink1);
+$pagesFetch = mysql_fetch_assoc($qry1);
+
+
+
+
+$sql_statementP = "SELECT `id` FROM `websiteadmin_photo_images` WHERE photo_id = '{$_GET['id']}'";
+$dblinka = mysql_connect($DBHost, $DBUser, $DBPass);
+mysql_select_db($DBName,$dblinka);
+$qryP = mysql_query($sql_statementP,$dblinka);
+$pageArrP = mysql_num_rows($qryP);
+if($pageArrP < $pagesFetch['no_of_images'])
 {
 ?>
 
-<table summary="" border="0" width="100%">
-	<tr>
-		<td>
-		
-		<br><br>
-		<span class="redtext">
-		
-		<?php
-		echo $M_USER_OVER_QUOTA;
-		?>
-		
-		</span>
-		</td>
-	</tr>
-</table>
-<br>
-<?php
-}
-else
-{
-?>
+
 <table summary="" border="0" width=100%>
 	<tr>
 		<td>
@@ -144,7 +144,7 @@ $tableAlbum = DataTable("photo_images","WHERE photo_id='".$photo_id."'");
 while($rowAlbum = mysql_fetch_array($tableAlbum))
 	$customArr[] = $rowAlbum;		{
 }
-$countArray =  count($customArr);
+//$countArray =  count($customArr);
 if($countArray < 4)
 {
 AddNewForm_BA
@@ -164,6 +164,24 @@ AddNewForm_BA
 	</tr>
 </table>
 	<?php
+}else{?>
+    <table summary="" border="0" width="100%">
+	<tr>
+		<td>
+		
+		<br><br>
+		<span class="redtext">
+		
+		<?php
+		echo $M_USER_OVER_QUOTA;
+		?>
+		
+		</span>
+		</td>
+	</tr>
+</table>
+<br>
+<?php
 }
 ?>	
 		

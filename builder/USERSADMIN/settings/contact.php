@@ -34,10 +34,10 @@ $MessageTDLength = 120;
 	
 AddEditForm_BA
 	(
-	array($M_SHOW_CONTACT_LINK,$SEND_AN_EMAIL,$M_TO),
-	array("show_contact_link","send_email","email"),
+	array($M_TO),
+	array("email"),
 	array(),
-	array("combobox_".$M_YES."^1_".$M_NO."^0","combobox_YES_NO","textbox_40"),
+	array("textbox_40"),
 	"contact_settings",
 	"user",
 	"'".$AuthUserName."'",

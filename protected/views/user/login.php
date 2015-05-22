@@ -8,10 +8,11 @@
       <!-- BEGIN CONTENT -->
                 <div class="col-md-6 col-sm-6">
         <?php 
-        if(!empty($msg)){
-            echo $msg; 
-        } ?>
-         <?php if(!empty($successMsg)){ echo $successMsg; } ?>                
+        if(!empty($_GET['successMsg'])){
+            echo "<p class='success'>".$_GET['successMsg']."</p>";
+        }
+        
+        if(!empty($msg)){ echo $msg; } ?>
         <h1>Login</h1>
         <div class="content-form-page">
           <div class="row">

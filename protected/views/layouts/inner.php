@@ -76,15 +76,20 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link href="/metronic/custom/custom-pagination.css" rel="stylesheet"
               type="text/css" />
+        
+        <link href="/metronic/assets/css/component.css" rel="stylesheet"
+              type="text/css" />
+         
+        <link href="/metronic/assets/css/layout.css" rel="stylesheet"
+              type="text/css" />
+          
+           <link href="/metronic/assets/plugins/uniform/uniform.default.css" rel="stylesheet"
+              type="text/css" />
         <!-- END THEME STYLES -->
         <link rel="stylesheet" type="text/css"
               href="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.css" />
         
-        <link href="/metronic/assets/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
-
-        <link href="/metronic/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-        <link href="/metronic/assets/css/layout.css" rel="stylesheet" type="text/css"/>
-        <link href="/metronic/assets/css/component.css" rel="stylesheet" type="text/css"/>
+        
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->
         <!--[if lt IE 9]>
@@ -165,6 +170,39 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+     <i class="glyphicon glyphicon-bell"></i>
+     <span class="badge badge-default">
+      7</span>
+     </a>
+     
+     
+    </li>
+    
+    
+    
+    <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+     <i class="glyphicon glyphicon-envelope"></i>
+     <span class="badge badge-default">
+      4</span>
+     </a>
+     
+      
+    </li>
+    
+    
+    
+    <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+     <i class="glyphicon glyphicon-th"></i>
+     <span class="badge badge-default">
+      3</span>
+     </a>
+     
+      
+    </li>
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
                     <!-- END NOTIFICATION DROPDOWN -->
@@ -178,7 +216,10 @@ License: You must have a valid license purchased only from themeforest(the above
                     <li class="dropdown user"><a href="#" class="dropdown-toggle"
                                                  data-toggle="dropdown" data-hover="dropdown"
                                                  data-close-others="true"> <span class="username">
-                                                         <?php echo Yii::app()->user->getState('username'); ?>
+                                                         <?php 
+                                                         $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                                                         if($userObject){
+                                                         echo $userObject->full_name; }?>
                             </span> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -236,15 +277,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
+                                    "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" || $curControllerLower == "order") {
+                                if ($curControllerLower == "profile" || $curControllerLower == "genealogy") {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'profile' && $curActionLower == 'order')
+                                if ($curControllerLower == 'profile' && $curActionLower == 'genealogy')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -286,7 +328,53 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             
-                           $hotel_pmenu = 6;
+                           
+                           
+                            $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "transaction/list" => "Transaction List",
+//                                    "moneytransfer/list" => "Moneytransfer List",
+                                    "MoneyTransfer/transfer" => "Transfer",
+                                    
+                                );
+                                ?>
+                                <li
+                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction1')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Fund </span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'transaction') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                            if ($ctName == "transaction" && $curControllerLower == "moneytransfer")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                            echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+
+                            $reservation_pmenu = 8;
+                            
+                            $bases_pmenu = 4;
+                            $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
                                 $hotel_subsection = array(
                                     "transaction/rpwallet" => "RP Wallet",
@@ -342,13 +430,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-                           
-                            $reservation_pmenu = 8;
-                            
-                            $reservation_pmenu = 8;
-                            
-                            $bases_pmenu = 4;
-                            
+
                         } else {
                             ?>
                             <li

@@ -551,7 +551,23 @@ class BaseClass extends Controller {
         
     }
     
-    public static function getReCaptcha(){
+    public function getDirectCommission($userName){
+        $percent = Yii::app()->params['percent'];
+        /* On User Basis get referral id */
+        $sponserId = "'".$userName."'";
+        $userChieldListObject = User::model()->findAll(array('condition'=>'sponsor_id = '.$sponserId));
+        $totalCommission = 0.00;
+        foreach($userChieldListObject as $userChieldObject) {
+            $orderObject = Order::getOrderByValue('user_id',$userChieldObject->id);
+            if(!empty($orderObject->package()->amount)){
+                $totalCommission = BaseClass::getPercentage($orderObject->package()->amount , $percent, 1 );            
+            }
+            $totalCommission+=$totalCommission;
+        }
+        return $totalCommission;
+    }
+
+        public static function getReCaptcha(){
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
 
@@ -932,6 +948,11 @@ class BaseClass extends Controller {
     
     public static function getGenoalogyTree($userId){
         $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId ) );
+        return $genealogyListObject;
+    }
+    
+    public static function getGenoalogyTreeChild($userId,$position){
+        $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId .' AND position = '. $position,'order'=>'position asc') );
         return $genealogyListObject;
     }
 }

@@ -103,4 +103,6 @@ else
 	$SHOW_TOP_BAR_ON_THE_BLOGS = false;
 	
 $AUTHORIZED_IPS_ADMIN_PANEL=aParameter(428);
+
+$BLOG_DOMAIN = "mglobal.dev";
 ?>
