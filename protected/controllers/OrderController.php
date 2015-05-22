@@ -120,7 +120,7 @@ class OrderController extends Controller
 	    				//'pagination' => array('pageSize' => $pageSize),
 				//));
             Yii::app()->session['order_id'] = $orderID;
-            Yii::app()->session['username'] = $userObject->name.$orderID;
+            Yii::app()->session['username1'] = $userObject->name.$orderID;
           header('Location:/builder/USERSADMIN/index.php?category=home&user='.$userObject->name.$orderID.'&order_id='.$orderID);
              //$orderObject = Order::model()->findAll();
              //echo "<pre>"; print_r();exit;
