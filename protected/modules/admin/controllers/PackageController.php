@@ -28,7 +28,7 @@ class PackageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','packageadd'),
+				'actions'=>array('index','view','packageadd','packagedit'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -64,9 +64,69 @@ class PackageController extends Controller
         
         public function actionPackageAdd()
         {
+            $error = "";
+            $success = "";
+            $packageObject = new Package;
+            if($_POST)
+            {
+               if($_POST['Package']['name']=='' && $_POST['Package']['amount']=='' && $_POST['Package']['description']=='')
+               {
+                   $error .= "Please fill required(*) marked fields."; 
+                   
+               }else{
+                   
+                $packageObject->name = $_POST['Package']['name'];
+                $packageObject->amount = $_POST['Package']['amount'];
+                $packageObject->Description = $_POST['Package']['description'];
+                $packageObject->no_of_pages = $_POST['Package']['no_of_pages'];
+                $packageObject->no_of_images = $_POST['Package']['no_of_images'];
+                $packageObject->no_of_forms = $_POST['Package']['no_of_forms'];
+                $packageObject->status = 1;
+                $packageObject->created_at = new CDbExpression('NOW()');
+                $packageObject->save(false);
+                
+                $success .= "Package Successfully Added";    
+               }    
+            }
+             
+         
             
-            $this->render('package_add');
+            $this->render('package_add',array('success'=>$success,'error'=>$error));
        
+            
+        }
+        
+        /*
+         * Function to Update package
+         */
+        
+       public function actionPackagedit() {
+         $error = "";
+            $success = "";
+            $packageObject = Package::model()->findByPK(array('id' => $_GET['id']));
+            if($_POST)
+            {
+               if($_POST['Package']['name']=='' && $_POST['Package']['amount']=='' && $_POST['Package']['description']=='')
+               {
+                   $error .= "Please fill required(*) marked fields."; 
+                   
+               }else{
+                   
+                $packageObject->name = $_POST['Package']['name'];
+                $packageObject->amount = $_POST['Package']['amount'];
+                $packageObject->Description = $_POST['Package']['description'];
+                $packageObject->no_of_pages = $_POST['Package']['no_of_pages'];
+                $packageObject->no_of_images = $_POST['Package']['no_of_images'];
+                $packageObject->no_of_forms = $_POST['Package']['no_of_forms'];
+                $packageObject->status = 1;
+                $packageObject->created_at = new CDbExpression('NOW()');
+                $packageObject->update();
+                
+                $success .= "Package Successfully Updated";    
+               }    
+            }
+             
+          $this->render('package_edit',array('success'=>$success,'error'=>$error,'packageObject'=>$packageObject));   
             
         }
             
