@@ -26,7 +26,7 @@ class ProfileController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','address','fetchstate','fetchcity','testimonial','updateprofile','documentverification','summery'),
+				'actions'=>array('index','address','fetchstate','fetchcity','testimonial','updateprofile','documentverification','summery','dashboard'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -251,9 +251,9 @@ class ProfileController extends Controller
          */
         public  function actionDashboard()
         { 
-            $model = "";
+            $orderObject = Order::model()->findAll(array('condition'=>'user_id='.$userId));
             $this->render('/user/dashboard',array(
-			'model'=>$model,
+			'orderObject'=>$orderObject,
 		));
         }
          
