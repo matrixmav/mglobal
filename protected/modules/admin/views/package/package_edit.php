@@ -12,12 +12,12 @@ $this->breadcrumbs = array(
     <form action="/admin/package/packagedit?id=<?php echo $packageObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
-            <legend>Edit Package</legend>
+            <legend>Edit Package </legend>
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Package Name<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="name" class="form-control" name="Package[name]" value="<?php echo (!$packageObject) ?  $packageObject->name : "";?>">
+                    <input type="text" id="name" class="form-control" name="Package[name]" value="<?php echo (!empty($packageObject))?$packageObject->name : "";?>">
                     <span id="name_error"></span>
                 </div>
             </div>
@@ -25,7 +25,7 @@ $this->breadcrumbs = array(
            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Price<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="amount" class="form-control" name="Package[amount]" value="<?php echo (!$packageObject) ?  $packageObject->amount : "";?>">
+                    <input type="text" id="amount" class="form-control" name="Package[amount]" value="<?php echo (!empty($packageObject))?$packageObject->amount : "";?>">
                     <span id="amount_error"></span>
                 </div>
             </div>
@@ -33,7 +33,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Description<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="description" class="form-control" name="Package[description]"><?php echo (!$packageObject) ?  $packageObject->description : "";?></textarea>
+                    <textarea id="description" class="form-control" name="Package[description]"><?php echo (!empty($packageObject))?$packageObject->Description : "";?></textarea>
                     <span id="description_error"></span>
                 </div>
             </div>
@@ -42,7 +42,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of Pages </label>
                     <div class="col-lg-8">
-                      <input type="text" id="no_of_pages" class="form-control" name="Package[no_of_pages]" value="<?php echo (!$packageObject) ?  $packageObject->no_of_pages : "";?>">
+                      <input type="text" id="no_of_pages" class="form-control" name="Package[no_of_pages]" value="<?php echo (!empty($packageObject))?$packageObject->no_of_pages : "";?>">
                       
                     </div>
                      
@@ -52,7 +52,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of images </label>
                     <div class="col-lg-8">
-                     <input type="text" id="no_of_images" class="form-control" name="Package[no_of_images]" value="<?php echo (!$packageObject) ?  $packageObject->no_of_images : "";?>">
+                     <input type="text" id="no_of_images" class="form-control" name="Package[no_of_images]" value="<?php echo (!empty($packageObject))?$packageObject->no_of_images : "";?>">
                       
                     </div>
                      
@@ -62,7 +62,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of forms </label>
                     <div class="col-lg-8">
-                     <input type="text" id="no_of_forms" class="form-control" name="Package[no_of_forms]" value="<?php echo (!$packageObject) ?  $packageObject->no_of_forms : "";?>">
+                     <input type="text" id="no_of_forms" class="form-control" name="Package[no_of_forms]" value="<?php echo (!empty($packageObject))?$packageObject->no_of_forms : "";?>">
                         
                     </div>
                      
