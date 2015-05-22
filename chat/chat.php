@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('db_connect.php');
+
 /*
 
 Copyright (c) 2009 Anant Garg (anantgarg.com | inscripts.com)
@@ -166,7 +167,7 @@ header('Content-type: application/json');
 
 function sendChat() {
 	$from = $_SESSION['username'];;
-	$to = "Urwebby";
+	$to = "mGlobaly";
 	$message = $_POST['message'];
 
 	$_SESSION['openChatBoxes'][$_POST['to']] = date('Y-m-d H:i:s', time());
