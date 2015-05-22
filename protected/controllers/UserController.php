@@ -77,6 +77,7 @@ class UserController extends Controller
                             if($identity->userAuthenticate())
                             Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
+                            Yii::app()->session['username'] = $getUserObject->name;
                             echo "1"; 
                             if(Yii::app()->session['package_id']!='') {
                                 $this->redirect("/package/domainsearch");  
