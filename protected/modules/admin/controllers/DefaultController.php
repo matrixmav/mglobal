@@ -73,6 +73,7 @@ class DefaultController extends Controller
                             if($identity->adminAuthenticate())
                             Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
+                            Yii::app()->session['username'] = $getUserObject->name;
                             echo "1";
                         } else {
                             echo "0";
