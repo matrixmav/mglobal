@@ -123,7 +123,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="/metronic/assets/scripts/core/app.js"></script>
-       <script type="text/javascript" src="/chat/js/chat.js"></script>
+       <script type="text/javascript" src="/chat-admin/js/chat.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
               App.init();
@@ -131,12 +131,12 @@ License: You must have a valid license purchased only from themeforest(the above
             });
           function OpenChatBox(userID)
             {
-
-            chatWith(userID);
+                 
+              chatWith(userID);
             }
         </script>
         
-        <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
+        <link type="text/css" rel="stylesheet" media="all" href="/chat-admin/css/chat.css" />
         <!-- END JAVASCRIPTS -->
 
 
