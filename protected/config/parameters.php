@@ -22,6 +22,7 @@ return array(
     'twitterPageUrl' => "",
     'instagramPageUrl' => "",
     'linkedinPageUrl' => "",
+    'percent'=>5,
             
     'blogUrl' => '/blog/',
     'thumbnails' => array(
