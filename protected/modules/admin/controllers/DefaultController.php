@@ -250,5 +250,7 @@ class DefaultController extends Controller
             Yii::app()->session['timestamp'] = $timing; //set new timestamp
         }
     }
+    
+
 
 }
