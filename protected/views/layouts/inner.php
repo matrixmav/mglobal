@@ -269,7 +269,62 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         <?php
                         if ($access != "manager") {
+                          
                             $hotel_pmenu = 6;
+                            
+                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
+                                $hotel_subsection = array(
+                                    "profile/dashboard" => "Dashboard",
+                                     
+//                                    "profile/summery" => "Summery",
+                                );
+                                $activecls = 'active';
+                                if ($curAction == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                if ($curAction == 'dashboard')
+                                    $activecls = 'active';
+                                if ($curActionLower == 'simplename')
+                                    $activecls = '';
+                                ?>
+                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
+                                            class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    $menusections ['sections'] = $hotel_subsection;
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($hotel_subsection as $hotName => $hotTitle) {
+                                        if (in_array($hotTitle, $menusections ['sections'])) {
+                                            if ($hotName == 'admin') {
+                                                $hotName = '/index';
+                                            }
+                                            if ($curActionLower == 'create') {
+                                                $curActionLower = 'create/type/details';
+                                            }
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+                                            echo '<li ' . $class_content . '>';
+                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($hotName == 'admin/index') {
+                                                $hotName = 'admin';
+                                            }
+
+                                            /*
+                                             * if($hotName == "admin")
+                                             * echo '</ul>';
+                                             */
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>					
+                                </li>	
+                                <?php
+                            }
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
@@ -281,12 +336,12 @@ License: You must have a valid license purchased only from themeforest(the above
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" || $curControllerLower == "genealogy" || $curControllerLower == "order") {
+                                if ($curControllerLower == "profile" && $curAction !='dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" ) {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'profile' && $curActionLower == 'genealogy')
+                                if ($curControllerLower == 'profile' && $curAction!='dashboard' || $curActionLower == 'genealogy' )
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -294,7 +349,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'order') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction!='dashboard') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -328,7 +383,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             
-                           
+                              
                            
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
