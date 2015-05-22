@@ -654,8 +654,12 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <!-- Carousel items -->
+
+        
+ 
            <?php $i=1;if(!empty($profileObject)) { 
                foreach($profileObject as $testimonial){ ?>
+ 
           <!-- Carousel items -->
           <div class="item <?php if($i=='1'){ echo "active"; }else{ echo "";}?>">
             <blockquote>
@@ -795,10 +799,4 @@
     </div>
   </div>
   <!-- Partners block END -->
-  
-  
-</body>
-
-
-
-</html>
+ 

@@ -8,7 +8,7 @@
           <p class="f-font">Legal</p>
           <p class="f-cnt"><a href="mailto:legal@xyz.com">legal@xyz.com</a><br/> 
           91-8500425185</p>
-          
+           
           <p class="f-font">Billing</p>
           <p class="f-cnt"><a href="mailto:billing@xyz.com">Billing@xyz.com</a><br/> 
           91-8500425185</p>

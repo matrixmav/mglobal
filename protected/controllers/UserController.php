@@ -139,7 +139,76 @@ class UserController extends Controller
                                     break;
                                 }
                             }
-                        } 
+ 
+                    } 
+                
+                }else{
+                   $userId =  $userObject->id; 
+                }       
+                
+                $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
+                $model->activation_key = $rand ;
+                               
+                
+                if(!$model->save(false)){
+                    echo "<pre>"; print_r($model->getErrors());exit;
+                }
+                
+                $modelUserProfile = new UserProfile();
+                $modelUserProfile->user_id = $model->id ;
+                $modelUserProfile->created_at = date('Y-m-d') ;
+                $modelUserProfile->referral_banner_id = 1 ;
+                $modelUserProfile->save(false);
+                
+                /* Geneology */
+                $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ));
+                //echo 
+                $modelGenealogy = new Genealogy();
+                $modelGenealogy->parent = $userId ; 
+                $modelGenealogy->user_id = $model->id ; 
+                $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
+                $modelGenealogy->position = $_POST['position'];                 
+                $modelGenealogy->save(false);
+                /*User entry in builder*/
+                
+                $builderObject = new WebsiteadminAdminUsers();
+                $builderObject->first_name = $_POST['full_name'] ;
+                $builderObject->username = $_POST['name'] ;
+                $builderObject->type = "Basic" ;
+                $builderObject->password = md5('12345');
+                $builderObject->save(false);
+                
+                /*User entry in builder templates*/
+                $buildertemplateObject = new WebsiteadminUserTemplates();
+                $buildertemplateObject->name = $_POST['full_name'];
+                $buildertemplateObject->user = $_POST['name'];
+                $buildertemplateObject->save(false);
+                
+                /*User entry in builder weblog*/
+                $builderweblogObject = new WebsiteadminWeblog();
+                $builderweblogObject->user = $_POST['name'];
+                $builderweblogObject->save(false);
+                $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>"; 
+                /*  For Genealogy Data */
+                
+                /*$modelGenealogy = new Genealogy();
+                $modelGenealogy->user_id = $model->id ; 
+                $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
+                $modelGenealogy->position = $_POST['position'] ; 
+                $modelGenealogy->save(); */
+                
+//                $config['to'] = $model->email; 
+//                $config['subject'] = 'Registration Confirmation' ;
+//                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
+//                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
+//                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
+//                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
+//                var_dump($config);
+//                CommonHelper::sendMail($config);
+                $this->render('login', array('successMsg'=> $successMsg));
+                $this->redirect('login');
+ 
+                         
 
                     }else{
                        $userId =  $userObject->id; 
@@ -185,7 +254,8 @@ class UserController extends Controller
     //                var_dump($config);
     //                CommonHelper::sendMail($config);
                     $this->redirect(array('login','successMsg'=>$successMsg));                    
-            }
+ 
+             
             $spnId = "";
             if($_GET){
                 $spnId = $_GET['spid'];

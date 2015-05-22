@@ -1,18 +1,18 @@
 <?php
-
 include("../config.php");
 include_once("../ADMIN/Utils.php");
 EnsureParams();
 include("security.php");
-
+ 
 if(!isset($AuthUserName))
 {
-	//die("<script>document.location.href='../index.php?error=expired';</script>");
+	die("<script>document.location.href='../index.php?error=expired';</script>");
 }
 $lArray=DataArray("admin_users","username='$AuthUserName'");
 
 if(isset($lng))
 {
+     
 	$LANGUAGE=strtolower($lng);
 	$LANGUAGE2=strtolower($lng);
 	SQLUpdate_SingleValue
@@ -38,13 +38,16 @@ if(!isset($LANGUAGE)||strlen($LANGUAGE)!=2)
 
 
 include("../include/texts_".strtolower($LANGUAGE2).".php");
-include("../include/init.php");
-include("pages_structure.php");
 
+include("../include/init.php");
+
+include("pages_structure.php");
+ 
 include("include/page_init.php");
 
 if(file_exists("../template_users_admin.htm"))
 {
+    
 	$TEMPLATE_HTML = file_get_contents("../template_users_admin.htm");
 }
 else
@@ -54,6 +57,7 @@ if(file_exists("../template_admin.html"))
 }
 if($category=="home")										
 {
+
 	$TEMPLATE_HTML = str_replace("<wsa languages_menu/>",GenerateLanguagesMenu_BLOGSADMIN($category,$action),$TEMPLATE_HTML);
 }
 
@@ -90,6 +94,7 @@ echo "<br>";
 ms_w($category);
 if(isset($folder))
 {
+    
 	ms_w($folder);
 	ms_w($page);
 	if(file_exists($category."/".$folder."_".$page.".php"))
@@ -103,6 +108,7 @@ if(isset($folder))
 }
 else
 {
+
 	ms_w($action); 
 	if(file_exists($category."/".$action.".php"))
 	{
@@ -115,6 +121,7 @@ else
 }
 if($HTML=="")
 {
+   
 	$HTML = ob_get_contents();
 }
 

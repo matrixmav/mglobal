@@ -197,6 +197,7 @@ class SiteController extends Controller
 		}else {
 			$url = Yii::app()->homeUrl;
 		}
+                unset(Yii::app()->session['username']);
 		$this->redirect($url);
 	}
         

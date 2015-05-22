@@ -51,13 +51,17 @@ function GenerateInternalMenu($category,$oLinkTexts,$oLinkActions)
 		
 	
 	if(!strstr($oLinkTexts[$i],"add-on"))
-	{
+	{ 
+             if($oLinkActions[$i]!='change_password' && $oLinkActions[$i]!='meta_tags' && $oLinkActions[$i]!='password' )
+             {
          
 		$strOutput .= '<div class="hsoff" style="border-width:'.($bFirst?'1px 1px 1px 1px':'0px 1px 1px 1px').'" onmouseover="javascript:zon(this,1,\'hson\',\'hsoff\',\''.$category.'\',z_BOTTOM)"> <a class="zls" href="index.php?category='.$category.'&action='.$oLinkActions[$i].'">'.$oLinkTexts[$i].'</a></div>';
 	}
+        }
  
 	else
 	{
+           
          
 		$strOutput .= '<div class="hsoff" style="border-width:'.($bFirst?'1px 1px 1px 1px':'0px 1px 1px 1px').'" onmouseover="javascript:zon(this,1,\'hson\',\'hsoff\',\''.$category.'\',z_BOTTOM)"> <a class="zls" href="index.php?category='.$oLinkActions[$i].'">'.$oLinkTexts[$i].'</a></div>';
 	}
@@ -160,7 +164,7 @@ if(aParameter(2)=="custom")
 	
 		$strLinkTemplate2=$strLinkTemplate;
 		$strLinkTemplate2=str_replace("rplc","onmouseover=\"javascript:zon(this,0,'hon','hoff','menu".$i."',z_BOTTOM);\"",$strLinkTemplate2);
-		if($oLinkTexts[$i]=='Site Manager' || $oLinkTexts[$i]=='Photo Albums' || $oLinkTexts[$i]=='Home'){
+		if($oLinkTexts[$i]=='Site Manager' || $oLinkTexts[$i]=='Photo Albums' || $oLinkTexts[$i]=='Home' || $oLinkTexts[$i]=='Settings'){
 $strOutput .= str_replace("[LINK_TEXT]",stripslashes($oLinkTexts[$i]),str_replace("[LINK_HREF]","index.php?category=".$oLinkActions[$i],$strLinkTemplate2));
 	}}
 	

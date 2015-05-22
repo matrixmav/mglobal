@@ -22,6 +22,7 @@ $vr2 = ($category."_oLinkActions");
 
 if(!isset($$vr1))
 {
+   
 	die("<script>document.location.href=\"index.php\";</script>");
 }
 
@@ -30,6 +31,7 @@ $evLinkActions = $$vr2;
 
 if(!isset($folder)&&!isset($action))
 {
+    
 	$action=$evLinkActions[0];
 }
 
@@ -58,11 +60,11 @@ $AuthGroup=="Administrators";
 
 if(isset($folder)&&isset($page))
 {
-	$strPageLink="user=".$_GET['user']."&category=$category&folder=$folder&page=$page&";
+	$strPageLink="category=$category&folder=$folder&page=$page&";
 }
 else
 {
-	$strPageLink = "user=".$_GET['user']."category=$category&action=$action&";
+	$strPageLink="category=$category&action=$action&";
 }
 
 if(!file_exists("../uploaded_images/".$AuthUserName)) 

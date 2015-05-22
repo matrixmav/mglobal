@@ -82,7 +82,7 @@ $this->menu=array(
 			'buttons'=>array(
 				'Builder' => array(
 					'label'=>'Builder',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
+					'options'=>array('class'=>'btn purple fa fa-edit margin-right15','target'=>'_blank'),
 					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/redirect/", array("id"=>$data->id)): ""',
 				),
                              
