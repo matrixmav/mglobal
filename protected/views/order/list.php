@@ -40,6 +40,12 @@ $this->menu=array(
 	),	
 	'columns'=>array(
 		//'idJob',
+            
+                array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$row+1',
+		),
 		array(
                     'name'=>'package_id',
                     'header'=>'<span style="white-space: nowrap;">Package Name &nbsp; &nbsp; &nbsp;</span>',
@@ -72,6 +78,7 @@ $this->menu=array(
 		),
 		array(
 			'name'=>'status',
+                        'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
 			'value'=>'($data->status == 1) ? Yii::t(\'translation\', \'Completed\') : Yii::t(\'translation\', \'Pending\')',
 		),
              
