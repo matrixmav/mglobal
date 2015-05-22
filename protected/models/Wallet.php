@@ -48,8 +48,10 @@ class Wallet extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     'user' => array(self::BELONGS_TO, 'User', 'user_id'),
-                    
-		);
+                    'moneytransfer' => array(self::BELONGS_TO, 'MoneyTransfer', 'id'),
+                    'gateway' => array(self::BELONGS_TO, 'Gateway', 'gateway_id'),
+                     
+                );
 	}
 
 	/**
