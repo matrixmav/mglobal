@@ -28,7 +28,7 @@ class WalletController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list'),
+				'actions'=>array('index','view','list','rpwallet','commisionwallet','fundwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -137,6 +137,47 @@ class WalletController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        
+        
+         /*
+         * this will fetch rp wallet
+         */
+        public function actionRpWallet()
+        {
+          $loggedInUserId = Yii::app()->session['userid'];
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=1'),'order'=>'id DESC',
+                                        )));
+            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
+        }
+        
+         /*
+         * this will fetch commision wallet
+         */
+        public function actionCommisionWallet()
+        {
+            $loggedInUserId = Yii::app()->session['userid'];
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=2'),'order'=>'id DESC',
+                                        )));
+            $this->render('commisionwallet',array('dataProvider'=>$dataProvider));
+        }
+        
+         /*
+         * this will fetch fund wallet
+         */
+        public function actionFundWallet()
+        {
+            $loggedInUserId = Yii::app()->session['userid'];
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=3'),'order'=>'id DESC',
+                                        )));
+            $this->render('fundwallet',array('dataProvider'=>$dataProvider));
+        }
 
 	/**
 	 * Manages all models.
