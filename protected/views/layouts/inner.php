@@ -281,7 +281,7 @@ License: You must have a valid license purchased only from themeforest(the above
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" || $curControllerLower == "genealogy") {
+                                if ($curControllerLower == "profile" || $curControllerLower == "genealogy" || $curControllerLower == "order") {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
@@ -340,11 +340,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 );
                                 ?>
                                 <li
-                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction1')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'transaction') || ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Fund </span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'transaction') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'transaction' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -377,25 +377,25 @@ License: You must have a valid license purchased only from themeforest(the above
                             $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
                                 $hotel_subsection = array(
-                                    "transaction/rpwallet" => "RP Wallet",
-                                    "transaction/commisionwallet" => "Commision Wallet",
-                                    "transaction/fundwallet" => "Fund Wallet",
+                                    "wallet/rpwallet" => "RP Wallet",
+                                    "wallet/commisionwallet" => "Commision Wallet",
+                                    "wallet/fundwallet" => "Fund Wallet",
                                      
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "transaction" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet') {
+                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'transaction' && $curActionLower == 'rpwallet' || $curActionLower == 'commisionwallet' || $curActionLower == 'fundwallet')
+                                if ($curControllerLower == 'wallet' && $curActionLower == 'rpwallet' || $curActionLower == 'commisionwallet' || $curActionLower == 'fundwallet')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
                                 ?>
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
-                                            class="leftmenu-hotel"></span> <span class="title">Summery</span>
+                                            class="leftmenu-hotel"></span> <span class="title">Summary</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'rpwallet') ? "open" : ''; ?>">
                                         </span>
@@ -413,7 +413,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             }
                                             $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
                                             echo '<li ' . $class_content . '>';
-                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
+                                            echo '<a href="/' . $hotName . '">' . Yii::t('wallet', $hotTitle) . '</a>';
                                             echo '</li>';
                                             if ($hotName == 'admin/index') {
                                                 $hotName = 'admin';
