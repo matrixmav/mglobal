@@ -38,22 +38,11 @@ $this->breadcrumbs = array(
             </div>
             
             
-            <div class="form-group">
+          <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of Pages </label>
                     <div class="col-lg-8">
-                        <select name="Package[no_of_pages]" id="no_of_pages" class="form-control">
-                            <option value="">Select Pages</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
+                      <input type="text" id="no_of_pages" class="form-control" name="Package[no_of_pages]" >
+                      
                     </div>
                      
                 </div>
@@ -62,19 +51,8 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of images </label>
                     <div class="col-lg-8">
-                         <select name="Package[no_of_images]" id="no_of_images" class="form-control">
-                            <option value="">Select Images</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
+                     <input type="text" id="no_of_images" class="form-control" name="Package[no_of_images]">
+                      
                     </div>
                      
                 </div>
@@ -83,15 +61,8 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of forms </label>
                     <div class="col-lg-8">
-                         <select name="Package[no_of_forms]" id="no_of_forms" class="form-control">
-                            <option value="">Select No of Forms</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                             
-                        </select>
+                     <input type="text" id="no_of_forms" class="form-control" name="Package[no_of_forms]">
+                        
                     </div>
                      
                 </div>

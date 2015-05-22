@@ -45,6 +45,7 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
+        
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
@@ -93,34 +94,29 @@ $this->breadcrumbs = array(
                     'name' => 'status',
                     'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
                 ),
-                array(
+              
+                
+                   array(
                     'class' => 'CButtonColumn',
-                    'template' => '{Change}',
-                    'htmlOptions' => array('width' => '30%'),
+                    'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
+                    'template' => '{Change}{Edit}{Delete}',
+                    'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
-//                        'Edit' => array(
-//                            'label' => 'Edit',
-//                            'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
-//                            'url' => 'Yii::app()->createUrl("admin/state/update", array("id"=>$data->id))',
-//                        ),
-                        'Change' => array(
+                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/package/changestatus", array("id"=>$data->id))',
                         ),
-                        
-                      'Change' => array(
-                            'label' => Yii::t('translation', 'Change Status'),
+                        'Edit' => array(
+                            'label' => 'Edit',
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/package/packagedit", array("id"=>$data->id))',
                         ),
-                        'Change' => array(
-                            'label' => Yii::t('translation', 'Change Status'),
+                        'Delete' => array(
+                            'label' => Yii::t('translation', 'Delete'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/package/delete", array("id"=>$data->id))',
                         ),
-                        
-                        
                     ),
                 ),
             ),
