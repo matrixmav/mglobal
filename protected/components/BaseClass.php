@@ -48,6 +48,14 @@ class BaseClass extends Controller {
             $this->redirect('/user/login');
         }
     }
+    
+    function walletAmount($id) {
+        $userId = Yii::app()->session['userid'];
+        $walletObject = Wallet::model()->findAll(array('condition'=>'user_id='.$userId. ' AND type = '.$id));
+                        
+            return $walletObject; 
+                        
+    }
 
     function isAdmin() {
         $userId = Yii::app()->session['userid'];
