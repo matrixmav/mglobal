@@ -129,11 +129,11 @@ License: You must have a valid license purchased only from themeforest(the above
               App.init();
                 //checkLoginTime();
             });
-          function OpenChatBox(userID)
-            {
-                 
-              chatWith(userID);
+            $(".plus").click(function(){
+             var data = $(this).attr('id');
+             chatWith(data);
             }
+           
         </script>
         
         <link type="text/css" rel="stylesheet" media="all" href="/chat-admin/css/chat.css" />
