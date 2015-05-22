@@ -3678,7 +3678,7 @@ Customized Bootstrap Labels
   font-family: "Open Sans", sans-serif;
 }
 .label.label-sm {
-  font-size: 12px;
+  font-size: 18px;
   padding: 0px 4px 1px 4px;
 }
 h1 .label, h2 .label, h3 .label, h4 .label, h5 .label, h6 .label {
@@ -5021,7 +5021,7 @@ Dashboard Stats
   padding-right: 15px;
 }
 .dashboard-stat .details .number {
-  padding-top: 25px;
+  padding-top: 38px;
   text-align: right;
   font-size: 34px;
   line-height: 36px;
