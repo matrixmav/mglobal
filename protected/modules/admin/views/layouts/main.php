@@ -129,11 +129,11 @@ License: You must have a valid license purchased only from themeforest(the above
               App.init();
                 //checkLoginTime();
             });
-            $(".plus").click(function(){
-             var data = $(this).attr('id');
-             chatWith(data);
+          function OpenChatBox(userID)
+            {
+                 
+              chatWith(userID);
             }
-           
         </script>
         
         <link type="text/css" rel="stylesheet" media="all" href="/chat-admin/css/chat.css" />
@@ -361,6 +361,49 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 $ctName = "search/create/type/details";
                                             }
                                         if ($ctName == "report" && $curControllerLower == "report")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                            
+                            $reservation_pmenu = 7;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "/package/packageadd" => "Package Add",
+                                    "/package/packagelist" => "Package List",
+                                    
+                                );
+                                ?>
+                                <li
+                                    class="<?php echo (($curControllerLower == 'package') || ($curControllerLower == 'package')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Package</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'package') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($ctName == "report" && $curControllerLower == "package")
                                                 $class_content = 'class="active"';
                                             else
                                                 $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
