@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Wallet Summery',
+	'Wallet Summary',
         'Fund Wallet',
 );
 
@@ -41,6 +41,11 @@ $this->menu=array(
 	),	
 	'columns'=>array(
 		//'idJob',
+                array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$row+1',
+		),
 		array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Transfer To &nbsp; &nbsp; &nbsp;</span>',
