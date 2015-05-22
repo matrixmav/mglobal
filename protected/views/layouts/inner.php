@@ -128,13 +128,18 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
 
         <script src="/metronic/assets/scripts/core/app.js"></script>
+        <script type="text/javascript" src="/chat/js/chat.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
-                App.init();
-                checkLoginTime();
+              App.init();
+                //checkLoginTime();
+                 var IDSVal = document.getElementById('username').value;
+                 chatWith(IDSVal);  
             });
 
         </script>
+        <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
+ 
         <!-- END JAVASCRIPTS -->
 
 
@@ -143,6 +148,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">
+        <?php //var_dump($_SESSION); exit;?>
+         <input type="hidden" id="username" value="mGlobaly">
         <!-- BEGIN HEADER -->
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
