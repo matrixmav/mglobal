@@ -28,7 +28,7 @@ class WalletController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list','rpwallet','commisionwallet','fundwallet'),
+				'actions'=>array('index','view','list','rpwallet','commisionwallet','fundwallet','countrpwallet','countcommisionwallet','countfundwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -178,7 +178,8 @@ class WalletController extends Controller
                                         )));
             $this->render('fundwallet',array('dataProvider'=>$dataProvider));
         }
-
+        
+        
 	/**
 	 * Manages all models.
 	 */
