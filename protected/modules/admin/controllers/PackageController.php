@@ -28,7 +28,7 @@ class PackageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','packageadd','packagedit','packagelist'),
+				'actions'=>array('index','view','packageadd','packagedit','packagelist','changestatus','delete'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -122,7 +122,8 @@ class PackageController extends Controller
                 $packageObject->created_at = new CDbExpression('NOW()');
                 $packageObject->update();
                 
-                $success .= "Package Successfully Updated";    
+                $success .= "Package Successfully Updated";
+                $this->redirect('packagelist',array('success'=>$success,'error'=>$error));
                }    
             }
              
@@ -134,7 +135,8 @@ class PackageController extends Controller
           * Function to fetch Package list
           */
          public function actionPackageList() {
-             
+             $error = "";
+             $success = "";
            $model = new Package();
             $pageSize = 10;
             $todayDate = date('Y-m-d');
@@ -150,6 +152,23 @@ class PackageController extends Controller
                 'criteria' => array(
                     'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),));
+           
+            $this->render('package_list',array(
+                    'dataProvider'=>$dataProvider,
+            ));    
+         }
+         
+          /*
+          * Function to fetch Package list
+          */
+         public function actionChangeStatus() {
+             
+            $packageObject = Package::model()->findByPK(array('id' => $_GET['id']));
+            if($_POST)
+            {
+                $packageObject->status = new CDbExpression('NOW()');
+                $packageObject->update();
+            }
            
             $this->render('package_list',array(
                     'dataProvider'=>$dataProvider,
