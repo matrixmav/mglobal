@@ -45,16 +45,6 @@ class UserController extends Controller
 			),
 		);
 	}
-        /*
-        * This will load user dashboard
-         */
-        public  function actionDashboard()
-        { 
-            $model = "";
-            $this->render('/user/dashboard',array(
-			'model'=>$model,
-		));
-        }
         
         /* User Login Strat Here */
         public function actionLogin(){ 
