@@ -135,7 +135,25 @@ class PackageController extends Controller
           */
          public function actionPackageList() {
              
-             
+           $model = new Package();
+            $pageSize = 10;
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+            }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+           
+            $this->render('package_list',array(
+                    'dataProvider'=>$dataProvider,
+            ));    
          }
 
          
