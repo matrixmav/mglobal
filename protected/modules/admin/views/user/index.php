@@ -20,6 +20,7 @@ $this->breadcrumbs = array(
 <div class="row">
     <div class="col-md-12">
         <?php
+        $test = "'sdsd'";
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
             'dataProvider' => $dataProvider,
@@ -66,13 +67,12 @@ $this->breadcrumbs = array(
                     'name' => 'status',
                     'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
                 ),
-                 array
-                (
-                      'name'=>'Quick Chat',
-                      'htmlOptions'=>array('class'=>'plus','id=>$data->name'),
-                      'value'=>'Yii::t(\'translation\', \'Start chat\')',
+                array(
+                    'name' => 'Quick Chat',
+                    'value' => array($this,'getOnClickEvent'),
                 ),
                 
+
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{Change}',
@@ -102,4 +102,4 @@ $this->breadcrumbs = array(
         ?>
     </div>
 </div>
-<a onclick="OpenChatBox('roopL');" href="javascript:void(0);">mGlobal</a>
+ 
