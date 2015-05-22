@@ -6,7 +6,7 @@ class PackageController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='inner';
+	public $layout='main';
 
 	/**
 	 * @return array action filters
@@ -62,13 +62,15 @@ class PackageController extends Controller
          * Function to add package in database
          */
         
-        public function actionPackageAdd() {
+        public function actionPackageAdd()
+        {
             
-            
+            $this->render('package_add');
+       
             
         }
             
-        }
+         
 
 	 
 	/**
