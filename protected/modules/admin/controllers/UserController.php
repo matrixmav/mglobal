@@ -317,4 +317,8 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+        public function getOnClickEvent($data, $row){
+            $fullName = "'".$data->name."'";
+    echo '<a onclick="OpenChatBox('.$fullName.')">Click to chat</a>';
+}
 }
