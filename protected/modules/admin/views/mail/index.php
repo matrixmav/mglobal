@@ -33,6 +33,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'columns' => array(
         //'idJob',
         array(
+            'name' => 'id',
+            'header'=>'No.',
+            'value'=>'$row+1',
+        ),
+        array(
             'name' => 'from_user_id',
             'header' => '<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
             'value' => '$data->touser->full_name',

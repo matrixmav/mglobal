@@ -340,7 +340,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 );
                                 ?>
                                 <li
-                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction1')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Fund </span>
                                         <span class="selected"></span> <span
