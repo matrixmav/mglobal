@@ -5,7 +5,8 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
-    <div class="error" id="error_msg" style="display: none;"></div>
+    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
+    <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
     <form action="/admin/package/packageadd" method="post" class="form-horizontal" onsubmit="return validation();">
      
@@ -40,7 +41,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of Pages </label>
                     <div class="col-lg-8">
-                        <select name="UserProfile[no_of_pages]" id="no_of_pages" class="form-control">
+                        <select name="Package[no_of_pages]" id="no_of_pages" class="form-control">
                             <option value="">Select Pages</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -61,8 +62,8 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of images </label>
                     <div class="col-lg-8">
-                         <select name="UserProfile[no_of_images]" id="no_of_images" class="form-control">
-                            <option value="">Select Pages</option>
+                         <select name="Package[no_of_images]" id="no_of_images" class="form-control">
+                            <option value="">Select Images</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -82,8 +83,8 @@ $this->breadcrumbs = array(
             <div class="form-group">
                     <label for="country" class="col-lg-4 control-label">No of forms </label>
                     <div class="col-lg-8">
-                         <select name="UserProfile[no_of_forms]" id="no_of_forms" class="form-control">
-                            <option value="">Select Pages</option>
+                         <select name="Package[no_of_forms]" id="no_of_forms" class="form-control">
+                            <option value="">Select No of Forms</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -113,20 +114,27 @@ $this->breadcrumbs = array(
 <script type="text/javascript">
     function validation()
     {
-       
+     var regex = /^\d*(.\d{2})?$/;
+     var amount = document.getElementById('amount');
     $("#name_error").html("");
      if ($("#name").val() == "") {
       $("#name_error").html("Enter Package Name");
       $("#name").focus();            
       return false;
     }
-    
     $("#amount_error").html("");
     if ($("#amount").val() == "") {
       $("#amount_error").html("Enter Package Price");
       $("#amount").focus();            
       return false;
     }
+    if (!regex.test(amount.value)){
+     
+      $("#amount_error").html("Enter Valid Package Price");
+      $("#amount").focus();            
+      return false;
+    }
+    
     $("#description_error").html("");
      if ($("#description").val() == "") {
       $("#description_error").html("Enter Package Description");
