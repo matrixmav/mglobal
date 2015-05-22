@@ -4,9 +4,9 @@
 
 $dbOptions = array(
 	'db_host' => 'localhost',
-	'db_user' => 'urwebby_online',
-	'db_pass' => 'value#7',
-	'db_name' => 'urwebby_demo_db'
+	'db_user' => 'root',
+	'db_pass' => '',
+	'db_name' => 'mglobal'
 );
 
 /* Database Config End */
