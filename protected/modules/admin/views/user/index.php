@@ -66,6 +66,13 @@ $this->breadcrumbs = array(
                     'name' => 'status',
                     'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
                 ),
+                 array
+                (
+                      'name'=>'Quick Chat',
+                      'htmlOptions'=>array('class'=>'plus','id=>$data->name'),
+                      'value'=>'Yii::t(\'translation\', \'Start chat\')',
+                ),
+                
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{Change}',
@@ -81,10 +88,18 @@ $this->breadcrumbs = array(
                             'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
                         ),
+                        
+                      
+                        
+                        
                     ),
                 ),
+                
+               
+                
             ),
         ));
         ?>
     </div>
 </div>
+<a onclick="OpenChatBox('roopL');" href="javascript:void(0);">mGlobal</a>
