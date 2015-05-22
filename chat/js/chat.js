@@ -182,7 +182,7 @@ function chatHeartbeat(){
 	}
 	
 	$.ajax({
-	  url: "chat/chat.php?action=chatheartbeat",
+	  url: "/chat/chat.php?action=chatheartbeat",
 	  cache: false,
 	  dataType: "json",
 	  success: function(data) {
@@ -238,7 +238,7 @@ function closeChatBox(chatboxtitle) {
 	$('#chatbox_'+chatboxtitle).css('display','none');
 	restructureChatBoxes();
 
-	$.post("chat/chat.php?action=closechat", { chatbox: chatboxtitle} , function(data){	
+	$.post("/chat/chat.php?action=closechat", { chatbox: chatboxtitle} , function(data){	
 	});
 
 }
