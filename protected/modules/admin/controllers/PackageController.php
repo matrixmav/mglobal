@@ -148,10 +148,7 @@ class PackageController extends Controller
                 $status = $_POST['res_filter'];
             }
 
-            $dataProvider = new CActiveDataProvider($model, array(
-                'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => $pageSize),));
+            $dataProvider = new CActiveDataProvider($model, array('pagination' => array('pageSize' => $pageSize),));
            
             $this->render('package_list',array(
                     'dataProvider'=>$dataProvider,
@@ -163,16 +160,30 @@ class PackageController extends Controller
           */
          public function actionChangeStatus() {
              
-            $packageObject = Package::model()->findByPK(array('id' => $_GET['id']));
-            if($_POST)
-            {
-                $packageObject->status = new CDbExpression('NOW()');
-                $packageObject->update();
-            }
-           
-            $this->render('package_list',array(
-                    'dataProvider'=>$dataProvider,
-            ));    
+            
+           if($_REQUEST['id']) {
+               $packageObject = Package::model()->findByPK($_REQUEST['id']);
+                if($packageObject->status == 1){
+                    $packageObject->status = 0;
+                } else {
+                    $packageObject->status = 1;
+                }
+                $packageObject->save(false);
+                $this->redirect('/admin/package/packagelist');
+            }  
+         }
+         
+         /*
+          * Function to Delete Package list
+          */
+         public function actionDelete() {
+             
+            
+           if($_REQUEST['id']) {
+               $packageObject = Package::model()->findByPK($_REQUEST['id']);
+                $packageObject->delete();
+                $this->redirect('/admin/package/packagelist');
+            }  
          }
 
          
