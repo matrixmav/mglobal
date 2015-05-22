@@ -171,28 +171,34 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <a href="/wallet/rpwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="RP Wallet">
                             <i class="glyphicon glyphicon-bell"></i>
                             <span class="badge badge-default">
-                                7</span>
+                                <?php $arrayRP =  BaseClass::walletAmount('2');
+                                foreach($arrayRP as $RP){}
+                                 echo (!empty($arrayRP)) ? $RP->fund : "0";?></span>
                         </a>
                     </li>
 
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <a href="/wallet/fundwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Fund Wallet">
                             <i class="glyphicon glyphicon-envelope"></i>
                             <span class="badge badge-default">
-                                4</span>
+                              <?php $arrayFund =  BaseClass::walletAmount('1');
+                                foreach($arrayFund as $fund){}
+                                 echo (!empty($arrayFund)) ? $fund->fund : "0";?></span>
                         </a>
                     </li>
 
 
 
                     <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <a href="/wallet/commisionwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Commision Wallet">
                             <i class="glyphicon glyphicon-th"></i>
                             <span class="badge badge-default">
-                                3</span>
+                                <?php $arrayCommision =  BaseClass::walletAmount('3');
+                                foreach($arrayCommision as $commision){}
+                                 echo (!empty($arrayCommision)) ? $commision->fund : "0";?></span>
                         </a>
 
 
