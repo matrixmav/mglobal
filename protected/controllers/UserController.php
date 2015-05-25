@@ -61,7 +61,6 @@ class UserController extends Controller
 
                 if((!empty($username)) && (!empty($password))  && (!empty($masterkey))) {
                     $getUserObject = User::model()->findByAttributes(array('name'=>$username,'status'=>1));
-                    
                     if(!empty($getUserObject)){
                         $flagPassword ='';
                         $flagMaster ='';
@@ -76,19 +75,7 @@ class UserController extends Controller
                         if($flagPassword == 'password' && $flagMaster == 'masterkey' ){
                             $identity = new UserIdentity($username,$password);                                                                               
                             if($identity->userAuthenticate())
-                                
-                            
                             Yii::app()->user->login($identity);
-                            $orderObject = Order::model()->findByAttributes(array('user_id'=>$getUserObject->id,'status'=>1));
-                            
-                            if($orderObject->package_id=='1' && Yii::app()->session['package_id']=='3' || Yii::app()->session['package_id']=='2')
-                            {
-                              $error .= "<p class='error'>Sorry you need to register with different email to puchase advance package.</p>";   
-                            }
-                            elseif($orderObject->package_id=='2' && Yii::app()->session['package_id']=='3')
-                            {
-                              $error .= "<p class='error'>Sorry you need to register with different email to puchase advance package.</p>";   
-                            }else{
                             Yii::app()->session['userid'] = $getUserObject->id;
                             Yii::app()->session['username'] = $getUserObject->name;
                             echo "1"; 
@@ -96,7 +83,6 @@ class UserController extends Controller
                                 $this->redirect("/package/domainsearch");  
                             } else {
                                 $this->redirect("/profile/dashboard");
-                            }
                             }
                         }else {
                            // echo "0"; 
@@ -111,11 +97,11 @@ class UserController extends Controller
                 $this->render("login",array("msg"=>$error));
  }
         
-        /* User Registration Strat Here */
         public function actionRegistration(){
             $error = "";
             if($_POST){ 
                 
+               
                     $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
                     $masterPin = BaseClass::getUniqInt(5); 
                     $model = new User;
@@ -125,18 +111,19 @@ class UserController extends Controller
                     $model->master_pin = BaseClass::md5Encryption($masterPin);
                     $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
                     $model->created_at = date('Y-m-d') ;
-                    if($_POST['admin']=='1')
+                    if($_POST['admin']==1)
                     {
-                    $model->role_id = 3 ; 
+                    $model->role_id = 3 ;
                     }else{
-                    $model->role_id = 1 ;    
+                    $model->role_id = 2 ;    
                     }
-                    if($_POST['admin']=='1')
+                    if($_POST['admin']==1)
                     {
-                    $model->status = 1 ; 
+                    $model->status = 3 ;
                     }else{
-                    $model->status = 0 ;    
+                    $model->status = 2 ;    
                     }
+
                     /* Condition for they have the child or not */
                     $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
                     //echo "<pre>"; print_r($geneObject);
@@ -163,7 +150,7 @@ class UserController extends Controller
                                     break;
                                 }
                             }
- 
+
                     } 
                 
                 }else{
@@ -229,70 +216,26 @@ class UserController extends Controller
 //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
 //                var_dump($config);
 //                CommonHelper::sendMail($config);
-                $this->render('login', array('successMsg'=> $successMsg));
-                $this->redirect('login');
- 
-                         
-
-                    }else{
-                       $userId =  $userObject->id; 
-                    }       
-
-                    $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
-                    $model->activation_key = $rand ;                               
-
-                    if(!$model->save(false)){
-                        echo "<pre>"; print_r($model->getErrors());exit;
-                    }
-
-                    $modelUserProfile = new UserProfile();
-                    $modelUserProfile->user_id = $model->id ;
-                    $modelUserProfile->created_at = date('Y-m-d') ;
-                    $modelUserProfile->referral_banner_id = 1 ;
-                    $modelUserProfile->save(false);
-
-                    /* Geneology */
-                    $userObjectId = User::model()->findByAttributes(array('id' => $userObject->id ));
-
-                    $modelGenealogy = new Genealogy();
-                    $modelGenealogy->parent = $userId ; 
-                    $modelGenealogy->user_id = $model->id ; 
-                    $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
-                    $modelGenealogy->position = $_POST['position'];                 
-                    $modelGenealogy->save(false); 
-                    $successMsg = "You have successfully registered. Please check your email to activate your account"; 
-                    /*  For Genealogy Data */
-
-                    /*$modelGenealogy = new Genealogy();
-                    $modelGenealogy->user_id = $model->id ; 
-                    $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
-                    $modelGenealogy->position = $_POST['position'] ; 
-                    $modelGenealogy->save(); */
-
-    //                $config['to'] = $model->email; 
-    //                $config['subject'] = 'Registration Confirmation' ;
-    //                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
-    //                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-    //                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
-    //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
-    //                var_dump($config);
-    //                CommonHelper::sendMail($config);
-                    echo $_POST['admin'];exit;
+                //$this->render('login', array('successMsg'=> $successMsg));
+                //$this->redirect('login');
+     
                     if($_POST['admin']==1)
                     {
-                    $this->redirect(array('admin/user/index','successMsg'=>$successMsg));
+                    $this->redirect(array('admin/user/index','successMsg'=>1));
                      }else{
-                    $this->redirect(array('login','successMsg'=>$successMsg));  
-                    }
- 
-             
+                    $this->redirect(array('login','successMsg'=>$successMsg)); 
+                     }
+
+            } 
             $spnId = "";
             if($_GET){
                 $spnId = $_GET['spid'];
             }
             $countryObject = Country::model()->findAll();
+            
             $this->render('registration',array('countryObject'=>$countryObject,'spnId'=>$spnId,'error'=>$error));
         }
+
 
         /* User Forget Password Strat Here */
         public function actionForgetPassword(){
