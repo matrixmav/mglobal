@@ -1,26 +1,19 @@
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/registration.js?ver=<?php echo strtotime("now");?>"></script>
-<?php $curAction = @Yii::app()->getController()->getAction()->controller->action->id; 
- if($curAction != 'loginregistration'){ ?>
- <div class="main">
-  <div class="container">
-    <!-- BEGIN SIDEBAR & CONTENT -->
-    <div class="row margin-bottom-40">
- <?php }?>
-        <!-- BEGIN CONTENT -->
-            <div class="col-md-6 col-sm-6">
-                <h1>Create an account</h1>
-                <?php if(isset($error)){ echo $error; }  ?>
-                <div class="content-form-page">
-                    <div class="row">
-                       <div class="col-md-12 col-sm-12">
-                            <form class="form-horizontal" role="form" method="post" action="/user/registration"  onsubmit="return validateFrm()">
-                                <input type="hidden" id="nameExistedErrorFlag" name="nameExistedErrorFlag" value="0"/>
-                                <input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="0"/>
-                                <input type="hidden" id="sponsorIdExistedErrorFlag" name="sponsorIdExistedErrorFlag" value="0"/>
-                                
-                                <fieldset> 
-                                    <legend>Your personal details</legend>
-                                    <div class="form-group">
+<?php
+$this->breadcrumbs = array(
+    'User' => array('user/add'),
+    'user Add',
+);
+?>
+<div class="col-md-7 col-sm-7">
+    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
+    <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+   
+    <form action="../user/registration" method="post" class="form-horizontal" onsubmit="return validateFrm();">
+     
+        <fieldset>
+            <legend>Add User</legend>
+            <input type="hidden" id="admin" name="admin" value="1">
+            <div class="form-group">
                                         <label for="firstname" class="col-lg-4 control-label">Sponsor Id <span class="require">*</span></label>
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" value="<?php echo (isset($spnId))?$spnId:""; ?>" name="sponsor_id" id="sponsor_id" onchange="isSponsorExisted()">
@@ -140,28 +133,25 @@
                                     
 
                                 </fieldset>
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                                        <button type="submit" class="btn btn-primary">Add</button>
-                                        
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
+                <input type="submit" name="submit" value="Submit" class="btn red">
+                 
             </div>
-            <!-- END CONTENT -->
-            <?php  if($curAction != 'loginregistration'){ ?>
-         </div>
-    <!-- END SIDEBAR & CONTENT -->
-  </div>
+        </div>
+    </form>
 </div>
 
-<?php }?>
+
+
+
+
 <script type="text/javascript">
  function getSponId(){ 
     $("#sponsor_id").val("<?php echo Yii::app()->params['adminSpnId']; ?>");
     return false;
 }
 </script>
+
+     
+     
