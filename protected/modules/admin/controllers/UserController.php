@@ -342,9 +342,36 @@ class UserController extends Controller
           */
          public  function actionEdit()
          {
+             $error ="";
+             $success ="";
            if($_REQUEST['id']) {  
-           $userObject = User::model()->findByPK($_REQUEST['id']);  
-           
+           $userObject = User::model()->findByPK($_REQUEST['id']); 
+           /*Updating User info*/
+            $userObject->full_name = $_POST['UserProfile']['full_name'];
+            $userObject->email = $_POST['UserProfile']['email'];
+            $userObject->phone = $_POST['UserProfile']['phone'];
+            $userObject->date_of_birth = $_POST['UserProfile']['date_of_birth'];
+            $userObject->skype_id = $_POST['UserProfile']['skype_id'];
+            $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
+            $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
+            $userObject->updated_at = new CDbExpression('NOW()');
+            $userObject->update();
+                
+           /*Updating User profile data*/
+                 $profileObject = UserProfile::model()->findByAttributes(array('user_id'=>$_REQUEST['id']));
+                $profileObject->address = $_POST['UserProfile']['address'];
+                $profileObject->street = $_POST['UserProfile']['street'];
+                $profileObject->city_name = $_POST['UserProfile']['city_name'];
+                $profileObject->state_name = $_POST['UserProfile']['state_name'];
+                $profileObject->country_id = $_POST['UserProfile']['country_id'];
+                $profileObject->zip_code = $_POST['UserProfile']['zip_code'];
+
+                $profileObject->updated_at = new CDbExpression('NOW()');
+                $profileObject->update();
+                if($userObject->update() && $profileObject->update() )
+                {
+                  $this->redirect(array('/admin/user/index','successMsg'=>3));  
+                }
            }
            
            $countryObject = Country::model()->findAll();
