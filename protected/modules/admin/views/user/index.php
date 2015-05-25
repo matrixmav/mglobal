@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Users' => array('/admin/user')
+    'Users' => array('/admin/index')
 );
 ?>
 
@@ -23,6 +23,7 @@ $this->breadcrumbs = array(
     <div class="col-md-12">
           <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><div class="success" id="error_msg"><?php echo "User Added Successfully";?></div><?php }?>
           <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='2'){?><div class="success" id="error_msg"><?php echo "Record Deleted Successfully";?></div><?php }?>
+          <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='3'){?><div class="success" id="error_msg"><?php echo "User Details Updated Successfully";?></div><?php }?>
         
               <?php
         $test = "'sdsd'";

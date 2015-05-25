@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs = array(
-    'User' => array('user/add'),
-    'user Add',
+     
+    'User Add',
 );
 ?>
 <div class="col-md-7 col-sm-7">
