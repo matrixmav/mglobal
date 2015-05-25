@@ -42,7 +42,7 @@ $this->breadcrumbs = array(
                     <span id="country_id_error"></span>
                 </div>
 
-            <div class="form-group" id="stateList"  style="display: <?php if(!empty($profileObject) && count($stateObject) > 0){ echo "block";}else{ echo "none";}?>">
+            <div class="form-group" id="stateList" >
                 <label class="col-lg-4 control-label" for="email">State <span class="require">*</span></label>
                 <div class="col-lg-8">
                    <input type="text" id="state_id" class="form-control" name="UserProfile[state_name]" value="<?php echo (!empty($profileObject)) ?  $profileObject->state_name : ""; ?>">
