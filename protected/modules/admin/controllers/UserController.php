@@ -329,9 +329,12 @@ class UserController extends Controller
          public function actionDeleteUser() {
            if($_REQUEST['id']) {
                 $userObject = User::model()->findByPK($_REQUEST['id']);
-                $userprofileObject = UserProfile::model()->findByAttributes(array('user_id'=>$userObject->id));
+                $userprofileObject = UserProfile::model()->findByAttributes(array('user_id'=>$_REQUEST['id']));
                 $userObject->delete();
+                if($userprofileObject)
+                {
                 $userprofileObject->delete();
+                }
                 $this->redirect(array('/admin/user/index','successMsg'=>2));
             }  
          }
@@ -342,10 +345,14 @@ class UserController extends Controller
           */
          public  function actionEdit()
          {
+            
              $error ="";
              $success ="";
-           if($_REQUEST['id']) {  
-           $userObject = User::model()->findByPK($_REQUEST['id']); 
+             if($_REQUEST['id']) {  
+             $userObject = User::model()->findByPK($_REQUEST['id']); 
+              $profileObject = UserProfile::model()->findByAttributes(array('user_id'=>$_REQUEST['id']));
+           if($_REQUEST['id'] && $_POST) { 
+               
            /*Updating User info*/
             $userObject->full_name = $_POST['UserProfile']['full_name'];
             $userObject->email = $_POST['UserProfile']['email'];
@@ -358,7 +365,7 @@ class UserController extends Controller
             $userObject->update();
                 
            /*Updating User profile data*/
-                 $profileObject = UserProfile::model()->findByAttributes(array('user_id'=>$_REQUEST['id']));
+                
                 $profileObject->address = $_POST['UserProfile']['address'];
                 $profileObject->street = $_POST['UserProfile']['street'];
                 $profileObject->city_name = $_POST['UserProfile']['city_name'];
@@ -373,11 +380,12 @@ class UserController extends Controller
                   $this->redirect(array('/admin/user/index','successMsg'=>3));  
                 }
            }
+             }
            
            $countryObject = Country::model()->findAll();
             
             $this->render('user_edit',array(
-			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success,'userObject'=>$userObject
+			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success,'userObject'=>$userObject,'profileObject'=>$profileObject
 		));
              
          }
