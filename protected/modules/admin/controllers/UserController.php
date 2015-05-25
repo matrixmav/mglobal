@@ -328,8 +328,8 @@ class UserController extends Controller
           */
          public function actionDeleteUser() {
            if($_REQUEST['id']) {
-               $userObject = User::model()->findByPK($_REQUEST['id']);
-               $userprofileObject = UserProfile::model()->findByAttributes(array('user_id'=>$userObject->id));
+                $userObject = User::model()->findByPK($_REQUEST['id']);
+                $userprofileObject = UserProfile::model()->findByAttributes(array('user_id'=>$userObject->id));
                 $userObject->delete();
                 $userprofileObject->delete();
                 $this->redirect(array('/admin/user/index','successMsg'=>2));
@@ -342,6 +342,16 @@ class UserController extends Controller
           */
          public  function actionEdit()
          {
+           if($_REQUEST['id']) {  
+           $userObject = User::model()->findByPK($_REQUEST['id']);  
+           
+           }
+           
+           $countryObject = Country::model()->findAll();
+            
+            $this->render('user_edit',array(
+			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success
+		));
              
          }
 
