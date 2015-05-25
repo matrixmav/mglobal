@@ -21,8 +21,10 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
-          <?php if($_GET['successMsg']!=''){?><div class="success" id="error_msg"><?php echo "User Added Successfully";?></div><?php }?>
-        <?php
+          <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><div class="success" id="error_msg"><?php echo "User Added Successfully";?></div><?php }?>
+          <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='2'){?><div class="success" id="error_msg"><?php echo "Record Deleted Successfully";?></div><?php }?>
+        
+              <?php
         $test = "'sdsd'";
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
@@ -99,8 +101,8 @@ $this->breadcrumbs = array(
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/user/delete", array("id"=>$data->id))',
+                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this user?')"),
+                            'url' => 'Yii::app()->createUrl("admin/user/deleteuser", array("id"=>$data->id))',
                         ),
                         
                         
