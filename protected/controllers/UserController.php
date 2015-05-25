@@ -377,8 +377,8 @@ class UserController extends Controller
        public function actionloginregistration()
        {
            $spnId = Yii::app()->params['adminSpnId'];
-           Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
-            
+            Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
+            $orderObject = Order::model()->findByAttributes(array('email' => $_POST['email']));
             $countryObject = Country::model()->findAll();
 //            echo "<pre>";print_r($countryObject);exit;
             $this->render('login-registration',array('countryObject'=>$countryObject,'spnId'=>$spnId));
