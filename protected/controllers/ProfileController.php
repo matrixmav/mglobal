@@ -243,8 +243,10 @@ class ProfileController extends Controller {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
-        if ($_POST) {
-            if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
+        if (!empty($_POST)) {
+          if($_POST['UserProfile']['old_password']!='' && $_POST['UserProfile']['new_password']!='' && $_POST['UserProfile']['confirm_password']!='' )  
+          {
+              if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
             if($userObject->password != md5($_POST['UserProfile']['old_password']))
             {
                $error .= "Incorrect old password"; 
@@ -260,6 +262,8 @@ class ProfileController extends Controller {
         } else {
             $error .="Please fill all required(*) marked fields.";
         }
+        }
+        
         $this->render('/user/change_password', array(
             'error' => $error,'success' => $success,
         ));
