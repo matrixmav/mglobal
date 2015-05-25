@@ -101,12 +101,12 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'status',
-                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Approved\') : Yii::t(\'translation\', \'Pending\')',
+                    'value' => '($data->document_status == 1) ? Yii::t(\'translation\', \'Approved\') : Yii::t(\'translation\', \'Pending\')',
                 ),
                  array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
-                    'template' => '{Change}{Edit}{Delete}',
+                    'template' => '{Change}',
                     'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
                          'Change' => array(
