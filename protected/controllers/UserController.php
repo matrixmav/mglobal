@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou'), 
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary'), 
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -207,55 +207,50 @@ class UserController extends Controller
 //                CommonHelper::sendMail($config);
                 $this->render('login', array('successMsg'=> $successMsg));
                 $this->redirect('login');
- 
-                         
+     
 
-                    }else{
-                       $userId =  $userObject->id; 
-                    }       
+                $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
+                $model->activation_key = $rand ;                               
 
-                    $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
-                    $model->activation_key = $rand ;                               
+                if(!$model->save(false)){
+                    echo "<pre>"; print_r($model->getErrors());exit;
+                }
 
-                    if(!$model->save(false)){
-                        echo "<pre>"; print_r($model->getErrors());exit;
-                    }
+                $modelUserProfile = new UserProfile();
+                $modelUserProfile->user_id = $model->id ;
+                $modelUserProfile->created_at = date('Y-m-d') ;
+                $modelUserProfile->referral_banner_id = 1 ;
+                $modelUserProfile->save(false);
 
-                    $modelUserProfile = new UserProfile();
-                    $modelUserProfile->user_id = $model->id ;
-                    $modelUserProfile->created_at = date('Y-m-d') ;
-                    $modelUserProfile->referral_banner_id = 1 ;
-                    $modelUserProfile->save(false);
+                /* Geneology */
+                $userObjectId = User::model()->findByAttributes(array('id' => $userObject->id ));
 
-                    /* Geneology */
-                    $userObjectId = User::model()->findByAttributes(array('id' => $userObject->id ));
+                $modelGenealogy = new Genealogy();
+                $modelGenealogy->parent = $userId ; 
+                $modelGenealogy->user_id = $model->id ; 
+                $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
+                $modelGenealogy->position = $_POST['position'];                 
+                $modelGenealogy->save(false); 
+                $successMsg = "You have successfully registered. Please check your email to activate your account"; 
+                /*  For Genealogy Data */
 
-                    $modelGenealogy = new Genealogy();
-                    $modelGenealogy->parent = $userId ; 
-                    $modelGenealogy->user_id = $model->id ; 
-                    $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
-                    $modelGenealogy->position = $_POST['position'];                 
-                    $modelGenealogy->save(false); 
-                    $successMsg = "You have successfully registered. Please check your email to activate your account"; 
-                    /*  For Genealogy Data */
+                /*$modelGenealogy = new Genealogy();
+                $modelGenealogy->user_id = $model->id ; 
+                $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
+                $modelGenealogy->position = $_POST['position'] ; 
+                $modelGenealogy->save(); */
 
-                    /*$modelGenealogy = new Genealogy();
-                    $modelGenealogy->user_id = $model->id ; 
-                    $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
-                    $modelGenealogy->position = $_POST['position'] ; 
-                    $modelGenealogy->save(); */
+//                $config['to'] = $model->email; 
+//                $config['subject'] = 'Registration Confirmation' ;
+//                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
+//                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
+//                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
+//                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
+//                var_dump($config);
+//                CommonHelper::sendMail($config);
+                $this->redirect(array('login','successMsg'=>$successMsg));                    
 
-    //                $config['to'] = $model->email; 
-    //                $config['subject'] = 'Registration Confirmation' ;
-    //                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
-    //                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-    //                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
-    //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
-    //                var_dump($config);
-    //                CommonHelper::sendMail($config);
-                    $this->redirect(array('login','successMsg'=>$successMsg));                    
- 
-             
+            } 
             $spnId = "";
             if($_GET){
                 $spnId = $_GET['spid'];
@@ -337,6 +332,43 @@ class UserController extends Controller
             $userObject = User::getUserById($userId);
             $totalCommission = BaseClass::getDirectCommission($userObject->name);
             $this->render('thankyou',array('getValue'=>$totalCommission ,'userObject'=>$userObject));            
+        }
+        
+        public function actionBinary(){
+            $currentDate = '"2015-05-19"' ;
+            $getOrderListObject = Order::model()->findAll(array('condition'=>'created_at = '. $currentDate  ));
+            $arrLast = array();
+            $arrAllLast = array();
+            $percent = 10;
+            
+            foreach($getOrderListObject as $getOrderObject){  
+                $userObject = Genealogy::getGenealogyByValue('user_id',$getOrderObject->user_id);                
+                $orderObject = Order::getOrderByValue('user_id',$getOrderObject->id);                
+                $packageObject = Package::model()->findByAttributes(array('id'=>$getOrderObject->package_id));
+                
+                array_push($arrLast,$userObject->parent);    
+                
+                if(count($arrLast) > 1 ){                    
+                    if($arrLast[0] == $arrLast[1]){                        
+                        if($arrAllLast[3] < $packageObject->amount){ // Check Condition                            
+                            echo $totalCommission = BaseClass::getPercentage($arrAllLast[3] , $percent, 1 ); 
+                            echo " Carry Forward :". $arrAllLast[2] ;
+                            echo $packageObject->amount - $arrAllLast[3] ;
+                            
+                        }else{
+                            echo $totalCommission = BaseClass::getPercentage($packageObject->amount , $percent, 1 ); 
+                            echo " Carry Forward :". $userObject->position ;
+                            echo $arrAllLast[3] - $packageObject->amount ;
+                        }
+                    }else{
+                        array_shift($arrLast); //empty the array
+                        $arrAllLast = array(); //empty the array
+                    }
+                }                
+                array_push($arrAllLast,$getOrderObject->user_id,$userObject->parent,$userObject->position,$packageObject->amount);
+            }            
+            
+            
         }
         
         public function actionIsUserExisted(){

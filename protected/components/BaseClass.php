@@ -567,7 +567,7 @@ class BaseClass extends Controller {
         return $totalCommission;
     }
 
-        public static function getReCaptcha(){
+    public static function getReCaptcha(){
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
 

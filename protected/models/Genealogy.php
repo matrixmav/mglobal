@@ -112,4 +112,8 @@ class Genealogy extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getGenealogyByValue($field, $value){
+             return Genealogy::model()->findByAttributes(array($field => $value ));
+        }
 }
