@@ -83,7 +83,7 @@ class PackageController extends Controller
              $transactionObject1 = Transaction::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
               
               
-             if(count($transactionObject1) > 0)
+             if(count($transactionObject1) > 0 && $transactionObject1->status!='1')
              { 
                  
                     $transactionObject1->mode = 'paypal';
