@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Package' => array('package/packagedit'),
+    'Package' => array('package/edit'),
     'Package Edit',
 );
  
@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/package/packagedit?id=<?php echo $packageObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/package/edit?id=<?php echo $packageObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
             <legend>Edit Package </legend>
