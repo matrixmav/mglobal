@@ -138,7 +138,7 @@ class PackageController extends Controller
           */
          public function actionList() {
               
-           $model = new Package();
+            $model = new Package();
             $pageSize = 10;
             $todayDate = date('Y-m-d');
             $fromDate = date('Y-m-d');
@@ -149,11 +149,13 @@ class PackageController extends Controller
                 $status = $_POST['res_filter'];
             }
 
-            $dataProvider = new CActiveDataProvider($model, array('pagination' => array('pageSize' => $pageSize),));
-           
+           $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
             $this->render('package_list',array(
                     'dataProvider'=>$dataProvider,'msg'=>0
-            ));    
+            ));   
          }
          
           /*
