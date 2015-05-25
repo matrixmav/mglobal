@@ -356,9 +356,9 @@ class UserController extends Controller
                 $status = $_POST['res_filter'];
             }
             $dataProvider = new CActiveDataProvider($model, array(
-                'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => $pageSize),));
+	    				'pagination' => array('pageSize' => 10),
+				));
+             
             $this->render('verification_approval',array(
                     'dataProvider'=>$dataProvider,
             ));
