@@ -124,6 +124,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="/metronic/assets/scripts/core/app.js"></script>
        <script type="text/javascript" src="/chat-admin/js/chat.js"></script>
+       <script type="text/javascript" src="/js/registration.js?ver=1432543968"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
               App.init();
