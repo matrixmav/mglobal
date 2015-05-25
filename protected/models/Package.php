@@ -32,11 +32,11 @@ class Package extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, start_date, end_date,coupon_discount, amount, status, created_at, update_at', 'required'),
+			array('name, start_date, end_date,coupon_discount, amount,Description,no_of_pages,no_of_images,no_of_forms, status, created_at, update_at', 'required'),
 			array('name, coupon_code, amount, status', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, start_date, end_date,coupon_discount, amount, status, created_at, update_at', 'safe', 'on'=>'search'),
+			array('id, name, start_date, end_date,coupon_discount, amount, Description,no_of_pages,no_of_images,no_of_forms,status, created_at, update_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,9 +61,12 @@ class Package extends CActiveRecord
 			'name' => 'Name',
 			'start_date' => 'Start Date',
 			'end_date' => 'End Date',
-			 
-                        'coupon_discount' => 'Coupon price',
+			'coupon_discount' => 'Coupon price',
 			'amount' => 'Amount',
+                        'Description' =>'Description',
+                        'no_of_pages'=>'No of pages',
+                        'no_of_images'=>'No of images',
+                        'no_of_forms'=>'No of forms',
 			'status' => 'Status',
 			'created_at' => 'Created At',
 			'update_at' => 'Update At',
@@ -95,6 +98,10 @@ class Package extends CActiveRecord
 		 
                 $criteria->compare('coupon_discount',$this->coupon_discount);
                 $criteria->compare('amount',$this->amount);
+                $criteria->compare('Description',$this->Description);
+                $criteria->compare('no_of_pages',$this->no_of_pages);
+                $criteria->compare('no_of_images',$this->no_of_images);
+                $criteria->compare('no_of_forms',$this->no_of_forms);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('update_at',$this->update_at,true);
