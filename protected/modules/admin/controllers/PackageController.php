@@ -28,7 +28,8 @@ class PackageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','packageadd','packagedit','packagelist','changestatus','delete'),
+				'actions'=>array('index','view','packageadd','packagedit','packagelist',
+                                    'changestatus','deletepackage'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -50,7 +51,7 @@ class PackageController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{
+	{ 
 		$dataProvider=new CActiveDataProvider('Package');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -66,6 +67,7 @@ class PackageController extends Controller
         {
             $error = "";
             $success = "";
+            $msg = 1;
             $packageObject = new Package;
             if($_POST)
             {
@@ -176,12 +178,11 @@ class PackageController extends Controller
          /*
           * Function to Delete Package list
           */
-         public function actionDelete() {
-             
+         public function actionDeletePackage() {
            if($_REQUEST['id']) {
                $packageObject = Package::model()->findByPK($_REQUEST['id']);
                 $packageObject->delete();
-                $this->redirect('/admin/package/packagelist');
+                $this->redirect('/admin/package/packagelist',array('msg'=>'1'));
             }  
          }
 
