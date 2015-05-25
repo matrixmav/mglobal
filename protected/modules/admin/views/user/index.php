@@ -8,6 +8,7 @@ $this->breadcrumbs = array(
 ?>
 
 <div class="expiration margin-topDefault">
+    <a class="btn  green margin-right-20" style="float:left" href="admin/user/add">New User +</a> 
     <!--<p>Client/ Hotel/ Bill : <?php //echo $clientObject->name; ?></p>-->
     <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/user" />
     <div class="col-md-3">
@@ -15,6 +16,7 @@ $this->breadcrumbs = array(
     </div>
     <input type="submit" class="btn btn-primary" value="OK" name="submit" id="submit"/>
     </form>
+  
 </div>
 
 <div class="row">
