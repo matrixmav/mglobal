@@ -354,11 +354,20 @@ class UserController extends Controller
                 $todayDate = $_POST['from'];
                 $fromDate = $_POST['to'];
                 $status = $_POST['res_filter'];
-            }
-            $dataProvider = new CActiveDataProvider($model, array(
-	    				'pagination' => array('pageSize' => 10),
+                $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                 'condition' => ('id_proof != "" AND address_proff != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND document_status = "' . $status . '"' ), 'order' => 'id DESC',   
+                ), 'pagination' => array('pageSize' => 10),
 				));
-             
+            }else{
+            
+             $dataProvider = new CActiveDataProvider($model, array(
+                 'criteria' => array(
+                 'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',   
+                ),
+                  'pagination' => array('pageSize' => 10),
+				));
+            }
             $this->render('verification_approval',array(
                     'dataProvider'=>$dataProvider,
             ));
@@ -486,7 +495,7 @@ class UserController extends Controller
             $fullName = "'".$data->name."'";
     echo '<a onclick="OpenChatBox('.$fullName.')">Click to chat</a>';
 }
-       protected function gridAddressImagePopup($data,$row)
+ protected function gridAddressImagePopup($data,$row)
 	{ 	
             $bigImagefolder=Yii::app()->params->imagePath['verificationDoc'];// folder with uploaded files
             echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->address_proff</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
