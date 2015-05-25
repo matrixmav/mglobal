@@ -318,7 +318,7 @@ class UserController extends Controller
             {
                 
             }else{
-                $error = "Please fill all required(*) marked fields.";
+                //$error = "Please fill all required(*) marked fields.";
             }
             
             $this->render('user_add',array(
