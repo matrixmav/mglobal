@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet','list','debitwallet','genealogy','add'),
+                                    'creditwallet','list','debitwallet','genealogy','add','deleteuser','edit'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -157,6 +157,7 @@ class UserController extends Controller
         public function actionIndex() {
             $model = new User;
             $pageSize = 10;
+            $successMsg = "";
             
             $dataProvider=new CActiveDataProvider('User', array(
                         'pagination' => array('pageSize' => $pageSize),
@@ -165,7 +166,7 @@ class UserController extends Controller
                 $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
             }
             $this->render('index',array(
-                    'dataProvider'=>$dataProvider,
+                    'dataProvider'=>$dataProvider,'successMsg'=>$successMsg
             )); 
         }
 
@@ -314,21 +315,38 @@ class UserController extends Controller
             $success = "";
             $error="";
             $countryObject = Country::model()->findAll();
-            if($_POST)
-            {
-                
-            }else{
-                //$error = "Please fill all required(*) marked fields.";
-            }
             
             $this->render('user_add',array(
 			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success
 		));
         }
+        
+       
+         
+         /*
+          * Function to Delete Users from list
+          */
+         public function actionDeleteUser() {
+           if($_REQUEST['id']) {
+               $userObject = User::model()->findByPK($_REQUEST['id']);
+               $userprofileObject = UserProfile::model()->findByAttributes(array('user_id'=>$userObject->id));
+                $userObject->delete();
+                $userprofileObject->delete();
+                $this->redirect(array('/admin/user/index','successMsg'=>2));
+            }  
+         }
 
         
+         /*
+          * Function to update user records
+          */
+         public  function actionEdit()
+         {
+             
+         }
 
-        /**
+
+                 /**
 	 * Performs the AJAX validation.
 	 * @param User $model the model to be validated
 	 */
