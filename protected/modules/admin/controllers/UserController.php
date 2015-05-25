@@ -338,8 +338,59 @@ class UserController extends Controller
                 $this->redirect(array('/admin/user/index','successMsg'=>2));
             }  
          }
+         
+         /*
+          * Function to fetch verification document
+          */
+         
+         public function actionVerificationApproval() {
+            $model = new UserProfile();
+            $pageSize = 10;
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+            }
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+            $this->render('verification_approval',array(
+                    'dataProvider'=>$dataProvider,
+            ));
+              
+         }
+         /*
+          * Function to fetch verification document
+          */
+         
+         public function actionTestimonialApproval() {
+             $model = new UserProfile();
+            $pageSize = 10;
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+            }
 
-        
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+            $this->render('verification',array(
+                    'dataProvider'=>$dataProvider,
+            ));
+              
+         }
+
+
+
          /*
           * Function to update user records
           */
