@@ -2,10 +2,13 @@
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Wallet Summary',
-        'RP Wallet',
+ 
+$this->breadcrumbs = array(
+    'Summary' => array('wallet/rpwallet'),
+    'RPWallet',
 );
+ 
+ 
 
 $this->menu=array(
 	array('label'=>'Create Order', 'url'=>array('create')),
