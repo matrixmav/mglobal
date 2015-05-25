@@ -65,6 +65,11 @@ $this->breadcrumbs = array(
                 //'idJob',
                 array(
                     'name' => 'id',
+                    'header'=>'No.',
+                    'value'=>'$row+1',
+                ),
+                array(
+                    'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Transaction Id &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->transaction->transaction_id)?$data->transaction->transaction_id:""',
                 ),
@@ -82,11 +87,6 @@ $this->breadcrumbs = array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">From User &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->fromuser->name)?$data->fromuser->name:""',
-                ),
-                 array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">Gateway &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->gateway->name)?$data->transaction->gateway->name:""',
                 ),
                 array(
                     'name' => 'id',

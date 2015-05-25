@@ -125,4 +125,40 @@ class Transaction extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function createTransaction($postDataArray, $userObject){
+            $transferAmount = $postDataArray['paid_amount'];
+            $percentage = BaseClass::getPercentage($transferAmount,1);
+            $actualAmount = ($transferAmount + $percentage);
+            $discountAmount = 0;
+            if($postDataArray['discount']){
+               $discountAmount = $postDataArray['discount'];
+            }
+            $gatewayId = 1;
+            if($postDataArray['gatewayId']){
+                $gatewayId = $postDataArray['gatewayId'];
+            }
+            $userRp = 0;
+            if($postDataArray['used_rp']){
+                $userRp = $postDataArray['used_rp'];
+            }
+            $createdTime = new CDbExpression('NOW()');
+            
+            $transactionObjuser = new Transaction;
+            $transactionObjuser->user_id = $userObject->id;
+            $transactionObjuser->gateway_id = $gatewayId;
+            $transactionObjuser->coupon_discount = $discountAmount;
+            $transactionObjuser->actual_amount = $actualAmount;
+            $transactionObjuser->paid_amount = $postDataArray['paid_amount'];
+            $transactionObjuser->used_rp = $userRp; //change this to current Used RPs
+            $transactionObjuser->status = 0;//pending
+            $transactionObjuser->created_at = $createdTime;
+            $transactionObjuser->updated_at = $createdTime;
+            if (!$transactionObjuser->save()) {
+                echo "<pre>";
+                print_r($transactionObjuser->getErrors());
+                exit;
+            }
+            return $transactionObjuser;
+        }
 }

@@ -95,10 +95,10 @@ return array(
 		// uncomment the following to use a MySQL database
 		
 		/*'db'=>array(
-			'connectionString' => 'mysql:host=192.168.1.2;dbname=dayuse_site',
+			'connectionString' => 'mysql:host=localhost;dbname=mgloball_demo',
 			'emulatePrepare' => true,
-			'username' => 'root', 
-			'password' => '1TVillag3',
+			'username' => 'mgloball_mg', 
+			'password' => 'mg@123',
 			'charset' => 'utf8',
 		 	'tablePrefix' => 'tbl_',
                         'enableParamLogging' => true,
@@ -110,7 +110,7 @@ return array(
 				'connectionString' => 'mysql:host=localhost;dbname=mglobal',
 				'emulatePrepare' => true,
 				'username' => 'root',
-				'password' => '',
+				'password' => 'root',
 				'charset' => 'utf8',
                                 'tablePrefix' => 'tbl_',
 		),

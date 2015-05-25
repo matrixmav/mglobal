@@ -127,6 +127,10 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/plugins/bootbox/bootbox.min.js"
         type="text/javascript"></script>
 
+        <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
+        
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript" src="/chat/js/chat.js"></script>
         <script type="text/javascript">
@@ -403,7 +407,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 );
                                 ?>
                                 <li
-                                    class="<?php echo (($curControllerLower == 'transaction') || ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
+ 
+                                    class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction')) ? "active" : ''; ?>">
+ 
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Fund </span>
                                         <span class="selected"></span> <span

@@ -49,8 +49,8 @@ class ReportController extends Controller
         
         public function actionTransaction(){
             $model = new MoneyTransfer();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
@@ -71,8 +71,8 @@ class ReportController extends Controller
 
         public function actionIndex() {
             $model = new User();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
@@ -94,8 +94,8 @@ class ReportController extends Controller
     public function actionAddress()
 	{
             $model = new UserProfile();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
@@ -115,8 +115,8 @@ class ReportController extends Controller
         
         public function actionVerification(){
             $model = new UserProfile();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
@@ -137,8 +137,8 @@ class ReportController extends Controller
         public function actionAdminSponsor()
 	{  
             $model = new User();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
@@ -158,8 +158,8 @@ class ReportController extends Controller
         public function actionPackage()
 	{
             $model = new Package();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
@@ -180,8 +180,8 @@ class ReportController extends Controller
         public function actionSocialAccount()
 	{   
             $model = new User();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
@@ -202,8 +202,8 @@ class ReportController extends Controller
         public function actionContact()
 	{  
             $model = new Contact();
-            $pageSize = 10;
-            $todayDate = date('Y-m-d');
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
