@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet','list','debitwallet','genealogy'),
+                                    'creditwallet','list','debitwallet','genealogy','add'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -304,8 +304,31 @@ class UserController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+        
+        /*
+         * Function to add multiple admin by superadmin
+         */
+        
+        public function actionAdd()
+        {
+            $success = "";
+            $error="";
+            $countryObject = Country::model()->findAll();
+            if($_POST)
+            {
+                
+            }else{
+                $error = "Please fill all required(*) marked fields.";
+            }
+            
+            $this->render('user_add',array(
+			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success
+		));
+        }
 
-	/**
+        
+
+        /**
 	 * Performs the AJAX validation.
 	 * @param User $model the model to be validated
 	 */
