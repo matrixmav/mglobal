@@ -243,6 +243,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "user/index" => "Member Management",
                                     "user/wallet" => "Wallet",
                                     "user/genealogy" => "Genealogy binary",
+                                    "user/verificationapproval" => "Document Approval",
+                                    "user/testimonialapproval" => "Testimonial Approval",
                                 );
                                 $activecls = 'active';
                                 if ($curControllerLower == "user" || $curControllerLower == "admin") {
