@@ -30,7 +30,8 @@ return array(
             'homepageAds'=>array("960_133"=>"960_133","277_700"=>"277_700"),
     ),
 
-    'defaultPageSize' => 10,
+    'defaultPageSize' => 500,
+    'startDate' =>date('2014-m-d'),
     'clientInvoicePercentage'=>5,
     'pageSizeOptions'=>array(10=>10,20=>20,50=>50,100=>100),
     'timeZone' => array(

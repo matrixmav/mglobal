@@ -64,6 +64,11 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
+                    'name' => 'id',
+                    'header'=>'No.',
+                    'value'=>'$row+1',
+                ),
+                array(
                     'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->user->full_name)?$data->user->full_name:""',

@@ -87,7 +87,7 @@
                                     </td>
                                 </tr>
 
-                                <tr class="ItemConvertedSubtotal" id="coupon_discount" style="display:<?php (!empty($orderObject->transaction->coupon_discount)) ? "none" : "block"; ?>">
+                                <tr class="ItemConvertedSubtotal" id="coupon_discount" style="display:<?php if($orderObject->transaction->coupon_discount=='0') { echo "none"; }else{ echo "block";} ?>">
                                     <td class="itemText">
                                         <p>Coupon Discount:</p>
                                     </td>
