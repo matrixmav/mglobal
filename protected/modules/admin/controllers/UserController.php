@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet','list','debitwallet','genealogy','add','deleteuser','edit'),
+                                    'creditwallet','list','debitwallet','genealogy','add','deleteuser','edit','verificationapproval','testimonialapproval','changeapprovalstatus'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -343,7 +343,8 @@ class UserController extends Controller
           * Function to fetch verification document
           */
          
-         public function actionVerificationApproval() {
+         public function actionVerificationApproval()
+         {
             $model = new UserProfile();
             $pageSize = 10;
             $todayDate = date('Y-m-d');
@@ -362,6 +363,10 @@ class UserController extends Controller
                     'dataProvider'=>$dataProvider,
             ));
               
+         }
+         
+         public function actionChangeApprovalStatus() {
+             
          }
          /*
           * Function to fetch verification document
@@ -383,7 +388,7 @@ class UserController extends Controller
                 'criteria' => array(
                     'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),));
-            $this->render('verification',array(
+            $this->render('testimonial_approval',array(
                     'dataProvider'=>$dataProvider,
             ));
               
