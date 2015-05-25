@@ -130,7 +130,7 @@ else
 	<?php   
                  $BLOGGER_TEMPLATES .= ",".'525';
                  $arrBloggerTemplates = explode(",",$BLOGGER_TEMPLATES);
-                 var_dump($arrBloggerTemplates);
+                 
 		$iTemplateCounter = 1;
 		foreach($arrBloggerTemplates as $arrBloggerTemplate)
 		{
