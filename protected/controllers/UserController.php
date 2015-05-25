@@ -116,7 +116,6 @@ class UserController extends Controller
             $error = "";
             if($_POST){ 
                 
-               
                     $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
                     $masterPin = BaseClass::getUniqInt(5); 
                     $model = new User;
@@ -126,8 +125,18 @@ class UserController extends Controller
                     $model->master_pin = BaseClass::md5Encryption($masterPin);
                     $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
                     $model->created_at = date('Y-m-d') ;
-                    $model->role_id = 1 ; 
-
+                    if($_POST['admin']=='1')
+                    {
+                    $model->role_id = 3 ; 
+                    }else{
+                    $model->role_id = 1 ;    
+                    }
+                    if($_POST['admin']=='1')
+                    {
+                    $model->status = 1 ; 
+                    }else{
+                    $model->status = 0 ;    
+                    }
                     /* Condition for they have the child or not */
                     $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
                     //echo "<pre>"; print_r($geneObject);
@@ -268,7 +277,13 @@ class UserController extends Controller
     //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
     //                var_dump($config);
     //                CommonHelper::sendMail($config);
-                    $this->redirect(array('login','successMsg'=>$successMsg));                    
+                    echo $_POST['admin'];exit;
+                    if($_POST['admin']==1)
+                    {
+                    $this->redirect(array('admin/user/index','successMsg'=>$successMsg));
+                     }else{
+                    $this->redirect(array('login','successMsg'=>$successMsg));  
+                    }
  
              
             $spnId = "";
