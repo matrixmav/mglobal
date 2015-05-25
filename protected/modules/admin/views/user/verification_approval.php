@@ -45,6 +45,7 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
+        <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><div class="success" id="error_msg"><?php echo "Status Changed Successfully";?></div><?php }?>
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
@@ -63,6 +64,11 @@ $this->breadcrumbs = array(
             ),
             'columns' => array(
                 //'idJob',
+                 array(
+                   'name' => 'user_id',
+                    'header' => '<span style="white-space: nowrap;">Sl.No &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$row+1',
+                ),
                 array(
                     'name' => 'user_id',
                     'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
@@ -80,9 +86,9 @@ $this->breadcrumbs = array(
                     'value' => array($this,'gridIdImagePopup'),
                 ),
                 array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">City &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->city_name',
+                    'name' => 'created_at',
+                    'header' => '<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->created_at',
                 ),
                 array(
                     'name' => 'id',
