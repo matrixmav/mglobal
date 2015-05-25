@@ -127,6 +127,10 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/plugins/bootbox/bootbox.min.js"
         type="text/javascript"></script>
 
+        <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
+        
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {

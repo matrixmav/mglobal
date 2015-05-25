@@ -21,7 +21,7 @@ $this->breadcrumbs = array(
     
         <div class="expiration margin-topDefault confirmMenu">
                     
-    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report/transaction">
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/transaction/list">
     <div class="input-group input-large date-picker input-daterange">
         <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
         <span class="input-group-addon">
@@ -114,3 +114,10 @@ $this->breadcrumbs = array(
         ?>
     </div>
 </div>
+<script>
+    $(function () {
+                $('.datepicker').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
+            });
+    </script>
