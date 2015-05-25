@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet','list','debitwallet','genealogy','add','deleteuser','edit','verificationapproval','testimonialapproval','changeapprovalstatus'),
+                                    'creditwallet','list','debitwallet','genealogy','add','deleteuser','edit','verificationapproval','testimonialapproval','changeapprovalstatus','testimonialapprovalstatus'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -366,7 +366,16 @@ class UserController extends Controller
          }
          
          public function actionChangeApprovalStatus() {
-             
+           if($_REQUEST['id']) {
+                $userprofileObject = UserProfile::model()->findByPk($_REQUEST['id']);
+                if($userprofileObject->document_status == 1){
+                    $userprofileObject->document_status = 0;
+                } else {
+                    $userprofileObject->document_status = 1;
+                }
+                $userprofileObject->save(false);
+                $this->redirect(array('/admin/user/verificationapproval','successMsg'=>1));
+            }
          }
          /*
           * Function to fetch verification document
@@ -392,6 +401,20 @@ class UserController extends Controller
                     'dataProvider'=>$dataProvider,
             ));
               
+         }
+         
+         
+          public function actionTestimonialApprovalStatus() {
+           if($_REQUEST['id']) {
+                $userprofileObject = UserProfile::model()->findByPk($_REQUEST['id']);
+                if($userprofileObject->testimonial_status == 1){
+                    $userprofileObject->testimonial_status = 0;
+                } else {
+                    $userprofileObject->testimonial_status = 1;
+                }
+                $userprofileObject->save(false);
+                $this->redirect(array('/admin/user/testimonialapproval','successMsg'=>1));
+            }
          }
 
 
