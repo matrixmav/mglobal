@@ -21,6 +21,7 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
+          <?php if($_GET['successMsg']!=''){?><div class="success" id="error_msg"><?php echo "User Added Successfully";?></div><?php }?>
         <?php
         $test = "'sdsd'";
         $this->widget('zii.widgets.grid.CGridView', array(
@@ -77,7 +78,7 @@ $this->breadcrumbs = array(
 
                 array(
                     'class' => 'CButtonColumn',
-                    'template' => '{Change}',
+                    'template' => '{Change}{Edit}{Delete}',
                     'htmlOptions' => array('width' => '30%'),
                     'buttons' => array(
 //                        'Edit' => array(
@@ -91,7 +92,16 @@ $this->breadcrumbs = array(
                             'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
                         ),
                         
-                      
+                       'Edit' => array(
+                            'label' => Yii::t('translation', 'Edit'),
+                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'url' => 'Yii::app()->createUrl("admin/user/edit", array("id"=>$data->id))',
+                        ),
+                        'Delete' => array(
+                            'label' => Yii::t('translation', 'Delete'),
+                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'url' => 'Yii::app()->createUrl("admin/user/delete", array("id"=>$data->id))',
+                        ),
                         
                         
                     ),
