@@ -356,7 +356,7 @@ class UserController extends Controller
                 $status = $_POST['res_filter'];
                 $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                 'condition' => ('id_proof != "" AND address_proff != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND document_status = "' . $status . '"' ), 'order' => 'id DESC',   
+                 'condition' => ('id_proof != "" AND address_proff != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '"'  ), 'order' => 'id DESC',   
                 ), 'pagination' => array('pageSize' => 10),
 				));
             }else{
@@ -397,16 +397,17 @@ class UserController extends Controller
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
+                
                 $todayDate = $_POST['from'];
                 $fromDate = $_POST['to'];
                 $status = $_POST['res_filter'];
              $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                 'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND document_status = "' . $status . '"' ), 'order' => 'id DESC',   
+                 'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR testimonials !="" AND testimonial_status = "' . $status . '" ' ), 'order' => 'id DESC',   
                 ), 'pagination' => array('pageSize' => 10),
 				));
             }else{
-            
+              
              $dataProvider = new CActiveDataProvider($model, array(
                  'criteria' => array(
                  'condition' => ('testimonials != ""'), 'order' => 'id DESC',   
@@ -475,6 +476,8 @@ class UserController extends Controller
                 {
                   $this->redirect(array('/admin/user/index','successMsg'=>3));  
                 }
+           }else{
+               $error .="Please fill all required(*) marked fields.";
            }
              }
            
