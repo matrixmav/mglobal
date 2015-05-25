@@ -56,33 +56,38 @@ $this->breadcrumbs = array(
 <script>
      function validation()
     {
+        $("#old_error_msg").html("");
         if($("#old_password").val()=='')
         {
             $("#old_error_msg").html("Please enter your old password.");
             $("#old_password").focus();
             return false;
         }
+         $("#new_error_msg").html("");
          if($("#new_password").val()=='')
         {
             $("#new_error_msg").html("Please enter your new password.");
             $("#new_password").focus();
             return false;
         }
+        $("#confirm_error_msg").html("");
         if($("#confirm_password").val()=='')
         {
             $("#confirm_error_msg").html("Please enter your confirm password.");
             $("#confirm_password").focus();
             return false;
         }
+        $("#confirm_error_msg").html("");
         if($("#confirm_password").val() != $("#new_password").val())
         {
             $("#confirm_error_msg").html("New password and confirm password must be same.");
             $("#confirm_password").focus();
             return false;
         }
+        $("#master_error_msg").html("");
         if($("#master_pin").val()=='')
         {
-            $("#master_error_msg").html("Please enter your confirm password.");
+            $("#master_error_msg").html("Please enter master pin.");
             $("#master_pin").focus();
             return false;
         }
