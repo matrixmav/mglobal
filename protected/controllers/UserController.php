@@ -61,6 +61,7 @@ class UserController extends Controller
 
                 if((!empty($username)) && (!empty($password))  && (!empty($masterkey))) {
                     $getUserObject = User::model()->findByAttributes(array('name'=>$username,'status'=>1));
+                    
                     if(!empty($getUserObject)){
                         $flagPassword ='';
                         $flagMaster ='';
@@ -75,7 +76,19 @@ class UserController extends Controller
                         if($flagPassword == 'password' && $flagMaster == 'masterkey' ){
                             $identity = new UserIdentity($username,$password);                                                                               
                             if($identity->userAuthenticate())
+                                
+                            
                             Yii::app()->user->login($identity);
+                            $orderObject = Order::model()->findByAttributes(array('user_id'=>$getUserObject->id,'status'=>1));
+                            
+                            if($orderObject->package_id=='1' && Yii::app()->session['package_id']=='3' || Yii::app()->session['package_id']=='2')
+                            {
+                              $error .= "<p class='error'>Sorry you need to register with different email to puchase advance package.</p>";   
+                            }
+                            elseif($orderObject->package_id=='2' && Yii::app()->session['package_id']=='3')
+                            {
+                              $error .= "<p class='error'>Sorry you need to register with different email to puchase advance package.</p>";   
+                            }else{
                             Yii::app()->session['userid'] = $getUserObject->id;
                             Yii::app()->session['username'] = $getUserObject->name;
                             echo "1"; 
@@ -83,6 +96,7 @@ class UserController extends Controller
                                 $this->redirect("/package/domainsearch");  
                             } else {
                                 $this->redirect("/profile/dashboard");
+                            }
                             }
                         }else {
                            // echo "0"; 
