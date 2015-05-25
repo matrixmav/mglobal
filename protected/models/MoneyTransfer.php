@@ -118,4 +118,27 @@ class MoneyTransfer extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function createMoneyTransfer($postDataArray, $userObject,$transactionId){
+            
+            $userid = Yii::app()->session['userid'];
+            $createdTime = new CDbExpression('NOW()');
+            $moneyTransfertoObj = new MoneyTransfer;
+            $moneyTransfertoObj->from_user_id = $userid;
+            $moneyTransfertoObj->to_user_id = $userObject->id;
+            $moneyTransfertoObj->transaction_id = $transactionId;
+//            $moneyTransfertoObj->fund_type = $postDataArray['fund'];//1:RP,2:Cash
+            $moneyTransfertoObj->comment = $postDataArray['comment'];
+            $moneyTransfertoObj->status = 0;
+            $moneyTransfertoObj->wallet_id = $postDataArray['walletId'];
+            $moneyTransfertoObj->created_at = $createdTime;
+            $moneyTransfertoObj->updated_at = $createdTime;
+            //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
+            if (!$moneyTransfertoObj->save()) {
+                echo "<pre>";
+                print_r($moneyTransfertoObj->getErrors());
+                exit;
+            }
+            return $moneyTransfertoObj;
+        }
 }
