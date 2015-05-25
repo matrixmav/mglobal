@@ -63,7 +63,7 @@ class PackageController extends Controller
          * Function to add package in database
          */
         
-        public function actionPackageAdd()
+        public function actionAdd()
         {
             $error = "";
             $success = "";
@@ -102,7 +102,7 @@ class PackageController extends Controller
          * Function to Update package
          */
         
-       public function actionPackagedit() {
+       public function actionedit() {
          $error = "";
             $success = "";
             $packageObject = Package::model()->findByPK(array('id' => $_GET['id']));
@@ -136,9 +136,8 @@ class PackageController extends Controller
          /*
           * Function to fetch Package list
           */
-         public function actionPackageList() {
-             $error = "";
-             $success = "";
+         public function actionList() {
+              
            $model = new Package();
             $pageSize = 10;
             $todayDate = date('Y-m-d');
@@ -153,7 +152,7 @@ class PackageController extends Controller
             $dataProvider = new CActiveDataProvider($model, array('pagination' => array('pageSize' => $pageSize),));
            
             $this->render('package_list',array(
-                    'dataProvider'=>$dataProvider,
+                    'dataProvider'=>$dataProvider,'msg'=>0
             ));    
          }
          
