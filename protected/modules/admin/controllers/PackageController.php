@@ -28,7 +28,7 @@ class PackageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','packageadd','packagedit','packagelist',
+				'actions'=>array('index','view','add','edit','list',
                                     'changestatus','deletepackage'),
 				'users'=>array('*'),
 			),
@@ -125,7 +125,7 @@ class PackageController extends Controller
                 $packageObject->update();
                 
                 $success .= "Package Successfully Updated";
-                $this->redirect('packagelist',array('success'=>$success,'error'=>$error));
+                $this->redirect('list',array('success'=>$success,'error'=>$error));
                }    
             }
              
@@ -170,7 +170,8 @@ class PackageController extends Controller
                     $packageObject->status = 1;
                 }
                 $packageObject->save(false);
-                $this->redirect('/admin/package/packagelist');
+                //$this->redirect('/admin/package/list',array('msg'=>'2'));
+                $this->redirect(array('/admin/package/list','msg'=>2));
             }  
          }
          
@@ -181,7 +182,7 @@ class PackageController extends Controller
            if($_REQUEST['id']) {
                $packageObject = Package::model()->findByPK($_REQUEST['id']);
                 $packageObject->delete();
-                $this->redirect('/admin/package/packagelist',array('msg'=>'1'));
+                $this->redirect(array('/admin/package/list','msg'=>1));
             }  
          }
 
