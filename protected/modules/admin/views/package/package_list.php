@@ -45,6 +45,8 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='1'){ ?> <div class="success"><?php echo "Record Deleted Succesfully."?></div> <?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='2'){ ?> <div class="success"><?php echo "Status Changed Succesfully."?></div> <?php } ?>
         
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
@@ -76,13 +78,8 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'start_date',
-                    'header' => '<span style="white-space: nowrap;">Start Date&nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->start_date',
-                ),
-                array(
-                    'name' => 'end_date',
-                    'header' => '<span style="white-space: nowrap;">End Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->end_date',
+                    'header' => '<span style="white-space: nowrap;">Created Date&nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->created_at',
                 ),
                 
                 array(
@@ -110,12 +107,12 @@ $this->breadcrumbs = array(
                         'Edit' => array(
                             'label' => 'Edit',
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/package/packagedit", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/package/edit", array("id"=>$data->id))',
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/package/delete", array("id"=>$data->id))',
+                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this package!')"),
+                            'url' => 'Yii::app()->createUrl("admin/package/deletepackage", array("id"=>$data->id))',
                         ),
                     ),
                 ),
