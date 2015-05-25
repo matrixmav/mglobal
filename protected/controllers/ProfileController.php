@@ -260,9 +260,8 @@ class ProfileController extends Controller
         
         public function actionChangePassword() 
         {
-            
-            
-        }
+            $this->render('/user/change_password'); 
+         }
          
         
 
