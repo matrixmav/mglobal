@@ -335,6 +335,8 @@ class UserController extends Controller
         }
         
         public function actionBinary(){
+            $loggedInUserId = 3;            
+            
             $currentDate = '"2015-05-19"' ;
             $getOrderListObject = Order::model()->findAll(array('condition'=>'created_at = '. $currentDate  ));
             $arrLast = array();
@@ -342,23 +344,34 @@ class UserController extends Controller
             $percent = 10;
             
             foreach($getOrderListObject as $getOrderObject){  
+                
                 $userObject = Genealogy::getGenealogyByValue('user_id',$getOrderObject->user_id);                
+                
+                echo "<pre>"; print_r($userObject);exit;
+                if($userObject->parent == $loggedInUserId){
+                    echo "parent";exit;
+                }
+                                echo "<pre>"; print_r($userObject);exit;
+                                
+                                
                 $orderObject = Order::getOrderByValue('user_id',$getOrderObject->id);                
                 $packageObject = Package::model()->findByAttributes(array('id'=>$getOrderObject->package_id));
                 
                 array_push($arrLast,$userObject->parent);    
                 
-                if(count($arrLast) > 1 ){                    
+                if(count($arrLast) > 1 ){    
                     if($arrLast[0] == $arrLast[1]){                        
-                        if($arrAllLast[3] < $packageObject->amount){ // Check Condition                            
+                        echo $arrLast[0] ." user id will get Commission "; 
+                        if($arrAllLast[3] < $packageObject->amount){ // Check Condition                                                        
                             echo $totalCommission = BaseClass::getPercentage($arrAllLast[3] , $percent, 1 ); 
-                            echo " Carry Forward :". $arrAllLast[2] ;
+                            echo " Carry Forward : ". $arrAllLast[2] ." " ;
                             echo $packageObject->amount - $arrAllLast[3] ;
-                            
-                        }else{
+                            array_shift($arrLast); //empty the array
+                        }else{                            
                             echo $totalCommission = BaseClass::getPercentage($packageObject->amount , $percent, 1 ); 
-                            echo " Carry Forward :". $userObject->position ;
+                            echo " Carry Forward : ". $userObject->position ;
                             echo $arrAllLast[3] - $packageObject->amount ;
+                            array_shift($arrLast); //empty the array
                         }
                     }else{
                         array_shift($arrLast); //empty the array
@@ -366,6 +379,8 @@ class UserController extends Controller
                     }
                 }                
                 array_push($arrAllLast,$getOrderObject->user_id,$userObject->parent,$userObject->position,$packageObject->amount);
+            
+            echo "<br/>";    
             }            
             
             
