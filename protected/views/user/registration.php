@@ -9,7 +9,7 @@
         <!-- BEGIN CONTENT -->
             <div class="col-md-6 col-sm-6">
                 <h1>Create an account</h1>
-                <?php if($error){ echo $error; }  ?>
+                <?php if(isset($error)){ echo $error; }  ?>
                 <div class="content-form-page">
                     <div class="row">
                        <div class="col-md-12 col-sm-12">
