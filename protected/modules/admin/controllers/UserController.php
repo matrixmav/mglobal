@@ -448,9 +448,10 @@ class UserController extends Controller
              if($_REQUEST['id']) {  
              $userObject = User::model()->findByPK($_REQUEST['id']); 
               $profileObject = UserProfile::model()->findByAttributes(array('user_id'=>$_REQUEST['id']));
-           if($_REQUEST['id'] && $_POST) { 
-               
-           /*Updating User info*/
+            if($_REQUEST['id'] && $_POST) { 
+            if($_POST['UserProfile']['address']!='' && $_POST['UserProfile']['street']!='' && $_POST['UserProfile']['city_name']!='' && $_POST['UserProfile']['state_name']!='' && $_POST['UserProfile']['country_id']!='' && $_POST['UserProfile']['zip_code']!='' && $_POST['UserProfile']['phone']!='')   
+            {
+                /*Updating User info*/
             $userObject->full_name = $_POST['UserProfile']['full_name'];
             $userObject->email = $_POST['UserProfile']['email'];
             $userObject->phone = $_POST['UserProfile']['phone'];
@@ -479,6 +480,7 @@ class UserController extends Controller
            }else{
                $error .="Please fill all required(*) marked fields.";
            }
+             }
              }
            
            $countryObject = Country::model()->findAll();
