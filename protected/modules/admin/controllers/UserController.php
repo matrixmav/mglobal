@@ -350,7 +350,7 @@ class UserController extends Controller
            $countryObject = Country::model()->findAll();
             
             $this->render('user_edit',array(
-			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success
+			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success,'userObject'=>$userObject
 		));
              
          }
