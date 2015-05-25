@@ -56,8 +56,7 @@ $this->breadcrumbs = array(
         </div>
     </form>
 </div>
-<a href="skype:ramhemareddy?call">Link will initiate Skype
-   to call my Skype username!</a>
+
 <script>
      function validation()
     {
