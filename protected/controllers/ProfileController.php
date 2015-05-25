@@ -260,7 +260,17 @@ class ProfileController extends Controller
         
         public function actionChangePassword() 
         {
-            $this->render('/user/change_password'); 
+            $error = "";
+            $success = "";
+            if($_POST)
+            {
+                
+            }else{
+                $error .="Please fill all required(*) marked fields.";
+            }
+            $this->render('/user/change_password',array(
+			'error'=>$error,
+		));
          }
          
         
