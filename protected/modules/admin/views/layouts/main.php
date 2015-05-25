@@ -382,8 +382,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "/package/packageadd" => "Package Add",
-                                    "/package/packagelist" => "Package List",
+                                    "package/add" => "Add",
+                                    "package/list" => "List",
                                     
                                 );
                                 ?>
