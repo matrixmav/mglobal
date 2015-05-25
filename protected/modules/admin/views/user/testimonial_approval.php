@@ -75,15 +75,11 @@ $this->breadcrumbs = array(
                     'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
                 
+                
                 array(
                     'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">Address Proof &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => array($this,'gridAddressImagePopup'),
-                ),
-                array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">Id Proof &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => array($this,'gridIdImagePopup'),
+                    'header' => '<span style="white-space: nowrap;">Testimonial &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->testimonials',
                 ),
                 array(
                     'name' => 'created_at',
@@ -107,7 +103,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'status',
-                    'value' => '($data->document_status == 1) ? Yii::t(\'translation\', \'Approved\') : Yii::t(\'translation\', \'Pending\')',
+                    'value' => '($data->testimonial_status == 1) ? Yii::t(\'translation\', \'Approved\') : Yii::t(\'translation\', \'Pending\')',
                 ),
                  array(
                     'class' => 'CButtonColumn',
@@ -118,7 +114,7 @@ $this->breadcrumbs = array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/user/changeapprovalstatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/user/testimonialapprovalstatus", array("id"=>$data->id))',
                         ),
                          
                     ),
