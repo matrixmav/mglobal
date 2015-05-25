@@ -400,12 +400,20 @@ class UserController extends Controller
                 $todayDate = $_POST['from'];
                 $fromDate = $_POST['to'];
                 $status = $_POST['res_filter'];
-            }
-
-            $dataProvider = new CActiveDataProvider($model, array(
+             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => $pageSize),));
+                 'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND document_status = "' . $status . '"' ), 'order' => 'id DESC',   
+                ), 'pagination' => array('pageSize' => 10),
+				));
+            }else{
+            
+             $dataProvider = new CActiveDataProvider($model, array(
+                 'criteria' => array(
+                 'condition' => ('testimonials != ""'), 'order' => 'id DESC',   
+                ),
+                  'pagination' => array('pageSize' => 10),
+				));
+            }
             $this->render('testimonial_approval',array(
                     'dataProvider'=>$dataProvider,
             ));
