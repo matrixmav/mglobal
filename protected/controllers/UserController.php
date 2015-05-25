@@ -98,7 +98,7 @@ class UserController extends Controller
  }
         
         public function actionRegistration(){
-            echo "sasa";exit;
+            
             $error = "";
             if($_POST){ 
                 
