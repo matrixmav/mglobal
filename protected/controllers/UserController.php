@@ -351,7 +351,7 @@ class UserController extends Controller
                 if($userObject->parent == $loggedInUserId){
                     echo "parent";exit;
                 }
-                                echo "<pre>"; print_r($userObject);exit;
+                echo "<pre>"; print_r($userObject);exit;
                                 
                                 
                 $orderObject = Order::getOrderByValue('user_id',$getOrderObject->id);                
