@@ -8,31 +8,18 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/buildtemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Add Template Header</legend>
             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Upload css zip folder<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="lastname">Upload zip folder includes(css,images,js)<span class="require">*</span></label>
                 <div class="col-lg-8">
                   <input type="file" name="cssfolder" id="cssfolder">
                     <span id="header_code_error"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Upload images zip folder<span class="require">*</span></label>
-                <div class="col-lg-8">
-                 <input type="file" name="imagesfolder" id="imagesfolder">
-                    <span id="header_code_error"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Upload js zip folder<span class="require">*</span></label>
-                <div class="col-lg-8">
-                    <input type="file" name="jsfolder" id="jsfolder">
-                    <span id="header_code_error"></span>
-                </div>
-            </div>
+            
             
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Category<span class="require">*</span></label>
@@ -91,18 +78,7 @@ $this->breadcrumbs = array(
       $("#cssfolder").focus();            
       return false;
     }
-     $("#imagesfolder_error").html("");
-      if ($("#imagesfolder").val() == "") {
-      $("#imagesfolder_error").html("Please upload images zip folder.");
-      $("#imagesfolder").focus();            
-      return false;
-    }
-     $("#jsfolder_error").html("");
-      if ($("#jsfolder").val() == "") {
-      $("#jsfolder_error").html("Please upload js zip folder.");
-      $("#jsfolder").focus();            
-      return false;
-    }  
+     
       $("#category_error").html("");
       if ($("#category").val() == "") {
       $("#category_error").html("Please select template category");
