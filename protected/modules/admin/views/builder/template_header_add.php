@@ -48,21 +48,21 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" ></textarea>
+                    <textarea id="header_code" class="form-control" name="Template[header_code]" style="width: 482px; height: 248px;"></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="body_code" class="form-control" name="Template[body_code]" ></textarea>
+                    <textarea id="body_code" class="form-control" name="Template[body_code]" style="width: 482px; height: 248px;"></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" ></textarea>
+                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" style="width: 482px; height: 248px;"></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
