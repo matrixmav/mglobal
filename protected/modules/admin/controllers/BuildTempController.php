@@ -109,11 +109,35 @@ class BuildTempController extends Controller {
 				));
     }
 
-    public function functionName($param) {
-
-        $categoryObject = BuildCategory::model()->findByPk($_REQUEST['id']);
-    }
-
+     /*
+          * Function to fetch Package list
+          */
+         public function actionChangeStatus() {
+             
+            
+           if($_REQUEST['id']) {
+               $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
+                if($categoryObject->status == 1){
+                    $categoryObject->status = 0;
+                } else {
+                    $categoryObject->status = 1;
+                }
+                $categoryObject->save(false);
+                //$this->redirect('/admin/package/list',array('msg'=>'2'));
+                $this->redirect(array('/admin/buildtemp/categorylist','msg'=>4));
+            }  
+         }
+         
+         /*
+          * Function to Delete Bilder Category list
+          */
+         public function actionDeleteCategory() {
+           if($_REQUEST['id']) {
+               $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
+                $categoryObject->delete();
+                $this->redirect(array('/admin/buildtemp/categorylist','msg'=>3));
+            }  
+         }
     // Uncomment the following methods and override them if needed
     /*
       public function filters()
