@@ -11,10 +11,10 @@ $this->breadcrumbs = array(
     <form action="/admin/buildtemp/templatebodyedit?b_id=<?php echo $bodyObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
-            <legend>Edit Template Header</legend>
+            <legend>Edit Template Body</legend>
             
             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="body_code" class="form-control" name="Template[body_code]" ><?php echo (!empty($bodyObject->header_content)) ? $bodyObject->header_content : ""; ?></textarea>
                     <span id="header_code_error"></span>

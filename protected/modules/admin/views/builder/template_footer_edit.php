@@ -11,10 +11,10 @@ $this->breadcrumbs = array(
     <form action="/admin/buildtemp/templatefooteredit?f_id=<?php echo $footerObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
-            <legend>Edit Template Header</legend>
+            <legend>Edit Template Footer</legend>
             
             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="footer_code" class="form-control" name="Template[footer_code]" ><?php echo (!empty($footerObject->header_content)) ? $footerObject->header_content : ""; ?></textarea>
                     <span id="header_code_error"></span>
