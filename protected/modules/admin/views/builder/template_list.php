@@ -21,12 +21,9 @@ $this->breadcrumbs = array(
  
 <div class="row">
     <div class="col-md-12">
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='1'){ ?> <div class="success"><?php echo "Category Added Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='2'){ ?> <div class="success"><?php echo "Category Updated Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='3'){ ?> <div class="success"><?php echo "Record Deleted Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='4'){ ?> <div class="success"><?php echo "Status Changed Succesfully."?></div> <?php } ?>
-        
+       
         <?php
+    
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
             'dataProvider' => $dataProvider,
@@ -45,15 +42,15 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
-                    'name' => '$data->category->name',
+                    'name' => '$data->id',
                     'header' => '<span style="white-space: nowrap;">Category &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->category->name',
                 ),
                 
                 array(
-                    'name' => '$data->header->name',
+                    'name' => '$data->id',
                     'header' => '<span style="white-space: nowrap;">Template&nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->header->name',
+                    'value' => '$data->header->template_title',
                 ),
                 
                 
@@ -84,12 +81,12 @@ $this->breadcrumbs = array(
                         'Edit' => array(
                             'label' => 'Edit',
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/categoryedit", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/buildtemp/templateheaderedit", array("id"=>$data->id))',
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
                             'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this category?')"),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/deletecategory", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/buildtemp/deletetemplate", array("id"=>$data->id))',
                         ),
                     ),
                 ),
