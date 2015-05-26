@@ -164,16 +164,20 @@ class BuildTempController extends Controller {
              $success = "";
         if ($_REQUEST['id']) {
             $headerObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
-        if (!empty($_POST['Template']))
+            $headerupdateObject  = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
+            if($_POST)
+            {
+        if (!empty($_POST['Template']['header_code'] !='' && $_POST['Template']['template_title'] !=''))
             {    
-            $headerObject->header_content = $_POST['Template']['header_code'];
-            $headerObject->template_title = $_POST['Template']['template_title'];
-            $headerObject->updated_at = date('Y-m-d');
-            if($headerObject->update()){
+            $headerupdateObject->header_content = $_POST['Template']['header_code'];
+            $headerupdateObject->template_title = $_POST['Template']['template_title'];
+            $headerupdateObject->updated_at = date('Y-m-d');
+            if($headerupdateObject->update()){
              $success .= "Header updated successfully";       
             }
             }else{
             $error .= "Please fill all required(*) marked fields.";    
+            }
             }
         }
         $categoryObject = BuildCategory::model()->findAll();
@@ -190,6 +194,20 @@ class BuildTempController extends Controller {
              $success = "";
         if ($_REQUEST['id']) {
             $bodyObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
+            $bodyupdateObject  = BuildTempBody::model()->findByPk($_REQUEST['b_id']);
+            if($_POST)
+            {
+           if (!empty($_POST['Template']['body_code'] !=''))
+            {    
+            $bodyupdateObject->body_content = $_POST['Template']['body_code'];
+            $bodyupdateObject->updated_at = date('Y-m-d');
+            if($bodyupdateObject->update()){
+             $success .= "Body updated successfully";       
+            }
+            }else{
+            $error .= "Please fill all required(*) marked fields.";    
+            }
+            }
         }
               $this->render('/builder/template_body_edit',array(
                     'bodyObject'=>$bodyObject,'error'=>$error,'success'=>$success
@@ -203,7 +221,21 @@ class BuildTempController extends Controller {
              $error = "";
              $success = "";
         if ($_REQUEST['id']) {
-            $footerObject  = BuildCategory::model()->findByPk($_REQUEST['id']);
+            $footerObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
+            $footerupdateObject  = BuildTempFooter::model()->findByPk($_REQUEST['f_id']);
+           if($_POST)
+            {
+        if (!empty($_POST['Template']['footer_code'] !=''))
+            {    
+            $footerupdateObject->footer_content = $_POST['Template']['footer_code'];
+            $footerupdateObject->updated_at = date('Y-m-d');
+            if($footerupdateObject->update()){
+             $success .= "Footer updated successfully";       
+            }
+            }else{
+            $error .= "Please fill all required(*) marked fields.";    
+            }
+            }
         }
               $this->render('/builder/template_footer_edit',array(
                     'footerObject'=>$footerObject,'error'=>$error,'success'=>$success
