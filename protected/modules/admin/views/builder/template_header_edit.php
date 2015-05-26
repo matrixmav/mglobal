@@ -17,7 +17,7 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Category<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <select name="category" id="category">
+                    <select name="Template[category]" id="category">
                         <option value="">Select Category</option>
                         <?php if(!empty($categoryObject))
                         {
