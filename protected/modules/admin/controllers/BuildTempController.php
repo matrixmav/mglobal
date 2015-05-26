@@ -64,6 +64,7 @@ class BuildTempController extends Controller {
         if ($_POST) {
             if ($_POST['Category']['name'] != '') {
                 $categoryObject->name = $_POST['Category']['name'];
+                $categoryObject->status = 1;
                 $categoryObject->created_at = date('Y-m-d');
                 if ($categoryObject->save(false)) {
                     $this->redirect(array('categorylist', 'msg' => 1));
@@ -107,6 +108,9 @@ class BuildTempController extends Controller {
        $dataProvider = new CActiveDataProvider('BuildCategory', array(
                  'pagination' => array('pageSize' => 10),
 				));
+       $this->render('/builder/category_list',array(
+                    'dataProvider'=>$dataProvider,
+            ));
     }
 
      /*
