@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Account' => array('profile/testimonial'),
+    'Account' => array('profile/updateprofile'),
     'Testimonial',
 );
 

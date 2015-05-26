@@ -73,6 +73,7 @@ class DefaultController extends Controller
                             if($identity->adminAuthenticate())
                             Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
+                            Yii::app()->session['username'] = "mGlobaly";
                             echo "1";
                         } else {
                             echo "0";
@@ -249,5 +250,7 @@ class DefaultController extends Controller
             Yii::app()->session['timestamp'] = $timing; //set new timestamp
         }
     }
+    
+
 
 }

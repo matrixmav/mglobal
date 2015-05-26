@@ -64,11 +64,6 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                 array(
-                    'name' => 'id',
-                    'header'=>'No.',
-                    'value'=>'$row+1',
-                ),
-                array(
                     'name' => 'name',
                     'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->name',
@@ -88,11 +83,7 @@ $this->breadcrumbs = array(
                     'header' => '<span style="white-space: nowrap;">End Date &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->end_date',
                 ),
-                array(
-                    'name' => 'coupon_code',
-                    'header' => '<span style="white-space: nowrap;">Coupon Code &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->coupon_code',
-                ),
+                
                
                 array(
                     'name' => 'Description',

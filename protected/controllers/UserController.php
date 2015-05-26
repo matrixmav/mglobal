@@ -77,6 +77,7 @@ class UserController extends Controller
                             if($identity->userAuthenticate())
                             Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
+                            Yii::app()->session['username'] = $getUserObject->name;
                             echo "1"; 
                             if(Yii::app()->session['package_id']!='') {
                                 $this->redirect("/package/domainsearch");  
@@ -96,8 +97,8 @@ class UserController extends Controller
                 $this->render("login",array("msg"=>$error));
  }
         
-        /* User Registration Strat Here */
         public function actionRegistration(){
+            
             $error = "";
             if($_POST){ 
                 
@@ -111,7 +112,18 @@ class UserController extends Controller
                     $model->master_pin = BaseClass::md5Encryption($masterPin);
                     $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
                     $model->created_at = date('Y-m-d') ;
-                    $model->role_id = 1 ; 
+                    if($_POST['admin']==1)
+                    {
+                    $model->role_id = 3 ;
+                    }else{
+                    $model->role_id = 2 ;    
+                    }
+                    if($_POST['admin']==1)
+                    {
+                    $model->status = 3 ;
+                    }else{
+                    $model->status = 2 ;    
+                    }
 
                     /* Condition for they have the child or not */
                     $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
@@ -139,7 +151,7 @@ class UserController extends Controller
                                     break;
                                 }
                             }
- 
+
                     } 
                 
                 }else{
@@ -205,6 +217,7 @@ class UserController extends Controller
 //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
 //                var_dump($config);
 //                CommonHelper::sendMail($config);
+
                 $this->render('login', array('successMsg'=> $successMsg));
                 $this->redirect('login');
      
@@ -250,14 +263,26 @@ class UserController extends Controller
 //                CommonHelper::sendMail($config);
                 $this->redirect(array('login','successMsg'=>$successMsg));                    
 
+                //$this->render('login', array('successMsg'=> $successMsg));
+                //$this->redirect('login');
+     
+                    if($_POST['admin']==1)
+                    {
+                    $this->redirect(array('admin/user/index','successMsg'=>1));
+                     }else{
+                    $this->redirect(array('login','successMsg'=>$successMsg)); 
+                     }
+
             } 
             $spnId = "";
             if($_GET){
                 $spnId = $_GET['spid'];
             }
             $countryObject = Country::model()->findAll();
+            
             $this->render('registration',array('countryObject'=>$countryObject,'spnId'=>$spnId,'error'=>$error));
         }
+
 
         /* User Forget Password Strat Here */
         public function actionForgetPassword(){

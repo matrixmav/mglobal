@@ -123,13 +123,21 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="/metronic/assets/scripts/core/app.js"></script>
+       <script type="text/javascript" src="/chat-admin/js/chat.js"></script>
+       <script type="text/javascript" src="/js/registration.js?ver=1432543968"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
-                App.init();
-//                checkLoginTime();
+              App.init();
+                //checkLoginTime();
             });
-
+          function OpenChatBox(userID)
+            {
+                 
+              chatWith(userID);
+            }
         </script>
+        
+        <link type="text/css" rel="stylesheet" media="all" href="/chat-admin/css/chat.css" />
         <!-- END JAVASCRIPTS -->
 
 
@@ -213,6 +221,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!-- END HEADER -->
         <div class="clearfix"></div>
+      
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
@@ -234,6 +243,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "user/index" => "Member Management",
                                     "user/wallet" => "Wallet",
                                     "user/genealogy" => "Genealogy binary",
+                                    "user/verificationapproval" => "Document Approval",
+                                    "user/testimonialapproval" => "Testimonial Approval",
                                 );
                                 $activecls = 'active';
                                 if ($curControllerLower == "user" || $curControllerLower == "admin") {
@@ -370,6 +381,49 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                            
+                            $reservation_pmenu = 7;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "package/add" => "Add",
+                                    "package/list" => "List",
+                                    
+                                );
+                                ?>
+                                <li
+                                    class="<?php echo (($curControllerLower == 'package') || ($curControllerLower == 'package')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Package</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'package') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($ctName == "report" && $curControllerLower == "package")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
                                     
                             $bases_pmenu = 4;
                             
@@ -481,7 +535,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <?php
                                         $this->widget('zii.widgets.CBreadcrumbs', array(
                                             'homeLink' => CHtml::link('User', array(
-                                                '/user'
+                                                '/admin/user'
                                             )),
                                             'links' => $this->breadcrumbs
                                         ));

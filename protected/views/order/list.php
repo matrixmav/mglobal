@@ -40,6 +40,12 @@ $this->menu=array(
 	),	
 	'columns'=>array(
 		//'idJob',
+            
+                array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$row+1',
+		),
 		array(
                     'name'=>'package_id',
                     'header'=>'<span style="white-space: nowrap;">Package Name &nbsp; &nbsp; &nbsp;</span>',
@@ -72,6 +78,7 @@ $this->menu=array(
 		),
 		array(
 			'name'=>'status',
+                        'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
 			'value'=>'($data->status == 1) ? Yii::t(\'translation\', \'Completed\') : Yii::t(\'translation\', \'Pending\')',
 		),
              
@@ -81,8 +88,8 @@ $this->menu=array(
 			'htmlOptions'=>array('width'=>'23%'),
 			'buttons'=>array(
 				'Builder' => array(
-					'label'=>'Builder',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15','target'=>'_blank'),
+					'label'=>'Visit Site',
+					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
 					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/redirect/", array("id"=>$data->id)): ""',
 				),
                              
@@ -96,7 +103,7 @@ $this->menu=array(
 			'buttons'=>array(
 				'Invoice' => array(
 					'label'=>'Invoice',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15','target'=>'_blank'),
+					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
 					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice?id=$data->id"): ""',
 				),
                        ),

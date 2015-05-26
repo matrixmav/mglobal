@@ -2,9 +2,13 @@
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Wallet Summery',
+ 
+$this->breadcrumbs = array(
+    'Summary' => array('wallet/rpwallet'),
+    'RPWallet',
 );
+ 
+ 
 
 $this->menu=array(
 	array('label'=>'Create Order', 'url'=>array('create')),
@@ -40,43 +44,42 @@ $this->menu=array(
 	),	
 	'columns'=>array(
 		//'idJob',
-		array(
-                    'name'=>'package_id',
-                    'header'=>'<span style="white-space: nowrap;">Package Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->package->name)?$data->package->name:""',
-		),
-                array(
-                    'name'=>'domain',
-                    'header'=>'<span style="white-space: nowrap;">Domain &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->domain',
-		),
-                array(
-                    'name'=>'start_date',
-                    'header'=>'<span style="white-space: nowrap;">Start Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->status == 1) ? $data->start_date : "N/A"',
-		),
-                array(
-                    'name'=>'end_date',
-                    'header'=>'<span style="white-space: nowrap;">End Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->status == 1) ? $data->end_date : "N/A"',
+             array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$row+1',
 		),
 		array(
-			'name'=>'status',
-			'value'=>'($data->status == 1) ? Yii::t(\'translation\', \'Completed\') : Yii::t(\'translation\', \'Pending\')',
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Transfer To &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data->touser->name)? ucwords($data->touser->name):""',
 		),
-             
-		array( 
-			'class'=>'CButtonColumn',
-			'template'=>'{Builder}',
-			'htmlOptions'=>array('width'=>'23%'),
-			'buttons'=>array(
-				'Builder' => array(
-					'label'=>'Builder',
-					'options'=>array('class'=>'btn purple fa fa-edit margin-right15'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/redirect/", array("id"=>$data->id)): ""',
-				),
-			),
+            array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Transfer From &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data->fromuser->name)? ucwords($data->fromuser->name):""',
 		),
+                array(
+                    'name'=>'transaction_id',
+                    'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data->transaction->paid_amount)? number_format($data->transaction->paid_amount,2):""',
+		),
+            array(
+                    'name'=>'created_at',
+                    'header'=>'<span style="white-space: nowrap;">Transfer Date &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$data->created_at',
+		),
+             array(
+                    'name'=>'status',
+                    'header'=>'<span style="white-space: nowrap;">Transfer Status &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->status == 1) ? "Transfered" : "Pending"',
+		),
+             array(
+                    'name'=>'comment',
+                    'header'=>'<span style="white-space: nowrap;">Comment &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$data->comment',
+		),
+		 
 	),
 )); ?>
                     

@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','changestatus','wallet',
-                                    'creditwallet','list','debitwallet','genealogy'),
+                                    'creditwallet','list','debitwallet','genealogy','add','deleteuser','edit','verificationapproval','testimonialapproval','changeapprovalstatus','testimonialapprovalstatus'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -157,6 +157,7 @@ class UserController extends Controller
         public function actionIndex() {
             $model = new User;
             $pageSize = 10;
+            $successMsg = "";
             
             $dataProvider=new CActiveDataProvider('User', array(
                         'pagination' => array('pageSize' => $pageSize),
@@ -165,7 +166,7 @@ class UserController extends Controller
                 $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
             }
             $this->render('index',array(
-                    'dataProvider'=>$dataProvider,
+                    'dataProvider'=>$dataProvider,'successMsg'=>$successMsg
             )); 
         }
 
@@ -304,8 +305,194 @@ class UserController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+        
+        /*
+         * Function to add multiple admin by superadmin
+         */
+        
+        public function actionAdd()
+        {
+            $success = "";
+            $error="";
+            $countryObject = Country::model()->findAll();
+            
+            $this->render('user_add',array(
+			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success
+		));
+        }
+        
+       
+         
+         /*
+          * Function to Delete Users from list
+          */
+         public function actionDeleteUser() {
+           if($_REQUEST['id']) {
+                $userObject = User::model()->findByPK($_REQUEST['id']);
+                $userprofileObject = UserProfile::model()->findByAttributes(array('user_id'=>$_REQUEST['id']));
+                $userObject->delete();
+                if($userprofileObject)
+                {
+                $userprofileObject->delete();
+                }
+                $this->redirect(array('/admin/user/index','successMsg'=>2));
+            }  
+         }
+         
+         /*
+          * Function to fetch verification document
+          */
+         
+         public function actionVerificationApproval()
+         {
+            $model = new UserProfile();
+            $pageSize = 10;
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+                $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                 'condition' => ('id_proof != "" AND address_proff != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '"'  ), 'order' => 'id DESC',   
+                ), 'pagination' => array('pageSize' => 10),
+				));
+            }else{
+            
+             $dataProvider = new CActiveDataProvider($model, array(
+                 'criteria' => array(
+                 'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',   
+                ),
+                  'pagination' => array('pageSize' => 10),
+				));
+            }
+            $this->render('verification_approval',array(
+                    'dataProvider'=>$dataProvider,
+            ));
+              
+         }
+         
+         public function actionChangeApprovalStatus() {
+           if($_REQUEST['id']) {
+                $userprofileObject = UserProfile::model()->findByPk($_REQUEST['id']);
+                if($userprofileObject->document_status == 1){
+                    $userprofileObject->document_status = 0;
+                } else {
+                    $userprofileObject->document_status = 1;
+                }
+                $userprofileObject->save(false);
+                $this->redirect(array('/admin/user/verificationapproval','successMsg'=>1));
+            }
+         }
+         /*
+          * Function to fetch verification document
+          */
+         
+         public function actionTestimonialApproval() {
+             $model = new UserProfile();
+            $pageSize = 10;
+            $todayDate = date('Y-m-d');
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+             $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                 'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR testimonials !="" AND testimonial_status = "' . $status . '" ' ), 'order' => 'id DESC',   
+                ), 'pagination' => array('pageSize' => 10),
+				));
+            }else{
+              
+             $dataProvider = new CActiveDataProvider($model, array(
+                 'criteria' => array(
+                 'condition' => ('testimonials != ""'), 'order' => 'id DESC',   
+                ),
+                  'pagination' => array('pageSize' => 10),
+				));
+            }
+            $this->render('testimonial_approval',array(
+                    'dataProvider'=>$dataProvider,
+            ));
+              
+         }
+         
+         
+          public function actionTestimonialApprovalStatus() {
+           if($_REQUEST['id']) {
+                $userprofileObject = UserProfile::model()->findByPk($_REQUEST['id']);
+                if($userprofileObject->testimonial_status == 1){
+                    $userprofileObject->testimonial_status = 0;
+                } else {
+                    $userprofileObject->testimonial_status = 1;
+                }
+                $userprofileObject->save(false);
+                $this->redirect(array('/admin/user/testimonialapproval','successMsg'=>1));
+            }
+         }
 
-	/**
+
+
+         /*
+          * Function to update user records
+          */
+         public  function actionEdit()
+         {
+            
+             $error ="";
+             $success ="";
+             if($_REQUEST['id']) {  
+             $userObject = User::model()->findByPK($_REQUEST['id']); 
+              $profileObject = UserProfile::model()->findByAttributes(array('user_id'=>$_REQUEST['id']));
+            if($_REQUEST['id'] && $_POST) { 
+            if($_POST['UserProfile']['address']!='' && $_POST['UserProfile']['street']!='' && $_POST['UserProfile']['city_name']!='' && $_POST['UserProfile']['state_name']!='' && $_POST['UserProfile']['country_id']!='' && $_POST['UserProfile']['zip_code']!='' && $_POST['UserProfile']['phone']!='')   
+            {
+                /*Updating User info*/
+            $userObject->full_name = $_POST['UserProfile']['full_name'];
+            $userObject->email = $_POST['UserProfile']['email'];
+            $userObject->phone = $_POST['UserProfile']['phone'];
+            $userObject->date_of_birth = $_POST['UserProfile']['date_of_birth'];
+            $userObject->skype_id = $_POST['UserProfile']['skype_id'];
+            $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
+            $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
+            $userObject->updated_at = new CDbExpression('NOW()');
+            $userObject->update();
+                
+           /*Updating User profile data*/
+                
+                $profileObject->address = $_POST['UserProfile']['address'];
+                $profileObject->street = $_POST['UserProfile']['street'];
+                $profileObject->city_name = $_POST['UserProfile']['city_name'];
+                $profileObject->state_name = $_POST['UserProfile']['state_name'];
+                $profileObject->country_id = $_POST['UserProfile']['country_id'];
+                $profileObject->zip_code = $_POST['UserProfile']['zip_code'];
+
+                $profileObject->updated_at = new CDbExpression('NOW()');
+                $profileObject->update();
+                if($userObject->update() && $profileObject->update() )
+                {
+                  $this->redirect(array('/admin/user/index','successMsg'=>3));  
+                }
+           }else{
+               $error .="Please fill all required(*) marked fields.";
+           }
+             }
+             }
+           
+           $countryObject = Country::model()->findAll();
+            
+            $this->render('user_edit',array(
+			'countryObject'=>$countryObject,'error'=>$error,'success'=>$success,'userObject'=>$userObject,'profileObject'=>$profileObject
+		));
+             
+         }
+
+
+                 /**
 	 * Performs the AJAX validation.
 	 * @param User $model the model to be validated
 	 */
@@ -316,5 +503,35 @@ class UserController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+        public function getOnClickEvent($data, $row){
+            $fullName = "'".$data->name."'";
+    echo '<a onclick="OpenChatBox('.$fullName.')">Click to chat</a>';
+}
+ protected function gridAddressImagePopup($data,$row)
+	{ 	
+            $bigImagefolder=Yii::app()->params->imagePath['verificationDoc'];// folder with uploaded files
+            echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->address_proff</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog" style="width:500px;">
+                        <div class="modal-content">
+                                <div class="modal-body" style="width: 500px;overflow: auto;height: 500px;padding: 0;">
+                                         <img src="'.$bigImagefolder.$data->address_proff.'">
+                                                         </div>
+                            </div>
+                        </div>
+                </div>';
+	}
+        protected function gridIdImagePopup($data,$row)
+	{ 	
+            $bigImagefolder=Yii::app()->params->imagePath['verificationDoc'];// folder with uploaded files
+            echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->id_proof</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog" style="width:500px;">
+                        <div class="modal-content">
+                                <div class="modal-body" style="width: 500px;overflow: auto;height: 500px;padding: 0;">
+                                         <img src="'.$bigImagefolder.$data->id_proof.'">
+                                                         </div>
+                            </div>
+                        </div>
+                </div>';
 	}
 }

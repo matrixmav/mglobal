@@ -1,0 +1,38 @@
+[17-Feb-2015 14:43:49] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:44:30] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:44:33] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:44:48] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:45:18] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:45:48] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:45:50] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:45:50] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:46:07] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:46:09] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:46:59] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:46:59] PHP Parse error:  syntax error, unexpected T_ECHO, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:49:11] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5
+[17-Feb-2015 14:49:25] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5
+[17-Feb-2015 14:50:10] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:50:11] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 8
+[17-Feb-2015 14:50:36] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5
+[17-Feb-2015 14:50:38] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5
+[17-Feb-2015 14:50:55] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:50:57] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:50:57] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:50:57] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:51:13] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:51:14] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:51:15] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:51:17] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 6
+[17-Feb-2015 14:51:32] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5
+[17-Feb-2015 14:51:33] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_FUNCTION in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5
+[17-Feb-2015 14:51:54] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:52:09] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:52:10] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:52:10] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:52:13] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:52:27] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:52:49] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:52:51] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 4
+[17-Feb-2015 14:53:25] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5
+[17-Feb-2015 14:53:28] PHP Fatal error:  Class 'ChatBase' not found in /home2/urwebby/public_html/demo/superadmin/chat/php/classes/ChatLine.class.php on line 5

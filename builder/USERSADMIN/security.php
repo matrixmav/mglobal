@@ -9,9 +9,9 @@ $_SESSION['order_id'] = $_GET['order_id'];
 $_SESSION['username'] = $_SESSION['username'];
 }*/
 unset($_COOKIE);
-$strCookie =  $_SESSION['username']."~".md5('12345')."~".(time()+2400);
+$strCookie =  $_SESSION['username1']."~".md5('12345')."~".(time()+2400);
 setcookie("Auth",$strCookie);
-$AuthUserName = $_SESSION['username'] ;
+$AuthUserName = $_SESSION['username1'] ;
 $AuthGroup = "Basic";
 /*$strSelect="SELECT * FROM ".$DBprefix."admin_users WHERE username='".$_SESSION['username']."' and password='".md5('12345')."'";
 $LoginResult=mysql_query($strSelect);

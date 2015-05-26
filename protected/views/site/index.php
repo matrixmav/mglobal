@@ -630,7 +630,8 @@
              <?php echo $package['Description'];?>
             </div>
             <div class="pricing-footer">
-              <a class="btn btn-default" href="javascript:void(0);">Sign Up</a>
+                
+            <?php if(Yii::app()->session['userid']!=''){?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $package['id']; ?>"><?php }else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $package['id']; ?>"><?php }?>Pick Now</a>
             </div>
                 </div>
                     </a>
