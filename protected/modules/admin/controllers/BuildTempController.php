@@ -352,6 +352,7 @@ class BuildTempController extends Controller {
                 }
                 }
                 $model = new BuildTemp;
+                $model->template_id = $headeraddObject->id;
                 $model->temp_header_id = $headeraddObject->id;
                 $model->temp_body_id = $bodyaddObject->id;
                 $model->temp_footer_id = $footeraddObject->id;
