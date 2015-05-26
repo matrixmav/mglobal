@@ -32,7 +32,7 @@ class BuildTempController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist','deletecategory','changestatus'),
+                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist','deletecategory','changestatus','templatelist'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -137,10 +137,23 @@ class BuildTempController extends Controller {
           */
          public function actionDeleteCategory() {
            if($_REQUEST['id']) {
-               $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
+                $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
                 $categoryObject->delete();
                 $this->redirect(array('/admin/buildtemp/categorylist','msg'=>3));
             }  
+         }
+         
+         /*
+          * Function to show added templates
+          */
+         public function actionTemplateList() 
+         {
+            $dataProvider = new CActiveDataProvider('BuildTemp', array(
+                 'pagination' => array('pageSize' => 10),
+				)); 
+            $this->render('/builder/template_list',array(
+                    'dataProvider'=>$dataProvider,
+            ));
          }
     // Uncomment the following methods and override them if needed
     /*
