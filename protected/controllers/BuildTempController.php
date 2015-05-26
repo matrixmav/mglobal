@@ -46,8 +46,8 @@ class BuildTempController extends Controller
         
         public function actionTemplates()
         {
-            $builderObject = BuildTemp::model()->findByPK(1);
-            $this->render('user_template',array('builderObject'=> $builderObject));
+            $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>'35'));
+            $this->renderPartial('user_templates',array('builderObject'=> $builderObject));
         }     
     
              
