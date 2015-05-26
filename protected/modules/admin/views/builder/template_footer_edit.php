@@ -5,10 +5,11 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
+    <a href="/admin/buildtemp/templateheaderedit?id=<?php echo $footerObject->id;?>">Header Code Edit</a>&nbsp;&nbsp;<a href="/admin/buildtemp/templatebodyedit?id=<?php echo $footerObject->id;?>">Body Code Edit</a>&nbsp;&nbsp;<a href="/admin/buildtemp/templatefooteredit?id=<?php echo $footerObject->id;?>">Footer Code Edit</a>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/templatefooteredit?f_id=<?php echo $footerObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/buildtemp/templatefooteredit?f_id=<?php echo $footerObject->id;?>&id=<?php echo $_GET['id'];?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
             <legend>Edit Template Footer</legend>
@@ -16,7 +17,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" ><?php echo (!empty($footerObject->header_content)) ? $footerObject->header_content : ""; ?></textarea>
+                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" ><?php echo (!empty($footerObject->footer->footer_content)) ? $footerObject->footer->footer_content : ""; ?></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>

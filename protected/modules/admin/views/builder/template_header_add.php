@@ -12,7 +12,30 @@ $this->breadcrumbs = array(
      
         <fieldset>
             <legend>Add Template Header</legend>
+             <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Category<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <select name="category" id="category">
+                        <option value="">Select Category</option>
+                        <?php if(!empty($categoryObject))
+                        {
+                            foreach($categoryObject as $category)
+                                {?>
+                        <option value="<?php echo $category->id; ?>" ><?php echo $category->name; ?></option>    
+                            <?php }
+                        }?>
+                    </select>
+                    <span id="header_code_error"></span>
+                </div>
+            </div>
             
+             <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <input id="title" type="text" class="form-control" name="Template[template_title]">
+                    <span id="header_code_error"></span>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">

@@ -5,10 +5,12 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
+    <a href="/admin/buildtemp/templateheaderedit?id=<?php echo $bodyObject->id;?>">Header Code Edit</a>&nbsp;&nbsp;<a href="/admin/buildtemp/templatebodyedit?id=<?php echo $bodyObject->id;?>">Body Code Edit</a>&nbsp;&nbsp;<a href="/admin/buildtemp/templatefooteredit?id=<?php echo $bodyObject->id;?>">Footer Code Edit</a>
+    
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/templatebodyedit?b_id=<?php echo $bodyObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/buildtemp/templatebodyedit?b_id=<?php echo $bodyObject->id;?>&id=<?php echo $_GET['id'];?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
             <legend>Edit Template Body</legend>
@@ -16,7 +18,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="body_code" class="form-control" name="Template[body_code]" ><?php echo (!empty($bodyObject->header_content)) ? $bodyObject->header_content : ""; ?></textarea>
+                    <textarea id="body_code" class="form-control" name="Template[body_code]" ><?php echo (!empty($bodyObject->body->body_content)) ? $bodyObject->body->body_content : ""; ?></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>

@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/templateheaderedit?id=<?php echo $headerObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/buildtemp/templateheaderedit?h_id=<?php echo $headerObject->id;?>&id=<?php echo $_GET['id'];?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
             <legend>Edit Template Header</legend>
@@ -23,7 +23,7 @@ $this->breadcrumbs = array(
                         {
                             foreach($categoryObject as $category)
                                 {?>
-                            <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>    
+                        <option value="<?php echo $category->id; ?>" <?php if($headerObject->category_id == $category->id){ ?> selected="selected" <?php }?>><?php echo $category->name; ?></option>    
                             <?php }
                         }?>
                     </select>
@@ -34,7 +34,7 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="title" class="form-control" name="Template[template_title]" ><?php echo (!empty($headerObject->template_title)) ? $headerObject->template_title : ""; ?></textarea>
+                    <input id="title" type="text" class="form-control" name="Template[template_title]" value="<?php echo (!empty($headerObject->header->template_title)) ? $headerObject->header->template_title : ""; ?>" >
                     <span id="header_code_error"></span>
                 </div>
             </div>
@@ -43,7 +43,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" ><?php echo (!empty($headerObject->header_content)) ? $headerObject->header_content : ""; ?></textarea>
+                    <textarea id="header_code" class="form-control" name="Template[header_code]" ><?php echo (!empty($headerObject->header->header_content)) ? $headerObject->header->header_content : ""; ?></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>

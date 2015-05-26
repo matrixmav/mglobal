@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
     .confirmMenu{position: relative;}
 </style>
 <div class="col-md-12">
- 
+ <a href="/admin/buildtemp/templateheaderadd" style="float:left" class="btn  green margin-right-20">New Template +</a>
 <div class="row">
     <div class="col-md-12">
        
