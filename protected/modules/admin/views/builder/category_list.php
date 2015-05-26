@@ -81,7 +81,7 @@ $this->breadcrumbs = array(
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
-                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this package?')"),
+                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this category?')"),
                             'url' => 'Yii::app()->createUrl("admin/buildtemp/deletecategory", array("id"=>$data->id))',
                         ),
                     ),

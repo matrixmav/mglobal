@@ -3,6 +3,7 @@ $this->breadcrumbs = array(
     'Category' => array('buildtemp/categorylist'),
     'Category Add',
 );
+
 ?>
 <div class="col-md-7 col-sm-7">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
@@ -16,7 +17,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Category Name<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="name" class="form-control" name="Category[name]" value="<?php (!empty($categoryObject->name)) ? $categoryObject->name : "";?>">
+                    <input type="text" id="name" class="form-control" name="Category[name]" value="<?php echo (!empty($categoryObject->name)) ? $categoryObject->name : "";?>">
                     <span id="name_error"></span>
                 </div>
             </div>
