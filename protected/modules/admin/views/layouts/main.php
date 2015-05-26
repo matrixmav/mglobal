@@ -428,9 +428,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "package/add" => "Category Add",
-                                    "package/list" => "Category List",
-                                    "package/list" => "HTML",
+                                    "buildtemp/categoryadd" => "Category Add",
+                                    "buildtemp/categorylist" => "Category List",
+                                    "buildtemp/list" => "HTML",
                                     
                                 );
                                 ?>
