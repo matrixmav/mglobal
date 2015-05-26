@@ -1,14 +1,14 @@
 <?php
 $this->breadcrumbs = array(
     'Template' => array('buildtemp/templatelist'),
-    'Template Header Edit',
+    'Template Footer Edit',
 );
 ?>
 <div class="col-md-7 col-sm-7">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/templateheader?id=<?php echo $headerObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/buildtemp/templatefooteredit?id=<?php echo $headerObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
             <legend>Edit Template Header</legend>
@@ -16,7 +16,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" ><?php echo (!empty($headerObject->header_content)) ? $headerObject->header_content : ""; ?></textarea>
+                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" ><?php echo (!empty($footerObject->header_content)) ? $footerObject->header_content : ""; ?></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
@@ -42,9 +42,9 @@ $this->breadcrumbs = array(
     function validation()
     {
       $("#header_code_error").html("");
-      if ($("#header_code").val() == "") {
-      $("#header_code_error").html("Enter Header Code");
-      $("#header_code").focus();            
+      if ($("#footer_code").val() == "") {
+      $("#header_code_error").html("Enter Footer Code");
+      $("#footer_code").focus();            
       return false;
     }
     }

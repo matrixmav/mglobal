@@ -1,22 +1,22 @@
 <?php
 $this->breadcrumbs = array(
     'Template' => array('buildtemp/templatelist'),
-    'Template Header Add',
+    'Template Body Add',
 );
 ?>
 <div class="col-md-7 col-sm-7">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/package/packageadd" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/buildtemp/templatebodyadd" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
-            <legend>Add Template Header</legend>
+            <legend>Add Template Body</legend>
             
             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" ></textarea>
+                    <textarea id="body_code" class="form-control" name="Template[body_code]" ></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
@@ -42,9 +42,9 @@ $this->breadcrumbs = array(
     function validation()
     {
       $("#header_code_error").html("");
-      if ($("#header_code").val() == "") {
-      $("#header_code_error").html("Enter Header Code");
-      $("#header_code").focus();            
+      if ($("#body_code").val() == "") {
+      $("#header_code_error").html("Enter Body Code");
+      $("#body_code").focus();            
       return false;
     }
     }
