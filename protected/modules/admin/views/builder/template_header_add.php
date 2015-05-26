@@ -13,13 +13,20 @@ $this->breadcrumbs = array(
         <fieldset>
             <legend>Add Template</legend>
             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Upload zip folder includes(css,images,js)<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="lastname">Upload Zip Folder includes(css,images,js)<span class="require">*</span></label>
                 <div class="col-lg-8">
                   <input type="file" name="cssfolder" id="cssfolder">
-                    <span id="header_code_error"></span>
+                    <span id="cssfolder_error"></span>
                 </div>
             </div>
             
+             <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Upload Template Screenshot<span class="require">*</span></label>
+                <div class="col-lg-8">
+                  <input type="file" name="screenshot" id="screenshot">
+                    <span id="screenshot_error"></span>
+                </div>
+            </div>
             
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Category<span class="require">*</span></label>
@@ -34,7 +41,7 @@ $this->breadcrumbs = array(
                             <?php }
                         }?>
                     </select>
-                    <span id="header_code_error"></span>
+                    <span id="category_error"></span>
                 </div>
             </div>
             
@@ -42,7 +49,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input id="template_title" type="text" class="form-control" name="Template[template_title]">
-                    <span id="header_code_error"></span>
+                    <span id="template_title_error"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -56,14 +63,14 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="body_code" class="form-control" name="Template[body_code]" style="width: 482px; height: 248px;"></textarea>
-                    <span id="header_code_error"></span>
+                    <span id="body_code_error"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="footer_code" class="form-control" name="Template[footer_code]" style="width: 482px; height: 248px;"></textarea>
-                    <span id="header_code_error"></span>
+                    <span id="footer_code_error"></span>
                 </div>
             </div>
             
@@ -89,8 +96,15 @@ $this->breadcrumbs = array(
     {
       $("#cssfolder_error").html("");
       if ($("#cssfolder").val() == "") {
-      $("#header_code_error").html("Please upload css zip folder.");
+      $("#cssfolder_error").html("Please upload css zip folder.");
       $("#cssfolder").focus();            
+      return false;
+    }
+    
+    $("#screenshot_error").html("");
+      if ($("#screenshot").val() == "") {
+      $("#screenshot_error").html("Please upload template screenshot.");
+      $("#screenshot").focus();            
       return false;
     }
      
