@@ -32,7 +32,7 @@ class BuildTempController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist'),
+                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist','deletecategory','changestatus'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -66,7 +66,7 @@ class BuildTempController extends Controller {
                 $categoryObject->name = $_POST['Category']['name'];
                 $categoryObject->created_at = date('Y-m-d');
                 if ($categoryObject->save(false)) {
-                    $this->redirect(array('categorylist', 'success' => $success));
+                    $this->redirect(array('categorylist', 'msg' => 1));
                 }
             } else {
                 $error .= "Please fill all required(*) marked fields";
@@ -89,14 +89,14 @@ class BuildTempController extends Controller {
                     $categoryObject->name = $_POST['Category']['name'];
                     $categoryObject->created_at = date('Y-m-d');
                     if ($categoryObject->save(false)) {
-                        $this->redirect(array('categorylist', 'success' => $success));
+                        $this->redirect(array('categorylist', 'msg' => 2));
                     }
                 } else {
                     $error .= "Please fill all required(*) marked fields";
                 }
             }
         }
-        $this->render('/builder/category_edit', array('error' => $error, 'success' => $success));
+        $this->render('/builder/category_edit', array('error' => $error, 'success' => $success,'categoryObject'=>$categoryObject));
     }
 
     /*
@@ -104,23 +104,9 @@ class BuildTempController extends Controller {
      */
 
     public function actionCategoryList() {
-        $error = "";
-        $success = "";
-        if ($_REQUEST['id']) {
-            $categoryObject = BuildCategory::model()->findByPk($_REQUEST['id']);
-            if ($_POST) {
-                if ($_POST['Category']['name'] != '') {
-                    $categoryObject->name = $_POST['Category']['name'];
-                    $categoryObject->created_at = date('Y-m-d');
-                    if ($categoryObject->save(false)) {
-                        $this->redirect(array('categorylist', 'success' => $success));
-                    }
-                } else {
-                    $error .= "Please fill all required(*) marked fields";
-                }
-            }
-        }
-        $this->render('/builder/category_edit', array('error' => $error, 'success' => $success));
+       $dataProvider = new CActiveDataProvider('BuildCategory', array(
+                 'pagination' => array('pageSize' => 10),
+				));
     }
 
     public function functionName($param) {
