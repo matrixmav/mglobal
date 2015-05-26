@@ -48,7 +48,14 @@ $this->breadcrumbs = array(
                 </div>
             </div>
             
-           
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Upload Template Screenshot<span class="require">*</span></label>
+                <div class="col-lg-8">
+                  <input type="file" name="screenshot" id="screenshot">
+                  <?php if($headerObject->screenshot !=''){?><img src="/user/template/<?php echo $headerObject->folderpath; ?>/screenshot/<?php echo $headerObject->screenshot;?>"><?php }?>
+                    <span id="screenshot_error"></span>
+                </div>
+            </div>
              
         </fieldset>
 
