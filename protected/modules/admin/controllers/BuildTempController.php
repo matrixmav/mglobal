@@ -322,14 +322,17 @@ class BuildTempController extends Controller {
                  
                 $model = new BuildTemp;
                 $model->temp_header_id = $headeraddObject->id;
-                $model->temp_body_id = 0;
-                $model->temp_footer_id = 0;
+//                $model->temp_body_id = 0;
+//                $model->temp_footer_id = 0;
                 $model->status = 1;
                 $model->created_at = date('Y-m-d');
                 $model->updated_at = date('Y-m-d');
                 $model->category_id = $category;
-                $model->folderpath = $headeraddObject->$filenoext;
+                $model->folderpath = $filenoext;
                 $model->save(false);
+                if(!$model->save(false)){
+                    echo "<pre>"; print_r($model->getErrors());exit;
+                }
                 $success .= "Header content added successfully";
             }
         } else {
