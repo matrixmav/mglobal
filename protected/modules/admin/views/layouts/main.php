@@ -435,11 +435,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 );
                                 ?>
                                 <li
-                                    class="<?php echo (($curControllerLower == 'package') || ($curControllerLower == 'package')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'buildtemp') || ($curControllerLower == 'buildtemp')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Builder</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'package') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'buildtemp') ? "open" : ''; ?>">
                                         </span>
                                     </a>
 
@@ -450,7 +450,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             if ($ctName == "search/create") {
                                                 $ctName = "search/create/type/details";
                                             }
-                                        if ($ctName == "report" && $curControllerLower == "package")
+                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
                                                 $class_content = 'class="active"';
                                             else
                                                 $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
