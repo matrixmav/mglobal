@@ -32,7 +32,7 @@ class BuildTempController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist','deletecategory','changestatus','templatelist','templateheaderedit','templatebodyedit','templatefooteredit'),
+                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist', 'deletecategory', 'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit', 'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -97,7 +97,7 @@ class BuildTempController extends Controller {
                 }
             }
         }
-        $this->render('/builder/category_edit', array('error' => $error, 'success' => $success,'categoryObject'=>$categoryObject));
+        $this->render('/builder/category_edit', array('error' => $error, 'success' => $success, 'categoryObject' => $categoryObject));
     }
 
     /*
@@ -105,143 +105,303 @@ class BuildTempController extends Controller {
      */
 
     public function actionCategoryList() {
-       $dataProvider = new CActiveDataProvider('BuildCategory', array(
-                 'pagination' => array('pageSize' => 10),
-				));
-       $this->render('/builder/category_list',array(
-                    'dataProvider'=>$dataProvider,
-            ));
+        $dataProvider = new CActiveDataProvider('BuildCategory', array(
+            'pagination' => array('pageSize' => 10),
+        ));
+        $this->render('/builder/category_list', array(
+            'dataProvider' => $dataProvider,
+        ));
     }
 
-     /*
-          * Function to fetch Package list
-          */
-         public function actionChangeStatus() {
-             
-            
-           if($_REQUEST['id']) {
-               $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
-                if($categoryObject->status == 1){
-                    $categoryObject->status = 0;
-                } else {
-                    $categoryObject->status = 1;
-                }
-                $categoryObject->save(false);
-                //$this->redirect('/admin/package/list',array('msg'=>'2'));
-                $this->redirect(array('/admin/buildtemp/categorylist','msg'=>4));
-            }  
-         }
-         
-         /*
-          * Function to Delete Bilder Category list
-          */
-         public function actionDeleteCategory() {
-           if($_REQUEST['id']) {
-                $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
-                $categoryObject->delete();
-                $this->redirect(array('/admin/buildtemp/categorylist','msg'=>3));
-            }  
-         }
-         
-         /*
-          * Function to show added templates
-          */
-         public function actionTemplateList() 
-         {
-            $dataProvider = new CActiveDataProvider('BuildTemp', array(
-                 'pagination' => array('pageSize' => 10),
-				)); 
-            $this->render('/builder/template_list',array(
-                    'dataProvider'=>$dataProvider,
-            ));
-         }
-         
-         /**
-          * Function to edit header code
-          */
-         public function actiontemplateheaderEdit() {
-             $error = "";
-             $success = "";
+    /*
+     * Function to fetch Package list
+     */
+
+    public function actionChangeStatus() {
+
+
         if ($_REQUEST['id']) {
-            $headerObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
-            $headerupdateObject  = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
-            if($_POST)
-            {
-        if (!empty($_POST['Template']['header_code'] !='' && $_POST['Template']['template_title'] !=''))
-            {    
-            $headerupdateObject->header_content = $_POST['Template']['header_code'];
-            $headerupdateObject->template_title = $_POST['Template']['template_title'];
-            $headerupdateObject->updated_at = date('Y-m-d');
-            if($headerupdateObject->update()){
-             $success .= "Header updated successfully";       
+            $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
+            if ($categoryObject->status == 1) {
+                $categoryObject->status = 0;
+            } else {
+                $categoryObject->status = 1;
             }
-            }else{
-            $error .= "Please fill all required(*) marked fields.";    
-            }
+            $categoryObject->save(false);
+            //$this->redirect('/admin/package/list',array('msg'=>'2'));
+            $this->redirect(array('/admin/buildtemp/categorylist', 'msg' => 4));
+        }
+    }
+
+    /*
+     * Function to Delete Bilder Category list
+     */
+
+    public function actionDeleteCategory() {
+        if ($_REQUEST['id']) {
+            $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
+            $categoryObject->delete();
+            $this->redirect(array('/admin/buildtemp/categorylist', 'msg' => 3));
+        }
+    }
+
+    /*
+     * Function to show added templates
+     */
+
+    public function actionTemplateList() {
+        $dataProvider = new CActiveDataProvider('BuildTemp', array(
+            'pagination' => array('pageSize' => 10),
+        ));
+        $this->render('/builder/template_list', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+
+    /**
+     * Function to edit header code
+     */
+    public function actiontemplateheaderEdit() {
+        $error = "";
+        $success = "";
+        if ($_REQUEST['id']) {
+            $headerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
+
+            if ($_POST) {
+                if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
+                    $headerupdateObject = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
+                    $headerupdateObject->header_content = $_POST['Template']['header_code'];
+                    $headerupdateObject->template_title = $_POST['Template']['template_title'];
+                    $headerupdateObject->updated_at = date('Y-m-d');
+                    if ($headerupdateObject->update()) {
+                        $success .= "Header updated successfully";
+                    }
+                } else {
+                    $error .= "Please fill all required(*) marked fields.";
+                }
             }
         }
         $categoryObject = BuildCategory::model()->findAll();
-              $this->render('/builder/template_header_edit',array(
-                    'headerObject'=>$headerObject,'error'=>$error,'success'=>$success,'categoryObject'=>$categoryObject,
-            ));
-             
-         }
-          /**
-          * Function to edit body code
-          */
-         public function actiontemplatebodyEdit() {
-             $error = "";
-             $success = "";
+        $this->render('/builder/template_header_edit', array(
+            'headerObject' => $headerObject, 'error' => $error, 'success' => $success, 'categoryObject' => $categoryObject,
+        ));
+    }
+
+    /**
+     * Function to edit body code
+     */
+    public function actiontemplatebodyEdit() {
+        $error = "";
+        $success = "";
         if ($_REQUEST['id']) {
-            $bodyObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
-            $bodyupdateObject  = BuildTempBody::model()->findByPk($_REQUEST['b_id']);
-            if($_POST)
-            {
-           if (!empty($_POST['Template']['body_code'] !=''))
-            {    
-            $bodyupdateObject->body_content = $_POST['Template']['body_code'];
-            $bodyupdateObject->updated_at = date('Y-m-d');
-            if($bodyupdateObject->update()){
-             $success .= "Body updated successfully";       
-            }
-            }else{
-            $error .= "Please fill all required(*) marked fields.";    
-            }
+            $bodyObject = BuildTemp::model()->findByPk($_REQUEST['id']);
+
+            if ($_POST) {
+                if (!empty($_POST['Template']['body_code'] != '')) {
+                    $bodyupdateObject = BuildTempBody::model()->findByPk($_REQUEST['b_id']);
+                    $bodyupdateObject->body_content = $_POST['Template']['body_code'];
+                    $bodyupdateObject->updated_at = date('Y-m-d');
+                    if ($bodyupdateObject->update()) {
+                        $success .= "Body updated successfully";
+                    }
+                } else {
+                    $error .= "Please fill all required(*) marked fields.";
+                }
             }
         }
-              $this->render('/builder/template_body_edit',array(
-                    'bodyObject'=>$bodyObject,'error'=>$error,'success'=>$success
-            ));
-             
-         }
-          /**
-          * Function to edit footer code
-          */
-         public function actiontemplatefooterEdit() {
-             $error = "";
-             $success = "";
+        $this->render('/builder/template_body_edit', array(
+            'bodyObject' => $bodyObject, 'error' => $error, 'success' => $success
+        ));
+    }
+
+    /**
+     * Function to edit footer code
+     */
+    public function actiontemplatefooterAdd() {
+        $error = "";
+        $success = "";
         if ($_REQUEST['id']) {
-            $footerObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
-            $footerupdateObject  = BuildTempFooter::model()->findByPk($_REQUEST['f_id']);
-           if($_POST)
-            {
-        if (!empty($_POST['Template']['footer_code'] !=''))
-            {    
-            $footerupdateObject->footer_content = $_POST['Template']['footer_code'];
-            $footerupdateObject->updated_at = date('Y-m-d');
-            if($footerupdateObject->update()){
-             $success .= "Footer updated successfully";       
-            }
-            }else{
-            $error .= "Please fill all required(*) marked fields.";    
-            }
+            $footerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
+            if ($_POST) {
+                if (!empty($_POST['Template']['footer_code'] != '')) {
+                    $footeraddObject = new BuildTempFooter;
+                    $footeraddObject->footer_content = $_POST['Template']['footer_code'];
+                    $footeraddObject->updated_at = date('Y-m-d');
+                    if ($footeraddObject->save(false)) {
+                        $model = BuildTemp::model()->findByPk($footeraddObject->footer_id);
+                        $model->temp_body_id = $headeraddObject->id;
+                        $model->save(false);
+                        $success .= "Body content added successfully";
+                    }
+                } else {
+                    $error .= "Please fill all required(*) marked fields.";
+                }
             }
         }
-              $this->render('/builder/template_footer_edit',array(
-                    'footerObject'=>$footerObject,'error'=>$error,'success'=>$success
-            ));
-             
-         }
+        $this->render('/builder/template_footer_add', array(
+            'error' => $error, 'success' => $success
+        ));
+    }
+
+    /**
+     * Function to edit header code
+     */
+    public function actionTemplateHeaderAdd() {
+        $error = "";
+        $success = "";
+        if ($_POST) {
+            $category = $_POST['Template']['category'];
+            if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
+                 function rmdir_recursive($dir) {
+                    foreach (scandir($dir) as $file) {
+                        if ('.' === $file || '..' === $file)
+                            continue;
+                        if (is_dir("$dir/$file"))
+                            rmdir_recursive("$dir/$file");
+                        else
+                            unlink("$dir/$file");
+                    }
+                    rmdir($dir);
+                }
+
+                if ($_FILES["cssfolder"]["name"]) {
+                    $filename = $_FILES["cssfolder"]["name"];
+                    $source = $_FILES["cssfolder"]["tmp_name"];
+                    $type = $_FILES["cssfolder"]["type"];
+
+                    $name = explode(".", $filename);
+                    $accepted_types = array('application/zip', 'application/x-zip-compressed', 'multipart/x-zip', 'application/x-compressed');
+                    foreach ($accepted_types as $mime_type) {
+                        if ($mime_type == $type) {
+                            $okay = true;
+                            break;
+                        }
+                    }
+
+                    $continue = strtolower($name[1]) == 'zip' ? true : false;
+                    if (!$continue) {
+                        $error .= "The file you are trying to upload is not a .zip file. Please try again.";
+                    }
+
+                    /* PHP current path */
+                    $path = "/home2/urwebby/public_html/template/";  // absolute path to the directory where zipper.php is in
+                    $filenoext = basename($filename, '.zip');  // absolute path to the directory where zipper.php is in (lowercase)
+                    $filenoext = basename($filenoext, '.ZIP');  // absolute path to the directory where zipper.php is in (when uppercase)
+                    $fname = time() . $filenoext;
+                    $targetdir = $path . time() . $filenoext; // target directory
+                    $targetzip = $path . time() . $filename; // target zip file
+
+                    /* create directory if not exists', otherwise overwrite */
+                    /* target directory is same as filename without extension */
+
+                    if (is_dir($targetdir))
+                        rmdir_recursive($targetdir);
+                    mkdir($targetdir, 0777);
+
+                    /* here it is really happening */
+
+                    if (move_uploaded_file($source, $targetzip)) {
+                        $zip = new ZipArchive();
+                        $x = $zip->open($targetzip);  // open the zip file to extract
+                        if ($x === true) {
+                            $zip->extractTo($targetdir); // place in the directory with same name  
+                            $zip->close();
+
+                            unlink($targetzip);
+                        }
+                        $message = "Your .zip file was uploaded and unpacked.";
+                    } else {
+                        $message = "There was a problem with the upload. Please try again.";
+                    }
+                }
+                $t = time();
+                $sql = mysql_query("INSERT INTO occ_our_template(`name`,`screenshot`,`template_name`,`category`,`add_date`,`category_new`,`class_name`) VALUES('{$Username}','{$Fname}','{$fname}','{$category}','{$t}','{$category_new}','{$class_name}')");
+                if ($sql) {
+                    $message = "Your Template Added Successfully.";
+                }
+            }
+
+            $headeraddObject = new BuildTempHeader;
+            $headeraddObject->header_content = $_POST['Template']['header_code'];
+            $headeraddObject->template_title = $_POST['Template']['template_title'];
+            $headeraddObject->created_at = date('Y-m-d');
+            if ($headeraddObject->save(false)) {
+                $model = new BuildTemp;
+                $model->temp_header_id = $headeraddObject->id;
+                $model->temp_body_id = 0;
+                $model->temp_footer_id = 0;
+                $model->status = 1;
+                $model->created_at = date('Y-m-d');
+                $model->updated_at = date('Y-m-d');
+                $model->category_id = $category;
+                $model->save(false);
+                $success .= "Header content added successfully";
+            }
+        } else {
+            $error .= "Please fill all required(*) marked fields.";
+        }
+        }
+
+        $categoryObject = BuildCategory::model()->findAll();
+        $this->render('/builder/template_header_add', array(
+            'error' => $error, 'success' => $success, 'categoryObject' => $categoryObject,
+        ));
+    }
+
+    /**
+     * Function to edit body code
+     */
+    public function actionTemplateBodyAdd() {
+        $error = "";
+        $success = "";
+        if ($_REQUEST['id']) {
+            if ($_POST) {
+                if (!empty($_POST['Template']['body_code'] != '')) {
+                    $bodyaddObject = new BuildTempBody;
+                    $bodyaddObject->body_content = $_POST['Template']['body_code'];
+                    $bodyaddObject->updated_at = date('Y-m-d');
+                    if ($bodyaddObject->save(false)) {
+                        $model = BuildTemp::model()->findByPk($bodyaddObject->body_id);
+                        $model->temp_body_id = $bodyaddObject->id;
+                        $model->update(false);
+                        $success .= "Footer content added successfully";
+                    }
+                } else {
+                    $error .= "Please fill all required(*) marked fields.";
+                }
+            }
+        }
+        $this->render('/builder/template_body_add', array(
+            'error' => $error, 'success' => $success
+        ));
+    }
+
+    /**
+     * Function to edit footer code
+     */
+    public function actionTemplateFooterEdit() {
+        $error = "";
+        $success = "";
+        if ($_REQUEST['id']) {
+            $footerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
+            if ($_POST) {
+                if (!empty($_POST['Template']['footer_code'] != '')) {
+                    $footerupdateObject = BuildTempFooter::model()->findByPk($_REQUEST['f_id']);
+                    $footerupdateObject->footer_content = $_POST['Template']['footer_code'];
+                    $footerupdateObject->updated_at = date('Y-m-d');
+                    if ($footerupdateObject->update()) {
+                        $success .= "Footer updated successfully";
+                    }
+                } else {
+                    $error .= "Please fill all required(*) marked fields.";
+                }
+            }
+        }
+        $this->render('/builder/template_footer_edit', array(
+            'footerObject' => $footerObject, 'error' => $error, 'success' => $success
+        ));
+    }
+
     // Uncomment the following methods and override them if needed
     /*
       public function filters()
