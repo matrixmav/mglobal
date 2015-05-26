@@ -23,6 +23,8 @@ $this->breadcrumbs = array(
     <div class="col-md-12">
         <?php if(isset($_GET['msg'])&& $_GET['msg']=='1'){ ?> <div class="success"><?php echo "Category Added Succesfully."?></div> <?php } ?>
         <?php if(isset($_GET['msg'])&& $_GET['msg']=='2'){ ?> <div class="success"><?php echo "Category Updated Succesfully."?></div> <?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='3'){ ?> <div class="success"><?php echo "Record Deleted Succesfully."?></div> <?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='4'){ ?> <div class="success"><?php echo "Status Changed Succesfully."?></div> <?php } ?>
         
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
