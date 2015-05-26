@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 20, 2015 at 09:28 AM
+-- Generation Time: May 26, 2015 at 11:30 AM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.9
 
@@ -19,6 +19,110 @@ SET time_zone = "+00:00";
 --
 -- Database: `mglobal`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ads`
+--
+
+CREATE TABLE IF NOT EXISTS `ads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `build_category`
+--
+
+CREATE TABLE IF NOT EXISTS `build_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `build_temp`
+--
+
+CREATE TABLE IF NOT EXISTS `build_temp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
+  `temp_header_id` int(11) NOT NULL,
+  `temp_body_id` int(11) NOT NULL,
+  `temp_footer_id` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`,`category_id`,`temp_header_id`,`temp_body_id`,`temp_footer_id`),
+  KEY `category_id` (`category_id`),
+  KEY `temp_header_id` (`temp_header_id`),
+  KEY `temp_body_id` (`temp_body_id`),
+  KEY `temp_footer_id` (`temp_footer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `build_temp_body`
+--
+
+CREATE TABLE IF NOT EXISTS `build_temp_body` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `body_content` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `build_temp_footer`
+--
+
+CREATE TABLE IF NOT EXISTS `build_temp_footer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `footer_content` date NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `build_temp_header`
+--
+
+CREATE TABLE IF NOT EXISTS `build_temp_header` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meta_title` varchar(255) DEFAULT NULL,
+  `meta_keywords` varchar(255) DEFAULT NULL,
+  `meta_description` varchar(255) DEFAULT NULL,
+  `header_content` text,
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -217,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `genealogy` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`sponsor_user_id`),
   KEY `sponsor_user_id` (`sponsor_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `genealogy`
@@ -226,7 +330,9 @@ CREATE TABLE IF NOT EXISTS `genealogy` (
 INSERT INTO `genealogy` (`id`, `parent`, `user_id`, `sponsor_user_id`, `position`, `status`, `created_at`, `updated_at`) VALUES
 (1, '1', 3, 1, 'left', 0, '0000-00-00', '2015-05-14 12:38:51'),
 (3, '4', 5, 1, 'right', 0, '0000-00-00', '2015-05-19 09:39:20'),
-(4, '5', 6, 1, 'right', 0, '0000-00-00', '2015-05-19 10:16:01');
+(4, '5', 6, 1, 'right', 0, '0000-00-00', '2015-05-19 10:16:01'),
+(5, '3', 7, 1, 'left', 0, '0000-00-00', '2015-05-20 11:52:12'),
+(6, '7', 8, 1, 'left', 0, '0000-00-00', '2015-05-20 11:53:39');
 
 -- --------------------------------------------------------
 
@@ -248,14 +354,18 @@ CREATE TABLE IF NOT EXISTS `mail` (
   PRIMARY KEY (`id`),
   KEY `to_user_id` (`to_user_id`,`from_user_id`),
   KEY `from_user_id` (`from_user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `mail`
 --
 
 INSERT INTO `mail` (`id`, `to_user_id`, `from_user_id`, `subject`, `message`, `attachment`, `type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'Testing', '            \r\n            Test', '', 2, 1, '2015-05-14', '2015-05-14 11:54:08');
+(1, 1, 1, 'Testing', '            \r\n            Test', '', 2, 1, '2015-05-14', '2015-05-14 11:54:08'),
+(2, 3, 1, 'surya@malinator.com', '            \r\n            surya@malinator.com', '', 2, 1, '2015-05-20', '2015-05-20 12:27:50'),
+(3, 3, 1, 'surya@malinator.com', '            \r\n            surya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.com', '', 2, 1, '2015-05-20', '2015-05-20 12:28:47'),
+(4, 3, 1, 'surya@malinator.com', '            \r\n            surya@malinator.com surya@malinator.comvsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.comsurya@malinator.com', '', 2, 1, '2015-05-20', '2015-05-20 12:29:27'),
+(5, 5, 1, ' 	nidhi@malinator.com', '            \r\n             	nidhi@malinator.com', '', 2, 1, '2015-05-20', '2015-05-20 12:29:58');
 
 -- --------------------------------------------------------
 
@@ -287,7 +397,7 @@ CREATE TABLE IF NOT EXISTS `money_transfer` (
 --
 
 INSERT INTO `money_transfer` (`id`, `to_user_id`, `from_user_id`, `transaction_id`, `wallet_id`, `fund_type`, `comment`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 1, 1, 1, 'Testing', 1, '0000-00-00', '2015-05-18 12:09:17'),
+(1, 1, 3, 1, 1, 1, 'Testing', 1, '2015-05-19', '2015-05-20 11:05:57'),
 (3, 1, 3, 4, 1, 1, '0.001 commission to admin', 1, '2015-05-19', '2015-05-19 04:47:45');
 
 -- --------------------------------------------------------
@@ -313,15 +423,16 @@ CREATE TABLE IF NOT EXISTS `order` (
   KEY `user_id` (`user_id`,`package_id`,`transaction_id`),
   KEY `transaction_id` (`transaction_id`),
   KEY `package_id` (`package_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `order`
 --
 
 INSERT INTO `order` (`id`, `user_id`, `package_id`, `transaction_id`, `web_builder_url`, `domain`, `domain_price`, `start_date`, `end_date`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 2, 1, '', 'dsdsdsd.com', 0, '2015-05-19', '2015-05-19', 1, '2015-05-19', '2015-05-19 09:53:12'),
-(2, 6, 1, 5, '', 'fjjfjnfpn.com', 5, '2015-05-19', '2015-05-19', 0, '2015-05-19', '2015-05-19 12:43:59');
+(1, 3, 1, 1, '', 'mavinfo.com', 5, '2015-05-20', '2015-05-20', 0, '2015-05-19', '2015-05-20 14:34:40'),
+(2, 6, 1, 5, '', 'fjjfjnfpn.com', 5, '2015-05-19', '2015-05-19', 0, '2015-05-19', '2015-05-19 12:43:59'),
+(3, 7, 2, 6, '', 'mave.com', 5, '2015-05-20', '2015-05-20', 1, '2015-05-20', '2015-05-20 12:38:27');
 
 -- --------------------------------------------------------
 
@@ -429,6 +540,7 @@ CREATE TABLE IF NOT EXISTS `summary` (
 
 CREATE TABLE IF NOT EXISTS `transaction` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `transaction_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `mode` varchar(30) NOT NULL,
   `gateway_id` int(11) NOT NULL,
@@ -443,17 +555,18 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   PRIMARY KEY (`id`),
   KEY `gateway_id` (`gateway_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `transaction`
 --
 
-INSERT INTO `transaction` (`id`, `user_id`, `mode`, `gateway_id`, `actual_amount`, `paid_amount`, `total_rp`, `used_rp`, `coupon_discount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 'paypal', 1, 355, 355, 0, 0, 0, 0, '0000-00-00', '2015-05-19 09:53:12'),
-(2, 3, '12', 1, 434, 444, 0, 434, 0, 1, '0000-00-00', '2015-05-18 12:08:51'),
-(4, 1, '1', 1, 0.001, 0.001, 0, 0, 0, 1, '2015-05-19', '2015-05-19 04:47:42'),
-(5, 6, 'paypal', 1, 239, 239, 0, 0, 0, 0, '2015-05-19', '2015-05-19 12:43:59');
+INSERT INTO `transaction` (`id`, `transaction_id`, `user_id`, `mode`, `gateway_id`, `actual_amount`, `paid_amount`, `total_rp`, `used_rp`, `coupon_discount`, `status`, `created_at`, `updated_at`) VALUES
+(1, 123456789, 3, 'paypal', 1, 205.6, 205.6, 0, 0, 28.4, 0, '0000-00-00', '2015-05-20 14:34:40'),
+(2, 98765432, 3, '12', 1, 434, 444, 0, 434, 0, 1, '0000-00-00', '2015-05-20 11:15:35'),
+(4, 456787654, 1, '1', 1, 0.001, 0.001, 0, 0, 0, 1, '2015-05-19', '2015-05-20 11:15:38'),
+(5, 23459875, 6, 'paypal', 1, 239, 239, 0, 0, 0, 1, '2015-05-19', '2015-05-20 11:15:42'),
+(6, 0, 7, 'paypal', 1, 355, 355, 0, 0, 0, 1, '2015-05-20', '2015-05-20 12:38:38');
 
 -- --------------------------------------------------------
 
@@ -486,7 +599,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `created_at` date DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `user`
@@ -496,7 +609,28 @@ INSERT INTO `user` (`id`, `sponsor_id`, `name`, `password`, `position`, `user_sp
 (1, '12345', 'admin', '734379e382de4feb0dce07cb1061ef48', 'left', 0, 'Ram Hemareddy', 'ramhemareddy@gmail.com', 1, 1, 1234567890, '2015-05-15', 'sdfasdf', 'dsafsd', 'fdsaf', 'e10adc3949ba59abbe56e057f20f883e', 1, '0', '', '', 2, '2015-05-14', '2015-05-18 07:13:43'),
 (3, 'sury631016', 'hemareddy', '734379e382de4feb0dce07cb1061ef48', 'left', 12345, 'surya', 'surya@malinator.com', 1, 91, 2147483647, '1963-10-16', NULL, NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', 1, '1013629720195', NULL, NULL, 1, '2015-05-14', '2015-05-19 09:03:10'),
 (5, 'nidh510306', 'nidhi', 'e10adc3949ba59abbe56e057f20f883e', 'right', 0, 'nidhi sati', 'nidhi@malinator.com', 1, 91, 1234567890, '1951-03-06', NULL, NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, '40ebe644746748a71c22fa32ed263ebe', NULL, NULL, 1, '2015-05-19', '2015-05-19 09:52:41'),
-(6, 'qwey681019', 'qweyt', '827ccb0eea8a706c4c34a16891f84e7b', 'right', 0, 'yugiojsdnkfvk', 'cfkuyhvjbbk@vgyigv.com', 1, 91, 2147483647, '1968-10-19', 'vgiudjvdjk', 'dvhuhckbsdkjv', 'hvbhvhufn', '827ccb0eea8a706c4c34a16891f84e7b', 1, 'fc0a91efdbfdcd668908e48de047472c', NULL, NULL, 1, '2015-05-19', '2015-05-19 10:18:09');
+(6, 'qwey681019', 'qweyt', '827ccb0eea8a706c4c34a16891f84e7b', 'right', 0, 'yugiojsdnkfvk', 'cfkuyhvjbbk@vgyigv.com', 1, 91, 2147483647, '1968-10-19', 'vgiudjvdjk', 'dvhuhckbsdkjv', 'hvbhvhufn', '827ccb0eea8a706c4c34a16891f84e7b', 1, 'fc0a91efdbfdcd668908e48de047472c', NULL, NULL, 1, '2015-05-19', '2015-05-19 10:18:09'),
+(7, 'nidh510304', 'nidhi86', '81076c62ffcd7ba79177cd73a36ab070', 'left', 0, 'nidhi mishra', 'nidhisati86@gmail.com', 1, 91, 2147483647, '1951-03-04', '', '', 'hemareddy', '827ccb0eea8a706c4c34a16891f84e7b', 1, 'e84f12b390f8a5edbea6e9fe1f39e440', NULL, NULL, 1, '2015-05-20', '2015-05-20 11:53:30'),
+(8, 'nidh510304', 'nidhi89', '81076c62ffcd7ba79177cd73a36ab070', 'left', 0, 'nidhi mishra', 'nidhisati86@gmail.com', 1, 91, 2147483647, '1951-03-04', NULL, NULL, NULL, '4bc336b15417584fcec3e7dcc531d836', 0, 'e96317ef409d7a6af7a10d19c528a65a', NULL, NULL, 1, '2015-05-20', '2015-05-20 12:18:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_has_social_account`
+--
+
+CREATE TABLE IF NOT EXISTS `user_has_social_account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:facebook,2:twitter',
+  `auth_id` varchar(255) DEFAULT NULL,
+  `auth_key` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -518,23 +652,47 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `referral_banner_id` int(11) NOT NULL,
   `testimonials` text NOT NULL,
   `testimonial_status` int(11) NOT NULL DEFAULT '0',
+  `document_status` int(1) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`city_name`,`state_name`,`country_id`),
   KEY `referral_banner_id` (`referral_banner_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `user_profile`
 --
 
-INSERT INTO `user_profile` (`id`, `user_id`, `address`, `street`, `city_name`, `state_name`, `country_id`, `zip_code`, `id_proof`, `address_proff`, `referral_banner_id`, `testimonials`, `testimonial_status`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Test', 'test', '111', '111', 1, '12313', 'survey-Testing.png', 'penclchk.gif', 1, '13123123', 0, 1, '2015-05-14', '2015-05-19 09:12:15'),
-(2, 3, NULL, '', 'Bangalore', 'Karnataka', 1, '', 'penclchk.gif', 'survey-Testing.png', 1, '', 0, 1, '2015-05-14', '2015-05-19 10:55:30'),
-(3, 5, NULL, '', '', '', 0, '', '1432033241bigstock-Test-word-on-white-keyboard-27134336.jpg', '1432033241survey-Testing.png', 1, 'testtttttttttt', 1, 0, '2015-05-19', '2015-05-19 12:35:58'),
-(4, 6, 'xchovdsnj  jvjxnfon', 'hufjvodbcvoci', 'fjfvouhednvoiuo', 'andhra', 1, '85201', '1432032164IMG-20150504-WA0009.jpg', '1432032164IMG-20150404-WA0018.jpg', 1, 'wrsedipo[l', 0, 1, '2015-05-19', '2015-05-19 12:21:04');
+INSERT INTO `user_profile` (`id`, `user_id`, `address`, `street`, `city_name`, `state_name`, `country_id`, `zip_code`, `id_proof`, `address_proff`, `referral_banner_id`, `testimonials`, `testimonial_status`, `document_status`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Test', 'test', '111', '111', 1, '12313', 'survey-Testing.png', 'penclchk.gif', 1, '13123123', 0, 0, 1, '2015-05-14', '2015-05-19 09:12:15'),
+(2, 3, NULL, '', 'Bangalore', 'Karnataka', 1, '', 'penclchk.gif', 'survey-Testing.png', 1, '', 0, 0, 1, '2015-05-14', '2015-05-19 10:55:30'),
+(3, 5, NULL, '', '', '', 0, '', '1432033241bigstock-Test-word-on-white-keyboard-27134336.jpg', '1432033241survey-Testing.png', 1, 'testtttttttttt', 1, 0, 0, '2015-05-19', '2015-05-19 12:35:58'),
+(4, 6, 'xchovdsnj  jvjxnfon', 'hufjvodbcvoci', 'fjfvouhednvoiuo', 'andhra', 1, '85201', '1432032164IMG-20150504-WA0009.jpg', '1432032164IMG-20150404-WA0018.jpg', 1, 'wrsedipo[l', 0, 0, 1, '2015-05-19', '2015-05-19 12:21:04'),
+(5, 7, 'fsdafds', 'sdafsdfa', 'sdafsda', 'sdfadsf', 1, 'hemareddy', '', '', 1, '', 0, 0, 0, '2015-05-20', '2015-05-20 12:06:08'),
+(6, 8, NULL, '', '', '', 0, '', '', '', 1, '', 0, 0, 0, '2015-05-20', '2015-05-20 11:53:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_shared_ad`
+--
+
+CREATE TABLE IF NOT EXISTS `user_shared_ad` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `ad_id` int(11) NOT NULL,
+  `social_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`,`user_id`),
+  KEY `social_id` (`social_id`),
+  KEY `ad_id` (`ad_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -569,6 +727,15 @@ INSERT INTO `wallet` (`id`, `user_id`, `fund`, `type`, `status`, `created_at`, `
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `build_temp`
+--
+ALTER TABLE `build_temp`
+  ADD CONSTRAINT `build_temp_ibfk_4` FOREIGN KEY (`temp_footer_id`) REFERENCES `build_temp_footer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `build_temp_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `build_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `build_temp_ibfk_2` FOREIGN KEY (`temp_header_id`) REFERENCES `build_temp_header` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `build_temp_ibfk_3` FOREIGN KEY (`temp_body_id`) REFERENCES `build_temp_body` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `city`
@@ -635,11 +802,25 @@ ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`gateway_id`) REFERENCES `gateway` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `user_has_social_account`
+--
+ALTER TABLE `user_has_social_account`
+  ADD CONSTRAINT `user_has_social_account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `user_profile`
 --
 ALTER TABLE `user_profile`
   ADD CONSTRAINT `user_profile_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_profile_ibfk_2` FOREIGN KEY (`referral_banner_id`) REFERENCES `referral_banner` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_shared_ad`
+--
+ALTER TABLE `user_shared_ad`
+  ADD CONSTRAINT `user_shared_ad_ibfk_3` FOREIGN KEY (`social_id`) REFERENCES `user_has_social_account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_shared_ad_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_shared_ad_ibfk_2` FOREIGN KEY (`ad_id`) REFERENCES `ads` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `wallet`
