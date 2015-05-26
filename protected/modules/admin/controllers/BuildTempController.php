@@ -63,6 +63,7 @@ class BuildTempController extends Controller
         public function actionCategoryAdd() 
         {
             $error = "";
+            $success = "";
          $categoryObject = new BuildCategory;   
          if(!empty($_POST))
          {
