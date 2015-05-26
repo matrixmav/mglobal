@@ -170,6 +170,18 @@ class BuildTempController extends Controller {
             if ($_POST) {
                 if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
                     $headerupdateObject = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
+                     if($_FILES['screenshot']['name'])
+                     {
+                        $ext1 = end((explode(".", $_FILES['screenshot']['name']))); 
+                        if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
+                                $error .= "Please upload mentioned file type.";
+                        }else{
+                        $path = $targetdir."/screenshot/";
+                        BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, time() . $_FILES['screenshot']['name']);
+                       }
+                    $headerObject->screenshot =   time().$_FILES['screenshot']['name'];
+                    $headerObject->update();
+                    }
                     $headerupdateObject->header_content = $_POST['Template']['header_code'];
                     $headerupdateObject->template_title = $_POST['Template']['template_title'];
                     $headerupdateObject->updated_at = date('Y-m-d');
@@ -329,7 +341,16 @@ class BuildTempController extends Controller {
                         $message = "There was a problem with the upload. Please try again.";
                     }
                 }
-                 
+                if($_FILES['screenshot']['name'])
+                {
+                $ext1 = end((explode(".", $_FILES['screenshot']['name']))); 
+                if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
+                        $error .= "Please upload mentioned file type.";
+                }else{
+                $path = $targetdir."/screenshot/";
+                BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, time() . $_FILES['screenshot']['name']);
+                }
+                }
                 $model = new BuildTemp;
                 $model->temp_header_id = $headeraddObject->id;
                 $model->temp_body_id = $bodyaddObject->id;
@@ -338,7 +359,9 @@ class BuildTempController extends Controller {
                 $model->created_at = date('Y-m-d');
                 $model->updated_at = date('Y-m-d');
                 $model->category_id = $category;
-                $model->folderpath = $targetzip;
+                $model->folderpath = time().$filenoext;
+                $model->screenshot = time().$_FILES['screenshot']['name'];
+                
                 $model->save(false);
                
                 $success .= "Header content added successfully";
