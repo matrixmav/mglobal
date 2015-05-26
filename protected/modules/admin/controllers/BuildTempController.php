@@ -253,10 +253,20 @@ class BuildTempController extends Controller {
             $category = $_POST['Template']['category'];
             if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
             $headeraddObject = new BuildTempHeader;
+            $bodyaddObject = new BuildTempBody;
+            $footeraddObject = new BuildTempFooter;
             $headeraddObject->header_content = $_POST['Template']['header_code'];
             $headeraddObject->template_title = $_POST['Template']['template_title'];
             $headeraddObject->created_at = date('Y-m-d');
             if ($headeraddObject->save(false)) {
+            
+            $bodyaddObject->body_content = $_POST['Template']['body_code'];
+            $bodyaddObject->created_at = date('Y-m-d');
+            $bodyaddObject->save(false);
+            
+            $footeraddObject->footer_content = $_POST['Template']['footer_code'];
+            $footeraddObject->created_at = date('Y-m-d');
+            $footeraddObject->save(false);    
                    function rmdir_recursive($dir) {
                     foreach (scandir($dir) as $file) {
                         if ('.' === $file || '..' === $file)
@@ -322,17 +332,15 @@ class BuildTempController extends Controller {
                  
                 $model = new BuildTemp;
                 $model->temp_header_id = $headeraddObject->id;
-//                $model->temp_body_id = 0;
-//                $model->temp_footer_id = 0;
+                $model->temp_body_id = $bodyaddObject->id;
+                $model->temp_footer_id = $footeraddObject->id;
                 $model->status = 1;
                 $model->created_at = date('Y-m-d');
                 $model->updated_at = date('Y-m-d');
                 $model->category_id = $category;
-                $model->folderpath = $filenoext;
+                $model->folderpath = $targetzip;
                 $model->save(false);
-                if(!$model->save(false)){
-                    echo "<pre>"; print_r($model->getErrors());exit;
-                }
+               
                 $success .= "Header content added successfully";
             }
         } else {
@@ -348,7 +356,7 @@ class BuildTempController extends Controller {
 
     /**
      * Function to edit body code
-     */
+     
     public function actionTemplateBodyAdd() {
         $error = "";
         $success = "";
