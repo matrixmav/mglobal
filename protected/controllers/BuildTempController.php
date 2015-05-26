@@ -18,7 +18,7 @@ class BuildTempController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates'),
+                'actions' => array('index', 'templates','usertemplates','managewebsite'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -46,9 +46,21 @@ class BuildTempController extends Controller
         
         public function actionTemplates()
         {
+            $builderObject = BuildTemp::model()->findAll(array('condition'=>'screenshot != ""'));
+            $this->render('templates',array('builderObject'=> $builderObject));
+        }
+        
+        public function actionUserTemplates()
+        {
             $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>'35'));
             $this->renderPartial('user_templates',array('builderObject'=> $builderObject));
-        }     
+        }
+        
+        public function actionManageWebsite()
+        {
+            
+            
+        }
     
              
         
