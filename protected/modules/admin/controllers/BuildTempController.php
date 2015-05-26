@@ -32,7 +32,7 @@ class BuildTempController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist','deletecategory','changestatus','templatelist'),
+                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist','deletecategory','changestatus','templatelist','templateheaderedit','templatebodyedit','templatefooteredit'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -154,6 +154,61 @@ class BuildTempController extends Controller {
             $this->render('/builder/template_list',array(
                     'dataProvider'=>$dataProvider,
             ));
+         }
+         
+         /**
+          * Function to edit header code
+          */
+         public function actiontemplateheaderEdit() {
+             $error = "";
+             $success = "";
+        if ($_REQUEST['id']) {
+            $headerObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
+        if (!empty($_POST['Template']))
+            {    
+            $headerObject->header_content = $_POST['Template']['header_code'];
+            $headerObject->template_title = $_POST['Template']['template_title'];
+            $headerObject->updated_at = date('Y-m-d');
+            if($headerObject->update()){
+             $success .= "Header updated successfully";       
+            }
+            }else{
+            $error .= "Please fill all required(*) marked fields.";    
+            }
+        }
+        $categoryObject = BuildCategory::model()->findAll();
+              $this->render('/builder/template_header_edit',array(
+                    'headerObject'=>$headerObject,'error'=>$error,'success'=>$success,'categoryObject'=>$categoryObject,
+            ));
+             
+         }
+          /**
+          * Function to edit body code
+          */
+         public function actiontemplatebodyEdit() {
+             $error = "";
+             $success = "";
+        if ($_REQUEST['id']) {
+            $bodyObject  = BuildTemp::model()->findByPk($_REQUEST['id']);
+        }
+              $this->render('/builder/template_body_edit',array(
+                    'bodyObject'=>$bodyObject,'error'=>$error,'success'=>$success
+            ));
+             
+         }
+          /**
+          * Function to edit footer code
+          */
+         public function actiontemplatefooterEdit() {
+             $error = "";
+             $success = "";
+        if ($_REQUEST['id']) {
+            $footerObject  = BuildCategory::model()->findByPk($_REQUEST['id']);
+        }
+              $this->render('/builder/template_footer_edit',array(
+                    'footerObject'=>$footerObject,'error'=>$error,'success'=>$success
+            ));
+             
          }
     // Uncomment the following methods and override them if needed
     /*
