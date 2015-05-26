@@ -46,6 +46,7 @@ class BuildTempController extends Controller
         
         public function actionTemplates()
         {
+            $getUserObject = User::model()->findByAttributes(array('name'=>$username,'status'=>1));
             $this->render('usertemplate.php');
         }     
     
