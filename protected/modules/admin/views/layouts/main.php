@@ -430,8 +430,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $reservation_subsection = array(
                                     "buildtemp/categoryadd" => "Category Add",
                                     "buildtemp/categorylist" => "Category List",
-                                    "buildtemp/list" => "HTML",
-                                    
+                                    "buildtemp/templatelist" => "Templates HTML",
                                 );
                                 ?>
                                 <li
