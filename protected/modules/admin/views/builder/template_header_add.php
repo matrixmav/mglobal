@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs = array(
     'Template' => array('buildtemp/templatelist'),
-    'Template Header Add',
+    'Template  Add',
 );
 ?>
 <div class="col-md-7 col-sm-7" id="test">
@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
     <form action="/admin/buildtemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
-            <legend>Add Template Header</legend>
+            <legend>Add Template</legend>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Upload zip folder includes(css,images,js)<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -52,6 +52,21 @@ $this->breadcrumbs = array(
                     <span id="header_code_error"></span>
                 </div>
             </div>
+             <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="body_code" class="form-control" name="Template[body_code]" ></textarea>
+                    <span id="header_code_error"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" ></textarea>
+                    <span id="header_code_error"></span>
+                </div>
+            </div>
+            
             
            
              
@@ -95,6 +110,18 @@ $this->breadcrumbs = array(
       if ($("#header_code").val() == "") {
       $("#header_code_error").html("Please enter Header Code");
       $("#header_code").focus();            
+      return false;
+    }
+    $("#header_code_error").html("");
+      if ($("#body_code").val() == "") {
+      $("#header_code_error").html("Enter Body Code");
+      $("#body_code").focus();            
+      return false;
+    }
+     $("#header_code_error").html("");
+      if ($("#footer_code").val() == "") {
+      $("#header_code_error").html("Enter Footer Code");
+      $("#footer_code").focus();            
       return false;
     }
      
