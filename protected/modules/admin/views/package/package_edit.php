@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Package' => array('package/edit'),
+    'Package' => array('package/list'),
     'Package Edit',
 );
  
