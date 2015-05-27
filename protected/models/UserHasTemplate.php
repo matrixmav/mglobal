@@ -5,9 +5,15 @@
  *
  * The followings are the available columns in table 'user_has_template':
  * @property integer $id
+ * @property integer $category_id
+ * @property string $temp_header
+ * @property string $temp_footer
+ * @property string $temp_body
+ * @property integer $publish
  * @property integer $user_id
  * @property integer $template_id
  * @property string $created_at
+ * @property integer $order_id
  */
 class UserHasTemplate extends CActiveRecord
 {
@@ -27,11 +33,11 @@ class UserHasTemplate extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, template_id, created_at', 'required'),
-			array('user_id, template_id', 'numerical', 'integerOnly'=>true),
+			array('category_id, temp_header, temp_footer, temp_body, user_id, template_id, created_at, order_id', 'required'),
+			array('category_id, publish, user_id, template_id, order_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, template_id, created_at', 'safe', 'on'=>'search'),
+			array('id, category_id, temp_header, temp_footer, temp_body, publish, user_id, template_id, created_at, order_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,9 +50,9 @@ class UserHasTemplate extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                      'category' => array(self::BELONGS_TO, 'Buildcategory', 'category_id'),
-                    'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header_id'),
-                    'footer' => array(self::BELONGS_TO, 'BuildTempfooter', 'temp_footer_id'),
-                    'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body_id'),
+                    'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header'),
+                    'footer' => array(self::BELONGS_TO, 'BuildTempfooter', 'temp_footer'),
+                    'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body'),
 		);
 	}
 
@@ -57,9 +63,15 @@ class UserHasTemplate extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'category_id' => 'Category',
+			'temp_header' => 'Temp Header',
+			'temp_footer' => 'Temp Footer',
+			'temp_body' => 'Temp Body',
+			'publish' => 'Publish',
 			'user_id' => 'User',
 			'template_id' => 'Template',
 			'created_at' => 'Created At',
+			'order_id' => 'Order',
 		);
 	}
 
@@ -82,9 +94,15 @@ class UserHasTemplate extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
+		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('temp_header',$this->temp_header,true);
+		$criteria->compare('temp_footer',$this->temp_footer,true);
+		$criteria->compare('temp_body',$this->temp_body,true);
+		$criteria->compare('publish',$this->publish);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('template_id',$this->template_id);
 		$criteria->compare('created_at',$this->created_at,true);
+		$criteria->compare('order_id',$this->order_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
