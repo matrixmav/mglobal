@@ -31,7 +31,7 @@ class BuildTemp extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, temp_header_id, temp_body_id, temp_footer_id, created_at, updated_at', 'required'),
+			array('category_id, temp_header_id, temp_body_id, temp_footer_id, created_at, updated_at', 'required','folderpath','screenshot','template_id'),
 			array('category_id, temp_header_id, temp_body_id, temp_footer_id, status', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -47,6 +47,13 @@ class BuildTemp extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                     
+                    'category' => array(self::BELONGS_TO, 'Buildcategory', 'category_id'),
+                    'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header_id'),
+                    'footer' => array(self::BELONGS_TO, 'BuildTempfooter', 'temp_footer_id'),
+                    'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body_id'),
+		     
+                    
 		);
 	}
 
@@ -62,6 +69,9 @@ class BuildTemp extends CActiveRecord
 			'temp_body_id' => 'Temp Body',
 			'temp_footer_id' => 'Temp Footer',
 			'status' => 'Status',
+                        'folderpath'=>'Folder path',
+                        'screenshot'=> 'Screenshot',
+                        'template_id'=>'template_id', 
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -91,6 +101,9 @@ class BuildTemp extends CActiveRecord
 		$criteria->compare('temp_body_id',$this->temp_body_id);
 		$criteria->compare('temp_footer_id',$this->temp_footer_id);
 		$criteria->compare('status',$this->status);
+                $criteria->compare('folderpath',$this->folderpath);
+                $criteria->compare('screenshot',$this->screenshot);
+                $criteria->compare('template_id',$this->template_id);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 

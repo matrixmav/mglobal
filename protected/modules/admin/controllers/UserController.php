@@ -160,7 +160,9 @@ class UserController extends Controller
             $successMsg = "";
             
             $dataProvider=new CActiveDataProvider('User', array(
-                        'pagination' => array('pageSize' => $pageSize),
+                  'criteria' => array(
+                  'condition' => ('name != "admin"'), 'order' => 'id DESC',   
+                ),'pagination' => array('pageSize' => $pageSize),
             ));
             if(!empty($_POST['search'])) { 
                 $dataProvider = CommonHelper::search(isset($_REQUEST['search'])?$_REQUEST['search']:"", $model, array('full_name','email','	phone','sponsor_id'), array(), isset($_REQUEST['selected'])?$_REQUEST['selected']:"");
