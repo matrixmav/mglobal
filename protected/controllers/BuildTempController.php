@@ -93,10 +93,8 @@ class BuildTempController extends Controller
          }
          
         $builderObjectz = UserHasTemplate::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID'],'user_id'=>Yii::app()->session['userid']));
-        Yii::app()->session['templateID'] = $builderObjectz->template_id;
-        $builderObjectFinal = BuildTemp::model()->findByAttributes(array('template_id'=>$builderObjectz->template_id));
-        
-        $this->renderPartial('user_templates',array('builderObject'=> $builderObjectFinal,'edit'=>1));    
+        $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>$builderObjectz->template_id));
+        $this->renderPartial('user_templates',array('builderObject'=> $builderObjectz,'edit'=>1,'builderObjectmeta'=>$builderObjectmeta));    
         }
     
         public function actionEditHeader() 
