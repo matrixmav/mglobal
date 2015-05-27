@@ -61,13 +61,19 @@ class BuildTempController extends Controller
         $templateObject = new UserHasTemplate;
         if(!empty($_POST))
         {
+        $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id'=>$_POST['template_id'])); 
+           $buildertempObject->template_id = $buildertempObject->template_id;
+           $buildertempObject->header_id = $buildertempObject->header_id;
+           $buildertempObject->body_id = $buildertempObject->body_id;
+           $buildertempObject->footer_id = $buildertempObject->footer_id;
+           $buildertempObject->save(false);
+           $id = $buildertempObject->id;
            $templateObject->user_id =  $_POST['user_id'];
-           $templateObject->template_id =  $_POST['template_id'];
+           $templateObject->template_id =  $id;
            $templateObject->created_at =  date('Y-m-d');
            $templateObject->save(false);
-           
         }
-        $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>$_POST['template_id']));    
+        $builderObject = BuildTemp::model()->findByAttributes(array('id'=>$_POST['template_id']));    
         $this->renderPartial('user_templates',array('builderObject'=> $builderObject));    
         }
     
