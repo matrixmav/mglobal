@@ -65,6 +65,8 @@ class Genealogy extends CActiveRecord
 			'sponsor_user_id' => 'Sponsor User',
 			'position' => 'Position',
 			'status' => 'Status',
+                        'order_status' => 'Order Status',
+                        'order_amount' => 'Order Amount',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -94,6 +96,8 @@ class Genealogy extends CActiveRecord
 		$criteria->compare('sponsor_user_id',$this->sponsor_user_id);
 		$criteria->compare('position',$this->position,true);
 		$criteria->compare('status',$this->status);
+                $criteria->compare('order_status',$this->order_status);
+                $criteria->compare('order_amount',$this->order_amount);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 
@@ -115,5 +119,25 @@ class Genealogy extends CActiveRecord
         
         public function getGenealogyByValue($field, $value){
              return Genealogy::model()->findByAttributes(array($field => $value ));
+        }
+        
+        public function getParentBinary($rightTotalAmount, $userObject, $position){
+            //check parent having right node or not
+            $myRightChieldObject = BaseClass::getGenoalogyTreeChild($userObject->parent, $position);
+
+            //parent having right node
+            if($myRightChieldObject){
+                //check chield having order
+                $rightChieldOrderObject = Order::getOrderByValue('user_id',$myRightChieldObject[0]->user_id);  
+
+                //Order present
+                if($rightChieldOrderObject){
+                    //find the order amount
+                    $rightOrderPurchaseValue = $rightChieldOrderObject->package->amount;
+                    //upsh the order amount in to an array
+                    array_push($rightTotalAmount, $rightOrderPurchaseValue);
+                }
+            }
+            return $rightTotalAmount;
         }
 }

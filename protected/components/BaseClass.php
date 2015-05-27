@@ -963,4 +963,11 @@ class BaseClass extends Controller {
         $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId .' AND position = '. $position,'order'=>'position asc') );
         return $genealogyListObject;
     }
-}
+    
+    public static function getBinaryTreeChild($userId, $date ,$position){
+        $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId .' AND position = '. $position .'AND updated_at = "2015-05-19" ', 'order'=>'position asc') );
+        return $genealogyListObject;
+    }
+    
+    
+ }

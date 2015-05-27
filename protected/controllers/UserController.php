@@ -360,53 +360,46 @@ class UserController extends Controller
         }
         
         public function actionBinary(){
-            $loggedInUserId = 3;            
             
-            $currentDate = '"2015-05-19"' ;
-            $getOrderListObject = Order::model()->findAll(array('condition'=>'created_at = '. $currentDate  ));
-            $arrLast = array();
-            $arrAllLast = array();
             $percent = 10;
+            $currentUserId = 3 ;        
+            $currentDate = '2015-05-19';
+            $genealogyLeftListObject = BaseClass::getBinaryTreeChild($currentUserId, $currentDate ,"'left'");          
+            $genealogyRightListObject = BaseClass::getBinaryTreeChild($currentUserId, $currentDate ,"'right'");
+             echo "<pre>";
+             print_r($genealogyRightListObject); 
             
-            foreach($getOrderListObject as $getOrderObject){  
-                
-                $userObject = Genealogy::getGenealogyByValue('user_id',$getOrderObject->user_id);                
-                
-                echo "<pre>"; print_r($userObject);exit;
-                if($userObject->parent == $loggedInUserId){
-                    echo "parent";exit;
+            if(count($genealogyLeftListObject) > 0  &&  count($genealogyRightListObject) > 0 ){               
+                echo $genealogyLeftListObject[0]->order_amount;                                
+                echo $genealogyRightListObject[0]->user_id;
+                if($genealogyLeftListObject[0]->order_amount > $genealogyRightListObject[0]->order_amount){
+                    $totalCommission = BaseClass::getPercentage($genealogyRightListObject[0]->order_amount , $percent, 1 ); 
+                }else{
+                    $totalCommission = BaseClass::getPercentage($genealogyLeftListObject[0]->order_amount, $percent, 1 ); 
                 }
-                echo "<pre>"; print_r($userObject);exit;
-                                
-                                
-                $orderObject = Order::getOrderByValue('user_id',$getOrderObject->id);                
-                $packageObject = Package::model()->findByAttributes(array('id'=>$getOrderObject->package_id));
-                
-                array_push($arrLast,$userObject->parent);    
-                
-                if(count($arrLast) > 1 ){    
-                    if($arrLast[0] == $arrLast[1]){                        
-                        echo $arrLast[0] ." user id will get Commission "; 
-                        if($arrAllLast[3] < $packageObject->amount){ // Check Condition                                                        
-                            echo $totalCommission = BaseClass::getPercentage($arrAllLast[3] , $percent, 1 ); 
-                            echo " Carry Forward : ". $arrAllLast[2] ." " ;
-                            echo $packageObject->amount - $arrAllLast[3] ;
-                            array_shift($arrLast); //empty the array
-                        }else{                            
-                            echo $totalCommission = BaseClass::getPercentage($packageObject->amount , $percent, 1 ); 
-                            echo " Carry Forward : ". $userObject->position ;
-                            echo $arrAllLast[3] - $packageObject->amount ;
-                            array_shift($arrLast); //empty the array
-                        }
-                    }else{
-                        array_shift($arrLast); //empty the array
-                        $arrAllLast = array(); //empty the array
-                    }
-                }                
-                array_push($arrAllLast,$getOrderObject->user_id,$userObject->parent,$userObject->position,$packageObject->amount);
+                echo $totalCommission ;
+            }
             
-            echo "<br/>";    
-            }            
+            for($i=0 ; $i< 10 ; $i++){
+                
+            }
+            
+            
+            
+            
+            
+            die;
+            echo "<pre>";
+            print_r($genealogyLeftListObject);
+            print_r($genealogyRightListObject);
+            
+            die;
+            
+            
+            
+            
+            $userObject = User::getUserById($loggedInUserId);
+                       
             
             
         }
