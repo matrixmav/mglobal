@@ -33,7 +33,7 @@ class UserHasTemplate extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, temp_header, temp_footer, temp_body, user_id, template_id, created_at, order_id', 'required'),
+			array('category_id, user_id, template_id, created_at, order_id', 'required'),
 			array('category_id, publish, user_id, template_id, order_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -49,10 +49,7 @@ class UserHasTemplate extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                     'category' => array(self::BELONGS_TO, 'Buildcategory', 'category_id'),
-                    'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header'),
-                    'footer' => array(self::BELONGS_TO, 'BuildTempfooter', 'temp_footer'),
-                    'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body'),
+                    
 		);
 	}
 
@@ -64,9 +61,6 @@ class UserHasTemplate extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'category_id' => 'Category',
-			'temp_header' => 'Temp Header',
-			'temp_footer' => 'Temp Footer',
-			'temp_body' => 'Temp Body',
 			'publish' => 'Publish',
 			'user_id' => 'User',
 			'template_id' => 'Template',
@@ -95,9 +89,6 @@ class UserHasTemplate extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('category_id',$this->category_id);
-		$criteria->compare('temp_header',$this->temp_header,true);
-		$criteria->compare('temp_footer',$this->temp_footer,true);
-		$criteria->compare('temp_body',$this->temp_body,true);
 		$criteria->compare('publish',$this->publish);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('template_id',$this->template_id);
