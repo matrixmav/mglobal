@@ -47,13 +47,14 @@ class BuildTempController extends Controller
         public function actionTemplates()
         {
             $builderObject = BuildTemp::model()->findAll(array('condition'=>'screenshot != ""'));
+            Yii::app()->session['orderID'] = $_GET['id'];
             $this->render('templates',array('builderObject'=> $builderObject));
         }
         
         public function actionUserTemplates()
         {
             $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>'35'));
-            Yii::app()->session['orderID'] = $_GET['id'];
+            
             $this->renderPartial('user_templates',array('builderObject'=> $builderObject));
         }
         
@@ -91,8 +92,11 @@ class BuildTempController extends Controller
             }
          }
          
-        $builderObject = BuildTemp::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID'],'user_id'=>Yii::app()->session['userid']));
-        $this->renderPartial('user_templates',array('builderObject'=> $builderObject));    
+        $builderObjectz = UserHasTemplate::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID'],'user_id'=>Yii::app()->session['userid']));
+        Yii::app()->session['templateID'] = $builderObjectz->template_id;
+        $builderObjectFinal = BuildTemp::model()->findByAttributes(array('template_id'=>$builderObjectz->template_id));
+        
+        $this->renderPartial('user_templates',array('builderObject'=> $builderObjectFinal,'edit'=>1));    
         }
     
              
