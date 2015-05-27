@@ -1,32 +1,27 @@
 <?php
 $this->breadcrumbs = array(
     'Template' => array('buildtemp/templates'),
-    'Page Add',
+    'Page Edit',
 );
 ?>
 <div class="col-md-7 col-sm-7" id="test">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-     <?php if(count($userpagesObject) < 4) {?>
-    <a href="/buildtemp/userinput">Add page</a>
-     <?php }else{
-      foreach($userpagesObject as $page){?><a href="/buildtemp/pagedit?id=<?php echo $page->id; ?>"><?php echo $page->page_name; ?></a><?php }?>   
-      <?php }?>
-    <form action="/buildtemp/userinput" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+      <form action="/buildtemp/pagedit?id=<?php echo $_GET['id']; ?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
-            <legend>Add Pages</legend>
+            <legend>Edit Pages</legend>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Page Title<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input id="page_name" type="text" class="form-control" name="pages[page_name]">
+                    <input id="page_name" type="text" class="form-control" name="pages[page_name]" value="<?php echo (!empty($userpagesObject->page_name)) ? $userpagesObject->page_name : ""; ?>">
                     <span id="page_title_error"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Page Content<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="editor1" class="form-control" name="pages[page_content]" style="width: 482px; height: 248px;"></textarea>
+                    <textarea id="editor1" class="form-control" name="pages[page_content]" style="width: 482px; height: 248px;"><?php echo (!empty($userpagesObject->page_content)) ? $userpagesObject->page_content : ""; ?></textarea>
                     <span id="page_content_error"></span>
                 </div>
             </div>
