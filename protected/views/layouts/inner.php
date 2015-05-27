@@ -499,6 +499,47 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
+                             $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "buildtemp/userinput" => "Add / Edit Pages",
+//                                    "moneytransfer/list" => "Moneytransfer List",
+                                    "buildtemp/transfer" => "Transfer",
+                                );
+                                ?>
+                                <li
+ 
+                                    class="<?php echo (($curControllerLower == 'buildtemp') && ($curControllerLower == 'buildtemp')) ? "active" : ''; ?>">
+ 
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Builder Pages</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'buildtemp' || $curControllerLower == 'buildtemp') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                        if ($ctName == "search/create") {
+                                            $ctName = "search/create/type/details";
+                                        }
+                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
+                                            $class_content = 'class="active"';
+                                        else
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                        echo '<li ' . $class_content . '>';
+                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '</li>';
+                                        if ($ctName == "search/create/type/details") {
+                                            $ctName = "search/create";
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
                         } else {
                             ?>
                             <li
