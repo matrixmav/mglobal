@@ -58,8 +58,17 @@ class BuildTempController extends Controller
         
         public function actionManageWebsite()
         {
-            
-            
+        $templateObject = new UserHasTemplate;
+        if(!empty($_POST))
+        {
+           $templateObject->user_id =  $_POST['user_id'];
+           $templateObject->template_id =  $_POST['template_id'];
+           $templateObject->created_at =  date('Y-m-d');
+           $templateObject->save(false);
+           
+        }
+        $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>$_POST['template_id']));    
+        $this->renderPartial('user_templates',array('builderObject'=> $builderObject));    
         }
     
              
