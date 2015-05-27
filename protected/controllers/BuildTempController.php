@@ -53,6 +53,7 @@ class BuildTempController extends Controller
         public function actionUserTemplates()
         {
             $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>'35'));
+            Yii::app()->session['orderID'] = $_GET['id'];
             $this->renderPartial('user_templates',array('builderObject'=> $builderObject));
         }
         
@@ -62,22 +63,35 @@ class BuildTempController extends Controller
         $buildTempObject = new BuildTemp;
         if(!empty($_POST))
         {
-           $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id'=>$_POST['template_id'])); 
-           $buildTempObject->category_id = $buildertempObject->category_id;
-           $buildTempObject->template_id = $buildertempObject->template_id;
-           $buildTempObject->temp_header_id = $buildertempObject->temp_header_id;
-           $buildTempObject->temp_body_id = $buildertempObject->temp_body_id;
-           $buildTempObject->temp_footer_id = $buildertempObject->temp_footer_id;
-           $buildTempObject->created_at = date('Y-m-d');
-           $buildTempObject->save(false);
-           $id = $buildTempObject->id;
+           $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id'=>$_POST['template_id']));
+           $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID']));
+           if($hasbuilderObject)
+           {
+           $hasbuilderObject->category_id = $buildertempObject->category_id;
+           $hasbuilderObject->user_id =  $_POST['user_id'];
+           $hasbuilderObject->template_id = $buildertempObject->template_id;
+           $hasbuilderObject->temp_header_id = $buildertempObject->temp_header_id;
+           $hasbuilderObject->temp_body_id = $buildertempObject->temp_body_id;
+           $hasbuilderObject->temp_footer_id = $buildertempObject->temp_footer_id;
+           $hasbuilderObject->order_id = Yii::app()->session['orderID'];
+           $hasbuilderObject->publish = 0;
+           $hasbuilderObject->created_at = date('Y-m-d');
+           $hasbuilderObject->update(false);
+           }else{
+           $templateObject->category_id = $buildertempObject->category_id;
            $templateObject->user_id =  $_POST['user_id'];
-           $templateObject->template_id =  $id;
-           $templateObject->created_at =  date('Y-m-d');
+           $templateObject->template_id = $buildertempObject->template_id;
+           $templateObject->temp_header_id = $buildertempObject->temp_header_id;
+           $templateObject->temp_body_id = $buildertempObject->temp_body_id;
+           $templateObject->temp_footer_id = $buildertempObject->temp_footer_id;
+           $templateObject->order_id = Yii::app()->session['orderID'];
+           $templateObject->publish = 0;
+           $templateObject->created_at = date('Y-m-d');
            $templateObject->save(false);
-        }
-        $builderObject1 = BuildTemp::model()->findByAttributes(array('id'=>$id));  
-        $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>$builderObject1->template_id));
+            }
+         }
+         
+        $builderObject = BuildTemp::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID'],'user_id'=>Yii::app()->session['userid']));
         $this->renderPartial('user_templates',array('builderObject'=> $builderObject));    
         }
     
