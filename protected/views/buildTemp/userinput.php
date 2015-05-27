@@ -7,7 +7,9 @@ $this->breadcrumbs = array(
 <div class="col-md-7 col-sm-7" id="test">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-   
+    <?php if(){?>
+    <a href="/buildtemp/pageadd">Page1</a>&nbsp;&nbsp;<a href="/buildtemp/pageadd">Page2</a>&nbsp;&nbsp;<a href="/buildtemp/pageadd">Page3</a>&nbsp;&nbsp;<a href="/buildtemp/pageadd">Page4</a>
+    <?php } ?>
     <form action="/admin/buildtemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
