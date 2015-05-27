@@ -12,7 +12,21 @@
             echo "<p class='success'>".$_GET['successMsg']."</p>";
         }
         
-        if(!empty($msg)){ echo $msg; } ?>
+        if(!empty($msg)){ echo $msg; } 
+        
+        
+        if (array_key_exists("login", $_GET)) {
+            $oauth_provider = $_GET['oauth_provider'];
+            if ($oauth_provider == 'twitter') {
+                header("Location: login-twitter.php");
+            } else if ($oauth_provider == 'facebook') {
+                header("Location: login-facebook.php");
+            }
+        }
+        
+        
+        
+        ?>
         <h1>Login</h1>
         <div class="content-form-page">
           <div class="row">
@@ -69,7 +83,7 @@
                 </div>
               </form>
             </div>
-
+            <a href="http://mglobal.dev/user/facebook"><img src="<?php echo Yii::app()->basePath; ?>/fb_tw/images/fb_login.png">Registration With Facebook</a>        
           </div>
         </div>
       </div>
