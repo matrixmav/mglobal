@@ -6,7 +6,8 @@
  * The followings are the available columns in table 'user_pages':
  * @property integer $id
  * @property integer $user_id
- * @property integer $template_id
+ * @property integer $order_id
+ * @property string $page_name
  * @property string $page_content
  * @property string $created_at
  */
@@ -28,11 +29,12 @@ class UserPages extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, template_id, page_content, created_at', 'required'),
-			array('user_id, template_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, order_id, page_name, page_content, created_at', 'required'),
+			array('user_id, order_id', 'numerical', 'integerOnly'=>true),
+			array('page_name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, template_id, page_content, created_at', 'safe', 'on'=>'search'),
+			array('id, user_id, order_id, page_name, page_content, created_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +57,8 @@ class UserPages extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'template_id' => 'Template',
+			'order_id' => 'Order',
+			'page_name' => 'Page Name',
 			'page_content' => 'Page Content',
 			'created_at' => 'Created At',
 		);
@@ -81,7 +84,8 @@ class UserPages extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('template_id',$this->template_id);
+		$criteria->compare('order_id',$this->order_id);
+		$criteria->compare('page_name',$this->page_name,true);
 		$criteria->compare('page_content',$this->page_content,true);
 		$criteria->compare('created_at',$this->created_at,true);
 
