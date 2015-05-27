@@ -59,21 +59,25 @@ class BuildTempController extends Controller
         public function actionManageWebsite()
         {
         $templateObject = new UserHasTemplate;
+        $buildTempObject = new BuildTemp;
         if(!empty($_POST))
         {
-        $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id'=>$_POST['template_id'])); 
-           $buildertempObject->template_id = $buildertempObject->template_id;
-           $buildertempObject->header_id = $buildertempObject->header_id;
-           $buildertempObject->body_id = $buildertempObject->body_id;
-           $buildertempObject->footer_id = $buildertempObject->footer_id;
-           $buildertempObject->save(false);
-           $id = $buildertempObject->id;
+           $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id'=>$_POST['template_id'])); 
+           $buildTempObject->category_id = $buildertempObject->category_id;
+           $buildTempObject->template_id = $buildertempObject->template_id;
+           $buildTempObject->temp_header_id = $buildertempObject->temp_header_id;
+           $buildTempObject->temp_body_id = $buildertempObject->temp_body_id;
+           $buildTempObject->temp_footer_id = $buildertempObject->temp_footer_id;
+           $buildTempObject->created_at = date('Y-m-d');
+           $buildTempObject->save(false);
+           $id = $buildTempObject->id;
            $templateObject->user_id =  $_POST['user_id'];
            $templateObject->template_id =  $id;
            $templateObject->created_at =  date('Y-m-d');
            $templateObject->save(false);
         }
-        $builderObject = BuildTemp::model()->findByAttributes(array('id'=>$_POST['template_id']));    
+        $builderObject1 = BuildTemp::model()->findByAttributes(array('id'=>$id));  
+        $builderObject = BuildTemp::model()->findByAttributes(array('template_id'=>$builderObject1->template_id));
         $this->renderPartial('user_templates',array('builderObject'=> $builderObject));    
         }
     
