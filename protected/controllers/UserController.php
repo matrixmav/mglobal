@@ -29,7 +29,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary'), 
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary','facebook'), 
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -45,6 +45,9 @@ class UserController extends Controller
 			),
 		);
 	}
+        
+        
+        
         
         /* User Login Strat Here */
         public function actionLogin(){ 
@@ -227,22 +230,7 @@ class UserController extends Controller
                 $modelGenealogy->position = $_POST['position'];                 
                 $modelGenealogy->save(false); 
                 $successMsg = "You have successfully registered. Please check your email to activate your account"; 
-                /*  For Genealogy Data */
-
-                /*$modelGenealogy = new Genealogy();
-                $modelGenealogy->user_id = $model->id ; 
-                $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
-                $modelGenealogy->position = $_POST['position'] ; 
-                $modelGenealogy->save(); */
-
-//                $config['to'] = $model->email; 
-//                $config['subject'] = 'Registration Confirmation' ;
-//                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
-//                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-//                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
-//                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
-//                var_dump($config);
-//                CommonHelper::sendMail($config);
+                
                 $this->redirect(array('login','successMsg'=>$successMsg));                    
 
                 //$this->render('login', array('successMsg'=> $successMsg));
@@ -557,4 +545,6 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        
 }

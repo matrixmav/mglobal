@@ -61,6 +61,10 @@ return array(
                             'HTML2PDF' => array(
                                 'librarySourcePath' => 'application.vendor.html2pdf.*',
                                 'classFile'         => 'html2pdf.class.php', // For adding to Yii::$classMap
+                            ),
+                            'FB_TW' => array(
+                                'librarySourcePath' => 'application.vendor.fb_tw.*',
+                                'classFile'         => 'fb_tw.facebook.facebook.php','fb_tw.config.fbconfig.php'  // For adding to Yii::$classMap
                             )
                         ),
                     ),
