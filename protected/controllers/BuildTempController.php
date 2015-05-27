@@ -103,12 +103,12 @@ class BuildTempController extends Controller
         {
         $builderObject = UserHasTemplate::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID'],'user_id'=>Yii::app()->session['userid']));
        
-         /*if(!empty($_POST['Header']))
+         if(!empty($_POST['Header']))
         {
           
           $builderObject->temp_header =  $_POST['Header']['header_content']; 
           $builderObject->update();
-        }*/
+        }
         $this->render('editheader',array('builderObject'=> $builderObject)); 
         }     
         
