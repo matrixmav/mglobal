@@ -18,7 +18,7 @@ class BuildTempController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput'),
+                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput','pageadd'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -115,9 +115,25 @@ class BuildTempController extends Controller
         $success = "";
         $error = "";
         $userpagesObject = UserPages::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid'],'order_id'=>Yii::app()->session['orderID']));
+        $userpagesObject1 = new UserPages;
+        if($_POST)
+        {
+        if($_POST['pages']['page_name']!='' && $_POST['pages']['page_content'] !='')
+        {
+        $userpagesObject1->order_id = Yii::app()->session['orderID'];
+        $userpagesObject1->user_id = Yii::app()->session['userid'];
+        $userpagesObject1->page_name = $_POST['pages']['page_name'];
+        $userpagesObject1->page_content = $_POST['pages']['page_content'];
+        $userpagesObject1->created_at = date("Y-m-d");
+        $userpagesObject1->save(false);
+        }else{
+           $error .= "Please fill required(*) marked fields."; 
+        }
+        }
         $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
         }
         
+         
 
 	// Uncomment the following methods and override them if needed
 	/*
