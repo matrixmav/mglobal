@@ -347,8 +347,9 @@ class BuildTempController extends Controller {
                 if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
                         $error .= "Please upload mentioned file type.";
                 }else{
+                $fileS = time() . $_FILES['screenshot']['name'];    
                 $path = $targetdir."/screenshot/";
-                BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, time() . $_FILES['screenshot']['name']);
+                BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, $fileS);
                 }
                 }
                 $model = new BuildTemp;
@@ -360,8 +361,8 @@ class BuildTempController extends Controller {
                 $model->created_at = date('Y-m-d');
                 $model->updated_at = date('Y-m-d');
                 $model->category_id = $category;
-                $model->folderpath = time().$filenoext;
-                $model->screenshot = time().$_FILES['screenshot']['name'];
+                $model->folderpath = $fname;
+                $model->screenshot = $fileS;
                 
                 $model->save(false);
                
