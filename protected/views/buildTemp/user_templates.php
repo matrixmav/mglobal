@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><?php echo $builderObject->header->meta_title;?></title>
-<link href="/user/template/<?php echo $builderObject->folderpath; ?>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<title><?php echo $builderObjectmeta->header->meta_title;?></title>
+<link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/user/template/<?php echo $builderObject->folderpath; ?>/js/jquery.min.js"></script>
+<script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/jquery.min.js"></script>
 <!-- Custom Theme files -->
 <!--theme-style-->
-<link href="/user/template/<?php echo $builderObject->folderpath; ?>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
+<link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/style.css" rel="stylesheet" type="text/css" media="all" />	
 <!--//theme-style-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -19,14 +19,14 @@
 </head>	
     <?php if($edit=='1'){ ?><a href="/buildtemp/editheader">Edit Header</a><?php }?>
 <div id="header">
-    <?php echo $builderObject->header->header_content;?>
+    <?php echo $builderObject->temp_header;?>
 </div>
 <?php if($edit=='1'){ ?><a href="/buildtemp/bodyedit">Edit Body</a><<?php }?>
 <div id="container">
-   <?php echo $builderObject->body->body_content;?>  
+   <?php echo $builderObject->temp_body;?>  
 </div>
 
 <?php if($edit=='1'){ ?><a href="/buildtemp/footeredit">Edit Footer</a><<?php }?>
 <div id="footer">
-  <?php echo $builderObject->footer->footer_content;?>   
+  <?php echo $builderObject->temp_footer;?>   
 </div>

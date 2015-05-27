@@ -1,5 +1,5 @@
-<form action="/buildtemp/editheader">
-<textarea name="Header[header_content]" id="editor1"><?php echo $builderObject->header->header_content; ?></textarea> 
+<form action="/buildtemp/editheader" method="post">
+<textarea name="Header[header_content]" id="editor1"><?php echo $builderObject->temp_header; ?></textarea> 
 <input type="submit" name="submit" value="Submit">
 </form>  
 <script type="text/javascript">
