@@ -356,7 +356,7 @@ class BuildTempController extends Controller {
                 $model->temp_header_id = $headeraddObject->id;
                 $model->temp_body_id = $bodyaddObject->id;
                 $model->temp_footer_id = $footeraddObject->id;
-                $model->status = 1;
+                $model->status = 0;
                 $model->created_at = date('Y-m-d');
                 $model->updated_at = date('Y-m-d');
                 $model->category_id = $category;
