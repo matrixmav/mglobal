@@ -10,78 +10,28 @@ $this->breadcrumbs = array(
     <?php if(!empty($userpagesObject)){?>
     <?php foreach($userpagesObject as $page){?><a href="/buildtemp/pagedit?page_id=<?php echo $page->id; ?>"><?php echo $page->page_name; ?></a><?php }?>
     <?php }else{ ?>
-    <a href="/buildtemp/pageadd">Page1</a>&nbsp;&nbsp;<a href="/buildtemp/pageadd">Page2</a>&nbsp;&nbsp;<a href="/buildtemp/pageadd">Page3</a>&nbsp;&nbsp;<a href="/buildtemp/pageadd">Page4</a>
+    <a href="/buildtemp/userinput">Page1</a>&nbsp;&nbsp;<a href="/buildtemp/userinput">Page2</a>&nbsp;&nbsp;<a href="/buildtemp/userinput">Page3</a>&nbsp;&nbsp;<a href="/buildtemp/userinput">Page4</a>
     <?php }?>
-    <form action="/admin/buildtemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+    <form action="/admin/buildtemp/userinput" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
-            <legend>Add Template</legend>
-            <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Upload Zip Folder includes(css,images,js)<span class="require">*</span></label>
-                <div class="col-lg-8">
-                  <input type="file" name="cssfolder" id="cssfolder">
-                    <span id="cssfolder_error"></span>
-                </div>
-            </div>
-            
+            <legend>Add Pages</legend>
              <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Upload Template Screenshot<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="lastname">Page Title<span class="require">*</span></label>
                 <div class="col-lg-8">
-                  <input type="file" name="screenshot" id="screenshot">
-                    <span id="screenshot_error"></span>
-                </div>
-            </div>
-            
-             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Category<span class="require">*</span></label>
-                <div class="col-lg-8">
-                    <select name="Template[category]" id="category">
-                        <option value="">Select Category</option>
-                        <?php if(!empty($categoryObject))
-                        {
-                            foreach($categoryObject as $category)
-                                {?>
-                        <option value="<?php echo $category->id; ?>" ><?php echo $category->name; ?></option>    
-                            <?php }
-                        }?>
-                    </select>
-                    <span id="category_error"></span>
-                </div>
-            </div>
-            
-             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
-                <div class="col-lg-8">
-                    <input id="template_title" type="text" class="form-control" name="Template[template_title]">
+                    <input id="template_title" type="text" class="form-control" name="pages[template_title]">
                     <span id="template_title_error"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" style="width: 482px; height: 248px;"></textarea>
+                    <textarea id="editor1" class="form-control" name="pages[page_content]" style="width: 482px; height: 248px;"></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
-             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
-                <div class="col-lg-8">
-                    <textarea id="body_code" class="form-control" name="Template[body_code]" style="width: 482px; height: 248px;"></textarea>
-                    <span id="body_code_error"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
-                <div class="col-lg-8">
-                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" style="width: 482px; height: 248px;"></textarea>
-                    <span id="footer_code_error"></span>
-                </div>
-            </div>
             
-            
-           
-             
-        </fieldset>
+          </fieldset>
 
     <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
