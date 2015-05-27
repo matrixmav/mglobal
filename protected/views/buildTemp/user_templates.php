@@ -17,15 +17,16 @@
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 </head>	
+    <?php if($edit=='1'){ ?><a href="/buildtemp/headeredit">Edit Header</a><?php }?>
 <div id="header">
     <?php echo $builderObject->header->header_content;?>
 </div>
-
+<?php if($edit=='1'){ ?><a href="/buildtemp/bodyedit">Edit Body</a><<?php }?>
 <div id="container">
    <?php echo $builderObject->body->body_content;?>  
 </div>
 
-
+<?php if($edit=='1'){ ?><a href="/buildtemp/footeredit">Edit Footer</a><<?php }?>
 <div id="footer">
   <?php echo $builderObject->footer->footer_content;?>   
 </div>
