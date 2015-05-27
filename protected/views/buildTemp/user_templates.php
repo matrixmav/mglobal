@@ -17,7 +17,7 @@
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 </head>	
-    <?php if($edit=='1'){ ?><a href="/buildtemp/headeredit">Edit Header</a><?php }?>
+    <?php if($edit=='1'){ ?><a href="/buildtemp/editheader">Edit Header</a><?php }?>
 <div id="header">
     <?php echo $builderObject->header->header_content;?>
 </div>
