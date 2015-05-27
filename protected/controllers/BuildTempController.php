@@ -18,7 +18,7 @@ class BuildTempController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates','usertemplates','managewebsite'),
+                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -71,9 +71,9 @@ class BuildTempController extends Controller
            $hasbuilderObject->category_id = $buildertempObject->category_id;
            $hasbuilderObject->user_id =  $_POST['user_id'];
            $hasbuilderObject->template_id = $buildertempObject->template_id;
-           $hasbuilderObject->temp_header_id = $buildertempObject->temp_header_id;
-           $hasbuilderObject->temp_body_id = $buildertempObject->temp_body_id;
-           $hasbuilderObject->temp_footer_id = $buildertempObject->temp_footer_id;
+           $hasbuilderObject->temp_header = $buildertempObject->header->header_content;
+           $hasbuilderObject->temp_body = $buildertempObject->body->body_content;
+           $hasbuilderObject->temp_footer = $buildertempObject->footer->footer_content;
            $hasbuilderObject->order_id = Yii::app()->session['orderID'];
            $hasbuilderObject->publish = 0;
            $hasbuilderObject->created_at = date('Y-m-d');
@@ -82,9 +82,9 @@ class BuildTempController extends Controller
            $templateObject->category_id = $buildertempObject->category_id;
            $templateObject->user_id =  $_POST['user_id'];
            $templateObject->template_id = $buildertempObject->template_id;
-           $templateObject->temp_header_id = $buildertempObject->temp_header_id;
-           $templateObject->temp_body_id = $buildertempObject->temp_body_id;
-           $templateObject->temp_footer_id = $buildertempObject->temp_footer_id;
+           $templateObject->temp_header = $buildertempObject->header->header_content;
+           $templateObject->temp_body = $buildertempObject->body->body_content;
+           $templateObject->temp_footer = $buildertempObject->footer->footer_content;
            $templateObject->order_id = Yii::app()->session['orderID'];
            $templateObject->publish = 0;
            $templateObject->created_at = date('Y-m-d');
@@ -99,7 +99,18 @@ class BuildTempController extends Controller
         $this->renderPartial('user_templates',array('builderObject'=> $builderObjectFinal,'edit'=>1));    
         }
     
-             
+        public function actionEditHeader() 
+        {
+        $builderObject = UserHasTemplate::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID'],'user_id'=>Yii::app()->session['userid']));
+       
+         /*if(!empty($_POST['Header']))
+        {
+          
+          $builderObject->temp_header =  $_POST['Header']['header_content']; 
+          $builderObject->update();
+        }*/
+        $this->render('editheader',array('builderObject'=> $builderObject)); 
+        }     
         
 
 	// Uncomment the following methods and override them if needed
