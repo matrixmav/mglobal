@@ -55,7 +55,7 @@ if(isset($this->pageTitle))
   <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form/red202.css" rel="stylesheet" id="style-color">
   <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form/custom202.css" rel="stylesheet">
   <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.min.js?ver=<?php echo strtotime("now");?>"></script>
-  
+  <script src="<?php echo Yii::app()->baseUrl.'/ckeditor/ckeditor.js'; ?>"></script>
 <!--javascript goes here--> 
 </head>
 
