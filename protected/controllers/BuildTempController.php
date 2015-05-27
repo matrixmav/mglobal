@@ -7,7 +7,7 @@ class BuildTempController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='user';
+	public $layout='inner';
 
  	
     /**
@@ -18,7 +18,7 @@ class BuildTempController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader'),
+                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -108,7 +108,14 @@ class BuildTempController extends Controller
           $builderObject->update();
         }
         $this->render('editheader',array('builderObject'=> $builderObject)); 
-        }     
+        }   
+        
+        public function actionUserInput() 
+        {
+        $success = "";
+        $error = "";
+        $this->render('userinput',array('success'=> $success,'$error'=>$error));    
+        }
         
 
 	// Uncomment the following methods and override them if needed
