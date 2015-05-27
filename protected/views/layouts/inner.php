@@ -130,7 +130,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
-        
+        <script src="<?php echo Yii::app()->baseUrl.'/ckeditor/ckeditor.js'; ?>"></script>
+  <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.'/ckfinder/ckfinder.js';?>"></script>
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript" src="/chat/js/chat.js"></script>
         <script type="text/javascript">
