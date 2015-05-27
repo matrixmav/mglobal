@@ -114,7 +114,8 @@ class BuildTempController extends Controller
         {
         $success = "";
         $error = "";
-        $this->render('userinput',array('success'=> $success,'$error'=>$error));    
+        $userpagesObject = UserPages::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid'],'order_id'=>Yii::app()->session['orderID']));
+        $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
         }
         
 
