@@ -143,6 +143,7 @@ License: You must have a valid license purchased only from themeforest(the above
             });
 
         </script>
+      
         <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
  
         <!-- END JAVASCRIPTS -->
