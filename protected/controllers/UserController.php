@@ -32,7 +32,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou'), 
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary','facebook','twitter','callback'), 
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -48,6 +48,285 @@ class UserController extends Controller
 			),
 		);
 	}
+        
+        public function actionTwitter(){
+				
+		$twitter = Yii::app()->twitter->getTwitter();
+		$request_token = $twitter->getRequestToken();
+		//print_r($request_token); exit;
+		//set some session info
+		Yii::app()->session['oauth_token'] = $token =           $request_token['oauth_token'];
+		Yii::app()->session['oauth_token_secret'] = $request_token['oauth_token_secret'];
+		
+		if($twitter->http_code == 200){
+			//get twitter connect url
+			$url = $twitter->getAuthorizeURL($token);
+			//send them
+			$this->redirect($url);
+		}else{
+			//error here
+			$this->redirect(Yii::app()->homeUrl);
+		}
+	}
+	
+	public function actionCallback() {
+            
+		/* If the oauth_token is old redirect to the connect page. */
+		if (isset($_REQUEST['oauth_token']) && Yii::app()->session['oauth_token'] !== $_REQUEST['oauth_token']) {
+			Yii::app()->session['oauth_status'] = 'oldtoken';
+		}
+	
+		/* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
+		$twitter = Yii::app()->twitter->getTwitterTokened(Yii::app()->session['oauth_token'], Yii::app()->session['oauth_token_secret']);
+			
+		/* Request access tokens from twitter */
+		$access_token = $twitter->getAccessToken($_REQUEST['oauth_verifier']);
+			
+		/* Save the access tokens. Normally these would be saved in a database for future use. */
+		Yii::app()->session['access_token'] = $access_token;
+	
+		/* Remove no longer needed request tokens */
+		unset(Yii::app()->session['oauth_token']);
+		unset(Yii::app()->session['oauth_token_secret']);
+	
+		if (200 == $twitter->http_code) {
+			/* The user has been verified and the access tokens can be saved for future use */
+			Yii::app()->session['status'] = 'verified';
+	
+			//get an access twitter object
+			$twitter = Yii::app()->twitter->getTwitterTokened($access_token['oauth_token'],$access_token['oauth_token_secret']);
+	
+			//get user details
+			$twuser= $twitter->get("account/verify_credentials"); //echo '<pre>'; print_r($twuser); exit;
+			                        
+                        $twitterAuthId = $twuser->id;
+			$fulltName     = $twuser->name;
+			$username      = $twuser->screen_name;
+			$userLocation  = $twuser->location;
+
+			$userModel = new User();
+			
+                        $currnetUserObject = User::model()->findByAttributes(array('unique_id'=>$twitterAuthId,'status'=>1));
+                        
+			if(count($currnetUserObject) < 1 ){ 		
+			
+                            $userObject = User::model()->findByAttributes(array('name' => 'admin'));
+                            $masterPin = BaseClass::getUniqInt(5); 
+                            $getPosition = BaseClass::getRandPosition();
+
+                            if($getPosition == 1 ){ $getPosition = 'left' ; }else{ $getPosition = 'right' ; }
+
+                            $model = new User;
+                            $model->attributes = $_POST;
+                            $model->password = BaseClass::md5Encryption($masterPin);  
+                            $model->sponsor_id = 'admin' ;
+                            $model->full_name = $fulltName ;
+                            $model->name = $username ;
+                            $model->unique_id = $twitterAuthId;                        
+                            $model->position = $getPosition ;
+                            $model->master_pin = BaseClass::md5Encryption($masterPin);
+                            $model->created_at = date('Y-m-d') ;
+                            $model->role_id = 1 ;
+                            $model->status = 1 ;                       
+
+                            /* Condition for they have the child or not */
+                            $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$getPosition));
+                            
+                            if(count($geneObject)){
+                                $userId = "";
+                                for($i = 1; $i <= 1000 ; $i++ ){                    
+
+                                    if( $i == 1 ){                       
+                                        $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $getPosition ) );
+                                        if(count($geneObjectNode)){                               
+                                            $userId = $geneObjectNode->user_id ;                        
+                                        }else{                                
+                                            $userId =  $geneObject->user_id;  
+                                            break;
+                                        }
+                                    }else{                        
+                                        $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId ,'position' => $getPosition ) );                            
+                                        if(count($geneObjectNode)){
+                                            $userId = "";
+                                            $userId .= $geneObjectNode->user_id;                            
+                                        }else{                                
+                                            $userId ;
+                                            break;
+                                        }
+                                    }
+                                } 
+
+                            }else{
+                               $userId =  $userObject->id; 
+                            }       
+
+                            if(!$model->save(false)){
+                                echo "<pre>"; print_r($model->getErrors());exit;
+                            }
+
+                            $modelUserProfile = new UserProfile();
+                            $modelUserProfile->user_id = $model->id ;
+                            $modelUserProfile->city_name = $userLocation ;
+                            $modelUserProfile->created_at = date('Y-m-d') ;
+                            $modelUserProfile->referral_banner_id = 1 ;
+                            $modelUserProfile->save(false);
+
+                            /* Geneology */
+                            $userObjectId = User::model()->findByAttributes(array('sponsor_id' => 'admin' ));
+                            //echo 
+                            $modelGenealogy = new Genealogy();
+                            $modelGenealogy->parent = $userId ; 
+                            $modelGenealogy->user_id = $model->id ; 
+                            $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
+                            $modelGenealogy->position = $getPosition;                 
+                            $modelGenealogy->save(false);
+
+                           $currnetUserObject = User::model()->findByAttributes(array('unique_id'=>$twitterAuthId,'status'=>1));
+                            Yii::app()->session['userid'] = $currnetUserObject->id;
+                            Yii::app()->session['username'] = $currnetUserObject->name;
+                            $this->redirect("/profile/dashboard");
+                            
+			}
+			else{				
+                            Yii::app()->session['userid'] = $currnetUserObject->id;
+                            Yii::app()->session['username'] = $currnetUserObject->name;
+                            $this->redirect("/profile/dashboard");
+			}
+			
+	
+		} else {
+                    $this->redirect(Yii::app()->homeUrl);
+		}
+	}
+                
+        public function actionFacebook(){
+            
+            require(__DIR__ . '/../vendor/fb_tw/facebook/facebook.php');
+            require(__DIR__ . '/../vendor/fb_tw/config/fbconfig.php');
+
+            $facebook = new Facebook(array(
+            'appId' => APP_ID,
+            'secret' => APP_SECRET,
+            ));
+
+            $user = $facebook->getUser();
+
+            if ($user) {
+               try{
+                    // Proceed knowing you have a logged in user who's authenticated.
+                    $user_profile = $facebook->api('/me');
+                } catch (FacebookApiException $e) {
+                    error_log($e);
+                    $user = null;
+                }
+
+                if (!empty($user_profile )) {
+                    # User info ok? Let's print it (Here we will be adding the login and registering routines)
+                    
+                    $currnetUserObject = User::model()->findByAttributes(array('unique_id'=>$user_profile['id'],'status'=>1));
+                  
+                    if(count($currnetUserObject) < 1 ){ // Is present in database or not                        
+                        // Check Validation for user name and email id unique or not
+                        $checkUserInfo = User::model()->findByAttributes(array('name'=>$user_profile['first_name'],'email'=>$user_profile['email']));
+                        if(count($checkUserInfo) < 1 ){   
+                            
+                            $userObject = User::model()->findByAttributes(array('name' => 'admin'));
+                            $masterPin = BaseClass::getUniqInt(5); 
+                            $getPosition = BaseClass::getRandPosition();
+
+                            if($getPosition == 1 ){ $getPosition = 'left' ; }else{ $getPosition = 'right' ; }
+
+                            $model = new User;
+                            $model->attributes = $_POST;
+                            $model->password = BaseClass::md5Encryption($masterPin);  
+                            $model->sponsor_id = 'admin' ;
+                            $model->email = $user_profile['email'] ;
+                            $model->full_name = $user_profile['name'] ;
+                            $model->name = $user_profile['first_name'] ;
+                            $model->unique_id = $user_profile['id'] ;                        
+                            $model->position = $getPosition ;
+                            $model->master_pin = BaseClass::md5Encryption($masterPin);
+                            $model->date_of_birth = '2011-05-04'; 
+                            $model->created_at = date('Y-m-d') ;
+                            $model->role_id = 1 ;
+                            $model->status = 1 ;                       
+
+                            /* Condition for they have the child or not */
+                            $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$getPosition));
+                            //echo "<pre>"; print_r($geneObject);
+                            //die;
+                            if(count($geneObject)){
+                                $userId = "";
+                                for($i = 1; $i <= 1000 ; $i++ ){                    
+
+                                    if( $i == 1 ){                       
+                                        $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $getPosition ) );
+                                        if(count($geneObjectNode)){                               
+                                            $userId = $geneObjectNode->user_id ;                        
+                                        }else{                                
+                                            $userId =  $geneObject->user_id;  
+                                            break;
+                                        }
+                                    }else{                        
+                                        $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId ,'position' => $getPosition ) );                            
+                                        if(count($geneObjectNode)){
+                                            $userId = "";
+                                            $userId .= $geneObjectNode->user_id;                            
+                                        }else{                                
+                                            $userId ;
+                                            break;
+                                        }
+                                    }
+                                } 
+
+                            }else{
+                               $userId =  $userObject->id; 
+                            }       
+
+                            if(!$model->save(false)){
+                                echo "<pre>"; print_r($model->getErrors());exit;
+                            }
+
+                            $modelUserProfile = new UserProfile();
+                            $modelUserProfile->user_id = $model->id ;
+                            $modelUserProfile->created_at = date('Y-m-d') ;
+                            $modelUserProfile->referral_banner_id = 1 ;
+                            $modelUserProfile->save(false);
+
+                            /* Geneology */
+                            $userObjectId = User::model()->findByAttributes(array('sponsor_id' => 'admin' ));
+                            //echo 
+                            $modelGenealogy = new Genealogy();
+                            $modelGenealogy->parent = $userId ; 
+                            $modelGenealogy->user_id = $model->id ; 
+                            $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
+                            $modelGenealogy->position = $getPosition;                 
+                            $modelGenealogy->save(false);
+
+                            $currnetUserObject = User::model()->findByAttributes(array('unique_id'=>$user_profile['id'],'status'=>1));
+                            Yii::app()->session['userid'] = $currnetUserObject->id;
+                            Yii::app()->session['username'] = $currnetUserObject->name;
+                            $this->redirect("/profile/dashboard");
+                        }else{
+                            $error = "<p class='error'>Invalid User Name</p>"; 
+                            $this->render("login",array("msg"=>$error));
+                        }    
+                    }else{
+                        Yii::app()->session['userid'] = $currnetUserObject->id;
+                        Yii::app()->session['username'] = $currnetUserObject->name;
+                        $this->redirect("/profile/dashboard");
+                    }
+                } else {
+                    # For testing purposes, if there was an error, let's kill the script
+                    die("There was an error.");
+                }
+            } else {
+                # There's no active session, let's generate one
+                $login_url = $facebook->getLoginUrl(array( 'scope' => 'email'));
+                header("Location: " . $login_url);
+            }
+        }
+        
         
         /* User Login Strat Here */
         public function actionLogin(){ 
@@ -81,7 +360,7 @@ class UserController extends Controller
                             Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
                             Yii::app()->session['username'] = $getUserObject->name;
-                            echo "1"; 
+                            
                             if(Yii::app()->session['package_id']!='') {
                                 $this->redirect("/package/domainsearch");  
                             } else {
@@ -103,115 +382,95 @@ class UserController extends Controller
         public function actionRegistration(){
             
             $error = "";
-            if($_POST){ 
-                
+            if($_POST){                 
                
-                    $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
-                    $masterPin = BaseClass::getUniqInt(5); 
-                    $model = new User;
-                    $model->attributes = $_POST;
-                    $model->password = BaseClass::md5Encryption($_POST['password']);  
-                    $model->sponsor_id = $_POST['sponsor_id'] ;
-                    $model->master_pin = BaseClass::md5Encryption($masterPin);
-                    $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
-                    $model->created_at = date('Y-m-d') ;
-                    if($_POST['admin']==1)
-                    {
-                    $model->role_id = 3 ;
-                    }else{
-                    $model->role_id = 2 ;    
-                    }
-                    if($_POST['admin']==1)
-                    {
-                    $model->status = 3 ;
-                    }else{
-                    $model->status = 2 ;    
-                    }
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
+                $masterPin = BaseClass::getUniqInt(5); 
+                $model = new User;
+                $model->attributes = $_POST;
+                $model->password = BaseClass::md5Encryption($_POST['password']);  
+                $model->sponsor_id = $_POST['sponsor_id'] ;
+                $model->master_pin = BaseClass::md5Encryption($masterPin);
+                $model->date_of_birth = $_POST['y']."-".$_POST['m']."-".$_POST['d']; 
+                $model->created_at = date('Y-m-d') ;
+                if($_POST['admin']==1)
+                {
+                $model->role_id = 3 ;
+                }else{
+                $model->role_id = 2 ;    
+                }
+                if($_POST['admin']==1)
+                {
+                $model->status = 3 ;
+                }else{
+                $model->status = 2 ;    
+                }
 
-                    /* Condition for they have the child or not */
-                    $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
-                    //echo "<pre>"; print_r($geneObject);
-                    //die;
-                    if(count($geneObject)){
-                        $userId = "";
-                        for($i = 1; $i <= 1000 ; $i++ ){                    
+                /* Condition for they have the child or not */
+                $geneObject = Genealogy::model()->findByAttributes(array('parent' =>$userObject->id,'position'=>$_POST['position']));
+                //echo "<pre>"; print_r($geneObject);
+                //die;
+                if(count($geneObject)){
+                    $userId = "";
+                    for($i = 1; $i <= 1000 ; $i++ ){                    
 
-                            if( $i == 1 ){                       
-                                $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $_POST['position'] ) );
-                                if(count($geneObjectNode)){                               
-                                    $userId = $geneObjectNode->user_id ;                        
-                                }else{                                
-                                    $userId =  $geneObject->user_id;  
-                                    break;
-                                }
-                            }else{                        
-                                $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId ,'position' => $_POST['position'] ) );                            
-                                if(count($geneObjectNode)){
-                                    $userId = "";
-                                    $userId .= $geneObjectNode->user_id;                            
-                                }else{                                
-                                    $userId ;
-                                    break;
-                                }
+                        if( $i == 1 ){                       
+                            $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id ,'position' => $_POST['position'] ) );
+                            if(count($geneObjectNode)){                               
+                                $userId = $geneObjectNode->user_id ;                        
+                            }else{                                
+                                $userId =  $geneObject->user_id;  
+                                break;
                             }
-
+                        }else{                        
+                            $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId ,'position' => $_POST['position'] ) );                            
+                            if(count($geneObjectNode)){
+                                $userId = "";
+                                $userId .= $geneObjectNode->user_id;                            
+                            }else{                                
+                                $userId ;
+                                break;
+                            }
+                        }
                     } 
-                
+
                 }else{
                    $userId =  $userObject->id; 
                 }       
-                
-                $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
-                $model->activation_key = $rand ;
-                               
-                
-                if(!$model->save(false)){
-                    echo "<pre>"; print_r($model->getErrors());exit;
-                }
-                
-                $modelUserProfile = new UserProfile();
-                $modelUserProfile->user_id = $model->id ;
-                $modelUserProfile->created_at = date('Y-m-d') ;
-                $modelUserProfile->referral_banner_id = 1 ;
-                $modelUserProfile->save(false);
-                
-                /* Geneology */
-                $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ));
-                //echo 
-                $modelGenealogy = new Genealogy();
-                $modelGenealogy->parent = $userId ; 
-                $modelGenealogy->user_id = $model->id ; 
-                $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
-                $modelGenealogy->position = $_POST['position'];                 
-                $modelGenealogy->save(false);
-                /*User entry in builder*/
-                
-                $builderObject = new WebsiteadminAdminUsers();
-                $builderObject->first_name = $_POST['full_name'] ;
-                $builderObject->username = $_POST['name'] ;
-                $builderObject->type = "Basic" ;
-                $builderObject->password = md5('12345');
-                $builderObject->save(false);
-                
-                /*User entry in builder templates*/
-                $buildertemplateObject = new WebsiteadminUserTemplates();
-                $buildertemplateObject->name = $_POST['full_name'];
-                $buildertemplateObject->user = $_POST['name'];
-                $buildertemplateObject->save(false);
-                
-                /*User entry in builder weblog*/
-                $builderweblogObject = new WebsiteadminWeblog();
-                $builderweblogObject->user = $_POST['name'];
-                $builderweblogObject->save(false);
-                $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>"; 
-                /*  For Genealogy Data */
-                
-                /*$modelGenealogy = new Genealogy();
-                $modelGenealogy->user_id = $model->id ; 
-                $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
-                $modelGenealogy->position = $_POST['position'] ; 
-                $modelGenealogy->save(); */
-                
+
+            $rand= BaseClass::md5Encryption(date('YmdHis'),5); // For the activation link
+            $model->activation_key = $rand ;
+
+
+            if(!$model->save(false)){
+                echo "<pre>"; print_r($model->getErrors());exit;
+            }
+
+            $modelUserProfile = new UserProfile();
+            $modelUserProfile->user_id = $model->id ;
+            $modelUserProfile->created_at = date('Y-m-d') ;
+            $modelUserProfile->referral_banner_id = 1 ;
+            $modelUserProfile->save(false);
+
+            /* Geneology */
+            $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id'] ));
+            //echo 
+            $modelGenealogy = new Genealogy();
+            $modelGenealogy->parent = $userId ; 
+            $modelGenealogy->user_id = $model->id ; 
+            $modelGenealogy->sponsor_user_id = $userObjectId->id;                 
+            $modelGenealogy->position = $_POST['position'];                 
+            $modelGenealogy->save(false);
+
+            $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>"; 
+            /*  For Genealogy Data */
+
+            /*$modelGenealogy = new Genealogy();
+            $modelGenealogy->user_id = $model->id ; 
+            $modelGenealogy->sponsor_user_id = $_POST['sponsor_id'] ; 
+            $modelGenealogy->position = $_POST['position'] ; 
+            $modelGenealogy->save(); */
+
 //                $config['to'] = $model->email; 
 //                $config['subject'] = 'Registration Confirmation' ;
 //                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
@@ -220,15 +479,15 @@ class UserController extends Controller
 //                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
 //                var_dump($config);
 //                CommonHelper::sendMail($config);
-                //$this->render('login', array('successMsg'=> $successMsg));
-                //$this->redirect('login');
-     
-                    if($_POST['admin']==1)
-                    {
-                    $this->redirect(array('admin/user/index','successMsg'=>1));
-                     }else{
-                    $this->redirect(array('login','successMsg'=>$successMsg)); 
-                     }
+            //$this->render('login', array('successMsg'=> $successMsg));
+            //$this->redirect('login');
+
+                if($_POST['admin']==1)
+                {
+                $this->redirect(array('admin/user/index','successMsg'=>1));
+                 }else{
+                $this->redirect(array('login','successMsg'=>$successMsg)); 
+                 }
 
             } 
             $spnId = "";
@@ -314,6 +573,51 @@ class UserController extends Controller
             $userObject = User::getUserById($userId);
             $totalCommission = BaseClass::getDirectCommission($userObject->name);
             $this->render('thankyou',array('getValue'=>$totalCommission ,'userObject'=>$userObject));            
+        }
+        
+        public function actionBinary(){
+            
+            $percent = 10;
+            $currentUserId = 3 ;        
+            $currentDate = '2015-05-19';
+            $genealogyLeftListObject = BaseClass::getBinaryTreeChild($currentUserId, $currentDate ,"'left'");          
+            $genealogyRightListObject = BaseClass::getBinaryTreeChild($currentUserId, $currentDate ,"'right'");
+             echo "<pre>";
+             print_r($genealogyRightListObject); 
+            
+            if(count($genealogyLeftListObject) > 0  &&  count($genealogyRightListObject) > 0 ){               
+                echo $genealogyLeftListObject[0]->order_amount;                                
+                echo $genealogyRightListObject[0]->user_id;
+                if($genealogyLeftListObject[0]->order_amount > $genealogyRightListObject[0]->order_amount){
+                    $totalCommission = BaseClass::getPercentage($genealogyRightListObject[0]->order_amount , $percent, 1 ); 
+                }else{
+                    $totalCommission = BaseClass::getPercentage($genealogyLeftListObject[0]->order_amount, $percent, 1 ); 
+                }
+                echo $totalCommission ;
+            }
+            
+            for($i=0 ; $i< 10 ; $i++){
+                
+            }
+            
+            
+            
+            
+            
+            die;
+            echo "<pre>";
+            print_r($genealogyLeftListObject);
+            print_r($genealogyRightListObject);
+            
+            die;
+            
+            
+            
+            
+            $userObject = User::getUserById($loggedInUserId);
+                       
+            
+            
         }
         
         public function actionIsUserExisted(){
@@ -487,4 +791,6 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        
 }
