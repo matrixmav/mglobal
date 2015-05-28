@@ -39,15 +39,16 @@ document.getElementById("logo").innerHTML = html;
 }
 });
 });
-function showContent()
+function showContent(ID)
 {
+dataString = 'fetchContent=yes&page_id='+ID;
 $.ajax({
 type: "GET",
 url: "/buildtemp/pagecontent",
 data: dataString,
 cache: false,
-success: function(html){alert();
-document.getElementById("logo").innerHTML = html;
+success: function(html){alert(html);
+document.getElementById("container").innerHTML = html;
 }
 });    
 }
