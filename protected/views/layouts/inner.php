@@ -130,20 +130,20 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
-        
+
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript" src="/chat/js/chat.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
-              App.init();
+                App.init();
                 //checkLoginTime();
-                 var IDSVal = document.getElementById('username').value;
-                 chatWith(IDSVal);  
+                var IDSVal = document.getElementById('username').value;
+                chatWith(IDSVal);
             });
 
         </script>
         <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
- 
+
         <!-- END JAVASCRIPTS -->
 
 
@@ -153,7 +153,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">
         <?php //var_dump($_SESSION); exit;?>
-         <input type="hidden" id="username" value="mGlobaly">
+        <input type="hidden" id="username" value="mGlobaly">
         <!-- BEGIN HEADER -->
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
@@ -178,42 +178,63 @@ License: You must have a valid license purchased only from themeforest(the above
                    data-target=".navbar-collapse"> <img
                         src="/metronic/assets/img/menu-toggler.png" alt="" />
                 </a>
+                
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                        <a href="/wallet/rpwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="RP Wallet">
-                            <i class="glyphicon glyphicon-bell"></i>
-                            <span class="badge badge-default">
-                                <?php $arrayRP =  BaseClass::walletAmount('2');
-                                foreach($arrayRP as $RP){}
-                                 echo (!empty($arrayRP)) ? $RP->fund : "0";?></span>
+                    <li><a href="#" class="btn green pull-right"</a>
+                            <span class="badge">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('2');
+                                foreach ($arrayRP as $RP) {
+                                    
+                                }
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2) : "0.00";
+                                ?>
+                            </span>
                         </a>
                     </li>
+                    <li><a href="#" class="btn red pull-right">Cash
+                            <span class="badge">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('2');
+                                foreach ($arrayRP as $RP) {
 
+                                }
+                                echo (!empty($arrayRP)) ? "<h4>" . number_format($RP->fund, 2) . "</h4>" : "0.00";
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                    <li><a href="#" class="btn blue pull-right">Comm
+                            <span class="badge">
+                                <?php
+                                $arrayFund = BaseClass::walletAmount('1');
+                                foreach ($arrayFund as $fund) {
+
+                                }
+                                echo (!empty($arrayFund)) ? $fund->fund : "0.00";
+                                ?>
+                            </span></a>
+                    </li>
+                    <li></li>
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
                         <a href="/wallet/fundwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Fund Wallet">
                             <i class="glyphicon glyphicon-envelope"></i>
                             <span class="badge badge-default">
-                              <?php $arrayFund =  BaseClass::walletAmount('1');
-                                foreach($arrayFund as $fund){}
-                                 echo (!empty($arrayFund)) ? $fund->fund : "0";?></span>
+                                <?php
+                                $userId = Yii::app()->session['userid'];
+                                $mailCount = BaseClass::getUnredMails($userId);
+                                if(!empty($mailCount)){
+                                    echo $mailCount;
+                                } else {
+                                     echo "0";
+                                }
+                                ?></span>
                         </a>
                     </li>
 
 
-
-                    <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
-                        <a href="/wallet/commisionwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Commision Wallet">
-                            <i class="glyphicon glyphicon-th"></i>
-                            <span class="badge badge-default">
-                                <?php $arrayCommision =  BaseClass::walletAmount('3');
-                                foreach($arrayCommision as $commision){}
-                                 echo (!empty($arrayCommision)) ? $commision->fund : "0";?></span>
-                        </a>
-
-
-                    </li>
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
                     <!-- END NOTIFICATION DROPDOWN -->
@@ -224,15 +245,16 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!-- END TODO DROPDOWN -->
                     <!-- BEGIN USER LOGIN DROPDOWN -->
-                    <li class="dropdown user"><a href="#" class="dropdown-toggle"
-                                                 data-toggle="dropdown" data-hover="dropdown"
-                                                 data-close-others="true"> <span class="username">
-                                                         <?php
-                                                         $userObject = User::model()->findByPk(Yii::app()->session['userid']);
-                                                         if ($userObject) {
-                                                             echo $userObject->full_name;
-                                                         }
-                                                         ?>
+                    <li class="dropdown user">
+                        <a href="#" class="dropdown-toggle"
+                           data-toggle="dropdown" data-hover="dropdown"
+                           data-close-others="true"> <span class="username">
+<?php
+$userObject = User::model()->findByPk(Yii::app()->session['userid']);
+if ($userObject) {
+    echo $userObject->full_name;
+}
+?>
                             </span> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -246,7 +268,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <a href="/admin/default/managerlogout"> <i class="fa fa-key"></i>
                                         Log Out
                                     </a>
-                                <?php } else { ?>
+<?php } else { ?>
                                     <a href="/site/logout"> <i class="fa fa-key"></i> Log Out
                                     </a>
 <?php } ?> 
@@ -393,17 +415,17 @@ License: You must have a valid license purchased only from themeforest(the above
                                     echo '</ul>';
                                     ?>					
                                 </li>	
-                                <?php
-                            }
+        <?php
+    }
 
-                            $billing_pmenu = 7;
-                            if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
-                                $billing_subsection = array(
-                                    "mail" => "Inbox",
-                                    "mail/compose" => "Compose",
-                                    "mail/sent" => "Sent",
-                                );
-                                ?>
+    $billing_pmenu = 7;
+    if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
+        $billing_subsection = array(
+            "mail" => "Inbox",
+            "mail/compose" => "Compose",
+            "mail/sent" => "Sent",
+        );
+        ?>
                                 <li
                                     class="<?php echo ($curControllerLower == 'mail') ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-hotel"></span> <span
@@ -412,36 +434,36 @@ License: You must have a valid license purchased only from themeforest(the above
                                             class="arrow <?php echo ($curControllerLower == 'mail') ? "open" : ''; ?>">
                                         </span>
                                     </a>
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($billing_subsection as $ctName => $ctTitle) {
-//                                        if (in_array($ctTitle, $menusections ['sections'])) {
-                                        // if($ctName == "invoice")
-                                        // echo '<ul class="sub-menu">';
-                                        $class_billing_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-                                        echo '<li ' . $class_billing_content . '>';
-                                        echo '<a href="/'. $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                            echo '</li>';
-//                                        }
-                                            }
-                                    echo '</ul>';
-                                    ?>					
-                                </li>	
                                 <?php
-                            }
+                                echo '<ul class="sub-menu">';
+                                foreach ($billing_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                    // if($ctName == "invoice")
+                                    // echo '<ul class="sub-menu">';
+                                    $class_billing_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+                                    echo '<li ' . $class_billing_content . '>';
+                                    echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                    echo '</li>';
+//                                        }
+                                }
+                                echo '</ul>';
+                                ?>					
+                                </li>	
+        <?php
+    }
 
-                            $reservation_pmenu = 8;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    "transaction/list" => "Transaction List",
+    $reservation_pmenu = 8;
+    if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+        $reservation_subsection = array(
+            "transaction/list" => "Transaction List",
 //                                    "moneytransfer/list" => "Moneytransfer List",
-                                    "MoneyTransfer/transfer" => "Transfer",
-                                );
-                                ?>
+            "MoneyTransfer/transfer" => "Transfer",
+        );
+        ?>
                                 <li
- 
+
                                     class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction')) ? "active" : ''; ?>">
- 
+
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Fund </span>
                                         <span class="selected"></span> <span
@@ -528,10 +550,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                     echo '</ul>';
                                     ?>					
                                 </li>	
-                                <?php
-                            }
-                        } else {
-                            ?>
+        <?php
+    }
+} else {
+    ?>
                             <li
                                 class="<?php echo ($curControllerLower == 'hotel') ? "active" : ''; ?>">
                                 <a href="/admin/hotel/index"> <i class="fa fa-cogs"></i> <span
@@ -547,13 +569,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="selected"></span> </span>
                                 </a>
                             </li>
-    <?php
-    $billing_subsection = array(
-        "invoice/index" => "Invoice Reservation",
-        "invoice/hotelbills" => "Invoices Listing",
-        "invoice/regulationstatus" => "Payment History"
-    );
-    ?>
+                                <?php
+                                $billing_subsection = array(
+                                    "invoice/index" => "Invoice Reservation",
+                                    "invoice/hotelbills" => "Invoices Listing",
+                                    "invoice/regulationstatus" => "Payment History"
+                                );
+                                ?>
                             <li
                                 class="<?php echo ($curControllerLower == 'invoice') ? "active" : ''; ?>">
                                 <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
@@ -561,21 +583,21 @@ License: You must have a valid license purchased only from themeforest(the above
                                         class="arrow <?php echo ($curControllerLower == 'invoice') ? "open" : ''; ?>">
                                     </span>
                                 </a>
-    <?php
-    foreach ($billing_subsection as $hotName => $hotTitle) {
-        if ($hotName == "invoice/index")
-            echo '<ul class="sub-menu">';
+                            <?php
+                            foreach ($billing_subsection as $hotName => $hotTitle) {
+                                if ($hotName == "invoice/index")
+                                    echo '<ul class="sub-menu">';
 
-        $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+                                $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
 
-        echo '<li ' . $class_content . '>';
-        echo '<a href="/admin/' . $hotName . '">' . $hotTitle . '</a>';
-        echo '</li>';
+                                echo '<li ' . $class_content . '>';
+                                echo '<a href="/admin/' . $hotName . '">' . $hotTitle . '</a>';
+                                echo '</li>';
 
-        if ($hotName == "invoice/regulationstatus")
-            echo '</ul>';
-    }
-    ?>						
+                                if ($hotName == "invoice/regulationstatus")
+                                    echo '</ul>';
+                            }
+                            ?>						
                             </li>
                                 <?php
                                 $reservation_subsection = array(
@@ -591,23 +613,23 @@ License: You must have a valid license purchased only from themeforest(the above
                                         class="arrow <?php echo ($curControllerLower == 'reservation') ? "open" : ''; ?>">
                                     </span>
                                 </a>
-    <?php
-    foreach ($reservation_subsection as $hotName => $hotTitle) {
-        if ($hotName == "reservation/onrequest")
-            echo '<ul class="sub-menu">';
+                            <?php
+                            foreach ($reservation_subsection as $hotName => $hotTitle) {
+                                if ($hotName == "reservation/onrequest")
+                                    echo '<ul class="sub-menu">';
 
-        $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+                                $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
 
-        echo '<li ' . $class_content . '>';
-        echo '<a href="/admin/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
-        echo '</li>';
+                                echo '<li ' . $class_content . '>';
+                                echo '<a href="/admin/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
+                                echo '</li>';
 
-        if ($hotName == "admin")
-            echo '</ul>';
-    }
-    ?>						
+                                if ($hotName == "admin")
+                                    echo '</ul>';
+                            }
+                            ?>						
                             </li>                                
-                            <?php } ?>				
+                    <?php } ?>				
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
@@ -623,12 +645,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!-- END STYLE CUSTOMIZER -->
                     <!-- BEGIN PAGE HEADER-->
-<?php
-$header_curController = @Yii::app()->controller->id;
-$header_curAction = @Yii::app()->getController()->getAction()->controller->action->id;
-$menu_cond = ($header_curController == "hotel" && $header_curAction == "index") ? false : true;
-if ($menu_cond) {
-    ?>
+                                    <?php
+                                    $header_curController = @Yii::app()->controller->id;
+                                    $header_curAction = @Yii::app()->getController()->getAction()->controller->action->id;
+                                    $menu_cond = ($header_curController == "hotel" && $header_curAction == "index") ? false : true;
+                                    if ($menu_cond) {
+                                        ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
@@ -649,7 +671,7 @@ if ($menu_cond) {
                                 <!-- END PAGE TITLE & BREADCRUMB-->
                             </div>
                         </div>
-<?php } ?>
+                <?php } ?>
                     <!-- END PAGE HEADER-->
                     <!-- BEGIN PAGE CONTENT-->
                     <div class="row">
