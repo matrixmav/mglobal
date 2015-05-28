@@ -165,6 +165,8 @@ class BuildTempController extends Controller
         {
          $responce = "";   
          $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+         $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+         $responce .= '<input type="hidden" name="defaultPage" id="defaultPage">';
          foreach($userpagesObject as $pages){
          $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($pages->page_name));
          $pagename = "'".$pages->id."'";
