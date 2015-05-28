@@ -969,5 +969,10 @@ class BaseClass extends Controller {
         return $genealogyListObject;
     }
     
+    public static function getRandPosition(){
+        $randValue = mt_rand(1, 2);
+        return $randValue ;        
+        
+    }
     
  }

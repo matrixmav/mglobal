@@ -108,7 +108,7 @@ return array(
                  */
                  //Local
                 
-		 'db'=>array(
+		'db'=>array(
 				'connectionString' => 'mysql:host=localhost;dbname=mglobal',
 				'emulatePrepare' => true,
 				'username' => 'root',
@@ -116,16 +116,13 @@ return array(
 				'charset' => 'utf8',
                                 'tablePrefix' => 'tbl_',
 		),
-                /*
-               
-                /*'db'=>array(
-				'connectionString' => 'mysql:host=localhost;dbname=hkbase',
-				'emulatePrepare' => true,
-				'username' => 'demodayu_site',
-				'password' => 'VuT%=Bv^O-&V',
-				'charset' => 'utf8',
-                                'tablePrefix' => 'tbl_',
-		),*/
+                
+                'twitter' => array(
+                                'class' => 'ext.yiitwitteroauth.YiiTwitter',
+                                'consumer_key' => 'JsUWA9cpSn8cCoIdCZQRHba32',
+                                'consumer_secret' => 'IA5qJ66PxsOtlqgwwsqcG1Bk5bVh3hhyaP87UHErE7vECTv8IW',
+                                'callback' => 'http://mglobal.dev/user/callback',
+                ),
 		
 		// Error handler
 		'errorHandler'=>array(
