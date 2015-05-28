@@ -16,17 +16,39 @@
 <!--//fonts-->
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+ $.ajax({
+type: "GET",
+url: "/buildtemp/fetchmenu",
+data: dataString,
+cache: false,
+success: function(html){ alert();
+document.getElementById("secondaryDomainResults").innerHTML = html;
+ 
+}
+
+});             
+});
+</script>
 </head>	
-    <?php if($edit=='1'){ ?><a href="/buildtemp/editheader">Edit Header</a><?php }?>
+ 
 <div id="header">
+    <?php /*code to fetch navigation*/
+//				$userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+//                                echo "<pre>"; print_r($userpagesObject);
+//				foreach($userpagesObject as $pages){
+//               ?>
+					<!--<li class="color1"><a href="/buildtemp/pagecontent?pageid=//<?php // echo $pages->id?>"><i class="icon1"> </i><span><?php //echo $pages->page_name?></span></a></li>-->
+				<?php // }?>	 
     <?php echo $builderObject->temp_header;?>
+    
 </div>
-<?php if($edit=='1'){ ?><a href="/buildtemp/bodyedit">Edit Body</a><<?php }?>
+
 <div id="container">
    <?php echo $builderObject->temp_body;?>  
 </div>
 
-<?php if($edit=='1'){ ?><a href="/buildtemp/footeredit">Edit Footer</a><<?php }?>
 <div id="footer">
   <?php echo $builderObject->temp_footer;?>   
 </div>
