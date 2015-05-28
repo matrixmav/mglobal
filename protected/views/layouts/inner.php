@@ -141,8 +141,19 @@ License: You must have a valid license purchased only from themeforest(the above
                  var IDSVal = document.getElementById('username').value;
                  chatWith(IDSVal);  
             });
+            $(".single_2").fancybox({
+    	openEffect	: 'elastic',
+    	closeEffect	: 'elastic',
+
+    	helpers : {
+    		title : {
+    			type : 'inside'
+    		}
+    	}
+    });
 
         </script>
+        
       
         <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
  
@@ -216,6 +227,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
                     </li>
+                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
                     <!-- END NOTIFICATION DROPDOWN -->
@@ -507,7 +519,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "buildtemp/userinput" => "Add / Edit Pages",
                                     "buildtemp/addlogo" => "Add Logo",
                                     "buildtemp/contactsetting" => "Contact Setting",
-                                     "buildtemp/managewebsite" => "Preview",
+                                    
                                 );
                                 ?>
                                 <li
