@@ -41,12 +41,13 @@ document.getElementById("logo").innerHTML = html;
 var url = document.URL;
 var str = url.split('/');
 var dValue = $("#defaultPage").val();
-if(str[5]!='')
+if(str[5]!='' && str[5]!='undefined')
 {
- var pageID = str[5];   
+var pageID = str[5];   
 }else{
 var pageID = dValue;      
 }
+
 dataString = 'fetchContent=yes&page_id='+pageID;
 $.ajax({
 type: "GET",
@@ -58,19 +59,7 @@ document.getElementById("content").innerHTML = html;
 }
 });
 });
-function showContent(ID)
-{
-dataString = 'fetchContent=yes&page_id='+ID;
-$.ajax({
-type: "GET",
-url: "/buildtemp/pagecontent",
-data: dataString,
-cache: false,
-success: function(html){
-document.getElementById("container").innerHTML = html;
-}
-});    
-}
+
 function validation()
  {
   $("#name_error").html("");
@@ -124,7 +113,7 @@ document.getElementById("msg").innerHTML = "Your query has been submitted succes
 <div id="header">
     
 <?php echo $builderObject->temp_header;?>
-    <input type="hidden" id="defaultPage" value="<?php echo $userpages1Object->id;?>">   
+    <input type="hidden" id="defaultPage" value="<?php echo (!empty($userpages1Object))? $userpages1Object->id : "";?>">   
 </div>
 
 <div id="container">
