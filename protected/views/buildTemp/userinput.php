@@ -8,9 +8,9 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
      <?php if(count($userpagesObject) < 4) {?>
-    <a href="/buildtemp/userinput">Add page</a>
+    <a href="/buildtemp/userinput" class="btn green">Add page</a>
      <?php }else{
-      foreach($userpagesObject as $page){?><a href="/buildtemp/pagedit?id=<?php echo $page->id; ?>"><?php echo $page->page_name; ?></a><?php }?>   
+      foreach($userpagesObject as $page){?><a href="/buildtemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a><?php }?>   
       <?php }?>
     <form action="/buildtemp/userinput" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
