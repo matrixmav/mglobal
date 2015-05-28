@@ -81,7 +81,7 @@ function validation()
   }
 
   $("#email_error").html("");
-      if ($("#email").val() == "") {
+      else if ($("#email").val() == "") {
       $("#email_error").html("Please enter email.");
       $("#email").focus();            
       return false;
@@ -89,16 +89,28 @@ function validation()
       var email = document.getElementById('email');
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-        if (!filter.test(email.value)) {
+        else if (!filter.test(email.value)) {
             $("#email_error").html("Enter valid email address ");
             $("#email").focus();
             return false;
         }
     $("#message_error").html("");
-    if($("#message").val() == "") {
+    else if($("#message").val() == "") {
     $("#message_error").html("Please enter your message.");
     $("#message").focus();            
     return false;
+  }
+  else{
+  dataString = 'fetchContent=yes&page_id='+ID;
+$.ajax({
+type: "GET",
+url: "/buildtemp/pagecontent",
+data: dataString,
+cache: false,
+success: function(html){
+document.getElementById("container").innerHTML = html;
+}
+});        
   }
  }
 </script>
