@@ -512,10 +512,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
+                            if(Yii::app()->session['orderID'] && Yii::app()->session['templateID'])
+                            {
                              $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    //"buildtemp/templates" => "Choose Templates",
+                                    "buildtemp/templates?id=".Yii::app()->session['orderID'] => "Choose Templates",
                                     "buildtemp/userinput" => "Add / Edit Pages",
                                     "buildtemp/addlogo" => "Add Logo",
                                     "buildtemp/contactsetting" => "Contact Setting",
@@ -554,7 +556,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     ?>			
                                 </li>
                                 <?php
-                            }
+                            }}
                         } else {
                             ?>
                             <li
