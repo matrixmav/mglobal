@@ -73,7 +73,7 @@ document.getElementById("container").innerHTML = html;
 }
 function validation()
  {
-    $("#name_error").html("");
+  $("#name_error").html("");
     if ($("#name").val() == "") {
     $("#name_error").html("Please enter your name.");
     $("#name").focus();            
@@ -81,34 +81,39 @@ function validation()
   }
 
   $("#email_error").html("");
-      else if ($("#email").val() == "") {
+      if ($("#email").val() == "")
+      {
       $("#email_error").html("Please enter email.");
       $("#email").focus();            
       return false;
      }
-      var email = document.getElementById('email');
+    var email = document.getElementById('email');
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-        else if (!filter.test(email.value)) {
+        if (!filter.test(email.value)) {
             $("#email_error").html("Enter valid email address ");
             $("#email").focus();
             return false;
         }
     $("#message_error").html("");
-    else if($("#message").val() == "") {
+    if($("#message").val() == "") {
     $("#message_error").html("Please enter your message.");
     $("#message").focus();            
     return false;
   }
-  else{
-  dataString = 'fetchContent=yes&page_id='+ID;
-$.ajax({
+else{
+ var name = $("#name").val();
+ var email = $("#email").val();
+ var message = $("#message").val();
+var dataString = 'name='+name+'&email='+email+'&message='+message;
+ $.ajax({
 type: "GET",
-url: "/buildtemp/pagecontent",
+url: "/buildtemp/submitform",
 data: dataString,
 cache: false,
 success: function(html){
-document.getElementById("container").innerHTML = html;
+if(html==1)
+document.getElementById("msg").innerHTML = "Your query has been submitted successfully.";
 }
 });        
   }
