@@ -13,14 +13,23 @@ $this->breadcrumbs = array(
             <legend>Edit Pages</legend>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Logo<span class="require">*</span></label>
-                <div class="col-lg-8">
-                    <input id="logo" type="file" class="form-control" name="logo">
-                    <?php if(!empty($userhasObject)){?>
-                    <img src="/user/template/logos/<?php echo $userhasObject->logo; ?>">
-                    <?php }?>
+                <div class="col-lg-8 fileupload fileupload-new">
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <span class="btn btn-primary btn-file btn-1"><span class="fileupload-new">
+                    <input id="logo" type="file" class="" name="logo">
+                    </span></span>
                     <span id="logo_error"></span>
+                    </div>
+                    <span class="example1">(Upload jpg ,png , pdf files only)<br/>
+                        <?php if(!empty($userhasObject)){?>
+                    <img src="/user/template/logos/<?php echo $userhasObject->logo; ?>">
+                    <?php }?></span>  
+                    
+                     </div>
+                    
+                   
                 </div>
-            </div>
+            
             
           </fieldset>
 
