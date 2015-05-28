@@ -503,9 +503,11 @@ License: You must have a valid license purchased only from themeforest(the above
                              $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
+                                    //"buildtemp/templates" => "Choose Templates",
                                     "buildtemp/userinput" => "Add / Edit Pages",
                                     "buildtemp/addlogo" => "Add Logo",
                                     "buildtemp/contactsetting" => "Contact Setting",
+                                     "buildtemp/managewebsite" => "Preview",
                                 );
                                 ?>
                                 <li
