@@ -82,6 +82,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                     'url' => 'Yii::app()->createUrl("admin/ads/edit", array("id"=>$data->id))',
                 ),
 
+                
             ),
         ),
         
