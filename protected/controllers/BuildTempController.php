@@ -18,7 +18,7 @@ class BuildTempController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput','pagedit','fetchmenu','addlogo','pageadd','fetchlogo','pagecontent','contactsetting'),
+                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput','pagedit','fetchmenu','addlogo','pageadd','fetchlogo','pagecontent','contactsetting','submitform'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -121,8 +121,7 @@ class BuildTempController extends Controller
             }
          }
         $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
-        $orderObject = Order::model()->findByAttributes(array('id'=>$_SESSION['orderID']));
-        $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject,'orderObject'=>$orderObject));    
+        $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
         }
         
         public function actionpageadd() {
@@ -159,13 +158,15 @@ class BuildTempController extends Controller
         {
         $userpagesObject->page_name = $_POST['pages']['page_name'];
         $userpagesObject->page_content = $_POST['pages']['page_content'];
+        $userpagesObject->page_form = $_POST['pages']['form_allowed'];
         $userpagesObject->update(false);
         $success .= "Page updated successfully"; 
         }else{
            $error .= "Please fill required(*) marked fields."; 
         }
         }
-        $this->render('pagedit',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
+        $orderObject = Order::model()->findByAttributes(array('id'=>Yii::app()->session['orderID']));
+        $this->render('pagedit',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject,'orderObject'=>$orderObject));    
         }
         
         
@@ -225,7 +226,27 @@ class BuildTempController extends Controller
         {
           $responce = "";
           $userpageObject = UserPages::model()->findBYPK($_REQUEST['page_id']);
-          echo $responce .= $userpageObject->page_content;
+          $responce .= $userpageObject->page_content;
+          if($userpageObject->page_form !='')
+          {
+           $responce .= '<form action="/buildtemp/submitform" method="post" onSubmit="return validation();">
+                        <div class="col-md-6 contact-left">
+			<p class="your-para"> Name<span>*</span></p>
+			<input type="text" name="name" id="name">
+                        <div id="name_error"></div>
+			</div>
+                        <div class="col-md-6 contact-left">
+			<p class="your-para"> Email<span>*</span></p>
+			<input type="text" name="email" id="email">
+                        <div id="email_error"></div>
+			</div>
+                        
+			<p class="message-para"> Message<span>*</span></p>
+			<textarea cols="77" rows="6" name="message" id="message"></textarea>
+                        <div id="message_error"></div>
+			<div class="send"><input type="submit" value="SEND" ></div><div class="clearfix"> </div>';
+          }
+          echo $responce;
         }
         
         function actionContactSetting()
@@ -245,6 +266,21 @@ class BuildTempController extends Controller
         }
         }
         $this->render('contactsetting',array('success'=> $success,'error'=>$error,'userhasObject'=>$userhasObject)); 
+        }
+        
+        public function actionSubmitForm()
+        {
+          $error = "";
+          $success = "";
+          $userhasObject = UserHasTemplate::model()->find(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+          if($_POST)
+          {
+            if($_POST['name'] !='' && $_POST['email'] !='' && $_POST['message'] !='')
+            {
+                
+            }      
+          }
+           
         }
 
 	// Uncomment the following methods and override them if needed
