@@ -38,6 +38,18 @@ success: function(html){
 document.getElementById("logo").innerHTML = html;
 }
 });
+var url = document.URL;
+var str = url.split('/');
+dataString = 'fetchContent=yes&page_id='+str[5];
+$.ajax({
+type: "GET",
+url: "/buildtemp/pagecontent",
+data: dataString,
+cache: false,
+success: function(html){
+document.getElementById("content").innerHTML = html;
+}
+});
 });
 function showContent(ID)
 {
@@ -47,7 +59,7 @@ type: "GET",
 url: "/buildtemp/pagecontent",
 data: dataString,
 cache: false,
-success: function(html){alert(html);
+success: function(html){
 document.getElementById("container").innerHTML = html;
 }
 });    
