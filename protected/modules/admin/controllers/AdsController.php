@@ -98,8 +98,7 @@ class AdsController extends Controller
         }
         
         
-        protected function gridBannerImage($data,$row)
-	{ 	
+        protected function gridBannerImage($data,$row){ 	
             $bigImagefolder= '/banner/';// folder with uploaded files
             echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->banner</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
                 <div class="modal-dialog" style="width:500px;">
@@ -133,7 +132,6 @@ class AdsController extends Controller
                 
                 $error = "";
                 $success = "";
-
                 if ($_POST) {
                     
                     $pageSize= 10;
@@ -155,20 +153,15 @@ class AdsController extends Controller
                         }
                     }
                     
-                   
                     $adsObject->attributes = $_POST;                        
-                   // $adsObject->banner =  $banner;
                     $adsObject->name = $_POST['ads_name'] ;
                     $adsObject->description = $_POST['ads_desc'] ;                    
-                    //$adsObject->get_code = '<p><img src='.$path.$banner.' height=100 width=100></p>' ;      
-                    
                     $successMsg = 1 ;
                     if(!$adsObject->update(false)){
                         echo "<pre>"; print_r($model->getErrors());exit;
                     }
                     $this->redirect('index?successMsg='.$successMsg,array('dataProvider'=>$dataProvider ));
-                }
-               // echo "<pre>"; print_r($adsObject); 
+                }               
                 $this->render('edit',array('adsObject' => $adsObject));
             }
             
