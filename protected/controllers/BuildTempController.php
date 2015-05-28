@@ -168,8 +168,9 @@ class BuildTempController extends Controller
          foreach($userpagesObject as $pages){
          $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($pages->page_name));
          $pagename = "'".$pages->id."'";
-         $responce .= '<li class="color1"><a onclick="showContent('.$pagename.');"><i class=""> </i><span>'.$pages->page_name.'</span></a></li>';
-         }
+        // $responce .= '<li class="color1"><a onclick="showContent('.$pagename.');"><i class=""> </i><span>'.$pages->page_name.'</span></a></li>';
+         $responce .= '<li class="color1"><a href="/buildtemp/managewebsite/'.$pages->id.'"><i class=""> </i><span>'.$pages->page_name.'</span></a></li>';
+          }
          echo $responce;
         }
         
@@ -215,7 +216,7 @@ class BuildTempController extends Controller
         {
           $responce = "";
           $userpageObject = UserPages::model()->findBYPK($_REQUEST['page_id']);
-          $responce .= $userpageObject->page_content;
+          echo $responce .= $userpageObject->page_content;
         }
 
 	// Uncomment the following methods and override them if needed
