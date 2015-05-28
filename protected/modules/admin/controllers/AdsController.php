@@ -111,7 +111,6 @@ class AdsController extends Controller
             </div>';
 	}
         
-        
         public function actionChangeStatus() {
            if($_REQUEST['id']) {               
                 $userprofileObject = Ads::model()->findByPk($_REQUEST['id']);
