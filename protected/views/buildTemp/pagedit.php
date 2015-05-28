@@ -21,11 +21,15 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Form Require</label>
                 <div class="col-lg-8">
-                    <select name="form" id="form">
+                    <select name="pages[form_allowed]" id="form">
                         <option value="">Select Form</option>
-                        <option value="contact">Contact Form<option>
-                        <option value="feedback">Feedback Form<option>
-                        <option value="enquiry">Enquiry Form<option>
+                        <option value="contact" <?php if(!empty($userpagesObject) && $userpagesObject->page_form=='contact'){?>selected="selected"<?php }?>>Contact Form<option>
+                        <?php if($orderObject->package->no_of_forms=='2' || $orderObject->package->no_of_forms=='3'){ ?>
+                        <option value="feedback" <?php if(!empty($userpagesObject) && $userpagesObject->page_form=='feedback'){?>selected="selected"<?php }?>>Feedback Form</option>
+                        <?php }?>
+                        <?php if($orderObject->package->no_of_forms=='3'){ ?>
+                        <option value="enquiry" <?php if(!empty($userpagesObject) && $userpagesObject->page_form=='enquiry'){?>selected="selected"<?php }?>>Enquiry Form</option>
+                        <?php }?>
                     </select>
                      
                 </div>
