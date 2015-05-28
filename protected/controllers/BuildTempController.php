@@ -152,6 +152,8 @@ class BuildTempController extends Controller
         $success = "";
         $error = "";
         $userpagesObject = UserPages::model()->findByPK($_REQUEST['id']);
+        $userpagesObjectF = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+        
         if($_POST)
         {
         if($_POST['pages']['page_name']!='' && $_POST['pages']['page_content'] !='')
@@ -166,7 +168,7 @@ class BuildTempController extends Controller
         }
         }
         $orderObject = Order::model()->findByAttributes(array('id'=>Yii::app()->session['orderID']));
-        $this->render('pagedit',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject,'orderObject'=>$orderObject));    
+        $this->render('pagedit',array('userpagesObjectF'=>$userpagesObjectF,'success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject,'orderObject'=>$orderObject));    
         }
         
         
