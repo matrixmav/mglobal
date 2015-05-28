@@ -72,20 +72,35 @@ document.getElementById("container").innerHTML = html;
 });    
 }
 function validation()
-  {
-    $("#page_title_error").html("");
-    if ($("#page_name").val() == "") {
-    $("#page_title_error").html("Please enter page title.");
-    $("#page_name").focus();            
+ {
+    $("#name_error").html("");
+    if ($("#name").val() == "") {
+    $("#name_error").html("Please enter your name.");
+    $("#name").focus();            
     return false;
   }
 
-  $("#page_content_error").html("");
-    if ($("#editor1").val() == "") {
-    $("#page_content_error").html("Please enter page content.");
-    $("#editor1").focus();            
+  $("#email_error").html("");
+      if ($("#email").val() == "") {
+      $("#email_error").html("Please enter email.");
+      $("#email").focus();            
+      return false;
+     }
+      var email = document.getElementById('email');
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+        if (!filter.test(email.value)) {
+            $("#email_error").html("Enter valid email address ");
+            $("#email").focus();
+            return false;
+        }
+    $("#message_error").html("");
+    if($("#message").val() == "") {
+    $("#message_error").html("Please enter your message.");
+    $("#message").focus();            
     return false;
   }
+ }
 </script>
 </head>	
  
