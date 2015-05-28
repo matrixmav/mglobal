@@ -25,8 +25,8 @@ type: "GET",
 url: "/buildtemp/fetchmenu",
 data: dataString,
 cache: false,
-success: function(html){ alert();
-document.getElementById("secondaryDomainResults").innerHTML = html;
+success: function(html){
+document.getElementById("menu").innerHTML = html;
  
 }
 
