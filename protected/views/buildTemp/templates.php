@@ -1,3 +1,10 @@
+<?php
+$this->breadcrumbs = array(
+    'Templates' => array('buildtemp/templates'),
+    'Choose Template',
+);
+ 
+?>
 <?php foreach($builderObject as $buildertemp){?>
 <a href=""><img src="/user/template/<?php echo $buildertemp->folderpath;?>/screenshot/<?php echo $buildertemp->screenshot;?>"></a><br/>
 <form action="/buildtemp/userinput" method="post">
