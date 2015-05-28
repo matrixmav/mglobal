@@ -553,14 +553,13 @@ License: You must have a valid license purchased only from themeforest(the above
                             
                             <!-- New Menu added here -->
                             
-                            <?php $reservation_pmenu = 7;
+                            <?php $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
                                     "ads/add" => "Ads Add",
                                     "ads" => "Ads List",
                                 );
                                 ?>
-                                
                                 
                                 <li
                                     class="<?php echo (($curControllerLower == 'buildtemp') || ($curControllerLower == 'ads')) ? "active" : ''; ?>">
