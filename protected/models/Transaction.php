@@ -131,21 +131,22 @@ class Transaction extends CActiveRecord
             $percentage = BaseClass::getPercentage($transferAmount,1);
             $actualAmount = ($transferAmount + $percentage);
             $discountAmount = 0;
-            if($postDataArray['discount']){
+            if(!empty($postDataArray['discount'])){
                $discountAmount = $postDataArray['discount'];
             }
             $gatewayId = 1;
-            if($postDataArray['gatewayId']){
+            if(!empty($postDataArray['gatewayId'])){
                 $gatewayId = $postDataArray['gatewayId'];
             }
             $userRp = 0;
-            if($postDataArray['used_rp']){
+            if(!empty($postDataArray['used_rp'])){
                 $userRp = $postDataArray['used_rp'];
             }
             $createdTime = new CDbExpression('NOW()');
             
             $transactionObjuser = new Transaction;
             $transactionObjuser->user_id = $userObject->id;
+            $transactionObjuser->mode = 'transfer';
             $transactionObjuser->gateway_id = $gatewayId;
             $transactionObjuser->coupon_discount = $discountAmount;
             $transactionObjuser->actual_amount = $actualAmount;

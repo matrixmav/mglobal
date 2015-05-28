@@ -7,7 +7,9 @@ class UserController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='main';
-
+        public function init() {
+            BaseClass::isAdmin();
+        }
 	/**
 	 * @return array action filters
 	 */

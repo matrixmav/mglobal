@@ -6,8 +6,11 @@ class MailController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='inner';
 
+        public function init() {
+            BaseClass::isLoggedIn();
+        }
 	/**
 	 * @return array action filters
 	 */
@@ -28,7 +31,7 @@ class MailController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','reply','compose','sent'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -45,15 +48,91 @@ class MailController extends Controller
 		);
 	}
 
+        /**
+	 * Lists all models.
+	 */
+	public function actionIndex()
+	{  
+            $loggedInUserId = Yii::app()->session['userid'];
+            $pageSize= 100;
+            $dataProvider = new CActiveDataProvider('Mail', array(
+                        'criteria'=>array('condition' => 'from_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
+                        'pagination' => array('pageSize' => $pageSize)));
+            
+            $this->render('index',array(
+                'dataProvider'=>$dataProvider,
+            ));
+	}
+        /**
+	 * Lists all models.
+	 */
+	public function actionSent()
+	{  
+            $loggedInUserId = Yii::app()->session['userid'];
+            $pageSize= 100;
+            $dataProvider = new CActiveDataProvider('Mail', array(
+                        'criteria'=>array('condition' => 'to_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
+                        'pagination' => array('pageSize' => $pageSize)));
+            $this->render('sent',array(
+                'dataProvider'=>$dataProvider,
+            ));
+	}
+        public function actionCompose(){ 
+            if($_POST){  
+                $emailArray = $_POST['to_email'];
+                $loggedInUserId = Yii::app()->session['userid'];
+                foreach ($emailArray as $email){
+                    $userObject = User::model()->findByAttributes(array('email'=>$email));
+                    if(empty($userObject)){
+                        $this->render('compose',array('error'=>'User Does Not Exist'));
+                    }
+//                    $customerName = $userObject->full_name;
+//                    $emailId = $email;
+//                    $emailBoday['to'] = $emailId;
+//                    $emailBoday['subject'] = $_POST['email_subject'];
+//
+//                    $emailBoday['body'] = $_POST['email_body'];
+//                    $emailBoday['from'] = Yii::app()->params['hkbAdminEmail'];
+//                    $result = CommonHelper::sendMail($emailBoday);
+//                    if($result){ 
+                        $mailObject = new Mail();
+                        $mailObject->to_user_id = Yii::app()->params['adminId'];
+                        $mailObject->from_user_id = $loggedInUserId;//Yii::app()->params['adminId'];
+                        $mailObject->subject = $_POST['email_subject'];
+                        $mailObject->message = $_POST['email_body'];
+                        $mailObject->status = 0;
+                        $mailObject->created_at = new CDbExpression('NOW()');
+                        $mailObject->updated_at = new CDbExpression('NOW()');
+                        $mailObject->save(false);
+                         $this->redirect('/mail');
+//                    } else {
+//                        $this->render('compose',array('error'=>'Sent Failed. Please try Again!!!.'));
+//                    }
+                }
+                $this->redirect('/mail');
+            }
+            $this->render('compose',array('error'=>''));
+        }
+        public function actionReply(){ 
+            if($_GET){
+                $mailObject = Mail::model()->findByPk($_GET['id']);
+                $this->render('compose',array('error'=>'','mailObject'=>$mailObject));
+            }
+        }
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{
+	{ 
+            if($id){ 
+                $mailObject = Mail::model()->findByPk($id);
+                $mailObject->status = 1;
+                $mailObject->save(false);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'mailObject'=>$mailObject,
 		));
+            }
 	}
 
 	/**
@@ -117,17 +196,17 @@ class MailController extends Controller
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('Mail');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+	
 
+        /**
+     * Get the reservation status
+     * 
+     * @param type $data 
+     * @param type $row
+     */
+    public function convertDate($data, $row) {
+        echo date("d M Y g:i A", strtotime($data->updated_at));
+    }
 	/**
 	 * Manages all models.
 	 */

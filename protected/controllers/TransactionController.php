@@ -32,7 +32,7 @@ class TransactionController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list'),
+				'actions'=>array('index','view','list','rpwallet','commisionwallet','fundwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -133,19 +133,75 @@ class TransactionController extends Controller
 	}
         
 	
-        /*
-         * this will fetch all transactions
+    /*
+     * this will fetch all transactions
+     */
+
+    public function actionList() {
+        $model = new MoneyTransfer();
+            $pageSize = Yii::app()->params['defaultPageSize'];
+            $todayDate = Yii::app()->params['startDate'];
+            $fromDate = date('Y-m-d');
+            $status = 1;
+            if (!empty($_POST)) {
+                $todayDate = $_POST['from'];
+                $fromDate = $_POST['to'];
+                $status = $_POST['res_filter'];
+            }
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+
+            $this->render('list', array(
+                'dataProvider' => $dataProvider,
+            ));
+//        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+//            'pagination' => array('pageSize' => 10),
+//        ));
+//        $this->render('list', array('dataProvider' => $dataProvider));
+    }
+
+    /*
+         * this will fetch rp wallet
          */
-	public function actionList(){
-		if(isset(Yii::app()->session['userid'])){
-             $dataProvider = new CActiveDataProvider('Transaction', array(
-	    				'pagination' => array('pageSize' => 10),
-				));
-            $this->render('list',array('dataProvider'=>$dataProvider));
-        }
+        public function actionRpWallet()
+        {
+          $loggedInUserId = Yii::app()->session['userid'];
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=1'),'order'=>'id DESC',
+                                        )));
+            $this->render('rpwallet',array('dataProvider'=>$dataProvider));
         }
         
-       
+         /*
+         * this will fetch commision wallet
+         */
+        public function actionCommisionWallet()
+        {
+            $loggedInUserId = Yii::app()->session['userid'];
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=2'),'order'=>'id DESC',
+                                        )));
+            $this->render('commisionwallet',array('dataProvider'=>$dataProvider));
+        }
+        
+         /*
+         * this will fetch fund wallet
+         */
+        public function actionFundWallet()
+        {
+            $loggedInUserId = Yii::app()->session['userid'];
+           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
+                                        'criteria'=>array(
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id=3'),'order'=>'id DESC',
+                                        )));
+            $this->render('fundwallet',array('dataProvider'=>$dataProvider));
+        }
 
         /*
 	 * Manages all models.
