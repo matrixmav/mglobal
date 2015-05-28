@@ -7,7 +7,10 @@ $this->breadcrumbs = array(
 <div class="col-md-7 col-sm-7" id="test">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-      <form action="/buildtemp/pagedit?id=<?php echo $_GET['id']; ?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+      
+    <?php foreach($userpagesObjectF as $page){?><a href="/buildtemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a><?php }?>   
+    <div style="float:right;"><a href="/buildtemp/managewebsite" class="btn green">Preview</a></div> 
+    <form action="/buildtemp/pagedit?id=<?php echo $_GET['id']; ?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Edit Pages</legend>
