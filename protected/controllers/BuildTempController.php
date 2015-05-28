@@ -18,7 +18,7 @@ class BuildTempController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput','pagedit','fetchmenu','addlogo'),
+                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput','pagedit','fetchmenu','addlogo','pageadd','fetchlogo','pagecontent'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -35,10 +35,6 @@ class BuildTempController extends Controller
         );
     }
     
-     public function actionIndex()
-	{
-		$this->render('index');
-	}
         
         /*
          * Function to fetch templates
@@ -115,9 +111,18 @@ class BuildTempController extends Controller
         {
         $success = "";
         $error = "";
+        Yii::app()->session['templateID'] = $_POST['template_id'];
+        
+        $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+        $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
+        }
+        
+        public function actionpageadd() {
+        $success = "";
+        $error = "";
         $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
         $userpagesObject1 = new UserPages;
-        if($_POST)
+        if($_POST['submit'])
         {
         if($_POST['pages']['page_name']!='' && $_POST['pages']['page_content'] !='')
         {
@@ -132,10 +137,10 @@ class BuildTempController extends Controller
            $error .= "Please fill required(*) marked fields."; 
         }
         }
-        $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
+        $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));        
         }
         
-     public function actionPagedit() 
+        public function actionPagedit() 
         {
         $success = "";
         $error = "";
@@ -162,7 +167,8 @@ class BuildTempController extends Controller
          $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
          foreach($userpagesObject as $pages){
          $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($pages->page_name));
-         $responce .= '<li class="color1"><a href="'.$slug.'.html"><i class=""> </i><span>'.$pages->page_name.'</span></a></li>';
+         $pagename = "'".$pages->id."'";
+         $responce .= '<li class="color1"><a onclick="showContent('.$pagename.');"><i class=""> </i><span>'.$pages->page_name.'</span></a></li>';
          }
          echo $responce;
         }
@@ -173,6 +179,7 @@ class BuildTempController extends Controller
            $success ="";
         $templateObject = new UserHasTemplate;    
         $userhasObject = UserHasTemplate::model()->findByAttributes(array('order_id'=>Yii::app()->session['orderID'],'user_id'=>Yii::app()->session['userid']));
+        $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>$userhasObject->template_id));
         if(!empty($_FILES))
         {
         if($_FILES['logo']['name'])
@@ -182,23 +189,34 @@ class BuildTempController extends Controller
          $error .= "Please upload mentioned file type.";
          }else{
         $fname = time(). $_FILES['logo']['name'];
-        if($userhasObject->logo)
-        {
+        
         $userhasObject->logo =  $fname;
         $userhasObject->update();
-        }else{
-        $templateObject->logo =  $fname;
-        $templateObject->save(false);   
-        }
-        $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>Yii::app()->session['templateID']));
-        $path = "/user/template/".$builderObjectmeta->folderpath."/images/";
-        BaseClass::uploadFile($_FILES['logo']['tmp_name'], $path, $filename);
+        $path = Yii::getPathOfAlias('webroot') . "/user/template/".$builderObjectmeta->folderpath."/images/";
+        BaseClass::uploadFile($_FILES['logo']['tmp_name'], $path, $fname);
+        $success .= "Logo added successfully";
         }
         }
-        $this->render('addlogo',array('success'=> $success,'error'=>$error,'userhasObject'=>$userhasObject));    
+        }
+        $this->render('addlogo',array('success'=> $success,'error'=>$error,'userhasObject'=>$userhasObject,'builderObjectmeta'=>$builderObjectmeta));    
         }
         
-         
+        public function actionFetchLogo()
+        {
+         $responce = "";   
+         $userhasObject = UserHasTemplate::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+         foreach($userhasObject as $userhas){}
+         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>$userhas->template_id));
+          $responce .= '<img src="/user/template/'.$builderObjectmeta->folderpath."/images/".$userhas->logo.'">';
+          echo $responce;   
+        }
+        
+        public function actionPageContent()
+        {
+          $responce = "";
+          $userpageObject = UserPages::model()->findBYPK($_REQUEST['page_id']);
+          $responce . = $userpageObject->page_content;
+        }
 
 	// Uncomment the following methods and override them if needed
 	/*
