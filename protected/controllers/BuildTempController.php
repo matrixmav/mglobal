@@ -215,7 +215,7 @@ class BuildTempController extends Controller
         {
           $responce = "";
           $userpageObject = UserPages::model()->findBYPK($_REQUEST['page_id']);
-          $responce . = $userpageObject->page_content;
+          $responce .= $userpageObject->page_content;
         }
 
 	// Uncomment the following methods and override them if needed
