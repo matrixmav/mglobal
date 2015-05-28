@@ -27,23 +27,24 @@ data: dataString,
 cache: false,
 success: function(html){
 document.getElementById("menu").innerHTML = html;
- 
 }
-
-});             
+});
+$.ajax({
+type: "GET",
+url: "/buildtemp/fetchlogo",
+data: dataString,
+cache: false,
+success: function(html){
+document.getElementById("logo").innerHTML = html;
+}
+});
 });
 </script>
 </head>	
  
 <div id="header">
-    <?php /*code to fetch navigation*/
-//				$userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
-//                                echo "<pre>"; print_r($userpagesObject);
-//				foreach($userpagesObject as $pages){
-//               ?>
-					<!--<li class="color1"><a href="/buildtemp/pagecontent?pageid=//<?php // echo $pages->id?>"><i class="icon1"> </i><span><?php //echo $pages->page_name?></span></a></li>-->
-				<?php // }?>	 
-    <?php echo $builderObject->temp_header;?>
+    
+<?php echo $builderObject->temp_header;?>
     
 </div>
 
