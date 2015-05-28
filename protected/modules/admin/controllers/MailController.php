@@ -80,28 +80,16 @@ class MailController extends Controller
                     if(empty($userObject)){
                         $this->render('compose',array('error'=>'User Does Not Exist'));
                     }
-//                    $customerName = $userObject->full_name;
-//                    $emailId = $email;
-//                    $emailBoday['to'] = $emailId;
-//                    $emailBoday['subject'] = $_POST['email_subject'];
-//
-//                    $emailBoday['body'] = $_POST['email_body'];
-//                    $emailBoday['from'] = Yii::app()->params['hkbAdminEmail'];
-//                    $result = CommonHelper::sendMail($emailBoday);
-//                    if($result){ 
-                        $mailObject = new Mail();
-                        $mailObject->to_user_id = $userObject->id;
-                        $mailObject->from_user_id = Yii::app()->params['adminId'];
-                        $mailObject->subject = $_POST['email_subject'];
-                        $mailObject->message = $_POST['email_body'];
-                        $mailObject->created_at = new CDbExpression('NOW()');
-                        $mailObject->updated_at = new CDbExpression('NOW()');
-                        $mailObject->save(false);
-                         $this->redirect('/admin/mail');
-//                    } else {
-//                        $this->render('compose',array('error'=>'Sent Failed. Please try Again!!!.'));
-//                    }
-                }
+                    $mailObject = new Mail();
+                    $mailObject->to_user_id = $userObject->id;
+                    $mailObject->from_user_id = Yii::app()->params['adminId'];
+                    $mailObject->subject = $_POST['email_subject'];
+                    $mailObject->message = $_POST['email_body'];
+                    $mailObject->created_at = new CDbExpression('NOW()');
+                    $mailObject->updated_at = new CDbExpression('NOW()');
+                    $mailObject->save(false);
+                    $this->redirect('/admin/mail');
+            }
                 $this->redirect('admin/mail');
             }
             $this->render('compose',array('error'=>''));

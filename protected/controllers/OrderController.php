@@ -9,7 +9,7 @@ class OrderController extends Controller
 	public $layout='inner';
         
         public function init() {
-        BaseClass::isLoggedIn();
+            BaseClass::isLoggedIn();
         }
 
 	/**
