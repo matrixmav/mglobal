@@ -229,7 +229,8 @@ class BuildTempController extends Controller
           $responce .= $userpageObject->page_content;
           if($userpageObject->page_form !='')
           {
-           $responce .= '<form action="/buildtemp/submitform" method="post" onSubmit="return validation();">
+           $responce .= '<div class="success" id="msg"></div>
+                <form action="" method="post">
                         <div class="col-md-6 contact-left">
 			<p class="your-para"> Name<span>*</span></p>
 			<input type="text" name="name" id="name">
@@ -244,7 +245,7 @@ class BuildTempController extends Controller
 			<p class="message-para"> Message<span>*</span></p>
 			<textarea cols="77" rows="6" name="message" id="message"></textarea>
                         <div id="message_error"></div>
-			<div class="send"><input type="submit" value="SEND" ></div><div class="clearfix"> </div>';
+			<div class="send"><input type="button" value="SEND" onClick=" return validation();"></div><div class="clearfix"> </div>';
           }
           echo $responce;
         }
@@ -272,12 +273,22 @@ class BuildTempController extends Controller
         {
           $error = "";
           $success = "";
+           
           $userhasObject = UserHasTemplate::model()->find(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
-          if($_POST)
+          if($_REQUEST)
           {
-            if($_POST['name'] !='' && $_POST['email'] !='' && $_POST['message'] !='')
+            if($_REQUEST['name'] !='' && $_REQUEST['email'] !='' && $_REQUEST['message'] !='')
             {
-                
+              /*$config['to'] = $userhasObject->contact_email; 
+                $config['subject'] = 'Contact Query Submitted' ;
+               $config['body'] = 'Dear Admin! New query submitted on your site '.
+                        '<strong>Name:</strong>'.$_POST['name'].'<br/><br/>'.
+                       '<strong>Email:</strong>'.$_POST['email'].'<br/><br/>'.
+                       '<strong>Message:</strong>'.$_POST['message'].'<br/><br/>';
+                 
+                 CommonHelper::sendMail($config);*/ 
+                 
+                 echo 1;
             }      
           }
            
