@@ -84,6 +84,8 @@
               </form>
             </div>
             <a href="http://mglobal.dev/user/facebook"><img src="<?php echo Yii::app()->basePath; ?>/fb_tw/images/fb_login.png">Registration With Facebook</a>        
+            <br><br/>
+            <a href="http://mglobal.dev/user/twitter"><img src="<?php echo Yii::app()->basePath; ?>/fb_tw/images/fb_login.png">Registration With Twitter</a>        
           </div>
         </div>
       </div>
