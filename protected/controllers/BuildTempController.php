@@ -159,6 +159,7 @@ class BuildTempController extends Controller
         {
          $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
          foreach($userpagesObject as $pages){
+         $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($pages->page_name));
          $responce .= '<li class="color1"><a href="'.$pages->slug.'.html"><i class="icon1"> </i><span>'.$pages->page_name.'</span></a></li>';
          }				   
         }
