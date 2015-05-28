@@ -18,7 +18,7 @@ class BuildTempController extends Controller
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput','pageadd'),
+                'actions' => array('index', 'templates','usertemplates','managewebsite','editheader','userinput','pagedit','fetchmenu'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -114,7 +114,7 @@ class BuildTempController extends Controller
         {
         $success = "";
         $error = "";
-        $userpagesObject = UserPages::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid'],'order_id'=>Yii::app()->session['orderID']));
+        $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
         $userpagesObject1 = new UserPages;
         if($_POST)
         {
@@ -126,11 +126,41 @@ class BuildTempController extends Controller
         $userpagesObject1->page_content = $_POST['pages']['page_content'];
         $userpagesObject1->created_at = date("Y-m-d");
         $userpagesObject1->save(false);
+        $success .= "Page added successfully"; 
         }else{
            $error .= "Please fill required(*) marked fields."; 
         }
         }
         $this->render('userinput',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
+        }
+        
+     public function actionPagedit() 
+        {
+        $success = "";
+        $error = "";
+        $userpagesObject = UserPages::model()->findByPK($_REQUEST['id']);
+        if($_POST)
+        {
+        if($_POST['pages']['page_name']!='' && $_POST['pages']['page_content'] !='')
+        {
+        $userpagesObject->page_name = $_POST['pages']['page_name'];
+        $userpagesObject->page_content = $_POST['pages']['page_content'];
+        $userpagesObject->update(false);
+        $success .= "Page updated successfully"; 
+        }else{
+           $error .= "Please fill required(*) marked fields."; 
+        }
+        }
+        $this->render('pagedit',array('success'=> $success,'error'=>$error,'userpagesObject'=>$userpagesObject));    
+        }
+        
+        
+        public function actionFetchMenu()
+        {
+         $userpagesObject = UserPages::model()->findAll(array('condition'=>'user_id='.Yii::app()->session['userid'].' AND order_id='.Yii::app()->session['orderID']));
+         foreach($userpagesObject as $pages){
+         $responce .= '<li class="color1"><a href="'.$pages->slug.'.html"><i class="icon1"> </i><span>'.$pages->page_name.'</span></a></li>';
+         }				   
         }
         
          
