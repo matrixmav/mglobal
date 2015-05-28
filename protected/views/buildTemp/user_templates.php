@@ -40,7 +40,14 @@ document.getElementById("logo").innerHTML = html;
 });
 var url = document.URL;
 var str = url.split('/');
-dataString = 'fetchContent=yes&page_id='+str[5];
+var dValue = $("#defaultPage").val();
+if(str[5]!='')
+{
+ var pageID = str[5];   
+}else{
+var pageID = dValue;      
+}
+dataString = 'fetchContent=yes&page_id='+pageID;
 $.ajax({
 type: "GET",
 url: "/buildtemp/pagecontent",
@@ -70,7 +77,7 @@ document.getElementById("container").innerHTML = html;
 <div id="header">
     
 <?php echo $builderObject->temp_header;?>
-    
+    <input type="hidden" id="defaultPage" value="<?php echo $userpages1Object->id;?>">   
 </div>
 
 <div id="container">

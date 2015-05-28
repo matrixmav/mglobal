@@ -16,7 +16,7 @@ $this->breadcrumbs = array(
                 <div class="col-lg-8">
                     <input id="logo" type="file" class="form-control" name="logo">
                     <?php if(!empty($userhasObject)){?>
-                    <img src="/user/template/<?php echo $builderObjectmeta->folderpath;?>/images/<?php echo $userhasObject->logo; ?>">
+                    <img src="/user/template/logos/<?php echo $userhasObject->logo; ?>">
                     <?php }?>
                     <span id="logo_error"></span>
                 </div>
