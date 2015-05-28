@@ -39,6 +39,18 @@ document.getElementById("logo").innerHTML = html;
 }
 });
 });
+function showContent()
+{
+$.ajax({
+type: "GET",
+url: "/buildtemp/pagecontent",
+data: dataString,
+cache: false,
+success: function(html){alert();
+document.getElementById("logo").innerHTML = html;
+}
+});    
+}
 </script>
 </head>	
  
