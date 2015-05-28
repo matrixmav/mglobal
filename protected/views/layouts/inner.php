@@ -505,7 +505,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $reservation_subsection = array(
                                     "buildtemp/userinput" => "Add / Edit Pages",
 //                                    "moneytransfer/list" => "Moneytransfer List",
-                                    "buildtemp/transfer" => "Transfer",
+                                     "buildtemp/addlogo" => "Add Logo",
                                 );
                                 ?>
                                 <li
