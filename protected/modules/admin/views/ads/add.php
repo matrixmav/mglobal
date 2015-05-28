@@ -61,13 +61,6 @@ $this->breadcrumbs = array(
             return false;
         }
         
-        if(document.getElementById("ads_desc").value==''){
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please Enter Ads Desciption.";
-            document.getElementById("ads_desc").focus();
-            return false;
-        }
-        
         if(document.getElementById("ads_banner").value==''){
             document.getElementById("error_msg").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please choose Banner Image.";
