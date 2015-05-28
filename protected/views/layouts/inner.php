@@ -504,8 +504,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
                                     "buildtemp/userinput" => "Add / Edit Pages",
-//                                    "moneytransfer/list" => "Moneytransfer List",
-                                     "buildtemp/addlogo" => "Add Logo",
+                                    "buildtemp/addlogo" => "Add Logo",
+                                    "buildtemp/contactsetting" => "Contact Setting",
                                 );
                                 ?>
                                 <li
