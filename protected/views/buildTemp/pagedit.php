@@ -18,6 +18,18 @@ $this->breadcrumbs = array(
                     <span id="page_title_error"></span>
                 </div>
             </div>
+             <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Form Require</label>
+                <div class="col-lg-8">
+                    <select name="form" id="form">
+                        <option value="">Select Form</option>
+                        <option value="contact">Contact Form<option>
+                        <option value="feedback">Feedback Form<option>
+                        <option value="enquiry">Enquiry Form<option>
+                    </select>
+                     
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Page Content<span class="require">*</span></label>
                 <div class="col-lg-8">
