@@ -71,6 +71,21 @@ document.getElementById("container").innerHTML = html;
 }
 });    
 }
+function validation()
+  {
+    $("#page_title_error").html("");
+    if ($("#page_name").val() == "") {
+    $("#page_title_error").html("Please enter page title.");
+    $("#page_name").focus();            
+    return false;
+  }
+
+  $("#page_content_error").html("");
+    if ($("#editor1").val() == "") {
+    $("#page_content_error").html("Please enter page content.");
+    $("#editor1").focus();            
+    return false;
+  }
 </script>
 </head>	
  
