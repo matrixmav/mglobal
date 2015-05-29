@@ -14,6 +14,11 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
+        <style>
+        table tr td.notice {
+    background:#FFF6BF;
+    color:#514721;
+}</style>
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'room-grid',
@@ -24,6 +29,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'template' => '{items} {summary} {pager}',
     'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
     'htmlOptions'=>array('id'=>'$data->id', 'class'=>'($data->status == 1)?:btn green":"btn red"') ,
+    'rowCssClassExpression'=>'($data->status == 1) ? "" : "info"',
+//    'cssClassExpression' => '"success"',
     'pager' => array(
         'header' => false,
         'firstPageLabel' => "<<",
