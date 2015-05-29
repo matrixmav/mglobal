@@ -46,25 +46,23 @@ $this->breadcrumbs = array(
      <?php }  ?>
     
     <?php }?>
-    <!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat red-intense">
             <div class="visual">
                 <i class="fa fa-bar-chart-o"></i>
             </div>
             <div class="details">
+                <a href="/cropper/live/index.html" target="_blank">
                 <div class="number">
-                    12,5M$
-                </div>
+                    Crop Images
+                </div></a>
                 <div class="desc">
-                    Total Profit
+                    crop...
                 </div>
             </div>
-            <a class="more" href="javascript:;">
-                View more <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
+                   </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <!--div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat green-haze">
             <div class="visual">
                 <i class="fa fa-shopping-cart"></i>
