@@ -3075,3 +3075,11 @@ Styler Panel
 .fancybox-opened {
   z-index: 100001;
 }
+
+
+/* custom.css */
+    .topWallet{}
+    .topWallet{}
+   .cash{ background: #FFF;}
+    .topWallet > li> a> i{ font-size:20px !important;}
+    .topWallet{}
