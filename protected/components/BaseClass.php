@@ -41,7 +41,7 @@ class BaseClass extends Controller {
         	$this->redirect('/admin');
         }*/
     }
-    function isLoggedIn() {
+    public static function isLoggedIn() {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if (!$adminObject) {
@@ -49,7 +49,7 @@ class BaseClass extends Controller {
         }
     }
     
-    function walletAmount($id) {
+    public static function walletAmount($id) {
         $userId = Yii::app()->session['userid'];
         $walletObject = Wallet::model()->findAll(array('condition'=>'user_id='.$userId. ' AND type = '.$id));
                         
@@ -57,7 +57,7 @@ class BaseClass extends Controller {
                         
     }
 
-    function isAdmin() {
+    public static function isAdmin() {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '2'));
         if (!$adminObject) {
@@ -65,7 +65,7 @@ class BaseClass extends Controller {
         }
     }
     
-    function getWalletList(){
+    public static function getWalletList(){
         return array(
             '0'=>'Select',
             '1'=>'Cash',
@@ -78,7 +78,7 @@ class BaseClass extends Controller {
      * method for getting the list of admins
      * 
      */
-    function getAdmin() {
+    public static function getAdmin() {
 
         $records = User::model()->findAll(array('condition' => "`role_id` = 1"));
         $adminArr = array();
@@ -91,7 +91,7 @@ class BaseClass extends Controller {
      * method for getting the list of admins
      * 
      */
-    function getAdmins() {
+    public static function getAdmins() {
 
         $records = User::model()->findAll(array('condition' => "`role_id` = 1"));
         $adminArr = array();
@@ -101,7 +101,7 @@ class BaseClass extends Controller {
         return $adminArr;
     }
 
-    function getAuthors() {
+    public static function getAuthors() {
 
         $records = User::model()->findAll(array('condition' => "`role_id` = 3"));
         $adminArr = array();
@@ -114,7 +114,7 @@ class BaseClass extends Controller {
     /*
      * method for getting the access rules based on the uaer role
      */
-    function getAccess($userRoleId) {
+    public static function getAccess($userRoleId) {
 
         //check user role id
     }
@@ -559,7 +559,7 @@ class BaseClass extends Controller {
         
     }
     
-    public function getDirectCommission($userName){
+    public static function getDirectCommission($userName){
         $percent = Yii::app()->params['percent'];
         /* On User Basis get referral id */
         $sponserId = "'".$userName."'";
