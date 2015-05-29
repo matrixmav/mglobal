@@ -181,9 +181,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
-                <ul class="nav navbar-nav pull-right">
-                    <li><a href="#" class="btn green pull-right"</a>
-                            <span class="badge">
+                <ul class="nav navbar-nav pull-right topWallet">
+                    <li class="credit"><a href="#" class="">
+                            <i class="fa fa-credit-card"></i>
+
+                            <span class="badge badge-default">
                                 <?php
                                 $arrayRP = BaseClass::walletAmount('2');
                                 foreach ($arrayRP as $RP) {
@@ -194,8 +196,10 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li><a href="#" class="btn red pull-right">Cash
-                            <span class="badge">
+                    <li class="cash"><a href="#" class="">
+                            <i class="fa fa-money"></i>
+
+                            <span class="badge badge-default">
                                 <?php
                                 $arrayRP = BaseClass::walletAmount('2');
                                 foreach ($arrayRP as $RP) {
@@ -206,8 +210,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li><a href="#" class="btn blue pull-right">Comm
-                            <span class="badge">
+                    <li class="commision"><a href="#" class="">
+                             <i class="glyphicon glyphicon-briefcase"></i>
+                            <span class="badge badge-default">
                                 <?php
                                 $arrayFund = BaseClass::walletAmount('1');
                                 foreach ($arrayFund as $fund) {

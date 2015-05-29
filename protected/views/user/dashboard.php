@@ -25,21 +25,22 @@ $this->breadcrumbs = array(
     <?php }else{
      foreach($orderObject as $order){?>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <a class="more" href="/buildtemp/templates/<?php echo $order->id; ?>" target="_blank"><div class="dashboard-stat blue-madison">
+          <a class="" href="/buildtemp/templates/<?php echo $order->id; ?>" target="_blank"><div class="dashboard-stat blue-madison">
             <div class="visual">
-                <div class="desc label label-sm">
-                 <?php echo $order->domain;?> 
-                </div>
+               
                 <i class="fa fa-comments"></i>
             </div>
             <div class="details">
-                <div class="number">
+              <div class="number">
+                 <?php echo $order->domain;?> 
                 </div>
-                <div class="desc label label-sm label-danger">
+                <div class="desc">
                     Visit website
-                    <i class="m-icon-swapright m-icon-white"></i>
-                </div>
+                </div> 
             </div>
+                  <span class="txtDescription">view more  <i class="m-icon-swapright m-icon-white"></i></span>
+                
+           
             
           </div></a>
     </div>    
@@ -47,20 +48,24 @@ $this->breadcrumbs = array(
     
     <?php }?>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat red-intense">
+        <a href="/cropper/live/index.html" target="_blank"><div class="dashboard-stat red-intense">
             <div class="visual">
+               
                 <i class="fa fa-bar-chart-o"></i>
             </div>
             <div class="details">
-                <a href="/cropper/live/index.html" target="_blank">
-                <div class="number">
-                    Crop Images
-                </div></a>
-                <div class="desc">
-                    crop...
+              <div class="number">
+                   Crop Images
                 </div>
+                <div class="desc">
+                    Visit website
+                </div> 
             </div>
-                   </div>
+                  <span class="txtDescription">view more  <i class="m-icon-swapright m-icon-white"></i></span>
+                
+           
+            
+          </div></a>
     </div>
     <!--div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat green-haze">
