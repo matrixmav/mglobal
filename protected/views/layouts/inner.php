@@ -130,7 +130,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
-
+        <script src="<?php echo Yii::app()->baseUrl.'/ckeditor/ckeditor.js'; ?>"></script>
+  <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.'/ckfinder/ckfinder.js';?>"></script>
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript" src="/chat/js/chat.js"></script>
         <script type="text/javascript">
@@ -140,8 +141,20 @@ License: You must have a valid license purchased only from themeforest(the above
                 var IDSVal = document.getElementById('username').value;
                 chatWith(IDSVal);
             });
+            $(".single_2").fancybox({
+    	openEffect	: 'elastic',
+    	closeEffect	: 'elastic',
+
+    	helpers : {
+    		title : {
+    			type : 'inside'
+    		}
+    	}
+    });
 
         </script>
+        
+      
         <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
 
         <!-- END JAVASCRIPTS -->
@@ -181,9 +194,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
-                <ul class="nav navbar-nav pull-right">
-                    <li><a href="#" class="btn green pull-right"</a>
-                            <span class="badge">
+                <ul class="nav navbar-nav pull-right topWallet">
+                    <li class="credit"><a href="#" class="">
+                            <i class="fa fa-credit-card"></i>
+
+                            <span class="badge badge-default">
                                 <?php
                                 $arrayRP = BaseClass::walletAmount('2');
                                 foreach ($arrayRP as $RP) {
@@ -194,8 +209,10 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li><a href="#" class="btn red pull-right">Cash
-                            <span class="badge">
+                    <li class="cash"><a href="#" class="">
+                            <i class="fa fa-money"></i>
+
+                            <span class="badge badge-default">
                                 <?php
                                 $arrayRP = BaseClass::walletAmount('2');
                                 foreach ($arrayRP as $RP) {
@@ -206,8 +223,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li><a href="#" class="btn blue pull-right">Comm
-                            <span class="badge">
+                    <li class="commision"><a href="#" class="">
+                             <i class="glyphicon glyphicon-briefcase"></i>
+                            <span class="badge badge-default">
                                 <?php
                                 $arrayFund = BaseClass::walletAmount('1');
                                 foreach ($arrayFund as $fund) {
@@ -234,6 +252,20 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </li>
 
+
+
+                    <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
+                        <a href="/wallet/commisionwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Commision Wallet">
+                            <i class="glyphicon glyphicon-th"></i>
+                            <span class="badge badge-default">
+                                <?php $arrayCommision =  BaseClass::walletAmount('3');
+                                foreach($arrayCommision as $commision){}
+                                 echo (!empty($arrayCommision)) ? $commision->fund : "0";?></span>
+                        </a>
+
+
+                    </li>
+<!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
 
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
@@ -442,7 +474,7 @@ if ($userObject) {
                                     // echo '<ul class="sub-menu">';
                                     $class_billing_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
                                     echo '<li ' . $class_billing_content . '>';
-                                    echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '<a href="/'. $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
                                     echo '</li>';
 //                                        }
                                 }
@@ -552,6 +584,49 @@ if ($userObject) {
                                 </li>	
         <?php
     }
+                            if(Yii::app()->session['orderID'] && Yii::app()->session['templateID'])
+                            {
+                             $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "buildtemp/templates?id=".Yii::app()->session['orderID'] => "Choose Templates",
+                                    "buildtemp/userinput" => "Add / Edit Pages",
+                                    "buildtemp/addlogo" => "Add Logo",
+                                    "buildtemp/contactsetting" => "Contact Setting",
+                                    
+                                );
+                                ?>
+                                <li class="<?php echo (($curControllerLower == 'buildtemp') && ($curControllerLower == 'buildtemp')) ? "active" : ''; ?>">
+ 
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Builder Pages</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'buildtemp' || $curControllerLower == 'buildtemp') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                        if ($ctName == "search/create") {
+                                            $ctName = "search/create/type/details";
+                                        }
+                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
+                                            $class_content = 'class="active"';
+                                        else
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                        echo '<li ' . $class_content . '>';
+                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '</li>';
+                                        if ($ctName == "search/create/type/details") {
+                                            $ctName = "search/create";
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+    }
 } else {
     ?>
                             <li
@@ -629,7 +704,7 @@ if ($userObject) {
                             }
                             ?>						
                             </li>                                
-                    <?php } ?>				
+                        <?php } } ?>				
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>

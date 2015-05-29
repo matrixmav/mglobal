@@ -90,7 +90,7 @@ $this->menu=array(
 				'Builder' => array(
 					'label'=>'Visit Site',
 					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/redirect/", array("id"=>$data->id)): ""',
+					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/buildtemp/templates/?id=$data->id"): ""',
 				),
                              
                        ),
