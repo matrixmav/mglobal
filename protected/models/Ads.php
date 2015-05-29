@@ -29,12 +29,12 @@ class Ads extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, description, created_at, updated_at', 'required'),
+			array('name, banner , description, get_code, status , created_at, updated_at', 'required'),
 			array('status', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, description, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, name, banner , description, get_code, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,12 +55,14 @@ class Ads extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'description' => 'Description',
-			'status' => 'Status',
-			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
+                    'id' => 'ID',
+                    'name' => 'Name',
+                    'banner' => 'Banner',
+                    'description' => 'Description',
+                    'get_code' => 'Get Code',
+                    'status' => 'Status',
+                    'created_at' => 'Created At',
+                    'updated_at' => 'Updated At',
 		);
 	}
 
