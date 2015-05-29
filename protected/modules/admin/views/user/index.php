@@ -44,6 +44,11 @@ $this->breadcrumbs = array(
                 'lastPageLabel' => ">>",
             ),
             'columns' => array(
+                array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$row+1',
+		),
                 //'idJob',
                 array(
                     'name' => 'full_name',

@@ -57,6 +57,7 @@ $this->breadcrumbs = array(
             'summaryText' => 'Showing {start} to {end} of {count} entries',
             'template' => '{items} {summary} {pager}',
             'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
+            'rowCssClassExpression'=>'fa fa-success btn default black delete',
             'pager' => array(
                 'header' => false,
                 'firstPageLabel' => "<<",
@@ -65,11 +66,17 @@ $this->breadcrumbs = array(
                 'lastPageLabel' => ">>",
             ),
             'columns' => array(
+                array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$row+1',
+		),
                 //'idJob',
                 array(
                     'name' => 'name',
                     'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->name',
+                    
                 ),
                  array(
                     'name' => 'amount',
@@ -97,7 +104,7 @@ $this->breadcrumbs = array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Change}{Edit}{Delete}',
-                    'htmlOptions' => array('width' => '25%'),
+                    'htmlOptions' => array('width' => '30%'),
                     'buttons' => array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
@@ -106,12 +113,12 @@ $this->breadcrumbs = array(
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default black delete blue'),
                             'url' => 'Yii::app()->createUrl("admin/package/edit", array("id"=>$data->id))',
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
-                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this package?')"),
+                            'options' => array('class' => 'fa fa-success btn default black delete red','onclick' =>"js:alert('Do u want to delete this package?')"),
                             'url' => 'Yii::app()->createUrl("admin/package/deletepackage", array("id"=>$data->id))',
                         ),
                     ),

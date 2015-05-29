@@ -56,6 +56,9 @@ class BaseClass extends Controller {
             return $walletObject; 
                         
     }
+    function getUnredMails($userId){
+        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND type = 0'));
+    }
 
     public static function isAdmin() {
         $userId = Yii::app()->session['userid'];
