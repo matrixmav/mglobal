@@ -23,9 +23,9 @@ $this->breadcrumbs = array(
         </div>
     </div>
     <?php }else{
-     foreach($orderObject as $order){?>
+     foreach($orderObject as $order){  ?>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <a class="" href="/buildtemp/templates/<?php echo $order->id; ?>" target="_blank"><div class="dashboard-stat blue-madison">
+          <a class="more" href="/buildtemp/templates?id=<?php echo $order->id; ?>" target="_blank"><div class="dashboard-stat blue-madison">
             <div class="visual">
                
                 <i class="fa fa-comments"></i>
