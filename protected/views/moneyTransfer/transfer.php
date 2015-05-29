@@ -32,7 +32,7 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="transactiontype" class="col-lg-4 control-label">Choose Type of Transaction<span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <select id="transactiontype" name="transactiontype" class="form-control">
+                        <select id="transactiontype" name="walletId" class="form-control">
                             <option value="">Select Option</option>
                             <option value="1">Cash</option>
                             <option value="2">RP Wallet</option>	 
@@ -41,13 +41,13 @@ $this->breadcrumbs = array(
                     </div>
 
                 </div>
-				 <div class="form-group">
+                <div class="form-group">
                     <label for="totalcash" class="col-lg-4 control-label" id="transaction_data_label">Total<span class="require">*</span></label>
                     <input type="hidden" value="<?php echo $walletPoints; ?>" name="wallet_points" id="wallet_points">
                     <div class="col-lg-8">
-					<div id="transaction_data" name="transaction_data" class="form-control">0</div>
+                        <div id="transaction_data" name="transaction_data" class="form-control">0</div>
                     </div></div>
-         
+
 
 
                 <div class="form-group">
@@ -78,9 +78,9 @@ $this->breadcrumbs = array(
                     <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
             </div>
-    <?php
-} else {
-    ?>
+            <?php
+        } else {
+            ?>
             <div class="form-group">
 
                 <div class="col-lg-8">                                          
@@ -88,8 +88,8 @@ $this->breadcrumbs = array(
                 </div>
 
             </div>
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
     </form>
 </div>

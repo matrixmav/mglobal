@@ -410,7 +410,39 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
 
-
+                            $billing_pmenu = 7;
+                            if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
+                                $billing_subsection = array(
+                                    "mail" => "Inbox",
+                                    "mail/compose" => "Compose",
+                                    "mail/sent" => "Sent",
+                                );
+                                ?>
+                                <li
+                                    class="<?php echo ($curControllerLower == 'mail') ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <span class="leftmenu-hotel"></span> <span
+                                            class="title">Mail</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'mail') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($billing_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                        // if($ctName == "invoice")
+                                        // echo '<ul class="sub-menu">';
+                                        $class_billing_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+                                        echo '<li ' . $class_billing_content . '>';
+                                        echo '<a href="/'. $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+//                                        }
+                                            }
+                                    echo '</ul>';
+                                    ?>					
+                                </li>	
+                                <?php
+                            }
 
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {

@@ -575,7 +575,7 @@ class BaseClass extends Controller {
         return $totalCommission;
     }
 
-        public static function getReCaptcha(){
+    public static function getReCaptcha(){
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
 
@@ -963,4 +963,16 @@ class BaseClass extends Controller {
         $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId .' AND position = '. $position,'order'=>'position asc') );
         return $genealogyListObject;
     }
-}
+    
+    public static function getBinaryTreeChild($userId, $date ,$position){
+        $genealogyListObject = Genealogy::model()->findAll(array('condition'=>'parent = '.$userId .' AND position = '. $position .'AND updated_at = "2015-05-19" ', 'order'=>'position asc') );
+        return $genealogyListObject;
+    }
+    
+    public static function getRandPosition(){
+        $randValue = mt_rand(1, 2);
+        return $randValue ;        
+        
+    }
+    
+ }

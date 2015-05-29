@@ -1,33 +1,49 @@
 <?php
-/* @var $this MailController */
-/* @var $model Mail */
-
-$this->breadcrumbs=array(
-	'Mails'=>array('index'),
-	$model->id,
-);
-
-$this->menu=array(
-	array('label'=>'List Mail', 'url'=>array('index')),
-	array('label'=>'Create Mail', 'url'=>array('create')),
-	array('label'=>'Update Mail', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Mail', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Mail', 'url'=>array('admin')),
+$this->breadcrumbs = array(
+    'Email' => array('/mail'),
+    'Read'
 );
 ?>
 
-<h1>View Mail #<?php echo $model->id; ?></h1>
+<div class="row">
+    <div class="col-md-12">
+            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20")); ?>
+            <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20")); ?>
+            <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
+    </div>
+</div>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'to_user_id',
-		'from_user_id',
-		'message',
-		'type',
-		'status',
-		'created_at',
-		'updated_at',
-	),
-)); ?>
+<div class="col-md-12 form-group">
+    <label class="col-md-1">Sender:</label>
+    <div class="col-md-6">
+        <p><?php echo $mailObject->touser->full_name; ?></p>
+    </div>
+</div>
+<div class="col-md-12 form-group">
+    <label class="col-md-1">Receiver:</label>
+    <div class="col-md-6">
+        <p><?php echo $mailObject->fromuser->full_name; ?></p>
+    </div>
+</div>
+<div class="col-md-12 form-group">
+    <label class="col-md-1">Subject:</label>
+    <div class="col-md-6">
+        <p><?php echo $mailObject->subject; ?></p>
+    </div>
+</div>
+<div class="col-md-12 form-group">
+    <label class="col-md-1">Message:</label>
+    <div class="col-md-6">
+        <p><?php echo $mailObject->message; ?></p>
+    </div>
+</div>
+<?php if(!empty($mailObject->attachment)){ ?>
+<div class="col-md-12 form-group">
+    <label class="col-md-1">Attachement </label>
+    <div class="col-md-6">
+        <p><?php echo $mailObject->attachment; ?></p>
+    </div>
+</div>
+<?php } ?>
+
+

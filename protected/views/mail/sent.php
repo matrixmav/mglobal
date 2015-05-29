@@ -7,9 +7,9 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
-            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20  red")); ?>
+            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20")); ?>
-            <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
+            <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn green margin-right-20 red")); ?>
     </div>
 </div>
 <div class="row">
@@ -23,7 +23,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'Showing {start} to {end} of {count} entries',
     'template' => '{items} {summary} {pager}',
     'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
-    'htmlOptions'=>array('id'=>'$data->id', 'class'=>'($data->status == 1)?:btn green":"btn red"') ,
     'pager' => array(
         'header' => false,
         'firstPageLabel' => "<<",
@@ -40,8 +39,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'from_user_id',
-            'header' => '<span style="white-space: nowrap;">Receiver &nbsp; &nbsp; &nbsp;</span>',
-            'value' => '$data->fromuser->full_name',
+            'header' => '<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
+            'value' => '$data->touser->full_name',
         ),
         array(
             'name' => 'subject',
@@ -65,7 +64,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'Reply' => array(
                     'label' => 'Reply',
                     'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
-                    'url' => 'Yii::app()->createUrl("/mail/reply?id=$data->id")',
+                    'url' => 'Yii::app()->createUrl("/mail/reply", array("id"=>$data->id))',
                 ),
                 'View' => array(
                     'label' => 'View',

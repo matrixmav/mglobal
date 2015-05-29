@@ -45,7 +45,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sponsor_id, name, password, parent, full_name, email, country_id, country_code, phone, date_of_birth, master_pin, status, updated_at', 'required'),
+			array('sponsor_id, name, password, parent, full_name, email, country_id, country_code, phone, date_of_birth, master_pin, unique_id, status, updated_at', 'required'),
 			array('parent, country_id, country_code, phone, master_pin, status, activation_key', 'numerical', 'integerOnly'=>true),
 			array('sponsor_id, name, password, full_name, email, skype_id, facebook_id, twitter_id, forget_key, forget_status', 'length', 'max'=>100),
 			array('position', 'length', 'max'=>30),
@@ -93,6 +93,7 @@ class User extends CActiveRecord
 			'facebook_id' => 'Facebook',
 			'twitter_id' => 'Twitter',
 			'master_pin' => 'Master Pin',
+			'unique_id' => 'Unique Id',
 			'status' => 'Status',
 			'activation_key' => 'Activation Key',
 			'forget_key' => 'Forget Key',
@@ -136,6 +137,7 @@ class User extends CActiveRecord
 		$criteria->compare('facebook_id',$this->facebook_id,true);
 		$criteria->compare('twitter_id',$this->twitter_id,true);
 		$criteria->compare('master_pin',$this->master_pin);
+		$criteria->compare('unique_id',$this->unique_id);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('activation_key',$this->activation_key);
 		$criteria->compare('forget_key',$this->forget_key,true);
