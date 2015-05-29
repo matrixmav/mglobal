@@ -4391,3 +4391,9 @@ UI Loading
     margin-bottom: 0;
     padding-top: 38px;
     text-align: right;}
+
+.chatboxhead {
+    background-color: #f15c2b !important ;
+    border-left: 1px solid #f15c2b !important;
+    border-right: 1px solid #f15c2b !important;
+}
