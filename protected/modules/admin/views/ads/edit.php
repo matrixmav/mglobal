@@ -36,7 +36,7 @@ $this->breadcrumbs = array(
                     <?php 
                     if(!empty($adsObject) && $adsObject->banner!=''){?>
                     <span class="example">
-                        <a href="/banner/<?php echo $adsObject->banner;?>" target="_blank"><img src="/banner/<?php echo $adsObject->banner;?>" width="50" height="50"></a></span>
+                        <a href="/upload/banner/<?php echo $adsObject->banner;?>" target="_blank"><img src="/upload/banner/<?php echo $adsObject->banner;?>" width="50" height="50"></a></span>
                     <?php }?>
                 </div>
             </div>

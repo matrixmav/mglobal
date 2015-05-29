@@ -74,7 +74,7 @@ class AdsController extends Controller
                     if($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg" ){
                         $error = "Please upload mentioned file type.";
                     }else{                            
-                        $path = Yii::getPathOfAlias('webroot') . "/banner/";
+                        $path = Yii::getPathOfAlias('webroot') . "/upload/banner/";
                         BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);
                        
                         $model = new Ads;
@@ -99,7 +99,7 @@ class AdsController extends Controller
         
         
         protected function gridBannerImage($data,$row){ 	
-            $bigImagefolder= '/banner/';// folder with uploaded files
+            $bigImagefolder= '/upload/banner/';// folder with uploaded files
             echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->banner</a>".'<div class="modal fade" id="zoom_'.$data->id.'" tabindex="-1" role="basic" aria-hidden="true">
                 <div class="modal-dialog" style="width:500px;">
                     <div class="modal-content">
@@ -145,7 +145,7 @@ class AdsController extends Controller
                         if($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg" ){
                             $error = "Please upload mentioned file type.";
                         }else{
-                            $path = Yii::getPathOfAlias('webroot') . "/banner/";
+                            $path = Yii::getPathOfAlias('webroot') . "/upload/banner/";
                             BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);
                             $adsObject->banner =  $banner;
                             $adsObject->get_code = '<p><img src='.$path.$banner.' height=100 width=100></p>' ;

@@ -33,11 +33,7 @@ $this->breadcrumbs = array(
                      <div data-provides="fileupload" class="fileupload fileupload-new">
                          <span class="btn btn-primary btn-file btn-1"><span class="fileupload-new"><input type="file" id="ads_banner" class="form-control11" name="ads_banner"></span></div>
                     <span class="example1">(Upload jpg ,png , pdf files only)</span> 
-                    <?php 
-                    if(!empty($userObject) && $userObject->id_proof!=''){?>
-                    <span class="example">
-                        <a href="/upload/verification-document/<?php echo $userObject->id_proof;?>" target="_blank"><img src="/upload/verification-document/<?php echo $userObject->id_proof;?>" width="50" height="50"></a></span>
-                    <?php }?>
+                   
                 </div>
             </div>
             
