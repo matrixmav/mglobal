@@ -265,7 +265,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
                     </li>
-                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>
+<!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
 
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
