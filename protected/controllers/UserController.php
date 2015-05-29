@@ -9,7 +9,7 @@ class UserController extends Controller
 	public $layout='user';
 
         public function init() {
-            BaseClass::isLoggedIn();
+            //BaseClass::isLoggedIn();
         }
 	/**
 	 * @return array action filters
