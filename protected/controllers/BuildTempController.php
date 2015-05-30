@@ -9,6 +9,15 @@ class BuildTempController extends Controller {
     public $layout = 'inner';
 
     /**
+     * @return array action filters
+     */
+    public function filters() {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+            'postOnly + delete', // we only allow deletion via POST request
+        );
+    }
+    /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
      * @return array access control rules
@@ -37,7 +46,7 @@ class BuildTempController extends Controller {
      * Function to fetch templates
      */
 
-    public function actionTemplates() {
+    public function actionTemplates() {  
         $builderObject = BuildTemp::model()->findAll(array('condition' => 'screenshot != ""'));
         Yii::app()->session['orderID'] = $_GET['id'];
         $this->render('templates', array('builderObject' => $builderObject));
@@ -73,15 +82,16 @@ class BuildTempController extends Controller {
 
     public function actionUserInput() {
         $success = "";
-        $error = "";
-
-        if (!isset(Yii::app()->session['templateID'])) {
+        $error = "";                 
+        
+        //if (!isset(Yii::app()->session['templateID'])) {
+        if (isset($_POST['template_id'])) {
             Yii::app()->session['templateID'] = $_POST['template_id'];
         } else {
             Yii::app()->session['templateID'] = Yii::app()->session['templateID'];
         }
 
-
+        print_r($_SESSION);
         $templateObject = new UserHasTemplate;
         $buildTempObject = new BuildTemp;
         if (!empty($_POST)) {
@@ -118,7 +128,23 @@ class BuildTempController extends Controller {
                 $templateObject->publish = 0;
                 $templateObject->created_at = date('Y-m-d');
                 $templateObject->save(false);
-            }
+                
+                /* Add Home page of website */
+                for($i=1; $i<6; $i++){
+                    $userpagesObject1 = new UserPages;
+                    $userpagesObject1->order_id = Yii::app()->session['orderID'];
+                    $userpagesObject1->user_id = Yii::app()->session['userid'];
+                    $userpagesObject1->page_name = 'Page'.$i;
+                    if($i == 1){
+                        $userpagesObject1->page_name = 'Home';
+                    }
+                    $userpagesObject1->page_content = $buildertempObject->body->body_content;
+                    $userpagesObject1->created_at = date("Y-m-d");
+                    $userpagesObject1->save(false);   
+                }
+                             
+                
+           }
         }
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $this->render('userinput', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject));
@@ -147,6 +173,7 @@ class BuildTempController extends Controller {
                 $error .= "Please fill required(*) marked fields.";
             }
         }
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $this->render('userinput', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject));
     }
 
@@ -173,15 +200,22 @@ class BuildTempController extends Controller {
 
     public function actionFetchMenu() {
         $responce = "";
-        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
-        //$responce .= '<input type="hidden" name="defaultPage" id="defaultPage" value="'.$userpages1Object->id.'">';
+//        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
+         $userpagesObject = UserPages::model()->findAll(); 
+         
+        $buildTempHeader = UserHasTemplate::model()->findByPk(44    );
+//echo "<pre>"; print_r($userpagesObject[0]->page_name);exit;
+        $bb = $buildTempHeader->temp_header;
+       
+        $i = 1;
         foreach ($userpagesObject as $pages) {
-            $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($pages->page_name));
-            $pagename = "'" . $pages->id . "'";
-            // $responce .= '<li class="color1"><a onclick="showContent('.$pagename.');"><i class=""> </i><span>'.$pages->page_name.'</span></a></li>';
-            $responce .= '<li class="color1"><a href="/buildtemp/managewebsite/' . $pages->id . '"><i class=""> </i><span>' . $pages->page_name . '</span></a></li>';
+            $pat1 = '*' . $i . '*';
+            $pat2 = '$' . $i . '$';
+            $bb = str_replace($pat1, $pages->id, $bb);
+            $bb = str_replace($pat2, $pages->page_name, $bb);
+            $i++;
         }
-        echo $responce;
+        echo $bb;
     }
 
     public function actionAddLogo() {
@@ -216,7 +250,7 @@ class BuildTempController extends Controller {
             
         }
         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $userhas->template_id));
-        $responce .= '<img src="/user/template/logos/' . $userhas->logo . '">';
+        $responce .= '<img height="100" width="100" src="/user/template/logos/' . $userhas->logo . '">';
         echo $responce;
     }
 
@@ -228,7 +262,7 @@ class BuildTempController extends Controller {
             $responce .= '<div class="success" id="msg"></div>
                 <form action="" method="post">
                         <div class="col-md-6 contact-left">
-			<p class="your-para"> Name<span>*</span></p>
+			<p class="your-para"> Name<sphttp://mglobal.dev/BuildTemp/managewebsite/55an>*</span></p>
 			<input type="text" name="name" id="name" class="form-control">
                         <div id="name_error"></div>
 			</div>

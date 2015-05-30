@@ -48,9 +48,9 @@ class BuildTemp extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                      
-                    'category' => array(self::BELONGS_TO, 'Buildcategory', 'category_id'),
+                    'category' => array(self::BELONGS_TO, 'BuildCategory', 'category_id'),
                     'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header_id'),
-                    'footer' => array(self::BELONGS_TO, 'BuildTempfooter', 'temp_footer_id'),
+                    'footer' => array(self::BELONGS_TO, 'BuildTempFooter', 'temp_footer_id'),
                     'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body_id'),
 		     
                     

@@ -164,13 +164,19 @@ class BuildTempController extends Controller {
     public function actiontemplateheaderEdit() {
         $error = "";
         $success = "";
+       
         if ($_REQUEST['id']) {
+            
+            //$headerObject = BuildTemp::model()->findByAttributes(array('id'=>$_REQUEST['id']));
             $headerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
-
+                
             if ($_POST) {
                 if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
+                    //$headerObject = BuildTemp::model()->findByAttributes(array('temp_header_id'=>$_REQUEST['id']));
+
                     $headerupdateObject = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
-                     if($_FILES['screenshot']['name'])
+//                    var_dump($headerupdateObject) ; die;
+                    if(!empty($_FILES['screenshot']['name']))
                      {
                         $ext1 = end((explode(".", $_FILES['screenshot']['name']))); 
                         if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
@@ -182,6 +188,8 @@ class BuildTempController extends Controller {
                     $headerObject->screenshot =   time().$_FILES['screenshot']['name'];
                     $headerObject->update();
                     }
+                    
+                    
                     $headerupdateObject->header_content = $_POST['Template']['header_code'];
                     $headerupdateObject->template_title = $_POST['Template']['template_title'];
                     $headerupdateObject->updated_at = date('Y-m-d');
@@ -193,6 +201,7 @@ class BuildTempController extends Controller {
                 }
             }
         }
+//        var_dump($headerObject) ; die;
         $categoryObject = BuildCategory::model()->findAll();
         $this->render('/builder/template_header_edit', array(
             'headerObject' => $headerObject, 'error' => $error, 'success' => $success, 'categoryObject' => $categoryObject,
