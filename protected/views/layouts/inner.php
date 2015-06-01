@@ -398,7 +398,7 @@ if ($userObject) {
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment') {
+                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' || $curControllerLower == "order" && $curActionLower!='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
@@ -411,7 +411,7 @@ if ($userObject) {
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard' && $curAction != 'refferalincome') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -535,7 +535,7 @@ if ($userObject) {
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment') {
+                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment' || $curControllerLower=='order' && $curActionLower=='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
