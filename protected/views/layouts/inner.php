@@ -398,12 +398,12 @@ if ($userObject) {
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' || $curControllerLower == "order" && $curActionLower!='refferalincome') {
+                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' && $curControllerLower == "order" && $curActionLower!='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'profile' && $curAction != 'dashboard' || $curActionLower == 'genealogy')
+                                if ($curControllerLower == 'profile' && $curAction != 'dashboard' || $curActionLower == 'genealogy' )
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -411,7 +411,7 @@ if ($userObject) {
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard' && $curAction != 'refferalincome') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard'  ) ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
