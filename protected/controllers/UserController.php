@@ -32,7 +32,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary','facebook','twitter','callback','checkinvestment'), 
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary','facebook','twitter','callback'), 
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
