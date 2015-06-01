@@ -188,6 +188,6 @@ class SummaryController extends Controller
 			Yii::app()->end();
 		}
 	}
-       
+         
         
 }
