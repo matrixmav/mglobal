@@ -32,7 +32,7 @@ class OrderController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list','redirect','invoice'),
+				'actions'=>array('index','view','list','redirect','invoice','checkinvestment'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -275,6 +275,22 @@ class OrderController extends Controller
 			Yii::app()->end();
 		}
 	}
+          /*
+         * Function to fetch user investment
+         */
+        
+        public function actionCheckInvestment()
+        {
+          $loggedInuserName = Yii::app()->session['username'];
+           $dataProvider = new CActiveDataProvider('User', array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id = "' . $loggedInuserName.'"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => 10),));
+            
+          $this->render('checkinvestment',array(
+			'dataProvider'=>$dataProvider,
+		)); 
+        }
         
        
       
