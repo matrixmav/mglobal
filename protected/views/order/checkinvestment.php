@@ -2,11 +2,9 @@
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
 
- 
 $this->breadcrumbs = array(
-    'RPWallet',
+    'Check Investment',
 );
- 
  
 
 $this->menu=array(
@@ -26,7 +24,9 @@ $this->menu=array(
           <!-- BEGIN CONTENT -->
           <div class="col-md-10 col-sm-9">
        
-        <?php $this->widget('zii.widgets.grid.CGridView', array(
+        <?php 
+         
+        $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'city-grid',
 	'dataProvider'=>$dataProvider,
 	'enableSorting'=>'true',
@@ -43,41 +43,38 @@ $this->menu=array(
 	),	
 	'columns'=>array(
 		//'idJob',
-             array(
+                array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$row+1',
 		),
 		array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Transfer To &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->touser->name)? ucwords($data->touser->name):""',
+                    'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data["full_name"])? ucwords($data["full_name"]):""',
 		),
-            array(
+                
+               array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Transfer From &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->fromuser->name)? ucwords($data->fromuser->name):""',
+                    'header'=>'<span style="white-space: nowrap;">Package &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data["name"])? $data["name"]:""',
 		),
-                array(
-                    'name'=>'transaction_id',
+              array(
+                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->transaction->paid_amount)? number_format($data->transaction->paid_amount,2):""',
+                    'value'=>'isset($data["paid_amount"])? number_format($data["paid_amount"],2):""',
 		),
-            array(
-                    'name'=>'created_at',
-                    'header'=>'<span style="white-space: nowrap;">Transfer Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->created_at',
+            
+               array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Position &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data["position"])? $data["position"]:""',
 		),
-             array(
-                    'name'=>'status',
-                    'header'=>'<span style="white-space: nowrap;">Transfer Status &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->status == 1) ? "Transfered" : "Pending"',
-		),
-             array(
-                    'name'=>'comment',
-                    'header'=>'<span style="white-space: nowrap;">Comment &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->comment',
-		),
+            
+               
+            
+            
+             
 		 
 	),
 )); ?>

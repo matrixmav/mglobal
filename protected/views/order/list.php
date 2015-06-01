@@ -23,7 +23,9 @@ $this->menu=array(
           <!-- BEGIN CONTENT -->
           <div class="col-md-10 col-sm-9">
        
-        <?php $this->widget('zii.widgets.grid.CGridView', array(
+        <?php 
+        
+        $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'city-grid',
 	'dataProvider'=>$dataProvider,
 	'enableSorting'=>'true',

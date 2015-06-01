@@ -151,6 +151,18 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             });
 
+            jQuery(document).ready(function ()
+              {
+                  App.init();
+                  //checkLoginTime();
+                  
+              });
+             
+           function openChat()
+           {
+             var IDSVal = document.getElementById('username').value;
+             chatWith(IDSVal);  
+           }
         </script>
 
 
@@ -406,12 +418,12 @@ License: You must have a valid license purchased only from themeforest(the above
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order") {
+                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' && $curControllerLower == "order" && $curActionLower!='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'profile' && $curAction != 'dashboard' || $curActionLower == 'genealogy')
+                                if ($curControllerLower == 'profile' && $curAction != 'dashboard' || $curActionLower == 'genealogy' )
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -419,7 +431,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard'  ) ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -538,10 +550,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "wallet/rpwallet" => "RP Wallet",
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Fund Wallet",
+                                    "order/checkinvestment" => "Check Investment",
+                                    "order/refferalincome" => "Referral Income",
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet') {
+                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment' || $curControllerLower=='order' && $curActionLower=='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
@@ -664,6 +678,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             'links' => $this->breadcrumbs
                                         ));
                                         ?>
+
+
                                     </li>
 
                                 </ul>
@@ -694,6 +710,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 </span>
             </div>
         </div>
+        
+<div class="chatWrap">
+   <a onclick="openChat();"><span class="glyphicon glyphicon-comment"></span></a>
+  
+</div>
         <!-- END FOOTER -->
         <script type="text/javascript">
             function showError(msg) {
@@ -714,7 +735,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 $.notific8('zindex', 11500);
                 $.notific8($.trim(msg), settings);
             }
+           
         </script>
+        <script>
+             $(".glyphicon-comment").click(function(){
+             $(".chatuserList").toggle();
+             });
+            </script>
     </body>
     <!-- END BODY -->
 </html>
