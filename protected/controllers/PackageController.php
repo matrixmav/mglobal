@@ -83,8 +83,9 @@ class PackageController extends Controller
              $transactionObject1 = Transaction::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
               
              $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount']; 
-             if(count($transactionObject1) > 0 && $transactionObject1->status!='1')
+             if(count($transactionObject1) > 0 && $transactionObject1->status !='1')
              { 
+                  
                  
                     $transactionObject1->mode = 'paypal';
                     $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
@@ -97,10 +98,12 @@ class PackageController extends Controller
                     $transactionObject1->updated_at = new CDbExpression('NOW()');
                     $transactionObject1->update(); 
              }else{
+                 
+                   
                     $transactionObject->user_id = Yii::app()->session['userid'];
                     $transactionObject->mode = 'paypal';
                     $transactionObject->actual_amount = $_REQUEST['totalAmount'];
-                    $transactionObject->paid_amount = $_REQUEST['totalAmount'];
+                    $transactionObject->paid_amount = $total;
                     $transactionObject->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject->total_rp = 0;
                     $transactionObject->used_rp = 0;
