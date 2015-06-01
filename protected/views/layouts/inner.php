@@ -686,6 +686,17 @@ if ($userObject) {
                 </span>
             </div>
         </div>
+        
+<div class="chatWrap">
+   <span class="glyphicon glyphicon-comment"></span>
+   <div class="chatuserList " style="display: none;">
+       <p><span class="glyphicon glyphicon-user"></span><a href="">user1</a></p>
+       <p><span class="glyphicon glyphicon-user"></span><a href="">user2</a></p>
+       <p><span class="glyphicon glyphicon-user"></span><a href="">user3</a></p>
+        <p><span class="glyphicon glyphicon-user"></span><a href="">user4</a></p>
+        <p><span class="glyphicon glyphicon-user"></span><a href="">user5</a></p>
+   </div>
+</div>
         <!-- END FOOTER -->
         <script type="text/javascript">
             function showError(msg) {
@@ -706,7 +717,13 @@ if ($userObject) {
                 $.notific8('zindex', 11500);
                 $.notific8($.trim(msg), settings);
             }
+           
         </script>
+        <script>
+             $(".glyphicon-comment").click(function(){
+        $(".chatuserList").toggle();
+    });
+            </script>
     </body>
     <!-- END BODY -->
 </html>

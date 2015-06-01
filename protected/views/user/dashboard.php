@@ -456,3 +456,4 @@ $this->breadcrumbs = array(
 <!-- END DASHBOARD STATS -->
 <div class="clearfix">
 </div>
+
