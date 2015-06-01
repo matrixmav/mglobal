@@ -263,33 +263,36 @@ class OrderController extends Controller {
      */
 
     public function actionCheckInvestment() {
-           $loggedInuserName = Yii::app()->session['username'];
-           $model = User::model()->findAll(array('condition'=>'sponsor_id = "'.$loggedInuserName.'"'));
-           $connection = Yii::app()->db;
-           $userid="";
-           foreach($model as $user)
-           {
-            $userid .= "'".$user->id."',";
-           }
-           $userID = rtrim($userid,',');
-           $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,package.amount,package.name from `user`,`order`,`package` WHERE order.user_id IN('.$userID.') AND user.id = order.user_id AND order.package_id = package.id ');
-           $row = $command->queryAll();
-           
-           $sqlData = new CArrayDataProvider($row, array(
-          'pagination' => array('pageSize' => 10)));
-            //$sqlData = $sqlData->getData();
-            //$sqlData = $sqlData[0];
-            
+        $loggedInuserName = Yii::app()->session['username'];
+        $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName . '"'));
+        $connection = Yii::app()->db;
+        $userid = "";
+        if ($model) {
+            foreach ($model as $user) {
+                $userid .= "'" . $user->id . "',";
+            }
+            $userID = rtrim($userid, ',');
+            $condition = 'order.user_id IN(' . $userID . ') AND ';
+        } else {
+            $condition = "order.user_id IN('0') AND ";
+        }
+        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,package.amount,package.name from `user`,`order`,`package` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id ');
+        $row = $command->queryAll();
+
+        $sqlData = new CArrayDataProvider($row, array(
+            'pagination' => array('pageSize' => 10)));
+        //$sqlData = $sqlData->getData();
+        //$sqlData = $sqlData[0];
         //$dataProvider = new CActiveDataProvider($sqlData, array(
-          //'pagination' => array('pageSize' => 10),));
+        //'pagination' => array('pageSize' => 10),));
         /* foreach($dataProvider as $data)
           {
           $orderObject =  Order::model()->findByAttributes(array('user_id'=>$data->id));
           $dataProvider['order'] = $orderObject;
           $packageObject =  Package::model()->findByPK($orderObject->package_id);
           $dataProvider['package'] = $packageObject;
-          }*/
-            
+          } */
+
         $this->render('checkinvestment', array(
             'dataProvider' => $sqlData,
         ));
