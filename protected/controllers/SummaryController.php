@@ -150,9 +150,11 @@ class SummaryController extends Controller
         
         public function actionCheckInvestment()
         {
-          $loggedInuserID = Yii::app()->session['userid'];  
-          $userObject = User::model()->findByPk($loggedInuserID);  
-            
+          $loggedInuserName = Yii::app()->session['username'];
+          $userObject = User::model()->findAll(array('condition'=>'sponsor_id = "'.$loggedInuserName.'"'));  
+          $this->render('checkinvestment',array(
+			'userObject'=>$userObject,
+		)); 
         }
 
 	/**
