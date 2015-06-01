@@ -28,7 +28,7 @@ class SummaryController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','summery','checkinvestment'),
+				'actions'=>array('index','view','summery'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -144,22 +144,7 @@ class SummaryController extends Controller
 		));
 	}
         
-        /*
-         * Function to fetch user investment
-         */
         
-        public function actionCheckInvestment()
-        {
-          $loggedInuserName = Yii::app()->session['username'];
-           $dataProvider = new CActiveDataProvider('Order', array(
-                'criteria' => array(
-                    'condition' => ('sponsor_id = ' . $loggedInuserName ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => $pageSize),));
-            
-          $this->render('checkinvestment',array(
-			'dataProvider'=>$dataProvider,
-		)); 
-        }
 
 	/**
 	 * Manages all models.
