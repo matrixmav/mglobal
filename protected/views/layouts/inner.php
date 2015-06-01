@@ -130,8 +130,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
-        <script src="<?php echo Yii::app()->baseUrl.'/ckeditor/ckeditor.js'; ?>"></script>
-  <script type="text/javascript" src="<?php echo Yii::app()->baseUrl.'/ckfinder/ckfinder.js';?>"></script>
+        <script src="<?php echo Yii::app()->baseUrl . '/ckeditor/ckeditor.js'; ?>"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl . '/ckfinder/ckfinder.js'; ?>"></script>
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript" src="/chat/js/chat.js"></script>
         <script type="text/javascript">
@@ -142,19 +142,18 @@ License: You must have a valid license purchased only from themeforest(the above
                 chatWith(IDSVal);
             });
             $(".single_2").fancybox({
-    	openEffect	: 'elastic',
-    	closeEffect	: 'elastic',
-
-    	helpers : {
-    		title : {
-    			type : 'inside'
-    		}
-    	}
-    });
+                openEffect: 'elastic',
+                closeEffect: 'elastic',
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    }
+                }
+            });
 
         </script>
-        
-      
+
+
         <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
 
         <!-- END JAVASCRIPTS -->
@@ -191,7 +190,7 @@ License: You must have a valid license purchased only from themeforest(the above
                    data-target=".navbar-collapse"> <img
                         src="/metronic/assets/img/menu-toggler.png" alt="" />
                 </a>
-                
+
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right topWallet">
@@ -216,7 +215,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                                 $arrayRP = BaseClass::walletAmount('2');
                                 foreach ($arrayRP as $RP) {
-
+                                    
                                 }
                                 echo (!empty($arrayRP)) ? "<h4>" . number_format($RP->fund, 2) . "</h4>" : "0.00";
                                 ?>
@@ -224,12 +223,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </li>
                     <li class="commision"><a href="#" class="">
-                             <i class="glyphicon glyphicon-briefcase"></i>
+                            <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
                                 $arrayFund = BaseClass::walletAmount('1');
                                 foreach ($arrayFund as $fund) {
-
+                                    
                                 }
                                 echo (!empty($arrayFund)) ? $fund->fund : "0.00";
                                 ?>
@@ -243,10 +242,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                                 $userId = Yii::app()->session['userid'];
                                 $mailCount = BaseClass::getUnredMails($userId);
-                                if(!empty($mailCount)){
+                                if (!empty($mailCount)) {
                                     echo $mailCount;
                                 } else {
-                                     echo "0";
+                                    echo "0";
                                 }
                                 ?></span>
                         </a>
@@ -258,14 +257,18 @@ License: You must have a valid license purchased only from themeforest(the above
                         <a href="/wallet/commisionwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Commision Wallet">
                             <i class="glyphicon glyphicon-th"></i>
                             <span class="badge badge-default">
-                                <?php $arrayCommision =  BaseClass::walletAmount('3');
-                                foreach($arrayCommision as $commision){}
-                                 echo (!empty($arrayCommision)) ? $commision->fund : "0";?></span>
+                                <?php
+                                $arrayCommision = BaseClass::walletAmount('3');
+                                foreach ($arrayCommision as $commision) {
+                                    
+                                }
+                                echo (!empty($arrayCommision)) ? $commision->fund : "0";
+                                ?></span>
                         </a>
 
 
                     </li>
-<!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
+                    <!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
 
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
@@ -281,12 +284,12 @@ License: You must have a valid license purchased only from themeforest(the above
                         <a href="#" class="dropdown-toggle"
                            data-toggle="dropdown" data-hover="dropdown"
                            data-close-others="true"> <span class="username">
-<?php
-$userObject = User::model()->findByPk(Yii::app()->session['userid']);
-if ($userObject) {
-    echo $userObject->full_name;
-}
-?>
+                                   <?php
+                                   $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                                   if ($userObject) {
+                                       echo $userObject->full_name;
+                                   }
+                                   ?>
                             </span> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -296,7 +299,7 @@ if ($userObject) {
                             </a>
                     </li> -->
                             <li>
-<?php if ($access == "manager") { ?>
+                                <?php if ($access == "manager") { ?>
                                     <a href="/admin/default/managerlogout"> <i class="fa fa-key"></i>
                                         Log Out
                                     </a>
@@ -447,17 +450,17 @@ if ($userObject) {
                                     echo '</ul>';
                                     ?>					
                                 </li>	
-        <?php
-    }
+                                <?php
+                            }
 
-    $billing_pmenu = 7;
-    if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
-        $billing_subsection = array(
-            "mail" => "Inbox",
-            "mail/compose" => "Compose",
-            "mail/sent" => "Sent",
-        );
-        ?>
+                            $billing_pmenu = 7;
+                            if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
+                                $billing_subsection = array(
+                                    "mail" => "Inbox",
+                                    "mail/compose" => "Compose",
+                                    "mail/sent" => "Sent",
+                                );
+                                ?>
                                 <li
                                     class="<?php echo ($curControllerLower == 'mail') ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-hotel"></span> <span
@@ -466,32 +469,32 @@ if ($userObject) {
                                             class="arrow <?php echo ($curControllerLower == 'mail') ? "open" : ''; ?>">
                                         </span>
                                     </a>
-                                <?php
-                                echo '<ul class="sub-menu">';
-                                foreach ($billing_subsection as $ctName => $ctTitle) {
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($billing_subsection as $ctName => $ctTitle) {
 //                                        if (in_array($ctTitle, $menusections ['sections'])) {
-                                    // if($ctName == "invoice")
-                                    // echo '<ul class="sub-menu">';
-                                    $class_billing_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-                                    echo '<li ' . $class_billing_content . '>';
-                                        echo '<a href="/'. $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                    echo '</li>';
+                                        // if($ctName == "invoice")
+                                        // echo '<ul class="sub-menu">';
+                                        $class_billing_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+                                        echo '<li ' . $class_billing_content . '>';
+                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '</li>';
 //                                        }
-                                }
-                                echo '</ul>';
-                                ?>					
+                                    }
+                                    echo '</ul>';
+                                    ?>					
                                 </li>	
-        <?php
-    }
+                                <?php
+                            }
 
-    $reservation_pmenu = 8;
-    if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-        $reservation_subsection = array(
-            "transaction/list" => "Transaction List",
+                            $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "transaction/list" => "Transaction List",
 //                                    "moneytransfer/list" => "Moneytransfer List",
-            "MoneyTransfer/transfer" => "Transfer",
-        );
-        ?>
+                                    "MoneyTransfer/transfer" => "Transfer",
+                                );
+                                ?>
                                 <li
 
                                     class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction')) ? "active" : ''; ?>">
@@ -582,52 +585,50 @@ if ($userObject) {
                                     echo '</ul>';
                                     ?>					
                                 </li>	
-        <?php
-    }
-                            if(Yii::app()->session['orderID'] && Yii::app()->session['templateID'])
-                            {
-                             $reservation_pmenu = 8;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    "BuildTemp/templates?id=".Yii::app()->session['orderID'] => "Choose Templates",
-                                    "BuildTemp/userinput" => "Add / Edit Pages",
-                                    "BuildTemp/addlogo" => "Add Logo",
-                                    "BuildTemp/contactsetting" => "Contact Setting",
-                                    
-                                );
-                                ?>
-                                <li class="<?php echo (($curControllerLower == 'BuildTemp') && ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
- 
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Builder Pages</span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'BuildTemp' || $curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
-                                        if ($ctName == "search/create") {
-                                            $ctName = "search/create/type/details";
-                                        }
-                                        if ($ctName == "BuildTemp" && $curControllerLower == "BuildTemp")
-                                            $class_content = 'class="active"';
-                                        else
-                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-
-                                        echo '<li ' . $class_content . '>';
-                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                        echo '</li>';
-                                        if ($ctName == "search/create/type/details") {
-                                            $ctName = "search/create";
-                                        }
-                                    }
-                                    echo '</ul>';
-                                    ?>			
-                                </li>
                                 <?php
-    }
-} } ?>				
+                            }
+                            if (Yii::app()->session['orderID'] && Yii::app()->session['templateID']) {
+                                $reservation_pmenu = 8;
+                                if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                    $reservation_subsection = array(
+                                        "BuildTemp/templates?id=" . Yii::app()->session['orderID'] => "Choose Templates",
+                                        "BuildTemp/userinput" => "Add / Edit Pages",
+                                    );
+                                    ?>
+                                    <li class="<?php echo (($curControllerLower == 'BuildTemp') && ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
+
+                                        <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                            <span class="title">Builder Pages</span>
+                                            <span class="selected"></span> <span
+                                                class="arrow <?php echo ($curControllerLower == 'BuildTemp' || $curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
+                                            </span>
+                                        </a>
+                                        <?php
+                                        echo '<ul class="sub-menu">';
+                                        foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                            if ($ctName == "BuildTemp" && $curControllerLower == "BuildTemp")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                            echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+                                        }
+                                        echo '</ul>';
+                                        ?>			
+                                    </li>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>				
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>
@@ -643,33 +644,33 @@ if ($userObject) {
 
                     <!-- END STYLE CUSTOMIZER -->
                     <!-- BEGIN PAGE HEADER-->
-                                    <?php
-                                    $header_curController = @Yii::app()->controller->id;
-                                    $header_curAction = @Yii::app()->getController()->getAction()->controller->action->id;
-                                    $menu_cond = ($header_curController == "hotel" && $header_curAction == "index") ? false : true;
-                                    if ($menu_cond) {
-                                        ?>
+                    <?php
+                    $header_curController = @Yii::app()->controller->id;
+                    $header_curAction = @Yii::app()->getController()->getAction()->controller->action->id;
+                    $menu_cond = ($header_curController == "hotel" && $header_curAction == "index") ? false : true;
+                    if ($menu_cond) {
+                        ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                                 <ul class="page-breadcrumb breadcrumb">
 
                                     <li>
-    <?php
-    $this->widget('zii.widgets.CBreadcrumbs', array(
-        'homeLink' => CHtml::link('User', array(
-            '/user'
-        )),
-        'links' => $this->breadcrumbs
-    ));
-    ?>
+                                        <?php
+                                        $this->widget('zii.widgets.CBreadcrumbs', array(
+                                            'homeLink' => CHtml::link('User', array(
+                                                '/user'
+                                            )),
+                                            'links' => $this->breadcrumbs
+                                        ));
+                                        ?>
                                     </li>
 
                                 </ul>
                                 <!-- END PAGE TITLE & BREADCRUMB-->
                             </div>
                         </div>
-                <?php } ?>
+                            <?php } ?>
                     <!-- END PAGE HEADER-->
                     <!-- BEGIN PAGE CONTENT-->
                     <div class="row">
