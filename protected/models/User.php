@@ -64,11 +64,9 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'userprofile'  => array(self::BELONGS_TO, 'UserProfile', 'id'),
-                    'touser'       => array(self::BELONGS_TO, 'MoneyTransfer', 'to_user_id'),
-                    'fromuser'     => array(self::BELONGS_TO, 'MoneyTransfer', 'from_user_id'),
-                     
-                    
+                    'userprofile' => array(self::BELONGS_TO, 'UserProfile', 'id'),
+                    'touser' => array(self::BELONGS_TO, 'MoneyTransfer', 'to_user_id'),
+                    'fromuser' => array(self::BELONGS_TO, 'MoneyTransfer', 'from_user_id'),
                      
 		);
 	}
