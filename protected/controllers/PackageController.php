@@ -28,7 +28,7 @@ class PackageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','domainsearch','availabledomain','checkout','domainadd','productcart','couponapply','loaddomain','orderadd','thankyou'),
+				'actions'=>array('index','view','domainsearch','availabledomain','checkout','domainadd','productcart','couponapply','loaddomain','orderadd','thankyou','walletcalculation'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -538,4 +538,12 @@ class PackageController extends Controller
             
         }
          
+        /*
+         * function to get wallet calculation for payment
+         */
+        public function actionWalletCalculation()
+        {
+          $loggedInUserId = Yii::app()->session['userid'];
+          $model=Package::model()->findByPk($id);
+        }
 }
