@@ -718,8 +718,8 @@ if ($userObject) {
         </script>
         <script>
              $(".glyphicon-comment").click(function(){
-        $(".chatuserList").toggle();
-    });
+             $(".chatuserList").toggle();
+             });
             </script>
     </body>
     <!-- END BODY -->
