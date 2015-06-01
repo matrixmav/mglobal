@@ -15,7 +15,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Upload Zip Folder includes(css,images,js)<span class="require">*</span></label>
                 <div class="col-lg-8">
-                  <input type="file" name="cssfolder" id="cssfolder">
+                  <input type="file" name="cssfolder" id="cssfolder" class="form-control">
                     <span id="cssfolder_error"></span>
                 </div>
             </div>
@@ -23,23 +23,22 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Upload Template Screenshot<span class="require">*</span></label>
                 <div class="col-lg-8">
-                  <input type="file" name="screenshot" id="screenshot">
+                  <input type="file" name="screenshot" id="screenshot" class="form-control">
                     <span id="screenshot_error"></span>
                 </div>
             </div>
             
              <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Category<span class="require">*</span></label>
+                 <label class="col-lg-4 control-label" for="lastname" >Category<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <select name="Template[category]" id="category">
+                    <select name="Template[category]" id="category" class="form-control">
                         <option value="">Select Category</option>
-                        <?php if(!empty($categoryObject))
-                        {
-                            foreach($categoryObject as $category)
-                                {?>
-                        <option value="<?php echo $category->id; ?>" ><?php echo $category->name; ?></option>    
+                        <?php 
+                        if(!empty($categoryObject)){
+                            foreach($categoryObject as $category){ ?>
+                                <option value="<?php echo $category->id; ?>" ><?php echo $category->name; ?></option>    
                             <?php }
-                        }?>
+                        } ?>
                     </select>
                     <span id="category_error"></span>
                 </div>
@@ -55,26 +54,37 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" style="width: 482px; height: 248px;"></textarea>
+                    <textarea id="header_code" class="form-control" name="Template[header_code]" style="width: 482px; height: 150px;"></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="body_code" class="form-control" name="Template[body_code]" style="width: 482px; height: 248px;"></textarea>
+                    <textarea id="body_code" class="form-control" name="Template[body_code]" style="width: 482px; height: 150px;"></textarea>
                     <span id="body_code_error"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" style="width: 482px; height: 248px;"></textarea>
+                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" style="width: 482px; height: 150px;"></textarea>
                     <span id="footer_code_error"></span>
                 </div>
             </div>
             
-            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Custom CSS</label>
+                <div class="col-lg-8">
+                    <textarea id="custom_css" class="form-control" name="custom_css" style="width: 482px; height: 150px;"><?php echo (!empty($customcode->custom_css)) ? stripcslashes($customcode->custom_css) : ""; ?></textarea>                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Custom JS</label>
+                <div class="col-lg-8">
+                    <textarea id="custom_js" class="form-control" name="custom_js" style="width: 482px; height: 150px;"><?php echo (!empty($customcode->custom_js)) ? stripcslashes($customcode->custom_js) : ""; ?></textarea>
+                </div>
+            </div>
            
              
         </fieldset>
