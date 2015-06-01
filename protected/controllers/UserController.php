@@ -32,7 +32,7 @@ class UserController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 
-				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary','facebook','twitter','callback'), 
+				'actions'=>array('index','view','registration','isuserexisted','forgetpassword','login','changepassword','404','success','loginregistration','dashboard','isemailexisted','issponsorexisted','thankyou','binary','facebook','twitter','callback','checkinvestment'), 
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -791,6 +791,23 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        /*
+         * Function to fetch user investment
+         */
+        
+        public function actionCheckInvestment()
+        {
+          $loggedInuserName = Yii::app()->session['username'];
+           $dataProvider = new CActiveDataProvider('User', array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id = "' . $loggedInuserName.'"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => 10),));
+            
+          $this->render('checkinvestment',array(
+			'dataProvider'=>$dataProvider,
+		)); 
+        }
         
         
 }
