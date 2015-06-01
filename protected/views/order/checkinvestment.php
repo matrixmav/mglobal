@@ -26,8 +26,6 @@ $this->menu=array(
           <div class="col-md-10 col-sm-9">
        
         <?php 
-       echo "<pre>";print_r($dataProvider);
-        $fullname; exit;
         $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'city-grid',
 	'dataProvider'=>$dataProvider,
@@ -53,31 +51,31 @@ $this->menu=array(
 		array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->full_name)? ucwords($data->full_name):""',
+                    'value'=>'isset($data["full_name"])? ucwords($data["full_name"]):""',
 		),
                 
                array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->package_id)? $data->package_id:""',
+                    'header'=>'<span style="white-space: nowrap;">Package &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data["name"])? $data["name"]:""',
 		),
-                /*array(
+              array(
                     'name'=>'transaction_id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->transaction->paid_amount)? number_format($data->transaction->paid_amount,2):""',
+                    'value'=>'isset($data["amount"])? number_format($data["amount"],2):""',
 		),
             
                array(
                     'name'=>'status',
                     'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->transaction->status == 1) ? "Completed" : "Pending"',
+                    'value'=>'($data["status"] == 1) ? "Completed" : "Pending"',
 		),
             
                array(
                     'name'=>'created_at',
                     'header'=>'<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->transaction->created_at',
-		),*/   
+                    'value'=>'$data["created_at"]',
+		),   
             
             
              
