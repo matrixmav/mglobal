@@ -527,6 +527,7 @@ if ($userObject) {
                                     "wallet/rpwallet" => "RP Wallet",
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Fund Wallet",
+                                    "summary/checkinvestment" => "Check Investment",
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
