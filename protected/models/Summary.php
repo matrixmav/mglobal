@@ -44,7 +44,6 @@ class Summary extends CActiveRecord
 	 */
 	public function relations()
 	{
-            
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
             return array( 
@@ -52,8 +51,6 @@ class Summary extends CActiveRecord
                     'transaction' => array(self::BELONGS_TO, 'Transaction', 'transaction_id'),
                     'moneytransfer' => array(self::BELONGS_TO, 'MoneyTransfer', 'money_transfer_id'),
                     'wallet' => array(self::BELONGS_TO, 'Wallet', 'wallet_id'),
-                    'order' => array(self::BELONGS_TO, 'Order', 'id'),
-                    'package' => array(self::BELONGS_TO, 'Package', 'id'),
                     );
 		
 	}
