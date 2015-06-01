@@ -62,7 +62,7 @@ $this->menu=array(
               array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["amount"])? number_format($data["amount"],2):""',
+                    'value'=>'isset($data["paid_amount"])? number_format($data["paid_amount"],2):""',
 		),
             
                array(
