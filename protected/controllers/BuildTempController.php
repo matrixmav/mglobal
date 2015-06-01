@@ -27,7 +27,7 @@ class BuildTempController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 
                                     'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent',
-                                    'contactsetting', 'submitform'),
+                                    'contactsetting', 'submitform','addcopyright'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -210,16 +210,33 @@ class BuildTempController extends Controller {
         echo $bb;
     }
 
+    
+     public function actionAddCopyRight() {
+        $error = "";
+        $success = "";
+        $templateObject = new UserHasTemplate;
+        $userhasObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID'], 'user_id' => Yii::app()->session['userid']));
+        if (!empty($_POST) ) {            
+            $userhasObject->copyright = $_POST['copyright'];           
+            $userhasObject->update();
+            $success = "Copy Right Updated Successfully";
+        }
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
+        $this->render('copyright', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
+    }
+    
+    
+    
     public function actionAddLogo() {
         $error = "";
         $success = "";
         $templateObject = new UserHasTemplate;
         $userhasObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID'], 'user_id' => Yii::app()->session['userid']));
-        //$builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>$userhasObject->template_id));
+        $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>$userhasObject->template_id));
+        //echo "<pre>";
+        
         if (!empty($_FILES) || !empty($_POST) ) {
-            
-            $userhasObject->copyright = $_POST['copyright'];           
-            
+            $userhasObject->site_title = addslashes($_POST['site_title']);
             if ($_FILES['logo']['name']) {
                 $ext1 = end((explode(".", $_FILES['logo']['name'])));
                 if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
@@ -228,15 +245,16 @@ class BuildTempController extends Controller {
                     $fname = time() . $_FILES['logo']['name'];
 
                     $userhasObject->logo = $fname;
-                    //$userhasObject->update();
-                    $path = Yii::getPathOfAlias('webroot') . "/user/template/logos/";
+                    $userhasObject->update();
+                    $path = Yii::getPathOfAlias('webroot') . "/user/template/".$builderObjectmeta->folderpath."/";
                     BaseClass::uploadFile($_FILES['logo']['tmp_name'], $path, $fname);
                     $success .= "Logo added successfully";
                 }
-            }
-            $userhasObject->update();
+            } 
+             $userhasObject->update();
         }
-        $this->render('addlogo', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject));
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));       
+        $this->render('addlogo', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject'=>$userhasObject,'builderObjectmeta'=>$builderObjectmeta));
     }
 
     public function actionFetchLogo() {
@@ -289,7 +307,9 @@ class BuildTempController extends Controller {
                 $error .= "Please fill all required(*)marked fields.";
             }
         }
-        $this->render('contactsetting', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject));
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));       
+        
+        $this->render('contactsetting', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject,'userpagesObject'=> $userpagesObject));
     }
 
     public function actionSubmitForm() {
