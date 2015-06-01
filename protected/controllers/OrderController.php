@@ -276,7 +276,7 @@ class OrderController extends Controller {
         } else {
             $condition = "order.user_id IN('0') AND ";
         }
-        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,package.amount,package.name from `user`,`order`,`package` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id ');
+        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id');
         $row = $command->queryAll();
 
         $sqlData = new CArrayDataProvider($row, array(
