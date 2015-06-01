@@ -139,11 +139,14 @@ License: You must have a valid license purchased only from themeforest(the above
               {
                   App.init();
                   //checkLoginTime();
-                  var IDSVal = document.getElementById('username').value;
-                  chatWith(IDSVal);
+                  
               });
              
-
+           function openChat()
+           {
+             var IDSVal = document.getElementById('username').value;
+             chatWith(IDSVal);  
+           }
         </script>
         
       
@@ -688,14 +691,8 @@ if ($userObject) {
         </div>
         
 <div class="chatWrap">
-   <span class="glyphicon glyphicon-comment"></span>
-   <div class="chatuserList " style="display: none;">
-       <p><span class="glyphicon glyphicon-user"></span><a href="">user1</a></p>
-       <p><span class="glyphicon glyphicon-user"></span><a href="">user2</a></p>
-       <p><span class="glyphicon glyphicon-user"></span><a href="">user3</a></p>
-        <p><span class="glyphicon glyphicon-user"></span><a href="">user4</a></p>
-        <p><span class="glyphicon glyphicon-user"></span><a href="">user5</a></p>
-   </div>
+   <a onclick="openChat();"><span class="glyphicon glyphicon-comment"></span></a>
+  
 </div>
         <!-- END FOOTER -->
         <script type="text/javascript">
