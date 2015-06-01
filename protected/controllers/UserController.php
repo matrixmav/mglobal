@@ -792,22 +792,7 @@ class UserController extends Controller
 		}
 	}
         
-        /*
-         * Function to fetch user investment
-         */
-        
-        public function actionCheckInvestment()
-        {
-          $loggedInuserName = Yii::app()->session['username'];
-           $dataProvider = new CActiveDataProvider('User', array(
-                'criteria' => array(
-                    'condition' => ('sponsor_id = "' . $loggedInuserName.'"' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),));
-            
-          $this->render('checkinvestment',array(
-			'dataProvider'=>$dataProvider,
-		)); 
-        }
+       
         
         
 }
