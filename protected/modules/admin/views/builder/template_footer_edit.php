@@ -5,7 +5,7 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
-    <a href="/admin/BuildTemp/templateheaderedit?id=<?php echo $footerObject->id;?>">Header Code Edit</a>&nbsp;&nbsp;<a href="/admin/BuildTemp/templatebodyedit?id=<?php echo $footerObject->id;?>">Body Code Edit</a>&nbsp;&nbsp;<a href="/admin/BuildTemp/templatefooteredit?id=<?php echo $footerObject->id;?>">Footer Code Edit</a>
+    <a class="btn btn-primary" href="/admin/BuildTemp/templateheaderedit?id=<?php echo $footerObject->id;?>">Header Code Edit</a>&nbsp;&nbsp;<a class="btn btn-info" href="/admin/BuildTemp/templatebodyedit?id=<?php echo $footerObject->id;?>">Body Code Edit</a>&nbsp;&nbsp;<a class="btn btn-success" href="/admin/BuildTemp/templatefooteredit?id=<?php echo $footerObject->id;?>">Footer Code Edit</a>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    

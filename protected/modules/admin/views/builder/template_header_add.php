@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation1();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Add Template</legend>
@@ -87,8 +87,6 @@ $this->breadcrumbs = array(
         </div>
     </form>
 </div>
-
-
 
 
 <script type="text/javascript">
