@@ -272,7 +272,7 @@ class OrderController extends Controller {
             $userid .= "'".$user->id."',";
            }
            $userID = rtrim($userid,',');
-           $command = $connection->createCommand('select order.created_at,order.status,user.full_name,user.id,order.package_id,package.amount,package.name from `user`,`order`,`package` WHERE order.user_id IN('.$userID.') AND user.id = order.user_id AND order.package_id = package.id ');
+           $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,package.amount,package.name from `user`,`order`,`package` WHERE order.user_id IN('.$userID.') AND user.id = order.user_id AND order.package_id = package.id ');
            $row = $command->queryAll();
            
            $sqlData = new CArrayDataProvider($row, array(
