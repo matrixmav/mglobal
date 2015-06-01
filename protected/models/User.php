@@ -67,7 +67,7 @@ class User extends CActiveRecord
                     'userprofile'  => array(self::BELONGS_TO, 'UserProfile', 'id'),
                     'touser'       => array(self::BELONGS_TO, 'MoneyTransfer', 'to_user_id'),
                     'fromuser'     => array(self::BELONGS_TO, 'MoneyTransfer', 'from_user_id'),
-                    'orderSummary' => array(self::BELONGS_TO, 'Order', 'user_id'),
+                   
                     
                      
 		);
