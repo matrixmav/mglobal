@@ -32,7 +32,10 @@ class BuildTempController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist', 'deletecategory', 'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit', 'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd'),
+                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist', 'deletecategory',
+                                   'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit',
+                                   'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd',
+                                   'customcode'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -190,8 +193,8 @@ class BuildTempController extends Controller {
                     }
                     
                     
-                    $headerupdateObject->header_content = $_POST['Template']['header_code'];
-                    $headerupdateObject->template_title = $_POST['Template']['template_title'];
+                    $headerupdateObject->header_content = addslashes($_POST['Template']['header_code']);
+                    $headerupdateObject->template_title = addslashes($_POST['Template']['template_title']);
                     $headerupdateObject->updated_at = date('Y-m-d');
                     if ($headerupdateObject->update()) {
                         $success .= "Header updated successfully";
@@ -220,7 +223,7 @@ class BuildTempController extends Controller {
             if ($_POST) {
                 if (!empty($_POST['Template']['body_code'] != '')) {
                     $bodyupdateObject = BuildTempBody::model()->findByPk($_REQUEST['b_id']);
-                    $bodyupdateObject->body_content = $_POST['Template']['body_code'];
+                    $bodyupdateObject->body_content = addslashes($_POST['Template']['body_code']);
                     $bodyupdateObject->updated_at = date('Y-m-d');
                     if ($bodyupdateObject->update()) {
                         $success .= "Body updated successfully";
@@ -246,7 +249,7 @@ class BuildTempController extends Controller {
             if ($_POST) {
                 if (!empty($_POST['Template']['footer_code'] != '')) {
                     $footeraddObject = new BuildTempFooter;
-                    $footeraddObject->footer_content = $_POST['Template']['footer_code'];
+                    $footeraddObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footeraddObject->updated_at = date('Y-m-d');
                     if ($footeraddObject->save(false)) {
                         $model = BuildTemp::model()->findByPk($footeraddObject->footer_id);
@@ -277,16 +280,16 @@ class BuildTempController extends Controller {
                 $headeraddObject = new BuildTempHeader;
                 $bodyaddObject = new BuildTempBody;
                 $footeraddObject = new BuildTempFooter;
-                $headeraddObject->header_content = $_POST['Template']['header_code'];
-                $headeraddObject->template_title = $_POST['Template']['template_title'];
+                $headeraddObject->header_content = addslashes($_POST['Template']['header_code']);
+                $headeraddObject->template_title = addslashes($_POST['Template']['template_title']);
                 $headeraddObject->created_at = date('Y-m-d');
                 if ($headeraddObject->save(false)) {
 
-                    $bodyaddObject->body_content = $_POST['Template']['body_code'];
+                    $bodyaddObject->body_content = addslashes($_POST['Template']['body_code']);
                     $bodyaddObject->created_at = date('Y-m-d');
                     $bodyaddObject->save(false);
 
-                    $footeraddObject->footer_content = $_POST['Template']['footer_code'];
+                    $footeraddObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footeraddObject->created_at = date('Y-m-d');
                     $footeraddObject->save(false);
                     
@@ -369,6 +372,8 @@ class BuildTempController extends Controller {
                     $model->temp_body_id = $bodyaddObject->id;
                     $model->temp_footer_id = $footeraddObject->id;
                     $model->status = 0;
+                    $model->custom_css = addslashes($_POST['custom_css']);
+                    $model->custom_js = addslashes($_POST['custom_js']);                                
                     $model->created_at = date('Y-m-d');
                     $model->updated_at = date('Y-m-d');
                     $model->category_id = $category;
@@ -451,7 +456,7 @@ class BuildTempController extends Controller {
             if ($_POST) {
                 if (!empty($_POST['Template']['footer_code'] != '')) {
                     $footerupdateObject = BuildTempFooter::model()->findByPk($_REQUEST['f_id']);
-                    $footerupdateObject->footer_content = $_POST['Template']['footer_code'];
+                    $footerupdateObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footerupdateObject->updated_at = date('Y-m-d');
                     if ($footerupdateObject->update()) {
                         $success .= "Footer updated successfully";
@@ -464,6 +469,31 @@ class BuildTempController extends Controller {
         $this->render('/builder/template_footer_edit', array(
             'footerObject' => $footerObject, 'error' => $error, 'success' => $success
         ));
+    }
+    
+    /* Get Custom Css and Js Code */
+    public function actionCustomCode(){
+      
+        $error = "";
+        $success = "";
+        if ($_REQUEST['id']) {
+            $customcode = BuildTemp::model()->findByPk($_REQUEST['id']);
+
+            if ($_POST) {
+                if (!empty($_POST['custom_css'] != '')) {
+                    $customcode->custom_css = addslashes($_POST['custom_css']);
+                    $customcode->custom_js = addslashes($_POST['custom_js']);                    
+                    if ($customcode->update()) {
+                        $success .= "Custom code has been updated successfully";
+                    }
+                } else {
+                    $error .= "Please fill all required(*) marked fields.";
+                }
+            }
+        }
+        $this->render('/builder/customcode', array(
+            'customcode' => $customcode, 'error' => $error, 'success' => $success
+        ));        
     }
 
     // Uncomment the following methods and override them if needed
