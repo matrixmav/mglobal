@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Category' => array('buildtemp/categorylist'),
+    'Category' => array('BuildTemp/categorylist'),
     'Category Add',
 );
 ?>
@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/categoryadd" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/BuildTemp/categoryadd" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
             <legend>Add Builder Category</legend>

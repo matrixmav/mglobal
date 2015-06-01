@@ -49,9 +49,9 @@ class UserHasTemplate extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                     'category' => array(self::BELONGS_TO, 'Buildcategory', 'category_id'),
+                     'category' => array(self::BELONGS_TO, 'BuildCategory', 'category_id'),
                     'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header'),
-                    'footer' => array(self::BELONGS_TO, 'BuildTempfooter', 'temp_footer'),
+                    'footer' => array(self::BELONGS_TO, 'BuildTempFooter', 'temp_footer'),
                     'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body'),
 		);
 	}

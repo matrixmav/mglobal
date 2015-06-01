@@ -589,19 +589,19 @@ if ($userObject) {
                              $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "buildtemp/templates?id=".Yii::app()->session['orderID'] => "Choose Templates",
-                                    "buildtemp/userinput" => "Add / Edit Pages",
-                                    "buildtemp/addlogo" => "Add Logo",
-                                    "buildtemp/contactsetting" => "Contact Setting",
+                                    "BuildTemp/templates?id=".Yii::app()->session['orderID'] => "Choose Templates",
+                                    "BuildTemp/userinput" => "Add / Edit Pages",
+                                    "BuildTemp/addlogo" => "Add Logo",
+                                    "BuildTemp/contactsetting" => "Contact Setting",
                                     
                                 );
                                 ?>
-                                <li class="<?php echo (($curControllerLower == 'buildtemp') && ($curControllerLower == 'buildtemp')) ? "active" : ''; ?>">
+                                <li class="<?php echo (($curControllerLower == 'BuildTemp') && ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
  
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Builder Pages</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'buildtemp' || $curControllerLower == 'buildtemp') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'BuildTemp' || $curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -610,7 +610,7 @@ if ($userObject) {
                                         if ($ctName == "search/create") {
                                             $ctName = "search/create/type/details";
                                         }
-                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
+                                        if ($ctName == "BuildTemp" && $curControllerLower == "BuildTemp")
                                             $class_content = 'class="active"';
                                         else
                                             $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
@@ -627,84 +627,7 @@ if ($userObject) {
                                 </li>
                                 <?php
     }
-} else {
-    ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'hotel') ? "active" : ''; ?>">
-                                <a href="/admin/hotel/index"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'Hotel List') ?></span>
-                                    <span class="selected"></span> </span>
-                                </a>
-                            </li>
-
-                            <li
-                                class="<?php echo ($curControllerLower == 'admin') ? "active" : ''; ?>">
-                                <a href="/admin/admin"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'My Profile') ?> </span>
-                                    <span class="selected"></span> </span>
-                                </a>
-                            </li>
-                                <?php
-                                $billing_subsection = array(
-                                    "invoice/index" => "Invoice Reservation",
-                                    "invoice/hotelbills" => "Invoices Listing",
-                                    "invoice/regulationstatus" => "Payment History"
-                                );
-                                ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'invoice') ? "active" : ''; ?>">
-                                <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
-                                        class="title">Billing</span> <span class="selected"></span> <span
-                                        class="arrow <?php echo ($curControllerLower == 'invoice') ? "open" : ''; ?>">
-                                    </span>
-                                </a>
-                            <?php
-                            foreach ($billing_subsection as $hotName => $hotTitle) {
-                                if ($hotName == "invoice/index")
-                                    echo '<ul class="sub-menu">';
-
-                                $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-
-                                echo '<li ' . $class_content . '>';
-                                echo '<a href="/admin/' . $hotName . '">' . $hotTitle . '</a>';
-                                echo '</li>';
-
-                                if ($hotName == "invoice/regulationstatus")
-                                    echo '</ul>';
-                            }
-                            ?>						
-                            </li>
-                                <?php
-                                $reservation_subsection = array(
-                                    "reservation/onrequest" => "On Request",
-                                    "reservation/viewconfirmed" => "Confirmed"
-                                );
-                                ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'reservation') ? "active" : ''; ?>">
-                                <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'Reservation') ?> </span>
-                                    <span class="selected"></span> <span
-                                        class="arrow <?php echo ($curControllerLower == 'reservation') ? "open" : ''; ?>">
-                                    </span>
-                                </a>
-                            <?php
-                            foreach ($reservation_subsection as $hotName => $hotTitle) {
-                                if ($hotName == "reservation/onrequest")
-                                    echo '<ul class="sub-menu">';
-
-                                $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-
-                                echo '<li ' . $class_content . '>';
-                                echo '<a href="/admin/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
-                                echo '</li>';
-
-                                if ($hotName == "admin")
-                                    echo '</ul>';
-                            }
-                            ?>						
-                            </li>                                
-                        <?php } } ?>				
+} } ?>				
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>

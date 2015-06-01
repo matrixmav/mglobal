@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Category' => array('/admin/buildtemp/categorylist'),'Category List'
+    'Category' => array('/admin/BuildTemp/categorylist'),'Category List'
 );
 ?>
 
@@ -72,17 +72,17 @@ $this->breadcrumbs = array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/changestatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/categoryedit", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/categoryedit", array("id"=>$data->id))',
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
                             'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this category?')"),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/deletecategory", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/deletecategory", array("id"=>$data->id))',
                         ),
                     ),
                 ),
