@@ -135,17 +135,17 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <script type="text/javascript" src="/chat/js/chat.js"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function () {
+            jQuery(document).ready(function ()
+            {
                 App.init();
                 //checkLoginTime();
                 var IDSVal = document.getElementById('username').value;
                 chatWith(IDSVal);
             });
             $(".single_2").fancybox({
-    	openEffect	: 'elastic',
-    	closeEffect	: 'elastic',
-
-    	helpers : {
+            openEffect	: 'elastic',
+            closeEffect	: 'elastic',
+            helpers : {
     		title : {
     			type : 'inside'
     		}
