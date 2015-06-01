@@ -2,6 +2,7 @@
       $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
 ?>
 <!-- BEGIN TOP BAR -->
+
 <div class="pre-header">
     <div class="container">
         <div class="row">
@@ -44,6 +45,7 @@
     </div>        
 </div>
 <!-- END TOP BAR -->
+
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
