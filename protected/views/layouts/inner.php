@@ -651,7 +651,7 @@ if ($userObject) {
     <?php
     $this->widget('zii.widgets.CBreadcrumbs', array(
         'homeLink' => CHtml::link('User', array(
-            '/user'
+            '/profile/dashboard'
         )),
         'links' => $this->breadcrumbs
     ));
