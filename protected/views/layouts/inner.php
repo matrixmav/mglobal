@@ -151,12 +151,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             });
 
-            jQuery(document).ready(function ()
-              {
-                  App.init();
-                  //checkLoginTime();
-                  
-              });
+            
              
            function openChat()
            {
