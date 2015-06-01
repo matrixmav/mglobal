@@ -151,9 +151,13 @@ class SummaryController extends Controller
         public function actionCheckInvestment()
         {
           $loggedInuserName = Yii::app()->session['username'];
-          $userObject = User::model()->findAll(array('condition'=>'sponsor_id = "'.$loggedInuserName.'"'));  
+           $dataProvider = new CActiveDataProvider('Order', array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id = ' . $loggedInuserName ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+            
           $this->render('checkinvestment',array(
-			'userObject'=>$userObject,
+			'dataProvider'=>$dataProvider,
 		)); 
         }
 
