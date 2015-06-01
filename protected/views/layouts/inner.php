@@ -531,7 +531,7 @@ if ($userObject) {
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Fund Wallet",
                                     "order/checkinvestment" => "Check Investment",
-                                    "order/directincome" => "Referral Income",
+                                    "order/refferalincome" => "Referral Income",
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
