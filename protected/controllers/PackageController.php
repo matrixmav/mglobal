@@ -544,6 +544,16 @@ class PackageController extends Controller
         public function actionWalletCalculation()
         {
           $loggedInUserId = Yii::app()->session['userid'];
-          $model=Package::model()->findByPk($id);
+          $walletObject = Wallet::model()->findAll(array('condition'=>'user_id='.$loggedInUserId));
+          if($walletObject)
+          {
+          if($_REQUEST['wallet_type']=='1')
+          {
+            $amount = $_REQUEST['totalAmount'];  
+          }
+          $amount = $_REQUEST['totalAmount'];
+          }else{
+          $amount = $_REQUEST['totalAmount'];    
+          }
         }
 }
