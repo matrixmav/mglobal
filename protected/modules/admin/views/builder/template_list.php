@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Template' => array('/admin/buildtemp/templatelist'),'Template List'
+    'Template' => array('/admin/BuildTemp/templatelist'),'Template List'
 );
 ?>
 
@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
     .confirmMenu{position: relative;}
 </style>
 <div class="col-md-12">
- <a href="/admin/buildtemp/templateheaderadd" style="float:left" class="btn  green margin-right-20">New Template +</a>
+ <a href="/admin/BuildTemp/templateheaderadd" style="float:left" class="btn  green margin-right-20">New Template +</a>
 <div class="row">
     <div class="col-md-12">
        
@@ -76,17 +76,17 @@ $this->breadcrumbs = array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/changestatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/templateheaderedit", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/templateheaderedit", array("id"=>$data->id))',
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
                             'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this category?')"),
-                            'url' => 'Yii::app()->createUrl("admin/buildtemp/deletetemplate", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/deletetemplate", array("id"=>$data->id))',
                         ),
                     ),
                 ),

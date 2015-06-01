@@ -1,13 +1,13 @@
 <?php
 $this->breadcrumbs = array(
-    'Template' => array('buildtemp/templates'),
+    'Template' => array('BuildTemp/templates'),
     'Logo Add',
 );
 ?>
 <div class="col-md-7 col-sm-7" id="test">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-      <form action="/buildtemp/addlogo" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+      <form action="/BuildTemp/addlogo" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Edit Pages</legend>

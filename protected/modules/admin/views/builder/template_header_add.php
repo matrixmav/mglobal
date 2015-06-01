@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Template' => array('buildtemp/templatelist'),
+    'Template' => array('BuildTemp/templatelist'),
     'Template  Add',
 );
 ?>
@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Add Template</legend>

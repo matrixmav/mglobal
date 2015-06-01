@@ -23,6 +23,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'summaryText' => 'Showing {start} to {end} of {count} entries',
     'template' => '{items} {summary} {pager}',
     'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
+    'rowCssClassExpression'=>'($data->status == 1) ? "" : "info"',  
     'pager' => array(
         'header' => false,
         'firstPageLabel' => "<<",
