@@ -26,6 +26,7 @@ $this->menu=array(
           <div class="col-md-10 col-sm-9">
        
         <?php 
+         
         $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'city-grid',
 	'dataProvider'=>$dataProvider,
@@ -60,22 +61,18 @@ $this->menu=array(
                     'value'=>'isset($data["name"])? $data["name"]:""',
 		),
               array(
-                    'name'=>'transaction_id',
+                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'isset($data["amount"])? number_format($data["amount"],2):""',
 		),
             
                array(
-                    'name'=>'status',
-                    'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data["status"] == 1) ? "Completed" : "Pending"',
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data["position"])? $data["position"]:""',
 		),
             
-               array(
-                    'name'=>'created_at',
-                    'header'=>'<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data["created_at"]',
-		),   
+               
             
             
              
