@@ -30,7 +30,7 @@ class OrderController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment'),
+                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment','refferalincome'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -276,7 +276,7 @@ class OrderController extends Controller {
         } else {
             $condition = "order.user_id IN('0') AND ";
         }
-        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id');
+        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1"');
         $row = $command->queryAll();
 
         $sqlData = new CArrayDataProvider($row, array(
@@ -298,4 +298,53 @@ class OrderController extends Controller {
         ));
     }
 
+    /*
+     * function to fetch direct income
+     */
+    
+    public function actionRefferalIncome()
+    {
+        $loggedInuserName = Yii::app()->session['username'];
+        $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName . '"'));
+        $connection = Yii::app()->db;
+        $userid = "";
+        if ($model) {
+            foreach ($model as $user) {
+                $userid .= "'" . $user->id . "',";
+            }
+            $userID = rtrim($userid, ',');
+            $condition = 'transaction.user_id IN(' . $userID . ') AND ';
+        } else {
+            $condition = "transaction.user_id IN('0') AND ";
+        }
+        $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1"');
+        $row = $command->queryAll();
+        $totalAmount = "";
+        foreach($row as $amount)
+        {
+          $totalAmount += $amount['paid_amount']*5/100;  
+        }
+         
+        $sqlData = new CArrayDataProvider($row, array(
+            'pagination' => array('pageSize' => 10)));
+        //$sqlData = $sqlData->getData();
+        //$sqlData = $sqlData[0];
+        //$dataProvider = new CActiveDataProvider($sqlData, array(
+        //'pagination' => array('pageSize' => 10),));
+        /* foreach($dataProvider as $data)
+          {
+          $orderObject =  Order::model()->findByAttributes(array('user_id'=>$data->id));
+          $dataProvider['order'] = $orderObject;
+          $packageObject =  Package::model()->findByPK($orderObject->package_id);
+          $dataProvider['package'] = $packageObject;
+          } */
+
+        
+      
+        $this->render('directincome', array(
+            'dataProvider' => $sqlData,
+            'totalAmount'=>$totalAmount,
+        ));
+    }
 }
+
