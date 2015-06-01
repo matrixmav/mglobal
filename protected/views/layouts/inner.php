@@ -395,7 +395,7 @@ if ($userObject) {
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order") {
+                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
@@ -527,11 +527,11 @@ if ($userObject) {
                                     "wallet/rpwallet" => "RP Wallet",
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Fund Wallet",
-                                    "summary/checkinvestment" => "Check Investment",
+                                    "order/checkinvestment" => "Check Investment",
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet') {
+                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
