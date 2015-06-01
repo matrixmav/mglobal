@@ -68,7 +68,7 @@ $this->menu=array(
             
                array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Position &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'isset($data["position"])? $data["position"]:""',
 		),
             
