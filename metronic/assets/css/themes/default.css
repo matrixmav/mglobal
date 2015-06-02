@@ -370,7 +370,7 @@ Landscape phone to portrait tablet
   }
 }
 
-.chatWrap{ position: fixed; right: 0; top: 200px;}
+.chatWrap{ position: fixed; right: 0; top: 126px;}
 
 .chatWrap span.glyphicon-comment{
     border-radius: 2px !important;
