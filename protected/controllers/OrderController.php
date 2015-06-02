@@ -264,8 +264,8 @@ class OrderController extends Controller {
      */
 
     public function actionCheckInvestment() {
-        $loggedInuserName = Yii::app()->session['username'];
-        $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName . '"'));
+        $loggedInuserName = User::model()->findByPk(Yii::app()->session['userid']);
+        $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName->name . '"'));
         $connection = Yii::app()->db;
         $userid = "";
         if ($model) {
@@ -305,8 +305,10 @@ class OrderController extends Controller {
     
     public function actionRefferalIncome()
     {
-        $loggedInuserName = Yii::app()->session['username'];
-        $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName . '"'));
+         
+        $loggedInuserName = User::model()->findByPk(Yii::app()->session['userid']);
+        $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName->name . '"'));
+        
         $connection = Yii::app()->db;
         $userid = "";
         if ($model) {
