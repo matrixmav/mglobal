@@ -32,7 +32,7 @@
             <div class="col-md-6 col-sm-6 additional-shop-info">
                     <ul class="list-unstyled list-inline">
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
-                        <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
+                        <li><i class="fa fa-envelope-o"></i><span>info@mglobal.com</span></li>
                         <li><button id="checkout" class="btn-flat-green btn-orange btn-h" onclick="RedirectCart();">Call Us</button></li>
                     </ul>
               </div>
