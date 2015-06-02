@@ -5,7 +5,7 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
-    <a href="/admin/BuildTemp/templateheaderedit?id=<?php echo $footerObject->id;?>">Header Code Edit</a>&nbsp;&nbsp;<a href="/admin/BuildTemp/templatebodyedit?id=<?php echo $footerObject->id;?>">Body Code Edit</a>&nbsp;&nbsp;<a href="/admin/BuildTemp/templatefooteredit?id=<?php echo $footerObject->id;?>">Footer Code Edit</a>
+    <a class="btn btn-primary" href="/admin/BuildTemp/templateheaderedit?id=<?php echo $footerObject->id;?>">Header Edit</a>&nbsp;&nbsp;<a class="btn btn-info" href="/admin/BuildTemp/templatebodyedit?id=<?php echo $footerObject->id;?>">Body Edit</a>&nbsp;&nbsp;<a class="btn btn-success" href="/admin/BuildTemp/templatefooteredit?id=<?php echo $footerObject->id;?>">Footer Edit</a>&nbsp;&nbsp;<a class="btn btn-warning" href="/admin/BuildTemp/customcode?id=<?php echo $footerObject->id;?>" >Custom CSS/JS</a>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
@@ -17,7 +17,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" cols="20" rows="10"><?php echo (!empty($footerObject->footer->footer_content)) ? $footerObject->footer->footer_content : ""; ?></textarea>
+                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" cols="20" rows="10"><?php echo (!empty($footerObject->footer->footer_content)) ? stripcslashes($footerObject->footer->footer_content) : ""; ?></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>

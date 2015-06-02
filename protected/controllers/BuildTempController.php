@@ -25,7 +25,9 @@ class BuildTempController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent', 'contactsetting', 'submitform'),
+                'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 
+                                    'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent',
+                                    'contactsetting', 'submitform','addcopyright'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -96,10 +98,6 @@ class BuildTempController extends Controller {
         $buildTempObject = new BuildTemp;
         if (!empty($_POST)) {
 
-//            echo "<pre>";
-//            print_r($_POST); 
-            print_r($_SESSION);
-//            die;
             $tempID = Yii::app()->session['templateID'];
             $userID = Yii::app()->session['userid'];
             $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $tempID));
@@ -142,8 +140,6 @@ class BuildTempController extends Controller {
                     $userpagesObject1->created_at = date("Y-m-d");
                     $userpagesObject1->save(false);   
                 }
-                             
-                
            }
         }
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
@@ -156,9 +152,7 @@ class BuildTempController extends Controller {
         $error = "";
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $userpagesObject1 = new UserPages;
-
-
-
+        
         if (isset($_POST['submit'])) {
            
             if ($_POST['pages']['page_name'] != '' && $_POST['pages']['page_content'] != '') {
@@ -200,11 +194,9 @@ class BuildTempController extends Controller {
 
     public function actionFetchMenu() {
         $responce = "";
-//        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
-         $userpagesObject = UserPages::model()->findAll(); 
+        $userpagesObject = UserPages::model()->findAll(); 
          
-        $buildTempHeader = UserHasTemplate::model()->findByPk(44    );
-//echo "<pre>"; print_r($userpagesObject[0]->page_name);exit;
+        $buildTempHeader = UserHasTemplate::model()->findByPk(44);
         $bb = $buildTempHeader->temp_header;
        
         $i = 1;
@@ -218,13 +210,33 @@ class BuildTempController extends Controller {
         echo $bb;
     }
 
+    
+     public function actionAddCopyRight() {
+        $error = "";
+        $success = "";
+        $templateObject = new UserHasTemplate;
+        $userhasObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID'], 'user_id' => Yii::app()->session['userid']));
+        if (!empty($_POST) ) {            
+            $userhasObject->copyright = $_POST['copyright'];           
+            $userhasObject->update();
+            $success = "Copy Right Updated Successfully";
+        }
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
+        $this->render('copyright', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
+    }
+    
+    
+    
     public function actionAddLogo() {
         $error = "";
         $success = "";
         $templateObject = new UserHasTemplate;
         $userhasObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID'], 'user_id' => Yii::app()->session['userid']));
-        //$builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>$userhasObject->template_id));
-        if (!empty($_FILES)) {
+        $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id'=>$userhasObject->template_id));
+        //echo "<pre>";
+        
+        if (!empty($_FILES) || !empty($_POST) ) {
+            $userhasObject->site_title = addslashes($_POST['site_title']);
             if ($_FILES['logo']['name']) {
                 $ext1 = end((explode(".", $_FILES['logo']['name'])));
                 if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
@@ -234,13 +246,15 @@ class BuildTempController extends Controller {
 
                     $userhasObject->logo = $fname;
                     $userhasObject->update();
-                    $path = Yii::getPathOfAlias('webroot') . "/user/template/logos/";
+                    $path = Yii::getPathOfAlias('webroot') . "/user/template/".$builderObjectmeta->folderpath."/";
                     BaseClass::uploadFile($_FILES['logo']['tmp_name'], $path, $fname);
                     $success .= "Logo added successfully";
                 }
-            }
+            } 
+             $userhasObject->update();
         }
-        $this->render('addlogo', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject));
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));       
+        $this->render('addlogo', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject'=>$userhasObject,'builderObjectmeta'=>$builderObjectmeta));
     }
 
     public function actionFetchLogo() {
@@ -293,7 +307,9 @@ class BuildTempController extends Controller {
                 $error .= "Please fill all required(*)marked fields.";
             }
         }
-        $this->render('contactsetting', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject));
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));       
+        
+        $this->render('contactsetting', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject,'userpagesObject'=> $userpagesObject));
     }
 
     public function actionSubmitForm() {
@@ -317,6 +333,7 @@ class BuildTempController extends Controller {
         }
     }
 
+    
     // Uncomment the following methods and override them if needed
     /*
       public function filters()

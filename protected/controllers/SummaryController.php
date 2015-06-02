@@ -28,7 +28,7 @@ class SummaryController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','summery'),
+				'actions'=>array('index','view','summery','checkinvestment'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -143,6 +143,8 @@ class SummaryController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        
+        
 
 	/**
 	 * Manages all models.
@@ -186,4 +188,6 @@ class SummaryController extends Controller
 			Yii::app()->end();
 		}
 	}
+         
+        
 }
