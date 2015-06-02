@@ -59,7 +59,7 @@ class BaseClass extends Controller {
     
     public static function transactionStatus() {
         $userId = Yii::app()->session['userid'];
-        $transactionObject = Transaction::model()->findByAttributes(array('condition'=>'user_id='.$userId));
+        $transactionObject = Transaction::model()->findByAttributes(array('user_id'=>$userId));
                         
             return $transactionObject; 
                         
