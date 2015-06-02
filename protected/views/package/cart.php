@@ -2,7 +2,7 @@
     <div class="col-lg-12">    
         <div id="maincontent" class="pageWrp checkout abtest">
             <div class="sectionWrp summary open">
-                <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span><a onclick="OpenDiv();" id="editIcon" style="display:none;" class="edit-icon">Edit</a></p>
+                <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span><a onclick="OpenDiv('editIcon');" id="editIcon" style="display:none;" class="edit-icon">Edit</a></p>
                 <div class="contentBlock CartSection" id="cartDiv">
                     <table class="cartItemsWrp" cellspacing="0" cellpadding="0">
                         <tbody><tr class="cartItemHeader">
@@ -128,7 +128,7 @@
                 </div>
                 <?php if ($walletObject) { ?>
                     <div class="sectionWrp paymentOptions">
-                        <p class="title"><span class="check">2.</span> <span class="txt">Choose Amount</span> <span class="edit">edit</span></p>
+                        <p class="title"><span class="check">2.</span> <span class="txt">Choose Amount</span> <a onclick="OpenDiv('editIcon1');" id="editIcon1" style="display:none;" class="edit-icon">Edit</a></p>
                         <div id="walletOption" style="display:none;">
                             <form id="walletform" name="walletform">
                                 <?php
@@ -146,7 +146,7 @@
                                         $fund = $wallet->fund;
                                     }
                                     ?>
-                                    <input type="checkbox" value="<?php echo $fund; ?>" name="wallet_type"><?php echo $walletname; ?>  
+                                <input type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="setwallettype(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);"><?php echo $walletname; ?>  
                                 <?php } ?>
                                 <br/><br/>
                                 <input type="button" value="Make Payment" onclick="walletamountcalculation();" class="btn-flat-green ui-btn-grey">   
@@ -171,7 +171,7 @@
                             <input type="hidden" name="currency_code" value="USD">
                             <input type="hidden" name="handling" value="0">
                             <input type="hidden" name="cancel_return" value="">
-                            <input type="hidden" name="return" value="http://localhost/package/thankyou/">
+                            <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>" id="return">
 
                         </form> 
                         <input type="button" value="Make Payment" onclick="makepayment();" class="btn-flat-green ui-btn-grey">   
@@ -184,6 +184,8 @@
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
+<input type="hidden" id="walletused" value="">
+<input type="hidden" id="totalusedrp" value="">
 <script type="text/javascript">
 
     function Couponapply() {
@@ -253,10 +255,21 @@
         });
     }
 
-    function OpenDiv()
+    function OpenDiv(iconID)
     {
+        if(iconID=='editIcon')
+        {
         $('#cartDiv').fadeIn();
         $('#paymentOption').fadeOut();
+        $('#walletOption').fadeOut();
+        }
+        if(iconID=='editIcon1')
+        {
+        $('#cartDiv').fadeOut();
+        $('#paymentOption').fadeOut();
+        $('#walletOption').fadeIn();
+        }
+       
     }
     function makepayment()
     {
@@ -270,6 +283,7 @@
     function walletamountcalculation()
     {
         var input = document.getElementsByName("wallet_type");
+        var wallet = $("#walletused").val();
         var totalAmount = $('#totalAmount').val();
         var total = 0;
         for (var i = 0; i < input.length; i++) {
@@ -277,11 +291,35 @@
                 total += parseFloat(input[i].value);
             }
         }
+        $("#totalusedrp").val(total);
+        var totalusedRP = $("#totalusedrp").val();
         var payableAmount = totalAmount - total;
-        
-        $('#totalAmount').val(payableAmount);
-        $('#ppamount').val(payableAmount); 
-        document.getElementById('walletOption').style.display = "none";
-        document.getElementById('paymentOption').style.display = "block";
+        $("#ppamount").val(payableAmount);
+        var dataString = 'payableAmount='+payableAmount+'&wallet='+wallet+'&totalusedRP='+totalusedRP;
+         
+         $.ajax({
+            type: "GET",
+            url: "/package/walletcalc",
+            data: dataString,
+            cache: false,
+            success: function (html) {
+                if (html == 1)
+                {
+                    $('#cartDiv').fadeOut();
+                    $('#editIcon').fadeIn();
+                    $('#editIcon1').fadeIn();
+                    document.getElementById('walletOption').style.display = "none";
+                    document.getElementById('paymentOption').style.display = "block";
+                }
+            }
+        });
+       
+     }
+     function setwallettype(ID,key)
+     {
+        str1 = $('#walletused').val();  
+        var str = ID+'-'+key+','+str1;
+        $('#walletused').val(str);  
+       
      }
 </script>    
