@@ -566,16 +566,27 @@ class PackageController extends Controller
             $MTObject1->fund  =  $MTObject1->fund - $mtObject->fund;
             $MTObject1->update(); 
            }  
-           $config['to'] = $userObject->email; 
+                  $config['to'] = $userObject->email; 
 //                $config['subject'] = 'Payment Confirmation' ;
 //                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
-//                $config['attachment'] = 'invice.pdf';        
+//                $config['attachment'] = $userObject->email.'invoice.pdf';        
 //                CommonHelper::sendMail($config);
            
            
            
            }  
          }
+         ob_start();
+         $orderObject = Order::model()->findByAttributes(array('transaction_id'=>$transactionObject->id));
+         $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
+         $html2pdf = Yii::app()->ePdf->HTML2PDF();
+         $orderObject = Order::model()->findByPK($orderObject->id);
+         $html2pdf->WriteHTML($this->renderPartial('/order/invoice', array(
+            'orderObject' => $orderObject,
+         ))
+         );
+         $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
+         //$html2pdf->output('invoice.pdf','I');
          $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";   
          $this->render('thankyou',array('successMsg'=>$successMsg
 	 ));    
