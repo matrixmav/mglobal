@@ -403,7 +403,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                                $arraytransaction = BaseClass:: transactionStatus(); 
+                                if($arraytransaction->status==1)
+                                {
+                                  $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
                                     "profile/updateprofile" => "Profile",
@@ -412,7 +415,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/testimonial" => "Testimonial",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
+                                );  
+                                }else{
+                                $hotel_subsection = array(
+                                    "order/list" => "My Order",
+                                    "profile/changepassword" => "Change Password",
+                                    "profile/updateprofile" => "Profile",
+                                    "profile/address" => "Address",
+                                    "profile/documentverification" => "Verification",
+                                    //"profile/testimonial" => "Testimonial",
+                                    "genealogy" => "Genealogy",
+//                                    "profile/summery" => "Summery",
                                 );
+                                }
                                 $activecls = 'active';
                                 if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' && $curControllerLower == "order" && $curActionLower!='refferalincome') {
                                     $activecls = 'active';
