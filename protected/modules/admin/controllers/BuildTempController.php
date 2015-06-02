@@ -32,7 +32,10 @@ class BuildTempController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist', 'deletecategory', 'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit', 'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd'),
+                'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist', 'deletecategory',
+                                   'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit',
+                                   'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd',
+                                   'customcode'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -164,13 +167,19 @@ class BuildTempController extends Controller {
     public function actiontemplateheaderEdit() {
         $error = "";
         $success = "";
+       
         if ($_REQUEST['id']) {
+            
+            //$headerObject = BuildTemp::model()->findByAttributes(array('id'=>$_REQUEST['id']));
             $headerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
-
+                
             if ($_POST) {
                 if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
+                    //$headerObject = BuildTemp::model()->findByAttributes(array('temp_header_id'=>$_REQUEST['id']));
+
                     $headerupdateObject = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
-                     if($_FILES['screenshot']['name'])
+//                    var_dump($headerupdateObject) ; die;
+                    if(!empty($_FILES['screenshot']['name']))
                      {
                         $ext1 = end((explode(".", $_FILES['screenshot']['name']))); 
                         if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
@@ -182,8 +191,10 @@ class BuildTempController extends Controller {
                     $headerObject->screenshot =   time().$_FILES['screenshot']['name'];
                     $headerObject->update();
                     }
-                    $headerupdateObject->header_content = $_POST['Template']['header_code'];
-                    $headerupdateObject->template_title = $_POST['Template']['template_title'];
+                    
+                    
+                    $headerupdateObject->header_content = addslashes($_POST['Template']['header_code']);
+                    $headerupdateObject->template_title = addslashes($_POST['Template']['template_title']);
                     $headerupdateObject->updated_at = date('Y-m-d');
                     if ($headerupdateObject->update()) {
                         $success .= "Header updated successfully";
@@ -193,6 +204,7 @@ class BuildTempController extends Controller {
                 }
             }
         }
+//        var_dump($headerObject) ; die;
         $categoryObject = BuildCategory::model()->findAll();
         $this->render('/builder/template_header_edit', array(
             'headerObject' => $headerObject, 'error' => $error, 'success' => $success, 'categoryObject' => $categoryObject,
@@ -211,7 +223,7 @@ class BuildTempController extends Controller {
             if ($_POST) {
                 if (!empty($_POST['Template']['body_code'] != '')) {
                     $bodyupdateObject = BuildTempBody::model()->findByPk($_REQUEST['b_id']);
-                    $bodyupdateObject->body_content = $_POST['Template']['body_code'];
+                    $bodyupdateObject->body_content = addslashes($_POST['Template']['body_code']);
                     $bodyupdateObject->updated_at = date('Y-m-d');
                     if ($bodyupdateObject->update()) {
                         $success .= "Body updated successfully";
@@ -237,7 +249,7 @@ class BuildTempController extends Controller {
             if ($_POST) {
                 if (!empty($_POST['Template']['footer_code'] != '')) {
                     $footeraddObject = new BuildTempFooter;
-                    $footeraddObject->footer_content = $_POST['Template']['footer_code'];
+                    $footeraddObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footeraddObject->updated_at = date('Y-m-d');
                     if ($footeraddObject->save(false)) {
                         $model = BuildTemp::model()->findByPk($footeraddObject->footer_id);
@@ -264,113 +276,139 @@ class BuildTempController extends Controller {
         if ($_POST) {
             $category = $_POST['Template']['category'];
             if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
-            $headeraddObject = new BuildTempHeader;
-            $bodyaddObject = new BuildTempBody;
-            $footeraddObject = new BuildTempFooter;
-            $headeraddObject->header_content = $_POST['Template']['header_code'];
-            $headeraddObject->template_title = $_POST['Template']['template_title'];
-            $headeraddObject->created_at = date('Y-m-d');
-            if ($headeraddObject->save(false)) {
-            
-            $bodyaddObject->body_content = $_POST['Template']['body_code'];
-            $bodyaddObject->created_at = date('Y-m-d');
-            $bodyaddObject->save(false);
-            
-            $footeraddObject->footer_content = $_POST['Template']['footer_code'];
-            $footeraddObject->created_at = date('Y-m-d');
-            $footeraddObject->save(false);    
-                   function rmdir_recursive($dir) {
-                    foreach (scandir($dir) as $file) {
-                        if ('.' === $file || '..' === $file)
-                            continue;
-                        if (is_dir("$dir/$file"))
-                            rmdir_recursive("$dir/$file");
-                        else
-                            unlink("$dir/$file");
-                    }
-                    rmdir($dir);
-                }
-
-                if ($_FILES["cssfolder"]["name"]) {
-                    $filename = $_FILES["cssfolder"]["name"];
-                    $source = $_FILES["cssfolder"]["tmp_name"];
-                    $type = $_FILES["cssfolder"]["type"];
-
-                    $name = explode(".", $filename);
-                    $accepted_types = array('application/zip', 'application/x-zip-compressed', 'multipart/x-zip', 'application/x-compressed');
-                    foreach ($accepted_types as $mime_type) {
-                        if ($mime_type == $type) {
-                            $okay = true;
-                            break;
-                        }
-                    }
-
-                    $continue = strtolower($name[1]) == 'zip' ? true : false;
-                    if (!$continue) {
-                        $error .= "The file you are trying to upload is not a .zip file. Please try again.";
-                    }
-
-                    /* PHP current path */
-                    $path = Yii::getPathOfAlias('webroot') . "/user/template/"; // absolute path to the directory where zipper.php is in
-                    $filenoext = basename($filename, '.zip');  // absolute path to the directory where zipper.php is in (lowercase)
-                    $filenoext = basename($filenoext, '.ZIP');  // absolute path to the directory where zipper.php is in (when uppercase)
-                    $fname = time() . $filenoext;
-                    $targetdir = $path . time() . $filenoext; // target directory
-                    $targetzip = $path . time() . $filename; // target zip file
-
-                    /* create directory if not exists', otherwise overwrite */
-                    /* target directory is same as filename without extension */
-
-                    if (is_dir($targetdir))
-                        rmdir_recursive($targetdir);
-                    mkdir($targetdir, 0777);
-
-                    /* here it is really happening */
-
-                    if (move_uploaded_file($source, $targetzip)) {
-                        $zip = new ZipArchive();
-                        $x = $zip->open($targetzip);  // open the zip file to extract
-                        if ($x === true) {
-                            $zip->extractTo($targetdir); // place in the directory with same name  
-                            $zip->close();
-
-                            unlink($targetzip);
-                        }
-                        $message = "Your .zip file was uploaded and unpacked.";
-                    } else {
-                        $message = "There was a problem with the upload. Please try again.";
-                    }
-                }
-                if($_FILES['screenshot']['name'])
-                {
-                $ext1 = end((explode(".", $_FILES['screenshot']['name']))); 
-                if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
-                        $error .= "Please upload mentioned file type.";
-                }else{
-                $fileS = time() . $_FILES['screenshot']['name'];    
-                $path = $targetdir."/screenshot/";
-                BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, $fileS);
-                }
-                }
-                $model = new BuildTemp;
-                $model->template_id = $headeraddObject->id;
-                $model->temp_header_id = $headeraddObject->id;
-                $model->temp_body_id = $bodyaddObject->id;
-                $model->temp_footer_id = $footeraddObject->id;
-                $model->status = 0;
-                $model->created_at = date('Y-m-d');
-                $model->updated_at = date('Y-m-d');
-                $model->category_id = $category;
-                $model->folderpath = $fname;
-                $model->screenshot = $fileS;
-                
-                $model->save(false);
                
-                $success .= "Header content added successfully";
+                $headeraddObject = new BuildTempHeader;
+                $bodyaddObject = new BuildTempBody;
+                $footeraddObject = new BuildTempFooter;
+                $headeraddObject->header_content = addslashes($_POST['Template']['header_code']);
+                $headeraddObject->template_title = addslashes($_POST['Template']['template_title']);
+                $headeraddObject->created_at = date('Y-m-d');
+                if ($headeraddObject->save(false)) {
+
+                    $bodyaddObject->body_content = addslashes($_POST['Template']['body_code']);
+                    $bodyaddObject->created_at = date('Y-m-d');
+                    $bodyaddObject->save(false);
+
+                    $footeraddObject->footer_content = addslashes($_POST['Template']['footer_code']);
+                    $footeraddObject->created_at = date('Y-m-d');
+                    $footeraddObject->save(false);
+                    
+                    /* for removing folder */                    
+                    function rmdir_recursive($dir) {
+                        foreach (scandir($dir) as $file) {
+                            if ('.' === $file || '..' === $file)
+                                continue;
+                            if (is_dir("$dir/$file"))
+                                rmdir_recursive("$dir/$file");
+                            else
+                                unlink("$dir/$file");
+                        }
+                        rmdir($dir);
+                    }
+
+                    if ($_FILES["cssfolder"]["name"]) {
+                        $filename = $_FILES["cssfolder"]["name"];
+                        $source = $_FILES["cssfolder"]["tmp_name"];
+                        $type = $_FILES["cssfolder"]["type"];
+
+                        $name = explode(".", $filename);
+                        $accepted_types = array('application/zip', 'application/x-zip-compressed', 'multipart/x-zip', 'application/x-compressed');
+                        foreach ($accepted_types as $mime_type) {
+                            if ($mime_type == $type) {
+                                $okay = true;
+                                break;
+                            }
+                        }
+
+                        $continue = strtolower($name[1]) == 'zip' ? true : false;
+                        if (!$continue) {
+                            $error .= "The file you are trying to upload is not a .zip file. Please try again.";
+                        }
+
+                        /* PHP current path */
+                        $path = Yii::getPathOfAlias('webroot') . "/user/template/"; // absolute path to the directory where zipper.php is in
+                        $filenoext = basename($filename, '.zip');  // absolute path to the directory where zipper.php is in (lowercase)
+                        $filenoext = basename($filenoext, '.ZIP');  // absolute path to the directory where zipper.php is in (when uppercase)
+                        $fname = time() . $filenoext;
+                        $targetdir = $path . time() . $filenoext; // target directory
+                        $targetzip = $path . time() . $filename; // target zip file
+
+                        /* create directory if not exists', otherwise overwrite */
+                        /* target directory is same as filename without extension */
+
+                        if (is_dir($targetdir))
+                            rmdir_recursive($targetdir);
+                        mkdir($targetdir, 0777);
+
+                        /* here it is really happening */
+
+                        if (move_uploaded_file($source, $targetzip)) {
+                            $zip = new ZipArchive();
+                            $x = $zip->open($targetzip);  // open the zip file to extract
+                            if ($x === true) {
+                                $zip->extractTo($targetdir); // place in the directory with same name  
+                                $zip->close();
+                                unlink($targetzip);
+                            }
+                            $message = "Your .zip file was uploaded and unpacked.";
+                        } else {
+                            $message = "There was a problem with the upload. Please try again.";
+                        }
+                    }
+                    if ($_FILES['screenshot']['name']) {
+                        $ext1 = end((explode(".", $_FILES['screenshot']['name'])));
+                        if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
+                            $error .= "Please upload mentioned file type.";
+                        } else {
+                            $fileS = time() . $_FILES['screenshot']['name'];
+                            $path = $targetdir . "/screenshot/";
+                            BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, $fileS);
+                        }
+                    }
+                    
+                    $model = new BuildTemp;
+                    $model->template_id = $headeraddObject->id;
+                    $model->temp_header_id = $headeraddObject->id;
+                    $model->temp_body_id = $bodyaddObject->id;
+                    $model->temp_footer_id = $footeraddObject->id;
+                    $model->status = 0;
+                    $model->custom_css = addslashes($_POST['custom_css']);
+                    $model->custom_js = addslashes($_POST['custom_js']);                                
+                    $model->created_at = date('Y-m-d');
+                    $model->updated_at = date('Y-m-d');
+                    $model->category_id = $category;
+                    $model->folderpath = $fname;
+                    $model->screenshot = $fileS;
+                    $model->save(false);
+                    $tmpId = $model->id  ;
+                    
+                    /*  Scan and Insert JS  */                  
+                    $scanDir = scandir($targetdir.'/js/');                    
+                    foreach ($scanDir as $dirName) {
+                        if ($dirName === '.' or $dirName === '..') continue;
+                        $modelJs = new BuildTempJs ;
+                        $modelJs->name = $dirName; 
+                        $modelJs->temp_id = $tmpId;
+                        $modelJs->created_at = date('Y-m-d');
+                        $modelJs->save(false);
+                    }
+                    
+                    $scanDir = scandir($targetdir.'/css/');                    
+                    foreach ($scanDir as $dirName) {
+                        if ($dirName === '.' or $dirName === '..') continue;
+                        $modelCss = new BuildTempCss ;
+                        $modelCss->name = $dirName; 
+                        $modelCss->temp_id = $tmpId;
+                        $modelCss->created_at = date('Y-m-d');
+                        $modelCss->save(false);
+                    }
+                   
+
+                    $success .= "Header content added successfully";
+                }
+            } else {
+                $error .= "Please fill all required(*) marked fields.";
             }
-        } else {
-            $error .= "Please fill all required(*) marked fields.";
-        }
         }
 
         $categoryObject = BuildCategory::model()->findAll();
@@ -418,7 +456,7 @@ class BuildTempController extends Controller {
             if ($_POST) {
                 if (!empty($_POST['Template']['footer_code'] != '')) {
                     $footerupdateObject = BuildTempFooter::model()->findByPk($_REQUEST['f_id']);
-                    $footerupdateObject->footer_content = $_POST['Template']['footer_code'];
+                    $footerupdateObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footerupdateObject->updated_at = date('Y-m-d');
                     if ($footerupdateObject->update()) {
                         $success .= "Footer updated successfully";
@@ -431,6 +469,31 @@ class BuildTempController extends Controller {
         $this->render('/builder/template_footer_edit', array(
             'footerObject' => $footerObject, 'error' => $error, 'success' => $success
         ));
+    }
+    
+    /* Get Custom Css and Js Code */
+    public function actionCustomCode(){
+      
+        $error = "";
+        $success = "";
+        if ($_REQUEST['id']) {
+            $customcode = BuildTemp::model()->findByPk($_REQUEST['id']);
+
+            if ($_POST) {
+                if (!empty($_POST['custom_css'] != '')) {
+                    $customcode->custom_css = addslashes($_POST['custom_css']);
+                    $customcode->custom_js = addslashes($_POST['custom_js']);                    
+                    if ($customcode->update()) {
+                        $success .= "Custom code has been updated successfully";
+                    }
+                } else {
+                    $error .= "Please fill all required(*) marked fields.";
+                }
+            }
+        }
+        $this->render('/builder/customcode', array(
+            'customcode' => $customcode, 'error' => $error, 'success' => $success
+        ));        
     }
 
     // Uncomment the following methods and override them if needed

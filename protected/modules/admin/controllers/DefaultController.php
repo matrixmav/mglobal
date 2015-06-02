@@ -14,6 +14,8 @@ class DefaultController extends Controller
 	{       
             //$this->render('index');
             $this->actionLogin();
+             
+       
 	}
 
 	/*

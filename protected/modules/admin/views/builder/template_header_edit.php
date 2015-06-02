@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs = array(
-    'Template' => array('buildtemp/templatelist'),
+    'Template' => array('BuildTemp/templatelist'),
     'Template Header Edit',
 );
 ?>
 <div class="col-md-7 col-sm-7">
-    <a href="/admin/buildtemp/templateheaderedit?id=<?php echo $headerObject->id;?>">Header Code Edit</a>&nbsp;&nbsp;<a href="/admin/buildtemp/templatebodyedit?id=<?php echo $headerObject->id;?>">Body Code Edit</a>&nbsp;&nbsp;<a href="/admin/buildtemp/templatefooteredit?id=<?php echo $headerObject->id;?>">Footer Code Edit</a>
+    <a class="btn btn-primary" href="/admin/BuildTemp/templateheaderedit?id=<?php echo $headerObject->id;?>">Header Edit</a>&nbsp;&nbsp;<a class="btn btn-info" href="/admin/BuildTemp/templatebodyedit?id=<?php echo $headerObject->id;?>">Body Edit</a>&nbsp;&nbsp;<a class="btn btn-success" href="/admin/BuildTemp/templatefooteredit?id=<?php echo $headerObject->id;?>">Footer Edit</a>&nbsp;&nbsp;<a class="btn btn-warning" href="/admin/BuildTemp/customcode?id=<?php echo $headerObject->id;?>" >Custom CSS/JS</a>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/buildtemp/templateheaderedit?h_id=<?php echo $headerObject->id;?>&id=<?php echo $_GET['id'];?>" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/BuildTemp/templateheaderedit?h_id=<?php echo $headerObject->temp_header_id;?>&id=<?php echo $_GET['id'];?>" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
             <legend>Edit Template Header</legend>
@@ -34,7 +34,7 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input id="title" type="text" class="form-control" name="Template[template_title]" value="<?php echo (!empty($headerObject->header->template_title)) ? $headerObject->header->template_title : ""; ?>" >
+                    <input id="title" type="text" class="form-control" name="Template[template_title]" value="<?php echo (!empty($headerObject->header->template_title)) ? stripcslashes($headerObject->header->template_title) : ""; ?>" >
                     <span id="header_code_error"></span>
                 </div>
             </div>
@@ -43,7 +43,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" ><?php echo (!empty($headerObject->header->header_content)) ? $headerObject->header->header_content : ""; ?></textarea>
+                    <textarea id="header_code" class="form-control" name="Template[header_code]" rows="10" cols="300"><?php echo (!empty($headerObject->header->header_content)) ? stripcslashes($headerObject->header->header_content) : ""; ?></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>
@@ -52,7 +52,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Upload Template Screenshot<span class="require">*</span></label>
                 <div class="col-lg-8">
                   <input type="file" name="screenshot" id="screenshot">
-                  <?php if($headerObject->screenshot !=''){?><img src="/user/template/<?php echo $headerObject->folderpath; ?>/screenshot/<?php echo $headerObject->screenshot;?>"><?php }?>
+                  <?php if($headerObject->screenshot !=''){?><img height="150" src="/user/template/<?php echo $headerObject->folderpath; ?>/screenshot/<?php echo $headerObject->screenshot;?>"><?php }?>
                     <span id="screenshot_error"></span>
                 </div>
             </div>
@@ -68,20 +68,16 @@ $this->breadcrumbs = array(
     </form>
 </div>
 
-
-
-
-
 <script type="text/javascript">
     function validation()
     {
       $("#header_code_error").html("");
       if ($("#header_code").val() == "") {
-      $("#header_code_error").html("Enter Header Code");
-      $("#header_code").focus();            
-      return false;
+        $("#header_code_error").html("Enter Header Code");
+        $("#header_code").focus();            
+        return false;
+      }
     }
-    }
-    </script>
+</script>
      
      

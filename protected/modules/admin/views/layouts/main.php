@@ -428,19 +428,19 @@ License: You must have a valid license purchased only from themeforest(the above
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "buildtemp/categoryadd" => "Category Add",
-                                    "buildtemp/categorylist" => "Category List",
-                                    "buildtemp/templatelist" => "Templates HTML",
+                                    "BuildTemp/categoryadd" => "Category Add",
+                                    "BuildTemp/categorylist" => "Category List",
+                                    "BuildTemp/templatelist" => "Templates HTML",
                                 );
                                 ?>
                                 
                                 
                                 <li
-                                    class="<?php echo (($curControllerLower == 'buildtemp') || ($curControllerLower == 'buildtemp')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'BuildTemp') || ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Builder</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'buildtemp') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
                                         </span>
                                     </a>
 
@@ -451,7 +451,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             if ($ctName == "search/create") {
                                                 $ctName = "search/create/type/details";
                                             }
-                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
+                                        if ($ctName == "BuildTemp" && $curControllerLower == "BuildTemp")
                                                 $class_content = 'class="active"';
                                             else
                                                 $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
@@ -562,11 +562,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                                 
                                 <li
-                                    class="<?php echo (($curControllerLower == 'buildtemp') || ($curControllerLower == 'ads')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curControllerLower == 'BuildTemp') || ($curControllerLower == 'ads')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Ads</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'buildtemp') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
                                         </span>
                                     </a>
 
@@ -577,7 +577,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             if ($ctName == "search/create") {
                                                 $ctName = "search/create/type/details";
                                             }
-                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
+                                        if ($ctName == "BuildTemp" && $curControllerLower == "BuildTemp")
                                                 $class_content = 'class="active"';
                                             else
                                                 $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';

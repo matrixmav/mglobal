@@ -1141,3 +1141,6 @@ Shop Stype Buttons
 .btn {
 	text-transform: uppercase;
 }
+.box{
+border-radius:10px; background color:#8ac007;padding:10px;width:20%;height:5%
+    }

@@ -28,7 +28,7 @@ class PackageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','domainsearch','availabledomain','checkout','domainadd','productcart','couponapply','loaddomain','orderadd'),
+				'actions'=>array('index','view','domainsearch','availabledomain','checkout','domainadd','productcart','couponapply','loaddomain','orderadd','thankyou','walletcalculation'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -82,13 +82,14 @@ class PackageController extends Controller
               
              $transactionObject1 = Transaction::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
               
-              
-             if(count($transactionObject1) > 0 && $transactionObject1->status!='1')
+             $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount']; 
+             if(count($transactionObject1) > 0 && $transactionObject1->status !='1')
              { 
+                  
                  
                     $transactionObject1->mode = 'paypal';
                     $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
-                    $transactionObject1->paid_amount = $_REQUEST['totalAmount'];
+                    $transactionObject1->paid_amount = $total;
                     $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject1->total_rp = 0;
                     $transactionObject1->used_rp = 0;
@@ -97,10 +98,12 @@ class PackageController extends Controller
                     $transactionObject1->updated_at = new CDbExpression('NOW()');
                     $transactionObject1->update(); 
              }else{
+                 
+                   
                     $transactionObject->user_id = Yii::app()->session['userid'];
                     $transactionObject->mode = 'paypal';
                     $transactionObject->actual_amount = $_REQUEST['totalAmount'];
-                    $transactionObject->paid_amount = $_REQUEST['totalAmount'];
+                    $transactionObject->paid_amount = $total;
                     $transactionObject->coupon_discount = $_REQUEST['coupon_discount'];
                     $transactionObject->total_rp = 0;
                     $transactionObject->used_rp = 0;
@@ -524,5 +527,33 @@ class PackageController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        /*
+         * function to save payment user select
+         */
+        
+        public function actionThankYou()
+        {
+            echo "nidhi"; exit;
+            
+        }
          
+        /*
+         * function to get wallet calculation for payment
+         */
+        public function actionWalletCalculation()
+        {
+          $loggedInUserId = Yii::app()->session['userid'];
+          $walletObject = Wallet::model()->findAll(array('condition'=>'user_id='.$loggedInUserId));
+          if($walletObject)
+          {
+          if($_REQUEST['wallet_type']=='1')
+          {
+            $amount = $_REQUEST['totalAmount'];  
+          }
+          $amount = $_REQUEST['totalAmount'];
+          }else{
+          $amount = $_REQUEST['totalAmount'];    
+          }
+        }
 }

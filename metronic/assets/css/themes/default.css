@@ -369,3 +369,26 @@ Landscape phone to portrait tablet
     background: #1e1e1e;
   }
 }
+
+.chatWrap{ position: fixed; right: 0; top: 200px;}
+
+.chatWrap span.glyphicon-comment{
+    border-radius: 2px !important;
+  background-color: #f99d39;
+  color: #FFF;
+    float: left;
+    font-size: 22px;
+    padding: 8px;
+    top: 0;}
+.chatuserList{background: #c6c6c6;
+    float: left;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    vertical-align: top;
+    width: auto;}
+.chatuserList p span{color:#578ebe;}
+.chatuserList p{ padding: 5px 25px 5px 15px; margin: 0; font-size: 14px; }
+.chatuserList p:hover{ background: #eee;}
+.chatuserList p a{color:#000;font-weight: bold; margin-left: 2px; text-transform: capitalize;}
+.chatuserList p a:hover{ text-decoration: none;}

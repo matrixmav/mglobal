@@ -95,6 +95,6 @@ if(isset($this->pageTitle))
   ga('create', 'UA-37564768-1', 'keenthemes.com');
   ga('send', 'pageview');
 </script>    
-    
+   
 </body>
 </html>

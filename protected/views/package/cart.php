@@ -128,83 +128,144 @@
                 </div>
 
                 <div class="sectionWrp paymentOptions">
-                    <p class="title"><span class="check">2.</span> <span class="txt">Payment Options</span> <span class="edit">edit</span></p>
-                    <div id="paymentOption">
+                    <p class="title"><span class="check">2.</span> <span class="txt">Choose Amount</span> <span class="edit">edit</span></p>
+                    <div id="walletOption" style="display:none;">
+                        <form id="walletform" name="walletform">
+                            <input type="checkbox" value="1" name="wallet_type[]">Cash Wallet 
+                            <input type="checkbox" value="2" name="wallet_type[]">RP Wallet
+                            <input type="checkbox" value="3" name="wallet_type[]">Commision Wallet
+                            <br/><br/>
+                            <input type="button" value="Make Payment" onclick="walletamountcalculation();" class="btn-flat-green ui-btn-grey">   
+                        </form>
+                            </div>
+                            </div>
 
+                            <div class="sectionWrp paymentOptions">
+                                <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
+                                <div id="paymentOption" style="display:none;">
+                                    <input type="radio" value="paypal" name="payment_mode">Paypal 
+                                    <input type="radio" value="rp" name="payment_mode">Use RP
+                                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
+                                        <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
+                                        <input type="hidden" name="cmd" value="_xclick">
+                                        <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
+                                        <input type="hidden" name="item_number" value="1">
+                                        <input type="hidden" name="credits" value="">
+                                        <input type="hidden" name="userid" value="<?php Yii::app()->session['userid']; ?>">
+                                        <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
+                                        <input type="hidden" name="no_shipping" value="1">
+                                        <input type="hidden" name="currency_code" value="USD">
+                                        <input type="hidden" name="handling" value="0">
+                                        <input type="hidden" name="cancel_return" value="">
+                                        <input type="hidden" name="return" value="/transaction/">
+
+                                    </form> 
+                                    <input type="button" value="Make Payment" onclick="makepayment();" class="btn-flat-green ui-btn-grey">   
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
-<input type="hidden" id="coupon_discount_price" value=""> 
-<script type="text/javascript">
+        <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
+        <input type="hidden" id="coupon_discount_price" value=""> 
+        <script type="text/javascript">
 
-    function Couponapply() {
-        var coupon_code = $('#coupon_code').val();
-        if (coupon_code == '')
-        {
-            document.getElementById("coupon_error").style.display = "block";
-            document.getElementById("coupon_error").innerHTML = "Please enter a domain name.";
-            document.getElementById("coupon_error").focus();
-        } else {
-            var dataString = 'coupon_code=' + coupon_code;
-            var url = $('#URL').val();
-            $.ajax({
-                type: "GET",
-                url: "couponapply",
-                data: dataString,
-                cache: false,
-                success: function (html) {
-                    if (html == 0)
-                    {
-                        document.getElementById("coupon_error").style.display = "block";
-                        document.getElementById("coupon_error").innerHTML = "Incorrect coupon code";
-                        $("#coupon_error").fadeOut(5000);
-                    } else {
-                        htmlTag = html.split("_");
-                        $('#coupon_code').val('');
-                        document.getElementById("coupon_success").style.display = "block";
-                        document.getElementById("coupon_success").innerHTML = "Coupon code applied";
-                        document.getElementById("totalpayable").innerHTML = htmlTag[0];
-                        document.getElementById("coupon_discount").style.display = "";
-                        document.getElementById("total-discount").innerHTML = htmlTag[1];
-                        document.getElementById("totalAmount").value = htmlTag[0];
-                        document.getElementById("coupon_discount_price").value = htmlTag[1];
-                        $("#coupon_success").fadeOut(5000);
-                    }
-                }
-
-            });//@ sourceURL=pen.js
-
-        }
-    }
-    function proceedPayment()
-    {
-        var coupon_discount = $('#coupon_discount_price').val();
-        var totalAmount = $('#totalAmount').val();
-        var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&coupon_discount=' + coupon_discount;
-        $.ajax({
-            type: "GET",
-            url: "orderadd",
-            data: dataString,
-            cache: false,
-            success: function (html) {
-                if (html == 1)
+            function Couponapply() {
+                var coupon_code = $('#coupon_code').val();
+                if (coupon_code == '')
                 {
-                    $('#cartDiv').fadeOut();
-                    $('#editIcon').fadeIn();
-                    $('#paymentOption').fadeIN();
+                    document.getElementById("coupon_error").style.display = "block";
+                    document.getElementById("coupon_error").innerHTML = "Please enter a domain name.";
+                    document.getElementById("coupon_error").focus();
+                } else {
+                    var dataString = 'coupon_code=' + coupon_code;
+                    var url = $('#URL').val();
+                    $.ajax({
+                        type: "GET",
+                        url: "couponapply",
+                        data: dataString,
+                        cache: false,
+                        success: function (html) {
+                            if (html == 0)
+                            {
+                                document.getElementById("coupon_error").style.display = "block";
+                                document.getElementById("coupon_error").innerHTML = "Incorrect coupon code";
+                                $("#coupon_error").fadeOut(5000);
+                            } else {
+                                htmlTag = html.split("_");
+                                $('#coupon_code').val('');
+                                document.getElementById("coupon_success").style.display = "block";
+                                document.getElementById("coupon_success").innerHTML = "Coupon code applied";
+                                document.getElementById("totalpayable").innerHTML = htmlTag[0];
+                                document.getElementById("coupon_discount").style.display = "";
+                                document.getElementById("total-discount").innerHTML = htmlTag[1];
+                                document.getElementById("totalAmount").value = htmlTag[0];
+                                document.getElementById("coupon_discount_price").value = htmlTag[1];
+                                $("#coupon_success").fadeOut(5000);
+                            }
+                        }
+
+                    });//@ sourceURL=pen.js
 
                 }
             }
-        });
-    }
+            function proceedPayment()
+            {
+                var coupon_discount = $('#coupon_discount_price').val();
+                var totalAmount = $('#totalAmount').val();
+                var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&coupon_discount=' + coupon_discount;
+                $.ajax({
+                    type: "GET",
+                    url: "orderadd",
+                    data: dataString,
+                    cache: false,
+                    success: function (html) {
+                        if (html == 1)
+                        {
+                            $('#cartDiv').fadeOut();
+                            $('#editIcon').fadeIn();
+                            document.getElementById('walletOption').style.display = "block";
 
-    function OpenDiv()
-    {
-        $('#cartDiv').fadeIn();
-        $('#paymentOption').fadeOut();
-    }
-</script>    
+                        }
+                    }
+                });
+            }
+
+            function OpenDiv()
+            {
+                $('#cartDiv').fadeIn();
+                $('#paymentOption').fadeOut();
+            }
+            function makepayment()
+            {
+                var valx = $('input[name=payment_mode]:checked').val();
+                if (valx == 'paypal')
+                {
+                    document.getElementById("frmPayPal").submit();
+                }
+                if (valx == 'rp')
+                {
+                    location.href = "/transaction/thankyou/";
+                }
+            }
+            function walletamountcalculation()
+            {
+                var form = document.walletform;
+                var totalAmount = $('#totalAmount').val();
+                var dataString = $(form).serialize()+'&totalAmount='+totalAmount;
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/package/walletcalculation/',
+                    data: dataString,
+                    success: function (data) { alert(data);return false;
+                        $('#myResponse').html(data);
+
+
+                    }
+                });
+                return false;
+            }
+        </script>    

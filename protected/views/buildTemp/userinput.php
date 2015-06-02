@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Template' => array('buildtemp/templates'),
+    'Template' => array('BuildTemp/templates'),
     'Page Add',
 );
 ?>
@@ -9,13 +9,16 @@ $this->breadcrumbs = array(
     <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
     <?php
     if (count($userpagesObject) < 4) { ?>
-        <a href="/buildtemp/userinput" class="btn green">Add page</a>
+        <a href="/BuildTemp/userinput" class="btn green">Add page</a>
     <?php }
     if(count($userpagesObject) > 0){
         foreach ($userpagesObject as $page) { ?>
-            <a href="/buildtemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
+            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
     <?php } }  ?>   
-    <form action="/buildtemp/pageadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+            
+    <a href="/BuildTemp/addlogo" class="btn green">Add Logo</a>    
+    <a href="/BuildTemp/copyright" class="btn green">Add Copy Right</a>            
+    <form action="/BuildTemp/pageadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
             <legend>Add Pages</legend>

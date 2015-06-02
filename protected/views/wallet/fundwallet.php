@@ -3,7 +3,6 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs = array(
-    'Summary' => array('wallet/rpwallet'),
     'FundWallet',
 );
  
