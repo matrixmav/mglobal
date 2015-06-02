@@ -28,7 +28,7 @@ class PackageController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','domainsearch','availabledomain','checkout','domainadd','productcart','couponapply','loaddomain','orderadd','thankyou','walletcalculation'),
+				'actions'=>array('index','view','domainsearch','availabledomain','checkout','domainadd','productcart','couponapply','loaddomain','orderadd','thankyou','walletcalculation','walletcalc'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -82,11 +82,17 @@ class PackageController extends Controller
               
              $transactionObject1 = Transaction::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
               
-             $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount']; 
+             $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
+             if(Yii::app()->session['transactionid']=='')
+             {
+             $tarnsactionID =  md5(rand(5, 15));
+              Yii::app()->session['transactionid'] = $tarnsactionID;
+             }
+            
              if(count($transactionObject1) > 0 && $transactionObject1->status !='1')
              { 
                   
-                 
+                    $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
                     $transactionObject1->mode = 'paypal';
                     $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
                     $transactionObject1->paid_amount = $total;
@@ -101,6 +107,7 @@ class PackageController extends Controller
                  
                    
                     $transactionObject->user_id = Yii::app()->session['userid'];
+                    $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
                     $transactionObject->mode = 'paypal';
                     $transactionObject->actual_amount = $_REQUEST['totalAmount'];
                     $transactionObject->paid_amount = $total;
@@ -536,11 +543,89 @@ class PackageController extends Controller
         
         public function actionThankYou()
         {
-         var_dump($_SESSION);   
-         $this->render('thankyou',array(
-			
-		));    
+         if($_GET)
+         {
+           $transactionObject = Transaction::model()->findByAttributes(array('transaction_id'=>$_GET['transaction_id']));
+           $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
+           if($transactionObject->status=0)
+           {
+           $transactionObject->status = 1;
+           $transactionObject->created_at = date('Y-m-d');
+           $transactionObject->update();
+           $orderObject = Order::model()->findByAttributes(array('transaction_id'=>$transactionObject->id));
+           $orderObject->status = 1;
+           $orderObject->start_date = date('Y-m-d');
+           $orderObject->end_date = (date('Y')+1).date('-m-d');
+           $orderObject->update();
+           $MTObject = MoneyTransfer::model()->findAll(array('condition'=>'transaction_id='.$transactionObject->id));
+           foreach($MTObject as $mtObject)
+           {
+            $mtObject->status = 1;
+            $mtObject->update();  
+            $MTObject1 = Wallet::model()->findByAttributes(array('id'=>$mtObject->wallet_id));
+            $MTObject1->fund  =  $MTObject1->fund - $mtObject->fund;
+            $MTObject1->update(); 
+           }  
+           $config['to'] = $userObject->email; 
+//                $config['subject'] = 'Payment Confirmation' ;
+//                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
+//                $config['attachment'] = 'invice.pdf';        
+//                CommonHelper::sendMail($config);
+           
+           
+           
+           }  
+         }
+         $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";   
+         $this->render('thankyou',array('successMsg'=>$successMsg
+	 ));    
             
+        }
+        
+        /*
+         * function to save transaction data
+         */
+        public function actionWalletCalc()
+        {
+          if($_REQUEST)
+          {
+            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id'=>Yii::app()->session['transactionid']));
+            if($transactionObject)
+            {
+                $transactionObject->paid_amount = $_REQUEST['payableAmount'];
+                $transactionObject->used_rp = $_REQUEST['totalusedRP'];
+                $transactionObject->update();
+            }
+            $delete = MoneyTransfer::model()->deleteAll('transaction_id = ' . $transactionObject->id);
+            $wallet = explode(',',rtrim($_REQUEST['wallet'],','));
+            foreach($wallet as $walletObj=>$key)
+            {
+            $finalArtr = explode('-',$key);
+            $moneytransferObject = new MoneyTransfer;
+            /*$MTObject->transaction_id = $transactionObject->id;
+            $MTObject->to_user_id = 1;
+            $MTObject->from_user_id = Yii::app()->session['userid'];
+            $MTObject->wallet_id = $finalArtr[0];
+            $MTObject->fund = $finalArtr[1];
+            $MTObject->comment = "Package Purchased";
+            $MTObject->status = 0;
+            $MTObject->update();
+            }else{*/
+            $moneytransferObject->transaction_id = $transactionObject->id;
+            $moneytransferObject->to_user_id = 1;
+            $moneytransferObject->from_user_id = Yii::app()->session['userid'];
+            $moneytransferObject->wallet_id = $finalArtr[0];
+            $moneytransferObject->fund = $finalArtr[1];
+            $moneytransferObject->comment = "Package Purchased";
+            $moneytransferObject->status = 0;
+            $moneytransferObject->created_at = date('Y-m-d');
+            $moneytransferObject->save(false); 
+            
+            /*}*/
+            
+            } 
+            echo 1;
+          }
         }
          
          
