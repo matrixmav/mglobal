@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Reports' => array('/admin/report/transaction'),'Social Account'
+   'Transaction',
 );
 ?>
 
@@ -101,11 +101,11 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Used RP &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->used_rp)?$datatransaction->->used_rp:""',
+                    'value' => 'isset($data->transaction->used_rp)?$data->transaction->used_rp:""',
                 ),
                  array(
                     'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">Discount &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->transaction->coupon_discount)?$data->transaction->coupon_discount:""',
                 ),
                 

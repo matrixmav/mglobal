@@ -6,13 +6,13 @@
 $this->breadcrumbs = array(
     'Ad List',
 );
-
+ 
 $this->menu = array(
     array('label' => 'Create Add', 'url' => array('create')),
     array('label' => 'Manage Add', 'url' => array('admin')),
 );
 ?>
-<?php //echo "<pre>"; print_r($orderObject);        ?>
+<?php //echo "<pre>"; print_r($orderObject);           ?>
 <div class="main">
     <div class="container">
 
@@ -65,8 +65,8 @@ $this->menu = array(
                         ),
                         array(
                             // 'name' => 'Share on',
-                            //'header' => '<span style="white-space: nowrap;">Created On &nbsp; &nbsp; &nbsp;</span>',
-                            'htmlOptions' => array('width' => '19%'),
+                            'header' => '<span style="white-space: nowrap;">Created On &nbsp; &nbsp; &nbsp;</span>',
+                            'htmlOptions' => array('width' => '25%'),
                             'value' => array($this, 'getSocialButton')
                         ),
                     ),
@@ -83,5 +83,7 @@ $this->menu = array(
 
         <script type="text/javascript" 
                 src="<?php echo Yii::app()->request->baseUrl; ?>/js/fbhelper.js">
-        </script> 
+        </script>
+
+
 
