@@ -168,7 +168,7 @@ header('Content-type: application/json');
 
 function sendChat() {
 	$from = $_SESSION['username'];;
-	$to = "mGlobaly";
+	$to = "mGlobally";
 	$message = $_POST['message'];
 
 	$_SESSION['openChatBoxes'][$_POST['to']] = date('Y-m-d H:i:s', time());
