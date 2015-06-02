@@ -56,8 +56,8 @@ class BaseClass extends Controller {
             return $walletObject; 
                         
     }
-    function getUnredMails($userId){
-        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND type = 0'));
+    public static function getUnredMails($userId){
+        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND status = 0'));
     }
 
     public static function isAdmin() {
