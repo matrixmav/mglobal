@@ -536,7 +536,7 @@ class PackageController extends Controller {
                 $config['to'] = $userObject->email;
 //                $config['subject'] = 'Payment Confirmation' ;
 //                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
-//                $config['attachment'] = $userObject->email.'invoice.pdf';        
+//                $config['attachment'] = '/upload/invoice-pdf/'.$userObject->name.'invoice.pdf';        
 //                CommonHelper::sendMail($config);
             }
         }
