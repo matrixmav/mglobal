@@ -395,7 +395,7 @@ class PackageController extends Controller
             $package_id = Yii::app()->session['package_id'];
             $packageObject = Package::model()->findByPK($package_id);
             $loggedInUserId = Yii::app()->session['userid'];
-            $walletObject = Wallet::model()->findAll(array('condition'=>'user_id='.$loggedInUserId));
+            $walletObject = Wallet::model()->findAll(array('condition'=>'user_id='.$loggedInUserId.' AND fund != "0"'));
             $this->render('cart',array(
 			'packageObject'=>$packageObject,'walletObject'=>$walletObject
 		));
@@ -536,17 +536,12 @@ class PackageController extends Controller
         
         public function actionThankYou()
         {
-            echo "nidhi"; exit;
+         var_dump($_SESSION);   
+         $this->render('thankyou',array(
+			
+		));    
             
         }
          
-        /*
-         * function to get wallet calculation for payment
-         */
-        public function actionWalletCalculation()
-        {
-          
-            $amount = $_REQUEST['totalAmount'];  
-           
-        }
+         
 }
