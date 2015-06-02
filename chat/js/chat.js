@@ -329,8 +329,7 @@ function startChatSession(){
 	  success: function(data) {
  
 		username = data.username;
-
-		$.each(data.items, function(i,item){
+                $.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
 
 				chatboxtitle = item.f;

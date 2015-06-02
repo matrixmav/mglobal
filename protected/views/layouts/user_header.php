@@ -49,7 +49,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="/#about"><h1>mGlobal</h1></a>
+        <a class="site-logo" href="/#about"><img class="img-responsive "src="../../../images/logo/logo.png" width="170px" ></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 

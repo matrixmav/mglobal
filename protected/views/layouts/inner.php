@@ -18,7 +18,9 @@ $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState (
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
+ 
 ?>
+
 
 <!DOCTYPE html>
 
@@ -138,8 +140,8 @@ License: You must have a valid license purchased only from themeforest(the above
             jQuery(document).ready(function () {
                 App.init();
                 //checkLoginTime();
-                var IDSVal = document.getElementById('username').value;
-                chatWith(IDSVal);
+                //var IDSVal = document.getElementById('username').value;
+                //chatWith(IDSVal);
             });
             $(".single_2").fancybox({
                 openEffect: 'elastic',
@@ -201,30 +203,17 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right topWallet">
-                    <li class="credit"><a href="#" class="">
-                            <i class="fa fa-credit-card"></i>
-
-                            <span class="badge badge-default">
-                                <?php
-                                $arrayRP = BaseClass::walletAmount('2');
-                                foreach ($arrayRP as $RP) {
-                                    
-                                }
-                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2) : "0.00";
-                                ?>
-                            </span>
-                        </a>
-                    </li>
+                    
                     <li class="cash"><a href="#" class="">
                             <i class="fa fa-money"></i>
 
                             <span class="badge badge-default">
                                 <?php
-                                $arrayRP = BaseClass::walletAmount('2');
+                                $arrayRP = BaseClass::walletAmount('1');
                                 foreach ($arrayRP as $RP) {
                                     
                                 }
-                                echo (!empty($arrayRP)) ? "<h4>" . number_format($RP->fund, 2) . "</h4>" : "0.00";
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2)  : "0.00";
                                 ?>
                             </span>
                         </a>
@@ -233,15 +222,29 @@ License: You must have a valid license purchased only from themeforest(the above
                             <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
-                                $arrayFund = BaseClass::walletAmount('1');
+                                $arrayFund = BaseClass::walletAmount('2');
                                 foreach ($arrayFund as $fund) {
                                     
                                 }
-                                echo (!empty($arrayFund)) ? $fund->fund : "0.00";
+                                echo (!empty($arrayFund)) ?  number_format($fund->fund, 2)  : "0.00";
                                 ?>
                             </span></a>
                     </li>
-                    <li></li>
+                    <li class="credit"><a href="#" class="">
+                            <i class="fa fa-credit-card"></i>
+
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('3');
+                                foreach ($arrayRP as $RP) {
+                                    
+                                }
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2) : "0.00";
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                     
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
                         <a href="/wallet/fundwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Fund Wallet">
                             <i class="glyphicon glyphicon-envelope"></i>
@@ -402,7 +405,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                                $arraytransaction = BaseClass:: transactionStatus(); 
+                                if($arraytransaction->status==1)
+                                {
+                                  $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
                                     "profile/updateprofile" => "Profile",
@@ -411,7 +417,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/testimonial" => "Testimonial",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
+                                );  
+                                }else{
+                                $hotel_subsection = array(
+                                    "order/list" => "My Order",
+                                    "profile/changepassword" => "Change Password",
+                                    "profile/updateprofile" => "Profile",
+                                    "profile/address" => "Address",
+                                    "profile/documentverification" => "Verification",
+                                    //"profile/testimonial" => "Testimonial",
+                                    "genealogy" => "Genealogy",
+//                                    "profile/summery" => "Summery",
                                 );
+                                }
                                 $activecls = 'active';
                                 if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' && $curControllerLower == "order" && $curActionLower!='refferalincome') {
                                     $activecls = 'active';
