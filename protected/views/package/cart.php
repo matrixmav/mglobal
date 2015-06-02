@@ -1,69 +1,68 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <div class="container">
+    <div class="row">
     <div class="col-lg-12">    
         <div id="maincontent" class="pageWrp checkout abtest">
             <div class="sectionWrp summary open">
                 <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span><a onclick="OpenDiv();" id="editIcon" style="display:none;" class="edit-icon">Edit</a></p>
                 <div class="contentBlock CartSection" id="cartDiv">
-                    <table class="cartItemsWrp" cellspacing="0" cellpadding="0">
-                        <tbody><tr class="cartItemHeader">
+                    <table class="cartItemsWrp table table-condensed">
+                          <thead>
+                        <tr class="cartItemHeaderSum">
                                 <th>Package</th>
                                 <th>Description</th>
                                 <th>Duration</th>
                                 <th>Price</th>
                             </tr>
-
+                          </thead>
+                            <tbody>
                             <tr class="productBlock CartItemRow domain" id="" name="product_items[]">
-                                <td class="pName">
-                                    <div class="name itemblock topRow vCenter">
+                                <td class="pNameSum">
+                                   
                                         <?php echo $packageObject->name; ?>
 
 
                                     </div>
-
                                 </td>
-                                <td class="pDescription">
-                                    <p class="description itemblock topRow vCenter"><?php echo substr($packageObject->Description, 0, 100); ?></p>
+                                <td class="pDescriptionSum">
+                                   <?php echo substr($packageObject->Description, 0, 100); ?>
                                 </td>
-                                <td class="pDuration">
-                                    <div class="itemblock topRow">
-                                        <p class="selectWrp">
+                                <td class="pDurationSum">
+                                    
+                                        
                                             <b>1 Year</b>
 
-                                        </p>
+                                       
                                     </div>
                                 </td>
-                                <td class="pPrice CartSubTotal tbl-pd">
-                                    <div class="pos_hlp itemblock topRow">
-                                        <p class="price ItemSubTotal">
+                                <td class="pPriceSum CartSubTotal tbl-pd">
+                                    
                                             <span class="WebRupee">$</span> <span id=""><?php echo Yii::app()->format->number($packageObject->amount) . ".00"; ?> </span>
-                                        </p>
-                                    </div>
+                                        
                                 </td>
                             </tr>
 
                             <tr class="productBlock CartItemRow domain" id="" name="product_items[]">
-                                <td class="pName">
-                                    <div class="name itemblock topRow vCenter">
+                                <td class="pNameSum">
+                                    
                                         Domain
-                                    </div>
+                                   
                                 </td>
                                 <td class="pDescription">
-                                    <p class="description itemblock topRow vCenter"><?php echo Yii::app()->session['domain']; ?></p>
+                                   <?php echo Yii::app()->session['domain']; ?>
                                 </td>
-                                <td class="pDuration">
-                                    <div class="itemblock topRow">
-                                        <p class="selectWrp">
+                                <td class="pDurationSum">
+                                    
+                                      
                                             <b>1 Year</b>
 
-                                        </p>
-                                    </div>
+                                        
+                                    
                                 </td>
-                                <td class="pPrice CartSubTotal tbl-pd">
-                                    <div class="pos_hlp itemblock topRow">
-                                        <p class="price ItemSubTotal">
+                                <td class="pPriceSum CartSubTotal tbl-pd">
+                                   
                                             <span class="WebRupee"></span> <span id=""><?php if (Yii::app()->session['amount'] != '') { ?> $<?php echo number_format(Yii::app()->session['amount'], 2); ?><?php } else { ?> N/A<?php } ?></span>
-                                        </p>
-                                    </div>
+                                      
                                 </td>
                             </tr>
 
@@ -71,10 +70,13 @@
                         </tbody></table>
                     </form>
                     <div class="cartfooter">
-                        <form id="couponCodeContainer" class="couponWrp lfloat" method="post">
-                            <input type="text" class="form-control" name="coupon_code" id="coupon_code" placeholder="Please Enter Coupon Code">
-                            <input type="button" class="btn-flat-green ui-btn-grey" value="Apply" onclick="Couponapply();">
-
+                        <div class="col-sm-4 col-xs-12">
+                        <form id="couponCodeContainer" class="couponWrp form-inline" method="post">
+                           <div class="form-group"> <input type="text" class="form-control" name="coupon_code" id="coupon_code" placeholder=" Enter Coupon Code">
+                           </div>
+                            <div class="form-group">
+                            <input type="button" class="btn btn-success" value="Apply" onclick="Couponapply();">
+                            </div>
                             <span class="couponWarning" style="display: none;" id="coupon_success"></span>
                             <div class="couponError" style="display: none;" id="coupon_error"></div>
 
@@ -86,13 +88,12 @@
                                 <div class="blurbBottom"></div>
                             </div>
                         </form>
-                        <div class="socialBtnWrp lfloat">
-                            <div class="fbConnect">
-                                <span id="fbButton" class="fbbtn"></span>
-
-                            </div>
                         </div>
-                        <table class="cartTotalWrp rfloat tbl-2" cellpadding="0" cellspacing="0" border="0">
+                        <div class="col-sm-4 col-xs-12">
+                        
+                        </div>
+                        <div class="col-sm-4 col-xs-12">
+                        <table class="cartTotalWrp tbl-2" cellpadding="0" cellspacing="0" border="0">
                             <tbody>
                                 <tr class="ItemConvertedSubtotal">
                                     <td class="itemText">
@@ -121,9 +122,10 @@
                                     </td>
                                 </tr>
                             </tbody></table>
+                        </div>
                     </div>
                     <div class="btnWrp">
-                        <a id="summary-btn" class="btn-flat-green xxl" onclick="proceedPayment();">Proceed to Payment</a>
+                        <a id="summary-btn" class="btn btn-success btn-lg" onclick="proceedPayment();">Proceed to Payment</a>
                     </div>
                 </div>
 
@@ -131,13 +133,23 @@
                     <p class="title"><span class="check">2.</span> <span class="txt">Choose Amount</span> <span class="edit">edit</span></p>
                     <div id="walletOption" style="display:none;">
                         <form id="walletform" name="walletform">
-                            <input type="checkbox" value="1" name="wallet_type[]">Cash Wallet 
-                            <input type="checkbox" value="2" name="wallet_type[]">RP Wallet
-                            <input type="checkbox" value="3" name="wallet_type[]">Commision Wallet
-                            <br/><br/>
-                            <input type="button" value="Make Payment" onclick="walletamountcalculation();" class="btn-flat-green ui-btn-grey">   
-                        </form>
+                            <div class="col-sm-4 col-xs-12 tleft">
+                           <input id="box1" type="checkbox" />
+                            <label for="box1">Cash Wallet</label>
                             </div>
+                             <div class="col-sm-4 col-xs-12 tleft">
+                           <input id="box2" type="checkbox" />
+                            <label for="box2">RP Wallet</label>
+                             </div>
+                             <div class="col-sm-4 col-xs-12 tleft">
+                          <input id="box3" type="checkbox" />
+                         <label for="box3">Commision Wallet</label>
+                            <br/><br/> </div>
+                            <input type="button" value="Make Payment" onclick="walletamountcalculation();" class="btn btn-success btn-lg">   
+                             </div>
+                            </form>
+                        
+                         
                             </div>
 
                             <div class="sectionWrp paymentOptions">
@@ -166,6 +178,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
         <input type="hidden" id="coupon_discount_price" value=""> 
