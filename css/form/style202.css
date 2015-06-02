@@ -3106,3 +3106,23 @@ Styler Panel
 .fancybox-opened {
   z-index: 100001;
 }
+
+.site-logo{padding:10px !important;}
+.cartItemsWrp{display: table !important; margin-bottom: 0;}
+.cartfooter{padding: 15px 0;}
+.cartfooter .couponWrp{ width: auto; border: none; padding: 0; min-height: auto;}
+#walletOption input[type=checkbox] { display:none; }
+#walletOption input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+#walletOption input[type=checkbox] + label:before { content: "\f096"; font-size: 20px; letter-spacing: 15px; color: #a1a1a1; }
+#walletOption input[type=checkbox]:checked + label:before { content: "\f046"; font-size: 20px; letter-spacing: 13px; color: #3fb148;}
+#walletOption label{font-size: 18px;}
+#walletform{padding: 10px 0;}
+.tleft{ text-align: left;}
+.sectionWrp.open .title{ background: #f0ea6a; color: #3b3b3b;}
+.edit-icon{ color: #3b3b3b;}
+.cartItemsWrp .domain td{color:#3b3b3b;}
+.header-navigation > ul > li.dropdown:hover > a:after{left: 40%;}
+.header-navigation > ul > li{ position: relative !important;}
