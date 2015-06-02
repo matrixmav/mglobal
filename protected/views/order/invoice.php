@@ -95,22 +95,22 @@
                                         <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($orderObject->transaction->coupon_discount, 2); ?></span></p>
                                     </td>
                                 </tr> 
-                                <tr class="ItemTotalAfterDiscount">
+                                <tr class="ItemConvertedSubtotal">
 
                                     <td class="itemText">
                                         <p>Total Amount:</p>
                                     </td>
                                     <td class="itemAmount">
-                                        <p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price - $orderObject->transaction->coupon_discount, 2); ?></span></p>
+                                        <p id="CartTotal"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price - $orderObject->transaction->coupon_discount, 2); ?></span></p>
                                     </td>
                                 </tr>
-                                <tr class="ItemTotalAfterDiscount">
+                                <tr class="ItemConvertedSubtotal">
 
                                     <td class="itemText">
                                         <p>Used RP /Cash :</p>
                                     </td>
                                     <td class="itemAmount">
-                                        <p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->transaction->used_rp, 2); ?></span></p>
+                                        <p id="CartTotal"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->transaction->used_rp, 2); ?></span></p>
                                     </td>
                                 </tr>
                                 <tr class="ItemTotalAfterDiscount">
