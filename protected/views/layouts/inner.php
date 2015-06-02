@@ -138,8 +138,8 @@ License: You must have a valid license purchased only from themeforest(the above
             jQuery(document).ready(function () {
                 App.init();
                 //checkLoginTime();
-                var IDSVal = document.getElementById('username').value;
-                chatWith(IDSVal);
+                //var IDSVal = document.getElementById('username').value;
+                //chatWith(IDSVal);
             });
             $(".single_2").fancybox({
                 openEffect: 'elastic',
