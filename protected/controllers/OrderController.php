@@ -210,7 +210,7 @@ class OrderController extends Controller {
             $order_id = $_GET['id'];
         }
         $orderObject = Order::model()->findByPK($order_id);
-        $transactionObject = Transaction::model()->findByPK($order_id);
+        $transactionObject = Transaction::model()->findByPK($orderObject->transaction_id);
         $this->renderPartial('invoice', array(
             'orderObject' => $orderObject,'transactionObject'=>$transactionObject
         ));
