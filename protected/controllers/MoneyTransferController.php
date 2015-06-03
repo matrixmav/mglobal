@@ -76,10 +76,14 @@ class MoneyTransferController extends Controller {
     /* code for money transfer in user view */
 
     public function actionTransfer() {
-
+        $error = "";
         $userid = Yii::app()->session['userid'];
         if (isset($_POST['transfer'])) {
-
+            
+        if($_POST['paid_amount'] < 10)
+        {
+           $error = "Sorry! you can not transfer amount less then $10";
+        }else{
             $postDataArray = $_POST;
             $userName = $postDataArray['username'];
             $userObject = User::model()->findByAttributes(array('name' => $userName));
@@ -93,11 +97,14 @@ class MoneyTransferController extends Controller {
             //create money transfer record entry
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id);
             $this->redirect(array('MoneyTransfer/confirm', 'tu' => base64_encode($moneyTransferObject->id), 'a' => base64_encode($transactionObject->actual_amount)));
-        } else {
+        } 
+        }
             //$adminId = Yii::app()->params['adminId'];
             $walletObject = Wallet::model()->findWalletByUserId($userid);
-            $this->render('transfer', array('walletObject' => $walletObject));
-        }
+            $this->render('transfer', array('walletObject' => $walletObject,'error'=>$error));
+         
+         
+     
     }
 
     /* autocomplete of username for user view excluding logged in user and admin */
