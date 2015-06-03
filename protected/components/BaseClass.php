@@ -56,7 +56,7 @@ class BaseClass extends Controller {
             return $walletObject; 
                         
     }
-    function getUnredMails($userId){
+    public static function getUnredMails($userId){
         return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND type = 0'));
     }
 
