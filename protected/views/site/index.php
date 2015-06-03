@@ -1,6 +1,6 @@
   <!-- Header END -->
   <div id='content-wrapper'>
-<div id='social-sidebar'>
+<!--<div id='social-sidebar'>
 <ul>
 <li>
 <a ><img src="images/whts1.png" />
@@ -34,7 +34,7 @@
 </li>
 
 </ul>
-</div>
+</div> -->
 
 </div>
   

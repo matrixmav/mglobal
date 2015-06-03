@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <?php  $curController = @Yii::app()->controller->id;
       $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
 ?>
