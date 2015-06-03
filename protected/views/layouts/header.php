@@ -32,7 +32,7 @@
             <div class="col-md-6 col-sm-6 additional-shop-info">
                     <ul class="list-unstyled list-inline">
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
-                        <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
+                        <li><i class="fa fa-envelope-o"></i><span>info@maverick.com</span></li>
                         <li><button id="checkout" class="btn-flat-green btn-orange btn-h" onclick="RedirectCart();">Call Us</button></li>
                     </ul>
               </div>
@@ -62,7 +62,7 @@
       <div class="row header-index">
         <!-- Logo BEGIN -->
         <div class="col-md-2 col-sm-2">
-          <a class="scroll site-logo" href="#promo-block"><!---<img src="/images/logo/red" alt="Metronic One Page">---->Maverick Global</a>
+          <a class="scroll site-logo" href="#promo-block"><img class="img-responsive "src="../../../images/logo/logo.png" width="140px" ></a>
         </div>
         <!-- Logo END -->
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
