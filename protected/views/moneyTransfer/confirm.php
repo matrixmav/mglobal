@@ -6,7 +6,7 @@ $this->breadcrumbs = array(
 <div class="col-md-7 col-sm-7">
     <form class="form-horizontal" role="form" method="post" action="" >
         <fieldset> 
-            <legend>Select User</legend>
+            <legend>Transfer Confirmation</legend>
             <div class="form-group">
                 <label for="lastname" class="col-lg-4 control-label">Actual Amount <span class="require">*</span></label>
                 <div class="col-lg-8" >
