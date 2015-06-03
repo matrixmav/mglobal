@@ -59,7 +59,7 @@ $this->menu=array(
                 array(
                     'name'=>'transaction_id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->transaction->paid_amount)? number_format($data->transaction->paid_amount,2):""',
+                    'value'=>'isset($data->transaction->paid_amount)? $data->transaction->paid_amount :""',
 		),
             array(
                     'name'=>'created_at',
