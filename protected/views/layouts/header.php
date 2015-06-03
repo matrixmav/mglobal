@@ -1,22 +1,21 @@
-<!-- BEGIN STYLE CUSTOMIZER --
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
   <div class="color-panel">
-    <div class="color-mode-icons icon-color"></div>
-    <div class="color-mode-icons icon-color-close"></div>
+    <div class="color-mode-icons icon-color"><i class="fa fa-share-alt"></i></div>
+    <div class="color-mode-icons icon-color-close"><i class="fa fa-share-alt"></i></div>
     <div class="color-mode">
-      <p>THEME COLOR</p>
+     
+
       <ul class="inline">
-        <li class="color-red current color-default" data-style="red"></li>
-        <li class="color-blue" data-style="blue"></li>
-        <li class="color-green" data-style="green"></li>
-        <li class="color-orange" data-style="orange"></li>
-        <li class="color-gray" data-style="gray"></li>
-        <li class="color-turquoise" data-style="turquoise"></li>
+         
+        <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+        <li><a href=""><i class="fa fa-twitter-square"></i></a></li>
+        <li><a href=""><i class="fa fa-skype"></i></a></li>
+        <li><a href=""><i class="fa fa-linkedin-square"></i></a></li>
+        <li><a href=""><i class="fa fa-youtube-square"></i></a></li>
+         <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
       </ul>
-      <p>MENU POSITION</p>
-      <select class="form-control menu-pos">
-        <option value="bottom">Bottom</option>
-        <option value="top">Top</option>
-      </select>
+      
     </div>
   </div>
   <!-- END BEGIN STYLE CUSTOMIZER -->
