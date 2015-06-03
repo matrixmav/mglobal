@@ -167,20 +167,21 @@
                                 <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
                                 <div id="paymentOption" style="display:none;">
                                     <input type="radio" value="paypal" name="payment_mode">Paypal 
-                                    <input type="radio" value="rp" name="payment_mode">Use RP
+                                     
                                     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
                                         <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                                         <input type="hidden" name="cmd" value="_xclick">
                                         <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
                                         <input type="hidden" name="item_number" value="1">
                                         <input type="hidden" name="credits" value="">
-                                        <input type="hidden" name="userid" value="<?php Yii::app()->session['userid']; ?>">
-                                        <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
+                                        <input type="hidden" name="userid" value="<?php echo Yii::app()->session['userid']; ?>">
+                                        <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>" id="ppamount">
                                         <input type="hidden" name="no_shipping" value="1">
                                         <input type="hidden" name="currency_code" value="USD">
                                         <input type="hidden" name="handling" value="0">
                                         <input type="hidden" name="cancel_return" value="">
-                                        <input type="hidden" name="return" value="/transaction/">
+                                        <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+                                        
 
 
                         </form> 
