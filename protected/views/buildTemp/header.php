@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs = array(
     'Template' => array('BuildTemp/templates'),
-    'Contact Setting',
+    'Template Header',
 );
 ?>
 
@@ -30,11 +30,11 @@ $this->breadcrumbs = array(
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
-            <legend>Contact Setting</legend>          
+            <legend>Header Edit</legend>          
                 <div class="form-group">
-                    <label class="col-lg-2 control-label" for="lastname">Footer<span class="require">*</span></label>
+                    <label class="col-lg-2 control-label" for="lastname">Header<span class="require">*</span></label>
                     <div class="col-lg-10">
-                        <textarea id="editor1" class="form-control" name="footer_code" cols="20" rows="10"><?php echo (!empty($userhasObject->temp_footer)) ? stripcslashes($userhasObject->temp_footer) : ""; ?></textarea>
+                        <textarea id="editor1" class="form-control" name="header_code" cols="20" rows="20" ><?php echo (!empty($userhasObject->temp_header)) ? stripcslashes($userhasObject->temp_header) : ""; ?></textarea>
                         <span id="contact_error"></span>
                     </div>
                 </div>
@@ -50,8 +50,6 @@ $this->breadcrumbs = array(
 </div>
 
 
-
-
 <script type="text/javascript">
     function validation()
     {
@@ -60,15 +58,7 @@ $this->breadcrumbs = array(
             $("#contact_error").html("Please enter contact email.");
             $("#contact").focus();
             return false;
-        }
-        var email = document.getElementById('email');
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-        if (!filter.test(email.value)) {
-            $("#contact_error").html("Enter valid email address ");
-            $("#email").focus();
-            return false;
-        }
+        }        
     }
 </script>
 <script type="text/javascript">
@@ -80,5 +70,5 @@ $this->breadcrumbs = array(
         filebrowserImageUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
         filebrowserFlashUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
     });
-    CKFinder.setupCKEditor(editor, '../');
+    CKFinder.setupCKEditor(editor, '../');   
 </script>
