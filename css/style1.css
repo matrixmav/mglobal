@@ -1804,3 +1804,17 @@ Pre-Header and pre-header elements
 .bg-s{  margin-top: -37px!important;}
 .h-pd{  padding-top: 9%!important;}
 .testi-bg{ background-image: url(images/)}
+.site-logo{padding-top: 2px !important;}
+.color-panel{top:145px !important;}
+.color-mode{width: auto !important; top: 62px !important; right: 0 !important; background: #c9c9c9; padding: 10px 0;}
+.color-panel .icon-color-close{background: #c9c9c9;}
+.color-mode ul {padding:0 8px;}
+.color-mode ul li{ border:none; background: #FFF; display: table; vertical-align: middle; text-align: center; border-radius:50%;}
+.color-mode ul li a{ vertical-align: middle; color: #337ab7; display: table-cell;}
+.color-mode ul li a i{font-size: 16px;}
+.color-panel .color-mode-icons{font-size:20px; padding: 17px;}
+/* .tp-leftarrow:after{content: "\f18e" !important;  font-family: FontAwesome !important;}
+.tp-leftarrow:before{content: "\f190" !important;  font-family: FontAwesome !important;}
+*/
+.tparrows:before{font-family: "FontAwesome" !important;}
+.tparrows:after{font-family: "FontAwesome" !important; content: "\f18e" !important;}
