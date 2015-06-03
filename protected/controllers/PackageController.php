@@ -74,16 +74,18 @@ class PackageController extends Controller {
     function actionOrderAdd() {
 
         $createdDate = date("Y-m-d");
-        $transactionObject = new Transaction;
-
-        $transactionObject1 = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
-
-        $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
+        $tarnsactionID = BaseClass::gettransactionID();
         if (Yii::app()->session['transactionid'] == '') {
-            $tarnsactionID = md5(rand(5, 15));
+            $tarnsactionID = $tarnsactionID;
             Yii::app()->session['transactionid'] = $tarnsactionID;
         }
 
+        $transactionObject = new Transaction;
+
+        $transactionObject1 = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'],'transaction_id'=>Yii::app()->session['transactionid']));
+
+        $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
+        
         if (count($transactionObject1) > 0 && $transactionObject1->status != '1') {
 
             $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
