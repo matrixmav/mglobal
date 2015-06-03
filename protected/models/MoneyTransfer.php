@@ -137,18 +137,13 @@ class MoneyTransfer extends CActiveRecord
             $moneyTransfertoObj->to_user_id = $userObject->id;
             $moneyTransfertoObj->transaction_id = $transactionId;
             $moneyTransfertoObj->fund_type = $fundType;//1:RP,2:Cash
-            $moneyTransfertoObj->fund = $fund;//1:RP,2:Cash
+            $moneyTransfertoObj->fund = $postDataArray['paid_amount'];//1:RP,2:Cash
             $moneyTransfertoObj->comment = $comment;
             $moneyTransfertoObj->status = 0;
             $moneyTransfertoObj->wallet_id = $postDataArray['walletId'];
             $moneyTransfertoObj->created_at = $createdTime;
             $moneyTransfertoObj->updated_at = $createdTime;
-            
-            $walletObject = Wallet::model()->find(array('condition'=>'user_id='.$userid.' AND type='.$postDataArray['walletId']));
-            $amountDeduted = $walletObject->fund - $postDataArray['fund'];
-            echo $walletObject->fund = $amountDeduted;exit;
-            $walletObject->update();
-            //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
+             //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
             if (!$moneyTransfertoObj->save()) {
                 echo "<pre>";
                 print_r($moneyTransfertoObj->getErrors());
