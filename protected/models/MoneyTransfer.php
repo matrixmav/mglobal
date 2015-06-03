@@ -121,7 +121,7 @@ class MoneyTransfer extends CActiveRecord
 		return parent::model($className);
 	}
         
-        public function createMoneyTransfer($postDataArray, $userObject,$transactionId){
+        public function createMoneyTransfer($postDataArray, $userObject,$transactionId,$paid_amount){
             $comment = "fund transfer";
             if(!empty($postDataArray['comment'])){
                 $comment = $postDataArray['comment'];
@@ -137,7 +137,7 @@ class MoneyTransfer extends CActiveRecord
             $moneyTransfertoObj->to_user_id = $userObject->id;
             $moneyTransfertoObj->transaction_id = $transactionId;
             $moneyTransfertoObj->fund_type = $fundType;//1:RP,2:Cash
-            $moneyTransfertoObj->fund = $postDataArray['paid_amount'];//1:RP,2:Cash
+            $moneyTransfertoObj->fund = $paid_amount;//1:RP,2:Cash
             $moneyTransfertoObj->comment = $comment;
             $moneyTransfertoObj->status = 0;
             $moneyTransfertoObj->wallet_id = $postDataArray['walletId'];
