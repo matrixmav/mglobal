@@ -96,7 +96,7 @@ class MoneyTransferController extends Controller {
 
             //create money transfer record entry
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id);
-            $this->redirect(array('MoneyTransfer/confirm', 'tu' => base64_encode($moneyTransferObject->id), 'a' => base64_encode($transactionObject->actual_amount)));
+            $this->redirect(array('MoneyTransfer/confirm', 'tu' => base64_encode($moneyTransferObject->id), 'a' => base64_encode($transactionObject->paid_amount)));
         } 
         }
             //$adminId = Yii::app()->params['adminId'];
