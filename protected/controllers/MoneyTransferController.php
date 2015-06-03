@@ -182,7 +182,7 @@ class MoneyTransferController extends Controller {
                 /* fetching existing money transfer */
                 $transactionObj = Transaction::model()->findByPk($moneyobj->transaction_id);
                 /* for from user wallet minus */
-                $walletRecvObj = Wallet::model()->findByAttributes(array('user_id'=>$userid,'type'=>$moneyobj->wallet_id));
+                $walletRecvObj = Wallet::model()->findByAttributes(array('user_id'=>$userid,'id'=>$moneyobj->wallet_id));
                 if(empty($walletRecvObj)){
                     
                     $walletRecvObj = new Wallet;
@@ -230,7 +230,7 @@ class MoneyTransferController extends Controller {
                 $walletadmObj = Wallet::model()->findByAttributes(array('user_id' => $adminid, 'type' => $transactionObj->mode));
                 if (empty($walletadmObj)) {
                     $walletadmObj = new Wallet;
-                    $walletadmObj->type = $moneyobj->wallet_id;
+                    $walletadmObj->type = $walletRecvObj->type;
                     $walletadmObj->user_id = $adminid;
                     $walletadmObj->fund = $fundA;
                     $walletadmObj->status = 1;
