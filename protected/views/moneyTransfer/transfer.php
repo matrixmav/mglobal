@@ -8,6 +8,8 @@ $this->breadcrumbs = array(
 
 <div class="col-md-7 col-sm-7">
     <div class="error" id="error_msg" style="display: none;"></div>
+    <?php if($error){ ?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
+    
     <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" >
         <fieldset> 
             <legend>Transfer Funds</legend>
