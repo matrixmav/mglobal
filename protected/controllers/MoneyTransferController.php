@@ -208,13 +208,16 @@ class MoneyTransferController extends Controller {
                 $transactionObj->status = 1;
                 $transactionObj->update();
                 /* creating new transaction object for admin */
-
+                $fundA = $transactionObj->paid_amount*1/100;
                 $transactionObjuser2 = new Transaction;
-                
+                $tarnsactionID = BaseClass::gettransactionID();
                 $transactionObjuser2->gateway_id = 1;
                 $transactionObjuser2->mode = 'transfer';
                 $transactionObjuser2->user_id = $adminid;
                 $transactionObjuser2->status = 1;
+                $transactionObjuser2->actual_amount = $fundA;
+                $transactionObjuser2->paid_amount = $fundA;
+                $transactionObjuser2->transaction_id = $tarnsactionID;
                 $transactionObjuser2->created_at = $createdtime;
                 $transactionObjuser2->updated_at = $createdtime;
                 if (!$transactionObjuser2->save(false)) {
@@ -229,7 +232,7 @@ class MoneyTransferController extends Controller {
                     $walletadmObj = new Wallet;
                     $walletadmObj->type = $moneyobj->wallet_id;
                     $walletadmObj->user_id = $adminid;
-                    $walletadmObj->fund = $transactionObjuser2->paid_amount*1/100;
+                    $walletadmObj->fund = $fundA;
                     $walletadmObj->status = 1;
                     $walletadmObj->created_at = $createdtime;
                     $walletadmObj->updated_at = $createdtime;
@@ -244,7 +247,7 @@ class MoneyTransferController extends Controller {
                     $walletadmObj->save();
                 }
                 /* creating new money transfer object for admin */
-                $fundA = $transactionObjuser2->paid_amount*1/100;
+                
                 $moneyTransferadmObj = new MoneyTransfer;
                 $moneyTransferadmObj->from_user_id = $userid;
                 $moneyTransferadmObj->to_user_id = $adminid;
@@ -275,8 +278,6 @@ class MoneyTransferController extends Controller {
 
     public function actionStatus() {
         $transactionObject = Transaction::model()->findByPk($_GET['transactionId']);
-        
-
         $this->render('status',array('transactionObject'=>$transactionObject));
     }
 
