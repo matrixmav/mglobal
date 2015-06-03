@@ -75,7 +75,6 @@ class PackageController extends Controller {
 
         $createdDate = date("Y-m-d");
         $tarnsactionID = BaseClass::gettransactionID();
-        
         $transactionObject = new Transaction;
         if (Yii::app()->session['transactionid'] == '') {
             Yii::app()->session['transactionid'] = $tarnsactionID;
