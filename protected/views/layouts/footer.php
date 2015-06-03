@@ -56,7 +56,7 @@
           <!-- END BOTTOM CONTACTS -->
           <div class="pre-footer-subscribe-box">
             <img src="../../../images/whts.png" width="30" height="30" /><span class="con-f"> &nbsp;+91 1234567890</span><br/><br/>
-              <img src="../../../images/skyp.png" width="100" height="50" class="img-mar" />
+            <a href="callto://ramhemareddy"><img src="../../../images/skyp.png" width="100" height="50" class="img-mar" /></a>
           </div>
         </div>
       </div>
