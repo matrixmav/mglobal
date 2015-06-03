@@ -32,7 +32,7 @@ class MoneyTransfer extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('to_user_id, from_user_id,transaction_id,wallet_id, fund_type,fund, comment, created_at, updated_at', 'required'),
-			array('to_user_id, from_user_id, transaction_id,wallet_id,fund_type,fund, status', 'numerical', 'integerOnly'=>true),
+			array('to_user_id, from_user_id, transaction_id,wallet_id,fund_type, status', 'numerical', 'integerOnly'=>true),
 			array('comment', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -130,6 +130,7 @@ class MoneyTransfer extends CActiveRecord
             if(!empty($postDataArray['fund'])){
                 $fundType = $postDataArray['fund'];
             }
+            
             $userid = Yii::app()->session['userid'];
             $createdTime = new CDbExpression('NOW()');
             $moneyTransfertoObj = new MoneyTransfer;
