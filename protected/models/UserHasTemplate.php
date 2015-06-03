@@ -121,4 +121,19 @@ class UserHasTemplate extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userId){
+            $hasbuilderObject->category_id = $buildertempObject->category_id;
+            $hasbuilderObject->user_id = $userId;
+            $hasbuilderObject->template_id = $buildertempObject->template_id;
+            $hasbuilderObject->temp_header = $buildertempObject->header->header_content;
+            $hasbuilderObject->user_menu = $buildertempObject->header->menu;
+            $hasbuilderObject->temp_body = $buildertempObject->body->body_content;
+            $hasbuilderObject->temp_footer = $buildertempObject->footer->footer_content;
+            $hasbuilderObject->order_id = $orderId;
+            $hasbuilderObject->publish = 0;
+            $hasbuilderObject->created_at = date('Y-m-d');
+            $hasbuilderObject->save(false);
+            return $hasbuilderObject;
+        }
 }
