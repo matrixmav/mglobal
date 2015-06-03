@@ -95,7 +95,7 @@ class MoneyTransferController extends Controller {
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject);
 
             //create money transfer record entry
-            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id);
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id,$transactionObject->paid_amount);
             $this->redirect(array('MoneyTransfer/confirm', 'tu' => base64_encode($moneyTransferObject->id), 'a' => base64_encode($transactionObject->paid_amount)));
         } 
         }
@@ -192,7 +192,7 @@ class MoneyTransferController extends Controller {
                     $walletRecvObj->updated_at = $createdtime;
                     $walletRecvObj->save(false);
                 }
-                $walletRecvObj->fund = ($walletRecvObj->fund) - ($transactionObj->actual_amount);
+                $walletRecvObj->fund = ($walletRecvObj->fund) - ($transactionObj->paid_amount);
                 $walletRecvObj->update();
 
                 /* for admin wallet add */
@@ -209,14 +209,7 @@ class MoneyTransferController extends Controller {
                 /* creating new transaction object for admin */
 
                 $transactionObjuser2 = new Transaction;
-                $transactionObjuser2->user_id = $adminid;
-                $transactionObjuser2->mode = $transactionObj->mode; //remove
-                $transactionObjuser2->gateway_id = 1;
-                $transactionObjuser2->coupon_discount = 0;
-                $transactionObjuser2->actual_amount = (($transactionObj->actual_amount) - ($transactionObj->paid_amount));
-                $transactionObjuser2->paid_amount = (($transactionObj->actual_amount) - ($transactionObj->paid_amount));
-                $transactionObjuser2->total_rp = 0; //remove
-                $transactionObjuser2->used_rp = 0;
+                 
                 $transactionObjuser2->status = 1;
                 $transactionObjuser2->created_at = $createdtime;
                 $transactionObjuser2->updated_at = $createdtime;
