@@ -32,8 +32,10 @@
             <div class="col-md-6 col-sm-6 additional-shop-info">
                     <ul class="list-unstyled list-inline">
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
-                        <li><i class="fa fa-envelope-o"></i><span>info@maverick.com</span></li>
-                        <li><button id="checkout" class="btn-flat-green btn-orange btn-h" onclick="RedirectCart();">Call Us</button></li>
+
+                        <li><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
+                        <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Call Us</button><a/></li>
+
                     </ul>
               </div>
             <div class="col-md-6 col-sm-6 additional-nav">

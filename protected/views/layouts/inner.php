@@ -18,7 +18,9 @@ $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState (
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
+ 
 ?>
+
 
 <!DOCTYPE html>
 
@@ -138,8 +140,8 @@ License: You must have a valid license purchased only from themeforest(the above
             jQuery(document).ready(function () {
                 App.init();
                 //checkLoginTime();
-                var IDSVal = document.getElementById('username').value;
-                chatWith(IDSVal);
+                //var IDSVal = document.getElementById('username').value;
+                //chatWith(IDSVal);
             });
             $(".single_2").fancybox({
                 openEffect: 'elastic',
@@ -403,7 +405,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                                $arraytransaction = BaseClass:: transactionStatus(); 
+                                if($arraytransaction->status==1)
+                                {
+                                  $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
                                     "profile/updateprofile" => "Profile",
@@ -412,7 +417,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/testimonial" => "Testimonial",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
+                                );  
+                                }else{
+                                $hotel_subsection = array(
+                                    "order/list" => "My Order",
+                                    "profile/changepassword" => "Change Password",
+                                    "profile/updateprofile" => "Profile",
+                                    "profile/address" => "Address",
+                                    "profile/documentverification" => "Verification",
+                                    //"profile/testimonial" => "Testimonial",
+                                    "genealogy" => "Genealogy",
+//                                    "profile/summery" => "Summery",
                                 );
+                                }
                                 $activecls = 'active';
                                 if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' && $curControllerLower == "order" && $curActionLower!='refferalincome') {
                                     $activecls = 'active';
@@ -520,6 +537,45 @@ License: You must have a valid license purchased only from themeforest(the above
                                             $ctName = "search/create/type/details";
                                         }
                                         if ($ctName == "transaction" && $curControllerLower == "moneytransfer")
+                                            $class_content = 'class="active"';
+                                        else
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                        echo '<li ' . $class_content . '>';
+                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '</li>';
+                                        if ($ctName == "search/create/type/details") {
+                                            $ctName = "search/create";
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                            $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "/ads" => "Ads List",
+                                );
+                                ?>
+                                <li
+
+                                    class="<?php echo (($curControllerLower == 'ads') && ($curControllerLower == 'ads')) ? "active" : ''; ?>">
+
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Ads </span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'ads' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                        if ($ctName == "search/create") {
+                                            $ctName = "search/create/type/details";
+                                        }
+                                        if ($ctName == "ads" && $curControllerLower == "moneytransfer")
                                             $class_content = 'class="active"';
                                         else
                                             $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';

@@ -2,32 +2,22 @@
 <html>
 <head>
 <title><?php echo $builderObjectmeta->header->meta_title;?></title>
-<link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
+<?php foreach($builderObjectCss as $builderObjectListCss){ ?>
+    <link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/<?php echo $builderObjectListCss->name ?>" rel="stylesheet" type="text/css" media="all" />
+<?php } ?>
+    
+<?php foreach($builderObjectJs as $builderObjectListJs){ ?>
+    <script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/<?php echo $builderObjectListJs->name ?>" ></script>
+<?php } ?>
 
-<link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/responsiveslides.css">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/responsiveslides.min.js"></script>
-		  <script>
-		    // You can also use "$(window).load(function() {"
-			    $(function () {
-			      // Slideshow 1
-			      $("#slider1").responsiveSlides({
-			        maxwidth: 1600,
-			        speed: 1000,
-			      });
-			});
-		  </script>
-
-
-
  
 <script type="text/javascript">
     
-jQuery(document).ready(function() { 
+$(document).ready(function() { 
     dataString = 'fetchmenu';
     $.ajax({
         type: "GET",
@@ -35,7 +25,7 @@ jQuery(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
-//            alert(html);
+          // alert(html);
             document.getElementById("head_menu").innerHTML = html;
         }
     });
@@ -46,7 +36,7 @@ jQuery(document).ready(function() {
         cache: false,
         success: function(html) {
 //            alert(html);
-            document.getElementById("logo").innerHTML = html;
+            //document.getElementById("logo").innerHTML = html;
         }
     });
     var url = document.URL;
@@ -65,9 +55,23 @@ jQuery(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
+                //alert(html);
             document.getElementById("content").innerHTML = html;
         }
     });
+    
+    dataString = 'fetchContent=yes&page_id=' + pageID;
+    $.ajax({
+        type: "GET",
+        url: "/BuildTemp/pagefooter",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+               //alert(html);
+            document.getElementById("footer").innerHTML = html;
+        }
+    });
+    
 });
 
 
@@ -119,22 +123,16 @@ function validation() {
 </head>	
 <body>
 <div id="header">
-
-<?php echo $builderObject->temp_header;?>
-    <input type="hidden" id="defaultPage" value="<?php echo (!empty($userpages1Object))? $userpages1Object->id : "";?>">   
+<?php echo stripslashes($builderObject->temp_header);  ?>
+    <input type="hidden" id="defaultPage" value="<?php //echo (!empty($userpages1Object))? stripslashes($userpages1Object->id) : "";?>">   
 </div>
 
-<div id="container">
-   <?php echo $builderObject->temp_body;?>  
+<div id="content">
+    <?php echo $builderObject->temp_body ;?> 
 </div>
 
 <div id="footer">
-  <?php echo $builderObject->temp_footer;?>   
+  <?php echo $builderObject->temp_footer ;?>   
 </div>
 </body>
 </html>
-
-<script type="text/javascript" src="js/tsc_jqcarousel.js"></script>
-<script type="text/javascript">
-  $(function() {jQuery('.tsc_carousel_hor .carousel').jcarousel({scroll:1});});
-</script>

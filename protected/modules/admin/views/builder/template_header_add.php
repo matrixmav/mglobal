@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation1();" enctype="multipart/form-data">
+    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Add Template</legend>
@@ -51,6 +51,15 @@ $this->breadcrumbs = array(
                     <span id="template_title_error"></span>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="menucode">Menu Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" style="width: 482px; height: 150px;"></textarea>
+                    <span id="menu_code_error"></span>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -76,13 +85,13 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Custom CSS</label>
                 <div class="col-lg-8">
-                    <textarea id="custom_css" class="form-control" name="custom_css" style="width: 482px; height: 150px;"><?php echo (!empty($customcode->custom_css)) ? stripcslashes($customcode->custom_css) : ""; ?></textarea>                    
+                    <textarea id="custom_css" class="form-control" name="custom_css" style="width: 482px; height: 150px;"></textarea>                    
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Custom JS</label>
                 <div class="col-lg-8">
-                    <textarea id="custom_js" class="form-control" name="custom_js" style="width: 482px; height: 150px;"><?php echo (!empty($customcode->custom_js)) ? stripcslashes($customcode->custom_js) : ""; ?></textarea>
+                    <textarea id="custom_js" class="form-control" name="custom_js" style="width: 482px; height: 150px;"></textarea>
                 </div>
             </div>
            
@@ -128,6 +137,16 @@ $this->breadcrumbs = array(
       $("#template_title").focus();            
       return false;
     }
+    
+    
+    
+    $("#menu_code_error").html("");
+      if ($("#menu_code").val() == "") {
+      $("#menu_code_error").html("Please enter Header Code");
+      $("#menu_code").focus();            
+      return false;
+    }
+    
       $("#header_code_error").html("");
       if ($("#header_code").val() == "") {
       $("#header_code_error").html("Please enter Header Code");

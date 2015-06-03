@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="body_code" class="form-control" name="Template[body_code]" cols="20" rows="20"><?php echo (!empty($bodyObject->body->body_content)) ? $bodyObject->body->body_content : ""; ?></textarea>
+                    <textarea id="body_code" class="form-control" name="Template[body_code]" cols="20" rows="20"><?php echo (!empty($bodyObject->body->body_content)) ? stripslashes($bodyObject->body->body_content) : ""; ?></textarea>
                     <span id="header_code_error"></span>
                 </div>
             </div>

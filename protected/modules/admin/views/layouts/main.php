@@ -663,6 +663,21 @@ License: You must have a valid license purchased only from themeforest(the above
                 </span>
             </div>
         </div>
+        
+    <div class="chatWrap">
+       <span class="glyphicon glyphicon-comment"></span>
+       
+      <div class="chatuserList " style="display: none;">
+       <?php $userObject = User::model()->findAll(array('condition'=>'status=1 AND name != "admin"','limit' => '10'));?>
+         
+       
+       <?php foreach($userObject as $user){?>
+       <p><span class="glyphicon glyphicon-user" ></span><a onclick="OpenChatBox('<?php echo $user->full_name;?>');"><?php echo $user->full_name; ?></a></p>
+       <?php }?>
+       
+      </div>    
+       </div> 
+        
         <!-- END FOOTER -->
         <script type="text/javascript">
             function showError(msg) {
@@ -688,7 +703,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     format: 'yyyy-mm-dd'
                 });
             });
+              $(".glyphicon-comment").click(function(){
+             $(".chatuserList").toggle();
+             });
         </script>
+       
     </body>
     <!-- END BODY -->
 </html>

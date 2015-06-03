@@ -281,6 +281,7 @@ class BuildTempController extends Controller {
                 $bodyaddObject = new BuildTempBody;
                 $footeraddObject = new BuildTempFooter;
                 $headeraddObject->header_content = addslashes($_POST['Template']['header_code']);
+                $headeraddObject->menu = addslashes($_POST['Template']['menu_code']);
                 $headeraddObject->template_title = addslashes($_POST['Template']['template_title']);
                 $headeraddObject->created_at = date('Y-m-d');
                 if ($headeraddObject->save(false)) {
