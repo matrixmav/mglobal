@@ -14,7 +14,7 @@
                 <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+91 1234567890</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>maverickinfosoft@gmail.com</span></li>
-                    <li><button id="checkout" class="btn-flat-green btn-orange btn-h" onclick="RedirectCart();">Click Here</button></li>
+                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Click Here</button></a></li>
                 </ul>
             </div>
             <!-- END TOP BAR LEFT PART -->
