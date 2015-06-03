@@ -64,9 +64,21 @@ class BaseClass extends Controller {
             return $transactionObject; 
                         
     }
+
+    
+    public static function gettransactionID() {
+       $transactionObject = Transaction::model()->find(array('order' => 'id DESC'));
+         $lastid = explode(Yii::app()->params['transactionid'],$transactionObject->transaction_id);
+         $incementID = $lastid[1] + 1; 
+         $generateid = Yii::app()->params['transactionid'].$incementID.Yii::app()->params['transactionid'];
+        return $generateid; 
+                        
+    }
+    
     public static function getUnredMails($userId){
 
         return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND status = 0'));
+
 
     }
 
@@ -555,7 +567,9 @@ class BaseClass extends Controller {
      * @return int
      */
     public static function getPercentage($value1, $value2 , $flag=0){
-        if($flag){
+        $percentage = $value1 + $value1*1/100;
+        return $percentage;
+        /*if($flag){
             if(($value1!=0 && $value1!='') && ($value2!=0 && $value2!='')) {
                return $percentage = ($value1 * $value2) / 100;
             } else {
@@ -568,7 +582,8 @@ class BaseClass extends Controller {
             else 
                     return 0;        
             return $percentage = substr((($value1 / $value2)*100),0,2);
-        }
+        }*/
+        
         
     }
     

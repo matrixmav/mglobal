@@ -277,7 +277,7 @@ class OrderController extends Controller {
         } else {
             $condition = "order.user_id IN('0') AND ";
         }
-        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1"');
+        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer"');
         $row = $command->queryAll();
 
         $sqlData = new CArrayDataProvider($row, array(
@@ -320,7 +320,7 @@ class OrderController extends Controller {
         } else {
             $condition = "transaction.user_id IN('0') AND ";
         }
-        $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1"');
+        $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer"');
         $row = $command->queryAll();
         $totalAmount = "";
         foreach($row as $amount)

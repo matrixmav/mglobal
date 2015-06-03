@@ -146,10 +146,16 @@ class WalletController extends Controller
         {
           $loggedInUserId = Yii::app()->session['userid'];
           $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>2));
+          if($walletobject)
+           {
+               $wid = $walletobject->id;
+           }else{
+             $wid = 0;  
+           }
           $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
 
                                         'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$walletobject->id),'order'=>'id DESC',
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid),'order'=>'id DESC',
                                         )));
             $this->render('rpwallet',array('dataProvider'=>$dataProvider));
         }
@@ -161,10 +167,15 @@ class WalletController extends Controller
         {
            $loggedInUserId = Yii::app()->session['userid'];
             $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>3));
-          
+           if($walletobject)
+           {
+               $wid = $walletobject->id;
+           }else{
+             $wid = 0;  
+           }
            $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
                                         'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$walletobject->id),'order'=>'id DESC',
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid),'order'=>'id DESC',
                                         )));
             $this->render('commisionwallet',array('dataProvider'=>$dataProvider));
         }
@@ -176,10 +187,15 @@ class WalletController extends Controller
         {
             $loggedInUserId = Yii::app()->session['userid'];
              $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>1));
-          
+          if($walletobject)
+           {
+               $wid = $walletobject->id;
+           }else{
+             $wid = 0;  
+           }
            $dataProvider = new CActiveDataProvider('MoneyTransfer',array(
                                         'criteria'=>array(
-                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$walletobject->id),'order'=>'id DESC',
+                                                        'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid),'order'=>'id DESC',
                                         )));
             $this->render('fundwallet',array('dataProvider'=>$dataProvider));
         }
