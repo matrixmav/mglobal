@@ -5,8 +5,8 @@ $this->breadcrumbs = array(
 );
 
 ?>
-<div class="col-md-7 col-sm-7" id="test">
-   
+
+<div class="col-md-12 col-sm-12" id="test">
     <?php if (count($userpagesObject) < 4) { ?>
         <a href="/BuildTemp/userinput" class="btn green">Add page</a>
     <?php
@@ -18,8 +18,16 @@ $this->breadcrumbs = array(
     <?php }
 } ?> 
 
-    <a href="/BuildTemp/addlogo" class="btn green">Add Logo</a>
+    <a href="/BuildTemp/addlogo" class="btn green">Add Logo</a>    
     <a href="/BuildTemp/addcopyright" class="btn green">Add Copy Right</a> 
+    <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
+    <a href="/BuildTemp/addfooter" class="btn green">Footer</a> 
+
+<?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
+<?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
+
+</div>
+<div class="col-md-7 col-sm-7">
 
 <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
 <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
@@ -75,5 +83,5 @@ $this->breadcrumbs = array(
             return false;
         }
     }
- </script>
+</script>
   

@@ -56,7 +56,7 @@ class BaseClass extends Controller {
             return $walletObject; 
                         
     }
-    
+   
     public static function transactionStatus() {
         $userId = Yii::app()->session['userid'];
         $transactionObject = Transaction::model()->findByAttributes(array('user_id'=>$userId));
@@ -64,6 +64,7 @@ class BaseClass extends Controller {
             return $transactionObject; 
                         
     }
+
     
     public static function gettransactionID() {
        $transactionObject = Transaction::model()->find(array('order' => 'id DESC'));
@@ -73,8 +74,12 @@ class BaseClass extends Controller {
         return $generateid; 
                         
     }
-    function getUnredMails($userId){
-        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND type = 0'));
+    
+    public static function getUnredMails($userId){
+
+        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND status = 0'));
+
+
     }
 
     public static function isAdmin() {

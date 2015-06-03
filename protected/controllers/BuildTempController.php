@@ -27,7 +27,7 @@ class BuildTempController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 
                                     'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent',
-                                    'contactsetting', 'submitform','addcopyright'),
+                                    'contactsetting', 'submitform','addcopyright','addfooter','pagefooter'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -64,11 +64,18 @@ class BuildTempController extends Controller {
         $buildTempObject = new BuildTemp;
         $userpages1Object = UserPages::model()->find(array('order' => 'id ASC', 'condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $builderObjectz = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID'], 'user_id' => Yii::app()->session['userid']));
+
+        /* Get template id  */
+        $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $builderObjectz->template_id));
         
-        //var_dump($builderObjectz); die;
+        /* Get template JS data */
+        $builderObjectJs = BuildTempJs::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
+       
+        /* Get template CSS data */
+        $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
         
         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $builderObjectz->template_id));
-        $this->renderPartial('user_templates', array('userpages1Object' => $userpages1Object, 'builderObject' => $builderObjectz, 'edit' => 1, 'builderObjectmeta' => $builderObjectmeta));
+        $this->renderPartial('user_templates', array('userpages1Object' => $userpages1Object, 'builderObject' => $builderObjectz, 'edit' => 1, 'builderObjectmeta' => $builderObjectmeta ,'builderObjectJs'=>$builderObjectJs,'builderObjectCss'=>$builderObjectCss));
     }
 
     public function actionEditHeader() {
@@ -109,6 +116,7 @@ class BuildTempController extends Controller {
                 $hasbuilderObject->user_id = $userID;
                 $hasbuilderObject->template_id = $buildertempObject->template_id;
                 $hasbuilderObject->temp_header = $buildertempObject->header->header_content;
+                $templateObject->user_menu = $buildertempObject->header->menu;
                 $hasbuilderObject->temp_body = $buildertempObject->body->body_content;
                 $hasbuilderObject->temp_footer = $buildertempObject->footer->footer_content;
                 $hasbuilderObject->order_id = Yii::app()->session['orderID'];
@@ -120,6 +128,7 @@ class BuildTempController extends Controller {
                 $templateObject->user_id = $userID;
                 $templateObject->template_id = $buildertempObject->template_id;
                 $templateObject->temp_header = $buildertempObject->header->header_content;
+                $templateObject->user_menu = $buildertempObject->header->menu;
                 $templateObject->temp_body = $buildertempObject->body->body_content;
                 $templateObject->temp_footer = $buildertempObject->footer->footer_content;
                 $templateObject->order_id = Yii::app()->session['orderID'];
@@ -196,8 +205,9 @@ class BuildTempController extends Controller {
         $responce = "";
         $userpagesObject = UserPages::model()->findAll(); 
          
-        $buildTempHeader = UserHasTemplate::model()->findByPk(44);
-        $bb = $buildTempHeader->temp_header;
+        $buildTempHeader = UserHasTemplate::model()->findByPk(10);
+       
+        $bb = stripcslashes($buildTempHeader->user_menu);
        
         $i = 1;
         foreach ($userpagesObject as $pages) {
@@ -207,7 +217,7 @@ class BuildTempController extends Controller {
             $bb = str_replace($pat2, $pages->page_name, $bb);
             $i++;
         }
-        echo $bb;
+        echo $bb;  
     }
 
     
@@ -225,6 +235,21 @@ class BuildTempController extends Controller {
         $this->render('copyright', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
     }
     
+    /* For updating footer text */
+    public function actionAddFooter(){
+        $error = "";
+        $success = "";
+        $templateObject = new UserHasTemplate;
+        $userhasObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID'], 'user_id' => Yii::app()->session['userid']));
+       
+        if (!empty($_POST) ) {            
+            $userhasObject->temp_footer = addslashes($_POST['footer_code']);           
+            $userhasObject->update();
+            $success = "Footer Updated Successfully";
+        }
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
+        $this->render('footer', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
+    }
     
     
     public function actionAddLogo() {
@@ -263,36 +288,27 @@ class BuildTempController extends Controller {
         foreach ($userhasObject as $userhas) {
             
         }
+        
+        
         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $userhas->template_id));
         $responce .= '<img height="100" width="100" src="/user/template/logos/' . $userhas->logo . '">';
         echo $responce;
     }
 
-    public function actionPageContent() {
-        $responce = "";
+    public function actionPageContent() { 
+        $responce = "";        
         $userpageObject = UserPages::model()->findBYPK($_REQUEST['page_id']);
-        $responce .= $userpageObject->page_content;
-        if ($userpageObject->page_form != '') {
-            $responce .= '<div class="success" id="msg"></div>
-                <form action="" method="post">
-                        <div class="col-md-6 contact-left">
-			<p class="your-para"> Name<sphttp://mglobal.dev/BuildTemp/managewebsite/55an>*</span></p>
-			<input type="text" name="name" id="name" class="form-control">
-                        <div id="name_error"></div>
-			</div>
-                        <div class="col-md-6 contact-left">
-			<p class="your-para"> Email<span>*</span></p>
-			<input type="text" name="email" id="email" class="form-control">
-                        <div id="email_error"></div>
-			</div>
-                        
-			<p class="message-para"> Message<span>*</span></p>
-			<textarea cols="77" rows="6" name="message" id="message" class="form-control"></textarea>
-                        <div id="message_error"></div>
-			<div class="send"><input type="button" value="SEND" class="btn btn-success" onClick=" return validation();"></div><div class="clearfix"> </div>';
-        }
-        echo $responce;
+        
+        echo stripslashes($userpageObject->page_content) ; //die;
+     // echo  $response = stripslashes($userpageObject->page_content);
+         
     }
+    
+    public function actionPageFooter(){ 
+        $userhasObject = UserHasTemplate::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
+        echo $response = stripslashes($userhasObject->temp_footer); die;
+    }
+            
 
     function actionContactSetting() {
         $error = "";
