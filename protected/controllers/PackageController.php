@@ -75,18 +75,17 @@ class PackageController extends Controller {
 
         $createdDate = date("Y-m-d");
         $tarnsactionID = BaseClass::gettransactionID();
+        
+        $transactionObject = new Transaction;
         if (Yii::app()->session['transactionid'] == '') {
-            $tarnsactionID = $tarnsactionID;
             Yii::app()->session['transactionid'] = $tarnsactionID;
         }
-
-        $transactionObject = new Transaction;
-
-        $transactionObject1 = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'],'transaction_id'=>Yii::app()->session['transactionid']));
-
+        
+        $transactionObject1 = Transaction::model()->find(array('condition'=>'user_id ='.Yii::app()->session['userid']. ' AND transaction_id= '.Yii::app()->session['transactionid']));
+         
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
         
-        if (count($transactionObject1) > 0 && $transactionObject1->status != '1') {
+        if ($transactionObject1) {
 
             $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
             $transactionObject1->mode = 'paypal';
@@ -103,7 +102,7 @@ class PackageController extends Controller {
 
 
             $transactionObject->user_id = Yii::app()->session['userid'];
-            $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
+            $transactionObject->transaction_id = Yii::app()->session['transactionid'];
             $transactionObject->mode = 'paypal';
             $transactionObject->actual_amount = $_REQUEST['totalAmount'];
             $transactionObject->paid_amount = $total;
@@ -124,7 +123,7 @@ class PackageController extends Controller {
         }
         //$transactionObject->used_rp = 0;
         $orderObject = new Order;
-        $orderObject1 = Order::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
+        $orderObject1 = Order::model()->find(array('condition'=>'user_id ='.Yii::app()->session['userid']. ' AND transaction_id= '.Yii::app()->session['transaction_id']));
 
         if (count($orderObject1) > 0) {
             $orderObject1->user_id = Yii::app()->session['userid'];
@@ -501,8 +500,10 @@ class PackageController extends Controller {
     public function actionThankYou() {
         if ($_GET) {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
+            
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status = 0) {
+            if ($transactionObject->status == 0) 
+                {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -522,7 +523,7 @@ class PackageController extends Controller {
                 ob_start();
         //$orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
         //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
-        //$packageObject = Package::model()->findByPK($orderObject->package_id);
+        $packageObject = Package::model()->findByPK($orderObject->package_id);
         $body = "<page><h1>";
         $body .= $packageObject->name;
         $body .= "</h1>
@@ -540,6 +541,9 @@ class PackageController extends Controller {
 //                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
 //                $config['attachment'] = '/upload/invoice-pdf/'.$userObject->name.'invoice.pdf';        
 //                CommonHelper::sendMail($config);
+                unset(Yii::app()->session['transactionid']);
+                unset(Yii::app()->session['amount']);
+                unset(Yii::app()->session['transaction_id']);
             }
         }
         
