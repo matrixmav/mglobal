@@ -58,25 +58,8 @@ class AdsController extends Controller {
     }
 
     public function getSocialButton($data, $row) {
-        $href = 'https://twitter.com/intent/tweet?text=' . $data->description;
-        
-        $link = '" www.example.com "';
-        $name = '"' . $data->name . '"';
-        $description = '"' . $data->description . '"';
-        $caption = '" "';
-        
-       /* echo "<a class='btn green fa fa-facebook margin-right15' onclick = 'postToFeed($link, $name, $description, $caption); return false;'></a>"
-      . "<a class='btn red fa fa-twitter margin-right15' onclick = 'postToFeed($link, $name, $description, $caption); return false;'></a>" . "<a class='btn green fa fa-google-plus margin-right15' onclick = 'postToFeed($link, $name, $description, $caption); return false;'></a>";*/
-      /*  echo "<a class='btn green fa fa-facebook margin-right15' onclick = 'postToFeed($link, $name, $description, $caption); return false;'></a>"
-      . "<a class='btn red fa fa-twitter margin-right15'  href='. $href . '></a>"; */
-        
-        $output = "<a class='btn green fa fa-facebook margin-right15' onclick = 'postToFeed($link, $name, $description, $caption); return false;'></a>";
-    
-        $output .= "<a class='btn red fa fa-twitter margin-right15' href='https://twitter.com/intent/tweet?text=Hello%20world' onclick='javascript:void window.open('https://twitter.com/intent/tweet?text=Hello%20world''></a>";
-                
-        echo $output;
+        $this->renderPartial('shareoptions', array('data' => $data), false, true);
     }
-
 
     /**
      * Creates a new model.
@@ -138,6 +121,7 @@ class AdsController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
+
         $model = new Ads;
         $pageSize = 100;
         $successMsg = "";

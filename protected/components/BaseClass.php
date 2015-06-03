@@ -56,6 +56,13 @@ class BaseClass extends Controller {
             return $walletObject; 
                         
     }
+    public static function transactionStatus() {
+        $userId = Yii::app()->session['userid'];
+        $transactionObject = Transaction::model()->findByAttributes(array('user_id'=>$userId));
+                        
+            return $transactionObject; 
+                        
+    }
     public static function getUnredMails($userId){
         return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND status = 0'));
     }

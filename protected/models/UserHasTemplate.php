@@ -37,7 +37,7 @@ class UserHasTemplate extends CActiveRecord
 			array('category_id, publish, user_id, template_id, order_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, category_id, temp_header, temp_footer, temp_body, publish, user_id, template_id, created_at, order_id', 'safe', 'on'=>'search'),
+			array('id, category_id,user_menu, temp_header, temp_footer, temp_body, publish, user_id, template_id, created_at, order_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,6 +64,7 @@ class UserHasTemplate extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'category_id' => 'Category',
+			'user_menu' => 'User Menu',
 			'temp_header' => 'Temp Header',
 			'temp_footer' => 'Temp Footer',
 			'temp_body' => 'Temp Body',
@@ -95,6 +96,7 @@ class UserHasTemplate extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('user_menu',$this->user_menu);
 		$criteria->compare('temp_header',$this->temp_header,true);
 		$criteria->compare('temp_footer',$this->temp_footer,true);
 		$criteria->compare('temp_body',$this->temp_body,true);

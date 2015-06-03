@@ -10,24 +10,28 @@ $this->breadcrumbs = array(
 
 <div class="expiration margin-topDefault">
     <a class="btn  green margin-right-20" style="float:left" href="/admin/user/add">New User +</a> 
-    <!--<p>Client/ Hotel/ Bill : <?php //echo $clientObject->name; ?></p>-->
+    <!--<p>Client/ Hotel/ Bill : <?php //echo $clientObject->name;?></p>-->
     <form id="user_filter_frm" name="user_filter_frm" method="post" action="/admin/user" />
     <div class="col-md-3">
         <input type="text" name="search" id="search" class="form-control" value="" />
     </div>
     <input type="submit" class="btn btn-primary" value="OK" name="submit" id="submit"/>
-    </form>
-  
+</form>
+
 </div>
 
 <div class="row">
     <div class="col-md-12">
-          <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><div class="success" id="error_msg"><?php echo "User Added Successfully";?></div><?php }?>
-          <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='2'){?><div class="success" id="error_msg"><?php echo "Record Deleted Successfully";?></div><?php }?>
-          <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='3'){?><div class="success" id="error_msg"><?php echo "User Details Updated Successfully";?></div><?php }?>
-        
-              <?php
-        $test = "'sdsd'";
+        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '1') { ?><div class="success" id="error_msg"><?php echo "User Added Successfully"; ?></div><?php } ?>
+        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '2') { ?><div class="success" id="error_msg"><?php echo "Record Deleted Successfully"; ?></div><?php } ?>
+        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '3') { ?><div class="success" id="error_msg"><?php echo "User Details Updated Successfully"; ?></div><?php } ?>
+        <?php if (Yii::app()->user->hasFlash('success')): ?>
+            <div class="success" id="error_msg">
+                <?php echo Yii::app()->user->getFlash('success'); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
             'dataProvider' => $dataProvider,
@@ -45,10 +49,10 @@ $this->breadcrumbs = array(
             ),
             'columns' => array(
                 array(
-                    'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$row+1',
-		),
+                    'name' => 'id',
+                    'header' => '<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$row+1',
+                ),
                 //'idJob',
                 array(
                     'name' => 'full_name',
@@ -81,10 +85,8 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'Quick Chat',
-                    'value' => array($this,'getOnClickEvent'),
+                    'value' => array($this, 'getOnClickEvent'),
                 ),
-                
-
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{Change}{Edit}{Delete}',
@@ -100,28 +102,22 @@ $this->breadcrumbs = array(
                             'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
                         ),
-                        
-                       'Edit' => array(
+                        'Edit' => array(
                             'label' => Yii::t('translation', 'Edit'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/edit", array("id"=>$data->id))',
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
-                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this user?')"),
+                            'options' => array('class' => 'fa fa-success btn default black delete', 'onclick' => 'return confirm("Do u want to delete this user?");'),
                             'url' => 'Yii::app()->createUrl("admin/user/deleteuser", array("id"=>$data->id))',
                         ),
-                        
-                        
                     ),
                 ),
-                
-               
-                
             ),
         ));
         ?>
     </div>
 </div>
- 
+
 

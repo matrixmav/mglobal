@@ -71,6 +71,11 @@ $this->menu=array(
                     'header'=>'<span style="white-space: nowrap;">Transfer Status &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->status == 1) ? "Transfered" : "Pending"',
 		),
+            array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Used Commision Funds &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->fund != 0) ? $data->fund : "N/A"',
+		),
             
              array(
                     'name'=>'comment',
