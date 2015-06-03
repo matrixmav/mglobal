@@ -672,7 +672,7 @@ License: You must have a valid license purchased only from themeforest(the above
          
        
        <?php foreach($userObject as $user){?>
-       <p><span class="glyphicon glyphicon-user" ></span><a onclick="OpenChatBox('<?php echo $user->full_name;?>');"><?php echo $user->full_name; ?></a></p>
+       <p><span class="glyphicon glyphicon-user" ></span><a onclick="OpenChatBox('<?php echo $user->name;?>');"><?php echo $user->full_name; ?></a></p>
        <?php }?>
        
       </div>    
