@@ -144,7 +144,6 @@ class Transaction extends CActiveRecord
             }
             $createdTime = new CDbExpression('NOW()');
             $tarnsactionID = BaseClass::gettransactionID();
-            Yii::app()->session['$ptarnsactionID'] = $tarnsactionID;
             $transactionObjuser = new Transaction;
             $transactionObjuser->user_id = $userObject->id;
             $transactionObjuser->transaction_id = $tarnsactionID;
