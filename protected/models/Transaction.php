@@ -149,8 +149,8 @@ class Transaction extends CActiveRecord
             $transactionObjuser->mode = 'transfer';
             $transactionObjuser->gateway_id = $gatewayId;
             $transactionObjuser->coupon_discount = $discountAmount;
-            $transactionObjuser->actual_amount = $actualAmount;
-            $transactionObjuser->paid_amount = $postDataArray['paid_amount'];
+            $transactionObjuser->actual_amount = $transferAmount;
+            $transactionObjuser->paid_amount = $percentage;
             $transactionObjuser->used_rp = $userRp; //change this to current Used RPs
             $transactionObjuser->status = 0;//pending
             $transactionObjuser->created_at = $createdTime;
