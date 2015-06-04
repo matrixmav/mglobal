@@ -53,6 +53,7 @@ class UserHasTemplate extends CActiveRecord
                     'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header'),
                     'footer' => array(self::BELONGS_TO, 'BuildTempFooter', 'temp_footer'),
                     'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body'),
+                    'order' => array(self::BELONGS_TO, 'Order', 'order_id'),
 		);
 	}
 
