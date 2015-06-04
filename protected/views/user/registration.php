@@ -43,6 +43,7 @@
                                         <div class="col-lg-8">
                                             <input type="text" class="form-control" onchange="isUserExisted()" id="name" name="name">
                                             <span id="name_error" class="clrred"></span>
+                                            <span id="name_available" class="clr green"></span>
                                         </div>
                              
                                         <div id="status"></div>
@@ -60,41 +61,6 @@
                                             <input type="text" class="form-control" id="email" name="email" onchange="isEmailExisted()">
                                         
                                         <span id="email_error" class="clrred"></span></div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="email" class="col-lg-4 control-label">Date Of Birth <span class="require">*</span></label>
-                                        <div class="col-lg-2 wdt2" >
-                                           
-                                            <select name="d" id="d" class="form-control">
-                                                 <option >Date</option>
-                                                <?php for($i=1;$i<=31;$i++): ?>
-                                                     <option value="<?=str_pad($i,2,'0',STR_PAD_LEFT)?>"><?=$i?></option>
-                                                <?php endfor ?>
-                                            </select>
-                                        
-                                        </div>
-                                        <div class="col-sm-3 wdt">
-                                            <select name="m" id="m" class="form-control">
-                                                <option value="">Month</option>
-                                                <?php for($i=1;$i<=12;$i++): ?>
-                                                     <option value="<?=str_pad($i,2,'0',STR_PAD_LEFT)?>"><?=$i?></option>
-                                                <?php endfor ?>
-                                            </select>                         
-
-                                        </div>
-                                        
-                                        <div class="col-sm-3 wdt">
-                                            <select name="y" id="y" class="form-control">
-                                                <option value="">Year</option>
-                                                <?php
-                                                for($i=1950; $i<=date("Y") - 18; $i++){ ?>                                                       
-                                                    <option value='<?=$i?>'><?=$i?></option>                                      
-                                                <?php } ?>
-                                            </select>                         
-                                        </div>                                        
-                                        <div class="col-lg-8">
-                                        <span id="date_error" class="clrred"></span></div>
                                     </div>
                                     
                                     <div class="form-group">
@@ -118,27 +84,10 @@
                                     <div class="form-group">
                                         <label for="phone" class="col-lg-4 control-label">Mobile phone <span class="require">*</span></label>
                                         <div class="col-lg-8">
-                                            <input  name="phone" id="phone" placeholder="phone number" class="form-control" > <br>
+                                            <input  name="phone" id="phone" maxlength="10" placeholder="phone number" class="form-control" > <br>
                                         
                                         <span id="phone_error" class="clrred"></span></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
-                                        <div class="col-lg-8">
-                                            <input type="password" id="password" name="password" placeholder="Password" class="form-control" > <br>
-                                        
-                                        <span id="password_error" class="clrred"></span></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="confirm_password" class="col-lg-4 control-label">Confirm Password<span class="require">*</span></label>
-                                        <div class="col-lg-8">
-                                            <input type="password" id="confirm_password" name="password" placeholder="Confirm Password" class="form-control" > <br>
-                                        
-                                        <span id="confirm_password_error" class="clrred"></span></div>
-                                    </div>
-
-                                    
-
                                 </fieldset>
                                 <div class="row">
                                     <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        

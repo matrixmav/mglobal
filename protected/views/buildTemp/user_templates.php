@@ -7,14 +7,9 @@
     <link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/<?php echo $builderObjectListCss->name ?>" rel="stylesheet" type="text/css" media="all" />
 <?php } ?>
     
-
-
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
- 
-<script type="text/javascript">
-    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 
+<script type="text/javascript">    
 $(document).ready(function() { 
     dataString = 'fetchmenu';
     $.ajax({
@@ -58,14 +53,14 @@ $(document).ready(function() {
         }
     });
     
-    dataString = 'fetchContent=yes&page_id=' + pageID;
+    dataString = 'fetchFooter=yes&page_id=' + pageID;
     $.ajax({
         type: "GET",
         url: "/BuildTemp/pagefooter",
         data: dataString,
         cache: false,
         success: function(html) {
-               //alert(html);
+              // alert(html);
             document.getElementById("footer").innerHTML = html;
         }
     });
@@ -138,7 +133,7 @@ function validation() {
 
       <div id="footer">
         <?php echo $builderObject->temp_footer ;?>   
-      </div>
+   
     </div>    
 </body>
 </html>

@@ -1,7 +1,7 @@
 var MIN_LENGTH = 3;
-	jQuery(document).ready(function($){
-	$("#username").keyup(function() {
-		var username = $("#username").val();
+	jQuery(document).ready(function($){ //alert("cool");
+	$("#search_username").keyup(function() {
+		var username = $("#search_username").val();
 		if (username.length >= MIN_LENGTH) {
 			$.get( "/MoneyTransfer/autocomplete", { username: username } )
 			.done(function( data ) {
@@ -13,7 +13,7 @@ var MIN_LENGTH = 3;
 
 			    $('.item').click(function() {
 			    	var text = $(this).html();
-			    	$('#username').val(text);
+			    	$('#search_username').val(text);
 			    })
 
 			});
@@ -44,7 +44,7 @@ var MIN_LENGTH = 3;
 		}
 	});
 
-    $("#username").blur(function(){
+    $("#search_username").blur(function(){
     		$("#results").fadeOut(500);
     	})
         .focus(function() {		
@@ -53,7 +53,7 @@ var MIN_LENGTH = 3;
 
 	
 	$("#transfer").click(function() {
-		var username = $("#username").val();
+		var username = $("#search_username").val();
 			$.ajax( {
                   url:'/MoneyTransfer/userexists?u='+username,
                   success:function(data) {
