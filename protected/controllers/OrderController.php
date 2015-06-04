@@ -57,7 +57,6 @@ class OrderController extends Controller {
 
 
         $orderObject = Order::model()->findAll(array('condition' => 'user_id=' . $userId));
-
         $this->render('list', array('dataProvider' => $dataProvider, 'orderObject' => $orderObject));
     }
 
