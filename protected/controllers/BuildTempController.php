@@ -175,11 +175,12 @@ class BuildTempController extends Controller {
 
     public function actionFetchMenu() {
         $responce = "";
-        $userpagesObject = UserPages::model()->findAll(); 
-         $userId = Yii::app()->session['userid'];
+        $userId = Yii::app()->session['userid'] ;
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']));
+        
         $buildTempHeader = UserHasTemplate::model()->findByAttributes(array('user_id' => $userId, 'order_id'=>Yii::app()->session['orderID']));
-//        $buildTempHeader = UserHasTemplate::model()->findByPk(10);
-       
+//        echo "<pre>";
+//        print_r($userpagesObject); die;
         $bb = stripcslashes(stripcslashes($buildTempHeader->user_menu));
        
         $i = 1;

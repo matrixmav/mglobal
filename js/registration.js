@@ -159,6 +159,8 @@
                 if(msg == 1){
                     $("#name_error").html("Existed!!!");
                     $("#nameExistedErrorFlag").val(1);
+                } else {
+                    $("#name_available").html("Available!!!");
                 }
             }
         });
