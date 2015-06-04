@@ -78,10 +78,16 @@ class BaseClass extends Controller {
 
     
     public static function gettransactionID() {
-       $transactionObject = Transaction::model()->find(array('order' => 'id DESC'));
-         $lastid = explode(Yii::app()->params['transactionid'],$transactionObject->transaction_id);
-         $incementID = $lastid[1] + 1; 
-         $generateid = Yii::app()->params['transactionid'].$incementID.Yii::app()->params['transactionid'];
+        
+        $transactionObject = Transaction::model()->find(array('order' => 'id DESC'));
+        
+        if(!empty($transactionObject)){
+            $lastid = explode(Yii::app()->params['transactionid'],$transactionObject->transaction_id);
+            $incementID = $lastid[1] + 1; 
+            $generateid = Yii::app()->params['transactionid'].$incementID.Yii::app()->params['transactionid'];
+        }else{
+            $generateid = Yii::app()->params['transactionid'].'12345'.Yii::app()->params['transactionid'];
+        }        
         return $generateid; 
                         
     }
