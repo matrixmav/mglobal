@@ -130,10 +130,11 @@
                 </div>
                 <?php if ($walletObject) { ?>
                     <div class="sectionWrp paymentOptions">
-                        <p class="title"><span class="check">2.</span> <span class="txt">Choose Amount</span> <a onclick="OpenDiv('editIcon1');" id="editIcon1" style="display:none;" class="edit-icon">Edit</a></p>
+                        <p class="title"><span class="check">2.</span> <span class="txt">Choose Wallet</span> <a onclick="OpenDiv('editIcon1');" id="editIcon1" style="display:none;" class="edit-icon">Edit</a></p>
                         <div id="walletOption" style="display:none;">
                             <form id="walletform" name="walletform">
                                 <?php
+                                $i=1;
                                 foreach ($walletObject as $wallet) {
                                     if ($wallet->type == '1') {
                                         $walletname = 'Cash Wallet';
@@ -148,56 +149,39 @@
                                         $fund = $wallet->fund;
                                     }
                                     ?>
-                                <input type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="setwallettype(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);"><?php echo $walletname; ?>  
-                                <?php } ?>
+                                <div class="col-sm-4 col-xs-12 tleft">
+                                <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="setwallettype(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
+                                <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>  </label>
+                                </div>
+                                 <?php $i++;} ?>
                                 <br/><br/>
                                 <input type="button" value="Make Payment" onclick="walletamountcalculation();" class="btn-flat-green ui-btn-grey">   
                             </form>
                         </div>
                     </div>
-<?php } ?>
+                      <?php } ?>
 
-                <div class="sectionWrp paymentOptions">
-                    <p class="title"><span class="check">2.</span> <span class="txt">Choose Amount</span> <span class="edit">edit</span></p>
-                    <div id="walletOption" style="display:none;">
-                        <form id="walletform" name="walletform">
-                            <div class="col-sm-4 col-xs-12 tleft">
-                           <input id="box1" type="checkbox" />
-                            <label for="box1">Cash Wallet</label>
-                            </div>
-                             <div class="col-sm-4 col-xs-12 tleft">
-                           <input id="box2" type="checkbox" />
-                            <label for="box2">RP Wallet</label>
-                             </div>
-                             <div class="col-sm-4 col-xs-12 tleft">
-                          <input id="box3" type="checkbox" />
-                         <label for="box3">Commision Wallet</label>
-                            <br/><br/> </div>
-                            <input type="button" value="Make Payment" onclick="walletamountcalculation();" class="btn btn-success btn-lg">   
-                             </div>
-                            </form>
-                        
-                         
-                            </div>
+                
 
                             <div class="sectionWrp paymentOptions">
                                 <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
                                 <div id="paymentOption" style="display:none;">
                                     <input type="radio" value="paypal" name="payment_mode">Paypal 
-                                    <input type="radio" value="rp" name="payment_mode">Use RP
+                                     
                                     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
                                         <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                                         <input type="hidden" name="cmd" value="_xclick">
                                         <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
                                         <input type="hidden" name="item_number" value="1">
                                         <input type="hidden" name="credits" value="">
-                                        <input type="hidden" name="userid" value="<?php Yii::app()->session['userid']; ?>">
-                                        <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
+                                        <input type="hidden" name="userid" value="<?php echo Yii::app()->session['userid']; ?>">
+                                        <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>" id="ppamount">
                                         <input type="hidden" name="no_shipping" value="1">
                                         <input type="hidden" name="currency_code" value="USD">
                                         <input type="hidden" name="handling" value="0">
                                         <input type="hidden" name="cancel_return" value="">
-                                        <input type="hidden" name="return" value="/transaction/">
+                                        <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+                                        
 
 
                         </form> 
@@ -207,57 +191,20 @@
             </div>
         </div>
         </div>
+       </div>
+        </div>
         <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
         <input type="hidden" id="coupon_discount_price" value=""> 
-        <script type="text/javascript">
-
-            function Couponapply() {
-                var coupon_code = $('#coupon_code').val();
-                if (coupon_code == '')
-                {
-                    document.getElementById("coupon_error").style.display = "block";
-                    document.getElementById("coupon_error").innerHTML = "Please enter a domain name.";
-                    document.getElementById("coupon_error").focus();
-                } else {
-                    var dataString = 'coupon_code=' + coupon_code;
-                    var url = $('#URL').val();
-                    $.ajax({
-                        type: "GET",
-                        url: "couponapply",
-                        data: dataString,
-                        cache: false,
-                        success: function (html) {
-                            if (html == 0)
-                            {
-                                document.getElementById("coupon_error").style.display = "block";
-                                document.getElementById("coupon_error").innerHTML = "Incorrect coupon code";
-                                $("#coupon_error").fadeOut(5000);
-                            } else {
-                                htmlTag = html.split("_");
-                                $('#coupon_code').val('');
-                                document.getElementById("coupon_success").style.display = "block";
-                                document.getElementById("coupon_success").innerHTML = "Coupon code applied";
-                                document.getElementById("totalpayable").innerHTML = htmlTag[0];
-                                document.getElementById("coupon_discount").style.display = "";
-                                document.getElementById("total-discount").innerHTML = htmlTag[1];
-                                document.getElementById("totalAmount").value = htmlTag[0];
-                                document.getElementById("coupon_discount_price").value = htmlTag[1];
-                                $("#coupon_success").fadeOut(5000);
-                            }
-                        }
-
-                    });//@ sourceURL=pen.js
-=======
-    </div>
-</div>
+        
+ 
+ 
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <script type="text/javascript">
->>>>>>> 18529828fd465e9e2186335044f42e56885f0789
-
+  
     function Couponapply() {
         var coupon_code = $('#coupon_code').val();
         if (coupon_code == '')

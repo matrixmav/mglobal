@@ -143,14 +143,15 @@ class Transaction extends CActiveRecord
                 $userRp = $postDataArray['used_rp'];
             }
             $createdTime = new CDbExpression('NOW()');
-            
+            $tarnsactionID = BaseClass::gettransactionID();
             $transactionObjuser = new Transaction;
             $transactionObjuser->user_id = $userObject->id;
+            $transactionObjuser->transaction_id = $tarnsactionID;
             $transactionObjuser->mode = 'transfer';
             $transactionObjuser->gateway_id = $gatewayId;
             $transactionObjuser->coupon_discount = $discountAmount;
-            $transactionObjuser->actual_amount = $actualAmount;
-            $transactionObjuser->paid_amount = $postDataArray['paid_amount'];
+            $transactionObjuser->actual_amount = $transferAmount;
+            $transactionObjuser->paid_amount = $percentage;
             $transactionObjuser->used_rp = $userRp; //change this to current Used RPs
             $transactionObjuser->status = 0;//pending
             $transactionObjuser->created_at = $createdTime;

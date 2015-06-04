@@ -18,11 +18,11 @@ $this->breadcrumbs = array(
     <?php }
 } ?> 
 
-    <a href="/BuildTemp/addlogo" class="btn green">Add Logo</a>    
-    <a href="/BuildTemp/addcopyright" class="btn green">Add Copy Right</a> 
+    <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
+    <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
+    <a href="/BuildTemp/addcopyright" class="btn green">Copy Right Setting</a> 
     <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
-    <a href="/BuildTemp/addfooter" class="btn green">Footer</a> 
-
+    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
 <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
 <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
 

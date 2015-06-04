@@ -7,9 +7,7 @@
     <link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/<?php echo $builderObjectListCss->name ?>" rel="stylesheet" type="text/css" media="all" />
 <?php } ?>
     
-<?php foreach($builderObjectJs as $builderObjectListJs){ ?>
-    <script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/<?php echo $builderObjectListJs->name ?>" ></script>
-<?php } ?>
+
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
@@ -25,7 +23,7 @@ $(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
-          // alert(html);
+           //alert(html);
             document.getElementById("head_menu").innerHTML = html;
         }
     });
@@ -35,8 +33,8 @@ $(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
-//            alert(html);
-            //document.getElementById("logo").innerHTML = html;
+            //alert(html);
+            document.getElementById("logo").innerHTML = html;
         }
     });
     var url = document.URL;
@@ -55,8 +53,8 @@ $(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
-                //alert(html);
-            document.getElementById("content").innerHTML = html;
+              //  alert(html);
+            document.getElementById("content111").innerHTML = html;
         }
     });
     
@@ -120,19 +118,27 @@ function validation() {
     }
 }
 </script>
+
+<?php foreach($builderObjectJs as $builderObjectListJs){ ?>
+    <script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/<?php echo $builderObjectListJs->name ?>" ></script>
+<?php } ?>
+    
 </head>	
 <body>
-<div id="header">
-<?php echo stripslashes($builderObject->temp_header);  ?>
-    <input type="hidden" id="defaultPage" value="<?php //echo (!empty($userpages1Object))? stripslashes($userpages1Object->id) : "";?>">   
-</div>
+    <div class="main-bg">  
+      <div id="header">         
+            <?php echo stripslashes($builderObject->temp_header);  ?>
+          <input type="hidden" id="defaultPage" value="<?php //echo (!empty($userpages1Object))? stripslashes($userpages1Object->id) : "";?>">   
+     
+          </div>
 
-<div id="content">
-    <?php echo $builderObject->temp_body ;?> 
-</div>
+      <div id="content111">
+          <?php echo $builderObject->temp_body ;?> 
+      </div>
 
-<div id="footer">
-  <?php echo $builderObject->temp_footer ;?>   
-</div>
+      <div id="footer">
+        <?php echo $builderObject->temp_footer ;?>   
+      </div>
+    </div>    
 </body>
 </html>

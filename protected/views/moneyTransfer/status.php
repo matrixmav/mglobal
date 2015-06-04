@@ -13,13 +13,13 @@ $this->breadcrumbs = array(
             <div class="col-lg-10">
                 <?php
                 if($transactionObject->status == 1){ ?>
-                <h3 style="color:green">echo 'Your Transaction is Success<br /></h3>
-                Transaction Id :<?php echo $transactionObject->paid_amount; ?><br />
-                Transaction Id :<?php echo $transactionObject->paid_amount; ?><br />
-               <?php } else { ?>
-                <h3 style="color:red">Your Transaction is Failed. Try Again... <br /></h3>
+                <div class="success"><?php echo "Your Transaction is Success";?></div>
                 <h4>Transaction Id :<?php echo $transactionObject->transaction_id; ?><br />
-                Transferred Amount :<?php echo $transactionObject->paid_amount; ?></h4><br />
+                Transferred Amount :$<?php echo $transactionObject->paid_amount; ?></h4><br />
+               <?php } else { ?>
+                <div class="error">Your Transaction is Failed. Try Again... </div>
+                <h4>Transaction Id :<?php echo $transactionObject->transaction_id; ?><br />
+                Transferred Amount :$<?php echo $transactionObject->paid_amount; ?></h4><br />
                <?php } ?>
             </div>
 
