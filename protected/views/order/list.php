@@ -90,7 +90,7 @@ $this->menu=array(
 			'htmlOptions'=>array('width'=>'23%'),
 			'buttons'=>array(
 				'Visit' => array(
-					'label'=> array($this,'buttontitle'),
+					'label'=> $data->GetButtonTitle(),
 					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
 					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/buildtemp/templates/?id=$data->id"): ""',
 				),
