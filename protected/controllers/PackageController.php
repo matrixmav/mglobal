@@ -253,11 +253,10 @@ class PackageController extends Controller {
                             <div class="secondaryDomain resultDomain-wrapper">
                                  <div class="domain-wrapper cart2">
                                     <p class="domainName">' . $UserDomainPart[0] . "." . $alldomain . '</p>
-                                    <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: WEBSITE199</div>
+                                    <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div>
                                  </div>
                                  <span class="pricing-wrp">
-                                   <strong><span class="WebRupee">Rs.</span> 199</strong>/YR<br>
-                                    <div class="slashprice cart1"><span class="WebRupee">Rs.</span> 819</div>
+                                    <div class="slashprice cart1"><span class="WebRupee">$</span> 819</div>
                                    </span>
                                       <input type="hidden" name="domain" id="domain" value="' . $UserDomainPart[0] . "." . $alldomain . '">
                                        <input type="hidden" name="amount" id="amount" value="5">';
@@ -302,11 +301,10 @@ class PackageController extends Controller {
                             <div class="secondaryDomain resultDomain-wrapper">
                                 <div class="domain-wrapper ">
                                     <div class="domainName">' . $UserDomainPart[0] . '.com</div>
-                                    <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: WEBSITE199</div>
+                                    <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div>
                                  </div>
                                  <span class="pricing-wrp">
-                                   <strong><span class="WebRupee">Rs.</span> 199</strong>/YR<br>
-                                    <s class="slashprice"><span class="WebRupee">Rs.</span> 819</s>
+                                    <s class="slashprice"><span class="WebRupee">$.</span> 819</s>
                                    </span>
                                    <span class="select-domain btn-flat-green">N/A</span>
                               </div>
@@ -318,11 +316,10 @@ class PackageController extends Controller {
                             <div class="secondaryDomain resultDomain-wrapper">
                                  <div class="domain-wrapper cart2">
                                     <p class="domainName">' . $UserDomainPart[0] . "." . $alldomain . '</p>
-                                    <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: WEBSITE199</div>
+                                    <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div>
                                  </div>
                                  <span class="pricing-wrp">
-                                   <strong><span class="WebRupee">Rs.</span> 199</strong>/YR<br>
-                                    <div class="slashprice cart1"><span class="WebRupee">Rs.</span> 819</div>
+                                    <div class="slashprice cart1"><span class="WebRupee">$</span> 819</div>
                                    </span>
                                    <input type="hidden" name="domain" id="domain" value="' . $UserDomainPart[0] . "." . $alldomain . '">
                                        <input type="hidden" name="amount" id="amount" value="5">

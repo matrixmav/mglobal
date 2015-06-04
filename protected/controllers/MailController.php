@@ -56,7 +56,7 @@ class MailController extends Controller
             $loggedInUserId = Yii::app()->session['userid'];
             $pageSize= 100;
             $dataProvider = new CActiveDataProvider('Mail', array(
-                        'criteria'=>array('condition' => 'from_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
+                        'criteria'=>array('condition' => 'to_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
                         'pagination' => array('pageSize' => $pageSize)));
             
             $this->render('index',array(
@@ -71,7 +71,7 @@ class MailController extends Controller
             $loggedInUserId = Yii::app()->session['userid'];
             $pageSize= 100;
             $dataProvider = new CActiveDataProvider('Mail', array(
-                        'criteria'=>array('condition' => 'to_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
+                        'criteria'=>array('condition' => 'from_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
                         'pagination' => array('pageSize' => $pageSize)));
             $this->render('sent',array(
                 'dataProvider'=>$dataProvider,
