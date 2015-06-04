@@ -91,7 +91,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link rel="stylesheet" type="text/css"
               href="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.css" />
 
-
+       
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->
         <!--[if lt IE 9]>
@@ -204,7 +204,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right topWallet">
                     
-                    <li class="cash"><a href="#" class="">
+                    <li class="cash"><a href="#" data-toggle="tooltip" data-placement="bottom" title="cash"> 
                             <i class="fa fa-money"></i>
 
                             <span class="badge badge-default">
@@ -218,7 +218,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li class="commision"><a href="#" class="">
+                    <li class="commision"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="commision">
                             <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
@@ -230,7 +230,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                             </span></a>
                     </li>
-                    <li class="credit"><a href="#" class="">
+                    <li class="credit"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="credit">
                             <i class="fa fa-credit-card"></i>
 
                             <span class="badge badge-default">
@@ -793,7 +793,11 @@ License: You must have a valid license purchased only from themeforest(the above
              $(".glyphicon-comment").click(function(){
              $(".chatuserList").toggle();
              });
+             $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
             </script>
+            
     </body>
     <!-- END BODY -->
 </html>

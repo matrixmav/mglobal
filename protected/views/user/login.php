@@ -83,9 +83,13 @@
                 </div>
               </form>
             </div>
-            <a href="<?php echo Yii::app()->baseUrl;?>/user/facebook"><img src="<?php echo Yii::app()->baseUrl; ?>/fb_tw/images/fb_login.png">Registration With Facebook</a>        
+              <a class="fb-btn" href="<?php echo Yii::app()->baseUrl;?>/user/facebook"><?php echo Yii::app()->baseUrl; ?>Registration With Facebook</a>        
             <br><br/>
-            <a href="<?php echo Yii::app()->baseUrl; ?>/user/twitter"><img src="<?php echo Yii::app()->baseUrl; ?>/fb_tw/images/fb_login.png">Registration With Twitter</a>        
+            <a class="tw-btn" href="<?php echo Yii::app()->baseUrl; ?>/user/twitter"><?php echo Yii::app()->baseUrl; ?>Registration With Twitter</a>        
+        <!-- 
+        <button  class="btn-social btn-fb">Sign in with Facebook</button> 
+        <button  class="btn-social btn-tw">Sign in with twitter</button> 
+        -->
           </div>
         </div>
       </div>
