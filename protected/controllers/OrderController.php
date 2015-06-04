@@ -290,11 +290,17 @@ class OrderController extends Controller {
             'totalAmount'=>$totalAmount,
         ));
     }
-    protected function ButtonTitle($data,$row)
+    protected function GetButtonTitle($data,$row)
 	{ 
             $userId = Yii::app()->session['userid'];
-            $orderObject = Order::model()->findAll(array('condition' => 'user_id=' . $userId));
-            //var_dump($orderObject->order);exit;
+           $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id'])); 
+           if(!empty($userhasObject) && $userhasObject->publish==1)
+           {
+              $title = '<a href="'.$data['domain'].'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
+           }else{
+             $title = '<a href="/buildtemp/templates/?id='.$data['id'].'" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>'; 
+           }
+           echo $title;
          }
 }
 
