@@ -151,7 +151,7 @@
                                     ?>
                                 <div class="col-sm-4 col-xs-12 tleft">
                                 <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="setwallettype(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
-                                <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>  </label>
+                                <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund;?>)  </label>
                                 </div>
                                  <?php $i++;} ?>
                                 <br/><br/>
