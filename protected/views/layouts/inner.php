@@ -204,8 +204,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right topWallet">
                     
-                    <li class="cash"><a href="#" class="">
-                            <i class="fa fa-money"></i>
+                    <li class="cash">
+                      <a href="/wallet/fundwallet/"  title="Fund Wallet">   
+                        <i class="fa fa-money"></i>
 
                             <span class="badge badge-default">
                                 <?php
@@ -218,8 +219,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li class="commision"><a href="#" class="">
-                            <i class="glyphicon glyphicon-briefcase"></i>
+                    <li class="commision"> 
+                      <a href="/wallet/rpwallet/"  title="RP Wallet">
+                       <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
                                 $arrayFund = BaseClass::walletAmount('2');
@@ -230,8 +232,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                             </span></a>
                     </li>
-                    <li class="credit"><a href="#" class="">
-                            <i class="fa fa-credit-card"></i>
+                    
+                    <li class="credit"> 
+                    <a href="/wallet/commisionwallet/"  title="Commision Wallet">
+                     <i class="fa fa-credit-card"></i>
 
                             <span class="badge badge-default">
                                 <?php
@@ -246,7 +250,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </li>
                      
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                        <a href="/mail/" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Mails">
+                        <a href="/mail/" class="dropdown-toggle"  data-hover="dropdown"  title="Mails">
                             <i class="glyphicon glyphicon-envelope"></i>
                             <span class="badge badge-default">
                                 <?php
@@ -261,23 +265,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </li>
 
-
-
-                    <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
-                        <a href="/wallet/commisionwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Commision Wallet">
-                            <i class="glyphicon glyphicon-th"></i>
-                            <span class="badge badge-default">
-                                <?php
-                                $arrayCommision = BaseClass::walletAmount('3');
-                                foreach ($arrayCommision as $commision) {
-                                    
-                                }
-                                echo (!empty($arrayCommision)) ? $commision->fund : "0";
-                                ?></span>
-                        </a>
-
-
-                    </li>
+                      
                     <!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
 
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
