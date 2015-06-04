@@ -26,7 +26,7 @@ if (in_array($userEnteredDomain, $domainTakenArray)) {
                                    <strong><span class="WebRupee">Rs.</span> 199</strong>/YR<br>
                                     <s class="slashprice"><span class="WebRupee">Rs.</span> 819</s>
                                    </span>
-                                   <span class="select-domain btn-flat-green">N/A</span>
+                                   <span class="select-domain btn-flat-green btn btn-success">N/A</span>
                               </div>
                         </div>';
     foreach ($AllDomainArray as $alldomain) {
@@ -42,7 +42,7 @@ if (in_array($userEnteredDomain, $domainTakenArray)) {
                                    </span>
                                    <input type="hidden" name="domain" id="domain" value="' . $UserDomainPart[0] . "." . $alldomain . '">
                                        <input type="hidden" name="amount" id="amount" value="5">
-                                    <button class="add-to-cart select-domain btn-flat-green" id="test"  onclick="DomainAdd(' . $UserDomainPart[0] . "." . $alldomain . ');"  type="button">Add</button>
+                                    <button class="add-to-cart select-domain btn-flat-green btn btn-success " id="test"  onclick="DomainAdd(' . $UserDomainPart[0] . "." . $alldomain . ');"  type="button">Add</button>
                               </div>
                         </div>';
 

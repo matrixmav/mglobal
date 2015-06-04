@@ -91,7 +91,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link rel="stylesheet" type="text/css"
               href="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.css" />
 
-
+       
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->
         <!--[if lt IE 9]>
@@ -204,9 +204,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right topWallet">
                     
-                    <li class="cash">
-                      <a href="/wallet/fundwallet/"  title="Fund Wallet">   
-                        <i class="fa fa-money"></i>
+
+                    <li class="cash"><a href="/wallet/fundwallet/" data-toggle="tooltip" data-placement="bottom" title="cash"> 
+                            <i class="fa fa-money"></i>
 
                             <span class="badge badge-default">
                                 <?php
@@ -219,9 +219,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li class="commision"> 
-                      <a href="/wallet/rpwallet/"  title="RP Wallet">
-                       <i class="glyphicon glyphicon-briefcase"></i>
+                    <li class="commision"><a href="/wallet/rpwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="commision">
+                            <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
                                 $arrayFund = BaseClass::walletAmount('2');
@@ -232,10 +231,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                             </span></a>
                     </li>
-                    
-                    <li class="credit"> 
-                    <a href="/wallet/commisionwallet/"  title="Commision Wallet">
-                     <i class="fa fa-credit-card"></i>
+
+                    <li class="credit"><a href="/wallet/commisionwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="credit">
+                            <i class="fa fa-credit-card"></i>
 
                             <span class="badge badge-default">
                                 <?php
@@ -782,7 +780,11 @@ License: You must have a valid license purchased only from themeforest(the above
              $(".glyphicon-comment").click(function(){
              $(".chatuserList").toggle();
              });
+             $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
             </script>
+            
     </body>
     <!-- END BODY -->
 </html>
