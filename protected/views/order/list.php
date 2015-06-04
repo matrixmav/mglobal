@@ -83,21 +83,13 @@ $this->menu=array(
                         'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
 			'value'=>'($data->status == 1) ? Yii::t(\'translation\', \'Completed\') : Yii::t(\'translation\', \'Pending\')',
 		),
-              
-		array( 
-			'class'=>'CButtonColumn',
-			'template'=>'{Visit}',
-			'htmlOptions'=>array('width'=>'23%'),
-			'buttons'=>array(
-				'Visit' => array(
-					'label'=> $data->GetButtonTitle(),
-					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/buildtemp/templates/?id=$data->id"): ""',
-				),
-                             
-                             
-                       ),
+              array(
+			'name'=>'action',
+                        'header'=>'<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
+			'value'=>array($this,'GetButtonTitle'),
 		),
+		 
+		 
             
                 array( 
 			'class'=>'CButtonColumn',
