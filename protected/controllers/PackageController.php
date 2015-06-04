@@ -522,11 +522,7 @@ class PackageController extends Controller {
         $packageObject = Package::model()->findByPK($orderObject->package_id);
         $body = "<page><h1>";
         $body .= $packageObject->name;
-        $body .= "</h1>
-            <br>
-            Ceci est un <b>exemple d'utilisation</b>
-            de <a href='http://html2pdf.fr/'>HTML2PDF</a>.<br>
-        </page>";
+        $body .= "test";
         $html2pdf = Yii::app()->ePdf->HTML2PDF();
         $orderObject = Order::model()->findByPK($orderObject->id);
         $html2pdf->WriteHTML($body);
@@ -539,6 +535,7 @@ class PackageController extends Controller {
 //                CommonHelper::sendMail($config);
                 unset(Yii::app()->session['transactionid']);
                 unset(Yii::app()->session['amount']);
+                unset(Yii::app()->session['package_id']);
                 unset(Yii::app()->session['transaction_id']);
             }
         }
