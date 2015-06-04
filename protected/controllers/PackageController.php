@@ -235,9 +235,9 @@ class PackageController extends Controller {
             <button id="checkout" class="btn-flat-green btn-orange" onclick="RedirectCart();">Checkout</button>
             </div>
             </div>';
-        $domainTakenArray = array('nidhisati.com', 'ram.net', 'sumeet.com', 'suryaasati.com');
-        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $userEnteredDomain = Yii::app()->session['domain'];
+        $domainTakenArray = DomainTemp::model()->findAll(array("condition"=>"name LIKE '".$userEnteredDomain."%'"));
+        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $UserDomainPart = explode('.', $userEnteredDomain);
 
 
@@ -245,21 +245,24 @@ class PackageController extends Controller {
         //unset($AllDomainArray[$pos]);
         //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
         $SuggestedDomain = "";
-        foreach ($AllDomainArray as $alldomain) {
-            $domainName = "'" . $UserDomainPart[0] . "." . $alldomain . "'";
-            $domainNameF = $UserDomainPart[0] . "." . $alldomain;
+        foreach ($domainTakenArray as $alldomain) {
+            foreach($AllDomainArray as $allext){ 
+                $domainName = "'" . $alldomain->name . "." . $allext . "'";
+              
+            $domainName = "'" . $alldomain->name . "." . $allext . "'";
+            $domainNameF = "'" . $alldomain->name . "." . $allext . "'";
 
             $SuggestedDomain .= '<div class="secondary-result">
                             <div class="secondaryDomain resultDomain-wrapper">
                                  <div class="domain-wrapper cart2">
-                                    <p class="domainName">' . $UserDomainPart[0] . "." . $alldomain . '</p>
+                                    <p class="domainName">' . $alldomain->name . "." . $allext  . '</p>
                                     <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div>
                                  </div>
                                  <span class="pricing-wrp">
-                                    <div class="slashprice cart1"><span class="WebRupee">$</span> 819</div>
+                                    <div class="slashprice cart1"><span class="WebRupee">$</span>'.$alldomain->price.'</div>
                                    </span>
-                                      <input type="hidden" name="domain" id="domain" value="' . $UserDomainPart[0] . "." . $alldomain . '">
-                                       <input type="hidden" name="amount" id="amount" value="5">';
+                                      <input type="hidden" name="domain" id="domain" value="' . $alldomain->name . "." . $allext  . '">
+                                       <input type="hidden" name="amount" id="amount" value="'.(!empty($alldomain->price > 30)) ? "5" : "0".'">';
             if (in_array($domainNameF, $domainTakenArray)) {
 
                 $SuggestedDomain .= '<span class="select-domain btn-flat-green">N/A</span>';
@@ -272,6 +275,7 @@ class PackageController extends Controller {
 
 
             //$SuggestedDomain .= "<a href='".Yii::app()->baseUrl."checkout?domain_id=1'>" . $UserDomainPart[0] . "." . $alldomain . "</a><br/>";
+        }
         }
 
 
@@ -289,14 +293,15 @@ class PackageController extends Controller {
      */
     public function actionAvailableDomain() {
         Yii::app()->session['package_id'] = $_REQUEST['package_id'];
-        $domainTakenArray = array('nidhisati.com', 'ram.net', 'sumeet.com', 'suryaasati.com');
-        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $userEnteredDomain = $_REQUEST['domain'];
+        //$domainTakenArray = array('nidhisati.com', 'ram.net', 'sumeet.com', 'suryaasati.com');
+        $domainTakenArray = DomainTemp::model()->findAll(array("condition"=>"name LIKE '".$userEnteredDomain."%'"));
+        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $UserDomainPart = explode('.', $userEnteredDomain);
-        if (in_array($userEnteredDomain, $domainTakenArray)) {
-            $pos = array_search($UserDomainPart[1], $AllDomainArray);
+        //if (in_array($userEnteredDomain, $domainTakenArray)) {
+            /*$pos = array_search($UserDomainPart[1], $AllDomainArray);
             unset($AllDomainArray[$pos]);
-            //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
+            $SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
             $SuggestedDomain = '<div class="secondary-result">
                             <div class="secondaryDomain resultDomain-wrapper">
                                 <div class="domain-wrapper ">
@@ -308,30 +313,33 @@ class PackageController extends Controller {
                                    </span>
                                    <span class="select-domain btn-flat-green">N/A</span>
                               </div>
-                        </div>';
-            foreach ($AllDomainArray as $alldomain) {
-                $domainName = "'" . $UserDomainPart[0] . "." . $alldomain . "'";
-
+                        </div>';*/
+          $SuggestedDomain = "";
+            foreach ($domainTakenArray as $alldomain) {
+              foreach($AllDomainArray as $allext){ 
+                $domainName = "'" . $alldomain->name . "." . $allext . "'";
+              
                 $SuggestedDomain .= '<div class="secondary-result">
                             <div class="secondaryDomain resultDomain-wrapper">
                                  <div class="domain-wrapper cart2">
-                                    <p class="domainName">' . $UserDomainPart[0] . "." . $alldomain . '</p>
+                                    <p class="domainName">' . $alldomain->name . "." . $allext . '</p>
                                     <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div>
                                  </div>
                                  <span class="pricing-wrp">
-                                    <div class="slashprice cart1"><span class="WebRupee">$</span> 819</div>
+                                    <div class="slashprice cart1"><span class="WebRupee">$</span> '.$alldomain->price .'</div>
                                    </span>
-                                   <input type="hidden" name="domain" id="domain" value="' . $UserDomainPart[0] . "." . $alldomain . '">
-                                       <input type="hidden" name="amount" id="amount" value="5">
+                                   <input type="hidden" name="domain" id="domain" value="' . $alldomain->name . "." . $allext  . '">
+                                   <input type="hidden" name="amount" id="amount" value="">
                                     <button class="add-to-cart select-domain btn-flat-green" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>
                               </div>
                         </div>';
-
+                        }}
 
                 //$SuggestedDomain .= "<a href='".Yii::app()->baseUrl."checkout?domain_id=1'>" . $UserDomainPart[0] . "." . $alldomain . "</a><br/>";
-            }
-        } else {
-            $domainNameF = "'" . $UserDomainPart[0] . ".com'";
+             
+        //} else {
+            
+            /*$domainNameF = "'" . $UserDomainPart[0] . ".com'";
             $SuggestedDomain = '<div class="secondary-result cart2">
                             <div class="secondaryDomain resultDomain-wrapper">
                                 <div class="domain-wrapper cart2">
@@ -347,11 +355,11 @@ class PackageController extends Controller {
                                    <button class="add-to-cart select-domain btn-flat-green" onclick="DomainAdd(' . $domainNameF . ');"  type="button">Add</button>
                                     
                               </div>
-                        </div> ';
+                        </div> ';*/
             foreach ($AllDomainArray as $alldomain) {
                 //$SuggestedDomain .= "<a href='".Yii::app()->baseUrl."checkout?domain_id=1'>" . $UserDomainPart[0] . "." . $alldomain . "</a><br/>";
             }
-        }
+        //}
         echo $SuggestedDomain;
     }
 
