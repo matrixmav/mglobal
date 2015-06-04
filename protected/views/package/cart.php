@@ -4,10 +4,7 @@
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-                  <?php if($error)
-                  {?>
-                    <div style="padding:10px;"> <?php echo $error;?></div>
-                  <?php }else{?>
+                 
                     <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span><a onclick="OpenDiv('editIcon');" id="editIcon" style="display:none;" class="edit-icon">Edit</a></p>
                     <div class="contentBlock CartSection" id="cartDiv">
                         <table class="cartItemsWrp table table-condensed">
@@ -190,13 +187,13 @@
                             <input type="button" value="Make Payment" onclick="makepayment();" class="btn-flat-green ui-btn-grey">   
                         </div>
                     </div>
-                  <?php }?>
+                   
                 </div>
             </div>
         </div>
     </div>
 </div>
- <?php if($error==''){?>
+  
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
 
@@ -208,6 +205,7 @@
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
+<input type="hidden" id="transID" value="<?php echo $_SESSION['transactionid']; ?>">
 <script type="text/javascript">
 
     function Couponapply() {
@@ -294,10 +292,11 @@
     {
         var valx = $('input[name=payment_mode]:checked').val();
         var totalusedrp = $("#totalusedrp").val();
+        var transID = $("#transID").val();
         var totalamount = $("#totalAmount").val();
          if (totalusedrp == totalamount)
         {
-            location.href = "/package/thankyou?transaction_id=<?php echo $_SESSION['transactionid']; ?>";
+            location.href = "/package/thankyou?transaction_id="+transID;
         } else {
             if (valx == '')
             {
@@ -361,4 +360,4 @@
     }
 
 </script>    
- <?php }?>
+ 
