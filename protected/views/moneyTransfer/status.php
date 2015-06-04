@@ -32,7 +32,7 @@ $this->breadcrumbs = array(
     <div class="row">
         <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">     
 
-            <a href="/MoneyTransfer/transfer"><button name="success" class="btn">New Transaction</button></a>                   
+            <a href="/MoneyTransfer/transfer"><button name="success" class="btn red">New Transaction</button></a>                   
 
         </div>
     </div>
