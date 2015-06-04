@@ -526,7 +526,7 @@ class PackageController extends Controller {
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
-            }
+            
             ob_start();
             $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
@@ -548,6 +548,7 @@ class PackageController extends Controller {
             unset(Yii::app()->session['package_id']);
             unset(Yii::app()->session['transaction_id']);
             unset(Yii::app()->session['domain']);
+            }
         }
 
         $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
