@@ -395,18 +395,13 @@ class UserController extends Controller {
             $model->password = BaseClass::md5Encryption($password);
             $model->sponsor_id = $_POST['sponsor_id'];
             $model->master_pin = BaseClass::md5Encryption($masterPin);
-            $model->date_of_birth = $_POST['y'] . "-" . $_POST['m'] . "-" . $_POST['d'];
             $model->created_at = date('Y-m-d');
             if ($_POST['admin'] == 1) {
                 $model->role_id = 3;
             } else {
                 $model->role_id = 2;
             }
-            if ($_POST['admin'] == 1) {
-                $model->status = 3;
-            } else {
-                $model->status = 2;
-            }
+            
 
             /* Condition for they have the child or not */
             $geneObject = Genealogy::model()->findByAttributes(array('parent' => $userObject->id, 'position' => $_POST['position']));
@@ -414,7 +409,8 @@ class UserController extends Controller {
             //die;
             if (count($geneObject)) {
                 $userId = "";
-                for ($i = 1; $i <= 1000; $i++) {
+                $userCount = User::model()->count();
+                for ($i = 1; $i <= $userCount; $i++) {
 
                     if ($i == 1) {
                         $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id, 'position' => $_POST['position']));
@@ -474,16 +470,15 @@ class UserController extends Controller {
               $modelGenealogy->position = $_POST['position'] ;
               $modelGenealogy->save(); */
 
-                $config['to'] = $model->email; 
-                $config['subject'] = 'Registration Confirmation' ;
-                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
-                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
-                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
-                var_dump($config);
-                CommonHelper::sendMail($config);
-            $this->render('login', array('successMsg'=> $successMsg));
-            $this->redirect('login');
+            $config['to'] = $model->email; 
+            $config['subject'] = 'Registration Confirmation' ;
+            $config['body'] = 'Congratulations! You have been registered successfully on our site '.
+                    '<strong>Your Password:</strong>'.$password.'<br/><br/>'.
+                    '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
+                    '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
+                    Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
+            $response = CommonHelper::sendMail($config);
+            $this->redirect('login',array('successMsg'=> $successMsg));
 
             if ($_POST['admin'] == 1) {
                 $this->redirect(array('admin/user/index', 'successMsg' => 1));
@@ -505,7 +500,7 @@ class UserController extends Controller {
     public function actionForgetPassword() {
         $msg = "";
         if (isset($_POST['email']) && $_POST['email'] != '') {
-            $email = $_POST['email'];
+             $email = $_POST['email'];
             $getUserObject = User::model()->findByAttributes(array('email' => $email));
             if (count($getUserObject) == 1) {
                 $userObject = new User;
@@ -514,22 +509,21 @@ class UserController extends Controller {
                 $userObject->forget_key = $forgetKey;
                 $userObject->forget_status = 1;
                 $userObject->update();
-                $msg = "<p class='success'>Please check your email to activate your account</p>";
+                $msg = "Please check your email to activate your account";
                 if (!$userObject->update(false)) {
                     echo "<pre>";
                     print_r($model->getErrors());
                     exit;
                 }
 
-//                    $config['to'] =  $email; 
-//                    $config['subject'] = 'Password reset On HKbase' ;
-//                    $config['body'] = 'Youre receiving this e-mail because you requested a password reset for your user account .  '.                            
-//                            '<strong>Please go to the following page and choose a new password:</strong><br/><br/>'.
-//                            Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$forgetKey;
-//                    var_dump($config);
-//                    $test = mail($config['to'],$config['subject'],$config['body']);
-//                    echo "<pre>"; print_r($test);exit;
-//                    CommonHelper::sendMail($config);
+                $config['to'] =  $email; 
+                $config['subject'] = 'Password reset On mGlobal' ;
+                $config['body'] = 'Youre receiving this e-mail because you requested a password reset for your user account .  '.                            
+                        '<strong>Please go to the following page and choose a new password:</strong><br/><br/>'.
+                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$forgetKey;
+                $response = CommonHelper::sendMail($config);
+            
+                $this->redirect(array('login', 'successMsg' => $msg));
             } else {
                 $msg = "<p class='error'>Please Enter Your Valid Email Address.</p>";
             }
