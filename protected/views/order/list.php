@@ -24,7 +24,7 @@ $this->menu=array(
           <div class="col-md-10 col-sm-9">
        
         <?php 
-        
+          
         $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'city-grid',
 	'dataProvider'=>$dataProvider,
@@ -83,17 +83,18 @@ $this->menu=array(
                         'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
 			'value'=>'($data->status == 1) ? Yii::t(\'translation\', \'Completed\') : Yii::t(\'translation\', \'Pending\')',
 		),
-             
+              
 		array( 
 			'class'=>'CButtonColumn',
-			'template'=>'{Builder}',
+			'template'=>'{Visit}',
 			'htmlOptions'=>array('width'=>'23%'),
 			'buttons'=>array(
-				'Builder' => array(
-					'label'=>'Visit Site',
+				'Visit' => array(
+					'label'=> array($this,'buttontitle'),
 					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
 					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/buildtemp/templates/?id=$data->id"): ""',
 				),
+                             
                              
                        ),
 		),
