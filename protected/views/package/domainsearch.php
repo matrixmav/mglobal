@@ -7,7 +7,8 @@
 <form action="" method="post">
     <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id'];?>">
  <div class="domain-select-wrapper">
-<input placeholder="Enter Your Domain Name" type="text" name="domain" class="domains-input" data-id="field_domains-input" id="domain" maxlength="65">
+<input placeholder="Enter Your Domain Name" type="text" name="domain" class="domains-input" data-id="field_domains-input" id="domain" maxlength="65" onkeydown="if (event.keyCode == 13)
+{document.getElementById('search').click(); return false;}">
 </div>
 <input type="button" class="btn-flat-green" id="search" value="Search Here"> 
 <div class="clear"></div>
