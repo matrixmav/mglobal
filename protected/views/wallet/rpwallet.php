@@ -61,7 +61,7 @@ $this->menu=array(
                 array(
                     'name'=>'transaction_id',
                     'header'=>'<span style="white-space: nowrap;">Credit Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->paid_amount)? $data->paid_amount:""',
+                    'value'=>'isset($data->wallet->fund)? $data->wallet->fund:""',
 		),
             array(
                     'name'=>'created_at',
