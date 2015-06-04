@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
         </fieldset>
         <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <button type="submit"  name="confirm" class="btn">Confirm</button>
+                <button type="submit"  name="confirm" class="btn red">Confirm</button>
                 <button type="button" class="btn">Cancel</button>
             </div>
         </div>

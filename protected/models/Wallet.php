@@ -113,4 +113,20 @@ class Wallet extends CActiveRecord
         public function findWalletByUserId($userid){
             return Wallet::model()->findAllByAttributes(array('user_id' => $userid));
         }
+        
+        public function create($userId,$fund,$type){
+            $walletObject = new Wallet;
+            $walletObject->user_id = $userId;
+            $walletObject->fund = $fund;
+            $walletObject->type = $type;
+            $walletObject->status = 1;
+            $walletObject->created_at = new CDbExpression('NOW()');
+            $walletObject->updated_at = new CDbExpression('NOW()');
+            if (!$walletObject->save()) {
+                echo "<pre>";
+                print_r($walletObject->getErrors());
+                exit;
+            }
+            return $walletObject;
+        }
 }
