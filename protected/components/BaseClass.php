@@ -57,6 +57,17 @@ class BaseClass extends Controller {
                         
     }
    
+    public static function getPassword(){
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$#@!&*';
+        $randomString = '';
+
+        for ($i = 0; $i < 5; $i++) 
+        {
+            $randomString .= $chars[rand(0, strlen($chars)-1)];
+        }	
+        return $randomString;
+    }
+
     public static function transactionStatus() {
         $userId = Yii::app()->session['userid'];
         $transactionObject = Transaction::model()->findByAttributes(array('user_id'=>$userId));

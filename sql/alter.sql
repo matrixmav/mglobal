@@ -12,3 +12,4 @@ ALTER TABLE `user_has_template` ADD `site_title` VARCHAR(255) NOT NULL AFTER `lo
 ALTER TABLE `build_temp_header` ADD `menu` TEXT NOT NULL AFTER `header_content`;
 
 ALTER TABLE `user_has_template` ADD `user_menu` TEXT NOT NULL AFTER `user_id`;
+

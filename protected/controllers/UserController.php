@@ -391,7 +391,8 @@ class UserController extends Controller {
             $masterPin = BaseClass::getUniqInt(5);
             $model = new User;
             $model->attributes = $_POST;
-            $model->password = BaseClass::md5Encryption($_POST['password']);
+            $password = BaseClass::getPassword();
+            $model->password = BaseClass::md5Encryption($password);
             $model->sponsor_id = $_POST['sponsor_id'];
             $model->master_pin = BaseClass::md5Encryption($masterPin);
             $model->date_of_birth = $_POST['y'] . "-" . $_POST['m'] . "-" . $_POST['d'];
@@ -473,16 +474,16 @@ class UserController extends Controller {
               $modelGenealogy->position = $_POST['position'] ;
               $modelGenealogy->save(); */
 
-//                $config['to'] = $model->email; 
-//                $config['subject'] = 'Registration Confirmation' ;
-//                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
-//                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-//                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
-//                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
-//                var_dump($config);
-//                CommonHelper::sendMail($config);
-            //$this->render('login', array('successMsg'=> $successMsg));
-            //$this->redirect('login');
+                $config['to'] = $model->email; 
+                $config['subject'] = 'Registration Confirmation' ;
+                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
+                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
+                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
+                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
+                var_dump($config);
+                CommonHelper::sendMail($config);
+            $this->render('login', array('successMsg'=> $successMsg));
+            $this->redirect('login');
 
             if ($_POST['admin'] == 1) {
                 $this->redirect(array('admin/user/index', 'successMsg' => 1));

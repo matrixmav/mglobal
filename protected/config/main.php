@@ -112,10 +112,11 @@ return array(
 				'connectionString' => 'mysql:host=localhost;dbname=mglobal',
 				'emulatePrepare' => true,
 				'username' => 'root',
-				'password' => '',
+				'password' => 'root',
 				'charset' => 'utf8',
                                 'tablePrefix' => 'tbl_',
 		),
+            
                 
                 'twitter' => array(
                                 'class' => 'ext.yiitwitteroauth.YiiTwitter',
