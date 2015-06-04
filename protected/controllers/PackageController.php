@@ -262,7 +262,8 @@ class PackageController extends Controller {
                                     <div class="slashprice cart1"><span class="WebRupee">$</span>'.$alldomain->price.'</div>
                                    </span>
                                       <input type="hidden" name="domain" id="domain" value="' . $alldomain->name . "." . $allext  . '">
-                                       <input type="hidden" name="amount" id="amount" value="'.(!empty($alldomain->price > 30)) ? "5" : "0".'">';
+                                    <input type="hidden" name="amount" id="amount" value="">';
+                                       
             if (in_array($domainNameF, $domainTakenArray)) {
 
                 $SuggestedDomain .= '<span class="select-domain btn-flat-green">N/A</span>';
@@ -374,19 +375,14 @@ class PackageController extends Controller {
 
     public function actionProductCart() {
         $package_id = Yii::app()->session['package_id'];
-        if ($package_id) {
+        
             $packageObject = Package::model()->findByPK($package_id);
             $loggedInUserId = Yii::app()->session['userid'];
             $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
             $this->render('cart', array(
                 'packageObject' => $packageObject, 'walletObject' => $walletObject
             ));
-        } else {
-            $error = "Sorry! Your cart is empty.";
-            $this->render('cart', array(
-                'error' => $error
-            ));
-        }
+       
     }
 
     /**
