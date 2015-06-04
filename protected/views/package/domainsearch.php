@@ -72,7 +72,7 @@ function autocomplet()
 
 var package_id = $('#package_id').val(); 
 var domain = $('#domain').val();
-var min_length = 0; // min caracters to display the autocomplete
+var min_length = 2; // min caracters to display the autocomplete
 /*if(domain=='')
 {
 document.getElementById("error_msg").style.display="block";
@@ -80,7 +80,7 @@ document.getElementById("error_msg").innerHTML = "Please enter a domain name.";
 document.getElementById("error_msg").focus();
 }else{*/
 if (domain.length >= min_length) {
-var dataString = 'domain='+domain+'.com'+'&package_id='+package_id;  
+var dataString = 'domain='+domain+'&package_id='+package_id;
 var url = $('#URL').val();
 $.ajax({
 type: "GET",
