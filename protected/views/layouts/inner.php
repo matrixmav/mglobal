@@ -18,7 +18,7 @@ $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState (
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
- 
+
 ?>
 
 
@@ -406,6 +406,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             }
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
                                 $arraytransaction = BaseClass:: transactionStatus(); 
+                                
                                 if($arraytransaction->status==1)
                                 {
                                   $hotel_subsection = array(
