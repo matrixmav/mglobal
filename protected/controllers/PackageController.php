@@ -517,8 +517,8 @@ class PackageController extends Controller {
                     $MTObject1->update();
                 }
                 ob_start();
-        //$orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-        //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
+        $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
+        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
         $packageObject = Package::model()->findByPK($orderObject->package_id);
         $body = "<page><h1>";
         $body .= $packageObject->name;
