@@ -62,21 +62,29 @@ class UserHasTemplate extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'category_id' => 'Category',
-			'user_menu' => 'User Menu',
-			'temp_header' => 'Temp Header',
-			'temp_footer' => 'Temp Footer',
-			'temp_body' => 'Temp Body',
-			'publish' => 'Publish',
-			'user_id' => 'User',
-			'template_id' => 'Template',
-			'created_at' => 'Created At',
-			'order_id' => 'Order',
+                        'id' => 'ID',
+                        'category_id' => 'Category',
+                        'user_menu' => 'User Menu',
+                        'temp_header' => 'Temp Header',
+                        'temp_footer' => 'Temp Footer',
+                        'temp_body' => 'Temp Body',
+                        'publish' => 'Publish',
+                        'user_id' => 'User',
+                        'logo' => 'Logo',
+                        'site_title' => 'Site Title',
+                        'contact_email' => 'Contact Email',
+                        'copyright' => 'Copyright',
+                        'custom_css' => 'Custom Css',
+                        'custom_js' => 'Custom Js',
+                        'logo_width' => 'Logo Width',
+                        'logo_height' => 'Logo Height',
+                        'template_id' => 'Template',
+                        'created_at' => 'Created At',
+                        'order_id' => 'Order',
 		);
 	}
 
-	/**
+        /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:
@@ -103,6 +111,14 @@ class UserHasTemplate extends CActiveRecord
 		$criteria->compare('publish',$this->publish);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('template_id',$this->template_id);
+		$criteria->compare('logo',$this->logo);
+		$criteria->compare('site_title',$this->site_title);
+		$criteria->compare('contact_email',$this->contact_email);
+		$criteria->compare('copyright',$this->copyright);
+		$criteria->compare('custom_css',$this->custom_css);
+		$criteria->compare('custom_js',$this->custom_js);
+		$criteria->compare('logo_height',$this->logo_height);
+		$criteria->compare('logo_width',$this->logo_width);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('order_id',$this->order_id);
 

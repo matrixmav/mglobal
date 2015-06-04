@@ -261,8 +261,9 @@ class BuildTempController extends Controller {
                     $error .= "Please upload mentioned file type.";
                 } else {
                     $fname = time() . $_FILES['logo']['name'];
-
                     $userhasObject->logo = $fname;
+                    $userhasObject->logo_height = $_POST['height'];
+                    $userhasObject->logo_width = $_POST['width'];
                     $userhasObject->update();
                     $path = Yii::getPathOfAlias('webroot') . "/user/template/".$builderObjectmeta->folderpath."/";
                     BaseClass::uploadFile($_FILES['logo']['tmp_name'], $path, $fname);
@@ -283,7 +284,7 @@ class BuildTempController extends Controller {
         }
         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $userhas->template_id));
     
-        $responce = '<img height="100" width="100" src="/user/template/' .$builderObjectmeta->folderpath . '/'. $userhasObject[0]->logo . '">';
+        $responce = '<img height="'.$userhasObject[0]->logo_height.'" width="'.$userhasObject[0]->logo_width.'" src="/user/template/' .$builderObjectmeta->folderpath . '/'. $userhasObject[0]->logo . '">';
         echo $responce;
     }
 
@@ -295,8 +296,8 @@ class BuildTempController extends Controller {
     }
     
     
-    public function actionPageFooter(){ 
-        $userhasObject = UserHasTemplate::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
+    public function actionPageFooter(){         
+        $userhasObject = UserHasTemplate::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'] , 'order_id' => Yii::app()->session['orderID']));       
         echo $response = stripslashes($userhasObject->temp_footer); 
     }
             
