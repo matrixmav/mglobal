@@ -79,11 +79,11 @@ class PackageController extends Controller {
         if (Yii::app()->session['transactionid'] == '') {
             Yii::app()->session['transactionid'] = $tarnsactionID;
         }
-        
-        $transactionObject1 = Transaction::model()->find(array('condition'=>'user_id ='.Yii::app()->session['userid']. ' AND transaction_id= '.Yii::app()->session['transactionid']));
-         
+
+        $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transactionid']));
+
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
-        
+
         if ($transactionObject1) {
 
             $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
@@ -122,7 +122,7 @@ class PackageController extends Controller {
         }
         //$transactionObject->used_rp = 0;
         $orderObject = new Order;
-        $orderObject1 = Order::model()->find(array('condition'=>'user_id ='.Yii::app()->session['userid']. ' AND transaction_id= '.Yii::app()->session['transaction_id']));
+        $orderObject1 = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transaction_id']));
 
         if (count($orderObject1) > 0) {
             $orderObject1->user_id = Yii::app()->session['userid'];
@@ -366,12 +366,19 @@ class PackageController extends Controller {
 
     public function actionProductCart() {
         $package_id = Yii::app()->session['package_id'];
-        $packageObject = Package::model()->findByPK($package_id);
-        $loggedInUserId = Yii::app()->session['userid'];
-        $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund != "0"'));
-        $this->render('cart', array(
-            'packageObject' => $packageObject, 'walletObject' => $walletObject
-        ));
+        if ($package_id) {
+            $packageObject = Package::model()->findByPK($package_id);
+            $loggedInUserId = Yii::app()->session['userid'];
+            $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
+            $this->render('cart', array(
+                'packageObject' => $packageObject, 'walletObject' => $walletObject
+            ));
+        } else {
+            $error = "Sorry! Your cart is empty.";
+            $this->render('cart', array(
+                'error' => $error
+            ));
+        }
     }
 
     /**
@@ -496,10 +503,9 @@ class PackageController extends Controller {
     public function actionThankYou() {
         if ($_GET) {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
-            
+
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) 
-                {
+            if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -516,30 +522,30 @@ class PackageController extends Controller {
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
-                ob_start();
-        $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-        $packageObject = Package::model()->findByPK($orderObject->package_id);
-        $body = "<page><h1>";
-        $body .= $packageObject->name;
-        $body .= "test";
-        $html2pdf = Yii::app()->ePdf->HTML2PDF();
-        $orderObject = Order::model()->findByPK($orderObject->id);
-        $html2pdf->WriteHTML($body);
-        $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
-        $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
-                $config['to'] = $userObject->email;
+            }
+            ob_start();
+            $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
+            $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+            $packageObject = Package::model()->findByPK($orderObject->package_id);
+            $body = "sdsds";
+
+            $html2pdf = Yii::app()->ePdf->HTML2PDF();
+            $orderObject = Order::model()->findByPK($orderObject->id);
+            $html2pdf->WriteHTML($body);
+            $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
+            $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
+            $config['to'] = $userObject->email;
 //                $config['subject'] = 'Payment Confirmation' ;
 //                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
 //                $config['attachment'] = '/upload/invoice-pdf/'.$userObject->name.'invoice.pdf';        
 //                CommonHelper::sendMail($config);
-                unset(Yii::app()->session['transactionid']);
-                unset(Yii::app()->session['amount']);
-                unset(Yii::app()->session['package_id']);
-                unset(Yii::app()->session['transaction_id']);
-            }
+            unset(Yii::app()->session['transactionid']);
+            unset(Yii::app()->session['amount']);
+            unset(Yii::app()->session['package_id']);
+            unset(Yii::app()->session['transaction_id']);
+            unset(Yii::app()->session['domain']);
         }
-        
+
         $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
