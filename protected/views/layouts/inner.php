@@ -246,7 +246,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </li>
                      
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                        <a href="/wallet/fundwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Fund Wallet">
+                        <a href="/mail/" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Mails">
                             <i class="glyphicon glyphicon-envelope"></i>
                             <span class="badge badge-default">
                                 <?php
