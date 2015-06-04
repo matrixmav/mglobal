@@ -290,5 +290,11 @@ class OrderController extends Controller {
             'totalAmount'=>$totalAmount,
         ));
     }
+    protected function ButtonTitle($data,$row)
+	{ 
+            $userId = Yii::app()->session['userid'];
+            $orderObject = Order::model()->findAll(array('condition' => 'user_id=' . $userId));
+            //var_dump($orderObject->order);exit;
+         }
 }
 
