@@ -60,7 +60,7 @@ $this->menu=array(
 		),
                array(
                     'name'=>'domain_price',
-                    'header'=>'<span style="white-space: nowrap;">Domain Price &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Premium Domain Price &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->domain_price) ? number_format($data->domain_price,2) : "N/A"',
 		),
                array(
