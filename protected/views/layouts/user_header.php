@@ -63,7 +63,7 @@
                 <li class="dropdown dropdown-megamenu">
                     <a class="dropdown-toggle" href="/#about">About </a>
                 </li>
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a class="dropdown-toggle" href="/#services"> Services  </a>
 
                 </li>
@@ -80,7 +80,7 @@
                 <li><a href="/#contact" target="_blank">support centre</a></li>
                
 
-                <!-- BEGIN TOP SEARCH -->
+                <!-- BEGIN TOP SEARCH 
                 <li class="menu-search">
                     <span class="sep"></span>
                     <i class="fa fa-search search-btn"></i>
@@ -94,7 +94,7 @@
                             </div>
                         </form>
                     </div> 
-                </li>
+                </li>-->
                 <!-- END TOP SEARCH -->
             </ul>
         </div>
