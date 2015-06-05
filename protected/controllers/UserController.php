@@ -30,7 +30,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted', 'forgetpassword', 'login', 'changepassword', '404', 'success', 'loginregistration', 'dashboard', 'confirm','isemailexisted', 'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 'callback'),
+                'actions' => array('index', 'view', 'registration', 'confirmation', 'isuserexisted', 'forgetpassword', 'login', 'changepassword', '404', 'success', 'loginregistration', 'dashboard', 'isemailexisted', 'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 'callback'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -47,31 +47,6 @@ class UserController extends Controller {
         );
     }
 
-public function actionConfirm(){
-       
-       $msg = "";
-            if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
-                $activationKey = $_GET['activation_key'];
-                $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
-                if (count($getUserObject) > 0) {
-                    $userObject = new User;
-                    $userObject = User::model()->findByPk($getUserObject->id);
-                    $userObject->status = 1;
-                    $userObject->update();
-                  $msg = "Your account has been verified.";
-
-                    if (!$userObject->update(false)) {
-                        echo "<pre>";
-                        print_r($model->getErrors());
-                        exit;
-                    }
-$this->redirect(array("login",'successMsg'=>$msg));
-                } else {
-                   $msg = "<p class='error'>Invalid Key.</p>";
-                 $this->redirect(array("login",'successMsg'=>$msg));
-                }
-            }        
-    }
     public function actionTwitter() {
 
         $twitter = Yii::app()->twitter->getTwitter();
@@ -355,6 +330,29 @@ $this->redirect(array("login",'successMsg'=>$msg));
             header("Location: " . $login_url);
         }
     }
+    
+    public function actionConfirmation(){
+       
+       $msg = "";
+            if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
+                $activationKey = $_GET['activation_key'];
+                $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
+                if (count($getUserObject) == 1) {
+                    $userObject = new User;
+                    $userObject = User::model()->findByPk($getUserObject->id);
+                    $userObject->status = 1;
+                    $userObject->update();
+                   echo $msg = "Your account has been verified.";
+                    if (!$userObject->update(false)) {
+                        echo "<pre>";
+                        print_r($model->getErrors());
+                        exit;
+                    }
+                } else {
+                   echo $msg = "<p class='error'>Invalid Key.</p>";
+                }
+            }        
+    }
 
     /* User Login Strat Here */
 
@@ -424,7 +422,7 @@ $this->redirect(array("login",'successMsg'=>$msg));
             if ($_POST['admin'] == 1) {
                 $model->role_id = 3;
             } else {
-                $model->role_id = 1;
+                $model->role_id = 2;
             }
             
 
@@ -497,15 +495,13 @@ $this->redirect(array("login",'successMsg'=>$msg));
 
             $config['to'] = $model->email; 
             $config['subject'] = 'Registration Confirmation' ;
-            $config['body'] = 'Hi,' .$model->full_name.'<br/>Congratulations! You have been registered successfully'.
-                    '<br/><br/><strong>User:</strong>'.$model->name.'<br/>'.
-                    '<br/><strong>Password:</strong>'.$password.'<br/>'.
-                    '<strong>Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-                    '<strong>Please click the link below to activate your account:</strong><br/>'.
-                    '<a href="http://staging.mglobally.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
+            $config['body'] = 'Congratulations! You have been registered successfully on our site '.
+                    '<strong>Your Password:</strong>'.$password.'<br/><br/>'.
+                    '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
+                    '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
+                    Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
             $response = CommonHelper::sendMail($config);
-            $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
-            $this->redirect(array('login','successMsg'=> $successMsg));
+            $this->redirect('login',array('successMsg'=> $successMsg));
 
             if ($_POST['admin'] == 1) {
                 $this->redirect(array('admin/user/index', 'successMsg' => 1));
