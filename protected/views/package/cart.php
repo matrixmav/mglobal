@@ -205,7 +205,7 @@
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
-<input type="hidden" id="transID" value="<?php echo $_SESSION['transactionid']; ?>">
+<input type="hidden" id="transID" value="<?php echo Yii::app()->session['transactionid']; ?>">
 <script type="text/javascript">
 
     function Couponapply() {
