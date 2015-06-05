@@ -90,8 +90,9 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'sponsor_id',
                     'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:""',
+                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:"N/A"',
                 ),
+                
                 array(
                     'name' => 'status',
                     'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
