@@ -38,7 +38,7 @@
                                     </td>
                                     <td class="pPriceSum CartSubTotal tbl-pd">
 
-                                        <span class="WebRupee">$</span> <span id=""><?php echo number_format($packageObject->amount,2); ?> </span>
+                                        <span class="WebRupee">$</span> <span id=""><?php echo Yii::app()->format->number($packageObject->amount) . ".00"; ?> </span>
 
                                     </td>
                                 </tr>
@@ -164,7 +164,7 @@
 <?php } ?>
                             <input type="radio" value="paypal" name="payment_mode">Paypal 
 
-                            <form action="<?php echo Yii::app()->params['paypalurl'];?>" method="post" id="frmPayPal">
+                            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
                                 <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                                 <input type="hidden" name="cmd" value="_xclick">
                                 <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
@@ -176,8 +176,11 @@
                                 <input type="hidden" name="currency_code" value="USD">
                                 <input type="hidden" name="handling" value="0">
                                 <input type="hidden" name="cancel_return" value="">
-                                <input type="hidden" name="return" value="<?php echo Yii::app()->params['returnurl'];?>?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
-                             </form>
+                                <input type="hidden" id ="return" name="return" value="http://staging.mglobally.com/package/thankylou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+
+
+
+                            </form>
                             <div id="actualamountDiv" style="display:none;">Total Amount-  <span id="actualamount" style="display:none;"></span></div>
                             <div id="walletamountDiv" style="display:none;">Wallet Amount- <span id="walletamount" style="display:none;"></span></div>
                             <div id="payamountDiv" style="display:none;">Payable Amount- <span id="payamount" style="display:none;"></span></div>
@@ -191,6 +194,11 @@
     </div>
 </div>
   
+<input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
+<input type="hidden" id="coupon_discount_price" value=""> 
+
+
+
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="payAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
@@ -251,8 +259,11 @@
             data: dataString,
             cache: false,
             success: function (html) {
-                if (html == 1)
+             var htmlArr = html.split('-');
+ 
+                if (htmlArr[0] == 1)
                 {
+                    $('#return').val('http://staging.mglobally.com/package/thankyou?transaction_id='+htmlArr[1]);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
 
@@ -352,4 +363,4 @@
     }
 
 </script>    
-
+ 
