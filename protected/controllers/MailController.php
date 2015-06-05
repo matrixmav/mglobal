@@ -68,7 +68,7 @@ class MailController extends Controller
 	 */
 	public function actionSent()
 	{  
-            $loggedInUserId = Yii::app()->session['userid'];
+             $loggedInUserId = Yii::app()->session['userid']; 
             $pageSize= 100;
             $dataProvider = new CActiveDataProvider('Mail', array(
                         'criteria'=>array('condition' => 'from_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
@@ -85,7 +85,7 @@ class MailController extends Controller
                     $userObject = User::model()->findByAttributes(array('email'=>$email));
                     if(empty($userObject)){
                         $this->render('compose',array('error'=>'User Does Not Exist'));
-                    }
+                    }else{
                         $mailObject = new Mail();
                         $mailObject->to_user_id = Yii::app()->params['adminId'];
                         $mailObject->from_user_id = $loggedInUserId;//Yii::app()->params['adminId'];
@@ -95,6 +95,7 @@ class MailController extends Controller
                         $mailObject->created_at = new CDbExpression('NOW()');
                         $mailObject->updated_at = new CDbExpression('NOW()');
                         $mailObject->save(false);
+                    }
                          $this->redirect('/mail');
                 }
                 $this->redirect('/mail');
