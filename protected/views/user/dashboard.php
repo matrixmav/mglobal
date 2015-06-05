@@ -35,7 +35,7 @@ $this->breadcrumbs = array(
                  <?php echo $order->domain;?> 
                 </div>
                 <div class="desc">
-                    Visit website
+                    Visit Website
                 </div> 
             </div>
                   <span class="txtDescription">view more  <i class="m-icon-swapright m-icon-white"></i></span>

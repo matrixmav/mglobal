@@ -132,7 +132,6 @@ License: You must have a valid license purchased only from themeforest(the above
             });
           function OpenChatBox(userID)
             {
-                 
               chatWith(userID);
             }
         </script>
@@ -143,6 +142,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link rel="shortcut icon" href="favicon.ico" />
     </head>
+ 
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">

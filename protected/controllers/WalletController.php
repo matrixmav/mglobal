@@ -157,6 +157,8 @@ class WalletController extends Controller
                                         'criteria'=>array(
                                                         'condition'=> ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid),'order'=>'id DESC',
                                         )));
+          
+          
             $this->render('rpwallet',array('dataProvider'=>$dataProvider));
         }
         

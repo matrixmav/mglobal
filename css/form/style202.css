@@ -3126,3 +3126,29 @@ Styler Panel
 .cartItemsWrp .domain td{color:#3b3b3b;}
 .header-navigation > ul > li.dropdown:hover > a:after{left: 40%;}
 .header-navigation > ul > li{ position: relative !important;}
+.fb-btn{   background: url(/images/facebook-icon.png) 3% center no-repeat #3c5a98 !important;
+  font-weight: bold;
+  padding: 15px 15px 15px 50px;
+  vertical-align: middle;
+  display: inline-block;
+  color: #FFF !important; font-size: 14px; border-radius: 2px !important;}
+.fb-btn:hover, .tw-btn:hover{text-decoration: none;}
+.tw-btn{   background: url(/images/twitter-icon.png) 3% center no-repeat #5ea9dd !important;
+  font-weight: bold;
+  padding: 15px 15px 15px 65px;
+  vertical-align: middle;
+  display: inline-block;
+  color: #FFF !important; font-size: 14px;  border-radius: 2px !important;}
+.fright{float:right !important; margin-right: 0 !important; }
+
+/* search form */
+.titleFiltersWrp > .title{color:#212121;}
+.dca-result-page .domain-select-wrapper{ background: #ffede7; border:1px solid #adadad;}
+.dca-result-page.revamped .domains-input{vertical-align: middle; padding: 8px 5px 3px 7px;}
+.resultDomain-wrapper .domainName{color:#f15d2a;}
+.resultDomain-wrapper .website-promo{color:#757575;}
+.dca-result-page.revamped .pricing-wrp .slashprice{color:#669933; font-weight: bold; font-size: 15px;}
+.resultDomain-wrapper{border-bottom:1px solid #e9e9e9;}
+#domainTaken{font-size:20px;}
+#total{color:#669933;}
+#dca_cart .cart-header{ background: #ebebeb;}

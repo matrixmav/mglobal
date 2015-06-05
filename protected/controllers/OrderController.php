@@ -57,69 +57,10 @@ class OrderController extends Controller {
 
 
         $orderObject = Order::model()->findAll(array('condition' => 'user_id=' . $userId));
-
         $this->render('list', array('dataProvider' => $dataProvider, 'orderObject' => $orderObject));
     }
 
-    public function actionRedirect() {
-        $orderID = end((explode("/", $_SERVER['REQUEST_URI'])));
-        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-        $builderObject = WebsiteadminAdminUsers::model()->findByAttributes(array('username' => $userObject->name . $orderID));
-        $builderweblogObject1 = WebsiteadminWeblog::model()->findByAttributes(array('user' => $userObject->name . $orderID));
-        $buildertemplateObject1 = WebsiteadminUserTemplates::model()->findByAttributes(array('user' => $userObject->name . $orderID));
-        if (count($builderObject) > 0) {
 
-            $builderObject->first_name = $userObject->full_name;
-            $builderObject->username = $userObject->name . $orderID;
-            $builderObject->type = "Basic";
-            $builderObject->password = md5('12345');
-            $builderObject->update();
-
-            $buildertemplateObject1->name = $userObject->full_name;
-            $buildertemplateObject1->user = $userObject->name . $orderID;
-            $buildertemplateObject1->update();
-
-            /* User entry in builder weblog */
-
-            $builderweblogObject1->user = $userObject->name . $orderID;
-            $builderweblogObject1->update();
-        } else {
-
-            $builderObject1 = new WebsiteadminAdminUsers();
-            $builderObject1->first_name = $userObject->full_name;
-            $builderObject1->username = $userObject->name . $orderID;
-            $builderObject1->type = "Basic";
-            $builderObject1->password = md5('12345');
-            $builderObject1->save(false);
-
-            /* User entry in builder templates */
-            $buildertemplateObject = new WebsiteadminUserTemplates();
-            $buildertemplateObject->name = $userObject->full_name;
-            $buildertemplateObject->user = $userObject->name . $orderID;
-            $buildertemplateObject->save(false);
-
-            /* User entry in builder weblog */
-            $builderweblogObject = new WebsiteadminWeblog();
-            $builderweblogObject->user = $userObject->name . $orderID;
-            $builderweblogObject->save(false);
-        }
-
-        //$criteria = new CDbCriteria;
-//            $criteria->addCondition("status=1");
-//            $criteria->addCondition("country_id=".$country_id);
-//            $states=State::model()->findAll($criteria);
-        //$pageSize = 10;
-        //$dataProvider = new CActiveDataProvider('Order', array(
-        //'criteria'=>$criteria,
-        //'pagination' => array('pageSize' => $pageSize),
-        //));
-        Yii::app()->session['order_id'] = $orderID;
-        Yii::app()->session['username1'] = $userObject->name . $orderID;
-        header('Location:/builder/USERSADMIN/index.php?category=home&user=' . $userObject->name . $orderID . '&order_id=' . $orderID);
-        //$orderObject = Order::model()->findAll();
-        //echo "<pre>"; print_r();exit;
-        //$this->render('list',array('dataProvider'=>$dataProvider));
-    }
 
     public function getLabel($data, $row) {
         echo "CButtonColumn1";
@@ -349,5 +290,17 @@ class OrderController extends Controller {
             'totalAmount'=>$totalAmount,
         ));
     }
+    protected function GetButtonTitle($data,$row)
+	{ 
+            $userId = Yii::app()->session['userid'];
+           $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id'])); 
+           if(!empty($userhasObject) && $userhasObject->publish==1)
+           {
+              $title = '<a href="'.$data['domain'].'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
+           }else{
+             $title = '<a href="/buildtemp/templates/?id='.$data['id'].'" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>'; 
+           }
+           echo $title;
+         }
 }
 

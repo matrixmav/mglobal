@@ -34,12 +34,12 @@ class Transaction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, mode, gateway_id, actual_amount, paid_amount,coupon_discount, status, created_at, updated_at', 'required'),
+			array('user_id, transaction_id,mode, gateway_id, actual_amount, paid_amount,coupon_discount, status, created_at, updated_at', 'required'),
 			array('user_id, gateway_id, status', 'numerical', 'integerOnly'=>true),
 			array('mode', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, mode, gateway_id, actual_amount, paid_amount,coupon_discount, total_rp, used_rp, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, user_id,transaction_id, mode, gateway_id, actual_amount, paid_amount,coupon_discount, total_rp, used_rp, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,6 +66,7 @@ class Transaction extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
+                        'transaction_id'=>'Transaction ID',
 			'mode' => 'Mode',
 			'gateway_id' => 'Gateway',
 			'actual_amount' => 'Actual Amount',
@@ -99,6 +100,7 @@ class Transaction extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
+                $criteria->compare('transaction_id',$this->transaction_id);
 		$criteria->compare('mode',$this->mode,true);
 		$criteria->compare('gateway_id',$this->gateway_id);
 		$criteria->compare('actual_amount',$this->actual_amount);

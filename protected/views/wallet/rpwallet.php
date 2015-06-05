@@ -60,8 +60,8 @@ $this->menu=array(
 		),
                 array(
                     'name'=>'transaction_id',
-                    'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->transaction->paid_amount)? $data->transaction->paid_amount:""',
+                    'header'=>'<span style="white-space: nowrap;">Credit Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data->wallet->fund)? $data->wallet->fund:""',
 		),
             array(
                     'name'=>'created_at',
@@ -75,7 +75,7 @@ $this->menu=array(
 		),
             array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Used RP Funds &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Debit Amount &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->fund != 0) ? $data->fund : "N/A"',
 		),
              array(

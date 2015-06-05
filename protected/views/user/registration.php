@@ -23,9 +23,16 @@
                                     <div class="form-group">
                                         <label for="firstname" class="col-lg-4 control-label">Sponsor Id <span class="require">*</span></label>
                                         <div class="col-lg-8">
+                                           
+                                            <div class="row">  
+                                                <div class="col-lg-7">
                                             <input type="text" class="form-control" value="<?php echo (isset($spnId))?$spnId:""; ?>" name="sponsor_id" id="sponsor_id" onchange="isSponsorExisted()">
-                                            <a href="javascript:void(0)" class="btn btn-default" onclick="getSponId();">Get Sponsor Id</a>
+                                                </div>
+                                                <div class="col-lg-5">
+                                            <a href="javascript:void(0)" class="btn btn-default fright" onclick="getSponId();">Get Sponsor Id</a>
                                             <span id="sponsor_id_error" class="clrred"></span>
+                                                </div>
+                                        </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -75,18 +82,19 @@
                                         
                                         <span id="country_id_error" class="clrred"></span></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email" class="col-lg-4 control-label">Country Code<span class="require">*</span></label>
-                                        <div class="col-lg-8">
-                                            <input  name="country_code" id="country_code" placeholder="Country Code" class="form-control" readonly="true"> <br>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="form-group">
                                         <label for="phone" class="col-lg-4 control-label">Mobile phone <span class="require">*</span></label>
                                         <div class="col-lg-8">
+                                            <div class="row">
+                                            <div class="col-lg-3 col-sm-3 col-xs-3">
+                                                <input  name="country_code" id="country_code" placeholder="Country Code" class="form-control" readonly="true">                                            </div>
+                                            <div class="col-lg-9 colo-sm-9 col-xs-9">
+                                                
                                             <input  name="phone" id="phone" maxlength="10" placeholder="phone number" class="form-control" > <br>
-                                        
+                                            </div>
                                         <span id="phone_error" class="clrred"></span></div>
+                                        </div>
                                     </div>
                                 </fieldset>
                                 <div class="row">

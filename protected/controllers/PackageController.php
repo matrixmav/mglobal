@@ -76,14 +76,16 @@ class PackageController extends Controller {
         $createdDate = date("Y-m-d");
         $tarnsactionID = BaseClass::gettransactionID();
         $transactionObject = new Transaction;
-        if (Yii::app()->session['transactionid'] == '') {
+        if (isset(Yii::app()->session['transactionid'])) {
             Yii::app()->session['transactionid'] = $tarnsactionID;
+        }else{
+           Yii::app()->session['transactionid'] = $tarnsactionID; 
         }
-        
-        $transactionObject1 = Transaction::model()->find(array('condition'=>'user_id ='.Yii::app()->session['userid']. ' AND transaction_id= '.Yii::app()->session['transactionid']));
-         
+          
+        $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transactionid']));
+
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
-        
+
         if ($transactionObject1) {
 
             $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
@@ -122,7 +124,7 @@ class PackageController extends Controller {
         }
         //$transactionObject->used_rp = 0;
         $orderObject = new Order;
-        $orderObject1 = Order::model()->find(array('condition'=>'user_id ='.Yii::app()->session['userid']. ' AND transaction_id= '.Yii::app()->session['transaction_id']));
+        $orderObject1 = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transaction_id']));
 
         if (count($orderObject1) > 0) {
             $orderObject1->user_id = Yii::app()->session['userid'];
@@ -148,7 +150,7 @@ class PackageController extends Controller {
             $orderObject->save(false);
         }
 
-        echo 1;
+        echo '1-'.Yii::app()->session['transaction_id'];
     }
 
     public function actionDomainAdd() {
@@ -235,9 +237,9 @@ class PackageController extends Controller {
             <button id="checkout" class="btn-flat-green btn-orange" onclick="RedirectCart();">Checkout</button>
             </div>
             </div>';
-        $domainTakenArray = array('nidhisati.com', 'ram.net', 'sumeet.com', 'suryaasati.com');
-        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $userEnteredDomain = Yii::app()->session['domain'];
+        $domainTakenArray = DomainTemp::model()->findAll(array("condition"=>"name LIKE '".$userEnteredDomain."%'"));
+        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $UserDomainPart = explode('.', $userEnteredDomain);
 
 
@@ -245,21 +247,25 @@ class PackageController extends Controller {
         //unset($AllDomainArray[$pos]);
         //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
         $SuggestedDomain = "";
-        foreach ($AllDomainArray as $alldomain) {
-            $domainName = "'" . $UserDomainPart[0] . "." . $alldomain . "'";
-            $domainNameF = $UserDomainPart[0] . "." . $alldomain;
+        foreach ($domainTakenArray as $alldomain) {
+            foreach($AllDomainArray as $allext){ 
+                $domainName = "'" . $alldomain->name . "." . $allext . "'";
+              
+            $domainName = "'" . $alldomain->name . "." . $allext . "'";
+            $domainNameF = "'" . $alldomain->name . "." . $allext . "'";
 
             $SuggestedDomain .= '<div class="secondary-result">
                             <div class="secondaryDomain resultDomain-wrapper">
                                  <div class="domain-wrapper cart2">
-                                    <p class="domainName">' . $UserDomainPart[0] . "." . $alldomain . '</p>
+                                    <p class="domainName">' . $alldomain->name . "." . $allext  . '</p>
                                     <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div>
                                  </div>
                                  <span class="pricing-wrp">
-                                    <div class="slashprice cart1"><span class="WebRupee">$</span> 819</div>
+                                    <div class="slashprice cart1"><span class="WebRupee">$</span>'.$alldomain->price.'</div>
                                    </span>
-                                      <input type="hidden" name="domain" id="domain" value="' . $UserDomainPart[0] . "." . $alldomain . '">
-                                       <input type="hidden" name="amount" id="amount" value="5">';
+                                      <input type="hidden" name="domain" id="domain" value="' . $alldomain->name . "." . $allext  . '">
+                                    <input type="hidden" name="amount" id="amount" value="">';
+                                       
             if (in_array($domainNameF, $domainTakenArray)) {
 
                 $SuggestedDomain .= '<span class="select-domain btn-flat-green">N/A</span>';
@@ -272,6 +278,7 @@ class PackageController extends Controller {
 
 
             //$SuggestedDomain .= "<a href='".Yii::app()->baseUrl."checkout?domain_id=1'>" . $UserDomainPart[0] . "." . $alldomain . "</a><br/>";
+        }
         }
 
 
@@ -289,14 +296,15 @@ class PackageController extends Controller {
      */
     public function actionAvailableDomain() {
         Yii::app()->session['package_id'] = $_REQUEST['package_id'];
-        $domainTakenArray = array('nidhisati.com', 'ram.net', 'sumeet.com', 'suryaasati.com');
-        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $userEnteredDomain = $_REQUEST['domain'];
+        //$domainTakenArray = array('nidhisati.com', 'ram.net', 'sumeet.com', 'suryaasati.com');
+        $domainTakenArray = DomainTemp::model()->findAll(array("condition"=>"name LIKE '".$userEnteredDomain."%'"));
+        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $UserDomainPart = explode('.', $userEnteredDomain);
-        if (in_array($userEnteredDomain, $domainTakenArray)) {
-            $pos = array_search($UserDomainPart[1], $AllDomainArray);
+        //if (in_array($userEnteredDomain, $domainTakenArray)) {
+            /*$pos = array_search($UserDomainPart[1], $AllDomainArray);
             unset($AllDomainArray[$pos]);
-            //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
+            $SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
             $SuggestedDomain = '<div class="secondary-result">
                             <div class="secondaryDomain resultDomain-wrapper">
                                 <div class="domain-wrapper ">
@@ -308,30 +316,33 @@ class PackageController extends Controller {
                                    </span>
                                    <span class="select-domain btn-flat-green">N/A</span>
                               </div>
-                        </div>';
-            foreach ($AllDomainArray as $alldomain) {
-                $domainName = "'" . $UserDomainPart[0] . "." . $alldomain . "'";
-
+                        </div>';*/
+          $SuggestedDomain = "";
+            foreach ($domainTakenArray as $alldomain) {
+              foreach($AllDomainArray as $allext){ 
+                $domainName = "'" . $alldomain->name . "." . $allext . "'";
+              
                 $SuggestedDomain .= '<div class="secondary-result">
                             <div class="secondaryDomain resultDomain-wrapper">
                                  <div class="domain-wrapper cart2">
-                                    <p class="domainName">' . $UserDomainPart[0] . "." . $alldomain . '</p>
+                                    <p class="domainName">' . $alldomain->name . "." . $allext . '</p>
                                     <div class="website-promo orange">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div>
                                  </div>
                                  <span class="pricing-wrp">
-                                    <div class="slashprice cart1"><span class="WebRupee">$</span> 819</div>
+                                    <div class="slashprice cart1"><span class="WebRupee">$</span> '.$alldomain->price .'</div>
                                    </span>
-                                   <input type="hidden" name="domain" id="domain" value="' . $UserDomainPart[0] . "." . $alldomain . '">
-                                       <input type="hidden" name="amount" id="amount" value="5">
+                                   <input type="hidden" name="domain" id="domain" value="' . $alldomain->name . "." . $allext  . '">
+                                   <input type="hidden" name="amount" id="amount" value="">
                                     <button class="add-to-cart select-domain btn-flat-green" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>
                               </div>
                         </div>';
-
+                        }}
 
                 //$SuggestedDomain .= "<a href='".Yii::app()->baseUrl."checkout?domain_id=1'>" . $UserDomainPart[0] . "." . $alldomain . "</a><br/>";
-            }
-        } else {
-            $domainNameF = "'" . $UserDomainPart[0] . ".com'";
+             
+        //} else {
+            
+            /*$domainNameF = "'" . $UserDomainPart[0] . ".com'";
             $SuggestedDomain = '<div class="secondary-result cart2">
                             <div class="secondaryDomain resultDomain-wrapper">
                                 <div class="domain-wrapper cart2">
@@ -347,11 +358,11 @@ class PackageController extends Controller {
                                    <button class="add-to-cart select-domain btn-flat-green" onclick="DomainAdd(' . $domainNameF . ');"  type="button">Add</button>
                                     
                               </div>
-                        </div> ';
+                        </div> ';*/
             foreach ($AllDomainArray as $alldomain) {
                 //$SuggestedDomain .= "<a href='".Yii::app()->baseUrl."checkout?domain_id=1'>" . $UserDomainPart[0] . "." . $alldomain . "</a><br/>";
             }
-        }
+        //}
         echo $SuggestedDomain;
     }
 
@@ -366,12 +377,14 @@ class PackageController extends Controller {
 
     public function actionProductCart() {
         $package_id = Yii::app()->session['package_id'];
-        $packageObject = Package::model()->findByPK($package_id);
-        $loggedInUserId = Yii::app()->session['userid'];
-        $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund != "0"'));
-        $this->render('cart', array(
-            'packageObject' => $packageObject, 'walletObject' => $walletObject
-        ));
+        
+            $packageObject = Package::model()->findByPK($package_id);
+            $loggedInUserId = Yii::app()->session['userid'];
+            $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
+            $this->render('cart', array(
+                'packageObject' => $packageObject, 'walletObject' => $walletObject
+            ));
+       
     }
 
     /**
@@ -494,12 +507,12 @@ class PackageController extends Controller {
      */
 
     public function actionThankYou() {
-        if ($_GET) {
+        
+        if (isset($_GET)) {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
-            
+
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) 
-                {
+            if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -516,33 +529,102 @@ class PackageController extends Controller {
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
-                ob_start();
-        //$orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-        //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
-        $packageObject = Package::model()->findByPK($orderObject->package_id);
-        $body = "<page><h1>";
-        $body .= $packageObject->name;
-        $body .= "</h1>
-            <br>
-            Ceci est un <b>exemple d'utilisation</b>
-            de <a href='http://html2pdf.fr/'>HTML2PDF</a>.<br>
-        </page>";
-        $html2pdf = Yii::app()->ePdf->HTML2PDF();
-        $orderObject = Order::model()->findByPK($orderObject->id);
-        $html2pdf->WriteHTML($body);
-        $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
-        $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
-                $config['to'] = $userObject->email;
-//                $config['subject'] = 'Payment Confirmation' ;
-//                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
-//                $config['attachment'] = '/upload/invoice-pdf/'.$userObject->name.'invoice.pdf';        
-//                CommonHelper::sendMail($config);
-                unset(Yii::app()->session['transactionid']);
-                unset(Yii::app()->session['amount']);
-                unset(Yii::app()->session['transaction_id']);
+             
+            ob_start();
+            $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
+            $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+            $packageObject = Package::model()->findByPK($orderObject->package_id);
+             $description = substr($packageObject->Description,20);
+             $Couponbody = "";
+             if($transactionObject->coupon_discount!='0')
+            {
+            $Couponbody .= '<tr>
+            <td width="200">Coupon Discount</td>
+              <td width="200">';
+            $Couponbody .= $transactionObject->coupon_discount;
+            $Couponbody .='</td>
+            </tr>';
             }
+            $RPBody ="";
+            if($transactionObject->used_rp !=0)
+            {
+            $RPBody .= '<tr>
+            <td width="200">Used RP /Cash</td>
+              <td width="200">';
+            $RPBody .= number_format($transactionObject->used_rp,2);
+            $RPBody .= '</td>
+            </tr>';
+            }
+            if($orderObject->domain_price !='0')
+            {
+                $domain_price = "$".number_format($orderObject->domain_price,2);
+            }else{
+                $domain_price = "N/A";
+            }
+            $Samount = number_format($packageObject->amount + $orderObject->domain_price,2);
+            $paid_amount = number_format($transactionObject->paid_amount,2);
+            $body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
+            $body .='<tr>
+                     <td>';
+            $body .= $packageObject->name;
+            $body .='</td><td>';
+            $body .= $description;
+            $body .='</td><td>1 Year</td><td>';
+            $body .= "$".$packageObject->amount;
+            $body .='</td></tr>';
+            $body .='<tr><td>';
+            $body .= 'Premium domain purchased';
+            $body .= '</td><td>';
+            $body .= $orderObject->domain;
+            $body .= '</td><td>';
+            $body .= '1 Year';
+            $body .='</td><td>';
+            $body .= $domain_price;
+            $body .= '</td></tr>
+                <tr>
+  	     <td colspan="2"></td>
+             <td colspan="2">
+    	     <table>
+        	<tr>
+            <td width="200">Subtotal</td>
+              <td width="200">';
+            $body .= "$".$Samount;
+            $body .= '</td>';
+            $body .= '</tr>';
+            $body .= $Couponbody;
+            $body .= $RPBody;
+            $body .='<tr>
+            <td width="200">Total Paid Amount:</td>
+              <td width="200">';
+            $body .= "$".$paid_amount;
+            $body .= '</td>
+            </tr>
+        </table>
+    </td>
+  </tr></table>';
+
+            $html2pdf = Yii::app()->ePdf->HTML2PDF('L',"A4","en", array(10, 10, 10, 10));;
+            $orderObject = Order::model()->findByPK($orderObject->id);
+            $html2pdf->WriteHTML($body);
+            $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
+            $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Payment Confirmation' ;
+                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
+                $config['file_path'] = $path.$userObject->name.'invoice.pdf';        
+               CommonHelper::sendMail($config);
+            }
+             if ($transactionObject->status == 1) {
+            Yii::app()->session['transactionid']=0;
+            Yii::app()->session['amount'] = 0;
+            Yii::app()->session['package_id']= 0;
+            Yii::app()->session['transaction_id']= 0;
+            Yii::app()->session['domain']= 0;
+             }
+       
+           
         }
-        
+
         $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
@@ -553,7 +635,8 @@ class PackageController extends Controller {
      */
 
     public function actionWalletCalc() {
-        if ($_REQUEST) {
+        if ($_REQUEST)
+        {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => Yii::app()->session['transactionid']));
             if ($transactionObject) {
                 $transactionObject->paid_amount = $_REQUEST['payableAmount'];

@@ -30,7 +30,7 @@ return array(
             'homepageAds'=>array("960_133"=>"960_133","277_700"=>"277_700"),
     ),
     'adminEmail'=>'info@mglobally.com',
-    'adminName' => 'Admmin',
+    'adminName' => 'Admin',
     'defaultPageSize' => 500,
     'startDate' =>date('2014-m-d'),
     'clientInvoicePercentage'=>5,
