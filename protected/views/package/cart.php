@@ -180,7 +180,7 @@
                                         <input type="hidden" name="currency_code" value="USD">
                                         <input type="hidden" name="handling" value="0">
                                         <input type="hidden" name="cancel_return" value="">
-                                        <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+                                        <input type="hidden" name="return" value="http://mglobal.dev/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
                                         
 
 
