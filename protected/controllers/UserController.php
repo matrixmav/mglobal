@@ -30,7 +30,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted', 'forgetpassword', 'login', 'changepassword', '404', 'success', 'loginregistration', 'dashboard', 'isemailexisted', 'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 'callback'),
+                'actions' => array('index', 'view', 'registration', 'confirmation', 'isuserexisted', 'forgetpassword', 'login', 'changepassword', '404', 'success', 'loginregistration', 'dashboard', 'isemailexisted', 'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 'callback'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -329,6 +329,29 @@ class UserController extends Controller {
             $login_url = $facebook->getLoginUrl(array('scope' => 'email'));
             header("Location: " . $login_url);
         }
+    }
+    
+    public function actionConfirmation(){
+       
+       $msg = "";
+            if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
+                $activationKey = $_GET['activation_key'];
+                $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
+                if (count($getUserObject) == 1) {
+                    $userObject = new User;
+                    $userObject = User::model()->findByPk($getUserObject->id);
+                    $userObject->status = 1;
+                    $userObject->update();
+                   echo $msg = "Your account has been verified.";
+                    if (!$userObject->update(false)) {
+                        echo "<pre>";
+                        print_r($model->getErrors());
+                        exit;
+                    }
+                } else {
+                   echo $msg = "<p class='error'>Invalid Key.</p>";
+                }
+            }        
     }
 
     /* User Login Strat Here */

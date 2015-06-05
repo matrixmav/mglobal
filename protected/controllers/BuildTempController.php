@@ -196,6 +196,7 @@ class BuildTempController extends Controller {
     }
 
     
+    
      public function actionAddCopyRight() {
         $error = "";
         $success = "";
@@ -289,9 +290,19 @@ class BuildTempController extends Controller {
     }
 
     public function actionPageContent() { 
-        $responce = "";        
+        $response = "";        
+        $responseForm = "";        
         $userpageObject = UserPages::model()->findBYPK($_REQUEST['page_id']);
-        echo  $response = stripslashes($userpageObject->page_content);
+        
+        if($userpageObject->page_form == 1){            
+            
+            $userhasObject = UserHasTemplate::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'] , 'order_id' => Yii::app()->session['orderID']));    
+            $responseForm = stripslashes($userhasObject->contact_form);
+            
+        }
+        
+        $response = stripslashes($userpageObject->page_content);
+        echo $response."aaaaa".$responseForm ;
 
     }
     
