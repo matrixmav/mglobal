@@ -31,7 +31,7 @@ class MailController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reply','compose','sent','fetchemail'),
+				'actions'=>array('index','view','reply','compose','sent'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -77,17 +77,23 @@ class MailController extends Controller
                 'dataProvider'=>$dataProvider,
             ));
 	}
-        public function actionCompose(){ 
+        public function actionCompose(){
+            $emailObject = User::model()->findAll(array('condition'=>'role_id=2'));
             if($_POST){  
-                $emailArray = $_POST['to_email'];
+                //$emailArray = $_POST['to_email'];
+                
+                
                 $loggedInUserId = Yii::app()->session['userid'];
-                foreach ($emailArray as $email){
-                    $userObject = User::model()->findByAttributes(array('email'=>$email));
+                //foreach ($emailArray as $email){
+                    $to_email = $_POST['to_email'];
+                    $userObject = User::model()->findByAttributes(array('id'=>$to_email));
                     if(empty($userObject)){
-                        $this->render('compose',array('error'=>'User Does Not Exist'));
+                        //$this->render('compose',array('error'=>'User Does Not Exist'));
+                        $this->render('compose',array('error'=>'User Does Not Exist','emailObject'=>$emailObject));
                     }else{
+                       
                         $mailObject = new Mail();
-                        $mailObject->to_user_id = Yii::app()->params['adminId'];
+                        $mailObject->to_user_id = $_POST['to_email'];
                         $mailObject->from_user_id = $loggedInUserId;//Yii::app()->params['adminId'];
                         $mailObject->subject = $_POST['email_subject'];
                         $mailObject->message = $_POST['email_body'];
@@ -97,10 +103,12 @@ class MailController extends Controller
                         $mailObject->save(false);
                     }
                          $this->redirect('/mail');
-                }
+                //}
                 $this->redirect('/mail');
             }
-            $this->render('compose',array('error'=>''));
+            //$emailObject = User::model()->findAll(array('condition'=>'role_id=2'));
+//            var_dump($emailObject);exit;
+            $this->render('compose',array('error'=>'','emailObject'=>$emailObject));
         }
         public function actionReply(){ 
             if($_GET){
@@ -124,18 +132,7 @@ class MailController extends Controller
             }
 	}
         
-        /*
-         * Fetch admin emails for mail module
-         */
         
-        public function actionFetchEmail()
-        {
-           $emailObject = User::model()->findAll(array('condition'=>'role_id=2')); 
-           $this->render('compose',array(
-			'emailObject'=>$emailObject,
-		));
-        }
-
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
