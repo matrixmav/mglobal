@@ -50,7 +50,7 @@ $this->menu=array(
 		),
 		array(
                     'name'=>'package_id',
-                    'header'=>'<span style="white-space: nowrap;">Package Name &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Package &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'isset($data->package->name)?$data->package->name:""',
 		),
                 array(
@@ -60,12 +60,12 @@ $this->menu=array(
 		),
                array(
                     'name'=>'domain_price',
-                    'header'=>'<span style="white-space: nowrap;">Premium Domain Price &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Pre Dom Price &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->domain_price) ? number_format($data->domain_price,2) : "N/A"',
 		),
                array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Discount &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->transaction->coupon_discount) ? number_format($data->transaction->coupon_discount,2) : "N/A"',
 		),
                 array(

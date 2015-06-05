@@ -31,10 +31,11 @@ $this->breadcrumbs = array(
     <?php 
     $statusId =   1;
     if(isset($_REQUEST['res_filter'])){
-      $statusId =   $_REQUEST['res_filter'];
+    $statusId =   $_REQUEST['res_filter'];
     } ?>
     
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
+
                 <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Active</option>
                 <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >In Active</option>
             </select>
@@ -57,7 +58,7 @@ $this->breadcrumbs = array(
             'summaryText' => 'Showing {start} to {end} of {count} entries',
             'template' => '{items} {summary} {pager}',
             'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
-            'rowCssClassExpression'=>'fa fa-success btn default black delete',
+            //'rowCssClassExpression'=>'fa fa-success btn default black delete',
             'pager' => array(
                 'header' => false,
                 'firstPageLabel' => "<<",
@@ -71,7 +72,7 @@ $this->breadcrumbs = array(
                     'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$row+1',
 		),
-                //'idJob',
+                
                 array(
                     'name' => 'name',
                     'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',

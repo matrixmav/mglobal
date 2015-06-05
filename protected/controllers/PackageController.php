@@ -76,10 +76,12 @@ class PackageController extends Controller {
         $createdDate = date("Y-m-d");
         $tarnsactionID = BaseClass::gettransactionID();
         $transactionObject = new Transaction;
-        if (Yii::app()->session['transactionid'] == '') {
+        if (isset(Yii::app()->session['transactionid'])) {
             Yii::app()->session['transactionid'] = $tarnsactionID;
+        }else{
+           Yii::app()->session['transactionid'] = $tarnsactionID; 
         }
-
+          
         $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transactionid']));
 
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
@@ -148,7 +150,7 @@ class PackageController extends Controller {
             $orderObject->save(false);
         }
 
-        echo 1;
+        echo '1-'.Yii::app()->session['transaction_id'];
     }
 
     public function actionDomainAdd() {
@@ -505,7 +507,8 @@ class PackageController extends Controller {
      */
 
     public function actionThankYou() {
-        if ($_GET) {
+        
+        if (isset($_GET)) {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
 
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
@@ -526,28 +529,100 @@ class PackageController extends Controller {
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
-            }
+             
             ob_start();
             $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
             $packageObject = Package::model()->findByPK($orderObject->package_id);
-            $body = "sdsds";
+             $description = substr($packageObject->Description,20);
+             $Couponbody = "";
+             if($transactionObject->coupon_discount!='0')
+            {
+            $Couponbody .= '<tr>
+            <td width="200">Coupon Discount</td>
+              <td width="200">';
+            $Couponbody .= $transactionObject->coupon_discount;
+            $Couponbody .='</td>
+            </tr>';
+            }
+            $RPBody ="";
+            if($transactionObject->used_rp !=0)
+            {
+            $RPBody .= '<tr>
+            <td width="200">Used RP /Cash</td>
+              <td width="200">';
+            $RPBody .= number_format($transactionObject->used_rp,2);
+            $RPBody .= '</td>
+            </tr>';
+            }
+            if($orderObject->domain_price !='0')
+            {
+                $domain_price = "$".number_format($orderObject->domain_price,2);
+            }else{
+                $domain_price = "N/A";
+            }
+            $Samount = number_format($packageObject->amount + $orderObject->domain_price,2);
+            $paid_amount = number_format($transactionObject->paid_amount,2);
+            $body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
+            $body .='<tr>
+                     <td>';
+            $body .= $packageObject->name;
+            $body .='</td><td>';
+            $body .= $description;
+            $body .='</td><td>1 Year</td><td>';
+            $body .= "$".$packageObject->amount;
+            $body .='</td></tr>';
+            $body .='<tr><td>';
+            $body .= 'Premium domain purchased';
+            $body .= '</td><td>';
+            $body .= $orderObject->domain;
+            $body .= '</td><td>';
+            $body .= '1 Year';
+            $body .='</td><td>';
+            $body .= $domain_price;
+            $body .= '</td></tr>
+                <tr>
+  	     <td colspan="2"></td>
+             <td colspan="2">
+    	     <table>
+        	<tr>
+            <td width="200">Subtotal</td>
+              <td width="200">';
+            $body .= "$".$Samount;
+            $body .= '</td>';
+            $body .= '</tr>';
+            $body .= $Couponbody;
+            $body .= $RPBody;
+            $body .='<tr>
+            <td width="200">Total Paid Amount:</td>
+              <td width="200">';
+            $body .= "$".$paid_amount;
+            $body .= '</td>
+            </tr>
+        </table>
+    </td>
+  </tr></table>';
 
-            $html2pdf = Yii::app()->ePdf->HTML2PDF();
+            $html2pdf = Yii::app()->ePdf->HTML2PDF('L',"A4","en", array(10, 10, 10, 10));;
             $orderObject = Order::model()->findByPK($orderObject->id);
             $html2pdf->WriteHTML($body);
             $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
             $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
-            $config['to'] = $userObject->email;
-//                $config['subject'] = 'Payment Confirmation' ;
-//                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
-//                $config['attachment'] = '/upload/invoice-pdf/'.$userObject->name.'invoice.pdf';        
-//                CommonHelper::sendMail($config);
-            unset(Yii::app()->session['transactionid']);
-            unset(Yii::app()->session['amount']);
-            unset(Yii::app()->session['package_id']);
-            unset(Yii::app()->session['transaction_id']);
-            unset(Yii::app()->session['domain']);
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Payment Confirmation' ;
+                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
+                $config['file_path'] = $path.$userObject->name.'invoice.pdf';        
+               CommonHelper::sendMail($config);
+            }
+             if ($transactionObject->status == 1) {
+            Yii::app()->session['transactionid']=0;
+            Yii::app()->session['amount'] = 0;
+            Yii::app()->session['package_id']= 0;
+            Yii::app()->session['transaction_id']= 0;
+            Yii::app()->session['domain']= 0;
+             }
+       
+           
         }
 
         $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
@@ -560,7 +635,8 @@ class PackageController extends Controller {
      */
 
     public function actionWalletCalc() {
-        if ($_REQUEST) {
+        if ($_REQUEST)
+        {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => Yii::app()->session['transactionid']));
             if ($transactionObject) {
                 $transactionObject->paid_amount = $_REQUEST['payableAmount'];

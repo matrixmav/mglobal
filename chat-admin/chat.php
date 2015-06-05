@@ -38,7 +38,7 @@ if (!isset($_SESSION['openChatBoxes'])) {
 
 function chatHeartbeat() {
 	
-	$sql = "select * from chat where (chat.to = 'mGlobaly' AND recd = 0) order by id ASC";
+	$sql = "select * from chat where (chat.to = 'mGlobally' AND recd = 0) order by id ASC";
 	$query = mysql_query($sql);
 	$items = '';
 
@@ -109,7 +109,7 @@ EOD;
 	}
 }
 
-	$sql = "update chat set recd = 1 where chat.to = 'mGlobaly' and recd = 0";
+	$sql = "update chat set recd = 1 where chat.to = 'mGlobally' and recd = 0";
 	$query = mysql_query($sql);
 
 	if ($items != '') {
@@ -169,7 +169,7 @@ header('Content-type: application/json');
 
 function sendChat() {
         
-	$from = "mGlobaly";
+	$from = "mGlobally";
 	$to = $_POST['to'];
 	$message = $_POST['message'];
 
