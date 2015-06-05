@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Wallet' => array('/admin/wallet'),
+    'Wallet' => array('/admin/user/wallet'),
     'Recharge'
 );
 ?>
