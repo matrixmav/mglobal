@@ -1,5 +1,5 @@
 <?php
-
+//echo "cool";exit;
 class MoneyTransferController extends Controller {
 
     /**
@@ -78,7 +78,7 @@ class MoneyTransferController extends Controller {
     public function actionTransfer() {
         $error = "";
         $userid = Yii::app()->session['userid'];
-        if (isset($_POST['transfer'])) {
+        if (isset($_POST['transfer'])) { //echo "cool";exit;
 
             if ($_POST['paid_amount'] < 10) {
                 $error = "Sorry! you can not transfer amount less then $10";
@@ -95,8 +95,8 @@ class MoneyTransferController extends Controller {
                 $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
                 if(!$toUserWalletObject){
                     //create wallet for to user
-                    $toUserWalletObject = Wallet::mgettransactionIDodel()->create($toUserId,$fund,$walletType);
-                }gettransactionID
+                    $toUserWalletObject = Wallet::model()->create($toUserId,$fund,$walletType);
+                }
                 //create transaction record entry
                 $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject);
 
@@ -215,12 +215,15 @@ class MoneyTransferController extends Controller {
                     $walletObject1->updated_at = 1;
                     $walletObject1->save(false);
                 }else{
-                 $totalAmount = $wallettoObj->fund + $transactionObj->paid_amount;   
+                 $totalAmount = $walletRecvObj2->fund + $transactionObj->paid_amount;   
                  $walletRecvObj2->fund = $totalAmount; 
-                 $walletObject1->updated_at = $createdtime;
-                 $walletObject1->update();
+                 $walletRecvObj2->updated_at = $createdtime;
+                 $walletRecvObj2->update();
                 }  
-
+                if($transactionObj){
+                    $transactionObj->status = 1;
+                    $transactionObj->update();
+                }
                 /* for admin wallet add */
                 /*$wallettoObj = Wallet::model()->findByAttributes(array('id' => $moneyobj->wallet_id));
                 $wallettoObj->fund = ($wallettoObj->fund) + ($transactionObj->paid_amount);

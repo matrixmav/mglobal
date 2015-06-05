@@ -155,6 +155,7 @@
             data: "username=" + $("#name").val(),
             success: function (msg) {
                 $("#name_error").html("");
+               $("#name_available").html("");
                 $("#nameExistedErrorFlag").val("0");
                 if(msg == 1){
                     $("#name_error").html("Existed!!!");

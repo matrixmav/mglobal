@@ -75,7 +75,7 @@ class WalletController extends Controller
             $type = $_POST['walletId'];
             $walletObject = Wallet::model()->findByAttributes(array('user_id'=>$userId,'type'=>$type));
             if(!empty($walletObject)){
-              echo $walletObject->fund;exit;
+              echo number_format($walletObject->fund,2);exit;
             }
             echo 0;exit;
         }

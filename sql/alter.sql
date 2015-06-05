@@ -17,6 +17,7 @@ INSERT INTO `domain_temp` (`id`, `name`, `price`, `status`) VALUES
 (5, 'ankita', 34, 1),
 (6, 'anu', 34, 1),
 (7, 'ankith', 45, 1);
+(8, 'ram', 45, 1);
  
 /*----*/
 
@@ -48,3 +49,7 @@ ALTER TABLE `user_has_template` ADD `user_menu` TEXT NOT NULL AFTER `user_id`;
 
 
 ALTER TABLE `user_has_template` ADD `logo_height` VARCHAR(11) NOT NULL AFTER `custom_js`, ADD `logo_width` VARCHAR(11) NOT NULL AFTER `logo_height`, ADD `contact_form` TEXT NOT NULL AFTER `logo_width`;
+
+ALTER TABLE `money_transfer` ADD `fund` FLOAT NULL AFTER `fund_type` ;
+
+ALTER TABLE `transaction` CHANGE `transaction_id` `transaction_id` VARCHAR( 50 ) NOT NULL ;

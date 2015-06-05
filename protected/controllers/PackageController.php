@@ -76,10 +76,12 @@ class PackageController extends Controller {
         $createdDate = date("Y-m-d");
         $tarnsactionID = BaseClass::gettransactionID();
         $transactionObject = new Transaction;
-        if (Yii::app()->session['transactionid'] == '') {
+        if (isset(Yii::app()->session['transactionid'])) {
             Yii::app()->session['transactionid'] = $tarnsactionID;
+        }else{
+           Yii::app()->session['transactionid'] = $tarnsactionID; 
         }
-
+          
         $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transactionid']));
 
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
@@ -148,7 +150,7 @@ class PackageController extends Controller {
             $orderObject->save(false);
         }
 
-        echo 1;
+        echo '1-'.Yii::app()->session['transaction_id'];
     }
 
     public function actionDomainAdd() {
