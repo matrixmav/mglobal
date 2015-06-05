@@ -114,7 +114,6 @@ class BaseClass extends Controller {
     
     public static function getWalletList(){
         return array(
-            ''=>'All',
             '1'=>'Cash',
             '2'=> 'RP Wallet',
             '3'=>'Commission'
