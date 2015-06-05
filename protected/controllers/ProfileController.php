@@ -251,7 +251,8 @@ class ProfileController extends Controller {
             }else{
              $userObject->password = md5($_POST['UserProfile']['new_password']);   
              if ($userObject->update()) {
-               $success .= "Your password changed successfully";  
+               $success .= "Your password changed successfully"; 
+               
              }  
             }
             } else {
