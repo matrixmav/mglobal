@@ -219,7 +219,7 @@ class UserController extends Controller {
     }
 
     public function actionCreditWallet() {
-        print_r($_GET['id']); exit;
+         
         if ($_POST) {
             $userId = $_POST['userId'];
             $type = $_POST['wallet_type'];
