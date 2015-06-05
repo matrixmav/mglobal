@@ -260,7 +260,7 @@
             cache: false,
             success: function (html) {
              var htmlArr = html.split('-');
- 
+            
                 if (htmlArr[0] == 1)
                 {
                     $('#return').val('http://staging.mglobally.com/package/thankyou?transaction_id='+htmlArr[1]);
