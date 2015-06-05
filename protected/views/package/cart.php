@@ -176,7 +176,7 @@
                                 <input type="hidden" name="currency_code" value="USD">
                                 <input type="hidden" name="handling" value="0">
                                 <input type="hidden" name="cancel_return" value="">
-                                <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+                                <input type="hidden" name="return" value="http://staging.mglobally.com/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
 
 
 
@@ -205,7 +205,7 @@
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
-<input type="hidden" id="transID" value="<?php echo $_SESSION['transactionid']; ?>">
+<input type="hidden" id="transID" value="<?php echo Yii::app()->session['transactionid']; ?>">
 <script type="text/javascript">
 
     function Couponapply() {

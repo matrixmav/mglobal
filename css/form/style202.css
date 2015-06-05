@@ -3144,7 +3144,7 @@ Styler Panel
 /* search form */
 .titleFiltersWrp > .title{color:#212121;}
 .dca-result-page .domain-select-wrapper{ background: #ffede7; border:1px solid #adadad;}
-.dca-result-page.revamped .domains-input{vertical-align: middle; padding: 20px;}
+.dca-result-page.revamped .domains-input{vertical-align: middle; padding: 8px 5px 3px 7px;}
 .resultDomain-wrapper .domainName{color:#f15d2a;}
 .resultDomain-wrapper .website-promo{color:#757575;}
 .dca-result-page.revamped .pricing-wrp .slashprice{color:#669933; font-weight: bold; font-size: 15px;}

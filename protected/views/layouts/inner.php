@@ -174,7 +174,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">
         <?php //var_dump($_SESSION); exit;?>
-        <input type="hidden" id="username" value="mGlobaly">
+        <input type="hidden" id="username" value="mGlobally">
         <!-- BEGIN HEADER -->
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
@@ -205,7 +205,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <ul class="nav navbar-nav pull-right topWallet">
                     
 
-                    <li class="cash"><a href="/wallet/fundwallet/" data-toggle="tooltip" data-placement="bottom" title="cash"> 
+                    <li class="cash"><a href="/wallet/fundwallet/" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
                             <i class="fa fa-money"></i>
 
                             <span class="badge badge-default">
@@ -219,7 +219,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li class="commision"><a href="/wallet/rpwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="commision">
+                    <li class="commision"><a href="/wallet/rpwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
                             <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
@@ -232,7 +232,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span></a>
                     </li>
 
-                    <li class="credit"><a href="/wallet/commisionwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="credit">
+                    <li class="credit"><a href="/wallet/commisionwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
                             <i class="fa fa-credit-card"></i>
 
                             <span class="badge badge-default">
@@ -248,7 +248,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     </li>
                      
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                        <a href="/mail/" class="dropdown-toggle"  data-hover="dropdown"  title="Mails">
+                        <a href="/mail/" class="dropdown-toggle"  data-hover="dropdown"  title="Inbox">
                             <i class="glyphicon glyphicon-envelope"></i>
                             <span class="badge badge-default">
                                 <?php
@@ -429,7 +429,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = '';
                                 ?>
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
-                                            class="leftmenu-hotel"></span> <span class="title">Account</span>
+                                            class="leftmenu-hotel"></span> <span class="title">My Account</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard'  ) ? "open" : ''; ?>">
                                         </span>
@@ -498,13 +498,50 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "transaction/list" => "Transaction List",
-//                                    "moneytransfer/list" => "Moneytransfer List",
                                     "MoneyTransfer/transfer" => "Transfer",
+                                );
+                                ?>
+                                <li
+
+                                    class="<?php echo (($curControllerLower == 'moneytransfer') && ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
+
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Fund </span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'moneytransfer' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                        if ($ctName == "search/create") {
+                                            $ctName = "search/create/type/details";
+                                        }
+                                        if ($ctName == "transaction" && $curControllerLower == "moneytransfer")
+                                            $class_content = 'class="active"';
+                                        else
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                        echo '<li ' . $class_content . '>';
+                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '</li>';
+                                        if ($ctName == "search/create/type/details") {
+                                            $ctName = "search/create";
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                            $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "transaction/list" => "Order Transaction",
+                                    "transaction/fund" => "Fund Transaction"
                                 );
                                 ?>
                                 <li
@@ -512,7 +549,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction')) ? "active" : ''; ?>">
 
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Fund </span>
+                                        <span class="title">Transactions </span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'transaction' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
                                         </span>
@@ -588,7 +625,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $hotel_subsection = array(
                                     "wallet/rpwallet" => "RP Wallet",
                                     "wallet/commisionwallet" => "Commision Wallet",
-                                    "wallet/fundwallet" => "Fund Wallet",
+                                    "wallet/fundwallet" => "Cash Wallet",
                                     "order/checkinvestment" => "Check Investment",
                                     "order/refferalincome" => "Referral Income",
 //                                    "profile/summery" => "Summery",
