@@ -138,6 +138,7 @@ class TransactionController extends Controller
      */
 
     public function actionList() {
+        $loggedInUserId = Yii::app()->session['userid'];
         $model = new MoneyTransfer();
             $pageSize = Yii::app()->params['defaultPageSize'];
             $todayDate = Yii::app()->params['startDate'];
@@ -151,7 +152,7 @@ class TransactionController extends Controller
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),));
 
             $this->render('list', array(
