@@ -397,8 +397,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
+                            $arraytransaction = BaseClass:: transactionStatus(); 
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $arraytransaction = BaseClass:: transactionStatus(); 
+                                
                                 
                                 if($arraytransaction!='' && $arraytransaction->status==1)
                                 {
@@ -584,6 +585,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                             if($arraytransaction!='' && $arraytransaction->status==1)
+                                {
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
@@ -623,6 +626,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                                }
 
                             $reservation_pmenu = 8;
 
