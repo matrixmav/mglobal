@@ -20,7 +20,7 @@ if(!empty($error)){
             <?php echo CHtml::link(Yii::t('translation', $mailComposeMessage) . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20  red")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
     </div>
-</div>
+</div><br/>
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/mail/compose" method="post" onsubmit="return validateForm()">
 <div class="col-md-12 form-group">
     <label class="col-md-2">To *</label>
