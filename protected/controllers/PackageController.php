@@ -506,7 +506,7 @@ class PackageController extends Controller {
 
     public function actionThankYou() {
         
-        if ($_GET) {
+        if (isset($_GET)) {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
 
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
@@ -527,7 +527,7 @@ class PackageController extends Controller {
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
-             }
+             
             ob_start();
             $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
@@ -609,13 +609,17 @@ class PackageController extends Controller {
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Payment Confirmation' ;
                 $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find'.
-                $config['attachment'] = '/upload/invoice-pdf/'.$userObject->name.'invoice.pdf';        
+                $config['file_path'] = $path.$userObject->name.'invoice.pdf';        
                CommonHelper::sendMail($config);
-            //unset(Yii::app()->session['transactionid']);
-            //unset(Yii::app()->session['amount']);
-            //unset(Yii::app()->session['package_id']);
-            //unset(Yii::app()->session['transaction_id']);
-            //unset(Yii::app()->session['domain']);
+            }
+             if ($transactionObject->status == 1) {
+            Yii::app()->session['transactionid']=0;
+            Yii::app()->session['amount'] = 0;
+            Yii::app()->session['package_id']= 0;
+            Yii::app()->session['transaction_id']= 0;
+            Yii::app()->session['domain']= 0;
+             }
+       
            
         }
 
