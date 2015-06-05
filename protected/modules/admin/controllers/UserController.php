@@ -351,14 +351,14 @@ class UserController extends Controller {
             $status = $_POST['res_filter'];
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '"' ), 'order' => 'id DESC',
+                    'condition' => ('id_proof != "" OR address_proff != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
         } else {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',
+                    'condition' => ('id_proof != "" AND address_proff != "" ' ), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => 10),
             ));
