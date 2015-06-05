@@ -179,7 +179,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="header-inner">
-                <span class="home-link"><a href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank">Home</a></span>
+                 <a class="navbar-brand" href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank" style="padding:10px;">
+                     <img width="70px" src="../../../images/logo/logo.png" class="img-responsive ">
+                 </a>
                 <!-- BEGIN LOGO -->
                 <?php /* <a class="navbar-brand" href="/admin/">
                   <?php
