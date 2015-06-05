@@ -31,7 +31,7 @@ class MailController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reply','compose','sent'),
+				'actions'=>array('index','view','reply','compose','sent','fetchemail'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -123,6 +123,18 @@ class MailController extends Controller
 		));
             }
 	}
+        
+        /*
+         * Fetch admin emails for mail module
+         */
+        
+        public function actionFetchEmail()
+        {
+           $emailObject = User::model()->findAll(array('condition'=>'role_id=2')); 
+           $this->render('compose',array(
+			'emailObject'=>$emailObject,
+		));
+        }
 
 	/**
 	 * Creates a new model.
