@@ -72,26 +72,23 @@ class BaseClass extends Controller {
 
     public static function transactionStatus() {
         $userId = Yii::app()->session['userid'];
-        $transactionObjects = Transaction::model()->findByAttributes(array('user_id'=>$userId));
-        if(!empty($transactionObjects)) 
-        {
-         $transactionObject = $transactionObjects;
-        }else{
-          $transactionObject = "";  
-        }
-        return $transactionObject;
+        $transactionObject = Transaction::model()->findByAttributes(array('user_id'=>$userId));
+                        
+            return $transactionObject; 
                         
     }
 
     
     public static function gettransactionID() {
+        
         $transactionObject = Transaction::model()->find(array('order' => 'id DESC'));
-        if (!empty($transactionObject)) {
-            $lastid = explode(Yii::app()->params['transactionid'], $transactionObject->transaction_id);
+        
+        if(!empty($transactionObject)){
+            $lastid = explode(Yii::app()->params['transactionid'],$transactionObject->transaction_id);
             $incementID = $lastid[1] + 1;
-            $generateid = Yii::app()->params['transactionid'] . $incementID . Yii::app()->params['transactionid'];
-        } else {
-            $generateid = Yii::app()->params['transactionid'] . '12345' . Yii::app()->params['transactionid'];
+            $generateid = Yii::app()->params['transactionid'].$incementID.Yii::app()->params['transactionid'];
+        }else{
+            $generateid = Yii::app()->params['transactionid'].'12345'.Yii::app()->params['transactionid'];
         }
         return $generateid;
         
@@ -1023,6 +1020,5 @@ class BaseClass extends Controller {
         return $randValue ;        
         
     }
-                        
     
  }

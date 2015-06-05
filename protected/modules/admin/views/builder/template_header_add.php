@@ -74,6 +74,15 @@ $this->breadcrumbs = array(
                     <span id="body_code_error"></span>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="formcode">Contact Form Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="form_code" class="form-control" name="Template[form_code]" style="width: 482px; height: 150px;"></textarea>
+                    <span id="form_code_error"></span>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -94,7 +103,6 @@ $this->breadcrumbs = array(
                     <textarea id="custom_js" class="form-control" name="custom_js" style="width: 482px; height: 150px;"></textarea>
                 </div>
             </div>
-           
              
         </fieldset>
 
@@ -109,59 +117,66 @@ $this->breadcrumbs = array(
 
 
 <script type="text/javascript">
-    function validation()
-    {
-      $("#cssfolder_error").html("");
-      if ($("#cssfolder").val() == "") {
-      $("#cssfolder_error").html("Please upload css zip folder.");
-      $("#cssfolder").focus();            
-      return false;
+function validation(){
+    $("#cssfolder_error").html("");
+    if ($("#cssfolder").val() == "") {
+        $("#cssfolder_error").html("Please upload css zip folder.");
+        $("#cssfolder").focus();            
+        return false;
     }
     
     $("#screenshot_error").html("");
-      if ($("#screenshot").val() == "") {
-      $("#screenshot_error").html("Please upload template screenshot.");
-      $("#screenshot").focus();            
-      return false;
+    if ($("#screenshot").val() == "") {
+        $("#screenshot_error").html("Please upload template screenshot.");
+        $("#screenshot").focus();            
+        return false;
     }
      
-      $("#category_error").html("");
-      if ($("#category").val() == "") {
-      $("#category_error").html("Please select template category");
-      $("#category").focus();            
-      return false;
-    }
-     $("#template_title_error").html("");
-      if($("#template_title").val() == "") {
-      $("#template_title_error").html("Please enter template title");
-      $("#template_title").focus();            
-      return false;
+    $("#category_error").html("");
+    if ($("#category").val() == "") {
+        $("#category_error").html("Please select template category");
+        $("#category").focus();            
+        return false;
     }
     
-    
+    $("#template_title_error").html("");
+    if($("#template_title").val() == "") {
+        $("#template_title_error").html("Please enter template title");
+        $("#template_title").focus();            
+        return false;
+    }
     
     $("#menu_code_error").html("");
-      if ($("#menu_code").val() == "") {
-      $("#menu_code_error").html("Please enter Header Code");
-      $("#menu_code").focus();            
-      return false;
+    if ($("#menu_code").val() == "") {
+        $("#menu_code_error").html("Please enter Header Code");
+        $("#menu_code").focus();            
+        return false;
     }
     
-      $("#header_code_error").html("");
-      if ($("#header_code").val() == "") {
-      $("#header_code_error").html("Please enter Header Code");
-      $("#header_code").focus();            
-      return false;
-    }
     $("#header_code_error").html("");
-      if ($("#body_code").val() == "") {
-      $("#header_code_error").html("Enter Body Code");
-      $("#body_code").focus();            
-      return false;
+    if ($("#header_code").val() == "") {
+        $("#header_code_error").html("Please enter Header Code");
+        $("#header_code").focus();            
+        return false;
     }
-     $("#header_code_error").html("");
-      if ($("#footer_code").val() == "") {
-      $("#header_code_error").html("Enter Footer Code");
+    
+    $("#body_code_error").html("");
+    if ($("#body_code").val() == "") {
+        $("#body_code_error").html("Enter Body Code");
+        $("#body_code").focus();            
+        return false;
+    }
+    
+    $("#form_code_error").html("");
+    if ($("#form_code").val() == "") {
+        $("#form_code_error").html("Please enter Header Code");
+        $("#form_code").focus();            
+        return false;
+    }
+    
+    $("#footer_code_error").html("");
+    if ($("#footer_code").val() == "") {
+      $("#footer_code_error").html("Enter Footer Code");
       $("#footer_code").focus();            
       return false;
     }

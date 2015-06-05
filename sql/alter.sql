@@ -32,8 +32,6 @@ CREATE TABLE IF NOT EXISTS `chat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 
-
-
 ALTER TABLE `build_temp` ADD `custom_css` TEXT NOT NULL AFTER `screenshot`, ADD `custom_js` TEXT NOT NULL AFTER `custom_css`;
 
 ALTER TABLE `user_has_template` ADD `copyright` VARCHAR(255) NOT NULL AFTER `contact_email`;
@@ -50,17 +48,16 @@ ALTER TABLE `user_has_template` ADD `user_menu` TEXT NOT NULL AFTER `user_id`;
 
 ALTER TABLE `user_has_template` ADD `logo_height` VARCHAR(11) NOT NULL AFTER `custom_js`, ADD `logo_width` VARCHAR(11) NOT NULL AFTER `logo_height`, ADD `contact_form` TEXT NOT NULL AFTER `logo_width`;
 
+ALTER TABLE `build_temp` ADD `contact_form` TEXT NOT NULL AFTER `custom_js`;
+
 ALTER TABLE `money_transfer` ADD `fund` FLOAT NULL AFTER `fund_type` ;
 
 ALTER TABLE `transaction` CHANGE `transaction_id` `transaction_id` VARCHAR( 50 ) NOT NULL ;
 
 
-/* 5-6-2015*/
 ALTER TABLE `order` CHANGE `created_at` `created_at` DATETIME NOT NULL;
-
-
 
 INSERT INTO `mglobal`.`user` (`id`, `sponsor_id`, `name`, `password`, `position`, `user_sponsor_id`, `full_name`, `email`, `country_id`, `country_code`, `phone`, `date_of_birth`, `skype_id`, `facebook_id`, `twitter_id`, `master_pin`, `unique_id`, `status`, `activation_key`, `forget_key`, `forget_status`, `role_id`, `created_at`, `updated_at`) VALUES (NULL, '', 'support@mglobally.com', '', NULL, '', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '1', NULL, NULL, NULL, '2', '2015-06-05', CURRENT_TIMESTAMP), (NULL, '', 'info@mglobally.com', '', NULL, '', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '1', NULL, NULL, NULL, '2', '2015-06-05', CURRENT_TIMESTAMP);
 
-
 INSERT INTO `mglobal`.`user` (`id`, `sponsor_id`, `name`, `password`, `position`, `user_sponsor_id`, `full_name`, `email`, `country_id`, `country_code`, `phone`, `date_of_birth`, `skype_id`, `facebook_id`, `twitter_id`, `master_pin`, `unique_id`, `status`, `activation_key`, `forget_key`, `forget_status`, `role_id`, `created_at`, `updated_at`) VALUES (NULL, '', 'sales', '', NULL, '', '', 'sales@mglobally.com', '', '', '', '', NULL, NULL, NULL, '', '', '1', NULL, NULL, NULL, '2', '2015-06-05', CURRENT_TIMESTAMP), (NULL, '', 'marketing@mglobally.com', '', NULL, '', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '1', NULL, NULL, NULL, '2', '2015-06-01', CURRENT_TIMESTAMP);
+
