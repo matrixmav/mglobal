@@ -19,7 +19,7 @@ $(document).ready(function() {
         cache: false,
         success: function(html) {
            //alert(html);
-            document.getElementById("head_menu").innerHTML = html;
+            $(".mav_menu").html(html);
         }
     });
     $.ajax({
@@ -29,7 +29,7 @@ $(document).ready(function() {
         cache: false,
         success: function(html) {
             //alert(html);
-            document.getElementById("logo").innerHTML = html;
+            $(".mav_logo").html(html);
         }
     });
     var url = document.URL;
@@ -48,11 +48,18 @@ $(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
-              //  alert(html);
-            document.getElementById("content111").innerHTML = html;
+            var htmlArr = html.split('aaaaa');
+            if(htmlArr[0] != ''){             
+                $(".mav_content").html(htmlArr[0]);
+            }
+            if(htmlArr[1] != ''){            
+                $(".mav_contact_form").html(htmlArr[1]);
+            }
+            
         }
     });
     
+       
     dataString = 'fetchFooter=yes&page_id=' + pageID;
     $.ajax({
         type: "GET",
@@ -61,7 +68,7 @@ $(document).ready(function() {
         cache: false,
         success: function(html) {
               // alert(html);
-            document.getElementById("footer").innerHTML = html;
+            $(".mav_footer").html(html);
         }
     });
     
@@ -119,21 +126,29 @@ function validation() {
 <?php } ?>
     
 </head>	
-<body>
-    <div class="main-bg">  
-      <div id="header">         
-            <?php echo stripslashes($builderObject->temp_header);  ?>
-          <input type="hidden" id="defaultPage" value="<?php //echo (!empty($userpages1Object))? stripslashes($userpages1Object->id) : "";?>">   
-     
-          </div>
+<body>      
+    <?php echo stripslashes($builderObject->temp_header); ?>     
 
-      <div id="content111">
-          <?php echo $builderObject->temp_body ;?> 
-      </div>
+    <div class="mav_content">
+        <?php echo $builderObject->temp_body; ?> 
+    </div>
+    
+    <!--    <div class="mav_contact_form">
+        <?php //echo $builderObject->temp_body; ?> 
+    </div>-->
 
-      <div id="footer">
-        <?php echo $builderObject->temp_footer ;?>   
-   
+    <div class="mav_footer">
+        <?php echo $builderObject->temp_footer; ?>   
     </div>    
+    
 </body>
 </html>
+
+
+<!--
+Logo class="mav_logo"
+Menu class="mav_menu"
+contact form class="mav_contact_form"
+Content Area class="mav_content"
+Footer class="mav_footer"
+-->
