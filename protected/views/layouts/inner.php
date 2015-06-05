@@ -339,7 +339,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             $hotel_pmenu = 6;
 
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                                /*$hotel_subsection = array(
                                     "profile/dashboard" => "Dashboard",
 //                                    "profile/summery" => "Summery",
                                 );
@@ -353,15 +353,22 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
+                                */
+                                if ($curAction == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
+                                <li class="<?php echo $activecls; ?>"><a href="/profile/dashboard"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
-                                        <span class="selected"></span> <span
+                                        <span class="selected"></span> 
+                                        <?php /*<span
                                             class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
-                                        </span>
+                                        </span><?php */?>
                                     </a>
                                     <?php
-                                    $menusections ['sections'] = $hotel_subsection;
+                                    /*$menusections ['sections'] = $hotel_subsection;
                                     echo '<ul class="sub-menu">';
                                     foreach ($hotel_subsection as $hotName => $hotTitle) {
                                         if (in_array($hotTitle, $menusections ['sections'])) {
@@ -383,10 +390,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                              * if($hotName == "admin")
                                              * echo '</ul>';
                                              */
-                                        }
+                                        /*}
                                     }
                                     echo '</ul>';
-                                    ?>					
+                                    */?>					
                                 </li>	
                                 <?php
                             }
