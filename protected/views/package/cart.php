@@ -38,7 +38,7 @@
                                     </td>
                                     <td class="pPriceSum CartSubTotal tbl-pd">
 
-                                        <span class="WebRupee">$</span> <span id=""><?php echo Yii::app()->format->number($packageObject->amount) . ".00"; ?> </span>
+                                        <span class="WebRupee">$</span> <span id=""><?php echo number_format($packageObject->amount,2); ?> </span>
 
                                     </td>
                                 </tr>
@@ -164,7 +164,7 @@
 <?php } ?>
                             <input type="radio" value="paypal" name="payment_mode">Paypal 
 
-                            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
+                            <form action="<?php echo Yii::app()->params['paypalurl'];?>" method="post" id="frmPayPal">
                                 <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                                 <input type="hidden" name="cmd" value="_xclick">
                                 <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
@@ -176,7 +176,7 @@
                                 <input type="hidden" name="currency_code" value="USD">
                                 <input type="hidden" name="handling" value="0">
                                 <input type="hidden" name="cancel_return" value="">
-                                <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+                                <input type="hidden" name="return" value="<?php echo Yii::app()->params['returnurl'];?>?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
 
 
 
