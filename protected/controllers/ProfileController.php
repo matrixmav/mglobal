@@ -251,8 +251,11 @@ class ProfileController extends Controller {
             }else{
              $userObject->password = md5($_POST['UserProfile']['new_password']);   
              if ($userObject->update()) {
-               $success .= "Your password changed successfully"; 
-               
+                $success .= "Your password changed successfully"; 
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'mGlobally Password Changed' ;
+                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.'.
+                CommonHelper::sendMail($config);
              }  
             }
             } else {
