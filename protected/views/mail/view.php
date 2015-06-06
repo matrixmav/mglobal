@@ -12,7 +12,6 @@ $this->breadcrumbs = array(
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
     </div>
 </div>
-
 <div class="col-md-12 form-group">
     <label class="col-md-1">Sender:</label>
     <div class="col-md-6">

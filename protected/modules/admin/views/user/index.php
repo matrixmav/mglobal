@@ -50,7 +50,7 @@ $this->breadcrumbs = array(
             'columns' => array(
                 array(
                     'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Sl.No</span>',
                     'value' => '$row+1',
                 ),
                 //'idJob',
@@ -77,7 +77,12 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'sponsor_id',
                     'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:""   ',
+                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:"N/A"   ',
+                ),
+                 array(
+                    'name' => 'created_at',
+                    'header' => '<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->created_at)?$data->created_at:"N/A"',
                 ),
                 array(
                     'name' => 'status',
@@ -90,7 +95,7 @@ $this->breadcrumbs = array(
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{Change}{Edit}{Delete}',
-                    'htmlOptions' => array('width' => '30%'),
+                    'htmlOptions' => array('width' => '20%'),
                     'buttons' => array(
 //                        'Edit' => array(
 //                            'label' => 'Edit',

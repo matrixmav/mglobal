@@ -179,7 +179,13 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="header-inner">
+
                 <span class="home-link"><a href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank">Home</a></span>
+
+                 <a class="navbar-brand" href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank" style="padding:10px;">
+                     <img width="70px" src="../../../images/logo/logo.png" class="img-responsive ">
+                 </a> 
+
                 <!-- BEGIN LOGO -->
                 <?php /* <a class="navbar-brand" href="/admin/">
                   <?php
@@ -339,7 +345,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             $hotel_pmenu = 6;
 
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                                /*$hotel_subsection = array(
                                     "profile/dashboard" => "Dashboard",
 //                                    "profile/summery" => "Summery",
                                 );
@@ -353,15 +359,22 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
+                                */
+                                if ($curAction == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
+                                <li class="<?php echo $activecls; ?>"><a href="/profile/dashboard"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
-                                        <span class="selected"></span> <span
+                                        <span class="selected"></span> 
+                                        <?php /*<span
                                             class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
-                                        </span>
+                                        </span><?php */?>
                                     </a>
                                     <?php
-                                    $menusections ['sections'] = $hotel_subsection;
+                                    /*$menusections ['sections'] = $hotel_subsection;
                                     echo '<ul class="sub-menu">';
                                     foreach ($hotel_subsection as $hotName => $hotTitle) {
                                         if (in_array($hotTitle, $menusections ['sections'])) {
@@ -383,15 +396,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                              * if($hotName == "admin")
                                              * echo '</ul>';
                                              */
-                                        }
+                                        /*}
                                     }
                                     echo '</ul>';
-                                    ?>					
+                                    */?>					
                                 </li>	
                                 <?php
                             }
+                            $arraytransaction = BaseClass:: transactionStatus(); 
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $arraytransaction = BaseClass:: transactionStatus(); 
+                                
                                 
                                 if($arraytransaction!='' && $arraytransaction->status==1)
                                 {
@@ -577,6 +591,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                             if($arraytransaction!='' && $arraytransaction->status==1)
+                                {
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
@@ -616,6 +632,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                                }
 
                             $reservation_pmenu = 8;
 

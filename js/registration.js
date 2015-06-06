@@ -30,14 +30,14 @@
             $("#sponsor_id").focus();            
             return false;
         }
-        
+         
         $("#name_error").html("");
         if ($("#name").val() == "") {
             $("#name_error").html("Enter User Name");
             $("#name").focus();            
             return false;
         }
-       
+        
         if ($("#name").val().length < 5) {
             $("#name_error").html("Enter atleast 5 chars in the input box");
             $("#name").focus();            
@@ -149,6 +149,13 @@
         
     }
     function isUserExisted() {
+        $("#name_error").html("");
+        if ($("#name").val().match(/\s/g)) {
+            $("#name_error").html("Username should not contain blank spaces.");
+            $("#name").focus();            
+            return false;
+        }
+       else{
         $.ajax({
             type: "post",
             url: "/user/isuserexisted",
@@ -165,6 +172,7 @@
                 }
             }
         });
+    }
     }
     function getCountryCode(id){ 
          $.ajax({

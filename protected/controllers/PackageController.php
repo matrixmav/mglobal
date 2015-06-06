@@ -150,7 +150,7 @@ class PackageController extends Controller {
             $orderObject->save(false);
         }
 
-        echo '1-'.Yii::app()->session['transaction_id'];
+        echo "1-".Yii::app()->session['transactionid'];
     }
 
     public function actionDomainAdd() {

@@ -187,6 +187,7 @@ class TransactionController extends Controller {
      */
 
     public function actionList() {
+        $loggedInUserId = Yii::app()->session['userid'];
         $model = new MoneyTransfer();
         $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = Yii::app()->params['startDate'];
@@ -206,6 +207,7 @@ class TransactionController extends Controller {
         $this->render('list', array(
             'dataProvider' => $dataProvider,
         ));
+
     }
 
     /*
