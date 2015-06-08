@@ -71,12 +71,12 @@ $this->menu=array(
                 array(
                     'name'=>'start_date',
                     'header'=>'<span style="white-space: nowrap;">Start Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->status == 1) ? $data->start_date : "N/A"',
+                    'value'=>'$data->start_date',
 		),
                 array(
                     'name'=>'end_date',
                     'header'=>'<span style="white-space: nowrap;">End Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->status == 1) ? $data->end_date : "N/A"',
+                    'value'=>'$data->end_date',
 		),
 		array(
 			'name'=>'status',

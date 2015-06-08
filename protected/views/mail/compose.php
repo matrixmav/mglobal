@@ -20,13 +20,19 @@ if(!empty($error)){
             <?php echo CHtml::link(Yii::t('translation', $mailComposeMessage) . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20  red")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
     </div>
-</div>
+</div><br/>
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/mail/compose" method="post" onsubmit="return validateForm()">
 <div class="col-md-12 form-group">
     <label class="col-md-2">To *</label>
     <div class="col-md-6">
-        <input type="text" class="form-control dvalid" name="to_email[]" id="to_email" size="60" maxlength="75" value="<?php echo (isset($mailObject)) ? $mailObject->touser->email : ""; ?>" />
-        <span class="clrred" style="color:red"  id="to_email_error"></span>
+        <select name="to_email" id="to_email"  class="form-control">
+            <option value="">Select Admin</option>
+            <?php foreach($emailObject as $email){?>
+            <option value="<?php echo $email->id;?>"><?php echo $email->full_name;?></option>
+            <?php }?>
+        </select>
+        
+         <span class="clrred" style="color:red"  id="to_email_error"></span>
     </div>
 </div>
 <div class="col-md-12 form-group">
@@ -39,9 +45,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Message *</label>
     <div class="col-md-8">
-        <textarea class="form-control dvalid" name="email_body" id="email_body" rows="10" cols="50">
-            
-            <?php 
+        <textarea class="form-control dvalid" name="email_body" id="email_body" rows="10" cols="50"><?php 
             if(!empty($mailObject)){
                 echo str_replace( "<br />", '', nl2br("<=== \n"));
                 $replyMsg =  nl2br($mailObject->touser->email." : ".$mailObject->updated_at ."\n" .$mailObject->message); 
@@ -68,7 +72,7 @@ if(!empty($error)){
 <script language = "Javascript">
     function validateForm(){
         if ($("#to_email").val() == "") {
-            $("#to_email_error").html("Enter the to E-Mail ");
+            $("#to_email_error").html("Select to E-Mail ");
             return false;
         }
         if ($("#email_subject").val() == "") {

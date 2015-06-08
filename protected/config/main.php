@@ -109,6 +109,7 @@ return array(
                  //Local
                 */
 		'db'=>array(
+
 				'connectionString' => 'mysql:host=localhost;dbname=old',
 				'emulatePrepare' => true,
 				'username' => 'root',

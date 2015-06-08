@@ -27,7 +27,7 @@ $this->breadcrumbs = array(
     </div>
     <?php $walletList = BaseClass::getWalletList(); ?>
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="walletType">
-        <?php foreach ($walletList as $key=>$value) { ?>
+        <?php  foreach ($walletList as $key=>$value) { ?>
         <option value="<?php echo $key;?>" <?php echo ($walletType == $key)?"selected":"";?> ><?php echo $value;?></option>
         <?php } ?>
     </select>
@@ -89,12 +89,12 @@ $this->breadcrumbs = array(
                         'Recharge' => array(
                             'label' => 'Recharge',
                             'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
-                            'url' => 'Yii::app()->createUrl("admin/user/creditwallet", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/user/creditwallet", array("id"=>$data->user_id))',
                         ),
                         'Deduct' => array(
                             'label' => Yii::t('translation', 'Deduct'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/user/debitwallet", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/user/debitwallet", array("id"=>$data->user_id))',
                         ),
                     ),
                 ),
