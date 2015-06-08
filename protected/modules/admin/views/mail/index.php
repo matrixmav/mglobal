@@ -7,14 +7,14 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
+     <div class="col-md-3">   
             <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/admin/mail', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/admin/mail/compose', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/admin/mail/sent', array("class" => "btn  green margin-right-20")); ?>
-    <div class="input-group input-large date-picker input-daterange">
-        
-    </div>
+     </div>
+         <div class="col-md-6">   
     <div class="expiration margin-topDefault confirmMenu">
-    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/mail">
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/mail" class="form-inline">
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="admin_email">
             <option value="">Select Mail By User</option>
             <?php foreach($emailObject as $email){?>
@@ -24,7 +24,7 @@ $this->breadcrumbs = array(
         <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
     </form>
 </div>
-
+</div>
 </div>
 </div>
 
