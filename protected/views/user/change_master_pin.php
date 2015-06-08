@@ -71,6 +71,12 @@ $this->breadcrumbs = array(
             $("#confirm_master_pin").focus();
             return false;
         }
+        if($("#confirm_master_pin").val() != $("#new_master_pin").val())
+        {
+            $("#confirm_error_msg").html("Please your confirm master pin and new master pin must be same.");
+            $("#confirm_master_pin").focus();
+            return false;
+        }
        
     }
 </script>
