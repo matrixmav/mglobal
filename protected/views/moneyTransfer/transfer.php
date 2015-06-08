@@ -1,70 +1,51 @@
 <?php
 Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/jquery.min.js');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/autocomplete.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/transaction.js');
+
 $this->breadcrumbs = array(
-    'Transfer Funds',
+    'Fund Transfer',
 );
 ?>
-
+<link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2.css"/>
+<link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2-metronic.css"/>
 <div class="col-md-7 col-sm-7">
     <div class="error" id="error_msg" style="display: none;"></div>
+    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
+
     <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" >
         <fieldset> 
             <legend>Transfer Funds</legend>
-            <?php
-            if (!empty($walletObject)) {
-                $walletPoints = 0;
-                $rpPoints = 0;
-                $commissionPoints = 0;
-                foreach ($walletObject as $wallet) {
-
-                    if ($wallet['type'] == 1) {
-                        $walletPoints = $wallet['fund'];
-                    }
-                    if ($wallet['type'] == 2) {
-                        $rpPoints = $wallet['fund'];
-                    }
-                    if ($wallet['type'] == 3) {
-                        $commissionPoints = $wallet['fund'];
-                    }
-                }
-                ?>
                 <div class="form-group">
                     <label for="transactiontype" class="col-lg-4 control-label">Choose Type of Transaction<span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <select id="transactiontype" name="walletId" class="form-control">
-                            <option value="">Select Option</option>
-                            <option value="1">Cash</option>
-                            <option value="2">RP Wallet</option>	 
-                            <option value="3">Commission Points</option>									   
-                        </select>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <select id="transactiontype" name="walletId" class="form-control" onchange="getExistingFund(<?php echo $userId; ?>,this.value);">
+                                    <option value="">Select Wallet</option>
+                                    <option value="1">Cash</option>
+                                    <option value="2">RP Wallet</option>	 
+                                    <option value="3">Commission Points</option>									   
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <div id="transaction_data" name="transaction_data" class="form-control">0</div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <div class="form-group">
-                    <label for="totalcash" class="col-lg-4 control-label" id="transaction_data_label">Total<span class="require">*</span></label>
-                    <input type="hidden" value="<?php echo $walletPoints; ?>" name="wallet_points" id="wallet_points">
-                    <div class="col-lg-8">
-                        <div id="transaction_data" name="transaction_data" class="form-control">0</div>
-                    </div></div>
-
-
-
+                <input type="hidden" class="form-control" value="" id="search_user_id" name="search_user_id" />
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <input type="text" value="" placeholder="Search" id="username" name="username" required class="form-control">
-                        <div id="results" >
-
-                        </div>
-                    </div>                                        
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullName(this.value);"/>
+                        <span id="search_user_error" style="color:red"></span>
+                    </div>     
                 </div>
                 <div class="form-group">
-                    <label for="paid_amount" class="col-lg-4 control-label">Amount Value <span class="require">*</span></label>
+                    <label for="paid_amount" class="col-lg-4 control-label">Amount<span class="require"> * $</span></label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control" id="paid_amount" name="paid_amount"  required class="form-control">
-                        <input type="hidden" value="<?php echo $rpPoints; ?>" name="rp_points" id="rp_points">
-                        <input type="hidden" value="<?php echo $commissionPoints; ?>" name="commission_points" id="commission_points">
                     </div>
                     <span id="email_error"></span>
                 </div>
@@ -73,23 +54,14 @@ $this->breadcrumbs = array(
             </fieldset>
             <div class="row">
                 <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">  
-                    <input type="submit"  name="transfer" id="transfer" class="btn" value="Transfer Funds" />                     
+                    <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" />                     
 
                     <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
             </div>
-            <?php
-        } else {
-            ?>
-            <div class="form-group">
-
-                <div class="col-lg-8">                                          
-                    Funds are empty, Kindly Add. 
-                </div>
-
-            </div>
-            <?php
-        }
-        ?>
     </form>
 </div>
+<script type="text/javascript" src="/metronic/assets/plugins/select2/select2.min.js"></script>
+<style>
+        #s2id_search_username{ width: 100% !important;}
+</style>

@@ -29,7 +29,8 @@ return array(
             'homepageSlider'=>array("1280_646"=>"1280_646"),
             'homepageAds'=>array("960_133"=>"960_133","277_700"=>"277_700"),
     ),
-
+    'adminEmail'=>'info@mglobally.com',
+    'adminName' => 'Admin',
     'defaultPageSize' => 500,
     'startDate' =>date('2014-m-d'),
     'clientInvoicePercentage'=>5,
@@ -100,4 +101,7 @@ return array(
    'countrycode' => array("1"=>"US", "2"=>"can", "3"=>"in", "4"=>"FR"),
    'accountno'=>'4444',
    'sitename'=>'mGlobal',
+   'transactionid'=>'67',
+   'paypalurl'=>'https://www.sandbox.paypal.com/cgi-bin/webscr',  
+   'returnurl'=>'http://localhost/package/thankyou',         
 );

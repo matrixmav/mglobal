@@ -13,13 +13,20 @@ $this->breadcrumbs = array(
             <div class="col-lg-10">
                 <?php
                 if($transactionObject->status == 1){ ?>
-                <h3 style="color:green">echo 'Your Transaction is Success<br /></h3>
-                Transaction Id :<?php echo $transactionObject->paid_amount; ?><br />
-                Transaction Id :<?php echo $transactionObject->paid_amount; ?><br />
+                <div class="success"><?php echo "Your Transaction is Success";?></div>
+                <h1><b>Thank you.</b></h1>
+
+                <h3>Your Transaction is successful</h3>
+                <h4>
+                Transfer To: <b><?php echo $transactionObject->user()->full_name; ?></b><br />
+                Transaction Id :<b><?php echo $transactionObject->transaction_id; ?></b><br />
+                Transferred Amount :$<b><?php echo $transactionObject->paid_amount; ?></b></h4><br />
                <?php } else { ?>
-                <h3 style="color:red">Your Transaction is Failed. Try Again... <br /></h3>
-                <h4>Transaction Id :<?php echo $transactionObject->transaction_id; ?><br />
-                Transferred Amount :<?php echo $transactionObject->paid_amount; ?></h4><br />
+                <div class="error">Your Transaction is Failed. Try Again... </div>
+                <h4>
+                Transfer To: <b><?php echo $transactionObject->transaction_id; ?></b><br />
+                Transaction Id :<b><?php echo $transactionObject->transaction_id; ?></b><br />
+                Transferred Amount :$<b><?php echo $transactionObject->paid_amount; ?></b></h4><br />
                <?php } ?>
             </div>
 
@@ -32,7 +39,7 @@ $this->breadcrumbs = array(
     <div class="row">
         <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">     
 
-            <a href="/MoneyTransfer/transfer"><button name="success" class="btn">New Transaction</button></a>                   
+            <a href="/MoneyTransfer/transfer"><button name="success" class="btn red">New Transaction</button></a>                   
 
         </div>
     </div>

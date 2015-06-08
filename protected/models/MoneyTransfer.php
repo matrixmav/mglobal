@@ -31,12 +31,12 @@ class MoneyTransfer extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('to_user_id, from_user_id,transaction_id,wallet_id, fund_type, comment, created_at, updated_at', 'required'),
+			array('to_user_id, from_user_id,transaction_id,wallet_id, fund_type,fund, comment, created_at, updated_at', 'required'),
 			array('to_user_id, from_user_id, transaction_id,wallet_id,fund_type, status', 'numerical', 'integerOnly'=>true),
 			array('comment', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, to_user_id, from_user_id,wallet_id, fund_type,transaction_id, comment, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, to_user_id, from_user_id,wallet_id, fund_type,fund,transaction_id, comment, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +51,7 @@ class MoneyTransfer extends CActiveRecord
                     'touser' => array(self::BELONGS_TO, 'User', 'to_user_id'),
                     'fromuser' => array(self::BELONGS_TO, 'User', 'from_user_id'),
                     'transaction' => array(self::BELONGS_TO, 'Transaction', 'transaction_id'),
-                    'wallet' => array(self::BELONGS_TO, 'Wallet', 'to_user_id'),
+                    'wallet' => array(self::BELONGS_TO, 'Wallet', 'wallet_id'),
 		);
 	}
 	
@@ -65,6 +65,7 @@ class MoneyTransfer extends CActiveRecord
 			'to_user_id' => 'To User',
 			'from_user_id' => 'From User',
 			'fund_type' => '1:RP,2:Amount',
+                         'fund'=>'Fund',
 			'comment' => 'Comment',
 			'status' => 'Status',
                         'wallet_id'=>'Wallet',
@@ -96,6 +97,7 @@ class MoneyTransfer extends CActiveRecord
 		$criteria->compare('to_user_id',$this->to_user_id);
 		$criteria->compare('from_user_id',$this->from_user_id);
 		$criteria->compare('fund_type',$this->fund_type);
+                $criteria->compare('fund',$this->fund);
 		$criteria->compare('comment',$this->comment,true);
 		$criteria->compare('status',$this->status);
                 $criteria->compare('transaction_id',$this->transaction_id);
@@ -119,7 +121,7 @@ class MoneyTransfer extends CActiveRecord
 		return parent::model($className);
 	}
         
-        public function createMoneyTransfer($postDataArray, $userObject,$transactionId){
+        public function createMoneyTransfer($postDataArray, $userObject,$transactionId,$paid_amount){
             $comment = "fund transfer";
             if(!empty($postDataArray['comment'])){
                 $comment = $postDataArray['comment'];
@@ -129,18 +131,20 @@ class MoneyTransfer extends CActiveRecord
                 $fundType = $postDataArray['fund'];
             }
             $userid = Yii::app()->session['userid'];
+            $Wallobj = Wallet::model()->findByAttributes(array('type' => $postDataArray['walletId'],'user_id' => $userid));
             $createdTime = new CDbExpression('NOW()');
             $moneyTransfertoObj = new MoneyTransfer;
             $moneyTransfertoObj->from_user_id = $userid;
             $moneyTransfertoObj->to_user_id = $userObject->id;
             $moneyTransfertoObj->transaction_id = $transactionId;
             $moneyTransfertoObj->fund_type = $fundType;//1:RP,2:Cash
+            $moneyTransfertoObj->fund = $paid_amount;//1:RP,2:Cash
             $moneyTransfertoObj->comment = $comment;
             $moneyTransfertoObj->status = 0;
-            $moneyTransfertoObj->wallet_id = $postDataArray['walletId'];
+            $moneyTransfertoObj->wallet_id = $Wallobj->id;
             $moneyTransfertoObj->created_at = $createdTime;
             $moneyTransfertoObj->updated_at = $createdTime;
-            //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
+             //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
             if (!$moneyTransfertoObj->save()) {
                 echo "<pre>";
                 print_r($moneyTransfertoObj->getErrors());

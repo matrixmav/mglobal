@@ -1,22 +1,21 @@
-<!-- BEGIN STYLE CUSTOMIZER --
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
   <div class="color-panel">
-    <div class="color-mode-icons icon-color"></div>
-    <div class="color-mode-icons icon-color-close"></div>
+    <div class="color-mode-icons icon-color"><i class="fa fa-share-alt"></i></div>
+    <div class="color-mode-icons icon-color-close"><i class="fa fa-share-alt"></i></div>
     <div class="color-mode">
-      <p>THEME COLOR</p>
+     
+
       <ul class="inline">
-        <li class="color-red current color-default" data-style="red"></li>
-        <li class="color-blue" data-style="blue"></li>
-        <li class="color-green" data-style="green"></li>
-        <li class="color-orange" data-style="orange"></li>
-        <li class="color-gray" data-style="gray"></li>
-        <li class="color-turquoise" data-style="turquoise"></li>
+         
+        <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+        <li><a href=""><i class="fa fa-twitter-square"></i></a></li>
+        <li><a href=""><i class="fa fa-skype"></i></a></li>
+        <li><a href=""><i class="fa fa-linkedin-square"></i></a></li>
+        <li><a href=""><i class="fa fa-youtube-square"></i></a></li>
+         <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
       </ul>
-      <p>MENU POSITION</p>
-      <select class="form-control menu-pos">
-        <option value="bottom">Bottom</option>
-        <option value="top">Top</option>
-      </select>
+      
     </div>
   </div>
   <!-- END BEGIN STYLE CUSTOMIZER -->
@@ -32,8 +31,10 @@
             <div class="col-md-6 col-sm-6 additional-shop-info">
                     <ul class="list-unstyled list-inline">
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
-                        <li><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></li>
-                        <li><button id="checkout" class="btn-flat-green btn-orange btn-h" onclick="RedirectCart();">Call Us</button></li>
+
+                        <li><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
+                        <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Call Us</button><a/></li>
+
                     </ul>
               </div>
             <div class="col-md-6 col-sm-6 additional-nav">
@@ -62,7 +63,7 @@
       <div class="row header-index">
         <!-- Logo BEGIN -->
         <div class="col-md-2 col-sm-2">
-          <a class="scroll site-logo" href="#promo-block"><!---<img src="/images/logo/red" alt="Metronic One Page">---->Maverick Global</a>
+          <a class="scroll site-logo" href="#promo-block"><img class="img-responsive "src="../../../images/logo/logo.png" width="140px" ></a>
         </div>
         <!-- Logo END -->
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>

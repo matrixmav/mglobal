@@ -219,7 +219,7 @@ class UserController extends Controller {
     }
 
     public function actionCreditWallet() {
-        print_r($_GET['id']); exit;
+         
         if ($_POST) {
             $userId = $_POST['userId'];
             $type = $_POST['wallet_type'];
@@ -344,21 +344,22 @@ class UserController extends Controller {
         $pageSize = 10;
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
-        $status = 1;
+        $status = "0";
         if (!empty($_POST)) {
+             
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
             $status = $_POST['res_filter'];
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '"' ), 'order' => 'id DESC',
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
         } else {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',
+                    'condition' => ('id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => 10),
             ));

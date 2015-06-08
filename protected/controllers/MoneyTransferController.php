@@ -1,5 +1,5 @@
 <?php
-
+//echo "cool";exit;
 class MoneyTransferController extends Controller {
 
     /**
@@ -76,28 +76,39 @@ class MoneyTransferController extends Controller {
     /* code for money transfer in user view */
 
     public function actionTransfer() {
-
+        $error = "";
         $userid = Yii::app()->session['userid'];
-        if (isset($_POST['transfer'])) {
+        if (isset($_POST['transfer'])) { //echo "cool";exit;
+            if ($_POST['paid_amount'] < 10) {
+                $error = "Sorry! you can not transfer amount less then $10";
+            } else {
+                $postDataArray = $_POST;
+                $toUserId = $postDataArray['search_user_id'];
+                $walletType = $postDataArray['walletId'];
+                $fund = $postDataArray['paid_amount'];  
+                $userObject = User::model()->findByPk($toUserId);
+                if (empty($userObject)) {
+                    $this->redirect(array('moneytransfer/status', 'status' => 'U'));
+                }
+                //getFund Wallet
+                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
+                if(!$toUserWalletObject){
+                    //create wallet for to user
+                    $toUserWalletObject = Wallet::model()->create($toUserId,$fund,$walletType);
+                }
+                //create transaction record entry
+                $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject);
 
-            $postDataArray = $_POST;
-            $userName = $postDataArray['username'];
-            $userObject = User::model()->findByAttributes(array('name' => $userName));
-//            echo "<pre>"; print_r($userObject);exit;
-            if (empty($userObject)) {
-                $this->redirect(array('moneytransfer/status', 'status' => 'U'));
+                //create money transfer record entry
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+                $this->redirect(array('MoneyTransfer/confirm', 'tu' => base64_encode($moneyTransferObject->id), 'a' => base64_encode($transactionObject->paid_amount)));
             }
-            //create transaction record entry
-            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject);
-
-            //create money transfer record entry
-            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id);
-            $this->redirect(array('MoneyTransfer/confirm', 'tu' => base64_encode($moneyTransferObject->id), 'a' => base64_encode($transactionObject->actual_amount)));
-        } else {
-            //$adminId = Yii::app()->params['adminId'];
-            $walletObject = Wallet::model()->findWalletByUserId($userid);
-            $this->render('transfer', array('walletObject' => $walletObject));
         }
+        $userObject = User::model()->findAll(array('condition'=>'role_id = 1 AND status = 1 AND id !='.$userid));
+        $this->render('transfer', 
+                array('userObject'=>$userObject,
+                    'error' => $error,
+                    'userId'=>$userid));
     }
 
     /* autocomplete of username for user view excluding logged in user and admin */
@@ -165,7 +176,7 @@ class MoneyTransferController extends Controller {
         $userid = Yii::app()->session['userid'];
         $createdtime = new CDbExpression('NOW()');
 //         echo "<pre>"; print_r($_REQUEST);exit;
-        if (isset($_POST['confirm'])) { 
+        if (isset($_POST['confirm'])) {
             $userObject = User::model()->findByAttributes(array('id' => $userid));
             if ($userObject->master_pin == md5($_POST['master_code'])) {
 
@@ -175,21 +186,45 @@ class MoneyTransferController extends Controller {
                 /* fetching existing money transfer */
                 $transactionObj = Transaction::model()->findByPk($moneyobj->transaction_id);
                 /* for from user wallet minus */
-                $walletRecvObj = Wallet::model()->findByPk($moneyobj->wallet_id);
-                if(empty($walletRecvObj)){
-                    $walletRecvObj = new Wallet;
-                    $walletRecvObj->user_id = $moneyobj->from_user_id;
-                    $walletRecvObj->fund = $transactionObj->actual_amount;
-                    $walletRecvObj->type = $moneyobj->wallet_id;
-                    $walletRecvObj->created_at = $createdtime;
-                    $walletRecvObj->updated_at = $createdtime;
-                    $walletRecvObj->save(false);
-                }
-                $walletRecvObj->fund = ($walletRecvObj->fund) - ($transactionObj->actual_amount);
-                $walletRecvObj->update();
+//                $walletRecvObj = Wallet::model()->findByAttributes(array('user_id'=>$userid,'id'=>$moneyobj->wallet_id));
+//                echo "<pre>"; print_r($moneyobj);
+//                $walletRecvObj2 = Wallet::model()->findByAttributes(array('user_id'=>$userid,'type'=>$walletRecvObj->type));
+//                  echo "<pre>"; print_r($walletRecvObj2);exit;
 
+                $walletObject = Wallet::model()->findByPk($moneyobj->wallet_id);
+                $walletRecvObj2 = Wallet::model()->findByAttributes(array('user_id' => $moneyobj->to_user_id, 'type' => $walletObject->type));
+
+//                echo "<pre>"; print_r($walletObject);exit;
+
+
+                $remainingAmount = ($walletObject->fund) - ($transactionObj->paid_amount);
+                $walletObject->fund = $remainingAmount;
+                if (!$walletObject->update()) {
+                    echo "<pre>";
+                    print_r($walletObject->getErrors());
+                    exit;
+                }
+                if (count($walletRecvObj2) == 0) {
+                    $walletObject1 = new Wallet;
+                    $walletObject1->user_id = $moneyobj->to_user_id;
+                    $walletObject1->fund = $transactionObj->paid_amount;
+                    $walletObject1->type = $walletObject->type;
+                    $walletObject1->created_at = $createdtime;
+                    $walletObject1->updated_at = $createdtime;
+                    $walletObject1->updated_at = 1;
+                    $walletObject1->save(false);
+                }else{
+                 $totalAmount = $walletRecvObj2->fund + $transactionObj->paid_amount;   
+                 $walletRecvObj2->fund = $totalAmount; 
+                 $walletRecvObj2->updated_at = $createdtime;
+                 $walletRecvObj2->update();
+                }  
+                if($transactionObj){
+                    $transactionObj->status = 1;
+                    $transactionObj->update();
+                }
                 /* for admin wallet add */
-                $wallettoObj = Wallet::model()->findByAttributes(array('id' => $moneyobj->wallet_id));
+                /*$wallettoObj = Wallet::model()->findByAttributes(array('id' => $moneyobj->wallet_id));
                 $wallettoObj->fund = ($wallettoObj->fund) + ($transactionObj->paid_amount);
                 $wallettoObj->status = 1;
                 $wallettoObj->save();
@@ -198,33 +233,34 @@ class MoneyTransferController extends Controller {
                 $moneyobj->wallet_id = $wallettoObj->id;
                 $moneyobj->update(false);
                 $transactionObj->status = 1;
-                $transactionObj->update();
+                $transactionObj->update();*/
+                
                 /* creating new transaction object for admin */
-
+                $fundA = $transactionObj->paid_amount * 1 / 100;
                 $transactionObjuser2 = new Transaction;
-                $transactionObjuser2->user_id = $adminid;
-                $transactionObjuser2->mode = $transactionObj->mode; //remove
+                $tarnsactionID = BaseClass::gettransactionID();
                 $transactionObjuser2->gateway_id = 1;
-                $transactionObjuser2->coupon_discount = 0;
-                $transactionObjuser2->actual_amount = (($transactionObj->actual_amount) - ($transactionObj->paid_amount));
-                $transactionObjuser2->paid_amount = (($transactionObj->actual_amount) - ($transactionObj->paid_amount));
-                $transactionObjuser2->total_rp = 0; //remove
-                $transactionObjuser2->used_rp = 0;
+                $transactionObjuser2->mode = 'transfer';
+                $transactionObjuser2->user_id = $adminid;
                 $transactionObjuser2->status = 1;
+                $transactionObjuser2->actual_amount = $fundA;
+                $transactionObjuser2->paid_amount = $fundA;
+                $transactionObjuser2->transaction_id = $tarnsactionID;
                 $transactionObjuser2->created_at = $createdtime;
                 $transactionObjuser2->updated_at = $createdtime;
-                if (!$transactionObjuser2->save()) {
+                if (!$transactionObjuser2->save(false)) {
                     echo "<pre>";
                     print_r($transactionObjuser2->getErrors());
                     exit;
                 }
+                //var_dump($transactionObj);exit;
                 /* for admin wallet add */
-                $walletadmObj = Wallet::model()->findByAttributes(array('user_id' => $adminid, 'type' => $transactionObj->mode));
+                $walletadmObj1 = Wallet::model()->findByAttributes(array('user_id' => $adminid, 'type' => $walletObject->type));
                 if (empty($walletadmObj)) {
                     $walletadmObj = new Wallet;
-                    $walletadmObj->type = $moneyobj->wallet_id;
+                    $walletadmObj->type = $walletObject->type;
                     $walletadmObj->user_id = $adminid;
-                    $walletadmObj->fund = ($transactionObjuser2->paid_amount);
+                    $walletadmObj->fund = $fundA;
                     $walletadmObj->status = 1;
                     $walletadmObj->created_at = $createdtime;
                     $walletadmObj->updated_at = $createdtime;
@@ -234,9 +270,9 @@ class MoneyTransferController extends Controller {
                         exit;
                     }
                 } else {
-                    $walletadmObj->fund = ($walletadmObj->fund) + ($transactionObjuser2->paid_amount);
-                    $walletadmObj->status = 1;
-                    $walletadmObj->save();
+                    $walletadmObj1->fund = ($walletadmObj1->fund) + ($transactionObjuser2->paid_amount);
+                    $walletadmObj1->status = 1;
+                    $walletadmObj1->save();
                 }
                 /* creating new money transfer object for admin */
 
@@ -245,7 +281,8 @@ class MoneyTransferController extends Controller {
                 $moneyTransferadmObj->to_user_id = $adminid;
                 $moneyTransferadmObj->transaction_id = $transactionObjuser2->id;
                 $moneyTransferadmObj->fund_type = $moneyobj->wallet_id;
-                $moneyTransferadmObj->comment = $transactionObjuser2->paid_amount . ' commission to admin';
+                $moneyTransferadmObj->fund = $fundA;
+                $moneyTransferadmObj->comment = $fundA . 'commission to admin';
                 $moneyTransferadmObj->wallet_id = $walletadmObj->id;
                 $moneyTransferadmObj->status = 1;
                 $moneyTransferadmObj->created_at = $createdtime;
@@ -258,7 +295,7 @@ class MoneyTransferController extends Controller {
                 }
 
                 //exit();
-                    $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObj->id));
+                $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObj->id));
             } else {
 
                 $this->redirect(array('MoneyTransfer/status', 'status' => 'F'));
@@ -269,9 +306,7 @@ class MoneyTransferController extends Controller {
 
     public function actionStatus() {
         $transactionObject = Transaction::model()->findByPk($_GET['transactionId']);
-        
-
-        $this->render('status',array('transactionObject'=>$transactionObject));
+        $this->render('status', array('transactionObject' => $transactionObject));
     }
 
     /* add fund functionality for admin */

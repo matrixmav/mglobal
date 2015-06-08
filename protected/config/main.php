@@ -105,9 +105,9 @@ return array(
 		 	'tablePrefix' => 'tbl_',
                         'enableParamLogging' => true,
 		), 
-                 */
+                 
                  //Local
-                
+                */
 		'db'=>array(
 				'connectionString' => 'mysql:host=localhost;dbname=mglobal',
 				'emulatePrepare' => true,
@@ -116,12 +116,13 @@ return array(
 				'charset' => 'utf8',
                                 'tablePrefix' => 'tbl_',
 		),
+            
                 
                 'twitter' => array(
                                 'class' => 'ext.yiitwitteroauth.YiiTwitter',
                                 'consumer_key' => 'JsUWA9cpSn8cCoIdCZQRHba32',
                                 'consumer_secret' => 'IA5qJ66PxsOtlqgwwsqcG1Bk5bVh3hhyaP87UHErE7vECTv8IW',
-                                'callback' => 'http://mglobal.dev/user/callback',
+                                'callback' => 'http://staging.mglobally.com/user/callback',
                 ),
 		
 		// Error handler

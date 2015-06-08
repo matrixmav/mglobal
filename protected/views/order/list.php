@@ -24,7 +24,7 @@ $this->menu=array(
           <div class="col-md-10 col-sm-9">
        
         <?php 
-        
+          
         $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'city-grid',
 	'dataProvider'=>$dataProvider,
@@ -50,7 +50,7 @@ $this->menu=array(
 		),
 		array(
                     'name'=>'package_id',
-                    'header'=>'<span style="white-space: nowrap;">Package Name &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Package &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'isset($data->package->name)?$data->package->name:""',
 		),
                 array(
@@ -60,43 +60,36 @@ $this->menu=array(
 		),
                array(
                     'name'=>'domain_price',
-                    'header'=>'<span style="white-space: nowrap;">Domain Price &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Pre Dom Price &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->domain_price) ? number_format($data->domain_price,2) : "N/A"',
 		),
                array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
+                    'header'=>'<span style="white-space: nowrap;">Discount &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->transaction->coupon_discount) ? number_format($data->transaction->coupon_discount,2) : "N/A"',
 		),
                 array(
                     'name'=>'start_date',
                     'header'=>'<span style="white-space: nowrap;">Start Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->status == 1) ? $data->start_date : "N/A"',
+                    'value'=>'$data->start_date',
 		),
                 array(
                     'name'=>'end_date',
                     'header'=>'<span style="white-space: nowrap;">End Date &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->status == 1) ? $data->end_date : "N/A"',
+                    'value'=>'$data->end_date',
 		),
 		array(
 			'name'=>'status',
                         'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
 			'value'=>'($data->status == 1) ? Yii::t(\'translation\', \'Completed\') : Yii::t(\'translation\', \'Pending\')',
 		),
-             
-		array( 
-			'class'=>'CButtonColumn',
-			'template'=>'{Builder}',
-			'htmlOptions'=>array('width'=>'23%'),
-			'buttons'=>array(
-				'Builder' => array(
-					'label'=>'Visit Site',
-					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/buildtemp/templates/?id=$data->id"): ""',
-				),
-                             
-                       ),
+              array(
+			'name'=>'action',
+                        'header'=>'<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
+			'value'=>array($this,'GetButtonTitle'),
 		),
+		 
+		 
             
                 array( 
 			'class'=>'CButtonColumn',

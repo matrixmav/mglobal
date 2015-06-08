@@ -60,8 +60,8 @@ $this->menu=array(
 		),
                 array(
                     'name'=>'transaction_id',
-                    'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->transaction->paid_amount)? number_format($data->transaction->paid_amount,2):""',
+                    'header'=>'<span style="white-space: nowrap;">Credit Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'isset($data->wallet->fund)? $data->wallet->fund:""',
 		),
             array(
                     'name'=>'created_at',
@@ -72,6 +72,11 @@ $this->menu=array(
                     'name'=>'status',
                     'header'=>'<span style="white-space: nowrap;">Transfer Status &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->status == 1) ? "Transfered" : "Pending"',
+		),
+            array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Debit Amount &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'($data->fund != 0) ? $data->fund : "N/A"',
 		),
              array(
                     'name'=>'comment',

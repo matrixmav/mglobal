@@ -24,7 +24,7 @@ $this->menu=array(
           <!-- BEGIN CONTENT -->
           <div class="col-md-10 col-sm-9">
             
-          <span class="btn  green margin-right-20">Total Refferal Bonus  - $<?php echo $totalAmount;?> </span>
+          <span class="btn  green margin-right-20">Total Refferal Bonus  - $<?php echo (!empty($totalAmount)) ? $totalAmount : "0";?> </span>
         <?php 
          
         $this->widget('zii.widgets.grid.CGridView', array(

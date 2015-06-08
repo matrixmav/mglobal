@@ -37,7 +37,7 @@ class UserHasTemplate extends CActiveRecord
 			array('category_id, publish, user_id, template_id, order_id', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, category_id, temp_header, temp_footer, temp_body, publish, user_id, template_id, created_at, order_id', 'safe', 'on'=>'search'),
+			array('id, category_id,user_menu, temp_header, temp_footer, temp_body, publish, user_id, template_id, created_at, order_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +53,7 @@ class UserHasTemplate extends CActiveRecord
                     'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header'),
                     'footer' => array(self::BELONGS_TO, 'BuildTempFooter', 'temp_footer'),
                     'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body'),
+                    'order' => array(self::BELONGS_TO, 'Order', 'order_id'),
 		);
 	}
 
@@ -62,20 +63,29 @@ class UserHasTemplate extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'category_id' => 'Category',
-			'temp_header' => 'Temp Header',
-			'temp_footer' => 'Temp Footer',
-			'temp_body' => 'Temp Body',
-			'publish' => 'Publish',
-			'user_id' => 'User',
-			'template_id' => 'Template',
-			'created_at' => 'Created At',
-			'order_id' => 'Order',
+                        'id' => 'ID',
+                        'category_id' => 'Category',
+                        'user_menu' => 'User Menu',
+                        'temp_header' => 'Temp Header',
+                        'temp_footer' => 'Temp Footer',
+                        'temp_body' => 'Temp Body',
+                        'publish' => 'Publish',
+                        'user_id' => 'User',
+                        'logo' => 'Logo',
+                        'site_title' => 'Site Title',
+                        'contact_email' => 'Contact Email',
+                        'copyright' => 'Copyright',
+                        'custom_css' => 'Custom Css',
+                        'custom_js' => 'Custom Js',
+                        'logo_width' => 'Logo Width',
+                        'logo_height' => 'Logo Height',
+                        'template_id' => 'Template',
+                        'created_at' => 'Created At',
+                        'order_id' => 'Order',
 		);
 	}
 
-	/**
+        /**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:
@@ -95,12 +105,21 @@ class UserHasTemplate extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('user_menu',$this->user_menu);
 		$criteria->compare('temp_header',$this->temp_header,true);
 		$criteria->compare('temp_footer',$this->temp_footer,true);
 		$criteria->compare('temp_body',$this->temp_body,true);
 		$criteria->compare('publish',$this->publish);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('template_id',$this->template_id);
+		$criteria->compare('logo',$this->logo);
+		$criteria->compare('site_title',$this->site_title);
+		$criteria->compare('contact_email',$this->contact_email);
+		$criteria->compare('copyright',$this->copyright);
+		$criteria->compare('custom_css',$this->custom_css);
+		$criteria->compare('custom_js',$this->custom_js);
+		$criteria->compare('logo_height',$this->logo_height);
+		$criteria->compare('logo_width',$this->logo_width);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('order_id',$this->order_id);
 
@@ -119,4 +138,19 @@ class UserHasTemplate extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userId){
+            $hasbuilderObject->category_id = $buildertempObject->category_id;
+            $hasbuilderObject->user_id = $userId;
+            $hasbuilderObject->template_id = $buildertempObject->template_id;
+            $hasbuilderObject->temp_header = $buildertempObject->header->header_content;
+            $hasbuilderObject->user_menu = $buildertempObject->header->menu;
+            $hasbuilderObject->temp_body = $buildertempObject->body->body_content;
+            $hasbuilderObject->temp_footer = $buildertempObject->footer->footer_content;
+            $hasbuilderObject->order_id = $orderId;
+            $hasbuilderObject->publish = 0;
+            $hasbuilderObject->created_at = date('Y-m-d');
+            $hasbuilderObject->save(false);
+            return $hasbuilderObject;
+        }
 }

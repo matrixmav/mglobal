@@ -4,7 +4,7 @@ $this->breadcrumbs = array(
     'Logo Add',
 );
 ?>
-<div class="col-md-7 col-sm-7" id="test">
+<div class="col-md-12 col-sm-12" id="test">
     <?php if (count($userpagesObject) < 4) { ?>
         <a href="/BuildTemp/userinput" class="btn green">Add page</a>
     <?php
@@ -16,15 +16,17 @@ $this->breadcrumbs = array(
     <?php }
 } ?> 
 
-    <a href="/BuildTemp/addlogo" class="btn green">Add Logo</a>
-
-    <a href="/BuildTemp/addcopyright" class="btn green">Add Copy Right</a> 
+    <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
+    <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
+    <a href="/BuildTemp/addcopyright" class="btn green">Copy Right Setting</a> 
+    <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
+    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
 
 <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
 <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
 
-
-
+</div>
+<div class="col-md-7 col-sm-7">
 
 <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
@@ -49,7 +51,7 @@ $this->breadcrumbs = array(
         </div>
     </form>
 
-
+</div>
 <script type="text/javascript">
     function validation() {
         $("#logo_error").html("");

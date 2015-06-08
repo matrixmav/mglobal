@@ -45,7 +45,9 @@ class BaseClass extends Controller {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if (!$adminObject) {
-            $this->redirect('/user/login');
+            //$this->redirect('/user/login');
+            header('Location:/user/login');
+            
         }
     }
     
@@ -56,21 +58,59 @@ class BaseClass extends Controller {
             return $walletObject; 
                         
     }
-    function getUnredMails($userId){
-        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND type = 0'));
+   
+    public static function getPassword(){
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$#@!&*';
+        $randomString = '';
+
+        for ($i = 0; $i < 5; $i++) 
+        {
+            $randomString .= $chars[rand(0, strlen($chars)-1)];
+        }	
+        return $randomString;
+    }
+
+    public static function transactionStatus() {
+        $userId = Yii::app()->session['userid'];
+        $transactionObject = Transaction::model()->findByAttributes(array('user_id'=>$userId));
+                        
+            return $transactionObject; 
+                        
+    }
+
+    
+    public static function gettransactionID() {
+        
+        $transactionObject = Transaction::model()->find(array('order' => 'id DESC'));
+        
+        if(!empty($transactionObject)){
+            $lastid = explode(Yii::app()->params['transactionid'],$transactionObject->transaction_id);
+            $incementID = $lastid[1] + 1;
+            $generateid = Yii::app()->params['transactionid'].$incementID.Yii::app()->params['transactionid'];
+        }else{
+            $generateid = Yii::app()->params['transactionid'].'12345'.Yii::app()->params['transactionid'];
+        }
+        return $generateid;
+        
+    }
+
+    public static function getUnredMails($userId){
+
+        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND status = 0'));
+
+
     }
 
     public static function isAdmin() {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '2'));
         if (!$adminObject) {
-            $this->redirect('/admin');
+            header('Location:/admin');
         }
     }
     
     public static function getWalletList(){
         return array(
-            '0'=>'Select',
             '1'=>'Cash',
             '2'=> 'RP Wallet',
             '3'=>'Commission'
@@ -545,7 +585,9 @@ class BaseClass extends Controller {
      * @return int
      */
     public static function getPercentage($value1, $value2 , $flag=0){
-        if($flag){
+        $percentage = $value1 + $value1*1/100;
+        return $percentage;
+        /*if($flag){
             if(($value1!=0 && $value1!='') && ($value2!=0 && $value2!='')) {
                return $percentage = ($value1 * $value2) / 100;
             } else {
@@ -558,7 +600,8 @@ class BaseClass extends Controller {
             else 
                     return 0;        
             return $percentage = substr((($value1 / $value2)*100),0,2);
-        }
+        }*/
+        
         
     }
     

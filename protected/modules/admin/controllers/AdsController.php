@@ -74,8 +74,8 @@ class AdsController extends Controller
                     if($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg" ){
                         $error = "Please upload mentioned file type.";
                     }else{                            
-                        $path = Yii::getPathOfAlias('application') . "/upload/banner/";
-                        BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);
+                        $path = Yii::getPathOfAlias('basepath'). "/upload/banner/";
+                        BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time().$_FILES['ads_banner']['name']);
                         $serverPath =  Yii::getPathOfAlias('basepath') . "/upload/banner/";
                         
                         

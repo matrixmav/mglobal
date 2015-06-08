@@ -18,7 +18,9 @@ $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState (
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
+
 ?>
+
 
 <!DOCTYPE html>
 
@@ -89,7 +91,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link rel="stylesheet" type="text/css"
               href="/metronic/assets/plugins/jquery-notific8/jquery.notific8.min.css" />
 
-
+       
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->
         <!--[if lt IE 9]>
@@ -138,8 +140,8 @@ License: You must have a valid license purchased only from themeforest(the above
             jQuery(document).ready(function () {
                 App.init();
                 //checkLoginTime();
-                var IDSVal = document.getElementById('username').value;
-                chatWith(IDSVal);
+                //var IDSVal = document.getElementById('username').value;
+                //chatWith(IDSVal);
             });
             $(".single_2").fancybox({
                 openEffect: 'elastic',
@@ -172,12 +174,18 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">
         <?php //var_dump($_SESSION); exit;?>
-        <input type="hidden" id="username" value="mGlobaly">
+        <input type="hidden" id="username" value="mGlobally">
         <!-- BEGIN HEADER -->
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="header-inner">
+
                 <span class="home-link"><a href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank">Home</a></span>
+
+                 <a class="navbar-brand" href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank" style="padding:10px;">
+                     <img width="70px" src="../../../images/logo/logo.png" class="img-responsive ">
+                 </a> 
+
                 <!-- BEGIN LOGO -->
                 <?php /* <a class="navbar-brand" href="/admin/">
                   <?php
@@ -201,12 +209,41 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right topWallet">
-                    <li class="credit"><a href="#" class="">
+                    
+
+                    <li class="cash"><a href="/wallet/fundwallet/" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
+                            <i class="fa fa-money"></i>
+
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('1');
+                                foreach ($arrayRP as $RP) {
+                                    
+                                }
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2)  : "0.00";
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="commision"><a href="/wallet/rpwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
+                            <i class="glyphicon glyphicon-briefcase"></i>
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayFund = BaseClass::walletAmount('2');
+                                foreach ($arrayFund as $fund) {
+                                    
+                                }
+                                echo (!empty($arrayFund)) ?  number_format($fund->fund, 2)  : "0.00";
+                                ?>
+                            </span></a>
+                    </li>
+
+                    <li class="credit"><a href="/wallet/commisionwallet/" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
                             <i class="fa fa-credit-card"></i>
 
                             <span class="badge badge-default">
                                 <?php
-                                $arrayRP = BaseClass::walletAmount('2');
+                                $arrayRP = BaseClass::walletAmount('3');
                                 foreach ($arrayRP as $RP) {
                                     
                                 }
@@ -215,35 +252,9 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li class="cash"><a href="#" class="">
-                            <i class="fa fa-money"></i>
-
-                            <span class="badge badge-default">
-                                <?php
-                                $arrayRP = BaseClass::walletAmount('2');
-                                foreach ($arrayRP as $RP) {
-                                    
-                                }
-                                echo (!empty($arrayRP)) ? "<h4>" . number_format($RP->fund, 2) . "</h4>" : "0.00";
-                                ?>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="commision"><a href="#" class="">
-                            <i class="glyphicon glyphicon-briefcase"></i>
-                            <span class="badge badge-default">
-                                <?php
-                                $arrayFund = BaseClass::walletAmount('1');
-                                foreach ($arrayFund as $fund) {
-                                    
-                                }
-                                echo (!empty($arrayFund)) ? $fund->fund : "0.00";
-                                ?>
-                            </span></a>
-                    </li>
-                    <li></li>
+                     
                     <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                        <a href="/wallet/fundwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Fund Wallet">
+                        <a href="/mail/" class="dropdown-toggle"  data-hover="dropdown"  title="Inbox">
                             <i class="glyphicon glyphicon-envelope"></i>
                             <span class="badge badge-default">
                                 <?php
@@ -258,23 +269,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </a>
                     </li>
 
-
-
-                    <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
-                        <a href="/wallet/commisionwallet" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" title="Commision Wallet">
-                            <i class="glyphicon glyphicon-th"></i>
-                            <span class="badge badge-default">
-                                <?php
-                                $arrayCommision = BaseClass::walletAmount('3');
-                                foreach ($arrayCommision as $commision) {
-                                    
-                                }
-                                echo (!empty($arrayCommision)) ? $commision->fund : "0";
-                                ?></span>
-                        </a>
-
-
-                    </li>
+                      
                     <!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
 
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
@@ -350,7 +345,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             $hotel_pmenu = 6;
 
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                                /*$hotel_subsection = array(
                                     "profile/dashboard" => "Dashboard",
 //                                    "profile/summery" => "Summery",
                                 );
@@ -364,15 +359,22 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
+                                */
+                                if ($curAction == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
+                                <li class="<?php echo $activecls; ?>"><a href="/profile/dashboard"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
-                                        <span class="selected"></span> <span
+                                        <span class="selected"></span> 
+                                        <?php /*<span
                                             class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
-                                        </span>
+                                        </span><?php */?>
                                     </a>
                                     <?php
-                                    $menusections ['sections'] = $hotel_subsection;
+                                    /*$menusections ['sections'] = $hotel_subsection;
                                     echo '<ul class="sub-menu">';
                                     foreach ($hotel_subsection as $hotName => $hotTitle) {
                                         if (in_array($hotTitle, $menusections ['sections'])) {
@@ -394,15 +396,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                              * if($hotName == "admin")
                                              * echo '</ul>';
                                              */
-                                        }
+                                        /*}
                                     }
                                     echo '</ul>';
-                                    ?>					
+                                    */?>					
                                 </li>	
                                 <?php
                             }
+                            $arraytransaction = BaseClass:: transactionStatus(); 
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                                
+                                
+                                if($arraytransaction!='' && $arraytransaction->status==1)
+                                {
+                                  $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
                                     "profile/updateprofile" => "Profile",
@@ -411,7 +418,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/testimonial" => "Testimonial",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
+                                );  
+                                }else{
+                                $hotel_subsection = array(
+                                    "order/list" => "My Order",
+                                    "profile/changepassword" => "Change Password",
+                                    "profile/updateprofile" => "Profile",
+                                    "profile/address" => "Address",
+                                    "profile/documentverification" => "Verification",
+                                    //"profile/testimonial" => "Testimonial",
+                                    "genealogy" => "Genealogy",
+//                                    "profile/summery" => "Summery",
                                 );
+                                }
                                 $activecls = 'active';
                                 if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' && $curControllerLower == "order" && $curActionLower!='refferalincome') {
                                     $activecls = 'active';
@@ -424,7 +443,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = '';
                                 ?>
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
-                                            class="leftmenu-hotel"></span> <span class="title">Account</span>
+                                            class="leftmenu-hotel"></span> <span class="title">My Account</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard'  ) ? "open" : ''; ?>">
                                         </span>
@@ -493,13 +512,50 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "transaction/list" => "Transaction List",
-//                                    "moneytransfer/list" => "Moneytransfer List",
                                     "MoneyTransfer/transfer" => "Transfer",
+                                );
+                                ?>
+                                <li
+
+                                    class="<?php echo (($curControllerLower == 'moneytransfer') && ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
+
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Fund </span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'moneytransfer' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                        if ($ctName == "search/create") {
+                                            $ctName = "search/create/type/details";
+                                        }
+                                        if ($ctName == "transaction" && $curControllerLower == "moneytransfer")
+                                            $class_content = 'class="active"';
+                                        else
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                        echo '<li ' . $class_content . '>';
+                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '</li>';
+                                        if ($ctName == "search/create/type/details") {
+                                            $ctName = "search/create";
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                            $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "transaction/list" => "Order Transaction",
+                                    "transaction/fund" => "Fund Transaction"
                                 );
                                 ?>
                                 <li
@@ -507,7 +563,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     class="<?php echo (($curControllerLower == 'transaction') && ($curControllerLower == 'transaction')) ? "active" : ''; ?>">
 
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Fund </span>
+                                        <span class="title">Transactions </span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'transaction' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
                                         </span>
@@ -535,6 +591,48 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                             if($arraytransaction!='' && $arraytransaction->status==1)
+                                {
+                            $reservation_pmenu = 8;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    "ads" => "Ads List",
+                                );
+                                ?>
+                                <li
+
+                                    class="<?php echo (($curControllerLower == 'ads') && ($curControllerLower == 'ads')) ? "active" : ''; ?>">
+
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Ads </span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'ads' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+                                        if ($ctName == "search/create") {
+                                            $ctName = "search/create/type/details";
+                                        }
+                                        if ($ctName == "ads" && $curControllerLower == "moneytransfer")
+                                            $class_content = 'class="active"';
+                                        else
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                        echo '<li ' . $class_content . '>';
+                                        echo '<a href="/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                        echo '</li>';
+                                        if ($ctName == "search/create/type/details") {
+                                            $ctName = "search/create";
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                                }
 
                             $reservation_pmenu = 8;
 
@@ -544,7 +642,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $hotel_subsection = array(
                                     "wallet/rpwallet" => "RP Wallet",
                                     "wallet/commisionwallet" => "Commision Wallet",
-                                    "wallet/fundwallet" => "Fund Wallet",
+                                    "wallet/fundwallet" => "Cash Wallet",
                                     "order/checkinvestment" => "Check Investment",
                                     "order/refferalincome" => "Referral Income",
 //                                    "profile/summery" => "Summery",
@@ -736,7 +834,11 @@ License: You must have a valid license purchased only from themeforest(the above
              $(".glyphicon-comment").click(function(){
              $(".chatuserList").toggle();
              });
+             $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
             </script>
+            
     </body>
     <!-- END BODY -->
 </html>

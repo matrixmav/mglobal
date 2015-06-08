@@ -30,7 +30,11 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted', 'forgetpassword', 'login', 'changepassword', '404', 'success', 'loginregistration', 'dashboard', 'isemailexisted', 'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 'callback'),
+                'actions' => array('index', 'view', 'registration', 'isuserexisted', 
+                    'forgetpassword', 'login', 'changepassword', '404', 'success', 
+                    'loginregistration', 'dashboard', 'confirm','isemailexisted', 
+                    'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 
+                    'callback','getfullname'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -47,6 +51,42 @@ class UserController extends Controller {
         );
     }
 
+public function actionConfirm(){
+       
+       $msg = "";
+            if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
+                $activationKey = $_GET['activation_key'];
+                $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
+                if (count($getUserObject) > 0) {
+                    $masterPin = BaseClass::getUniqInt(5);
+                    $password = BaseClass::getPassword();
+                    $userObject = new User;
+                    $userObject = User::model()->findByPk($getUserObject->id);
+                    $userObject->status = 1;
+                    $userObject->password = BaseClass::md5Encryption($password);
+                    $userObject->update();
+                    $msg = "Your account has been verified.";
+                    
+                    if (!$userObject->update(false)) {
+                        echo "<pre>";
+                        print_r($userObject->getErrors());
+                        exit;
+                    }
+                    $config['to'] = $userObject->email; 
+                    $config['subject'] = 'Login Details' ;
+                    $config['body'] = 'Hi,' .$userObject->full_name.'<br/>! You have been registered successfully'.
+                    '<br/><br/><strong>User:</strong>'.$userObject->name.'<br/>'.
+                    '<br/><strong>Password:</strong>'.$password.'<br/>'.
+                    '<strong>Master Pin:</strong>'.$masterPin.'<br/><br/>';
+                    CommonHelper::sendMail($config);
+            
+                    $this->redirect(array("login",'successMsg'=>$msg));
+                } else {
+                   $msg = "<p class='error'>Invalid Key.</p>";
+                 $this->redirect(array("login",'successMsg'=>$msg));
+                }
+            }        
+    }
     public function actionTwitter() {
 
         $twitter = Yii::app()->twitter->getTwitter();
@@ -391,21 +431,17 @@ class UserController extends Controller {
             $masterPin = BaseClass::getUniqInt(5);
             $model = new User;
             $model->attributes = $_POST;
-            $model->password = BaseClass::md5Encryption($_POST['password']);
+            $password = BaseClass::getPassword();
+            $model->password = BaseClass::md5Encryption($password);
             $model->sponsor_id = $_POST['sponsor_id'];
             $model->master_pin = BaseClass::md5Encryption($masterPin);
-            $model->date_of_birth = $_POST['y'] . "-" . $_POST['m'] . "-" . $_POST['d'];
             $model->created_at = date('Y-m-d');
             if ($_POST['admin'] == 1) {
                 $model->role_id = 3;
             } else {
-                $model->role_id = 2;
+                $model->role_id = 1;
             }
-            if ($_POST['admin'] == 1) {
-                $model->status = 3;
-            } else {
-                $model->status = 2;
-            }
+            
 
             /* Condition for they have the child or not */
             $geneObject = Genealogy::model()->findByAttributes(array('parent' => $userObject->id, 'position' => $_POST['position']));
@@ -413,7 +449,8 @@ class UserController extends Controller {
             //die;
             if (count($geneObject)) {
                 $userId = "";
-                for ($i = 1; $i <= 1000; $i++) {
+                $userCount = User::model()->count();
+                for ($i = 1; $i <= $userCount; $i++) {
 
                     if ($i == 1) {
                         $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id, 'position' => $_POST['position']));
@@ -473,16 +510,14 @@ class UserController extends Controller {
               $modelGenealogy->position = $_POST['position'] ;
               $modelGenealogy->save(); */
 
-//                $config['to'] = $model->email; 
-//                $config['subject'] = 'Registration Confirmation' ;
-//                $config['body'] = 'Congratulations! You have been registered successfully on our site '.
-//                        '<strong>Your Master Pin:</strong>'.$masterPin.'<br/><br/>'.
-//                        '<strong>Please click the link below to activate your account:</strong><br/><br/>'.
-//                        Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$rand;
-//                var_dump($config);
-//                CommonHelper::sendMail($config);
-            //$this->render('login', array('successMsg'=> $successMsg));
-            //$this->redirect('login');
+            $config['to'] = $model->email; 
+            $config['subject'] = 'Registration Confirmation' ;
+            $config['body'] = 'Hi,' .$model->full_name.'<br/>Congratulations! You have been registered successfully'.
+                    '<strong>Please click the link below to activate your account:</strong><br/>'.
+                    '<a href="http://staging.mglobally.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
+            $response = CommonHelper::sendMail($config);
+            $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
+            $this->redirect(array('login','successMsg'=> $successMsg));
 
             if ($_POST['admin'] == 1) {
                 $this->redirect(array('admin/user/index', 'successMsg' => 1));
@@ -505,30 +540,29 @@ class UserController extends Controller {
         $msg = "";
         if (isset($_POST['email']) && $_POST['email'] != '') {
             $email = $_POST['email'];
+            $password = BaseClass::getPassword();
             $getUserObject = User::model()->findByAttributes(array('email' => $email));
             if (count($getUserObject) == 1) {
-                $userObject = new User;
                 $userObject = User::model()->findByPk($getUserObject->id);
                 $forgetKey = base64_encode($getUserObject->name . "--" . $getUserObject->date_of_birth);
                 $userObject->forget_key = $forgetKey;
                 $userObject->forget_status = 1;
+                $userObject->password = BaseClass::md5Encryption($password);
                 $userObject->update();
-                $msg = "<p class='success'>Please check your email to activate your account</p>";
+                $msg = "Please check your email to activate your account";
                 if (!$userObject->update(false)) {
                     echo "<pre>";
                     print_r($model->getErrors());
                     exit;
                 }
-
-//                    $config['to'] =  $email; 
-//                    $config['subject'] = 'Password reset On HKbase' ;
-//                    $config['body'] = 'Youre receiving this e-mail because you requested a password reset for your user account .  '.                            
-//                            '<strong>Please go to the following page and choose a new password:</strong><br/><br/>'.
-//                            Yii::app()->request->baseUrl.'/user/confirmAction?activation_key='.$forgetKey;
-//                    var_dump($config);
-//                    $test = mail($config['to'],$config['subject'],$config['body']);
-//                    echo "<pre>"; print_r($test);exit;
-//                    CommonHelper::sendMail($config);
+                
+                $config['to'] = $userObject->email; 
+                $config['subject'] = 'Forgot Password' ;
+                $config['body'] = 'Hi,' .$userObject->full_name.'<br/>'
+                        . 'New Password:'.$password.'">Click to activate </a>';
+                $response = CommonHelper::sendMail($config);
+            
+                $this->redirect(array('login', 'successMsg' => $msg));
             } else {
                 $msg = "<p class='error'>Please Enter Your Valid Email Address.</p>";
             }
@@ -776,6 +810,19 @@ class UserController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+    
+    public function actionGetFullName(){
+        if($_POST){
+            $userName = $_POST['userName'];
+            $getUserObject = User::model()->findByAttributes(array('name' => $userName));
+            if($getUserObject){
+                $userArray = array('id'=>$getUserObject->id,'fullName'=>$getUserObject->full_name);
+                echo CJSON::encode($userArray);exit;
+            } else {
+                echo 0;exit;
+            }
         }
     }
 }

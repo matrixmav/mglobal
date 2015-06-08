@@ -295,7 +295,7 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 		if (message != '') {
 			$.post("/chat-admin/chat.php?action=sendchat", {to: chatboxtitle, message: message} , function(data){
 				message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
-				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">mGlobaly:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">mGlobally:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
 			});
 		}
@@ -329,7 +329,7 @@ function startChatSession(){
  
 		username = data.username;
 
-		$.each(data.items, function(i,item){ alert(item);
+		$.each(data.items, function(i,item){  
 			if (item)	{ // fix strange ie bug
 
 				chatboxtitle = item.f;

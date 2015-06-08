@@ -36,7 +36,7 @@
                   <label for="email" class="col-lg-4 control-label">User Name <span class="require">*</span></label>
                   <div class="col-lg-8">
 
-                      <input type="text" class="form-control" id="login-name" name="name">
+                      <input type="text" class="form-control " id="login-name" name="name">
                   
                   <span id="name_error" class="clrred"></span></div>
                 </div>
@@ -68,26 +68,46 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 padding-right-30">
+                <!--  <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 padding-right-30">
                     <hr>
                     <div class="login-socio">
-                        <!--<p class="text-muted">or login using:</p>-->
+                        <p class="text-muted">or login using:</p>
                         <ul class="social-icons">
                             <li><a href="javascript:;" data-original-title="facebook" class="facebook" title="facebook"></a></li>
                             <li><a href="javascript:;" data-original-title="Twitter" class="twitter" title="Twitter"></a></li>
                             <li><a href="javascript:;" data-original-title="Google Plus" class="googleplus" title="Google Plus"></a></li>
                             <li><a href="javascript:;" data-original-title="Linkedin" class="linkedin" title="LinkedIn"></a></li>
                         </ul>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </form>
             </div>
-            <a href="http://mglobal.dev/user/facebook"><img src="<?php echo Yii::app()->basePath; ?>/fb_tw/images/fb_login.png">Registration With Facebook</a>        
-            <br><br/>
-            <a href="http://mglobal.dev/user/twitter"><img src="<?php echo Yii::app()->basePath; ?>/fb_tw/images/fb_login.png">Registration With Twitter</a>        
+              <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 col-xs-12">
+              <a class="fb-btn" href="<?php echo Yii::app()->baseUrl;?>/user/facebook"><?php echo Yii::app()->baseUrl; ?>Log in With Facebook</a>        
+              </div>
+              <br><br/>
+               <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 col-xs-12">
+            <a class="tw-btn" href="<?php echo Yii::app()->baseUrl; ?>/user/twitter"><?php echo Yii::app()->baseUrl; ?>Log in With Twitter</a>        
+               </div>
+            <!--
+        
+        <button  class="btn-social btn-fb">Sign in with Facebook</button> 
+        <button  class="btn-social btn-tw">Sign in with twitter</button> 
+        -->
           </div>
         </div>
+      <div class="col-md-6 col-sm-6">
+          <div class="clear80"></div>
+          <div class="col-sm-12 col-xs-12 tcenter pad10">
+              <a class="fb-btn" href="<?php echo Yii::app()->baseUrl;?>/user/facebook"><?php echo Yii::app()->baseUrl; ?>Log in With Facebook</a>        
+              </div>
+          <hr>
+               <div class="col-sm-12 col-xs-12 tcenter pad10">
+            <a class="tw-btn" href="<?php echo Yii::app()->baseUrl; ?>/user/twitter"><?php echo Yii::app()->baseUrl; ?>Log in With Twitter</a>        
+               </div>
+         
+      </div>
       </div>
       <!-- END CONTENT -->
       <?php if($curAction != 'loginregistration'){ ?>

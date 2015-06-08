@@ -281,15 +281,16 @@ class BuildTempController extends Controller {
                 $bodyaddObject = new BuildTempBody;
                 $footeraddObject = new BuildTempFooter;
                 $headeraddObject->header_content = addslashes($_POST['Template']['header_code']);
+                $headeraddObject->menu = addslashes($_POST['Template']['menu_code']);
                 $headeraddObject->template_title = addslashes($_POST['Template']['template_title']);
                 $headeraddObject->created_at = date('Y-m-d');
                 if ($headeraddObject->save(false)) {
 
-                    $bodyaddObject->body_content = addslashes($_POST['Template']['body_code']);
+                    $bodyaddObject->body_content = addslashes('<div class="mav_content">'.$_POST['Template']['body_code'].'</div>');
                     $bodyaddObject->created_at = date('Y-m-d');
                     $bodyaddObject->save(false);
 
-                    $footeraddObject->footer_content = addslashes($_POST['Template']['footer_code']);
+                    $footeraddObject->footer_content = addslashes('<div class="mav_footer">'.$_POST['Template']['footer_code'].'</div>');
                     $footeraddObject->created_at = date('Y-m-d');
                     $footeraddObject->save(false);
                     
@@ -379,6 +380,7 @@ class BuildTempController extends Controller {
                     $model->category_id = $category;
                     $model->folderpath = $fname;
                     $model->screenshot = $fileS;
+                    $model->contact_form = addslashes('<div class="mav_contact">'.$_POST['Template']['form_code'].'</div>');
                     $model->save(false);
                     $tmpId = $model->id  ;
                     

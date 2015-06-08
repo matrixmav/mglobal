@@ -16,8 +16,11 @@ $this->breadcrumbs = array(
             <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
     <?php } }  ?>   
             
-    <a href="/BuildTemp/addlogo" class="btn green">Add Logo</a>    
-    <a href="/BuildTemp/copyright" class="btn green">Add Copy Right</a>            
+    <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
+    <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
+    <a href="/BuildTemp/addcopyright" class="btn green">Copy Right Setting</a> 
+    <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
+    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a>           
     <form action="/BuildTemp/pageadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <?php  $curController = @Yii::app()->controller->id;
       $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
 ?>
@@ -14,7 +15,7 @@
                 <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+91 1234567890</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>maverickinfosoft@gmail.com</span></li>
-                    <li><button id="checkout" class="btn-flat-green btn-orange btn-h" onclick="RedirectCart();">Click Here</button></li>
+                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Click Here</button></a></li>
                 </ul>
             </div>
             <!-- END TOP BAR LEFT PART -->
@@ -49,7 +50,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="/#about"><h1>mGlobal</h1></a>
+        <a class="site-logo" href="/#about"><img class="img-responsive "src="../../../images/logo/logo.png" width="170px" ></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -62,7 +63,7 @@
                 <li class="dropdown dropdown-megamenu">
                     <a class="dropdown-toggle" href="/#about">About </a>
                 </li>
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a class="dropdown-toggle" href="/#services"> Services  </a>
 
                 </li>
@@ -79,7 +80,7 @@
                 <li><a href="/#contact" target="_blank">support centre</a></li>
                
 
-                <!-- BEGIN TOP SEARCH -->
+                <!-- BEGIN TOP SEARCH 
                 <li class="menu-search">
                     <span class="sep"></span>
                     <i class="fa fa-search search-btn"></i>
@@ -93,7 +94,7 @@
                             </div>
                         </form>
                     </div> 
-                </li>
+                </li>-->
                 <!-- END TOP SEARCH -->
             </ul>
         </div>

@@ -5,11 +5,19 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-12 col-sm-12" id="test">
+   
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
       
     <?php foreach($userpagesObjectF as $page){?><a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a><?php }?>   
     <div style="float:right;"><a href="/BuildTemp/managewebsite/<?php echo $_GET['id'];?>" class="btn green">Preview</a></div> 
+   
+    <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
+    <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
+    <a href="/BuildTemp/addcopyright" class="btn green">Copy Right Setting</a> 
+    <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
+    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
+    
     <form action="/BuildTemp/pagedit?id=<?php echo $_GET['id']; ?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
@@ -40,7 +48,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="lastname">Page Content<span class="require">*</span></label>
                 <div class="col-lg-10">
-                    <textarea id="editor1" class="form-control" name="pages[page_content]" style="width: 482px; height: 248px;"><?php echo (!empty($userpagesObject->page_content)) ? $userpagesObject->page_content : ""; ?></textarea>
+                    <textarea id="editor1" class="form-control" name="pages[page_content]" style="width: 482px; height: 248px;"><?php echo (!empty($userpagesObject->page_content)) ? stripslashes($userpagesObject->page_content) : ""; ?></textarea>
                     <span id="page_content_error"></span>
                 </div>
             </div>

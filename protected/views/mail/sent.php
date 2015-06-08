@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn green margin-right-20 red")); ?>
     </div>
-</div>
+</div><br/>
 <div class="row">
     <div class="col-md-12">
 <?php

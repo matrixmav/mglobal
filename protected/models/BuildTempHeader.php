@@ -35,7 +35,7 @@ class BuildTempHeader extends CActiveRecord
 			array('header_content', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, meta_title, meta_keywords, meta_description, header_content, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, meta_title, meta_keywords, meta_description,menu, header_content, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,6 +58,7 @@ class BuildTempHeader extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'meta_title' => 'Meta Title',
+			'menu' => 'Menu',
 			'meta_keywords' => 'Meta Keywords',
 			'meta_description' => 'Meta Description',
 			'header_content' => 'Header Content',
@@ -86,6 +87,7 @@ class BuildTempHeader extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('meta_title',$this->meta_title,true);
+		$criteria->compare('menu',$this->menu,true);
 		$criteria->compare('meta_keywords',$this->meta_keywords,true);
 		$criteria->compare('meta_description',$this->meta_description,true);
 		$criteria->compare('header_content',$this->header_content,true);

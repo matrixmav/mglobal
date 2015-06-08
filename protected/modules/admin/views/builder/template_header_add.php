@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation1();" enctype="multipart/form-data">
+    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Add Template</legend>
@@ -51,6 +51,15 @@ $this->breadcrumbs = array(
                     <span id="template_title_error"></span>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="menucode">Menu Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" style="width: 482px; height: 150px;"></textarea>
+                    <span id="menu_code_error"></span>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -65,6 +74,15 @@ $this->breadcrumbs = array(
                     <span id="body_code_error"></span>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="formcode">Contact Form Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="form_code" class="form-control" name="Template[form_code]" style="width: 482px; height: 150px;"></textarea>
+                    <span id="form_code_error"></span>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -76,16 +94,15 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Custom CSS</label>
                 <div class="col-lg-8">
-                    <textarea id="custom_css" class="form-control" name="custom_css" style="width: 482px; height: 150px;"><?php echo (!empty($customcode->custom_css)) ? stripcslashes($customcode->custom_css) : ""; ?></textarea>                    
+                    <textarea id="custom_css" class="form-control" name="custom_css" style="width: 482px; height: 150px;"></textarea>                    
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Custom JS</label>
                 <div class="col-lg-8">
-                    <textarea id="custom_js" class="form-control" name="custom_js" style="width: 482px; height: 150px;"><?php echo (!empty($customcode->custom_js)) ? stripcslashes($customcode->custom_js) : ""; ?></textarea>
+                    <textarea id="custom_js" class="form-control" name="custom_js" style="width: 482px; height: 150px;"></textarea>
                 </div>
             </div>
-           
              
         </fieldset>
 
@@ -100,49 +117,66 @@ $this->breadcrumbs = array(
 
 
 <script type="text/javascript">
-    function validation()
-    {
-      $("#cssfolder_error").html("");
-      if ($("#cssfolder").val() == "") {
-      $("#cssfolder_error").html("Please upload css zip folder.");
-      $("#cssfolder").focus();            
-      return false;
+function validation(){
+    $("#cssfolder_error").html("");
+    if ($("#cssfolder").val() == "") {
+        $("#cssfolder_error").html("Please upload css zip folder.");
+        $("#cssfolder").focus();            
+        return false;
     }
     
     $("#screenshot_error").html("");
-      if ($("#screenshot").val() == "") {
-      $("#screenshot_error").html("Please upload template screenshot.");
-      $("#screenshot").focus();            
-      return false;
+    if ($("#screenshot").val() == "") {
+        $("#screenshot_error").html("Please upload template screenshot.");
+        $("#screenshot").focus();            
+        return false;
     }
      
-      $("#category_error").html("");
-      if ($("#category").val() == "") {
-      $("#category_error").html("Please select template category");
-      $("#category").focus();            
-      return false;
+    $("#category_error").html("");
+    if ($("#category").val() == "") {
+        $("#category_error").html("Please select template category");
+        $("#category").focus();            
+        return false;
     }
-     $("#template_title_error").html("");
-      if($("#template_title").val() == "") {
-      $("#template_title_error").html("Please enter template title");
-      $("#template_title").focus();            
-      return false;
+    
+    $("#template_title_error").html("");
+    if($("#template_title").val() == "") {
+        $("#template_title_error").html("Please enter template title");
+        $("#template_title").focus();            
+        return false;
     }
-      $("#header_code_error").html("");
-      if ($("#header_code").val() == "") {
-      $("#header_code_error").html("Please enter Header Code");
-      $("#header_code").focus();            
-      return false;
+    
+    $("#menu_code_error").html("");
+    if ($("#menu_code").val() == "") {
+        $("#menu_code_error").html("Please enter Header Code");
+        $("#menu_code").focus();            
+        return false;
     }
+    
     $("#header_code_error").html("");
-      if ($("#body_code").val() == "") {
-      $("#header_code_error").html("Enter Body Code");
-      $("#body_code").focus();            
-      return false;
+    if ($("#header_code").val() == "") {
+        $("#header_code_error").html("Please enter Header Code");
+        $("#header_code").focus();            
+        return false;
     }
-     $("#header_code_error").html("");
-      if ($("#footer_code").val() == "") {
-      $("#header_code_error").html("Enter Footer Code");
+    
+    $("#body_code_error").html("");
+    if ($("#body_code").val() == "") {
+        $("#body_code_error").html("Enter Body Code");
+        $("#body_code").focus();            
+        return false;
+    }
+    
+    $("#form_code_error").html("");
+    if ($("#form_code").val() == "") {
+        $("#form_code_error").html("Please enter Header Code");
+        $("#form_code").focus();            
+        return false;
+    }
+    
+    $("#footer_code_error").html("");
+    if ($("#footer_code").val() == "") {
+      $("#footer_code_error").html("Enter Footer Code");
       $("#footer_code").focus();            
       return false;
     }

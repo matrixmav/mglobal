@@ -1,6 +1,6 @@
   <!-- Header END -->
   <div id='content-wrapper'>
-<div id='social-sidebar'>
+<!--<div id='social-sidebar'>
 <ul>
 <li>
 <a ><img src="images/whts1.png" />
@@ -34,7 +34,7 @@
 </li>
 
 </ul>
-</div>
+</div> -->
 
 </div>
   
@@ -613,7 +613,18 @@
   <div class="prices-block content content-center" id="prices">
     <div class="container">
       <h2 class="margin-bottom-50"><strong>Pricing</strong> Tables</h2>
-      <div class="row">
+        <div class="panel-group tabPrice" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Basic Packages
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    <div class="row">
         <!-- Pricing item BEGIN -->
         <?php foreach($packageObject as $package){?>
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -642,6 +653,94 @@
         
         
       </div>
+                  </div>
+                </div>
+              </div>
+            <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Advance
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+       <div class="row">
+        <!-- Pricing item BEGIN -->
+        <?php foreach($packageObject as $package){?>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <?php if(Yii::app()->session['userid']!=''){?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $package['id']; ?>"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $package['id']; ?>"><?php }?><div class="pricing-item">
+            <div class="pricing-head">
+              <h3><?php echo $package['name'];?></h3>
+              <p><?php //echo $package['description1'];?></p>
+            </div>
+            <div class="pricing-content">
+              <div class="pi-price">
+                <strong>$<em><?php echo $package['amount'];?></em></strong>
+                <p>Per Month</p>
+              </div>
+             <?php echo $package['Description'];?>
+            </div>
+            <div class="pricing-footer">
+                
+            <?php if(Yii::app()->session['userid']!=''){?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $package['id']; ?>"><?php }else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $package['id']; ?>"><?php }?>Pick Now</a>
+            </div>
+                </div>
+                    </a>
+        
+        </div>
+        <?php }?>
+        <!-- Pricing item END -->
+        
+        
+      </div>
+      </div>
+    </div>
+  </div>
+            <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Advance PRO
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+       <div class="row">
+        <!-- Pricing item BEGIN -->
+        <?php foreach($packageObject as $package){?>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <?php if(Yii::app()->session['userid']!=''){?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $package['id']; ?>"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $package['id']; ?>"><?php }?><div class="pricing-item">
+            <div class="pricing-head">
+              <h3><?php echo $package['name'];?></h3>
+              <p><?php //echo $package['description1'];?></p>
+            </div>
+            <div class="pricing-content">
+              <div class="pi-price">
+                <strong>$<em><?php echo $package['amount'];?></em></strong>
+                <p>Per Month</p>
+              </div>
+             <?php echo $package['Description'];?>
+            </div>
+            <div class="pricing-footer">
+                
+            <?php if(Yii::app()->session['userid']!=''){?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $package['id']; ?>"><?php }else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $package['id']; ?>"><?php }?>Pick Now</a>
+            </div>
+                </div>
+                    </a>
+        
+        </div>
+        <?php }?>
+        <!-- Pricing item END -->
+        
+        
+      </div>
+      </div>
+    </div>
+  </div>
+        </div>
     </div>
   </div>
   <!-- Prices block END -->
