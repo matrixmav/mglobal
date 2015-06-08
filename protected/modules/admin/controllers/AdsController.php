@@ -65,6 +65,7 @@ class AdsController extends Controller
          
             $error = "";
             $success = "";
+            $baseURL = Yii::app()->getBaseUrl(true);
             
             if ($_POST) {
                 $banner = time() . $_FILES['ads_banner']['name'];
@@ -74,9 +75,9 @@ class AdsController extends Controller
                     if($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg" ){
                         $error = "Please upload mentioned file type.";
                     }else{                            
-                        $path = Yii::getPathOfAlias('basepath'). "/upload/banner/";
+                        $path = Yii::getPathOfAlias('webroot'). "/upload/banner/";
                         BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time().$_FILES['ads_banner']['name']);
-                        $serverPath =  Yii::getPathOfAlias('basepath') . "/upload/banner/";
+                        $serverPath =  $baseURL . "/upload/banner/";
                         
                         
                         $model = new Ads;
