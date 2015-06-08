@@ -29,6 +29,7 @@ $this->breadcrumbs = array(
         <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
     </div>
     <?php 
+    //echo "<pre>";print_r($dataProvider);exit;
     $statusId =   1;
     if(isset($_REQUEST['res_filter'])){
       $statusId =   $_REQUEST['res_filter'];
@@ -88,11 +89,11 @@ $this->breadcrumbs = array(
                     'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->sponsor_id',
                 ),
-                array(
+                /*array(
                     'name' => 'sponsor_id',
                     'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->userprofile->address',
-                ),
+                ),*/
                 array(
                     'name' => 'status',
                     'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
