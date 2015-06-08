@@ -24,7 +24,7 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword'),
+                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -269,6 +269,43 @@ class ProfileController extends Controller {
         $this->render('/user/change_password', array(
             'error' => $error,'success' => $success,
         ));
+    }
+    
+    /*
+     * Function to change master pin
+     */
+    public function ChangePin()
+    {
+        $error = "";
+        $success = "";
+        $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+        if (!empty($_POST)) {
+          if($_POST['UserProfile']['old_master_pin']!='' && $_POST['UserProfile']['new_master_pin']!='' && $_POST['UserProfile']['confirm_master_pin']!='' )  
+          {
+             
+             if($userObject->master_pin != md5($_POST['UserProfile']['old_password']))
+             {
+               $error .= "Incorrect old master pin"; 
+             }else{
+             $userObject->password = md5($_POST['UserProfile']['new_password']);   
+             if ($userObject->update()) {
+                $success .= "Your password changed successfully"; 
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'mGlobally Password Changed' ;
+                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.'.
+                CommonHelper::sendMail($config);
+             }  
+            }
+             
+        } else {
+            $error .="Please fill all required(*) marked fields.";
+        }
+        }
+        
+        $this->render('/user/change_master_pin', array(
+            'error' => $error,'success' => $success,
+        ));   
+        
     }
 
     // Uncomment the following methods and override them if needed
