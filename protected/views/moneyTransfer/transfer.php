@@ -34,17 +34,13 @@ $this->breadcrumbs = array(
                     </div>
 
                 </div>
-                
+                <input type="hidden" class="form-control" value="" id="search_user_id" name="search_user_id" />
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <select class="form-control input-small pull-left select2me" data-placeholder="Select..." id="search_username" name="username">
-                            <option value="">Search To User</option>
-                            <?php foreach($userObject as $userObj){ ?>
-                                <option value="<?php echo $userObj->id; ?>"><?php echo $userObj->full_name; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>                                        
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullName(this.value);"/>
+                        <span id="search_user_error" style="color:red"></span>
+                    </div>     
                 </div>
                 <div class="form-group">
                     <label for="paid_amount" class="col-lg-4 control-label">Amount<span class="require"> * $</span></label>

@@ -30,7 +30,11 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted', 'forgetpassword', 'login', 'changepassword', '404', 'success', 'loginregistration', 'dashboard', 'confirm','isemailexisted', 'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 'callback'),
+                'actions' => array('index', 'view', 'registration', 'isuserexisted', 
+                    'forgetpassword', 'login', 'changepassword', '404', 'success', 
+                    'loginregistration', 'dashboard', 'confirm','isemailexisted', 
+                    'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 
+                    'callback','getfullname'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -806,6 +810,19 @@ public function actionConfirm(){
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+    
+    public function actionGetFullName(){
+        if($_POST){
+            $userName = $_POST['userName'];
+            $getUserObject = User::model()->findByAttributes(array('name' => $userName));
+            if($getUserObject){
+                $userArray = array('id'=>$getUserObject->id,'fullName'=>$getUserObject->full_name);
+                echo CJSON::encode($userArray);exit;
+            } else {
+                echo 0;exit;
+            }
         }
     }
 }
