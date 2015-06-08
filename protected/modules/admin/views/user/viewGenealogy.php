@@ -19,7 +19,7 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
                             if(count($genealogyListObject) > 0 ){  
                                 /* if they have chind with 1st layer */   
                                 echo  '<li>';
-                                echo  $currentUserId ? '<a href="#" data-hint="This is a success hint that fades in" class="hint-top-s-small-t-notice">'. $currentUserId."</a>" : '';
+                                echo  $userObject->name ? '<a href="#" data-hint="This is a success hint that fades in" class="hint-top-s-small-t-notice">'. $userObject->name."</a>" : '';
                                 
                                 echo '<ul>';                               
                                 
