@@ -74,6 +74,9 @@ class BuildTempController extends Controller {
         /* Get template CSS data */
         $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
         
+        /* Get Template Custom CSS and JS */
+        
+        
         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $builderObjectz->template_id));
         $this->renderPartial('user_templates', array('userpages1Object' => $userpages1Object, 'builderObject' => $builderObjectz, 'edit' => 1, 'builderObjectmeta' => $builderObjectmeta ,'builderObjectJs'=>$builderObjectJs,'builderObjectCss'=>$builderObjectCss));
     }
@@ -91,16 +94,14 @@ class BuildTempController extends Controller {
 
     public function actionUserInput() {
         $success = "";
-        $error = "";                 
+        $error = "";        
         
-        //if (!isset(Yii::app()->session['templateID'])) {
         if (isset($_POST['template_id'])) {
             Yii::app()->session['templateID'] = $_POST['template_id'];
         } else {
             Yii::app()->session['templateID'] = Yii::app()->session['templateID'];
         }
 
-        print_r($_SESSION);
         $templateObject = new UserHasTemplate;
         $buildTempObject = new BuildTemp;
         if (!empty($_POST)) {
@@ -108,14 +109,21 @@ class BuildTempController extends Controller {
             $tempID = Yii::app()->session['templateID'];
             $userID = Yii::app()->session['userid'];
             $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $tempID));
-//echo "<pre>";
-//            print_r($buildertempObject->body()  ->body_content); die;
+
             $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID']));
-            if ($hasbuilderObject) {  
-                $orderId = Yii::app()->session['orderID'];
-                $hasbuilderObject = UserHasTemplate::model()->addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userID);
-                UserPages::model()->deleteAll(array('condition'=>'user_id = '.$userID .' AND order_id = '.$orderId));
-                UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content);
+            if ($hasbuilderObject) {                 
+                $hasUserTemplatePages = UserHasTemplate::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND  template_id = ' . $tempID )) ;
+               
+                /* Check Conditioin for template is proceed or not */                
+                if(count($hasUserTemplatePages) == 0 ){                   
+                    $orderId = Yii::app()->session['orderID'];
+                    $hasbuilderObject = UserHasTemplate::model()->addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userID);
+
+                    UserPages::model()->deleteAll(array('condition'=>'user_id = '.$userID .' AND order_id = '.$orderId));
+                    UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content);
+                    
+                }  
+                
             } else { 
                 $orderId = Yii::app()->session['orderID'];
                 $templateObject = UserHasTemplate::model()->addAndEdit($templateObject, $buildertempObject,$orderId,$userID);
@@ -156,19 +164,19 @@ class BuildTempController extends Controller {
         $success = "";
         $error = "";
         $userpagesObject = UserPages::model()->findByPK($_REQUEST['id']);
-        $userpagesObjectF = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
-
         if ($_POST) {
             if ($_POST['pages']['page_name'] != '' && $_POST['pages']['page_content'] != '') {
                 $userpagesObject->page_name = $_POST['pages']['page_name'];
                 $userpagesObject->page_content = addslashes($_POST['pages']['page_content']);
                 $userpagesObject->page_form = $_POST['pages']['form_allowed'];
+                $userpagesObject->status = $_POST['pages']['status'];
                 $userpagesObject->update(false);
                 $success .= "Page updated successfully";
             } else {
                 $error .= "Please fill required(*) marked fields.";
             }
         }
+        $userpagesObjectF = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $orderObject = Order::model()->findByAttributes(array('id' => Yii::app()->session['orderID']));
         $this->render('pagedit', array('userpagesObjectF' => $userpagesObjectF, 'success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject, 'orderObject' => $orderObject));
     }
@@ -176,7 +184,7 @@ class BuildTempController extends Controller {
     public function actionFetchMenu() {
         $responce = "";
         $userId = Yii::app()->session['userid'] ;
-        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']));
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']  .' AND status = 1 ' ));
         
         $buildTempHeader = UserHasTemplate::model()->findByAttributes(array('user_id' => $userId, 'order_id'=>Yii::app()->session['orderID']));
 //        echo "<pre>";
@@ -224,6 +232,7 @@ class BuildTempController extends Controller {
             $success = "Header Updated Successfully";
         }
         
+//        $userhasObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID'], 'user_id' => Yii::app()->session['userid']));
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $this->render('header', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
     }
@@ -295,9 +304,8 @@ class BuildTempController extends Controller {
         $userpageObject = UserPages::model()->findBYPK($_REQUEST['page_id']);
         
         if($userpageObject->page_form == 1){            
-            
             $userhasObject = UserHasTemplate::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'] , 'order_id' => Yii::app()->session['orderID']));    
-            $responseForm = stripslashes($userhasObject->contact_form);
+            $responseForm = stripslashes($userhasObject->contact_form);                       
             
         }
         
