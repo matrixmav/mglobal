@@ -359,7 +359,7 @@ class UserController extends Controller {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
+                    'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => 10),
             ));
