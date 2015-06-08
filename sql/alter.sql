@@ -16,7 +16,7 @@ INSERT INTO `domain_temp` (`id`, `name`, `price`, `status`) VALUES
 (4, 'suman', 23, 1),
 (5, 'ankita', 34, 1),
 (6, 'anu', 34, 1),
-(7, 'ankith', 45, 1);
+(7, 'ankith', 45, 1),
 (8, 'ram', 45, 1);
  
 /*----*/
