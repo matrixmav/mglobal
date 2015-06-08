@@ -150,14 +150,20 @@ class ReportController extends Controller
                 $todayDate = $_POST['from'];
                 $fromDate = $_POST['to'];
                 $status = $_POST['res_filter'];
-            }
+            
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ('sponsor_id = "'.$adminSpnId.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),));
             
-            
+            }else{
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id = "'.$adminSpnId.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+                
+            }
             $this->render('adminsponsor',array(
                     'dataProvider'=>$dataProvider,
             ));
