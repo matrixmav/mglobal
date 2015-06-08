@@ -143,10 +143,15 @@ class UserHasTemplate extends CActiveRecord
             $hasbuilderObject->category_id = $buildertempObject->category_id;
             $hasbuilderObject->user_id = $userId;
             $hasbuilderObject->template_id = $buildertempObject->template_id;
+            $hasbuilderObject->custom_css = $buildertempObject->custom_css;
+            $hasbuilderObject->custom_js = $buildertempObject->custom_js;
+            $hasbuilderObject->contact_form = $buildertempObject->contact_form;
+            
             $hasbuilderObject->temp_header = $buildertempObject->header->header_content;
             $hasbuilderObject->user_menu = $buildertempObject->header->menu;
             $hasbuilderObject->temp_body = $buildertempObject->body->body_content;
             $hasbuilderObject->temp_footer = $buildertempObject->footer->footer_content;
+            
             $hasbuilderObject->order_id = $orderId;
             $hasbuilderObject->publish = 0;
             $hasbuilderObject->created_at = date('Y-m-d');
