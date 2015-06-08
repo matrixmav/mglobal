@@ -51,8 +51,9 @@ class MailController extends Controller
 	public function actionIndex()
 	{  
             $pageSize= 10;
+            
             $dataProvider = new CActiveDataProvider('Mail', array(
-                        'criteria'=>array('condition' => 'to_user_id = 1','order'=>'updated_at DESC'),
+                        'criteria'=>array('condition' => 'to_user_id IN (1,21,22,23,24)','order'=>'updated_at DESC'),
                         'pagination' => array('pageSize' => $pageSize)));
             
             $this->render('index',array(
