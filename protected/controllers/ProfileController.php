@@ -131,15 +131,18 @@ class ProfileController extends Controller {
         if (!empty($transactionObject) && $transactionObject->status == '1') {
             $edit = "no";
         }
+        //print_r($_POST['UserProfile']);exit;
         if (isset($_POST['UserProfile'])) {
             if ($_POST['UserProfile'] == '') {
                 $error .= "Please fill required(*) marked fields.";
             } else {
+                
                    if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
+                    $dob = date("Y-m-d",strtotime($_POST['UserProfile']['date_of_birth']));    
                     $userObject->full_name = $_POST['UserProfile']['full_name'];
                     $userObject->email = $_POST['UserProfile']['email'];
                     $userObject->phone = $_POST['UserProfile']['phone'];
-                    $userObject->date_of_birth = $_POST['UserProfile']['date_of_birth'];
+                    $userObject->date_of_birth = $dob;
                     $userObject->skype_id = $_POST['UserProfile']['skype_id'];
                     $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
                     $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
