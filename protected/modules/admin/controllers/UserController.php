@@ -345,7 +345,7 @@ class UserController extends Controller {
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $status = "0";
-        if (!empty($_POST) && $_POST['res_filter'] !='') {
+        if (!empty($_POST) && $_POST['res_filter']!='') {
              
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
