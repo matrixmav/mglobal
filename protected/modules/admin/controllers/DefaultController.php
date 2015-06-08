@@ -60,23 +60,24 @@ class DefaultController extends Controller
         }
         
         public function actionAdminLogin(){ 
-            if($_POST){
+            if($_REQUEST){
                 $model = new User;
 		$error = "";
-		$username = $_POST['LoginForm']['username'];
-		$password =  $_POST['LoginForm']['password'];
+		$username = $_REQUEST['name'];
+		$password =  $_REQUEST['password'];
 
 		if((!empty($username)) && (!empty($password))) {
                     $getUserObject = User::model()->findByAttributes(array('name'=>$username));
                     //$getcustomerid = Customer::model()->findAll('content LIKE :telephone', array(':telephone'=>"%$telephone%"));
                     if(!empty($getUserObject)){
                         if(($getUserObject->password == md5($password))) {
-                            $identity = new UserIdentity($username,$password);
+                            
+                            /*$identity = new UserIdentity($username,$password);
                             if($identity->adminAuthenticate())
                             Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
-                            Yii::app()->session['username'] = "mGlobaly";
-                            echo "1";
+                            Yii::app()->session['username'] = "mGlobally";*/
+                            echo "11";
                         } else {
                             echo "0";
                         }
