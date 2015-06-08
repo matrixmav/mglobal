@@ -412,6 +412,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                   $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
+                                    "profile/changepin" => "Change Master Pin",
                                     "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
@@ -423,6 +424,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
+                                     "profile/changepin" => "Change Master Pin",
                                     "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
