@@ -127,10 +127,7 @@ class TransactionController extends Controller {
      * this will fetch all transactions
      */
     public function testing($data, $row){
-//        echo "<pre>"; print_r($data->transaction_id);
         echo $data->transaction_id;
-//        $transactionObject = Transaction::model()->findByPk($data->transaction_id);
-//        echo $transactionObject->user_rp;
     }
 
     public function actionFund() {
