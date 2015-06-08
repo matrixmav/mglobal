@@ -405,6 +405,7 @@
   var pin = $('#master_pin').val();
         $('#username').val(name);
         $('#password').val(password);
+        
         var dataString = 'login=yes&name='+name+'&password='+password+'&pin='+pin;
          
         $.ajax({
