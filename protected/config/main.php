@@ -109,10 +109,10 @@ return array(
                  //Local
                 */
 		'db'=>array(
-				'connectionString' => 'mysql:host=localhost;dbname=mglobal',
+				'connectionString' => 'mysql:host=localhost;dbname=old',
 				'emulatePrepare' => true,
 				'username' => 'root',
-				'password' => 'root',
+				'password' => '',
 				'charset' => 'utf8',
                                 'tablePrefix' => 'tbl_',
 		),
