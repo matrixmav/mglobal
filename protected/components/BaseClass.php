@@ -69,6 +69,16 @@ class BaseClass extends Controller {
         }	
         return $randomString;
     }
+     public static function getPasswordAdmin(){
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$#@!&*';
+        $randomString = '';
+
+        for ($i = 0; $i < 8; $i++) 
+        {
+            $randomString .= $chars[rand(0, strlen($chars)-1)];
+        }	
+        return $randomString;
+    }
 
     public static function transactionStatus() {
         $userId = Yii::app()->session['userid'];
