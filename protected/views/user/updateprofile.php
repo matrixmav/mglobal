@@ -55,7 +55,7 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
                 <div class="col-lg-8">
-                  <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="yyyy-mm-dd">  
+                  <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="yyyy-mm-dd" value="<?php echo (!empty($userObject))?$userObject->date_of_birth:"";?>">  
                     </div>
             </div>
              <div class="form-group">
