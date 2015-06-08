@@ -64,6 +64,8 @@ class UserController extends Controller {
     }
 
     public function actionGenealogy() {
+        $emailObject = User::model()->findAll(array('condition'=>'sponsor_id = "admin"'));
+        
         if (!empty($_GET)) {
             $currentUserId = $_GET['id'];
             $userObject = User::model()->findByPK($currentUserId);
@@ -72,7 +74,8 @@ class UserController extends Controller {
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
                 'currentUserId' => $currentUserId,
-                'userObject'=>$userObject
+                'userObject'=>$userObject,
+                'emailObject'=>$emailObject
             ));
         } else {
             $currentUserId = 1;
@@ -81,7 +84,8 @@ class UserController extends Controller {
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
                 'currentUserId' => $currentUserId,
-                'userObject'=>$userObject
+                'userObject'=>$userObject,
+                'emailObject'=>$emailObject
             ));
         }
     }
