@@ -66,6 +66,7 @@ class UserController extends Controller {
     public function actionGenealogy() {
         if (!empty($_GET)) {
             $currentUserId = $_GET['id'];
+            $userObject = User::model()->findByAttributes(array('id' => $currentUserId));
             $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
@@ -76,7 +77,8 @@ class UserController extends Controller {
             $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
-                'currentUserId' => $currentUserId
+                'currentUserId' => $currentUserId,
+                'userObject'=>$userObject
             ));
         }
     }
