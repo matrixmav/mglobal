@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-   'Transaction',
+   'Order Transaction',
 );
 ?>
 

@@ -21,7 +21,7 @@ $this->breadcrumbs = array(
         <div class="expiration margin-topDefault confirmMenu">
                     
     <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report/contact">
-    <div class="input-group input-large date-picker input-daterange">
+        <div class="input-group input-large date-picker input-daterange">
         <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
         <span class="input-group-addon">
         to </span>
@@ -35,7 +35,7 @@ $this->breadcrumbs = array(
     
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
                 <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Active</option>
-                <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >In Active</option>
+                <option value="0" <?php if($statusId == 0){ echo "selected"; } ?> >In Active</option>
             </select>
     </div>
     <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
