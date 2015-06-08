@@ -3,9 +3,10 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Users' => array('/admin/user')
+   'Transaction',
 );
 ?>
+
 <style>
     .confirmBtn{left: 333px;
     position: absolute;
@@ -20,9 +21,9 @@ $this->breadcrumbs = array(
     
         <div class="expiration margin-topDefault confirmMenu">
                     
-    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report">
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/transaction/list">
     <div class="input-group input-large date-picker input-daterange">
-        <input type="text" name="from" data-provide="datepicker"  placeholder="To Date" class="datepicker form-control">
+        <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
         <span class="input-group-addon">
         to </span>
         <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
@@ -68,37 +69,55 @@ $this->breadcrumbs = array(
                     'value'=>'$row+1',
                 ),
                 array(
-                    'name' => 'full_name',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->full_name',
+                    'name' => 'id',
+                    'header' => '<span style="white-space: nowrap;">Transaction Id &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->transaction_id)?$data->transaction_id:""',
+                ),
+                 array(
+                    'name' => 'created_at',
+                    'header' => '<span style="white-space: nowrap;">Date &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->created_at',
+                ),
+//                 array(
+//                    'name' => 'id',
+//                    'header' => '<span style="white-space: nowrap;">To User &nbsp; &nbsp; &nbsp;</span>',
+//                    'value' => 'isset($data->touser->name)?$data->touser->name:""',
+//                ),
+//                 array(
+//                    'name' => 'id',
+//                    'header' => '<span style="white-space: nowrap;">From User &nbsp; &nbsp; &nbsp;</span>',
+//                    'value' => 'isset($data->fromuser->name)?$data->fromuser->name:""',
+//                ),
+                array(
+                    'name' => 'id',
+                    'header' => '<span style="white-space: nowrap;">Actual Amt &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->actual_amount)?$data->actual_amount:""',
                 ),
                 array(
-                    'name' => 'phone',
-                    'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->phone',
+                    'name' => 'id',
+                    'header' => '<span style="white-space: nowrap;">Trans Amt &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->paid_amount)?$data->paid_amount:""',
                 ),
                 array(
-                    'name' => 'email',
-                    'header' => '<span style="white-space: nowrap;">Email &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->email',
+                    'name' => 'id',
+                    'header' => '<span style="white-space: nowrap;">Used RP &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => array($this,'testing'),
                 ),
-                array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->sponsor_id',
-                ),
-                array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:"N/A"',
+                 array(
+                    'name' => 'id',
+                    'header' => '<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->transaction->coupon_discount)?$data->transaction->coupon_discount:""',
                 ),
                 
-                array(
-                    'name' => 'status',
-                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
-                ),
             ),
         ));
         ?>
     </div>
 </div>
+<script>
+    $(function () {
+                $('.datepicker').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
+            });
+    </script>

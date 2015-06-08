@@ -45,7 +45,9 @@ class BaseClass extends Controller {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if (!$adminObject) {
-            $this->redirect('/user/login');
+            //$this->redirect('/user/login');
+            header('Location:/user/login');
+            
         }
     }
     
@@ -103,13 +105,12 @@ class BaseClass extends Controller {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '2'));
         if (!$adminObject) {
-            $this->redirect('/admin');
+            header('Location:/admin');
         }
     }
     
     public static function getWalletList(){
         return array(
-            '0'=>'Select',
             '1'=>'Cash',
             '2'=> 'RP Wallet',
             '3'=>'Commission'

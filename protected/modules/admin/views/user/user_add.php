@@ -24,9 +24,9 @@ $this->breadcrumbs = array(
                                     <div class="form-group">
                                         <label for="position" class="col-lg-4 control-label">Position <span class="require">*</span></label>
                                         <div class="col-lg-8">        
-                                            <input type="radio" name="position" id="position" value="right" checked/>
+                                            <input type="radio" name="position" id="position" value="right" checked style="margin-left:0px;"/>
                                             <label class="gender">Right</label>
-                                            <input type="radio" name="position" id="position" value="left"/>
+                                            <input type="radio" name="position" id="position" value="left" style="margin-left: 0px;"/>
                                             <label class="gender">Left</label>
                                         
                                         <span id="position_error" class="clrred"></span></div>

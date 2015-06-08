@@ -126,7 +126,7 @@ class ProfileController extends Controller {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
-        $transactionObject = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
+         $transactionObject = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
         $edit = "yes";
         if (!empty($transactionObject) && $transactionObject->status == '1') {
             $edit = "no";
@@ -135,9 +135,7 @@ class ProfileController extends Controller {
             if ($_POST['UserProfile'] == '') {
                 $error .= "Please fill required(*) marked fields.";
             } else {
-
-
-                if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
+                   if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
                     $userObject->full_name = $_POST['UserProfile']['full_name'];
                     $userObject->email = $_POST['UserProfile']['email'];
                     $userObject->phone = $_POST['UserProfile']['phone'];
@@ -253,7 +251,11 @@ class ProfileController extends Controller {
             }else{
              $userObject->password = md5($_POST['UserProfile']['new_password']);   
              if ($userObject->update()) {
-               $success .= "Your password changed successfully";  
+                $success .= "Your password changed successfully"; 
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'mGlobally Password Changed' ;
+                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.'.
+                CommonHelper::sendMail($config);
              }  
             }
             } else {
