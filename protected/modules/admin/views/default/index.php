@@ -390,4 +390,29 @@
 	App.init();
 	Login.init();	
   }
+  function login()
+  {
+  var name = $('#name').val();
+  var password = $('#password').val();
+        
+        var dataString = 'login=yes&name=' + name + '&password=' + password;
+        $.ajax({
+            type: "GET",
+            url: "/adminlogin",
+            data: dataString,
+            cache: false,
+            success: function (html) {alert(html);return false;
+               if (htmlArr[0] == 1)
+                {
+                    $('#return').val('http://staging.mglobally.com/package/thankyou?transaction_id='+htmlArr[1]);
+                    $('#cartDiv').fadeOut();
+                    $('#editIcon').fadeIn();
+
+                    document.getElementById('paymentOption').style.display = "block";
+
+
+                }
+            }
+        });
+    }
   </script>
