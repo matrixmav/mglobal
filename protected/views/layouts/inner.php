@@ -153,7 +153,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             });
 
-            
+            $(function () {
+                $('.datepicker').datepicker({
+                    format: 'yyyy-mm-dd'
+                });
+            });
              
            function openChat()
            {
