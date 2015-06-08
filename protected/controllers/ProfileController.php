@@ -274,8 +274,8 @@ class ProfileController extends Controller {
     /*
      * Function to change master pin
      */
-    public function ChangePin()
-    {
+    public function actionChangePin()
+    { 
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
