@@ -55,8 +55,8 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="date_of_birth" class="form-control" name="UserProfile[date_of_birth]" value="<?php echo (!empty($userObject))?$userObject->date_of_birth:"";?>">
-                </div>
+                  <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="yyyy-mm-dd">  
+                    </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Skype ID</label>
