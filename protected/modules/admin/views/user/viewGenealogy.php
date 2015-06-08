@@ -128,6 +128,8 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
 
                                     }                    
                                  }                
+                             }else{
+                            echo 'No Records Found';     
                              }
                         echo '</ul>
                     </div>
