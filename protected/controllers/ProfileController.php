@@ -283,16 +283,16 @@ class ProfileController extends Controller {
           if($_POST['UserProfile']['old_master_pin']!='' && $_POST['UserProfile']['new_master_pin']!='' && $_POST['UserProfile']['confirm_master_pin']!='' )  
           {
              
-             if($userObject->master_pin != md5($_POST['UserProfile']['old_password']))
+             if($userObject->master_pin != md5($_POST['UserProfile']['old_master_pin']))
              {
                $error .= "Incorrect old master pin"; 
              }else{
-             $userObject->password = md5($_POST['UserProfile']['new_password']);   
+             $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);   
              if ($userObject->update()) {
-                $success .= "Your password changed successfully"; 
+                $success .= "Your pin changed successfully"; 
                 $config['to'] = $userObject->email;
-                $config['subject'] = 'mGlobally Password Changed' ;
-                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.'.
+                $config['subject'] = 'mGlobally Master Pin Changed' ;
+                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.'.
                 CommonHelper::sendMail($config);
              }  
             }
