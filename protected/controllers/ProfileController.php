@@ -282,6 +282,7 @@ class ProfileController extends Controller {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+         
         if (!empty($_POST)) {
           if($_POST['UserProfile']['old_master_pin']!='' && $_POST['UserProfile']['new_master_pin']!='' && $_POST['UserProfile']['confirm_master_pin']!='' )  
           {
@@ -290,8 +291,10 @@ class ProfileController extends Controller {
              {
                $error .= "Incorrect old master pin"; 
              }else{
-             $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);   
+             $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);
+             
              if ($userObject->update()) {
+                 
                 $success .= "Your pin changed successfully"; 
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'mGlobally Master Pin Changed' ;
