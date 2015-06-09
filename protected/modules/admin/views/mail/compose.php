@@ -49,7 +49,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Attachement </label>
     <div class="col-md-6">
-        <input type="file" name="attachement" id="attachement"/>
+        <input type="file" name="attachment" id="attachement"/>
         <span class="clrred" style="color:red"  id="email_address_error"></span>
     </div>
 </div>
