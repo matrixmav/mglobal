@@ -91,9 +91,9 @@ class MailController extends Controller
                         //$this->render('compose',array('error'=>'User Does Not Exist'));
                         $this->render('compose',array('error'=>'User Does Not Exist','emailObject'=>$emailObject));
                     }else{
-                        $fname = time().$_FILES['attachment'];
-                       $path = Yii::getPathOfAlias('webroot') . "/upload/attachment/";
-                       BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
+                        $fname = time().$_FILES['attachment']['name'];
+                       $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
+                        BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                         $mailObject = new Mail();
                         $mailObject->to_user_id = $_POST['to_email'];
                         $mailObject->from_user_id = $loggedInUserId;//Yii::app()->params['adminId'];
