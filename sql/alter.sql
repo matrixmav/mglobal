@@ -54,6 +54,9 @@ ALTER TABLE `money_transfer` ADD `fund` FLOAT NULL AFTER `fund_type` ;
 
 ALTER TABLE `transaction` CHANGE `transaction_id` `transaction_id` VARCHAR( 50 ) NOT NULL ;
 
+/*---*/
+
+ALTER TABLE `user` CHANGE `date_of_birth` `date_of_birth` VARCHAR(100) NOT NULL;
 
 ALTER TABLE `order` CHANGE `created_at` `created_at` DATETIME NOT NULL;
 
