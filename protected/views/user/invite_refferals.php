@@ -2,14 +2,18 @@
 $this->breadcrumbs = array(
     'Invite Refferals'
 );
+ 
+$link = '"' . Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'&social=fb"';
+$name = '"' . $data->name . '"';
+$desc = '"' . $data->description . '"';
+$caption = '""';
 ?>
+ 
 
 <div class="row">
     <div class="col-md-12">
-            <?php echo CHtml::link(Yii::t('translation', 'SMS'), '/mail', array("class" => "btn  green margin-right-20  red")); ?>
-            <?php echo CHtml::link(Yii::t('translation', 'Email') . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20")); ?>
-            <?php echo CHtml::link(Yii::t('translation', 'Facebook'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
-            <?php echo CHtml::link(Yii::t('translation', 'Google+'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
+        <a onclick = "postToFeedInvite(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>">Facebook</a>
+        <a href = "https://plus.google.com/share?url=<?php echo $link;?>">Google+</a>
     </div>
 </div><br/> 
 <div class="col-md-7 col-sm-7">
