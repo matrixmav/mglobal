@@ -143,18 +143,27 @@ class ReportController extends Controller
             $model = new User();
             $pageSize = Yii::app()->params['defaultPageSize'];
             $todayDate = Yii::app()->params['startDate'];
+            $adminSpnId  = Yii::app()->params['adminSpnId'];
             $fromDate = date('Y-m-d');
             $status = 1;
             if (!empty($_POST)) {
                 $todayDate = $_POST['from'];
                 $fromDate = $_POST['to'];
                 $status = $_POST['res_filter'];
-            }
+            
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('sponsor_id = 12345 AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                    'condition' => ('sponsor_id = "'.$adminSpnId.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),));
+            
+            }else{
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id = "'.$adminSpnId.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+                
+            }
             $this->render('adminsponsor',array(
                     'dataProvider'=>$dataProvider,
             ));

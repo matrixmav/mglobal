@@ -14,12 +14,19 @@ $this->breadcrumbs = array(
                 <?php
                 if($transactionObject->status == 1){ ?>
                 <div class="success"><?php echo "Your Transaction is Success";?></div>
-                <h4>Transaction Id :<?php echo $transactionObject->transaction_id; ?><br />
-                Transferred Amount :$<?php echo $transactionObject->paid_amount; ?></h4><br />
+                <h1><b>Thank you.</b></h1>
+
+                <h3>Your Transaction is successful</h3>
+                <h4>
+                Transfer To: <b><?php echo $transactionObject->user()->full_name; ?></b><br />
+                Transaction Id :<b><?php echo $transactionObject->transaction_id; ?></b><br />
+                Transferred Amount :$<b><?php echo $transactionObject->paid_amount; ?></b></h4><br />
                <?php } else { ?>
                 <div class="error">Your Transaction is Failed. Try Again... </div>
-                <h4>Transaction Id :<?php echo $transactionObject->transaction_id; ?><br />
-                Transferred Amount :$<?php echo $transactionObject->paid_amount; ?></h4><br />
+                <h4>
+                Transfer To: <b><?php echo $transactionObject->transaction_id; ?></b><br />
+                Transaction Id :<b><?php echo $transactionObject->transaction_id; ?></b><br />
+                Transferred Amount :$<b><?php echo $transactionObject->paid_amount; ?></b></h4><br />
                <?php } ?>
             </div>
 

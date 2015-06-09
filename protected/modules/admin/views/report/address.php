@@ -36,7 +36,7 @@ $this->breadcrumbs = array(
     
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
                 <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Active</option>
-                <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >In Active</option>
+                <option value="0" <?php if($statusId == 0){ echo "selected"; } ?> >In Active</option>
             </select>
     </div>
     <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>

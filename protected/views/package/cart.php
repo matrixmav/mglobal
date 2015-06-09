@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="/css/themes/font-awesome.min.css">
 <div class="container">
     <div class="row">
@@ -125,15 +126,15 @@
                                     </tbody></table>
                             </div>
                         </div>
-                        <div class="btnWrp">
+                        <div class="btnWrp col-sm-11">
                             <a id="summary-btn" class="btn btn-success btn-lg" onclick="proceedPayment();">Proceed to Payment</a>
                         </div>
                     </div>
-                    <div class="sectionWrp paymentOptions">
+                    <div class="sectionWrp paymentOptions clearfix">
                         <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
                         <div id="paymentOption" style="display:none;">
                             <?php if ($walletObject) { ?>
-                                <div id="walletOption">
+                            <div id="walletOption" class="col-sm-4">
                                     <form id="walletform" name="walletform">
                                         <?php
                                         $i = 1;
@@ -151,7 +152,7 @@
                                                 $fund = $wallet->fund;
                                             }
                                             ?>
-                                            <div class="col-sm-4 col-xs-12 tleft">
+                                            <div class="col-sm-12 col-xs-12 tleft">
                                                 <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
                                                 <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                             </div>
@@ -162,8 +163,21 @@
                                 </div>
 
 <?php } ?>
-                            <input type="radio" value="paypal" name="payment_mode">Paypal 
+                            <div class="payChoose col-sm-4">
+                                <div class="payOption clearfix" id="paymentOption">
+                                    <div class="col-sm-12 col-xs-12 tleft">
+                                                 <input type="radio" id="myRadio" name="myRadio" value="myRadioOption">
+                                                <label for="myRadio">paypal</label>
 
+                                            </div>
+                                    <div class="col-sm-12 col-xs-12 tleft">
+                                                 <input type="radio" id="myRadio2" name="myRadio" value="myRadioOption">
+                                                <label for="myRadio2">Label</label>
+
+                                            </div>
+                                    
+                           
+                                </div>
                             <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
                                 <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                                 <input type="hidden" name="cmd" value="_xclick">
@@ -176,16 +190,33 @@
                                 <input type="hidden" name="currency_code" value="USD">
                                 <input type="hidden" name="handling" value="0">
                                 <input type="hidden" name="cancel_return" value="">
-                                <input type="hidden" id ="return" name="return" value="http://staging.mglobally.com/package/thankylou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+                                <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
 
 
 
                             </form>
-                            <div id="actualamountDiv" style="display:none;">Total Amount-  <span id="actualamount" style="display:none;"></span></div>
-                            <div id="walletamountDiv" style="display:none;">Wallet Amount- <span id="walletamount" style="display:none;"></span></div>
-                            <div id="payamountDiv" style="display:none;">Payable Amount- <span id="payamount" style="display:none;"></span></div>
-                            <input type="button" value="Make Payment" onclick="makepayment();" class="btn-flat-green ui-btn-grey">   
+                           
                         </div>
+                             <div class="col-sm-4  col-xs-12 amountTab" display="table">
+                                <table width="100%">
+                                    <tr>
+                                        <td> <div id="actualamountDiv" >  Total Amount</div> </td>
+                                        <td><span id="actualamount" style="display:inline-block;">11</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div id="walletamountDiv">  Wallet Amount<div> </td>
+                                        <td><span id="walletamount" style="display:inline-block ;">111</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div id="walletamountDiv"> Payable Amount </div></td>
+                                        <td> <span id="payamount" style="display:inline-block;">111</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">
+                                            </div>
+                           
+                            </div>
                     </div>
                    
                 </div>
@@ -194,11 +225,6 @@
     </div>
 </div>
   
-<input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
-<input type="hidden" id="coupon_discount_price" value=""> 
-
-
-
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="payAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
@@ -259,11 +285,8 @@
             data: dataString,
             cache: false,
             success: function (html) {
-             var htmlArr = html.split('-');
-            
-                if (htmlArr[0] == 1)
+                if (html == 1)
                 {
-                    $('#return').val('http://staging.mglobally.com/package/thankyou?transaction_id='+htmlArr[1]);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
 
@@ -363,4 +386,3 @@
     }
 
 </script>    
- 

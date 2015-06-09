@@ -7,11 +7,27 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
+     <div class="col-md-3">   
             <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/admin/mail', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/admin/mail/compose', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/admin/mail/sent', array("class" => "btn  green margin-right-20")); ?>
-    </div>
-</div><br/>
+     </div>
+         <div class="col-md-6">   
+    <div class="expiration margin-topDefault confirmMenu">
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/mail" class="form-inline">
+    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="admin_email">
+            <option value="">Select Mail By User</option>
+            <?php foreach($emailObject as $email){?>
+            <option value="<?php echo $email->id;?>" <?php if(!empty($_POST) && $_POST['admin_email']== $email->id) { ?> selected="selected"<?php }?>><?php echo $email->full_name;?></option>
+            <?php }?>
+        </select>
+        <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+    </form>
+</div>
+</div>
+</div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
 <?php
@@ -41,12 +57,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'from_user_id',
             'header' => '<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
-            'value' => '$data->touser->full_name',
+            'value' => '$data->fromuser->full_name',
         ),
         array(
             'name' => 'from_user_id',
             'header' => '<span style="white-space: nowrap;">Receiver &nbsp; &nbsp; &nbsp;</span>',
-            'value' => '$data->fromuser->full_name',
+            'value' => '$data->touser->full_name',
         ),
         array(
             'name' => 'subject',

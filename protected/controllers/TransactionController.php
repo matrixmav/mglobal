@@ -127,61 +127,49 @@ class TransactionController extends Controller {
      * this will fetch all transactions
      */
     public function testing($data, $row){
-//        echo "<pre>"; print_r($data->transaction_id);
         echo $data->transaction_id;
-//        $transactionObject = Transaction::model()->findByPk($data->transaction_id);
-//        echo $transactionObject->user_rp;
     }
 
     public function actionFund() {
-//        $model = new MoneyTransfer();
-//        $pageSize = Yii::app()->params['defaultPageSize'];
-//        $todayDate = Yii::app()->params['startDate'];
-//        $fromDate = date('Y-m-d');
-//        $status = 1;
-//        if (!empty($_POST)) {
-//            $todayDate = $_POST['from'];
-//            $fromDate = $_POST['to'];
-//            $status = $_POST['res_filter'];
-//        }
-//        $mode  = "transfer";
-//        
-//        $criteria = new CDbCriteria;
-//            $criteria->select = 't.*, tu.* ';
-//            $criteria->join = ' INNER JOIN `transaction` AS `tu` ON t.transaction_id = tu.id';
-//            $criteria->addCondition("tu.mode = 'transfer'");
-////            $criteria->addCondition('t.created_at >= "' . $todayDate . '"');
-////            $criteria->addCondition('t.created_at <= "' . $fromDate . '"');
-////            $criteria->addCondition('t.status = "' . $status . '"');
-//        
-//        
-//        $dataProvider = new CActiveDataProvider($model, array(
-//            'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
-//
-//        $this->render('fund_list', array(
-//            'dataProvider' => $dataProvider,
-//        ));
+        $loggedInUserId = Yii::app()->session['userid'];
         $model = new MoneyTransfer();
         $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = Yii::app()->params['startDate'];
         $fromDate = date('Y-m-d');
         $status = 1;
         if (!empty($_POST)) {
-            $todayDate = $_POST['from'];
-            $fromDate = $_POST['to'];
+//            $todayDate = ($_POST['from'])?$_POST['from']:$todayDate;
+//            $fromDate = ($_POST['to'])?$_POST['to']:$fromDate;
             $status = $_POST['res_filter'];
         }
 
+        $walletType = "";
+        if(!empty($_POST['res_filter'])){
+            $walletType = ' AND wallet.type = '.$_POST['res_filter'];
+        }
+        $criteria=new CDbCriteria;
+        $mode = "transfer";
+        $criteria->with=array('transaction','wallet');
+        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode = "'.$mode.'" AND t.from_user_id = ' . $loggedInUserId . $walletType;
+        $criteria->order = 't.id DESC';
+        // . 'AND t.created_at >= ' . $todayDate . ' AND t.created_at <= ' . $fromDate ;
         $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
-            ), 'pagination' => array('pageSize' => $pageSize),));
+            'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
 
-        $this->render('list', array(
+        $this->render('fund_list', array(
             'dataProvider' => $dataProvider,
         ));
     }
     
+    public function getWalletName($data,$row){
+        if($data->wallet()->type == 1){
+            echo 'Cash';
+        } elseif($data->wallet()->type == 2){
+            echo 'RP Wallet';
+        } else {
+            echo 'Commission';
+        }
+    }
     /*
      * this will fetch all transactions
      */
@@ -201,7 +189,7 @@ class TransactionController extends Controller {
 
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '" AND t.from_user_id = ' . $loggedInUserId  ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
 
         $this->render('list', array(

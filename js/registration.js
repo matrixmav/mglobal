@@ -30,14 +30,14 @@
             $("#sponsor_id").focus();            
             return false;
         }
-         
+        
         $("#name_error").html("");
         if ($("#name").val() == "") {
             $("#name_error").html("Enter User Name");
             $("#name").focus();            
             return false;
         }
-        
+       
         if ($("#name").val().length < 5) {
             $("#name_error").html("Enter atleast 5 chars in the input box");
             $("#name").focus();            
@@ -115,21 +115,24 @@
             return false;
         }
         
-         if ($("#password").val().length < 5) {
-            $("#password_error").html("Enter atleast 5 chars in the input box");
+
+    var regExp = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    var pwd = $("#password").val();
+    if (!regExp.test(pwd)) {
+        $("#password_error").html("Enter atleast 6 characters with one numeric digit, one lowecase letter and one uppercase letter.");
             $("#password_name").focus();   
             return false;
         }
         
-
         if ($("#confirm_password").val() == "") {
             $("#confirm_password_error").html("Enter Confirm Password");
             $("#confirm_password").focus();
             return false;
         }
         
-        if ($("#confirm_password").val().length < 5) {
-            $("#confirm_password_error").html("Enter atleast 5 chars in the input box");
+    var pwd = $("#confirm_password").val();
+    if (!regExp.test(pwd)) {
+        $("#confirm_password_error").html("Enter atleast 6 characters with one numeric digit, one lowecase letter and one uppercase letter.");
             $("#confirm_password").focus();
             return false;
         }
@@ -149,30 +152,19 @@
         
     }
     function isUserExisted() {
-        $("#name_error").html("");
-        if ($("#name").val().match(/\s/g)) {
-            $("#name_error").html("Username should not contain blank spaces.");
-            $("#name").focus();            
-            return false;
-        }
-       else{
         $.ajax({
             type: "post",
             url: "/user/isuserexisted",
             data: "username=" + $("#name").val(),
             success: function (msg) {
                 $("#name_error").html("");
-               $("#name_available").html("");
                 $("#nameExistedErrorFlag").val("0");
                 if(msg == 1){
                     $("#name_error").html("Existed!!!");
                     $("#nameExistedErrorFlag").val(1);
-                } else {
-                    $("#name_available").html("Available!!!");
                 }
             }
         });
-    }
     }
     function getCountryCode(id){ 
          $.ajax({

@@ -24,20 +24,20 @@
     <div class="container">
         <!-----sub-header------>
         
-        <div class="pre-header">
+        <div class="row pre-header ">
         <div class="container">
           <div class="row">
                 <!-- BEGIN TOP BAR LEFT PART -->
-            <div class="col-md-6 col-sm-6 additional-shop-info">
+            <div class="col-md-6 col-sm-6 additional-shop-info col-xs-12">
                     <ul class="list-unstyled list-inline">
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
 
-                        <li><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
-                        <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Call Us</button><a/></li>
+                        <li style="border: none;"><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
+                        <li style="border: none;"><a href="callto://ramhemareddy"><button id="checkout" class="btn btn-primary">Call Us</button><a/></li>
 
                     </ul>
               </div>
-            <div class="col-md-6 col-sm-6 additional-nav">
+            <div class="col-md-6 col-sm-6 additional-nav col-xs-12">
                     <ul class="list-unstyled list-inline pull-right">
                        <?php if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/profile/dashboard">My Account</a></li>

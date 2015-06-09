@@ -64,19 +64,28 @@ class UserController extends Controller {
     }
 
     public function actionGenealogy() {
+        $emailObject = User::model()->findAll(array('condition'=>'sponsor_id = "admin"'));
+        
         if (!empty($_GET)) {
             $currentUserId = $_GET['id'];
+            $userObject = User::model()->findByPK($currentUserId);
+            
             $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
-                'currentUserId' => $currentUserId
+                'currentUserId' => $currentUserId,
+                'userObject'=>$userObject,
+                'emailObject'=>$emailObject
             ));
         } else {
             $currentUserId = 1;
+             $userObject = User::model()->findByPK($currentUserId);
             $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
-                'currentUserId' => $currentUserId
+                'currentUserId' => $currentUserId,
+                'userObject'=>$userObject,
+                'emailObject'=>$emailObject
             ));
         }
     }
@@ -345,7 +354,7 @@ class UserController extends Controller {
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $status = "0";
-        if (!empty($_POST)) {
+        if (!empty($_POST) && $_POST['res_filter']!='') {
              
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
@@ -359,7 +368,7 @@ class UserController extends Controller {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
+                    'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => 10),
             ));

@@ -272,7 +272,7 @@ class PackageController extends Controller {
             } else {
 
 
-                $SuggestedDomain .= '<button class="add-to-cart select-domain btn-flat-green" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>';
+                $SuggestedDomain .= '<button class="add-to-cart select-domain btn-flat-green " id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>';
             }
             $SuggestedDomain .= '</div></div>';
 
@@ -284,7 +284,7 @@ class PackageController extends Controller {
 
 
 
-        $this->render('domainsearch', array(
+        $this->render('cart_search', array(
             'rightbar' => $rightbar,
             'suggestedDomain' => $SuggestedDomain,
         ));
@@ -333,7 +333,7 @@ class PackageController extends Controller {
                                    </span>
                                    <input type="hidden" name="domain" id="domain" value="' . $alldomain->name . "." . $allext  . '">
                                    <input type="hidden" name="amount" id="amount" value="">
-                                    <button class="add-to-cart select-domain btn-flat-green" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>
+                                    <button class="add-to-cart select-domain btn-flat-green btn btn-success" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>
                               </div>
                         </div>';
                         }}

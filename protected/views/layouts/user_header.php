@@ -11,16 +11,16 @@
 
  
             <!-- BEGIN TOP BAR LEFT PART -->
-            <div class="col-md-6 col-sm-6 additional-shop-info">
+            <div class="col-md-6 col-sm-6 additional-shop-info col-xs-12">
                 <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+91 1234567890</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>maverickinfosoft@gmail.com</span></li>
-                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Click Here</button></a></li>
+                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn btn-primary">Click Here</button></a></li>
                 </ul>
             </div>
             <!-- END TOP BAR LEFT PART -->
             <!-- BEGIN TOP BAR MENU -->
-            <div class="col-md-6 col-sm-6 additional-nav">
+            <div class="col-md-6 col-sm-6 additional-nav col-xs-12">
                 <ul class="list-unstyled list-inline pull-right">
                     <?php if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/profile/dashboard">My Account</a></li>
@@ -50,7 +50,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="/#about"><img class="img-responsive "src="../../../images/logo/logo.png" width="170px" ></a>
+        <a class="site-logo" href="/"><img class="img-responsive "src="../../../images/logo/logo.png" width="170px" ></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 

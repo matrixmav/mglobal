@@ -130,7 +130,7 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
 
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-        <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+         <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="<?php echo Yii::app()->baseUrl . '/ckeditor/ckeditor.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->baseUrl . '/ckfinder/ckfinder.js'; ?>"></script>
@@ -153,7 +153,11 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             });
 
-            
+            $(function () {
+                $('.datepicker1').datepicker({
+                    format: 'Y-m-d'
+                });
+            });
              
            function openChat()
            {
@@ -412,6 +416,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                   $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
+                                    "profile/changepin" => "Change Master Pin",
                                     "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
@@ -423,6 +428,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
+                                     "profile/changepin" => "Change Master Pin",
                                     "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",

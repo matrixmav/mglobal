@@ -24,7 +24,7 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword'),
+                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -131,15 +131,18 @@ class ProfileController extends Controller {
         if (!empty($transactionObject) && $transactionObject->status == '1') {
             $edit = "no";
         }
+        //print_r($_POST['UserProfile']);exit;
         if (isset($_POST['UserProfile'])) {
             if ($_POST['UserProfile'] == '') {
                 $error .= "Please fill required(*) marked fields.";
             } else {
+                
                    if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
+                    $dob = date("Y-m-d",strtotime($_POST['UserProfile']['date_of_birth']));    
                     $userObject->full_name = $_POST['UserProfile']['full_name'];
                     $userObject->email = $_POST['UserProfile']['email'];
                     $userObject->phone = $_POST['UserProfile']['phone'];
-                    $userObject->date_of_birth = $_POST['UserProfile']['date_of_birth'];
+                    $userObject->date_of_birth = $dob;
                     $userObject->skype_id = $_POST['UserProfile']['skype_id'];
                     $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
                     $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
@@ -269,6 +272,43 @@ class ProfileController extends Controller {
         $this->render('/user/change_password', array(
             'error' => $error,'success' => $success,
         ));
+    }
+    
+    /*
+     * Function to change master pin
+     */
+    public function actionChangePin()
+    { 
+        $error = "";
+        $success = "";
+        $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+        if (!empty($_POST)) {
+          if($_POST['UserProfile']['old_master_pin']!='' && $_POST['UserProfile']['new_master_pin']!='' && $_POST['UserProfile']['confirm_master_pin']!='' )  
+          {
+             
+             if($userObject->master_pin != md5($_POST['UserProfile']['old_master_pin']))
+             {
+               $error .= "Incorrect old master pin"; 
+             }else{
+             $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);   
+             if ($userObject->update()) {
+                $success .= "Your pin changed successfully"; 
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'mGlobally Master Pin Changed' ;
+                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.'.
+                CommonHelper::sendMail($config);
+             }  
+            }
+             
+        } else {
+            $error .="Please fill all required(*) marked fields.";
+        }
+        }
+        
+        $this->render('/user/change_master_pin', array(
+            'error' => $error,'success' => $success,
+        ));   
+        
     }
 
     // Uncomment the following methods and override them if needed
