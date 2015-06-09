@@ -30,7 +30,7 @@
       };
       
         function callback(response) {
-          document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+          //document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
         }
  
         FB.ui(obj, callback);
