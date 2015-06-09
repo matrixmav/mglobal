@@ -29,12 +29,12 @@ class UserPages extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, order_id, page_name, page_content, created_at', 'required'),
+			array('user_id, order_id, page_name, page_content, created_at , page_form , status', 'required'),
 			array('user_id, order_id', 'numerical', 'integerOnly'=>true),
 			array('page_name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, order_id, page_name, page_content, created_at', 'safe', 'on'=>'search'),
+			array('id, user_id, order_id, page_name, page_content, created_at , page_form , status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,6 +61,8 @@ class UserPages extends CActiveRecord
 			'page_name' => 'Page Name',
 			'page_content' => 'Page Content',
 			'created_at' => 'Created At',
+			'page_form' => 'Page Form',
+			'status' => 'Status',
 		);
 	}
 
@@ -88,6 +90,8 @@ class UserPages extends CActiveRecord
 		$criteria->compare('page_name',$this->page_name,true);
 		$criteria->compare('page_content',$this->page_content,true);
 		$criteria->compare('created_at',$this->created_at,true);
+		$criteria->compare('page_form',$this->page_form,true);
+		$criteria->compare('status',$this->status,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -104,18 +108,25 @@ class UserPages extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        public function createNewPages($userId, $orderId, $nbPage,$pageContent){
+        public function createNewPages($userId, $orderId, $nbPage,$pageContent,$buildertempObject){
             for($i=1; $i<$nbPage; $i++){
-                    $userpagesObject1 = new UserPages;
-                    $userpagesObject1->order_id = $orderId;
-                    $userpagesObject1->user_id = $userId;
-                    $userpagesObject1->page_name = 'Page'.$i;
-                    if($i == 1){
-                        $userpagesObject1->page_name = 'Home';
-                    }
-                    $userpagesObject1->page_content = $pageContent;
-                    $userpagesObject1->created_at = date("Y-m-d");
-                    $userpagesObject1->save(false);   
+                $userpagesObject1 = new UserPages;
+                $userpagesObject1->order_id = $orderId;
+                $userpagesObject1->user_id = $userId;
+                $userpagesObject1->page_name = 'Page'.$i;
+                if($i == 1){
+                    $userpagesObject1->page_name = 'Home';
                 }
+                
+                $baseURL = Yii::app()->getBaseUrl(true)."/";
+                $pageContent = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject.'/' , stripcslashes($pageContent));  
+                
+                $userpagesObject1->page_content = addslashes($pageContent);
+                $userpagesObject1->created_at = date("Y-m-d");
+                $userpagesObject1->page_form = 0;
+                $userpagesObject1->status = 1;
+                $userpagesObject1->save(false);
+                
+            }
         }
 }

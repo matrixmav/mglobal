@@ -10,7 +10,7 @@
 <input placeholder="Enter Your Domain Name" type="text" name="domain" class="domains-input" data-id="field_domains-input" id="domain" maxlength="65" onkeyup="autocomplet();" onkeydown="if (event.keyCode == 13)
 {document.getElementById('search').click(); return false;}">
 </div>
-    <input type="button" class="btn-flat-green" id="search" value="Search Here" onclick=""> 
+    <input type="button" class="btn-flat-green btn btn-success" id="search" value="Search Here" onclick="" style="padding:10px;"> 
 <div class="clear"></div>
 </form>
 </div>

@@ -60,8 +60,12 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-$baseUrl = '/ckfinder/userfiles/';
+session_start();
+//echo "<pre>";
+////echo 
+//print_r($_SESSION);  die;
 
+$baseUrl = '/builder_images/'.$_SESSION['userid'].'/'.$_SESSION['templateID'];  
 /*
 $baseDir : the path to the local directory (in the server) which points to the
 above $baseUrl URL. This is the path used by CKFinder to handle the files in
@@ -202,8 +206,8 @@ $config['ResourceType'][] = Array(
 
 $config['ResourceType'][] = Array(
 		'name' => 'Images',
-		'url' => $baseUrl . 'images',
-		'directory' => $baseDir . 'images',
+		'url' => $baseUrl ,
+		'directory' => $baseDir ,
 		'maxSize' => 0,
 		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
 		'deniedExtensions' => '');

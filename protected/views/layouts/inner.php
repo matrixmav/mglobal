@@ -183,10 +183,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="header navbar navbar-fixed-top">
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="header-inner">
-
                 <span class="home-link"><a href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank">Home</a></span>
-
-                 <a class="navbar-brand" href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank" style="padding:10px;">
+                
+                <a class="navbar-brand" href="<?php echo Yii::app()->getBaseUrl(true); ?>" target="_blank" style="padding:10px;">
                      <img width="70px" src="../../../images/logo/logo.png" class="img-responsive ">
                  </a> 
 
@@ -421,6 +420,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
+                                    "profile/inviterefferal" => "Invite Refferals",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
                                 );  
@@ -432,6 +432,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
+                                    "profile/inviterefferal" => "Invite Refferals",
                                     //"profile/testimonial" => "Testimonial",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
@@ -750,6 +751,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
                 <div class="page-content">
+                    <span class="home-link" style="font-size:14px;float:right;"><?php echo date('Y-m-d H:i:s', strtotime('now'))."\n";?> | <?php echo $userObject->created_at;?></span>
                     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
                     <!-- /.modal -->
                     <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->

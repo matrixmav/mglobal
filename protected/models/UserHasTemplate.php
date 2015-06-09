@@ -49,7 +49,7 @@ class UserHasTemplate extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                     'category' => array(self::BELONGS_TO, 'BuildCategory', 'category_id'),
+                    'category' => array(self::BELONGS_TO, 'BuildCategory', 'category_id'),
                     'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header'),
                     'footer' => array(self::BELONGS_TO, 'BuildTempFooter', 'temp_footer'),
                     'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body'),
@@ -143,10 +143,20 @@ class UserHasTemplate extends CActiveRecord
             $hasbuilderObject->category_id = $buildertempObject->category_id;
             $hasbuilderObject->user_id = $userId;
             $hasbuilderObject->template_id = $buildertempObject->template_id;
-            $hasbuilderObject->temp_header = $buildertempObject->header->header_content;
+            $hasbuilderObject->custom_css = $buildertempObject->custom_css;
+            $hasbuilderObject->custom_js = $buildertempObject->custom_js;
+            $hasbuilderObject->contact_form = $buildertempObject->contact_form;
+           
+            $baseURL = Yii::app()->getBaseUrl(true)."/";
+            $tempHeader = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->header->header_content)); 
+            $tempFooter = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->footer->footer_content)); 
+            $bb = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->body->body_content)); 
+            
+            $hasbuilderObject->temp_header = addslashes($tempHeader);
             $hasbuilderObject->user_menu = $buildertempObject->header->menu;
-            $hasbuilderObject->temp_body = $buildertempObject->body->body_content;
-            $hasbuilderObject->temp_footer = $buildertempObject->footer->footer_content;
+            $hasbuilderObject->temp_body = addslashes($bb);
+            $hasbuilderObject->temp_footer = addslashes($tempFooter);
+            
             $hasbuilderObject->order_id = $orderId;
             $hasbuilderObject->publish = 0;
             $hasbuilderObject->created_at = date('Y-m-d');

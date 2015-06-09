@@ -20,7 +20,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">To *</label>
     <div class="col-md-6">
-        <input type="text" class="form-control dvalid" name="to_email[]" id="to_email" size="60" maxlength="75" value="<?php echo (isset($mailObject)) ? $mailObject->touser->email : ""; ?>" />
+        <input type="text" class="form-control dvalid" name="to_email[]" id="to_email" size="60" maxlength="75" value="<?php echo (isset($mailObject)) ? $mailObject->fromuser->email : ""; ?>" />
         <span class="clrred" style="color:red"  id="to_email_error"></span>
     </div>
 </div>
@@ -33,23 +33,20 @@ if(!empty($error)){
 </div>
 <div class="col-md-12 form-group">
     <label class="col-md-2">Message *</label>
-    <div class="col-md-8">
-        <textarea class="form-control dvalid" name="email_body" id="email_body" rows="10" cols="50">
-            
-            <?php 
+    <div class="col-md-8"><textarea class="form-control dvalid" name="email_body" id="email_body" rows="10" cols="50">
+        <?php 
             if(!empty($mailObject)){
                 echo str_replace( "<br />", '', nl2br("<=== \n"));
                 $replyMsg =  nl2br($mailObject->touser->email." : ".$mailObject->updated_at ."\n" .$mailObject->message); 
                 echo str_replace( "<br />", '', $replyMsg ); 
-            } 
-            ?></textarea>
+            }?></textarea>
         <span class="clrred" style="color:red"  id="email_body_error"></span>
     </div>
 </div>
 <div class="col-md-12 form-group">
     <label class="col-md-2">Attachement </label>
     <div class="col-md-6">
-        <input type="file" name="attachement" id="attachement"/>
+        <input type="file" name="attachment" id="attachement"/>
         <span class="clrred" style="color:red"  id="email_address_error"></span>
     </div>
 </div>

@@ -24,7 +24,7 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin'),
+                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin','inviterefferal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -282,6 +282,7 @@ class ProfileController extends Controller {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+         
         if (!empty($_POST)) {
           if($_POST['UserProfile']['old_master_pin']!='' && $_POST['UserProfile']['new_master_pin']!='' && $_POST['UserProfile']['confirm_master_pin']!='' )  
           {
@@ -290,8 +291,10 @@ class ProfileController extends Controller {
              {
                $error .= "Incorrect old master pin"; 
              }else{
-             $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);   
+             $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);
+             
              if ($userObject->update()) {
+                 
                 $success .= "Your pin changed successfully"; 
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'mGlobally Master Pin Changed' ;
@@ -309,6 +312,40 @@ class ProfileController extends Controller {
             'error' => $error,'success' => $success,
         ));   
         
+    }
+    
+    /*
+     * function to invite refferals
+     */
+    public function actionInviteRefferal()
+    {
+        $error = "";
+        $success = "";
+        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+        $link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'&social=email';
+        if(!empty($_POST))
+        {
+          if($_POST['email']!='')
+          {
+            $emailArr = $_POST['email'];
+            $emailArray = explode(',',$emailArr);
+            
+            foreach($emailArray as $email)
+            {
+                $config['to'] = $email;
+                $config['subject'] = 'mGlobally Invitation From'.$userObject->name ;
+                $config['body'] = 'Hey '.$email.',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="'.$link.'">Click Here</a>';
+                CommonHelper::sendMail($config);  
+            }
+           $success .= "Email sent successfully.";   
+          }else{
+              $error .= "Email field can not be blank.";
+          }
+        }
+        
+       $this->render('/user/invite_refferals', array(
+            'error' => $error,'success' => $success,'userObject'=>$userObject
+        ));  
     }
 
     // Uncomment the following methods and override them if needed
