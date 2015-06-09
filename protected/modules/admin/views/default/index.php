@@ -7,7 +7,7 @@
 
      <form class="login-form" action="" method="post">
          <h3 class="form-title">Admin Login</h3>
-         <div id="msg" class="error"></div>
+         <div id="msg" class="error" style="color:#dd0808;"></div>
          <div class="alert alert-error hide">
             <button class="close" data-dismiss="alert"></button>
             <span>Enter the valid data</span>
@@ -394,11 +394,7 @@
 <!-- END PAGE LEVEL SCRIPTS -->
   
 <script type="text/javascript">
-  //window.onload = function() {
-	//App.init();
-	//Login.init();	
-  //}
-  function login()
+function login()
   {
   var name = $('#username').val();
   var password = $('#password').val();
@@ -417,7 +413,7 @@
                if (html == 11)
                { 
                 document.getElementById('masterPin').style.display = "block";    
-                document.getElementById('msg').innerHTML = "Master pin sent to your email. Please check your email.";
+                document.getElementById('msg').innerHTML = "Master pin sent to your email. Please check.";
                }
                if (html == 3)
                { 
