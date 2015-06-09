@@ -318,8 +318,9 @@ class ProfileController extends Controller {
     {
         $error = "";
         $success = "";
+        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
        $this->render('/user/invite_refferals', array(
-            'error' => $error,'success' => $success,
+            'error' => $error,'success' => $success,'userObject'=>$userObject
         ));  
     }
 
