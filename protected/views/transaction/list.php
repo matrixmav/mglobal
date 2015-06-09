@@ -39,7 +39,7 @@ $this->breadcrumbs = array(
                 <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >In Active</option>
             </select>
     </div>*/?>
-        <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit" style="left: 340px;position: absolute;top: 0"/>
+        <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit" style="left:340px!important;top:0px!important;"/>
     </form>
 
 </div>
