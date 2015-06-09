@@ -420,13 +420,13 @@ a:hover {
   display: none;
   margin: 15px 15px 0;
   position: relative;
-  background: url(../img/toggler.png) no-repeat 6px 8px;
+  background: url(/images/toggler.png) no-repeat 6px 8px;
 }
 .header .mobi-toggler i {
   display: none;
 }
 .header .mobi-toggler:hover {
-  background: #e34f00 url(../img/toggler.png) no-repeat 6px -28px;
+  background: #e34f00 url(/images/toggler.png) no-repeat 6px -28px;
   border-color: #e34f00;
   color: #fff;
 }
@@ -830,14 +830,14 @@ a:hover {
   width: 21px;
   height: 21px;
   display: inline-block;
-  background: #e54a1a url(../img/toggle-icons.png) no-repeat 6px 10px;
+  background: #e54a1a url(/images/toggle-icons.png) no-repeat 6px 10px;
   border-radius: 50% !important;
   margin-right: 10px;
   position: relative;
   top: 4px;
 }
 .choose-us-block .panel-default .collapsed:before {
-  background: #495764 url(../img/toggle-icons.png) no-repeat 6px -148px;
+  background: #495764 url(/images/toggle-icons.png) no-repeat 6px -148px;
 }
 .choose-us-block .panel-default .panel-title:hover .collapsed:before {
   background-color: #e54a1a;
@@ -1042,7 +1042,7 @@ a:hover {
   height: auto;
   padding: 57px 0 0;
   z-index: -1;
-  background: #fff url(../img/facts.jpg) no-repeat fixed;
+  background: #fff url(/images/facts.jpg) no-repeat fixed;
   position: relative;
   color: #fff;
 }
@@ -1821,3 +1821,7 @@ Pre-Header and pre-header elements
 .tp-rightarrow:before{font-family: "FontAwesome" !important;content: "\f18e" !important;}
 .tabPrice .panel-title >a{display: block; font-weight: bold;}
 .tcenter{text-align: center;}
+.pre-header .additional-shop-info ul li span{margin-left: 2px;}
+.pre-header li{margin:2px 0;}
+.pre-header .btn-primary{background-color:#337ab7 !important}
+.fa.fa-share-alt{color:#FFF;}

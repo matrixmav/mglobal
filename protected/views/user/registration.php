@@ -87,9 +87,9 @@
                                         <label for="phone" class="col-lg-4 control-label">Mobile phone <span class="require">*</span></label>
                                         <div class="col-lg-8">
                                             <div class="row">
-                                            <div class="col-lg-3 col-sm-3 col-xs-3">
+                                            <div class="col-lg-3 col-sm-3 col-xs-4">
                                                 <input  name="country_code" id="country_code" placeholder="Country Code" class="form-control" readonly="true">                                            </div>
-                                            <div class="col-lg-9 colo-sm-9 col-xs-9">
+                                            <div class="col-lg-9 colo-sm-9 col-xs-8">
                                                 
                                             <input  name="phone" id="phone" maxlength="10" placeholder="phone number" class="form-control" > <br>
                                             </div>
