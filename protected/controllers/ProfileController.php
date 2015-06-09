@@ -319,6 +319,27 @@ class ProfileController extends Controller {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+        $link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'&social=email';
+        if(!empty($_POST))
+        {
+          if($_POST['email']!='')
+          {
+            $emailArr = $_POST['email'];
+            $emailArray = explode(',',$emailArr);
+            
+            foreach($emailArray as $email)
+            {
+                $config['to'] = $email;
+                $config['subject'] = 'mGlobally Invitation From'.$userObject->name ;
+                $config['body'] = 'Hey '.$email.',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="'.$link.'">Click Here</a>';
+                CommonHelper::sendMail($config);  
+            }
+           $success .= "Email sent successfully.";   
+          }else{
+              $error .= "Email field can not be blank.";
+          }
+        }
+        
        $this->render('/user/invite_refferals', array(
             'error' => $error,'success' => $success,'userObject'=>$userObject
         ));  
