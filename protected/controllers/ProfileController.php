@@ -316,7 +316,9 @@ class ProfileController extends Controller {
      */
     public function actionInviteRefferal()
     {
-       $this->render('user/invite_refferals', array(
+        $error = "";
+        $success = "";
+       $this->render('/user/invite_refferals', array(
             'error' => $error,'success' => $success,
         ));  
     }
