@@ -74,9 +74,6 @@ class BuildTempController extends Controller {
         /* Get template CSS data */
         $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
         
-        /* Get Template Custom CSS and JS */
-        
-        
         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $builderObjectz->template_id));
         $this->renderPartial('user_templates', array('userpages1Object' => $userpages1Object, 'builderObject' => $builderObjectz, 'edit' => 1, 'builderObjectmeta' => $builderObjectmeta ,'builderObjectJs'=>$builderObjectJs,'builderObjectCss'=>$builderObjectCss));
     }
@@ -93,6 +90,8 @@ class BuildTempController extends Controller {
     }
 
     public function actionUserInput() {
+        
+           
         $success = "";
         $error = "";        
         
@@ -111,6 +110,18 @@ class BuildTempController extends Controller {
             $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $tempID));
 
             $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID']));
+           
+            /* Copy Image folder to another location */
+            $path = Yii::getPathOfAlias('webroot');       
+            /*Create Folder And Permission */
+            if(!file_exists($path."/builder_images/".$userID)){
+                !mkdir($path."/builder_images/".$userID.'/', 0777, true);
+            }
+            if(!file_exists($path."/builder_images/".$userID.'/'.$tempID)){
+                !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
+            }
+            BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
+            
             if ($hasbuilderObject) {                 
                 $hasUserTemplatePages = UserHasTemplate::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND  template_id = ' . $tempID )) ;
                
@@ -120,16 +131,18 @@ class BuildTempController extends Controller {
                     $hasbuilderObject = UserHasTemplate::model()->addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userID);
 
                     UserPages::model()->deleteAll(array('condition'=>'user_id = '.$userID .' AND order_id = '.$orderId));
-                    UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content);
-                    
+                    UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content,$buildertempObject->template_id);
                 }  
                 
             } else { 
                 $orderId = Yii::app()->session['orderID'];
                 $templateObject = UserHasTemplate::model()->addAndEdit($templateObject, $buildertempObject,$orderId,$userID);
                 /* Add Home page of website */
-                UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content);
+                UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content,$buildertempObject->template_id);
            }
+
+           
+            
         }
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $this->render('userinput', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject));
@@ -159,8 +172,9 @@ class BuildTempController extends Controller {
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $this->render('userinput', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject));
     }
-
-    public function actionPagedit() {
+    
+    public function actionPagedit() {        
+             
         $success = "";
         $error = "";
         $userpagesObject = UserPages::model()->findByPK($_REQUEST['id']);
