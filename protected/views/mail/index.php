@@ -47,7 +47,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'from_user_id',
-            'header' => '<span style="white-space: nowrap;">Receiver &nbsp; &nbsp; &nbsp;</span>',
+            'header' => '<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
             'value' => '$data->fromuser->full_name',
         ),
         array(
