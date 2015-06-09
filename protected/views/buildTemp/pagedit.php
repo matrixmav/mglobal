@@ -23,30 +23,38 @@ $this->breadcrumbs = array(
         <fieldset>
             <legend>Edit Pages</legend>
              <div class="form-group">
-                <label class="col-lg-2 control-label" for="lastname">Page Title<span class="require">*</span></label>
-                <div class="col-lg-6">
+                <label class="col-sm-2 control-label" for="lastname">Page Title<span class="require">*</span></label>
+                <div class="col-sm-2">
                     <input id="page_name" type="text" class="form-control" name="pages[page_name]" value="<?php echo (!empty($userpagesObject->page_name)) ? $userpagesObject->page_name : ""; ?>">
                     <span id="page_title_error"></span>
                 </div>
-            </div>
-             <div class="form-group">
-                <label class="col-lg-2 control-label" for="lastname">Form Require</label>
-                <div class="col-lg-6">
+                
+                 <label class="col-sm-2 control-label" for="lastname">Form Require</label>
+                <div class="col-sm-2">
                     <select name="pages[form_allowed]" id="form" class="form-control">
-                        <option value="">Select Form</option>
-                        <option value="contact" <?php if(!empty($userpagesObject) && $userpagesObject->page_form=='contact'){?>selected="selected"<?php }?>>Contact Form<option>
-                        <?php if($orderObject->package->no_of_forms=='2' || $orderObject->package->no_of_forms=='3'){ ?>
-                        <option value="feedback" <?php if(!empty($userpagesObject) && $userpagesObject->page_form=='feedback'){?>selected="selected"<?php }?>>Feedback Form</option>
-                        <?php }?>
-                        <?php if($orderObject->package->no_of_forms=='3'){ ?>
-                        <option value="enquiry" <?php if(!empty($userpagesObject) && $userpagesObject->page_form=='enquiry'){?>selected="selected"<?php }?>>Enquiry Form</option>
-                        <?php }?>
+                        <option value="0">Select Form</option>
+                        <option value="1" <?php if(!empty($userpagesObject) && $userpagesObject->page_form=='1'){?>selected="selected"<?php }?>>Contact Form</option>
+                        <?php //if($orderObject->package->no_of_forms=='2' || $orderObject->package->no_of_forms=='3'){ ?>
+                        <!--<option value="feedback" <?php //if(!empty($userpagesObject) && $userpagesObject->page_form=='feedback'){?>selected="selected"<?php //}?>>Feedback Form</option>-->
+                        <?php //}?>
+                        <?php //if($orderObject->package->no_of_forms=='3'){ ?>
+<!--                        <option value="enquiry" <?php //if(!empty($userpagesObject) && $userpagesObject->page_form=='enquiry'){?>selected="selected"<?php //}?>>Enquiry Form</option>-->
+                        <?php //}?>
                     </select>
                      
                 </div>
+                
+                <label class="col-sm-2 control-label" for="lastname">Status</label>                
+                <div class="col-sm-2">
+                    <label><input type="radio" name="pages[status]" value="1" <?php if(!empty($userpagesObject) && $userpagesObject->status=='1'){ echo "checked=checked"; } ?> >Active</label>
+                    <label><input type="radio" name="pages[status]" value="0" <?php if(!empty($userpagesObject) && $userpagesObject->status=='0'){ echo "checked=checked"; } ?> >Pending</label>
+                    
+                </div>
+                
             </div>
+             
             <div class="form-group">
-                <label class="col-lg-2 control-label" for="lastname">Page Content<span class="require">*</span></label>
+                <label class="col-sm-2 control-label" for="lastname">Page Content<span class="require">*</span></label>
                 <div class="col-lg-10">
                     <textarea id="editor1" class="form-control" name="pages[page_content]" style="width: 482px; height: 248px;"><?php echo (!empty($userpagesObject->page_content)) ? stripslashes($userpagesObject->page_content) : ""; ?></textarea>
                     <span id="page_content_error"></span>
@@ -63,9 +71,6 @@ $this->breadcrumbs = array(
         </div>
     </form>
 </div>
-
-
-
 
 <script type="text/javascript">
     function validation()

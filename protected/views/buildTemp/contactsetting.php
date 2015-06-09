@@ -25,7 +25,7 @@ $this->breadcrumbs = array(
     <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
     <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-<?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
+    <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
 
 </div>
 <div class="col-md-7 col-sm-7">

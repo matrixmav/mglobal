@@ -124,7 +124,8 @@ class BuildTempController extends Controller {
 
 
         if ($_REQUEST['id']) {
-            $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
+            $categoryObject = BuildCategory::model()->findByPk($_REQUEST['id']);
+            var_dump($categoryObject); die;
             if ($categoryObject->status == 1) {
                 $categoryObject->status = 0;
             } else {
@@ -372,14 +373,14 @@ class BuildTempController extends Controller {
                     $model->temp_header_id = $headeraddObject->id;
                     $model->temp_body_id = $bodyaddObject->id;
                     $model->temp_footer_id = $footeraddObject->id;
-                    $model->status = 0;
-                    $model->custom_css = addslashes($_POST['custom_css']);
-                    $model->custom_js = addslashes($_POST['custom_js']);                                
+                    $model->status = 0;                                                   
                     $model->created_at = date('Y-m-d');
                     $model->updated_at = date('Y-m-d');
                     $model->category_id = $category;
                     $model->folderpath = $fname;
                     $model->screenshot = $fileS;
+                    $model->custom_css = addslashes($_POST['custom_css']);
+                    $model->custom_js = addslashes($_POST['custom_js']); 
                     $model->contact_form = addslashes('<div class="mav_contact">'.$_POST['Template']['form_code'].'</div>');
                     $model->save(false);
                     $tmpId = $model->id  ;
