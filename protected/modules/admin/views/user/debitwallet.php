@@ -46,6 +46,13 @@ if(!empty($error)){
     </div>
 </div>
 <div class="col-md-12 form-group">
+    <label class="col-md-2">Description</label>
+    <div class="col-md-6">
+        <textarea class="form-control dvalid" name="description" id="description" value="<?php echo (!empty($walletObject)) ? $walletObject->comment : ""; ?>" />
+        <span style="color:red"  id="fund_error"></span>
+    </div>
+</div>
+<div class="col-md-12 form-group">
     <label class="col-md-2"></label>
     <div class="col-md-6">
         <input type="submit" class="btn green" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
