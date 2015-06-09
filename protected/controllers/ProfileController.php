@@ -24,7 +24,7 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin'),
+                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin','inviterefferal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -309,6 +309,16 @@ class ProfileController extends Controller {
             'error' => $error,'success' => $success,
         ));   
         
+    }
+    
+    /*
+     * function to invite refferals
+     */
+    public function actionInviteRefferal()
+    {
+       $this->render('user/invite_refferals', array(
+            'error' => $error,'success' => $success,
+        ));  
     }
 
     // Uncomment the following methods and override them if needed
