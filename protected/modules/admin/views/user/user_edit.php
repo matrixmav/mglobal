@@ -15,49 +15,49 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Sponsor ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="name" class="form-control" name="UserProfile[sponsor_id]" value="<?php echo (!empty($userObject))? $userObject->sponsor_id:"";?>" readonly="readonly">
+                    <input type="text" id="name" class="form-control" name="UserProfile[sponsor_id]" value="<?php echo (!empty($userObject))? $userObject->sponsor_id:"";?>" >
                    
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Name</label>
                 <div class="col-lg-8">
-                    <input type="text" id="name" class="form-control" name="UserProfile[name]" value="<?php echo (!empty($userObject))? $userObject->name : "";?>" readonly="readonly">
+                    <input type="text" id="name" class="form-control" name="UserProfile[name]" value="<?php echo (!empty($userObject))? $userObject->name : "";?>" readonly="readonly" >
                 </div>
             </div>
             
            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Position</label>
                 <div class="col-lg-8">
-                    <input type="text" id="position" class="form-control" name="UserProfile[position]" value="<?php echo (!empty($userObject))?$userObject->position:"";?>" readonly="readonly">
+                    <input type="text" id="position" class="form-control" name="UserProfile[position]" value="<?php echo (!empty($userObject))?$userObject->position:"";?>">
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Full Name<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject))?$userObject->full_name:"";?>" readonly="readonly" >
+                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject))?$userObject->full_name:"";?>">
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Email<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject))? $userObject->email:"";?>" readonly="readonly" >
+                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject))? $userObject->email:"";?>" >
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" value="<?php echo (!empty($userObject))? $userObject->country_code:"";?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>"  style="width:88%;float:right;">
+                    <input type="text" value="<?php echo (!empty($userObject))? $userObject->country_code:"";?>" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>"  style="width:88%;float:right;">
                    <div  id="error_msg_phone"> </div> 
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="date_of_birth" class="form-control" name="UserProfile[date_of_birth]" value="<?php echo (!empty($userObject))?$userObject->date_of_birth:"";?>" readonly="readonly" >
+                    <input type="text" id="date_of_birth" class="form-control" name="UserProfile[date_of_birth]" value="<?php echo (!empty($userObject))?$userObject->date_of_birth:"";?>" >
                    <div id="error_msg"> </div> 
                 </div>
             </div>
