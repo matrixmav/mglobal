@@ -14,12 +14,29 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
     echo '<div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                 <div class="expiration margin-topDefault confirmMenu">
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/mail" class="form-inline">
+    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="admin_email" onchange="showusergeneo(this.value)">
+            <option value="">Select Mail By User</option>';
+            foreach($emailObject as $email){
+            echo '<option value="'.$email->id.'"';
+             if(!empty($_POST) && $_POST['admin_email']== $email->id) { 
+                 echo 'selected="selected"';
+                 }
+                 echo '>';
+                 echo $email->full_name;
+                 echo '</option>';
+             }
+        echo '</select>
+         
+    </form>
+</div> 
                     <div class="tree">
                         <ul>'; 
                             if(count($genealogyListObject) > 0 ){  
                                 /* if they have chind with 1st layer */   
                                 echo  '<li>';
-                                echo  $currentUserId ? '<a href="#" data-hint="This is a success hint that fades in" class="hint-top-s-small-t-notice">'. $currentUserId."</a>" : '';
+                                echo  $userObject->name ? '<a href="#" data-hint="This is a success hint that fades in" class="hint-top-s-small-t-notice">'. $userObject->name."</a>" : '';
                                 
                                 echo '<ul>';                               
                                 
@@ -39,10 +56,11 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
                                                     
                                             foreach($leftGenealogyListObject as $leftGenealogyObject){ 
                                                 $leftCurrnetIdCount = BaseClass::getGenoalogyTree($leftGenealogyObject->user_id);      
-                                                /* Check for the link */ 
-                                                $leftUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $leftGenealogyObject->user->sponsor_id)); 
+                                                /* Check for the link */
+                                                 
+                                                $leftUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $leftGenealogyObject->user->sponsor_id,'position'=>'left')); 
                                                 $rightIdCount = count($leftCurrnetIdCount) >= 1 ? $treeVar.'?id='.$leftGenealogyObject->user->name : $leftUrl ;                                                                                               
-                                                $naUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id)); 
+                                                $naUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id,'position'=>'left')); 
                                                
                                                 if($leftGenealogyObject->position == 'left'){                                                                                       
                                                     echo $leftGenealogyObject->user_id ? '<li><a href='.$rightIdCount.'>'.$leftGenealogyObject->user->name."</a></li>" : ''; 
@@ -60,7 +78,7 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
 
                                         }else{
                                             echo  '<li>';
-                                            $leftUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id));
+                                            $leftUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id,'position'=>'left'));
                                             echo  $chiId = $genealogyObject->user_id ? '<a href="'.$leftUrl.'">'. $genealogyObject->user->name."</a>" : '';
                                             echo '<ul>'; 
                                         echo '
@@ -85,8 +103,8 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
                                                 $rightCurrnetIdCount = BaseClass::getGenoalogyTree($rightGenealogyObject->user_id);      
                                                 /* Check for the link */ 
                                                 
-                                                $rightUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $rightGenealogyObject->user->sponsor_id)); 
-                                                $naUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id)); 
+                                                $rightUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $rightGenealogyObject->user->sponsor_id,'position'=>'right')); 
+                                                $naUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id,'position'=>'right')); 
                                                 $rightIdCount = count($rightCurrnetIdCount) >= 1 ? $treeVar.'?id='.$rightGenealogyObject->user_id : $rightUrl ;                                                                                               
                                                 
                                                 if($rightGenealogyObject->position == 'left'){                                                     
@@ -99,7 +117,7 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
                                              }                            
                                          }else{
                                             echo  '<li>';
-                                            $rightUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id));
+                                            $rightUrl =  Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id,'position'=>'right'));
                                             echo  $chiId =  $genealogyObject->user_id ? '<a href="'.$rightUrl.'">'. $genealogyObject->user->name."</a>" : '';
                                             echo '<ul>'; 
                                          }  
@@ -110,6 +128,8 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
 
                                     }                    
                                  }                
+                             }else{
+                            echo 'No Records Found';     
                              }
                         echo '</ul>
                     </div>
@@ -118,4 +138,10 @@ echo '<link rel="stylesheet" href="'.Yii::app()->getBaseUrl(true).'/css/main.css
         </div>'; 
 ?>
 
-<link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/hint.css">    
+<link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/hint.css">
+<script type="text/javascript">
+    function showusergeneo(userVal)
+    {
+        location.href= "/admin/user/genealogy?id="+userVal;
+    }
+</script>    

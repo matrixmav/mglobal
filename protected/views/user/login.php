@@ -83,6 +83,7 @@
                 </div>
               </form>
             </div>
+           <?php if($curAction == 'loginregistration'){?>
               <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 col-xs-12">
               <a class="fb-btn" href="<?php echo Yii::app()->baseUrl;?>/user/facebook"><?php echo Yii::app()->baseUrl; ?>Log in With Facebook</a>        
               </div>
@@ -90,6 +91,7 @@
                <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 col-xs-12">
             <a class="tw-btn" href="<?php echo Yii::app()->baseUrl; ?>/user/twitter"><?php echo Yii::app()->baseUrl; ?>Log in With Twitter</a>        
                </div>
+           <?php }?>
             <!--
         
         <button  class="btn-social btn-fb">Sign in with Facebook</button> 
@@ -97,6 +99,7 @@
         -->
           </div>
         </div>
+      <?php if($curAction == 'login'){?>
       <div class="col-md-6 col-sm-6">
           <div class="clear80"></div>
           <div class="col-sm-12 col-xs-12 tcenter pad10">
@@ -108,6 +111,7 @@
                </div>
          
       </div>
+      <?php }?>
       </div>
       <!-- END CONTENT -->
       <?php if($curAction != 'loginregistration'){ ?>

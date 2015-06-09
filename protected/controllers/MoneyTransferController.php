@@ -79,14 +79,13 @@ class MoneyTransferController extends Controller {
         $error = "";
         $userid = Yii::app()->session['userid'];
         if (isset($_POST['transfer'])) { //echo "cool";exit;
-
             if ($_POST['paid_amount'] < 10) {
                 $error = "Sorry! you can not transfer amount less then $10";
             } else {
                 $postDataArray = $_POST;
-                $toUserId = $postDataArray['username'];
+                $toUserId = $postDataArray['search_user_id'];
                 $walletType = $postDataArray['walletId'];
-                $fund = $postDataArray['paid_amount'];
+                $fund = $postDataArray['paid_amount'];  
                 $userObject = User::model()->findByPk($toUserId);
                 if (empty($userObject)) {
                     $this->redirect(array('moneytransfer/status', 'status' => 'U'));

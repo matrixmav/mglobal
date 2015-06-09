@@ -5,8 +5,9 @@
 <div class="content">
       <!-- BEGIN LOGIN FORM -->
 
-     <form class="login-form" action="index.html" method="post">
+     <form class="login-form" action="" method="post">
          <h3 class="form-title">Admin Login</h3>
+         <div id="msg" class="error"></div>
          <div class="alert alert-error hide">
             <button class="close" data-dismiss="alert"></button>
             <span>Enter the valid data</span>
@@ -16,7 +17,7 @@
             <label class="control-label visible-ie8 visible-ie9">Admin Name</label>
             <div class="input-icon">
                <i class="fa fa-user"></i>
-               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="username" id="username_id"/>
+               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="username" id="username"/>
             </div>
          </div>
          <div class="form-group">
@@ -26,12 +27,19 @@
                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" id="password"/>
             </div>
          </div>
+          <div class="form-group" id="masterPin" style="display:none;">
+            <label class="control-label visible-ie8 visible-ie9">Master Pin</label>
+            <div class="input-icon">
+               <i class="fa fa-lock"></i>
+               <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Master Pin" name="master_pin" id="master_pin"/>
+            </div>
+         </div>
          <div class="form-actions">
             <!--<label class="checkbox">
             <input type="checkbox" name="LoginForm[rememberMe]" value="1" id="on_off"/> Se souvenir de moi
             </label>-->
 			
-            <button type="submit" class="btn blue pull-right">
+            <button type="button" class="btn blue pull-right" onclick="return login();">
             Submit <i class="m-icon-swapright m-icon-white"></i>
             </button>            
          </div>
@@ -50,7 +58,7 @@
          <div class="form-group">
             <div class="input-icon">
                <i class="icon-envelope"></i>
-               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" />
+               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" i />
             </div>
          </div>
          <div class="form-actions">
@@ -343,7 +351,7 @@
             <label class="control-label visible-ie8 visible-ie9">Username</label>
             <div class="input-icon">
                <i class="icon-user"></i>
-               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
+               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" id="username"/>
             </div>
          </div>
          <div class="form-group">
@@ -386,8 +394,44 @@
 <!-- END PAGE LEVEL SCRIPTS -->
   
 <script type="text/javascript">
-  window.onload = function() {
-	App.init();
-	Login.init();	
-  }
+  //window.onload = function() {
+	//App.init();
+	//Login.init();	
+  //}
+  function login()
+  {
+  var name = $('#username').val();
+  var password = $('#password').val();
+  var pin = $('#master_pin').val();
+        $('#username').val(name);
+        $('#password').val(password);
+        
+        var dataString = 'login=yes&name='+name+'&password='+password+'&pin='+pin;
+         
+        $.ajax({
+            type: "GET",
+            url: "adminlogin",
+            data: dataString,
+            cache: false,
+            success: function (html) {
+               if (html == 11)
+               { 
+                document.getElementById('masterPin').style.display = "block";    
+                document.getElementById('msg').innerHTML = "Master pin sent to your email. Please check your email.";
+               }
+               if (html == 3)
+               { 
+               document.getElementById('msg').innerHTML  = "Incorrect master pin";
+               }
+               if (html == 1)
+               { 
+                location.href= "/admin/";
+               }
+               if (html == 12)
+               { 
+                document.getElementById('msg').innerHTML  = "Incorrect username / password.";
+               }
+            }
+        });
+    }
   </script>
