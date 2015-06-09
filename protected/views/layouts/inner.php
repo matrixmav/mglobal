@@ -421,6 +421,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
+                                    "profile/inviterefferal" => "Invire Refferals",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
                                 );  
