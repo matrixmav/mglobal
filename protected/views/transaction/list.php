@@ -29,7 +29,7 @@ $this->breadcrumbs = array(
         <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
     </div>
     <?php 
-    $statusId =   1;
+    /*$statusId =   1;
     if(isset($_REQUEST['res_filter'])){
       $statusId =   $_REQUEST['res_filter'];
     } ?>
@@ -38,8 +38,8 @@ $this->breadcrumbs = array(
                 <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Active</option>
                 <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >In Active</option>
             </select>
-    </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+    </div>*/?>
+        <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit" style="left: 340px;position: absolute;top: 0"/>
     </form>
 
 </div>
