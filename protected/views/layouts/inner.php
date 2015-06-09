@@ -433,6 +433,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
+                                    "profile/inviterefferal" => "Invite Refferals",
                                     //"profile/testimonial" => "Testimonial",
                                     "genealogy" => "Genealogy",
 //                                    "profile/summery" => "Summery",
