@@ -72,7 +72,7 @@ return array(
     ),
    'session' => array(
    'class' => 'CDbHttpSession',
-   'timeout' => 60*60*24*30*12*5, 
+   'timeout' => 1800, 
 ),  
     'sms_verification_text' => 'Dayuse Reservation Verification Code: ',
     'months' => array(
