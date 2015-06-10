@@ -4,7 +4,14 @@
   <div class="container">
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
+       
+?>
  <?php }?>
+ <?php if(Yii::app()->session['adminID']==1){?>
+       <div class="error">User already loggedIn. Please try in other browser.</div>     
+       <?php }else{?>
+            
+        
       <!-- BEGIN CONTENT -->
                 <div class="col-md-6 col-sm-6">
         <?php 
@@ -99,6 +106,8 @@
         -->
           </div>
         </div>
+       <?php }?>
+      <?php if(Yii::app()->session['adminID']!=1){?>
       <?php if($curAction == 'login'){?>
       <div class="col-md-6 col-sm-6">
           <div class="clear80"></div>
@@ -111,7 +120,7 @@
                </div>
          
       </div>
-      <?php }?>
+      <?php } }?>
       </div>
       <!-- END CONTENT -->
       <?php if($curAction != 'loginregistration'){ ?>
