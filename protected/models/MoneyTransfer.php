@@ -126,6 +126,7 @@ class MoneyTransfer extends CActiveRecord
             if(!empty($postDataArray['comment'])){
                 $comment = $postDataArray['comment'];
             }
+             
             $fundType = 1;
             if(!empty($postDataArray['fund'])){
                 $fundType = $postDataArray['fund'];
