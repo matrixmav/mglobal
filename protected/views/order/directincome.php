@@ -27,7 +27,7 @@ $this->menu=array(
     
         <div class="expiration margin-topDefault confirmMenu">
                     
-    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/transaction/list">
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/order/refferalincome">
     <div class="input-group input-large date-picker input-daterange">
         <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
         <span class="input-group-addon">
@@ -51,7 +51,7 @@ $this->menu=array(
 </div>
 <div class="row">
     <div class="col-md-12">
-            
+        <br/>  
           <span class="btn  green margin-right-20">Total Refferal Bonus  - $<?php echo (!empty($totalAmount)) ? $totalAmount : "0";?> </span>
         <?php 
          
