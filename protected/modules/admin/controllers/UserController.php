@@ -231,8 +231,13 @@ class UserController extends Controller {
          
         if ($_POST) {
             $userId = $_POST['userId'];
-            $type = $_POST['wallet_type'];
-            $fundAmount = $_POST['fund'];
+            $userObject = User::model()->findByPk($userId);
+            $type = $_POST['walletId'];
+            $fundAmount = $_POST['paid_amount'];
+            $postDataArray = $_POST;
+            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+            
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($fundAmount + $walletObject->fund);
@@ -260,12 +265,8 @@ class UserController extends Controller {
     public function actionDebitWallet() {
         if ($_POST) {
             $userId = $_POST['userId'];
-            $userObject = User::model()->findByPk($userId);
             $type = $_POST['wallet_type'];
             $fundAmount = $_POST['fund'];
-            $postDataArray = $_POST;
-            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject);
-            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
