@@ -145,9 +145,9 @@ class WalletController extends Controller
         public function actionRpWallet()
         {
            $model = "MoneyTransfer";   
-          $loggedInUserId = Yii::app()->session['userid'];
-          $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>2));
-          if($walletobject)
+           $loggedInUserId = Yii::app()->session['userid'];
+           $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>2));
+           if($walletobject)
            {
                $wid = $walletobject->id;
            }else{
