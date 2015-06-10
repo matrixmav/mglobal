@@ -17,6 +17,16 @@ $this->breadcrumbs = array(
     top: 8px;}
     .confirmMenu{position: relative;}
 </style>
+<?php 
+if(!empty($_GET) && $_GET['successMsg']=='1'){
+    echo "<div class='success'>Wallet amount transferred successfully.</div>";
+}
+?>
+<?php 
+if(!empty($_GET) && $_GET['successMsg']=='2'){
+    echo "<div class='success'>Wallet amount deducted successfully.</div>";
+}
+?>
 <div class="col-md-12">
     
         <div class="expiration margin-topDefault confirmMenu">
