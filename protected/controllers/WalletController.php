@@ -162,14 +162,14 @@ class WalletController extends Controller
             
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),
+                    'condition' => ('wallet_id='.$wid.' AND (to_user_id = "'.$loggedInUserId. '" OR from_user_id = "'.$loggedInUserId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
             ));
         } else {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"'), 'order' => 'id DESC',
+                    'condition' => ('wallet_id='.$wid.' AND (to_user_id = "'.$loggedInUserId. '" OR from_user_id = "'.$loggedInUserId.'")'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
@@ -192,12 +192,13 @@ class WalletController extends Controller
            $model = "MoneyTransfer";   
           $loggedInUserId = Yii::app()->session['userid'];
           $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>3));
-          if($walletobject)
+          if(!empty($walletobject))
            {
-               $wid = $walletobject->id;
+             $wid = $walletobject->id;
            }else{
-             $wid = 0;  
+             $wid = "0";  
            }
+            
            $pageSize = Yii::app()->params['defaultPageSize'];
            $todayDate = date('Y-m-d');
            $fromDate = date('Y-m-d');
@@ -207,18 +208,19 @@ class WalletController extends Controller
             
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),
+                    'condition' => ('wallet_id='.$wid.' AND  (to_user_id = "'.$loggedInUserId. '" OR from_user_id = "'.$loggedInUserId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
             ));
         } else {
-
-            $dataProvider = new CActiveDataProvider($model, array(
+             
+      $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+                    'condition' => ('wallet_id="'.$wid.'" AND (to_user_id = "'.$loggedInUserId. '" OR from_user_id = "'.$loggedInUserId.'")'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
         }
+   
             $this->render('commisionwallet',array('dataProvider'=>$dataProvider));
         }
         
@@ -227,7 +229,7 @@ class WalletController extends Controller
          */
         public function actionFundWallet()
         {
-            $model = "MoneyTransfer";   
+          $model = "MoneyTransfer";   
           $loggedInUserId = Yii::app()->session['userid'];
           $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>1));
           if($walletobject)
@@ -236,6 +238,7 @@ class WalletController extends Controller
            }else{
              $wid = 0;  
            }
+           
            $pageSize = Yii::app()->params['defaultPageSize'];
            $todayDate = date('Y-m-d');
            $fromDate = date('Y-m-d');
@@ -245,21 +248,22 @@ class WalletController extends Controller
             
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),
+                    'condition' => ('wallet_id='.$wid.' AND  (to_user_id = "'.$loggedInUserId. '" OR from_user_id = "'.$loggedInUserId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
             ));
-           } else {
-
+           
+            } else {
+            
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"'), 'order' => 'id DESC',
+                    'condition' => ('wallet_id='.$wid.' AND  (to_user_id = "'.$loggedInUserId. '" OR from_user_id = "'.$loggedInUserId.'") '), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
         }
             $this->render('fundwallet',array('dataProvider'=>$dataProvider));
-        
         }
+         
         
         
 	/**
