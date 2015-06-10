@@ -530,12 +530,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                   );  
                                  
                                 $activecls = 'active';
-                                if ($curControllerLower == 'genealogy' || $curAction == 'checkinvestment' || $curAction =='refferalincome') {
+                                if ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction =='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'genealogy' || $curAction == 'checkinvestment' || $curAction =='refferalincome')
+                                if ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction =='refferalincome')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
