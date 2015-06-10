@@ -809,7 +809,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
                 <div class="page-content">
-                    <span class="home-link" style="font-size:14px;float:right;"><?php echo date('Y-m-d H:i:s', strtotime('now'))."\n";?> | <?php echo $userObject->created_at;?></span>
+                    <span class="home-link" style="font-size:14px;float:right;">Registered Date : <?php echo $userObject->created_at;?> |  <?php echo date('Y-m-d H:i:s', strtotime('now'))."\n";?> </span>
                     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
                     <!-- /.modal -->
                     <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
