@@ -870,10 +870,10 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         
-<div class="chatWrap">
+<?php /*?><div class="chatWrap">
    <a onclick="openChat();"><span class="glyphicon glyphicon-comment"></span></a>
   
-</div>
+</div><?php */?>
         <!-- END FOOTER -->
         <script type="text/javascript">
             function showError(msg) {
