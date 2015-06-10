@@ -10,6 +10,7 @@ if(!empty($error)){
 }
 ?>
 <?php 
+$_GET['successMsg'] = 0;
 if(!empty($_GET) && $_GET['successMsg']=='1'){
     echo "<div class='success'>Your message sent successfully.</div>";
 }
