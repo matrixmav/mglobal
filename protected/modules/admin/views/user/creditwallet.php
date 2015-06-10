@@ -24,7 +24,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Wallet Type: </label>
     <div class="col-md-6">
-        <select name="wallet_type" id="wallet_type" class="form-control dvalid">
+        <select name="walletId" id="wallet_type" class="form-control dvalid">
             <?php foreach ($walletList as $key=>$value) { ?>
             <option value="<?php echo $key;?>" ><?php echo $value;?></option>
             <?php } ?>
