@@ -9,6 +9,11 @@ if(!empty($error)){
     echo "<p class='error'>".$error."</p>";
 }
 ?>
+<?php 
+if(!empty($_GET) && $_GET['success']!=''){
+    echo "<div class='success'>".$_GET['success']."</div>";
+}
+?>
 <div class="row">
     <div class="col-md-12">
             <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/admin/mail', array("class" => "btn  green margin-right-20")); ?>
