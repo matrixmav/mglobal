@@ -4,7 +4,10 @@
    <!-- END PAGE LEVEL SCRIPTS -->
 <div class="content">
       <!-- BEGIN LOGIN FORM -->
-
+<?php if(Yii::app()->session['frontloggedIN']==1)
+      {?>
+      <h3 class="form-title">Sorry! Someone already loggedIN. Please user another browser.</h3>
+      <?php }else{?>
      <form class="login-form" action="" method="post">
          <h3 class="form-title">Admin Login</h3>
          <div id="msg" class="error" style="color:#dd0808;"></div>
@@ -50,6 +53,7 @@
             </p>
          </div>-->
       </form>
+       <?php }?>
       <!-- END LOGIN FORM -->        
       <!-- BEGIN FORGOT PASSWORD FORM -->
       <form class="forget-form" action="index.html" method="post">
@@ -70,6 +74,7 @@
             </button>            
          </div>
       </form>
+     
       <!-- END FORGOT PASSWORD FORM -->
       <!-- BEGIN REGISTRATION FORM -->
       <form class="register-form" action="index.html" method="post">
