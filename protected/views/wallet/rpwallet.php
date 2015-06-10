@@ -28,7 +28,7 @@ $this->menu=array(
     
         <div class="expiration margin-topDefault confirmMenu">
                     
-    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/transaction/list">
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/wallet/rpwallet">
     <div class="input-group input-large date-picker input-daterange">
         <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
         <span class="input-group-addon">
