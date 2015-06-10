@@ -61,7 +61,7 @@ class DefaultController extends Controller {
         exit;
     }
 
-    public function actionAdminLogin() {
+   /* public function actionAdminLogin() {
         if ($_REQUEST) {
             
             $model = new User;
@@ -81,12 +81,12 @@ class DefaultController extends Controller {
                         $config['subject'] = 'mGlobally Admin Authentication Pin';
                         $config['body'] = 'Hey ' . $getUserObject->email . ',<br/>Please use this code to login in admin.<br/>Pin :' . $masterPin;
                         CommonHelper::sendMail($config);
-                        /* $identity = new UserIdentity($username,$password);
+                        /* olsss$identity = new UserIdentity($username,$password);
                           if($identity->adminAuthenticate())
                           Yii::app()->user->login($identity);
                           Yii::app()->session['userid'] = $getUserObject->id;
-                          Yii::app()->session['username'] = "mGlobally"; */
-                        echo "11";
+                          Yii::app()->session['username'] = "mGlobally"; olddd*/
+                       /* echo "11";
                     } else {
                         echo "12";
                     }
@@ -109,6 +109,31 @@ class DefaultController extends Controller {
                         echo 3;
                     }
                 }
+            }
+        }*/
+     public function actionAdminLogin(){ 
+            if($_POST){
+                $model = new User;
+		$error = "";
+		$username = $_POST['LoginForm']['username'];
+		$password =  $_POST['LoginForm']['password'];
+
+		if((!empty($username)) && (!empty($password))) {
+                    $getUserObject = User::model()->findByAttributes(array('name'=>$username));
+                    //$getcustomerid = Customer::model()->findAll('content LIKE :telephone', array(':telephone'=>"%$telephone%"));
+                    if(!empty($getUserObject)){
+                        if(($getUserObject->password == md5($password))) {
+                            $identity = new UserIdentity($username,$password);
+                            if($identity->adminAuthenticate())
+                            Yii::app()->user->login($identity);
+                            Yii::app()->session['userid'] = $getUserObject->id;
+                            Yii::app()->session['username'] = "mGlobaly";
+                            echo "1";
+                        } else {
+                            echo "0";
+                        }
+                    }
+		}
             }
         }
      
