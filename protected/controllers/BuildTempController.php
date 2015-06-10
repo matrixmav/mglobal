@@ -27,7 +27,8 @@ class BuildTempController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 
                                     'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent',
-                                    'contactsetting', 'submitform','addcopyright','addfooter','addheader','pagefooter'),
+                                    'contactsetting', 'submitform','addcopyright','addfooter','addheader','pagefooter',
+                                    'builder'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -47,6 +48,128 @@ class BuildTempController extends Controller {
     /*
      * Function to fetch templates
      */
+    
+    
+    /*
+     * Create Bulider with all these pages.
+     */
+    
+    public function actionBuilder(){
+        
+        echo $tempID = Yii::app()->session['templateID']; echo "--";
+        echo $userID = Yii::app()->session['userid']; 
+        echo $orderID = Yii::app()->session['orderID'];
+        
+        $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID']));
+        
+        $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempID));        
+        /* Get template JS data */
+        $builderObjectJs = BuildTempJs::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));       
+        /* Get template CSS data */
+        $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
+        
+        $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userID . ' AND order_id=' . $orderID ));
+  
+//         $tempMenu = $hasbuilderObject->user_menu;
+//        $i = 1;
+//        foreach ($userPagesObject as $pages) {
+//            $pat1 = '*' . $i . '*';
+//            $pat2 = '$' . $i . '$';
+//            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
+//            $tempMenu = str_replace($pat2, strtolower($pages->page_name), $tempMenu);
+//            $i++;
+//        }
+//       // echo $tempMenu;
+//        $tempMenu = stripcslashes($tempMenu);
+//        print_r($tempMenu); die;
+        
+        $path = Yii::getPathOfAlias('webroot');       
+        /*Create Folder And Permission */        
+        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID)){
+            !mkdir($path."/builder_images/".$userID.'/build'.$orderID, 0777, true);
+        }
+        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID.'/images/')){
+            !mkdir($path."/builder_images/".$userID.'/build'.$orderID.'/images/', 0777, true);
+        }
+        
+        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID.'/js/')){
+            !mkdir($path."/builder_images/".$userID.'/build'.$orderID.'/js/', 0777, true);
+        }
+        
+        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID.'/css/')){
+            !mkdir($path."/builder_images/".$userID.'/build'.$orderID.'/css/', 0777, true);
+        }
+        
+        BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/images/", $path.'/builder_images/'.$userID.'/build'.$orderID."/images/");
+        BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/js/", $path.'/builder_images/'.$userID.'/build'.$orderID."/js/");
+        BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/css/", $path.'/builder_images/'.$userID.'/build'.$orderID."/css/");
+      
+        
+        /* Create File and write ka code */
+        $path = Yii::getPathOfAlias('webroot');               
+        foreach($userPagesObject as $userPagesObjectList){
+         
+            $my_file = $path."/builder_images/".$userID.'/build'.$orderID.'/'.strtolower($userPagesObjectList->page_name).".html";
+            $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
+
+            foreach($builderObjectCss as $builderObjectListCss){
+               $data = "\n".'<link rel="stylesheet" href="css/'.$builderObjectListCss->name.'" type="text/css" media="all">' ;           
+                //stripslashes($userpagesObject->page_content) ;
+                fwrite($handle, $data);
+            } 
+            foreach($builderObjectJs as $builderObjectListJs){
+               $data = "\n".'<script type="text/javascript" src="js/'.$builderObjectListJs->name.'"></script>' ;           
+                //stripslashes($userpagesObject->page_content) ;
+                fwrite($handle, $data);
+            }
+
+            
+            /* For Header Content */
+            $baseURL = Yii::app()->getBaseUrl(true);        
+            $dataHeader = stripcslashes($hasbuilderObject->temp_header);        
+            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
+            fwrite($handle, $data);        
+
+            
+            
+            
+            /* For Page Content */
+            $dataContent = stripcslashes($userPagesObjectList->page_content);        
+            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
+            fwrite($handle, $data);        
+
+            /* For Footer Content */        
+            $data1 = stripcslashes($hasbuilderObject->temp_footer);        
+            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $data1);  
+            fwrite($handle, $data);
+        }
+        
+        // define some basics
+        echo $rootPath = $path."/builder_images/".$userID.'/build'.$orderID;
+        $archiveName = 'build1.zip';
+            
+        // initialize the ZIP archive
+        $zip = new ZipArchive;
+        $zip->open($archiveName, ZipArchive::CREATE);
+
+        // create recursive directory iterator
+        $files = new RecursiveIteratorIterator (new RecursiveDirectoryIterator($rootPath), RecursiveIteratorIterator::LEAVES_ONLY);
+
+        foreach ($files as $name => $file) {
+                $new_filename = $name;
+                $zip->addFile($file, $new_filename);
+        }
+
+        // close the zip file
+        if (!$zip->close()) {
+                echo '<p>There was a problem writing the ZIP archive.</p>';
+        } else {
+                echo '<p>Successfully created the ZIP Archive!</p>';
+        }
+
+        
+    }
+
 
     public function actionTemplates() {  
         $builderObject = BuildTemp::model()->findAll(array('condition' => 'screenshot != ""'));
@@ -90,8 +213,6 @@ class BuildTempController extends Controller {
     }
 
     public function actionUserInput() {
-        
-           
         $success = "";
         $error = "";        
         
@@ -148,8 +269,7 @@ class BuildTempController extends Controller {
         $this->render('userinput', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject));
     }
 
-    public function actionpageadd() {
-         
+    public function actionpageadd() {         
         $success = "";
         $error = "";
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
@@ -174,7 +294,6 @@ class BuildTempController extends Controller {
     }
     
     public function actionPagedit() {        
-             
         $success = "";
         $error = "";
         $userpagesObject = UserPages::model()->findByPK($_REQUEST['id']);
@@ -192,6 +311,7 @@ class BuildTempController extends Controller {
         }
         $userpagesObjectF = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $orderObject = Order::model()->findByAttributes(array('id' => Yii::app()->session['orderID']));
+        
         $this->render('pagedit', array('userpagesObjectF' => $userpagesObjectF, 'success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject, 'orderObject' => $orderObject));
     }
 
@@ -201,8 +321,7 @@ class BuildTempController extends Controller {
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']  .' AND status = 1 ' ));
         
         $buildTempHeader = UserHasTemplate::model()->findByAttributes(array('user_id' => $userId, 'order_id'=>Yii::app()->session['orderID']));
-//        echo "<pre>";
-//        print_r($userpagesObject); die;
+
         $bb = stripcslashes(stripcslashes($buildTempHeader->user_menu));
        
         $i = 1;
@@ -217,9 +336,7 @@ class BuildTempController extends Controller {
        
     }
 
-    
-    
-     public function actionAddCopyRight() {
+    public function actionAddCopyRight() {
         $error = "";
         $success = "";
         $templateObject = new UserHasTemplate;
@@ -233,7 +350,7 @@ class BuildTempController extends Controller {
         $this->render('copyright', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
     }
     
-     /* For updating footer text */
+    /* For updating footer text */
     public function actionAddHeader(){       
         $error = "";
         $success = "";
@@ -251,7 +368,6 @@ class BuildTempController extends Controller {
         $this->render('header', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
     }
     
-    
     /* For updating footer text */
     public function actionAddFooter(){
         $error = "";
@@ -267,7 +383,6 @@ class BuildTempController extends Controller {
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
         $this->render('footer', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject' => $userhasObject));
     }
-    
     
     public function actionAddLogo() {
         $error = "";
@@ -328,13 +443,11 @@ class BuildTempController extends Controller {
 
     }
     
-    
     public function actionPageFooter(){         
         $userhasObject = UserHasTemplate::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'] , 'order_id' => Yii::app()->session['orderID']));       
         echo $response = stripslashes($userhasObject->temp_footer); 
     }
-            
-
+    
     function actionContactSetting() {
         $error = "";
         $success = "";
