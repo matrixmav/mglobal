@@ -48,9 +48,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <meta content="" name="author" />
 
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link
+        <!--<link
             href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
-            rel="stylesheet" type="text/css" />
+            rel="stylesheet" type="text/css" />-->
         <link
             href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css"
             rel="stylesheet" type="text/css" />
@@ -420,31 +420,33 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
-                                    "profile/inviterefferal" => "Invite Refferals",
-                                    "genealogy" => "Genealogy",
+                                     
+                                    
 //                                    "profile/summery" => "Summery",
                                 );  
                                 }else{
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/changepassword" => "Change Password",
-                                     "profile/changepin" => "Change Master Pin",
+                                    "profile/changepin" => "Change Master Pin",
                                     "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
-                                    "profile/inviterefferal" => "Invite Refferals",
+                                    
                                     //"profile/testimonial" => "Testimonial",
-                                    "genealogy" => "Genealogy",
+                                     
 //                                    "profile/summery" => "Summery",
                                 );
                                 }
                                 $activecls = 'active';
-                                if ($curControllerLower == "profile" && $curAction != 'dashboard' || $curControllerLower == "genealogy" || $curControllerLower == "order" && $curActionLower!='checkinvestment' && $curControllerLower == "order" && $curActionLower!='refferalincome') {
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') {
+                                    
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'profile' && $curAction != 'dashboard' || $curActionLower == 'genealogy' )
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') 
+                                     
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -452,7 +454,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">My Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'order' && $curAction != 'dashboard'  ) ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -485,7 +487,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-
+                            
+                              
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
                                 $billing_subsection = array(
@@ -519,6 +522,61 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
+                            if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
+                                     $hotel_subsection = array(
+                                    "genealogy" => "Placement",
+                                    "profile/inviterefferal" => "Invite referral",
+                                    "order/refferalincome" => "Track referral",     
+                                  );  
+                                 
+                                $activecls = 'active';
+                                if ($curControllerLower == 'genealogy' && $curAction == 'checkinvestment' && $curAction =='refferalincome') {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                if ($curControllerLower == 'genealogy' && $curAction == 'checkinvestment' && $curAction =='refferalincome')
+                                    $activecls = 'active';
+                                if ($curActionLower == 'simplename')
+                                    $activecls = '';
+                                ?>
+                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
+                                            class="leftmenu-hotel"></span> <span class="title">Genealogy</span>
+                                        <span class="selected"></span> <span
+                            class="arrow <?php echo ($curControllerLower == 'genealogy' && $curAction == 'checkinvestment' && $curAction =='refferalincome') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+                                    <?php
+                                    $menusections ['sections'] = $hotel_subsection;
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($hotel_subsection as $hotName => $hotTitle) {
+                                        if (in_array($hotTitle, $menusections ['sections'])) {
+                                            if ($hotName == 'admin') {
+                                                $hotName = '/index';
+                                            }
+                                            if ($curActionLower == 'create') {
+                                                $curActionLower = 'create/type/details';
+                                            }
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+                                            echo '<li ' . $class_content . '>';
+                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($hotName == 'admin/index') {
+                                                $hotName = 'admin';
+                                            }
+
+                                            /*
+                                             * if($hotName == "admin")
+                                             * echo '</ul>';
+                                             */
+                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>					
+                                </li>	
+                                <?php
+                            }
+                            
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
@@ -651,11 +709,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Cash Wallet",
                                     "order/checkinvestment" => "Check Investment",
-                                    "order/refferalincome" => "Referral Income",
+                                     
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment' || $curControllerLower=='order' && $curActionLower=='refferalincome') {
+                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
