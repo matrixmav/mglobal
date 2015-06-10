@@ -36,7 +36,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Add Fund *</label>
     <div class="col-md-6">
-        <input type="text" class="form-control dvalid" name="fund" id="fund" size="60" maxlength="75" value="<?php echo (!empty($walletObject)) ? $walletObject->touser->email : ""; ?>" />
+        <input type="text" class="form-control dvalid" name="paid_amount" id="fund" size="60" maxlength="75" value="<?php echo (!empty($walletObject)) ? $walletObject->touser->email : ""; ?>" />
         <span style="color:red"  id="fund_error"></span>
     </div>
 </div>
