@@ -265,8 +265,11 @@ class UserController extends Controller {
     public function actionDebitWallet() {
         if ($_POST) {
             $userId = $_POST['userId'];
-            $type = $_POST['wallet_type'];
-            $fundAmount = $_POST['fund'];
+            $userObject = User::model()->findByPk($userId);
+            $type = $_POST['walletId'];
+            $fundAmount = $_POST['paid_amount'];
+            $postDataArray = $_POST;
+            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
@@ -283,6 +286,8 @@ class UserController extends Controller {
                 echo "<pre>";
                 print_r($walletObject->getErrors());
                 exit;
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+                
             }
             $this->redirect('/admin/user/wallet?successmsg=2');
         }
