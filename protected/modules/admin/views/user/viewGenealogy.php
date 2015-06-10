@@ -12,26 +12,18 @@ $this->breadcrumbs = array(
 );
 echo '<link rel="stylesheet" href="' . Yii::app()->getBaseUrl(true) . '/css/main.css">';
 echo '<div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                 <div class="expiration margin-topDefault confirmMenu">
-    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/mail" class="form-inline">
-    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="admin_email" onchange="showusergeneo(this.value)">
-            <option value="">Select Mail By User</option>';
-foreach ($emailObject as $email) {
-    echo '<option value="' . $email->id . '"';
-    if (!empty($_POST) && $_POST['admin_email'] == $email->id) {
-        echo 'selected="selected"';
-    }
-    echo '>';
-    echo $email->full_name;
-    echo '</option>';
+      <div class="row">
+     <div class="expiration margin-topDefault confirmMenu" style="display:inline-block;">
+     <form action="" class="form-inline">
+     <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username"  value="'.$userObject->full_name.'" />
+     <input type="button" name="submit" value="Search" onclick="submitform();" class="btn btn-primary confirmOk">';
+
+echo '</div>';
+if (!empty($_GET) && $_GET['id'] != '') {
+    echo '<a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;">Go Back >></a>';
 }
-echo '</select>
-         
-    </form>
-</div> 
- <span>
+echo '</div>
+  <span>
 
                            <div class="tree">
                         <ul>';
@@ -134,19 +126,25 @@ echo '</ul>
                     </div>
                     
                 </div>
-            </div>
-            ';
-if (!empty($_GET) && $_GET['id'] != '') {
-    echo '<a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;">Go Back >></a>';
-}
+            </div>';
+
 echo '</span>
         </div>';
 ?>
-
+<input type="hidden" name='userSearch' value='' id='search_user_id'>
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/hint.css">
 <script type="text/javascript">
     function showusergeneo(userVal)
     {
         location.href = "/admin/user/genealogy?id=" + userVal;
     }
-</script>    
+    function submitform()
+    {
+        var id = $('#search_user_id').val();
+        if(id !='')
+        {
+        location.href = "/admin/user/genealogy?id=" + id;
+        }
+    }
+</script>
+<script type="text/javascript" src="/js/transaction.js"></script>
