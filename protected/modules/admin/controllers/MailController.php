@@ -96,9 +96,9 @@ class MailController extends Controller {
                 $mailObject->created_at = new CDbExpression('NOW()');
                 $mailObject->updated_at = new CDbExpression('NOW()');
                 $mailObject->save(false);
-                $this->redirect('/admin/mail');
+                $this->redirect(array('admin/mail', 'successMsg' => 1));
             }
-            $this->redirect('admin/mail');
+            $this->redirect(array('admin/mail', 'successMsg' => 1));
         }
         $this->render('compose', array('error' => ''));
     }
