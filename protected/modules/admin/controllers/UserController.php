@@ -161,7 +161,7 @@ class UserController extends Controller {
      */
     public function actionIndex() {
         $model = new User;
-        $pageSize = 100;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $successMsg = "";
 
         $dataProvider = new CActiveDataProvider('User', array(
@@ -350,7 +350,7 @@ class UserController extends Controller {
 
     public function actionVerificationApproval() {
         $model = new UserProfile();
-        $pageSize = 10;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $status = "0";
@@ -362,15 +362,15 @@ class UserController extends Controller {
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),
+                ), 'pagination' => array('pageSize' => 100),
             ));
         } else {
-
+           
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',
                 ),
-                'pagination' => array('pageSize' => 10),
+                'pagination' => array('pageSize' => $pageSize),
             ));
         }
         $this->render('verification_approval', array(
@@ -397,7 +397,7 @@ class UserController extends Controller {
 
     public function actionTestimonialApproval() {
         $model = new UserProfile();
-        $pageSize = 10;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $status = 1;
@@ -417,7 +417,7 @@ class UserController extends Controller {
                 'criteria' => array(
                     'condition' => ('testimonials != ""'), 'order' => 'id DESC',
                 ),
-                'pagination' => array('pageSize' => 10),
+                'pagination' => array('pageSize' => $pageSize),
             ));
         }
         $this->render('testimonial_approval', array(
