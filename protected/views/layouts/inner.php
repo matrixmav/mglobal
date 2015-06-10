@@ -155,7 +155,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
             $(function () {
                 $('.datepicker1').datepicker({
-                    format: 'Y-m-d'
+                    dateFormat: 'dd/mm/yyyy'
                 });
             });
              
