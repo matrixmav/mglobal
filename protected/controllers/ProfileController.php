@@ -196,7 +196,7 @@ class ProfileController extends Controller {
         }
 
 
-        $this->render('/user/verification', array('success' => $success, 'error' => $error, 'profileObject' => $profileObject));
+        $this->render('/user/verification', array('success' => $success, 'error' => $error, 'userObject' => $profileObject));
     }
 
     /*
