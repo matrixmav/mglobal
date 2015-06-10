@@ -5,7 +5,7 @@
     <!-- BEGIN SIDEBAR & CONTENT -->
     <div class="row margin-bottom-40">
        
-?>
+ 
  <?php }?>
  <?php if(Yii::app()->session['adminID']==1){?>
        <div class="error">User already loggedIn. Please try in other browser.</div>     
