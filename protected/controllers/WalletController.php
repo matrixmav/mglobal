@@ -162,14 +162,14 @@ class WalletController extends Controller
             
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
         } else {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
@@ -245,14 +245,14 @@ class WalletController extends Controller
             
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
            } else {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at BETWEEN "' . $todayDate . '" AND  "' . $fromDate . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
