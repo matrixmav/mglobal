@@ -24,7 +24,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Wallet Type: </label>
     <div class="col-md-6">
-        <select name="wallet_type" id="wallet_type" class="form-control dvalid"  onchange="getExistingFund('<?php echo $userObject->id;?>',this.value);">
+        <select name="walletId" id="wallet_type" class="form-control dvalid"  onchange="getExistingFund('<?php echo $userObject->id;?>',this.value);">
             <?php foreach ($walletList as $key=>$value) { ?>
             <option value="<?php echo $key;?>"><?php echo $value;?></option>
             <?php } ?>
@@ -41,10 +41,19 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Deduct Fund *</label>
     <div class="col-md-6">
-        <input type="text" class="form-control dvalid" name="fund" id="fund" size="60" maxlength="75" value="<?php echo (!empty($walletObject)) ? $walletObject->touser->email : ""; ?>" />
+        <input type="text" class="form-control dvalid" name="paid_amount" id="fund" size="60" maxlength="75" value="<?php echo (!empty($walletObject)) ? $walletObject->touser->email : ""; ?>" />
         <span style="color:red"  id="fund_error"></span>
     </div>
 </div>
+
+<div class="col-md-12 form-group">
+    <label class="col-md-2">Comment</label>
+    <div class="col-md-6">
+        <textarea class="form-control dvalid" name="comment" id="fund" rows="10" cols="50"></textarea>
+         
+    </div>
+</div>
+
 <div class="col-md-12 form-group">
     <label class="col-md-2"></label>
     <div class="col-md-6">

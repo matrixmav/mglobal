@@ -70,6 +70,10 @@ return array(
         'from' => '',
         'apiUrl' => ''
     ),
+   'session' => array(
+   'class' => 'CDbHttpSession',
+   'timeout' => 1800, 
+),  
     'sms_verification_text' => 'Dayuse Reservation Verification Code: ',
     'months' => array(
             1 => 'January',

@@ -55,7 +55,7 @@ $this->breadcrumbs = array(
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
                 <div class="col-lg-8">
-                  <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="yyyy-mm-dd" value="<?php echo (!empty($userObject))?$userObject->date_of_birth:"";?>">  
+                  <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="yyyy-mm-dd" value="<?php echo (!empty($userObject))? $userObject->date_of_birth:"";?>">  
                     </div>
             </div>
              <div class="form-group">
@@ -88,7 +88,7 @@ $this->breadcrumbs = array(
             
         </fieldset>
 
-    <div class="row">
+         <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
                 <input type="submit" name="submit" value="Update" class="btn red">
                  

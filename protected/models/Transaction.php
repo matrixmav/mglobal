@@ -128,9 +128,15 @@ class Transaction extends CActiveRecord
 		return parent::model($className);
 	}
         
-        public function createTransaction($postDataArray, $userObject){
+        public function createTransaction($postDataArray, $userObject,$role=''){
             $transferAmount = $postDataArray['paid_amount'];
+            $percentage = $transferAmount;
+            
+            if(empty($role))
+            {
             $percentage = BaseClass::getPercentage($transferAmount,1);
+            }
+            
             $actualAmount = ($transferAmount + $percentage);
             $discountAmount = 0;
             if(!empty($postDataArray['discount'])){

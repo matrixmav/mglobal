@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
   
    
-    <form action="http://localhost/user/registration" method="post" class="form-horizontal" onsubmit="return validateFrm();">
+    <form action="/user/registration" method="post" class="form-horizontal" onsubmit="return validateFrm();">
      
         <fieldset>
             <legend>Add User</legend>
