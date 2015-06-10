@@ -146,8 +146,8 @@ class BuildTempController extends Controller {
         
         // define some basics
         echo $rootPath = $path."/builder_images/".$userID.'/build'.$orderID;
-        $archiveName = 'build1.zip';
-            
+        $archiveName = 'build.zip';
+
         // initialize the ZIP archive
         $zip = new ZipArchive;
         $zip->open($archiveName, ZipArchive::CREATE);
