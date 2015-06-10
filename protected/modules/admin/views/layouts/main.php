@@ -664,7 +664,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         
-    <div class="chatWrap">
+    <?php /*?><div class="chatWrap">
        <span class="glyphicon glyphicon-comment"></span>
        
       <div class="chatuserList " style="display: none;">
@@ -676,7 +676,7 @@ License: You must have a valid license purchased only from themeforest(the above
        <?php }?>
        
       </div>    
-       </div> 
+       </div> <?php */?>
         
         <!-- END FOOTER -->
         <script type="text/javascript">
