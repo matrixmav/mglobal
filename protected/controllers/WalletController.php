@@ -145,9 +145,9 @@ class WalletController extends Controller
         public function actionRpWallet()
         {
            $model = "MoneyTransfer";   
-           $loggedInUserId = Yii::app()->session['userid'];
-           $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>2));
-           if($walletobject)
+          $loggedInUserId = Yii::app()->session['userid'];
+          $walletobject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId,'type'=>2));
+          if($walletobject)
            {
                $wid = $walletobject->id;
            }else{
@@ -165,7 +165,15 @@ class WalletController extends Controller
                     'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
-         }
+        } else {
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+                ),
+                'pagination' => array('pageSize' => $pageSize),
+            ));
+        }
           /*$dataProvider = new CActiveDataProvider('MoneyTransfer',array(
 
                                         'criteria'=>array(
@@ -202,7 +210,15 @@ class WalletController extends Controller
                     'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
-           }
+        } else {
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+                ),
+                'pagination' => array('pageSize' => $pageSize),
+            ));
+        }
             $this->render('commisionwallet',array('dataProvider'=>$dataProvider));
         }
         
@@ -232,9 +248,17 @@ class WalletController extends Controller
                     'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
-           }
+           } else {
+
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ('to_user_id = '.$loggedInUserId. ' OR from_user_id = '.$loggedInUserId.' AND wallet_id='.$wid.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+                ),
+                'pagination' => array('pageSize' => $pageSize),
+            ));
+        }
             $this->render('fundwallet',array('dataProvider'=>$dataProvider));
-         
+        
         }
         
         
