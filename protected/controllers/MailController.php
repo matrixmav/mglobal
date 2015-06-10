@@ -115,8 +115,9 @@ class MailController extends Controller
         }
         public function actionReply(){ 
             if($_GET){
+                $emailObject = User::model()->findAll(array('condition'=>'role_id=2'));
                 $mailObject = Mail::model()->findByPk($_GET['id']);
-                $this->render('compose',array('error'=>'','mailObject'=>$mailObject));
+                $this->render('compose',array('error'=>'','mailObject'=>$mailObject,'emailObject'=>$emailObject));
             }
         }
 	/**
