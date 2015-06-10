@@ -64,28 +64,28 @@ class UserController extends Controller {
     }
 
     public function actionGenealogy() {
-        $emailObject = User::model()->findAll(array('condition'=>'sponsor_id = "admin"'));
-        
+        $emailObject = User::model()->findAll(array('condition' => 'sponsor_id = "admin"'));
+
         if (!empty($_GET)) {
             $currentUserId = $_GET['id'];
             $userObject = User::model()->findByPK($currentUserId);
-            
+
             $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
                 'currentUserId' => $currentUserId,
-                'userObject'=>$userObject,
-                'emailObject'=>$emailObject
+                'userObject' => $userObject,
+                'emailObject' => $emailObject
             ));
         } else {
             $currentUserId = 1;
-             $userObject = User::model()->findByPK($currentUserId);
+            $userObject = User::model()->findByPK($currentUserId);
             $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
             $this->render('viewGenealogy', array(
                 'genealogyListObject' => $genealogyListObject,
                 'currentUserId' => $currentUserId,
-                'userObject'=>$userObject,
-                'emailObject'=>$emailObject
+                'userObject' => $userObject,
+                'emailObject' => $emailObject
             ));
         }
     }
@@ -169,8 +169,18 @@ class UserController extends Controller {
                 'condition' => ('name != "admin"'), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),
         ));
+
+        $selected = null;
         if (!empty($_POST['search'])) {
-            $dataProvider = CommonHelper::search(isset($_REQUEST['search']) ? $_REQUEST['search'] : "", $model, array('full_name', 'email', '	phone', 'sponsor_id'), array(), isset($_REQUEST['selected']) ? $_REQUEST['selected'] : "");
+            if (strtolower($_POST['search']) == 'active') {
+                $selected = "status_active";
+            }
+            if (strtolower($_POST['search']) == 'inactive') {
+                $selected = "status_inactive";
+            }            
+
+            //$dataProvider = CommonHelper::search(isset($_REQUEST['search']) ? $_REQUEST['search'] : "", $model, array('full_name', 'email', 'phone', 'sponsor_id', 'status'), array(), isset($_REQUEST['selected']) ? $_REQUEST['selected'] : "");
+            $dataProvider = CommonHelper::search(isset($_REQUEST['search']) ? $_REQUEST['search'] : "", $model, array('full_name', 'email', 'phone', 'sponsor_id'), array(), isset($selected) ? $selected : "");
         }
         $this->render('index', array(
             'dataProvider' => $dataProvider, 'successMsg' => $successMsg
@@ -209,7 +219,7 @@ class UserController extends Controller {
             ), 'pagination' => array('pageSize' => $pageSize),));
 
         if (!empty($_POST)) {
-            
+
             $userObject = User::model()->findByAttributes(array('name' => $_POST['search']));
             $condition = 'type = ' . $walletType . " AND status = 1";
             if (!empty($userObject)) {
@@ -228,7 +238,7 @@ class UserController extends Controller {
     }
 
     public function actionCreditWallet() {
-         
+
         if ($_POST) {
             $userId = $_POST['userId'];
             $type = $_POST['wallet_type'];
@@ -354,8 +364,8 @@ class UserController extends Controller {
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $status = "0";
-        if (!empty($_POST) && $_POST['res_filter']!='') {
-             
+        if (!empty($_POST) && $_POST['res_filter'] != '') {
+
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
             $status = $_POST['res_filter'];

@@ -80,7 +80,7 @@ class MailController extends Controller {
         if ($_POST) {
             $emailArray = $_POST['to_email'];
             foreach ($emailArray as $email) {
-                $userObject = User::model()->findByAttributes(array('email' => $email));
+                $userObject = User::model()->findByAttributes(array('full_name' => $email));
                 if (empty($userObject)) {
                     $this->render('compose', array('error' => 'User Does Not Exist'));
                 }
