@@ -530,12 +530,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                   );  
                                  
                                 $activecls = 'active';
-                                if ($curControllerLower == 'genealogy' && $curAction == 'checkinvestment' && $curAction =='refferalincome') {
+                                if ($curControllerLower == 'genealogy' || $curAction == 'checkinvestment' || $curAction =='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'genealogy' && $curAction == 'checkinvestment' && $curAction =='refferalincome')
+                                if ($curControllerLower == 'genealogy' || $curAction == 'checkinvestment' || $curAction =='refferalincome')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -543,7 +543,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Genealogy</span>
                                         <span class="selected"></span> <span
-                            class="arrow <?php echo ($curControllerLower == 'genealogy' && $curAction == 'checkinvestment' && $curAction =='refferalincome') ? "open" : ''; ?>">
+                            class="arrow <?php echo ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction == 'refferalincome') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
