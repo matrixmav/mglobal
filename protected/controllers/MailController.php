@@ -105,9 +105,9 @@ class MailController extends Controller
                         $mailObject->updated_at = new CDbExpression('NOW()');
                         $mailObject->save(false);
                     }
-                         $this->redirect('/mail');
-                //}
-                $this->redirect('/mail');
+                        $this->redirect(array('/mail', 'successMsg' => 1));
+             
+            $this->redirect(array('/mail', 'successMsg' => 1));
             }
             //$emailObject = User::model()->findAll(array('condition'=>'role_id=2'));
 //            var_dump($emailObject);exit;
