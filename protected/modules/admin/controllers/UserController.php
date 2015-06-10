@@ -359,16 +359,23 @@ class UserController extends Controller {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
             $status = $_POST['res_filter'];
+              if($status  != 'all')
+            {
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" OR document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
+            }else{
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" OR document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
+            }
+             
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""' ), 'order' => 'id DESC',
+                    'condition' => ($cond), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 100),
             ));
         } else {
            
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',
+                    'condition' => ('id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
