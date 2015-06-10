@@ -25,13 +25,16 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">To *</label>
     <div class="col-md-6">
+        <?php if(!empty($emailObject)) { ?>
         <select name="to_email" id="to_email"  class="form-control">
             <option value="">Select Admin</option>
             <?php foreach($emailObject as $email){?>
             <option value="<?php echo $email->id;?>"><?php echo $email->full_name;?></option>
             <?php }?>
         </select>
-        
+        <?php }else{?>
+        <input type="text" class="form-control dvalid" name="email_subject" id="email_subject" size="60" maxlength="75" class="textBox" value="<?php echo (isset($mailObject)) ? $mailObject->subject : ""; ?>" />
+        <?php }?>
          <span class="clrred" style="color:red"  id="to_email_error"></span>
     </div>
 </div>
