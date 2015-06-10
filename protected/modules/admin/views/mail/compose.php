@@ -10,8 +10,8 @@ if(!empty($error)){
 }
 ?>
 <?php 
-if(!empty($_GET) && $_GET['success']!=''){
-    echo "<div class='success'>".$_GET['success']."</div>";
+if(!empty($_GET) && $_GET['successMsg']=='1'){
+    echo "<div class='success'>Your message sent successfully.</div>";
 }
 ?>
 <div class="row">
