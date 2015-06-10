@@ -161,7 +161,7 @@ class UserController extends Controller {
      */
     public function actionIndex() {
         $model = new User;
-        $pageSize = 100;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $successMsg = "";
 
         $dataProvider = new CActiveDataProvider('User', array(
@@ -241,8 +241,11 @@ class UserController extends Controller {
 
         if ($_POST) {
             $userId = $_POST['userId'];
-            $type = $_POST['wallet_type'];
-            $fundAmount = $_POST['fund'];
+            $userObject = User::model()->findByPk($userId);
+            $type = $_POST['walletId'];
+            $fundAmount = $_POST['paid_amount'];
+            $postDataArray = $_POST;
+            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($fundAmount + $walletObject->fund);
@@ -260,7 +263,9 @@ class UserController extends Controller {
                 print_r($walletObject->getErrors());
                 exit;
             }
-            $this->redirect('/admin/user/wallet');
+              
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+            $this->redirect('/admin/user/wallet?successmsg=1');
         }
         $userId = $_GET['id'];
         $userObject = User::model()->findByPk($userId);
@@ -270,11 +275,17 @@ class UserController extends Controller {
     public function actionDebitWallet() {
         if ($_POST) {
             $userId = $_POST['userId'];
-            $type = $_POST['wallet_type'];
-            $fundAmount = $_POST['fund'];
+            $userObject = User::model()->findByPk($userId);
+            $type = $_POST['walletId'];
+            $fundAmount = $_POST['paid_amount'];
+            $postDataArray = $_POST;
+             
+            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+             
             } else {
                 $walletObject = new Wallet;
             }
@@ -288,8 +299,11 @@ class UserController extends Controller {
                 echo "<pre>";
                 print_r($walletObject->getErrors());
                 exit;
+                var_dump($postDataArray);exit;
+             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+                
             }
-            $this->redirect('/admin/user/wallet');
+            $this->redirect('/admin/user/wallet?successmsg=2');
         }
         $userId = $_GET['id'];
         $userObject = User::model()->findByPk($userId);
@@ -360,7 +374,7 @@ class UserController extends Controller {
 
     public function actionVerificationApproval() {
         $model = new UserProfile();
-        $pageSize = 10;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $status = "0";
@@ -369,18 +383,25 @@ class UserController extends Controller {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
             $status = $_POST['res_filter'];
+              if($status  != 'all')
+            {
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" OR document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
+            }else{
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" OR document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
+            }
+             
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),
+                    'condition' => ($cond), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => 100),
             ));
         } else {
-
+           
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != ""'), 'order' => 'id DESC',
+                    'condition' => ('id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
-                'pagination' => array('pageSize' => 10),
+                'pagination' => array('pageSize' => $pageSize),
             ));
         }
         $this->render('verification_approval', array(
@@ -407,7 +428,7 @@ class UserController extends Controller {
 
     public function actionTestimonialApproval() {
         $model = new UserProfile();
-        $pageSize = 10;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $status = 1;
@@ -427,7 +448,7 @@ class UserController extends Controller {
                 'criteria' => array(
                     'condition' => ('testimonials != ""'), 'order' => 'id DESC',
                 ),
-                'pagination' => array('pageSize' => 10),
+                'pagination' => array('pageSize' => $pageSize),
             ));
         }
         $this->render('testimonial_approval', array(

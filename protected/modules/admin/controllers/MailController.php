@@ -93,12 +93,13 @@ class MailController extends Controller {
                 $mailObject->subject = $_POST['email_subject'];
                 $mailObject->message = $_POST['email_body'];
                 $mailObject->attachment = $fname;
+                $mailObject->status = 0;
                 $mailObject->created_at = new CDbExpression('NOW()');
                 $mailObject->updated_at = new CDbExpression('NOW()');
                 $mailObject->save(false);
-                $this->redirect('/admin/mail');
+                $this->redirect(array('admin/mail?successMsg=1'));
             }
-            $this->redirect('admin/mail');
+            $this->redirect(array('admin/mail?successMsg=1'));
         }
         $this->render('compose', array('error' => ''));
     }

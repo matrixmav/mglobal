@@ -243,5 +243,4 @@ class WalletController extends Controller {
             Yii::app()->end();
         }
     }
-
 }

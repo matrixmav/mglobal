@@ -207,6 +207,14 @@ class OrderController extends Controller {
         $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName->name . '"'));
         $connection = Yii::app()->db;
         $userid = "";
+        
+        if (!empty($_POST)) {
+        $todayDate = $_POST['from'];
+        $fromDate = $_POST['to'];
+        }else{
+        $todayDate = date('Y-m-d');
+        $fromDate = date('Y-m-d');   
+        }
         if ($model) {
             foreach ($model as $user) {
                 $userid .= "'" . $user->id . "',";
@@ -224,6 +232,7 @@ class OrderController extends Controller {
             $fromDate = date('Y-m-d', strtotime($_POST['to']));
             $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND order.created_at >= "' . $todayDate . '" AND order.created_at <= "' . $fromDate . '"');
         }
+
         $row = $command->queryAll();
 
         $sqlData = new CArrayDataProvider($row, array(
@@ -274,6 +283,7 @@ class OrderController extends Controller {
         }
         
         $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer"');
+
         $row = $command->queryAll();
         $totalAmount = "";
         foreach ($row as $amount) {

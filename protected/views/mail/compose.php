@@ -25,10 +25,18 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">To *</label>
     <div class="col-md-6">
+         
         <select name="to_email" id="to_email"  class="form-control">
             <option value="">Select Admin</option>
-            <?php foreach($emailObject as $email){?>
-            <option value="<?php echo $email->id;?>"><?php echo $email->full_name;?></option>
+            <?php foreach($emailObject as $email){
+              if(!empty($mailObject))
+              { 
+                  $varID = $mailObject->id;
+                  }else{ 
+                  $varID =  "";
+                 }  
+                ?>
+            <option value="<?php echo $email->id;?>" <?php if($email->id == $varID){?> selected="selected" <?php }?>><?php echo $email->full_name;?></option>
             <?php }?>
         </select>
         

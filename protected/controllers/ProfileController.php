@@ -165,22 +165,22 @@ class ProfileController extends Controller {
     public function actionDocumentVerification() {
         $error = "";
         $success = "";
-        $profileObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
-        $userObject = $profileObject->userprofile();
+        $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
+        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
 
         if ($_POST) {
-            $userObject->id_proof = time() . $_FILES['id_proof']['name'];
-            $userObject->address_proff = time() . $_FILES['address_proof']['name'];
+            $profileObject->id_proof = time() . $_FILES['id_proof']['name'];
+            $profileObject->address_proff = time() . $_FILES['address_proof']['name'];
             if ($_FILES) {
-                if (md5($_POST['UserProfile']['master_pin']) == $profileObject->master_pin) {
-                    $ext1 = end((explode(".", $userObject->id_proof)));
-                    $ext2 = end((explode(".", $userObject->address_proff)));
+                if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
+                    $ext1 = end((explode(".", $profileObject->id_proof)));
+                    $ext2 = end((explode(".", $profileObject->address_proff)));
 
                     if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg" && $ext1 != "pdf" || $ext2 != "jpg" && $ext2 != "png" && $ext2 != "jpeg" && $ext2 != "pdf") {
                         $error = "Please upload mentioned file type.";
                     } else {
 
-                        if ($userObject->update()) {
+                        if ($profileObject->update()) {
                             $path = Yii::getPathOfAlias('webroot') . "/upload/verification-document/";
                             BaseClass::uploadFile($_FILES['id_proof']['tmp_name'], $path, time() . $_FILES['id_proof']['name']);
                             BaseClass::uploadFile($_FILES['address_proof']['tmp_name'], $path, time() . $_FILES['address_proof']['name']);
@@ -196,7 +196,7 @@ class ProfileController extends Controller {
         }
 
 
-        $this->render('/user/verification', array('success' => $success, 'error' => $error, 'userObject' => $userObject));
+        $this->render('/user/verification', array('success' => $success, 'error' => $error, 'userObject' => $profileObject));
     }
 
     /*

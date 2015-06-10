@@ -11,6 +11,12 @@ if (!empty($error)) {
 ?>
 <script type="text/javascript" src="/js/transaction.js"></script>
 
+<?php 
+$_GET['successMsg'] = 0;
+if(!empty($_GET) && $_GET['successMsg']=='1'){
+    echo "<div class='success'>Your message sent successfully.</div>";
+}
+?>
 <div class="row">
     <div class="col-md-12">
         <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/admin/mail', array("class" => "btn  green margin-right-20")); ?>
