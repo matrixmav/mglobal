@@ -21,7 +21,7 @@ class DefaultController extends Controller {
 
     public function actionLogin() {
 
-        if (Yii::app()->session['userid']) {
+        if (Yii::app()->session['userid'] && Yii::app()->session['frontloggedIN']!=1) {
             $this->redirect("/admin/dashboard");
         } else {
             $model = new LoginForm('Admin');
@@ -51,6 +51,7 @@ class DefaultController extends Controller {
             // display the login form
             $this->m_str_title = yii::t('admin', 'admin_default_loginpage_title');
             $this->layout = 'login';
+            
             $this->render('index', array('model' => $model));
         }
     }
