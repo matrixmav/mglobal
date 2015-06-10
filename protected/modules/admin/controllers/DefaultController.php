@@ -128,6 +128,7 @@ class DefaultController extends Controller {
                             Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
                             Yii::app()->session['username'] = "mGlobaly";
+                            Yii::app()->session['adminID'] = "1";
                             echo "1";
                         } else {
                             echo "0";
