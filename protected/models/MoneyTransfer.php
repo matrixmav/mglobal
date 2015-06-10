@@ -130,8 +130,10 @@ class MoneyTransfer extends CActiveRecord
             if(!empty($postDataArray['fund'])){
                 $fundType = $postDataArray['fund'];
             }
-            $userid = Yii::app()->session['userid'];
+            
+            $userid = $userObject->id;
             $Wallobj = Wallet::model()->findByAttributes(array('type' => $postDataArray['walletId'],'user_id' => $userid));
+             
             $createdTime = new CDbExpression('NOW()');
             $moneyTransfertoObj = new MoneyTransfer;
             $moneyTransfertoObj->from_user_id = $userid;
