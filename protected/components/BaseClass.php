@@ -42,7 +42,7 @@ class BaseClass extends Controller {
     }
 
     public static function isLoggedIn() {
-        echo $userId = Yii::app()->session['userid'];// die;
+        $userId = Yii::app()->session['userid'];// die;
        // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if ( !isset($userId)) {
             //ob_start();
