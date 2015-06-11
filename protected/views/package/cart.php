@@ -165,7 +165,7 @@
                             <div class="payChoose col-sm-4">
                                 <div class="payOption clearfix" id="paymentOption">
                                     <div class="col-sm-12 col-xs-12 tleft">
-                                                 <input type="radio" id="payment_mode" name="payment_mode" value="paypal">
+                                                 <input type="radio" id="myRadio" name="myRadio" value="paypal">
                                                  <label for="myRadio">Paypal</label>
 
                                             </div>
@@ -186,19 +186,19 @@
                                 <input type="hidden" id ="return" name="return" value="<?php echo Yii::app()->params['returnurl'];?>transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
                             </form>
                             </div>
-                             <div class="col-sm-4  col-xs-12 amountTab" display="table">
+                             <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
                                 <table width="100%">
                                     <tr>
-                                        <td> <div id="actualamountDiv" style="display:none;">  Total Amount</div> </td>
-                                        <td><span id="actualamount" style="display:none;"></span></td>
+                                        <td> <div id="actualamountDiv">  Total Amount</div> </td>
+                                        <td><span id="actualamount"></span></td>
                                     </tr>
                                     <tr>
-                                        <td><div id="walletamountDiv" style="display:none;">  Wallet Amount</div> </td>
-                                        <td><span id="walletamount" style="display:none;"></span></td>
+                                        <td><div id="walletamountDiv">  Wallet Amount</div> </td>
+                                        <td><span id="walletamount"></span></td>
                                     </tr>
                                     <tr>
-                                        <td><div id="walletamountDiv" style="display:none;"> Payable Amount </div></td>
-                                        <td> <span id="payamount" style="display:none;"></span></td>
+                                        <td><div id="walletamountDiv"> Payable Amount </div></td>
+                                        <td> <span id="payamount"></span></td>
                                     </tr>
                                 </table>
                             </div>
@@ -305,7 +305,7 @@
     }
     function makepayment()
     {
-        var valx = $('input[name=payment_mode]:checked').val();
+        var valx = $('input[name=myRadio]:checked').val();
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
         var totalamount = $("#totalAmount").val();
@@ -354,12 +354,8 @@
             success: function (html) {
                 if (html == 1)
                 {
-                    $('#actualamountDiv').fadeIn();
-                    $('#walletamountDiv').fadeIn();
-                    $('#payamountDiv').fadeIn();
-                    $('#actualamount').fadeIn();
-                    $('#walletamount').fadeIn();
-                    $('#payamount').fadeIn();
+                    totalAmounDiv
+                    $('#totalAmounDiv').fadeIn();
                     $('#actualamount').html('$'+totalAmount);
                     $('#walletamount').html('$'+total);
                     $('#payamount').html('$'+payableAmount);
