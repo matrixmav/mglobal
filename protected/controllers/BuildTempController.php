@@ -70,18 +70,16 @@ class BuildTempController extends Controller {
         
         $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userID . ' AND order_id=' . $orderID ));
   
-//         $tempMenu = $hasbuilderObject->user_menu;
-//        $i = 1;
-//        foreach ($userPagesObject as $pages) {
-//            $pat1 = '*' . $i . '*';
-//            $pat2 = '$' . $i . '$';
-//            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
-//            $tempMenu = str_replace($pat2, strtolower($pages->page_name), $tempMenu);
-//            $i++;
-//        }
-//       // echo $tempMenu;
-//        $tempMenu = stripcslashes($tempMenu);
-//        print_r($tempMenu); die;
+         $tempMenu = $hasbuilderObject->user_menu;
+        $i = 1;
+        foreach ($userPagesObject as $pages) {
+            $pat1 = '*' . $i . '*';
+            $pat2 = '$' . $i . '$';
+            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
+            $tempMenu = str_replace($pat2, $pages->page_name, $tempMenu);
+            $i++;
+        }
+        $tempMenu = stripcslashes($tempMenu);
         
         $path = Yii::getPathOfAlias('webroot');       
         /*Create Folder And Permission */        
@@ -108,31 +106,46 @@ class BuildTempController extends Controller {
         /* Create File and write ka code */
         $path = Yii::getPathOfAlias('webroot');               
         foreach($userPagesObject as $userPagesObjectList){
-         
+            
             $my_file = $path."/builder_images/".$userID.'/build'.$orderID.'/'.strtolower($userPagesObjectList->page_name).".html";
             $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
 
+$headMeta = '<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>'.$userPagesObjectList->page_name.'</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' ;
+           
+            fwrite($handle, $headMeta);  
+            
             foreach($builderObjectCss as $builderObjectListCss){
                $data = "\n".'<link rel="stylesheet" href="css/'.$builderObjectListCss->name.'" type="text/css" media="all">' ;           
-                //stripslashes($userpagesObject->page_content) ;
                 fwrite($handle, $data);
             } 
             foreach($builderObjectJs as $builderObjectListJs){
                $data = "\n".'<script type="text/javascript" src="js/'.$builderObjectListJs->name.'"></script>' ;           
-                //stripslashes($userpagesObject->page_content) ;
                 fwrite($handle, $data);
             }
 
+            $headMetaEnd = "\n".'</head>';
+            $headMetaEnd = "\n".'<body>';
+            fwrite($handle, $headMetaEnd);
             
             /* For Header Content */
             $baseURL = Yii::app()->getBaseUrl(true);        
             $dataHeader = stripcslashes($hasbuilderObject->temp_header);        
+            
+        
+$dataHeader .= "<script>    
+    $(document).ready(function() {         
+        $('.mav_menu').html('".$tempMenu."');         
+    });
+    </script>";
+            
             $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
-            fwrite($handle, $data);        
-
-            
-            
-            
+            fwrite($handle, $data);           
+             
             /* For Page Content */
             $dataContent = stripcslashes($userPagesObjectList->page_content);        
             $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
@@ -142,6 +155,10 @@ class BuildTempController extends Controller {
             $data1 = stripcslashes($hasbuilderObject->temp_footer);        
             $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $data1);  
             fwrite($handle, $data);
+            $bodyEnd = "";
+            $bodyEnd .= "\n".'</body>';
+            $bodyEnd .= "\n".'</html>';
+            fwrite($handle, $bodyEnd);
         }
         
         // define some basics
