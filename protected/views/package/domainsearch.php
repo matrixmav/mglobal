@@ -12,7 +12,7 @@
         <div class="col-sm-8 col-xs-12 col-lg-8">
             <div class="row">
                 <form class="form-inline">
-                    <div class="form-group col-sm-9  has-success has-feedback">
+                    <div class="form-group col-sm-12  has-success has-feedback">
                         <form action="" method="post">
                         <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>" class="form-control searchTxt">
                         <input placeholder="Enter Your Domain Name" type="text" name="domain" class="form-control searchTxt" data-id="field_domains-input" id="domain" style="width: 100%;" onkeyup="autocomplet();" onkeydown="if (event.keyCode == 13)
@@ -37,7 +37,7 @@
                 <?php echo $suggestedDomain; ?> 
             </div>
         </div>
-        <div class="col-sm-4 col-xs-12">
+        <div class="col-sm-3 col-xs-12 col-sm-offset-1">
             <?php echo $rightbar; ?>
         </div>
     </div>
