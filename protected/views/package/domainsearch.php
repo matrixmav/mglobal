@@ -1,70 +1,48 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<div class="container">
-<div class="content-wrapper dca-result-page dca-page-wrapper revamped">
-<div class="left-column lfloat">
-<div style="width: 90%;display: none;" class="error" id="error_msg"></div>
-<div class="search-again-wrapper" style="">
-<form action="" method="post">
-    <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id'];?>">
- <div class="domain-select-wrapper">
-<input placeholder="Enter Your Domain Name" type="text" name="domain" class="domains-input" data-id="field_domains-input" id="domain" maxlength="65" onkeyup="autocomplet();" onkeydown="if (event.keyCode == 13)
+<?php 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+?>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">     
+<div class="container domainSearch">
+    <div class="row">
+        <div class="col-sm-8 col-xs-12 col-lg-8">
+            <div class="row">
+                <form class="form-inline">
+                    <div class="form-group col-sm-9  has-success has-feedback">
+                        <form action="" method="post">
+                        <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>" class="form-control searchTxt">
+                        <input placeholder="Enter Your Domain Name" type="text" name="domain" class="form-control searchTxt" data-id="field_domains-input" id="domain" maxlength="65" onkeyup="autocomplet();" onkeydown="if (event.keyCode == 13)
 {document.getElementById('search').click(); return false;}">
-</div>
-    <input type="button" class="btn-flat-green btn btn-success" id="search" value="Search Here" onclick="" style="padding:10px;"> 
-<div class="clear"></div>
-</form>
-</div>
-<div id="suggestedDomain" style="display:<?php if(Yii::app()->session['domain']){ echo "block"; }else{ echo "none"; }?>">
-<div class="results-wrapper">
-<div class="section-wrap secondary-section">
- <div class="titleFiltersWrp filters">
-<div class="title">
-</div>
-            <div class="title">More domains to consider: </div>
-            <!--<ul class="filterWrp">
-            <li class="title first">FILTER BY:</li>
-            <li id="dca-price-filter" class="priceFilter filterContent second">
-            <div class="title">PRICE</div>
-            <div class="filterContainer price">
-            <div class="slider" id="max-price-slider" style="position: relative; -webkit-user-select: none; box-sizing: border-box; min-height: 25px; margin-left: 12.5px; margin-right: 12.5px;"><div class="track" style="position: absolute; top: 50%; -webkit-user-select: none; cursor: pointer; width: 100%; margin-top: -5.5px;"></div><div class="highlight-track" style="position: absolute; top: 50%; -webkit-user-select: none; cursor: pointer; width: 216px; margin-top: -5.5px;"></div><div class="dragger" style="position: absolute; top: 50%; -webkit-user-select: none; cursor: pointer; margin-top: -12.5px; margin-left: -12.5px; left: 216px;"></div></div><input id="max-price" name="max-price" type="text" style="display: none;">
-            <p class="data price-range-container">
-            <span class="lfloat minPrice"><span class="WebRupee">Rs.</span> 469</span>
-            <span class="rfloat maxPrice"><span class="WebRupee">Rs.</span> 2546580</span>                            
-            </p>
+                        </form> 
+                        <!--<input type="search"  id="" placeholder="search" style="width: 100%;">-->
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                        <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                    </div>
+                    <!--<div class="form-group col-sm-3">
+                        <button type="submit" class="btn btn-success btn-lg">Search Here</button>
+                    </div>-->
+                </form>
             </div>
-            </li>
-            <li id="dca-match-filter" class="exactfilter filterContent third">
-            <div class="title">EXACT MATCHES</div>
-            <div class="filterContainer exact">
-            <p>
-            <input type="checkbox" id="exact-match" name="exact-match">
-            <label for="exact-match">Only show results that exactly match your typed domain name</label>
-            </p>
-            <p class="exactNote">Domain names that are unavailable will not be shown.</p>
+            <div class="row" id="suggestedDomain">
+                <div class="col-sm-12">
+                    <h3>More domains to consider:</h3>
+                </div>
+
             </div>
-            </li>
-            </ul>-->
-            <div class="clear"></div>
- </div>
-    <div class="clear"></div>
-            <div class="domainSearchResult">
-            <div id="secondaryDomainResults" class="secondary-result-section">
-                
-           <?php echo $suggestedDomain;?> 
-                
-</div>  
+            <div id="secondaryDomainResults">
+                <?php echo $suggestedDomain; ?> 
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <?php echo $rightbar; ?>
+        </div>
+    </div>
+    <div class="clear80"></div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="sidebar rfloat cart">
-<div id="scrollable-content" class="scrollable mySideCart">
-<?php echo $rightbar;?>
-</div>
-</div>
-</div>  
-</div>  
 <input type="hidden" name="domainset" id="domainset" value="<?php echo Yii::app()->session['domain'];?>">
   <script>
 function autocomplet()
