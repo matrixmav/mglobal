@@ -129,7 +129,7 @@ function validation() {
 <?php } ?>
     
 </head>	
-<body>      
+<body onload="myOnloadFunc();">      
     <?php echo stripslashes($builderObject->temp_header); ?>     
 
     <div class="mav_content">
@@ -156,7 +156,18 @@ function validation() {
 </body>
 </html>
 
-
+<script>
+    function myOnloadFunc(){
+        $("#slider").responsiveSlides({
+            auto: true,
+            pager: false,
+            nav: true,
+            speed: 500,
+            maxwidth: 962,
+            namespace: "centered-btns"
+      });
+    }
+	</script>
 <!--
 Logo class="mav_logo"
 Menu class="mav_menu"
