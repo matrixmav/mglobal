@@ -15,7 +15,7 @@
                     <div class="form-group col-sm-9  has-success has-feedback">
                         <form action="" method="post">
                         <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>" class="form-control searchTxt">
-                        <input placeholder="Enter Your Domain Name" type="text" name="domain" class="form-control searchTxt" data-id="field_domains-input" id="domain" maxlength="65" onkeyup="autocomplet();" onkeydown="if (event.keyCode == 13)
+                        <input placeholder="Enter Your Domain Name" type="text" name="domain" class="form-control searchTxt" data-id="field_domains-input" id="domain" style="width: 100%;" onkeyup="autocomplet();" onkeydown="if (event.keyCode == 13)
 {document.getElementById('search').click(); return false;}">
                         </form> 
                         <!--<input type="search"  id="" placeholder="search" style="width: 100%;">-->
