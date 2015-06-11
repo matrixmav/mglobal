@@ -13,7 +13,6 @@ class BuildTempController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = 'main';
-
     /**
      * @return array action filters
      */
@@ -274,7 +273,7 @@ class BuildTempController extends Controller {
     public function actionTemplateHeaderAdd() {
         $error = "";
         $success = "";
-        if ($_POST) {
+        if ($_POST) {            
             $category = $_POST['Template']['category'];
             if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
                

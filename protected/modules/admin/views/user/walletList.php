@@ -83,7 +83,8 @@ if(!empty($_GET) && $_GET['successmsg']=='2'){
                 ),
                 array(
                     'name' => 'fund',
-                    'header' => '<span style="white-space: nowrap;">Wallet Fund &nbsp; &nbsp; &nbsp;</span>',
+                    //'header' => '<span style="white-space: nowrap;">Wallet Fund &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Fund &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->fund',
                 ),
                 array(

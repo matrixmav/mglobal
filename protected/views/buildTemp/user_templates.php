@@ -18,7 +18,7 @@ $(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
-           //alert(html);
+            //alert(html);
             $(".mav_menu").html(html);
         }
     });
@@ -121,6 +121,8 @@ function validation() {
     }
 }
 </script>
+
+
 
 <?php foreach($builderObjectJs as $builderObjectListJs){ ?>
     <script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/<?php echo $builderObjectListJs->name ?>" ></script>

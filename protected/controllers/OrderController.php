@@ -30,7 +30,7 @@ class OrderController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment','refferalincome'),
+                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment', 'refferalincome'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -59,8 +59,6 @@ class OrderController extends Controller {
         $orderObject = Order::model()->findAll(array('condition' => 'user_id=' . $userId));
         $this->render('list', array('dataProvider' => $dataProvider, 'orderObject' => $orderObject));
     }
-
-
 
     public function getLabel($data, $row) {
         echo "CButtonColumn1";
@@ -151,7 +149,7 @@ class OrderController extends Controller {
             $order_id = $_GET['id'];
         }
         $orderObject = Order::model()->findByPK($order_id);
-         
+
         $this->renderPartial('invoice', array(
             'orderObject' => $orderObject
         ));
@@ -226,7 +224,15 @@ class OrderController extends Controller {
         } else {
             $condition = "order.user_id IN('0') AND ";
         }
-        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '"');
+        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer"');
+
+        // Date filter.
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+            $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND order.created_at >= "' . $todayDate . '" AND order.created_at <= "' . $fromDate . '"');
+        }
+
         $row = $command->queryAll();
 
         $sqlData = new CArrayDataProvider($row, array(
@@ -251,19 +257,11 @@ class OrderController extends Controller {
     /*
      * function to fetch direct income
      */
-    
-    public function actionRefferalIncome()
-    {
-         
+
+    public function actionRefferalIncome() {
         $loggedInuserName = User::model()->findByPk(Yii::app()->session['userid']);
         $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName->name . '"'));
-        if (!empty($_POST)) {
-        $todayDate = $_POST['from'];
-        $fromDate = $_POST['to'];
-        }else{
-        $todayDate = date('Y-m-d');
-        $fromDate = date('Y-m-d');   
-        }
+
         $connection = Yii::app()->db;
         $userid = "";
         if ($model) {
@@ -275,14 +273,23 @@ class OrderController extends Controller {
         } else {
             $condition = "transaction.user_id IN('0') AND ";
         }
-        $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer"  AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '"');
+
+        // Date filter.
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+            $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '"');
+            var_dump($command); exit;
+        }
+        
+        $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer"');
+
         $row = $command->queryAll();
         $totalAmount = "";
-        foreach($row as $amount)
-        {
-          $totalAmount += $amount['paid_amount']*5/100;  
+        foreach ($row as $amount) {
+            $totalAmount += $amount['paid_amount'] * 5 / 100;
         }
-         
+
         $sqlData = new CArrayDataProvider($row, array(
             'pagination' => array('pageSize' => 10)));
         //$sqlData = $sqlData->getData();
@@ -297,24 +304,23 @@ class OrderController extends Controller {
           $dataProvider['package'] = $packageObject;
           } */
 
-        
-      
+
+
         $this->render('directincome', array(
             'dataProvider' => $sqlData,
-            'totalAmount'=>$totalAmount,
+            'totalAmount' => $totalAmount,
         ));
     }
-    protected function GetButtonTitle($data,$row)
-	{ 
-            $userId = Yii::app()->session['userid'];
-           $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id'])); 
-           if(!empty($userhasObject) && $userhasObject->publish==1)
-           {
-              $title = '<a href="'.$data['domain'].'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
-           }else{
-             $title = '<a href="/buildtemp/templates/?id='.$data['id'].'" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>'; 
-           }
-           echo $title;
-         }
-}
 
+    protected function GetButtonTitle($data, $row) {
+        $userId = Yii::app()->session['userid'];
+        $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
+        if (!empty($userhasObject) && $userhasObject->publish == 1) {
+            $title = '<a href="' . $data['domain'] . '" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
+        } else {
+            $title = '<a href="/buildtemp/templates/?id=' . $data['id'] . '" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>';
+        }
+        echo $title;
+    }
+
+}

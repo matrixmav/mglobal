@@ -5,13 +5,12 @@
 $this->breadcrumbs = array(
     'Commission Wallet',
 );
- 
 
-$this->menu=array(
-	array('label'=>'Create Order', 'url'=>array('create')),
-	array('label'=>'Manage Order', 'url'=>array('admin')),
+
+$this->menu = array(
+    array('label' => 'Create Order', 'url' => array('create')),
+    array('label' => 'Manage Order', 'url' => array('admin')),
 );
- 
 ?>
 <style>
     .confirmBtn{left: 333px;

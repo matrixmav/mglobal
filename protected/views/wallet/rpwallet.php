@@ -2,17 +2,18 @@
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
 
- 
+
 $this->breadcrumbs = array(
     'RPWallet',
 );
- 
- 
 
-$this->menu=array(
-	array('label'=>'Create Order', 'url'=>array('create')),
-	array('label'=>'Manage Order', 'url'=>array('admin')),
+
+
+$this->menu = array(
+    array('label' => 'Create Order', 'url' => array('create')),
+    array('label' => 'Manage Order', 'url' => array('admin')),
 );
+
  
 ?><style>
     .confirmBtn{left: 333px;
@@ -121,4 +122,4 @@ $this->menu=array(
                     format: 'yyyy-mm-dd'
                 });
             });
-    </script>
+    </script>   
