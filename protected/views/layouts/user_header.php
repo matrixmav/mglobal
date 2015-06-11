@@ -58,7 +58,7 @@
         <div class="header-navigation pull-right font-transform-inherit">
             <ul>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="/">Home </a>
+                    <a class="dropdown-toggle"  href="/">Home </a>
                 </li>
                 <li class="dropdown dropdown-megamenu">
                     <a class="dropdown-toggle" href="/#about">About </a>
@@ -71,7 +71,7 @@
                     <a class="dropdown-toggle" href="/#team">Media centre </a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="javascript:;"> Templates </a>
+                    <a class="dropdown-toggle" href="/#portfolio"> Templates </a>
                 </li>
                 <li class="dropdown">
                     <a href="/#benefits" class="dropdown-toggle" >Benefits</a>

@@ -549,6 +549,11 @@ public function actionConfirm(){
                 $userObject->password = BaseClass::md5Encryption($password);
                 $userObject->update();
                 $msg = "Please check your email to activate your account";
+                /*echo "<pre>";
+                print_r($password);
+                print_r($userObject->password);
+                print_r($userObject);
+                exit;*/
                 if (!$userObject->update(false)) {
                     echo "<pre>";
                     print_r($model->getErrors());

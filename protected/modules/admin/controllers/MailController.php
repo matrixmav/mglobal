@@ -8,6 +8,10 @@ class MailController extends Controller {
      */
     public $layout = 'main';
 
+    public function init() {
+        BaseClass::isAdmin();
+    }
+
     /**
      * @return array action filters
      */
@@ -51,7 +55,7 @@ class MailController extends Controller {
         $emailObject = User::model()->findAll(array('condition' => 'role_id=2'));
         if (!empty($_POST)) {
             $dataProvider = new CActiveDataProvider('Mail', array(
-                'criteria' => array('condition' => 'to_user_id ='.$_POST['admin_email'], 'order' => 'updated_at DESC'),
+                'criteria' => array('condition' => 'to_user_id =' . $_POST['admin_email'], 'order' => 'updated_at DESC'),
                 'pagination' => array('pageSize' => $pageSize)));
         } else {
             $dataProvider = new CActiveDataProvider('Mail', array(
@@ -84,7 +88,7 @@ class MailController extends Controller {
                 if (empty($userObject)) {
                     $this->render('compose', array('error' => 'User Does Not Exist'));
                 }
-                $fname = time().$_FILES['attachment']['name'];
+                $fname = time() . $_FILES['attachment']['name'];
                 $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                 BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                 $mailObject = new Mail();

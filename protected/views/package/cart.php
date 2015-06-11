@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/css/themes/font-awesome.min.css">
 <div class="container">
     <div class="row">
@@ -126,15 +125,15 @@
                                     </tbody></table>
                             </div>
                         </div>
-                        <div class="btnWrp col-sm-11">
+                        <div class="btnWrp">
                             <a id="summary-btn" class="btn btn-success btn-lg" onclick="proceedPayment();">Proceed to Payment</a>
                         </div>
                     </div>
-                    <div class="sectionWrp paymentOptions clearfix">
+                    <div class="sectionWrp paymentOptions">
                         <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
                         <div id="paymentOption" style="display:none;">
                             <?php if ($walletObject) { ?>
-                            <div id="walletOption" class="col-sm-4">
+                                <div id="walletOption">
                                     <form id="walletform" name="walletform">
                                         <?php
                                         $i = 1;
@@ -152,7 +151,7 @@
                                                 $fund = $wallet->fund;
                                             }
                                             ?>
-                                            <div class="col-sm-12 col-xs-12 tleft">
+                                            <div class="col-sm-4 col-xs-12 tleft">
                                                 <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
                                                 <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                             </div>
@@ -166,19 +165,13 @@
                             <div class="payChoose col-sm-4">
                                 <div class="payOption clearfix" id="paymentOption">
                                     <div class="col-sm-12 col-xs-12 tleft">
-                                                 <input type="radio" id="myRadio" name="myRadio" value="myRadioOption">
-                                                <label for="myRadio">paypal</label>
+                                                 <input type="radio" id="myRadio" name="myRadio" value="paypal">
+                                                 <label for="myRadio">Paypal</label>
 
                                             </div>
-                                    <div class="col-sm-12 col-xs-12 tleft">
-                                                 <input type="radio" id="myRadio2" name="myRadio" value="myRadioOption">
-                                                <label for="myRadio2">Label</label>
-
-                                            </div>
-                                    
-                           
                                 </div>
-                            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
+
+                            <form action="<?php echo Yii::app()->params['paypalurl'];?>" method="post" id="frmPayPal">
                                 <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                                 <input type="hidden" name="cmd" value="_xclick">
                                 <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
@@ -190,36 +183,29 @@
                                 <input type="hidden" name="currency_code" value="USD">
                                 <input type="hidden" name="handling" value="0">
                                 <input type="hidden" name="cancel_return" value="">
-                                <input type="hidden" name="return" value="http://localhost/package/thankyou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
-
-
-
+                                <input type="hidden" id ="return" name="return" value="<?php echo Yii::app()->params['returnurl'];?>transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
                             </form>
-                           
-                        </div>
-                             <div class="col-sm-4  col-xs-12 amountTab" display="table">
+                            </div>
+                             <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
                                 <table width="100%">
                                     <tr>
-                                        <td> <div id="actualamountDiv" >  Total Amount</div> </td>
-                                        <td><span id="actualamount" style="display:inline-block;">11</span></td>
+                                        <td> <div id="actualamountDiv">  Total Amount</div> </td>
+                                        <td><span id="actualamount"></span></td>
                                     </tr>
                                     <tr>
-                                        <td><div id="walletamountDiv">  Wallet Amount<div> </td>
-                                        <td><span id="walletamount" style="display:inline-block ;">111</span></td>
+                                        <td><div id="walletamountDiv">  Wallet Amount</div> </td>
+                                        <td><span id="walletamount"></span></td>
                                     </tr>
                                     <tr>
                                         <td><div id="walletamountDiv"> Payable Amount </div></td>
-                                        <td> <span id="payamount" style="display:inline-block;">111</span></td>
+                                        <td> <span id="payamount"></span></td>
                                     </tr>
                                 </table>
                             </div>
-                                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">
-                                            </div>
-                           
+                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg"></div>
                             </div>
+                        </div>
                     </div>
-                   
-                </div>
             </div>
         </div>
     </div>
@@ -285,8 +271,11 @@
             data: dataString,
             cache: false,
             success: function (html) {
-                if (html == 1)
+             var htmlArr = html.split('-');
+            
+                if (htmlArr[0] == 1)
                 {
+                    $('#return').val('http://mglobally.maverickinfosoft.com/package/thankyou?transaction_id='+htmlArr[1]);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
 
@@ -316,7 +305,7 @@
     }
     function makepayment()
     {
-        var valx = $('input[name=payment_mode]:checked').val();
+        var valx = $('input[name=myRadio]:checked').val();
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
         var totalamount = $("#totalAmount").val();
@@ -365,12 +354,8 @@
             success: function (html) {
                 if (html == 1)
                 {
-                    $('#actualamountDiv').fadeIn();
-                    $('#walletamountDiv').fadeIn();
-                    $('#payamountDiv').fadeIn();
-                    $('#actualamount').fadeIn();
-                    $('#walletamount').fadeIn();
-                    $('#payamount').fadeIn();
+                    totalAmounDiv
+                    $('#totalAmounDiv').fadeIn();
                     $('#actualamount').html('$'+totalAmount);
                     $('#walletamount').html('$'+total);
                     $('#payamount').html('$'+payableAmount);
@@ -386,3 +371,4 @@
     }
 
 </script>    
+ 

@@ -42,11 +42,15 @@ class BaseClass extends Controller {
     }
 
     public static function isLoggedIn() {
-        $userId = Yii::app()->session['userid'];
-        $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
-        if (!$adminObject) {
+        echo $userId = Yii::app()->session['userid'];// die;
+       // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
+        if ( !isset($userId)) {
+            //ob_start();
             //$this->redirect('/user/login');
-            header('Location:/user/login');
+
+            header('Location:/user/login');  die; 
+            
+
         }
     }
 
@@ -98,7 +102,14 @@ class BaseClass extends Controller {
         return $generateid;
     }
 
-    public static function getUnredMails($userId) {
+
+    public static function getUnredMails($userId){
+
+        return Mail::model()->count(array('condition'=>'to_user_id='.$userId. ' AND status = 0'));
+
+}
+
+    /*public static function getUnredMails($userId) {
         $count = Mail::model()->count(array(
             'condition' => 'to_user_id = :uid AND status = :status',
             'params' => array(
@@ -107,14 +118,15 @@ class BaseClass extends Controller {
             ),
         ));        
         return $count;        
-        /*return Mail::model()->count(array('condition' => 'from_user_id=' . $userId . ' AND status = 0'));*/
-    }
+        /*return Mail::model()->count(array('condition' => 'from_user_id=' . $userId . ' AND status = 0'));}*/ 
+
+    
 
     public static function isAdmin() {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '2'));
         if (!$adminObject) {
-            header('Location:/admin');
+            header('Location:/admin');die;
         }
     }
 
