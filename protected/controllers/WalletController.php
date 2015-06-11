@@ -149,8 +149,9 @@ class WalletController extends Controller {
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND to_user_id = ' . $loggedInUserId . ' OR from_user_id = ' . $loggedInUserId . ' AND wallet_id=' . $wid), 'order' => 'id DESC',
+                'condition' => ('wallet_id="' . $wid.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
+         
         $this->render('rpwallet', array('dataProvider' => $dataProvider));
     }
 
@@ -175,7 +176,7 @@ class WalletController extends Controller {
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND to_user_id = ' . $loggedInUserId . ' OR from_user_id = ' . $loggedInUserId . ' AND wallet_id=' . $wid), 'order' => 'id DESC',
+                'condition' => ('wallet_id="' . $wid.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
         $this->render('commisionwallet', array('dataProvider' => $dataProvider));
     }
@@ -200,8 +201,8 @@ class WalletController extends Controller {
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND to_user_id = ' . $loggedInUserId . ' OR from_user_id = ' . $loggedInUserId . ' AND wallet_id=' . $wid), 'order' => 'id DESC',
-        )));
+                'condition' => ('wallet_id="' . $wid.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+         )));
         $this->render('fundwallet', array('dataProvider' => $dataProvider));
     }
 
