@@ -108,7 +108,7 @@
             return false;
         }
 
-        $("#password_error").html("");
+        /*$("#password_error").html("");
         if ($("#password").val() == "") {
             $("#password_error").html("Enter Password");
             $("#password").focus();
@@ -141,7 +141,7 @@
             $("#confirm_password_error").html("Please check that you've entered and confirmed your password");
             $("#confirm_password").focus();
             return false;
-        }
+        }*/
 
         $("#position_error").html("");
         if ($("#position").val() == "") {
@@ -152,19 +152,30 @@
         
     }
     function isUserExisted() {
+        $("#name_error").html("");
+        if ($("#name").val().match(/\s/g)) {
+            $("#name_error").html("Username should not contain blank spaces.");
+            $("#name").focus();            
+            return false;
+        }
+       else{
         $.ajax({
             type: "post",
             url: "/user/isuserexisted",
             data: "username=" + $("#name").val(),
             success: function (msg) {
                 $("#name_error").html("");
+               $("#name_available").html("");
                 $("#nameExistedErrorFlag").val("0");
                 if(msg == 1){
                     $("#name_error").html("Existed!!!");
                     $("#nameExistedErrorFlag").val(1);
+                } else {
+                    $("#name_available").html("Available!!!");
                 }
             }
         });
+    }
     }
     function getCountryCode(id){ 
          $.ajax({

@@ -1,5 +1,4 @@
 <?php
-
 class UserController extends Controller {
 
     /**
@@ -405,7 +404,7 @@ public function actionConfirm(){
                             Yii::app()->user->login($identity);
                         Yii::app()->session['userid'] = $getUserObject->id;
                         Yii::app()->session['username'] = $getUserObject->name;
-
+                        Yii::app()->session['frontloggedIN'] = "1";
                         if (Yii::app()->session['package_id'] != '') {
                             $this->redirect("/package/domainsearch");
                         } else {
@@ -515,7 +514,7 @@ public function actionConfirm(){
             $config['subject'] = 'Registration Confirmation' ;
             $config['body'] = 'Hi,' .$model->full_name.'<br/>Congratulations! You have been registered successfully'.
                     '<strong>Please click the link below to activate your account:</strong><br/>'.
-                    '<a href="http://staging.mglobally.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
+                    '<a href="http://mglobally.maverickinfosoft.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
             $response = CommonHelper::sendMail($config);
             $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
             $this->redirect(array('login','successMsg'=> $successMsg));
@@ -551,6 +550,11 @@ public function actionConfirm(){
                 $userObject->password = BaseClass::md5Encryption($password);
                 $userObject->update();
                 $msg = "Please check your email to activate your account";
+                /*echo "<pre>";
+                print_r($password);
+                print_r($userObject->password);
+                print_r($userObject);
+                exit;*/
                 if (!$userObject->update(false)) {
                     echo "<pre>";
                     print_r($model->getErrors());

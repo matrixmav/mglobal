@@ -4361,7 +4361,7 @@ UI Loading
 /* custom.css */
     .topWallet{}
     .topWallet{}
-   .topWallet > li{ width: auto; display: inline-block; padding: 0 10px !important;}
+   .topWallet > li{ width: auto; display: inline-block; padding: 0 6px !important;}
     .topWallet > li> a> i{ font-size:20px !important;}
      
     .topWallet > li.credit span{ position: absolute; right:35px; top: 8px;}

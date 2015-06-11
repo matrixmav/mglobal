@@ -8,6 +8,10 @@ class MailController extends Controller {
      */
     public $layout = 'main';
 
+    public function init() {
+        BaseClass::isAdmin();
+    }
+
     /**
      * @return array action filters
      */
@@ -51,7 +55,7 @@ class MailController extends Controller {
         $emailObject = User::model()->findAll(array('condition' => 'role_id=2'));
         if (!empty($_POST)) {
             $dataProvider = new CActiveDataProvider('Mail', array(
-                'criteria' => array('condition' => 'to_user_id ='.$_POST['admin_email'], 'order' => 'updated_at DESC'),
+                'criteria' => array('condition' => 'to_user_id =' . $_POST['admin_email'], 'order' => 'updated_at DESC'),
                 'pagination' => array('pageSize' => $pageSize)));
         } else {
             $dataProvider = new CActiveDataProvider('Mail', array(
@@ -80,21 +84,26 @@ class MailController extends Controller {
         if ($_POST) {
             $emailArray = $_POST['to_email'];
             foreach ($emailArray as $email) {
-                $userObject = User::model()->findByAttributes(array('email' => $email));
+                $userObject = User::model()->findByAttributes(array('full_name' => $email));
                 if (empty($userObject)) {
                     $this->render('compose', array('error' => 'User Does Not Exist'));
                 }
+                $fname = time() . $_FILES['attachment']['name'];
+                $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
+                BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                 $mailObject = new Mail();
                 $mailObject->to_user_id = $userObject->id;
                 $mailObject->from_user_id = Yii::app()->params['adminId'];
                 $mailObject->subject = $_POST['email_subject'];
                 $mailObject->message = $_POST['email_body'];
+                $mailObject->attachment = $fname;
+                $mailObject->status = 0;
                 $mailObject->created_at = new CDbExpression('NOW()');
                 $mailObject->updated_at = new CDbExpression('NOW()');
                 $mailObject->save(false);
-                $this->redirect('/admin/mail');
+                $this->redirect(array('admin/mail?successMsg=1'));
             }
-            $this->redirect('admin/mail');
+            $this->redirect(array('admin/mail?successMsg=1'));
         }
         $this->render('compose', array('error' => ''));
     }

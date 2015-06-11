@@ -17,6 +17,16 @@ $this->breadcrumbs = array(
     top: 8px;}
     .confirmMenu{position: relative;}
 </style>
+<?php 
+if(!empty($_GET) && $_GET['successmsg']=='1'){
+    echo "<div class='success'>Wallet amount transferred successfully.</div>";
+}
+?>
+<?php 
+if(!empty($_GET) && $_GET['successmsg']=='2'){
+    echo "<div class='success'>Wallet amount deducted successfully.</div>";
+}
+?>
 <div class="col-md-12">
     
         <div class="expiration margin-topDefault confirmMenu">
@@ -73,7 +83,8 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'fund',
-                    'header' => '<span style="white-space: nowrap;">Wallet Fund &nbsp; &nbsp; &nbsp;</span>',
+                    //'header' => '<span style="white-space: nowrap;">Wallet Fund &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Fund &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->fund',
                 ),
                 array(

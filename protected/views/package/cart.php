@@ -162,9 +162,16 @@
                                 </div>
 
 <?php } ?>
-                            <input type="radio" value="paypal" name="payment_mode">Paypal 
+                            <div class="payChoose col-sm-4">
+                                <div class="payOption clearfix" id="paymentOption">
+                                    <div class="col-sm-12 col-xs-12 tleft">
+                                                 <input type="radio" id="myRadio" name="myRadio" value="paypal">
+                                                 <label for="myRadio">Paypal</label>
 
-                            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="frmPayPal">
+                                            </div>
+                                </div>
+
+                            <form action="<?php echo Yii::app()->params['paypalurl'];?>" method="post" id="frmPayPal">
                                 <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                                 <input type="hidden" name="cmd" value="_xclick">
                                 <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
@@ -176,19 +183,29 @@
                                 <input type="hidden" name="currency_code" value="USD">
                                 <input type="hidden" name="handling" value="0">
                                 <input type="hidden" name="cancel_return" value="">
-                                <input type="hidden" id ="return" name="return" value="http://staging.mglobally.com/package/thankylou?transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
-
-
-
+                                <input type="hidden" id ="return" name="return" value="<?php echo Yii::app()->params['returnurl'];?>transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
                             </form>
-                            <div id="actualamountDiv" style="display:none;">Total Amount-  <span id="actualamount" style="display:none;"></span></div>
-                            <div id="walletamountDiv" style="display:none;">Wallet Amount- <span id="walletamount" style="display:none;"></span></div>
-                            <div id="payamountDiv" style="display:none;">Payable Amount- <span id="payamount" style="display:none;"></span></div>
-                            <input type="button" value="Make Payment" onclick="makepayment();" class="btn-flat-green ui-btn-grey">   
+                            </div>
+                             <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
+                                <table width="100%">
+                                    <tr>
+                                        <td> <div id="actualamountDiv">  Total Amount</div> </td>
+                                        <td><span id="actualamount"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div id="walletamountDiv">  Wallet Amount</div> </td>
+                                        <td><span id="walletamount"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><div id="walletamountDiv"> Payable Amount </div></td>
+                                        <td> <span id="payamount"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg"></div>
+                            </div>
                         </div>
                     </div>
-                   
-                </div>
             </div>
         </div>
     </div>
@@ -258,7 +275,7 @@
             
                 if (htmlArr[0] == 1)
                 {
-                    $('#return').val('http://staging.mglobally.com/package/thankyou?transaction_id='+htmlArr[1]);
+                    $('#return').val('http://mglobally.maverickinfosoft.com/package/thankyou?transaction_id='+htmlArr[1]);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
 
@@ -288,7 +305,7 @@
     }
     function makepayment()
     {
-        var valx = $('input[name=payment_mode]:checked').val();
+        var valx = $('input[name=myRadio]:checked').val();
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
         var totalamount = $("#totalAmount").val();
@@ -337,12 +354,8 @@
             success: function (html) {
                 if (html == 1)
                 {
-                    $('#actualamountDiv').fadeIn();
-                    $('#walletamountDiv').fadeIn();
-                    $('#payamountDiv').fadeIn();
-                    $('#actualamount').fadeIn();
-                    $('#walletamount').fadeIn();
-                    $('#payamount').fadeIn();
+                    totalAmounDiv
+                    $('#totalAmounDiv').fadeIn();
                     $('#actualamount').html('$'+totalAmount);
                     $('#walletamount').html('$'+total);
                     $('#payamount').html('$'+payableAmount);

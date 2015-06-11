@@ -109,6 +109,7 @@ return array(
                  //Local
                 */
 		'db'=>array(
+
 				'connectionString' => 'mysql:host=localhost;dbname=mglobal',
 				'emulatePrepare' => true,
 				'username' => 'root',

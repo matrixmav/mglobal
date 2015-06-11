@@ -18,7 +18,7 @@ $(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
-           //alert(html);
+            //alert(html);
             $(".mav_menu").html(html);
         }
     });
@@ -48,6 +48,7 @@ $(document).ready(function() {
         data: dataString,
         cache: false,
         success: function(html) {
+            //alert(html);
             var htmlArr = html.split('aaaaa');
             if(htmlArr[0] != ''){             
                 $(".mav_content").html(htmlArr[0]);
@@ -121,6 +122,8 @@ function validation() {
 }
 </script>
 
+
+
 <?php foreach($builderObjectJs as $builderObjectListJs){ ?>
     <script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/<?php echo $builderObjectListJs->name ?>" ></script>
 <?php } ?>
@@ -139,7 +142,16 @@ function validation() {
 
     <div class="mav_footer">
         <?php echo $builderObject->temp_footer; ?>   
-    </div>    
+    </div>  
+    <?php
+    if($builderObject->custom_js){ 
+        echo "<script type='text/javascript'>". stripslashes($builderObject->custom_js) ."</script>";
+    } 
+    
+    if($builderObject->custom_css){ 
+        echo "<style>". stripslashes($builderObject->custom_css) ."</style>";
+    }
+    ?>
     
 </body>
 </html>

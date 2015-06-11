@@ -4,7 +4,11 @@ $this->breadcrumbs = array(
     'inbox'
 );
 ?>
-
+<?php 
+if(!empty($_GET) && $_GET['successMsg']=='1'){
+    echo "<div class='success'>Your message sent successfully.</div>";
+}
+?>
 <div class="row">
     <div class="col-md-12">
             <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20  red")); ?>
@@ -47,7 +51,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'from_user_id',
-            'header' => '<span style="white-space: nowrap;">Receiver &nbsp; &nbsp; &nbsp;</span>',
+            'header' => '<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
             'value' => '$data->fromuser->full_name',
         ),
         array(

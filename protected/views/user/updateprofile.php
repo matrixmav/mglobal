@@ -6,92 +6,93 @@ $this->breadcrumbs = array(
 ?>
 <div class="col-md-7 col-sm-7">
     <div class="error" id="error_msg" style="display: none;"></div>
-    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
-    <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
+    <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
     <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return validation();">
-     
+
         <fieldset>
             <legend>Update Profile</legend>
-             <div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Sponsor ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="name" class="form-control" name="UserProfile[sponsor_id]" value="<?php echo (!empty($userObject))? $userObject->sponsor_id:"";?>" readonly="readonly">
+                    <input type="text" id="name" class="form-control" name="UserProfile[sponsor_id]" value="<?php echo (!empty($userObject)) ? $userObject->sponsor_id : ""; ?>" readonly="readonly">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Name</label>
                 <div class="col-lg-8">
-                    <input type="text" id="name" class="form-control" name="UserProfile[name]" value="<?php echo (!empty($userObject))? $userObject->name : "";?>" readonly="readonly">
+                    <input type="text" id="name" class="form-control" name="UserProfile[name]" value="<?php echo (!empty($userObject)) ? $userObject->name : ""; ?>" readonly="readonly">
                 </div>
             </div>
-            
-           <div class="form-group">
+
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Position</label>
                 <div class="col-lg-8">
-                    <input type="text" id="position" class="form-control" name="UserProfile[position]" value="<?php echo (!empty($userObject))?$userObject->position:"";?>" readonly="readonly">
+                    <input type="text" id="position" class="form-control" name="UserProfile[position]" value="<?php echo (!empty($userObject)) ? $userObject->position : ""; ?>" readonly="readonly">
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Full Name<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject))?$userObject->full_name:"";?>" <?php if($edit=='no'){ ?>readonly="readonly" <?php }?>>
+                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject)) ? $userObject->full_name : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?>>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Email<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject))? $userObject->email:"";?>" <?php if($edit=='no'){ ?>readonly="readonly" <?php }?>>
+                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject)) ? $userObject->email : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?>>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" value="<?php echo (!empty($userObject))? $userObject->country_code:"";?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>" <?php if($edit=='no'){ ?>readonly="readonly" <?php }?> style="width:88%;float:right;">
+                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:88%;float:right;">
                 </div>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
-                <div class="col-lg-8">
-                  <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="yyyy-mm-dd" value="<?php echo (!empty($userObject))?$userObject->date_of_birth:"";?>">  
-                    </div>
+                <div class="col-lg-8">                  
+                    <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="d-m-yyyy" value="<?php echo (!empty($userObject)) ? date("d-m-Y", strtotime($userObject->date_of_birth)) : ""; ?>">  
+                </div>
+
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Skype ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="skype_id" class="form-control" name="UserProfile[skype_id]" value="<?php echo (!empty($userObject))?$userObject->skype_id:"";?>">
+                    <input type="text" id="skype_id" class="form-control" name="UserProfile[skype_id]" value="<?php echo (!empty($userObject)) ? $userObject->skype_id : ""; ?>">
                     <span class="example">Ex: example12</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Facebook ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="facebook_id" class="form-control" name="UserProfile[facebook_id]" value="<?php echo (!empty($userObject))?$userObject->facebook_id:"";?>">
+                    <input type="text" id="facebook_id" class="form-control" name="UserProfile[facebook_id]" value="<?php echo (!empty($userObject)) ? $userObject->facebook_id : ""; ?>">
                     <span class="example">Ex: http://facebook.com</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Twitter ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="twitter_id" class="form-control" name="UserProfile[twitter_id]" value="<?php echo (!empty($userObject))?$userObject->twitter_id:"";?>">
+                    <input type="text" id="twitter_id" class="form-control" name="UserProfile[twitter_id]" value="<?php echo (!empty($userObject)) ? $userObject->twitter_id : ""; ?>">
                     <span class="example">Ex: http://twitter.com</span>
                 </div>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
                 </div>
             </div>
-            
+
         </fieldset>
 
-    <div class="row">
+        <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
                 <input type="submit" name="submit" value="Update" class="btn red">
-                 
+
             </div>
         </div>
     </form>
@@ -104,16 +105,16 @@ $this->breadcrumbs = array(
 <script type="text/javascript">
     function validation()
     {
-        if(document.getElementById("full_name").value=='')
+        if (document.getElementById("full_name").value == '')
         {
-            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg").style.display = "block";
             document.getElementById("error_msg").innerHTML = "Please enter your full name.";
             document.getElementById("full_name").focus();
             return false;
         }
-        if(document.getElementById("email").value=='')
+        if (document.getElementById("email").value == '')
         {
-            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg").style.display = "block";
             document.getElementById("error_msg").innerHTML = "Please enter your email.";
             document.getElementById("email").focus();
             return false;
@@ -122,14 +123,14 @@ $this->breadcrumbs = array(
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
         if (!filter.test(email.value)) {
-            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg").style.display = "block";
             $("#error_msg").html("Enter valid email address ");
             $("#email").focus();
             return false;
         }
-        if(document.getElementById("phone").value=='')
+        if (document.getElementById("phone").value == '')
         {
-            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg").style.display = "block";
             document.getElementById("error_msg").innerHTML = "Please enter phone number.";
             document.getElementById("phone").focus();
             return false;
@@ -139,19 +140,18 @@ $this->breadcrumbs = array(
 
         if (!filter.test(phone.value)) {
             $("#error_msg").html("Enter valid phone number ");
-            $("#phone").focus();  
+            $("#phone").focus();
             return false;
         }
-        if(document.getElementById("master_pin").value=='')
+        if (document.getElementById("master_pin").value == '')
         {
-            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg").style.display = "block";
             document.getElementById("error_msg").innerHTML = "Please enter your master pin.";
             document.getElementById("master_pin").focus();
             return false;
         }
-         
-        
+
+
     }
-    </script>
-     
-     
+</script>
+
