@@ -237,20 +237,21 @@ class PackageController extends Controller {
             <button id="checkout" class="btn-flat-green btn-orange" onclick="RedirectCart();">Checkout</button>
             </div>
             </div>';
+        
         $userEnteredDomain = Yii::app()->session['domain'];
-        $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $userEnteredDomain . "%'"));
+        $doaminArr = explode('.', $userEnteredDomain);
+        $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $doaminArr[0] . "%'"));
         $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
         $UserDomainPart = explode('.', $userEnteredDomain);
-
+        
 
         // $pos = array_search($UserDomainPart[1], $AllDomainArray);
         //unset($AllDomainArray[$pos]);
         //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
         $SuggestedDomain = "";
         foreach ($domainTakenArray as $alldomain) {
+            
             foreach ($AllDomainArray as $allext) {
-                $domainName = "'" . $alldomain->name . "." . $allext . "'";
-
                 $domainName = "'" . $alldomain->name . "." . $allext . "'";
                 $domainNameF = "'" . $alldomain->name . "." . $allext . "'";
 
@@ -263,24 +264,21 @@ class PackageController extends Controller {
 
                 if (in_array($domainNameF, $domainTakenArray)) {
 
-                    $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><span class="btn btn-success">N/A</span></div>';
+                    $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><span class="btn btn-success">N/A</span></div></div></div>';
                 } else {
 
 
-                    $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><button class="btn btn-success" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add/button>
+                    $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><button class="btn btn-success" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>
                     </div></div></div>';
                 }
-                $SuggestedDomain .= '</div></div>';
-
-
-                //$SuggestedDomain .= "<a href='".Yii::app()->baseUrl."checkout?domain_id=1'>" . $UserDomainPart[0] . "." . $alldomain . "</a><br/>";
+               
             }
         }
 
 
 
 
-        $this->render('cart_search', array(
+        $this->render('domainsearch', array(
             'rightbar' => $rightbar,
             'suggestedDomain' => $SuggestedDomain,
         ));
@@ -318,7 +316,7 @@ class PackageController extends Controller {
             foreach ($AllDomainArray as $allext) {
                 $domainName = "'" . $alldomain->name . "." . $allext . "'";
 
-                $SuggestedDomain .= $SuggestedDomain .= '<div class="searchWrap"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
+                $SuggestedDomain .= '<div class="searchWrap"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
                                     <div class="txtComent">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div></div></div>
                                     <div class="col-sm-2 col-xs-2">
                                     <p class="priceDomain"> <span>$</span>' . $alldomain->price . '</p></div>
