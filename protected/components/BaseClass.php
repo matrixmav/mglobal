@@ -106,7 +106,7 @@ class BaseClass extends Controller {
 
     public static function getUnredMails($userId){
 
-        return Mail::model()->count(array('condition'=>'from_user_id='.$userId. ' AND status = 0'));
+        return Mail::model()->count(array('condition'=>'to_user_id='.$userId. ' AND status = 0'));
 
 
     }
