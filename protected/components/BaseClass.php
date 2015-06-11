@@ -42,11 +42,12 @@ class BaseClass extends Controller {
         }*/
     }
     public static function isLoggedIn() {
-        $userId = Yii::app()->session['userid'];
-        $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
-        if (!$adminObject) {
+        echo $userId = Yii::app()->session['userid'];// die;
+       // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
+        if ( !isset($userId)) {
+            //ob_start();
             //$this->redirect('/user/login');
-            header('Location:/user/login');
+            header('Location:/user/login');  die; 
             
         }
     }
@@ -115,7 +116,7 @@ class BaseClass extends Controller {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '2'));
         if (!$adminObject) {
-            header('Location:/admin');
+            header('Location:/admin');die;
         }
     }
     
