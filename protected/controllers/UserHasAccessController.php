@@ -44,10 +44,12 @@ class UserHasAccessController extends Controller {
     }
 
     public function actionIndex() {
+        echo "ssd";exit;
         $this->render('index');
     }
     
     public function actionMemberAccess() {
+        echo "ssd";exit;
         $this->render('user/member_access');
     }
     
