@@ -101,7 +101,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Used RP &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->used_rp)? $datatransaction->used_rp:"N/A"',
+                    'value' => 'isset($data->transaction->used_rp)? $data->transaction->used_rp:"N/A"',
                 ),
                  array(
                     'name' => 'id',
