@@ -97,7 +97,7 @@ class UserHasAccessController extends Controller {
                 'condition' => ('role_id >= "2" AND name != "admin"'), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
 
-        $this->render('members', array(
+        $this->render('/user/members', array(
             'dataProvider' => $dataProvider,
         ));
     }
