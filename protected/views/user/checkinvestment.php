@@ -78,7 +78,7 @@ $this->menu=array(
                     'value'=>'$row+1',
 		),
 		array(
-                    'name'=>'full_name',
+                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'isset($data->full_name)? ucwords($data->full_name):""',
 		),
@@ -88,17 +88,17 @@ $this->menu=array(
                     'value'=>'isset($data->package->name)? ucwords($data->package->name):""',
 		),
                 array(
-                    'name'=>'transaction_id',
+                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'isset($data->package->amount)? number_format($data->package->amount,2):""',
 		),
             array(
-                    'name'=>'created_at',
+                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Order Date &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->orderSummary->created_at',
 		),
             array(
-                    'name'=>'status',
+                    'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Transfer Status &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'($data->orderSummary->status == 1) ? "Completed" : "Pending"',
 		),
