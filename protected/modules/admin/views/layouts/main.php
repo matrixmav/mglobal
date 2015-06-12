@@ -18,6 +18,9 @@ $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState (
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
+
+$UseraccessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
+$accessArr = explode(',',$UseraccessObject->access);
 ?>
 
 <!DOCTYPE html>
@@ -234,6 +237,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
 
                         <?php
+                        if (in_array('user', $accessArr)) {
                         if ($access != "manager") {
                             $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
@@ -291,7 +295,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-                            
+                        }
+                           if (in_array('mail', $accessArr)) { 
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
                                 $billing_subsection = array(
@@ -323,6 +328,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
+                           }
+                           if (in_array('reports', $accessArr)) {
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
@@ -379,7 +386,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                            
+                           }
+                            if (in_array('package', $accessArr)) {
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
@@ -422,7 +430,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                            
+                            }
+                            if (in_array('builder', $accessArr)) {
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
@@ -467,6 +476,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     ?>			
                                 </li>
                                 <?php
+                            }
                             }
                                     
                             $bases_pmenu = 4;
@@ -551,8 +561,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <?php } ?>	
                             
                             <!-- New Menu added here -->
-                            
-                            <?php $reservation_pmenu = 9;
+                            <?php if (in_array('ads', $accessArr)) {
+                             $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
                                     "ads/add" => "Ads Add",
@@ -594,7 +604,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                            
+                            }
+                            if (in_array('memberaccess', $accessArr)) {
                             /*access menu start*/     
                             $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
@@ -638,6 +649,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     ?>			
                                 </li>
                                 <?php
+                            }
                             }
                             $bases_pmenu = 4; ?>
                             
