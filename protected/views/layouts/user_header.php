@@ -11,18 +11,20 @@
 
  
             <!-- BEGIN TOP BAR LEFT PART -->
-            <div class="col-md-6 col-sm-6 additional-shop-info col-xs-12">
+            <div class="col-md-6 col-sm-6 additional-shop-info">
                 <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+91 1234567890</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>maverickinfosoft@gmail.com</span></li>
-                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn btn-primary">Click Here</button></a></li>
+                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Click Here</button></a></li>
                 </ul>
             </div>
             <!-- END TOP BAR LEFT PART -->
             <!-- BEGIN TOP BAR MENU -->
-            <div class="col-md-6 col-sm-6 additional-nav col-xs-12">
+            <div class="col-md-6 col-sm-6 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
-                    <?php if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
+                    <?php 
+                     if(Yii::app()->session['adminID']!= '1'){ 
+                     if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/profile/dashboard">My Account</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/site/logout">Logout</a></li>
                     <?php }else{?>
@@ -38,7 +40,7 @@
                     <?php }?>
                     <?php }
                     
-                    }?>
+                    }}?>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -58,7 +60,7 @@
         <div class="header-navigation pull-right font-transform-inherit">
             <ul>
                 <li class="dropdown">
-                    <a class="dropdown-toggle"  href="/">Home </a>
+                    <a class="dropdown-toggle" href="/">Home </a>
                 </li>
                 <li class="dropdown dropdown-megamenu">
                     <a class="dropdown-toggle" href="/#about">About </a>
