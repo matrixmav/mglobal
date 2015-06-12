@@ -28,9 +28,9 @@ $this->breadcrumbs = array(
         <input type="checkbox" name="access[]" id="ads">Ads<br/>
         <input type="checkbox" name="access[]" id="package">package<br/>
         <input type="checkbox" name="access[]" id="reports">Reports<br/>
-        <input type="checkbox" name="access[]" id="users">Member Management<br/>
+        <input type="checkbox" name="access[]" id="user">Member Management<br/>
         <input type="checkbox" name="access[]" id="mail">Mail<br/>
-        <input type="checkbox" name="access[]" id="mail">Member Access<br/>
+        <input type="checkbox" name="access[]" id="memberaccess">Member Access<br/>
     </div>
 </div>
  
