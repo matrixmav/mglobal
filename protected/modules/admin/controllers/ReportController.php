@@ -122,7 +122,7 @@ class ReportController extends Controller {
         //By default Pending.
         $status = 0;
 
-        $condition = 'address_proff !="" AND id_proof !="" AND status = ' . $status;
+        $condition = 'address_proff !="" AND id_proof !="" AND status = ' . $status.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"';
         if (!empty($_POST)) {
             $status = $_POST['res_filter'];
             // Add status.
