@@ -26,7 +26,7 @@ class UserHasAccessController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'memberaccess','members'),
+                'actions' => array('index', 'memberaccess','members','changeapprovalstatus'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -101,6 +101,19 @@ class UserHasAccessController extends Controller {
         $this->render('/user/members', array(
             'dataProvider' => $dataProvider,
         ));
+    }
+    
+     public function actionChangeApprovalStatus() {
+        if ($_REQUEST['id']) {
+            $userprofileObject = User::model()->findByPk($_REQUEST['id']);
+            if ($userprofileObject->status == 1) {
+                $userprofileObject->status = 0;
+            } else {
+                $userprofileObject->status = 1;
+            }
+            $userprofileObject->save(false);
+            $this->redirect(array('/admin/userhasaccess/members', 'successMsg' => 1));
+        }
     }
     
     /*
