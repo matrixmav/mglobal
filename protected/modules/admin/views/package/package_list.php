@@ -21,8 +21,8 @@ $this->breadcrumbs = array(
 
     <div class="expiration margin-topDefault confirmMenu">
 
-        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/package/list">
-            <div class="input-group" style="margin-left:0px!important;">
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/package/list" class="form-inline">
+            <div class="input-group form-group" >
                 <?php
             $statusId = 1;
             if (isset($_REQUEST['res_filter'])) {
@@ -30,7 +30,7 @@ $this->breadcrumbs = array(
             }
             ?>
 
-            <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
+                <select class="customeSelect howDidYou form-control input-medium" id="ui-id-5" name="res_filter" style="margin-right: 10px;">
 
                 <option value="1" <?php if ($statusId == 1) {
                 echo "selected";
@@ -39,10 +39,12 @@ $this->breadcrumbs = array(
                 echo "selected";
             } ?> >In Active</option>
             </select>
+                <input type="submit" class="btn btn-primary " value="OK" name="submit" id="submit"/>
             </div>
-            
+          
+        </form>
     </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+    
 </form>
 
 </div>
