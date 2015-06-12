@@ -39,13 +39,15 @@
               </div>
             <div class="col-md-6 col-sm-6 additional-nav col-xs-12">
                     <ul class="list-unstyled list-inline pull-right">
-                       <?php if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
+                       <?php 
+if(Yii::app()->session['adminID']!= '1'){ 
+if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/profile/dashboard">My Account</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/site/logout">Logout</a></li>
                     <?php }else{?>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/login">Log In</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/registration">Registration</a></li>
-                    <?php }?>
+                    <?php }}?>
                     </ul>
                 </div>
             </div>
