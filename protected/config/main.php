@@ -113,7 +113,7 @@ return array(
 				'connectionString' => 'mysql:host=localhost;dbname=mglobal',
 				'emulatePrepare' => true,
 				'username' => 'root',
-				'password' => 'root',
+				'password' => '',
 				'charset' => 'utf8',
                                 'tablePrefix' => 'tbl_',
 		),
