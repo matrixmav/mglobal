@@ -479,6 +479,7 @@ class UserController extends Controller {
         $success = "";
         if ($_REQUEST['id']) {
             $userObject = User::model()->findByPK($_REQUEST['id']);
+            
             $profileObject = UserProfile::model()->findByAttributes(array('user_id' => $_REQUEST['id']));
             if ($_REQUEST['id'] && $_POST) {
                 if ($_POST['UserProfile']['address'] != '' && $_POST['UserProfile']['street'] != '' && $_POST['UserProfile']['city_name'] != '' && $_POST['UserProfile']['state_name'] != '' && $_POST['UserProfile']['country_id'] != '' && $_POST['UserProfile']['zip_code'] != '' && $_POST['UserProfile']['phone'] != '') {
@@ -489,6 +490,7 @@ class UserController extends Controller {
                     $userObject->date_of_birth = $_POST['UserProfile']['date_of_birth'];
                     $userObject->skype_id = $_POST['UserProfile']['skype_id'];
                     $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
+                    $userObject->country_id = $_POST['UserProfile']['country_id'];
                     $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
                     $userObject->updated_at = new CDbExpression('NOW()');
                     $userObject->update();
