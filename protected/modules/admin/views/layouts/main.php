@@ -19,6 +19,7 @@ $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username'
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
 $accessArr = BaseClass::getMemberAccess();
+$userName = BaseClass::getUserName();
 ?>
 
 <!DOCTYPE html>
@@ -183,8 +184,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown user"><a href="#" class="dropdown-toggle"
                                                  data-toggle="dropdown" data-hover="dropdown"
-                                                 data-close-others="true"> <span class="username">
-                                                         <?php echo Yii::app()->user->getState('username'); ?>
+                                                 data-close-others="true"> <span class="username" style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
+                                                         <?php echo ucfirst($userName); ?>
                             </span> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -208,11 +209,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- END USER LOGIN DROPDOWN -->
                 </ul>
 
-                <div class="pull-right inlineBlock"
+                <!--<div class="pull-right inlineBlock"
                      style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
                     <!--<img src="<?php //echo Yii::app()->request->baseUrl . "/images/admin/"; ?>"><br />-->
-                    Admin
-                </div>
+                    <!--Admin
+                </div>-->
 
                 <!-- END TOP NAVIGATION MENU -->
             </div>
@@ -235,7 +236,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
 
                         <?php
-                        
+                        if (in_array('user', $accessArr)) {
                         if ($access != "manager") {
                             $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
@@ -244,7 +245,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "user/index" => "Member Management",
                                     );
                               }else{
-                                    $hotel_subsection3 = array();
+                                    $hotel_subsection1 = array();
                                             
                                 }
                                 if (in_array('wallet', $accessArr)) { 
@@ -252,7 +253,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                       "user/wallet" => "Wallet",   
                                    );
                                 }else{
-                                    $hotel_subsection3 = array();
+                                    $hotel_subsection2 = array();
                                             
                                 }
                                 if (in_array('geneology', $accessArr)) { 
@@ -329,7 +330,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                              
-                        }
+                        }}
                            if (in_array('mail', $accessArr)) { 
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
