@@ -3,6 +3,7 @@ $this->breadcrumbs = array(
      
     'User Edit',
 );
+ 
 ?>
 <div class="col-md-7 col-sm-7">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
@@ -104,7 +105,7 @@ $this->breadcrumbs = array(
                         <select name="UserProfile[country_id]" id="country_id" onchange="getStateList(this.value)" class="form-control">
                             <option value="">Select Country</option>
                             <?php foreach ( $countryObject as  $country) { ?>
-                            <option value="<?php echo $country->id; ?>" <?php if(!empty($profileObject)) { if( $country->id== $profileObject->country_id){?>selected="selected<?php }}?>"><?php echo $country->name;?></option>
+                            <option value="<?php echo $country->id; ?>" <?php if(!empty($userObject)) { if( $country->id== $profileObject->country_id){?>selected="selected<?php }}?>"><?php echo $country->name;?></option>
                             <?php } ?>
                         </select>
                     <div id="error_msg_country"></div> 
