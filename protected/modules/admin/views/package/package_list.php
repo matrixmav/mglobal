@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Package' => array('/admin/package/list'), 'Package List'
+    'Package List'
 );
 ?>
 
