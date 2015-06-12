@@ -22,13 +22,8 @@ $this->breadcrumbs = array(
     <div class="expiration margin-topDefault confirmMenu">
 
         <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/package/list">
-            <div class="input-group input-large date-picker input-daterange">
-                <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
-                <span class="input-group-addon">
-                    to </span>
-                <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
-            </div>
-            <?php
+            <div class="input-group" style="margin-left:0px!important;">
+                <?php
             $statusId = 1;
             if (isset($_REQUEST['res_filter'])) {
                 $statusId = $_REQUEST['res_filter'];
@@ -44,6 +39,8 @@ $this->breadcrumbs = array(
                 echo "selected";
             } ?> >In Active</option>
             </select>
+            </div>
+            
     </div>
     <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
 </form>
