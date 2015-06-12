@@ -72,6 +72,18 @@ class BaseClass extends Controller {
         return $accessArr;
      
     }
+    
+    function getUserName() {
+     $userId = Yii::app()->session['userid'];// die; 
+     $userName = User::model()->findByPK(array('user_id'=>$userId));
+     if(!empty($userName))
+     {
+        $name = $userName->name;
+     }else{
+        $name = ""; 
+     }
+     return $name;
+    }
 
     public static function walletAmount($id) {
         $userId = Yii::app()->session['userid'];
