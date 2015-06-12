@@ -47,6 +47,10 @@ class UserHasAccessController extends Controller {
         $this->render('index');
     }
     
+    public function actionMemberAccess() {
+        $this->render('user/member_access');
+    }
+    
     /*
      * function to save access for admin users
      */
