@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Orders List',
+	'Track Referral',
 );
 
 $this->menu=array(
@@ -51,12 +51,12 @@ $this->menu=array(
 		array(
                     'name'=>'full_name',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->full_name)?$data->package->full_name:""',
+                    'value'=>'isset($data->full_name)?$data->full_name:""',
 		),
                 array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Refered In &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'($data->social==fb) ? facebook ($data->social==tw) ? twitter : email',
+                    'value'=>'( $data->social=="fb") ? "facebook" : ($data->social=="tw" ? "twitter" : "email")',
 		),
                array(
                     'name'=>'created_at',
