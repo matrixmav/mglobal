@@ -26,7 +26,7 @@ class UserHasAccessController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'memberaccess'),
+                'actions' => array('index', 'memberaccess','member'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -85,6 +85,21 @@ class UserHasAccessController extends Controller {
      }
     }
     $this->render('/user/member_access',array('emailObject'=>$emailObject,'error'=>$error,'success'=>$success));
+    }
+    
+    /*
+     * function to fetch members
+     */
+    public function actionMembers() {
+           $pageSize= 100;
+            $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('role_id >= "2" AND name != "admin"'), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+
+        $this->render('members', array(
+            'dataProvider' => $dataProvider,
+        ));
     }
     
     /*
