@@ -49,11 +49,16 @@ class UserHasAccessController extends Controller {
     }
     
     public function actionMemberAccess() {
-    $varString = "";    
-    $emailObject = User::model()->findAll(array('condition'=>'role_id=2 AND name != "admin"'));
+    $varString = "";
     $error ="";
     $success ="";
+    
     $model = new UserHasAccess;
+    if((isset($_GET)) && $_GET['id'] !='')
+    {
+    $emailObject = User::model()->findBYPK($_GET['id']);
+    $UseraccessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>$_GET['id']));
+    $accessArr = explode(',',$UseraccessObject->access);
     if(!empty($_POST))
     {
      $accessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>$_POST['admin_id']));
@@ -84,7 +89,10 @@ class UserHasAccessController extends Controller {
          $success .= "User access permission saved successfully.";
      }
     }
-    $this->render('/user/member_access',array('emailObject'=>$emailObject,'error'=>$error,'success'=>$success));
+    }else{
+      $error .= "Invalid request.";   
+    }
+    $this->render('/user/member_access',array('emailObject'=>$emailObject,'error'=>$error,'success'=>$success,'accessArr'=>$accessArr));
     }
     
     /*
