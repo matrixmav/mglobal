@@ -115,7 +115,7 @@ $this->breadcrumbs = array(
                         ),
                          'Access' => array(
                             'label' => Yii::t('translation', 'Member Access'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/userhasaccess/memberaccess", array("id"=>$data->id))',
                         ),
                          
