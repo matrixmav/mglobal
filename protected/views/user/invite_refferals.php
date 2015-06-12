@@ -22,6 +22,7 @@ $caption = '';
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+    <div class="error" id="error_msg_email" style="display:none;"></div>
     <form action="/profile/inviterefferal" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset id="emailDiv" style="display:none;">
@@ -30,7 +31,7 @@ $caption = '';
                 <label class="col-lg-4 control-label" for="lastname">Email</label>
                 <div class="col-lg-8">
                     <input type="text" id="email" class="form-control" name="email" value="">(Enter comma seperated email address. example : example.com,example1.com etc )<br/>
-                    <div class="" id="error_msg_email"></div>
+                    
                 </div>
             </div>
             
@@ -60,6 +61,7 @@ $caption = '';
       var emailList = document.getElementById("email").value;
       if(emailList=='')
       {
+         $("#error_msg_email").fadeIn(); 
          $("#error_msg_email").html("Email field can not be blank");
          $("#email").focus();
             return false;  
@@ -69,6 +71,7 @@ $caption = '';
       for(var i = 0; i < emails.length; i++)
       {
      if( emails[i] == "" || ! regex.test(emails[i])){
+         $("#error_msg_email").fadeIn(); 
          $("#error_msg_email").html("One of your entered email is not correct.Please check");
          $("#email").focus();
             return false;
