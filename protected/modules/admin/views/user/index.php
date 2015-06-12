@@ -105,7 +105,7 @@ $this->breadcrumbs = array(
 //                        ),
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default blue delete'),
+                            'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
