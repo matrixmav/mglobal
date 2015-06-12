@@ -104,7 +104,7 @@ $this->breadcrumbs = array(
                         <select name="UserProfile[country_id]" id="country_id" onchange="getStateList(this.value)" class="form-control">
                             <option value="">Select Country</option>
                             <?php foreach ( $countryObject as  $country) { ?>
-                            <option value="<?php echo $country->id; ?>" <?php if( $country->id== (!empty($profileObject)) ? $profileObject->country_id :  ""){?>selected="selected<?php }?>"><?php echo $country->name;?></option>
+                            <option value="<?php echo $country->id; ?>" <?php if(!empty($profileObject)) { if( $country->id== $profileObject->country_id){?>selected="selected<?php }}?>"><?php echo $country->name;?></option>
                             <?php } ?>
                         </select>
                     <div id="error_msg_country"></div> 
