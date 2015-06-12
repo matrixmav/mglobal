@@ -1,4 +1,3 @@
-
 <?php
 /* @var $this UserController */
 /* @var $model User */
@@ -55,8 +54,13 @@ $this->breadcrumbs = array(
                 ),
                 //'idJob',
                 array(
+                    'name' => 'name',
+                    'header' => '<span style="white-space: nowrap;">Name</span>',
+                    'value' => '$data->name',
+                ),
+                array(
                     'name' => 'full_name',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp;</span>',
                     'value' => '$data->full_name',
                 ),
                 array(
@@ -88,10 +92,7 @@ $this->breadcrumbs = array(
                     'name' => 'status',
                     'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
                 ),
-                array(
-                    'name' => 'Quick Chat',
-                    'value' => array($this, 'getOnClickEvent'),
-                ),
+
                 array(
                     'class' => 'CButtonColumn',
                     'template' => '{Change}{Edit}{Delete}',
@@ -104,17 +105,17 @@ $this->breadcrumbs = array(
 //                        ),
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default blue delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => Yii::t('translation', 'Edit'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/edit", array("id"=>$data->id))',
                         ),
                         'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
-                            'options' => array('class' => 'fa fa-success btn default black delete', 'onclick' => 'return confirm("Do u want to delete this user?");'),
+                            'options' => array('class' => 'fa fa-success btn default red delete', 'onclick' => 'return confirm("Do u want to delete this user?");'),
                             'url' => 'Yii::app()->createUrl("admin/user/deleteuser", array("id"=>$data->id))',
                         ),
                     ),
