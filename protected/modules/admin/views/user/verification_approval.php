@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-     'Document Approval' => array('/admin/user/verificationapproval'),'Document Verification'
+     'Document Approval'
 );
 ?>
 

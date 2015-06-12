@@ -7,8 +7,8 @@ $treeVar = '/admin/user/genealogy/';
 
 
 $this->breadcrumbs = array(
-    'Genealogies' => array('index'),
-    "Tree"
+    'Genealogies'
+    
 );
 echo '<link rel="stylesheet" href="' . Yii::app()->getBaseUrl(true) . '/css/main.css">';
 if (!empty($_GET) && $_GET['id'] != '') {

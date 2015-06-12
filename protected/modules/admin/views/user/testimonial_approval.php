@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-     'Testimonial Approval' => array('/admin/user/testimonialapproval'),'Testimonial Approval'
+     'Testimonial Approval'
 );
 ?>
 
