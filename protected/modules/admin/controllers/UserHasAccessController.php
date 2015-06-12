@@ -26,7 +26,7 @@ class UserHasAccessController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'memberaccess','member'),
+                'actions' => array('index', 'memberaccess','members'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -92,9 +92,10 @@ class UserHasAccessController extends Controller {
      */
     public function actionMembers() {
            $pageSize= 100;
-            $dataProvider = new CActiveDataProvider($model, array(
+           $model = 
+            $dataProvider = new CActiveDataProvider('User', array(
             'criteria' => array(
-                'condition' => ('role_id >= "2" AND name != "admin"'), 'order' => 'id DESC',
+                'condition' => ('role_id = "2" AND name != "admin" '), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
 
         $this->render('/user/members', array(
