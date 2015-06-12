@@ -4,7 +4,11 @@ $this->breadcrumbs = array(
     'inbox'
 );
 ?>
-
+<?php 
+if(!empty($_GET) && $_GET['successMsg']=='1'){
+    echo "<div class='success'>Your message sent successfully.</div>";
+}
+?>
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-3">   
