@@ -18,7 +18,6 @@ $this->breadcrumbs = array(
             
     <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
     <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
-    <a href="/BuildTemp/addcopyright" class="btn green">Copy Right Setting</a> 
     <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
     <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a>           
     <form action="/BuildTemp/pageadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
