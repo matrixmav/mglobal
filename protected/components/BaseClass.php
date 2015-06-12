@@ -1,4 +1,4 @@
-get<?php
+<?php
 
 require_once Yii::app()->basePath . '/components/Mobile_Detect.php';
 
