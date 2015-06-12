@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
                 <div class="col-lg-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
                          <span class="btn btn-primary btn-file btn-1"><span class="fileupload-new"><input type="file" id="id_proof" class="form-control11" name="id_proof"></span></div>
-                    <span class="example1">(Upload jpg ,png , pdf files only)</span> 
+                    <span class="example1">(Upload jpg ,png files only)</span> 
                     <?php 
                     if(!empty($userObject) && $userObject->id_proof!=''){?>
                     <span class="example">
@@ -32,7 +32,7 @@ $this->breadcrumbs = array(
                 <div class="col-lg-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
                          <span class="btn btn-primary btn-file btn-1"><input type="file" id="address_proof" class="form-control11" name="address_proof"></span></div>
-                         <span class="example1">(Upload jpg ,png ,pdf files only)</span> 
+                         <span class="example1">(Upload jpg ,png files only)</span> 
                              <?php if(!empty($userObject) && $userObject->address_proff!=''){?>
                     <span class="example"><a href="/upload/verification-document/<?php echo $userObject->address_proff;?>" target="_blank"><img src="/upload/verification-document/<?php echo $userObject->address_proff;?>" width="50" height="50"></a></span>
                     <?php }?>
