@@ -239,7 +239,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         if ($access != "manager") {
                             $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                              if (in_array('user', $accessArr)) {  
+                              if (in_array('usermg', $accessArr)) {  
                                 $hotel_subsection1 = array(
                                     "user/index" => "Member Management",
                                     );
