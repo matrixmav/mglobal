@@ -25,7 +25,7 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin','inviterefferal'),
+                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin','inviterefferal','trackrefferal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -349,6 +349,25 @@ class ProfileController extends Controller {
             'error' => $error,'success' => $success,'userObject'=>$userObject
         ));  
     }
+    
+    public function actionTrackRefferal()
+    {
+        $error = "";
+        $success = "";
+        $loggedInUserId = Yii::app()->session['userid'];
+          $pageSize= 100;
+             $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'criteria' => array(
+                'condition' => ('sponsor_id="' . $loggedInUserId.'" AND social != ""'), 'order' => 'id DESC',
+             )));
+            $this->render('index',array(
+                'dataProvider'=>$dataProvider,
+            ));
+       $this->render('/user/invite_refferals', array(
+            'error' => $error,'success' => $success,'userObject'=>$userObject
+        ));  
+    }
+    
 
     // Uncomment the following methods and override them if needed
     /*
