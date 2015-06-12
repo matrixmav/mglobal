@@ -28,9 +28,7 @@ $this->breadcrumbs = array(
 
 </div>
 <div class="col-md-12 col-sm-12">
-
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
-
         <fieldset>
             <legend>Contact Setting</legend>
             
@@ -41,29 +39,23 @@ $this->breadcrumbs = array(
                     <span id="contact_error"></span>
                 </div>
             </div>
+            
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="lastname">Contact Form<span class="require">*</span></label>
                 <div class="col-lg-10">
                     <textarea id="editor1" class="form-control" name="contact" style="width: 482px; height: 248px;"><?php echo (!empty($userhasObject->contact_form)) ? stripslashes($userhasObject->contact_form) : "" ; ?></textarea>
                     <span id="page_content_error"></span>
                 </div>
+            </div>            
+        
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
+                    <input type="submit" name="submit" value="Submit" class="btn red">
+                </div>
             </div>
-            
         </fieldset>
-
-        
-        
-        <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn red">
-
-            </div>
-        </div>
     </form>
 </div>
-
-
-
  <script type="text/javascript">
     CKEDITOR.replace('editor1', {
         filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
