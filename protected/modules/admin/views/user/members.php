@@ -17,20 +17,15 @@ $this->breadcrumbs = array(
     top: 8px;}
     .confirmMenu{position: relative;}
 </style>
-<?php 
-if(!empty($_GET) && $_GET['successMsg'] =='1'){
-    echo "<p class='success'>Member Status Changed Successfully.</p>";
-}
 
-?>
 <div class="col-md-12">
 
     <div class="expiration margin-topDefault confirmMenu">
 
-        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/package/list" class="form-inline">
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/userhasaccess/members" class="form-inline">
             <div class="input-group form-group" >
                 <?php
-            $statusId = 1;
+            $statusId = 0;
             if (isset($_REQUEST['res_filter'])) {
                 $statusId = $_REQUEST['res_filter'];
             }
@@ -110,13 +105,18 @@ if(!empty($_GET) && $_GET['successMsg'] =='1'){
                  array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
-                    'template' => '{Change}',
+                    'template' => '{Change} {Access}',
                     'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/userhasaccess/changeapprovalstatus", array("id"=>$data->id))',
+                        ),
+                         'Access' => array(
+                            'label' => Yii::t('translation', 'Member Access'),
+                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'url' => 'Yii::app()->createUrl("admin/userhasaccess/memberaccess", array("id"=>$data->id))',
                         ),
                          
                     ),

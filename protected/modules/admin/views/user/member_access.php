@@ -11,38 +11,30 @@ if(!empty($error)){
 
 ?>
 <?php 
-if(!empty($error)){
+if(!empty($success)){
     echo "<p class='success'>".$success."</p>";
 }
 
 ?>
-<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/userhasaccess/memberaccess" method="post" onsubmit="return validateForm()">
+<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/userhasaccess/memberaccess?id=<?php echo (!empty($_GET) && $_GET['id']!='') ? $_GET['id']: "";?>" method="post" onsubmit="return validateForm()">
+<input type="hidden" id="admin_id" class="form-control" name="admin_id" readonly="readonly" value="<?php echo (!empty($_GET) && $_GET['id']!='') ? $_GET['id']: "0";?>">
 <div class="col-md-12 form-group">
+    <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
-    <select name="admin_id" id="admin_id"  class="form-control">
-            <option value="">Select Member</option>
-            <?php foreach($emailObject as $email){
-              if(!empty($mailObject))
-              { 
-                  $varID = $mailObject->id;
-                  }else{ 
-                  $varID =  "";
-                 }  
-                ?>
-            <option value="<?php echo $email->id;?>" <?php if($email->id == $varID){?> selected="selected" <?php }?>><?php echo $email->full_name;?></option>
-            <?php }?>
-        </select>
-          </div>
+        <p><?php echo $emailObject->full_name; ?></p>
+        <span id="first_name_error" style="color:red"></span>
+    </div>
 </div>
 <div class="col-md-12 form-group">
+    <label class="col-md-2">Choose Permission: </label>
     <div class="col-md-6">
-        <input type="checkbox" name="access[]" value="builder">Builder<br/>
-        <input type="checkbox" name="access[]" value="ads">Ads<br/>
-        <input type="checkbox" name="access[]" value="package">package<br/>
-        <input type="checkbox" name="access[]" value="reports">Reports<br/>
-        <input type="checkbox" name="access[]" value="user">Member Management<br/>
-        <input type="checkbox" name="access[]" value="mail">Mail<br/>
-        <input type="checkbox" name="access[]" value="memberaccess">Member Access<br/>
+        <input type="checkbox" name="access[]" value="builder" <?php if(in_array('builder',$accessArr)){?> checked="checked" <?php }?>>Builder<br/>
+        <input type="checkbox" name="access[]" value="ads" <?php if(in_array('ads',$accessArr)){?> checked="checked" <?php }?>>Ads<br/>
+        <input type="checkbox" name="access[]" value="package" <?php if(in_array('package',$accessArr)){?> checked="checked" <?php }?>>package<br/>
+        <input type="checkbox" name="access[]" value="reports" <?php if(in_array('reports',$accessArr)){?> checked="checked" <?php }?>>Reports<br/>
+        <input type="checkbox" name="access[]" value="user" <?php if(in_array('user',$accessArr)){?> checked="checked" <?php }?>>Member Management<br/>
+        <input type="checkbox" name="access[]" value="mail" <?php if(in_array('mail',$accessArr)){?> checked="checked" <?php }?>>Mail<br/>
+        <input type="checkbox" name="access[]" value="memberaccess" <?php if(in_array('memberaccess',$accessArr)){?> checked="checked" <?php }?>>Member Access<br/>
     </div>
 </div>
  
