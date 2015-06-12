@@ -1,4 +1,4 @@
-<?php
+get<?php
 
 require_once Yii::app()->basePath . '/components/Mobile_Detect.php';
 
@@ -60,14 +60,16 @@ class BaseClass extends Controller {
 
         return $walletObject;
     }
-
-    public static function getPassword() {
-        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$#@!&*';
+   
+    public static function getPassword(){
+        $chars = '0123456789abcd345efghijklmnopq*&%$rstuvwxyzAB345CDEFGH!@#$IJKLMNOPQRSTUVWXYZ$#@!&*';
         $randomString = '';
 
-        for ($i = 0; $i < 5; $i++) {
-            $randomString .= $chars[rand(0, strlen($chars) - 1)];
-        }
+        for ($i = 0; $i < 8; $i++) 
+        {
+            $randomString .= $chars[rand(0, strlen($chars)-1)];
+        }	
+
         return $randomString;
     }
 

@@ -151,10 +151,7 @@ function validation() {
     if($builderObject->custom_css){ 
         echo "<style>". stripslashes($builderObject->custom_css) ."</style>";
     }
-    
-    
     ?>
-    
     
 </body>
 </html>
