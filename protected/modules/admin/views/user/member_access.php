@@ -5,7 +5,23 @@ $this->breadcrumbs = array(
 );
 ?>
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/userhasaccess/memberaccess" method="post" onsubmit="return validateForm()">
-
+<div class="col-md-12 form-group">
+    <div class="col-md-6">
+    <select name="to_email" id="to_email"  class="form-control">
+            <option value="">Select Member</option>
+            <?php foreach($emailObject as $email){
+              if(!empty($mailObject))
+              { 
+                  $varID = $mailObject->id;
+                  }else{ 
+                  $varID =  "";
+                 }  
+                ?>
+            <option value="<?php echo $email->id;?>" <?php if($email->id == $varID){?> selected="selected" <?php }?>><?php echo $email->full_name;?></option>
+            <?php }?>
+        </select>
+          </div>
+</div>
 <div class="col-md-12 form-group">
     <div class="col-md-6">
         <input type="checkbox" name="access[]" id="builder">Builder
