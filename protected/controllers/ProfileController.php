@@ -62,9 +62,10 @@ class ProfileController extends Controller {
                     $profileObject->state_name = $_POST['UserProfile']['state_name'];
                     $profileObject->country_id = $_POST['UserProfile']['country_id'];
                     $profileObject->zip_code = $_POST['UserProfile']['zip_code'];
-
                     $profileObject->updated_at = new CDbExpression('NOW()');
                     $profileObject->update();
+                    $userObject->country_id = $_POST['UserProfile']['country_id'];
+                    $userObject->update();
                     $success .= "Address Updated Successfully";
                 } else {
                     $error .= "Incorrect master pin.";
