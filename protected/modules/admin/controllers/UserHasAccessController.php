@@ -91,11 +91,14 @@ class UserHasAccessController extends Controller {
      * function to fetch members
      */
     public function actionMembers() {
+           $status = 0;
            $pageSize= 100;
-           $model = 
+           if (!empty($_POST)) {
+           $status = $_POST['res_filter'];
+           }
             $dataProvider = new CActiveDataProvider('User', array(
             'criteria' => array(
-                'condition' => ('role_id = "2" AND name != "admin" '), 'order' => 'id DESC',
+                'condition' => ('role_id = "2" AND name != "admin" AND status= "'.$status.'"'), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
 
         $this->render('/user/members', array(
