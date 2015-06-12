@@ -354,15 +354,25 @@ class ProfileController extends Controller {
     {
         $error = "";
         $success = "";
+        $todayDate = date('Y-m-d');
+        $fromDate = date('Y-m-d');
         $loggedInUserId = Yii::app()->session['userid'];
         $userObject = User::model()->findByPK($loggedInUserId);
-          $pageSize= 100;
-             $dataProvider = new CActiveDataProvider('User', array(
+        $pageSize= 100;
+        if (!empty($_POST)) {
+        $todayDate = $_POST['from'];
+        $fromDate = $_POST['to'];
+         $dataProvider = new CActiveDataProvider('User', array(
             'criteria' => array(
-                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != ""'), 'order' => 'id DESC',
+                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
              )));
-            
-       $this->render('/user/track_refferal', array(
+        }else{
+          $dataProvider = new CActiveDataProvider('User', array(
+            'criteria' => array(
+                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+             )));  
+        }
+        $this->render('/user/track_refferal', array(
             'error' => $error,'success' => $success,'dataProvider'=>$dataProvider
         ));  
     }
