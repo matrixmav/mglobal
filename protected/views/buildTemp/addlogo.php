@@ -19,7 +19,6 @@ $this->breadcrumbs = array(
 
     <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
     <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
-    <a href="/BuildTemp/addcopyright" class="btn green">Copy Right Setting</a> 
     <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
     <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
 
@@ -51,45 +50,40 @@ $this->breadcrumbs = array(
                         <?php } ?>
                     </span> 
                 </div>
-                <div>    
-                    <div class="form-inline form-group">
-                        <div class="form-group">
-                            <label for="exampleInputEmail2">Width</label>
-                            <input type="text" class="form-control" id="width" name="width" placeholder="Width" value="<?php echo $userhasObject->logo_width ? $userhasObject->logo_width : '';  ?>">
-                        </div>
-                        <span id="width_error" class="clrred"></span>
-
-                        <div class="form-group">
-                            <label for="exampleInputName2">Height</label>
-                            <input type="text" class="form-control" id="height" name="height" placeholder="Height" value="<?php echo $userhasObject->logo_height ? $userhasObject->logo_height : '';  ?>">
-                        </div>
-                        <span id="height_error" class="clrred"></span>
-
-                    </div>
+                </div>  
                     
-                    <div class="form-group">
-                        <label class="col-lg-4 control-label" for="lastname">Site Title</label>
-                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                            <input type="text" value="<?php echo $userhasObject->site_title ? stripcslashes($userhasObject->site_title) : ''; ?>" name="site_title"  class="form-control" id="copyright">  
-                        </div>
-                    </div>                
+            <div class="form-group">
+               <label class="col-lg-4 control-label" for="lastname">Width</label>
+               <div class="fileupload fileupload-new" data-provides="fileupload">
+                   <input type="text" class="form-control" id="width" name="width" placeholder="Width" value="<?php echo $userhasObject->logo_width ? $userhasObject->logo_width : '';  ?>">
+               </div>
+           </div>  
+
+           <div class="form-group">
+               <label class="col-lg-4 control-label" for="lastname">Height</label>
+               <div class="fileupload fileupload-new" data-provides="fileupload">
+                   <input type="text" class="form-control" id="height" name="height" placeholder="Height" value="<?php echo $userhasObject->logo_height ? $userhasObject->logo_height : '';  ?>">
+               </div>
+           </div>  
+                    
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="lastname">Site Title</label>
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <input type="text" value="<?php echo $userhasObject->site_title ? stripcslashes($userhasObject->site_title) : ''; ?>" name="site_title"  class="form-control" id="copyright">  
                 </div>
+            </div>                
 
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
+                    <input type="submit" name="submit" value="Submit" class="btn red">
+
+                </div>
             </div>
-
         </fieldset>
-
-        <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn red">
-
-            </div>
-        </div>
     </form>
 </div>
 
-
-<script type="text/javascript">
+<!--<script type="text/javascript">
     function validation(){
         $("#logo_error").html("");
         if ($("#logo").val() == "") {
@@ -114,6 +108,6 @@ $this->breadcrumbs = array(
     
     }
     
-</script>
+</script>-->
 
 
