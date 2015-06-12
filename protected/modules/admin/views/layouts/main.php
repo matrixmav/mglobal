@@ -235,17 +235,53 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
 
                         <?php
-                        if (in_array('user', $accessArr)) {
+                        
                         if ($access != "manager") {
                             $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                              if (in_array('user', $accessArr)) {  
+                                $hotel_subsection1 = array(
                                     "user/index" => "Member Management",
-                                    "user/wallet" => "Wallet",
-                                    "user/genealogy" => "Genealogy binary",
-                                    "user/verificationapproval" => "Document Approval",
-                                    "user/testimonialapproval" => "Testimonial Approval",
-                                );
+                                    );
+                              }else{
+                                    $hotel_subsection3 = array();
+                                            
+                                }
+                                if (in_array('wallet', $accessArr)) { 
+                                    $hotel_subsection2 = array(
+                                      "user/wallet" => "Wallet",   
+                                   );
+                                }else{
+                                    $hotel_subsection3 = array();
+                                            
+                                }
+                                if (in_array('geneology', $accessArr)) { 
+                                    $hotel_subsection3 = array(
+                                      "user/genealogy" => "Genealogy binary",   
+                                   );
+                                }else{
+                                    $hotel_subsection3 = array();
+                                            
+                                }
+                                if (in_array('document', $accessArr)) { 
+                                    $hotel_subsection4 = array(
+                                      "user/verificationapproval" => "Document Approval",   
+                                   );
+                                }else{
+                                    $hotel_subsection4 = array();
+                                            
+                                }
+                                if (in_array('testimonial', $accessArr)) { 
+                                    $hotel_subsection5 = array(
+                                      "user/testimonialapproval" => "Testimonial Approval",  
+                                   );
+                                }else{
+                                    $hotel_subsection5 = array();
+                                            
+                                }
+                                 
+                                $hotel_subsection = array_merge($hotel_subsection1, $hotel_subsection2, $hotel_subsection3, $hotel_subsection4, $hotel_subsection5);
+                                 
                                 $activecls = 'active';
                                 if ($curControllerLower == "user" || $curControllerLower == "admin") {
                                     $activecls = 'active';
@@ -292,7 +328,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     ?>					
                                 </li>	
                                 <?php
-                            }
+                             
                         }
                            if (in_array('mail', $accessArr)) { 
                             $billing_pmenu = 7;
@@ -330,25 +366,65 @@ License: You must have a valid license purchased only from themeforest(the above
                            if (in_array('reports', $accessArr)) {
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
+                                 
+                               if (in_array('userreport', $accessArr)) {  
+                                $reservation_subsection1 = array(
                                     "report/" => "Registration",
-                                    "report/address" => "Member Address",
-                                    "report/adminsponsor" => "Admin Sponsor",
-                                    "report/package" => "Package",
-                                    "report/transaction"=>"Transaction",
-//                                    "report/inbox4" => "Binary",
-//                                    "report/inbox5" => "Deposit",
-//                                    "report/inbox6" => "Check Investments",
-                                    "report/verification" => "Member  Verification",
-//                                    "report/inbox8" => "Invite referrals",
-                                    "report/socialaccount" => "Social profile",
-                                    "report/contact" => "Contact",
-//                                    "report/inbox11" => "Bug",
-//                                    "report/inbox12" => "Call back",
-//                                    "report/inbox13" => "feed back",
-//                                    "report/inbox14" => "Recharge Wallet",
-//                                    "report/inbox15" => "Deduct Wallet"
-                                );
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('reportaddress', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "report/address" => "Member Address",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                if (in_array('reportsponsor', $accessArr)) { 
+                                    $reservation_subsection3 = array(
+                                      "report/adminsponsor" => "Admin Sponsor",   
+                                   );
+                                }else{
+                                    $reservation_subsection3 = array();
+                                            
+                                }
+                                if (in_array('reportpackage', $accessArr)) { 
+                                    $reservation_subsection4 = array(
+                                      "report/package" => "Package",   
+                                   );
+                                }else{
+                                    $reservation_subsection4 = array();
+                                            
+                                }
+                                if (in_array('reporttransaction', $accessArr)) { 
+                                    $reservation_subsection5 = array(
+                                      "report/transaction"=>"Transaction",  
+                                   );
+                                }else{
+                                    $reservation_subsection5 = array();
+                                            
+                                }
+                                if (in_array('reportsocial', $accessArr)) { 
+                                    $reservation_subsection5 = array(
+                                      "report/socialaccount" => "Social profile",  
+                                   );
+                                }else{
+                                    $reservation_subsection5 = array();
+                                            
+                                }
+                                if (in_array('reportcontact', $accessArr)) { 
+                                    $reservation_subsection5 = array(
+                                      "report/contact" => "Contact",  
+                                   );
+                                }else{
+                                    $reservation_subsection5 = array();
+                                            
+                                }
+                                 
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
@@ -385,14 +461,28 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                            }
-                            if (in_array('package', $accessArr)) {
+                            if (in_array('package', $accessArr) || in_array('package_add', $accessArr) || in_array('package_list', $accessArr)) {
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
+                                 if (in_array('package_add', $accessArr)) {  
+                                $reservation_subsection1 = array(
                                     "package/add" => "Add",
-                                    "package/list" => "List",
-                                    
-                                );
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('package_list', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "package/list" => "List",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                 
+                                 
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'package') || ($curControllerLower == 'package')) ? "active" : ''; ?>">
@@ -481,13 +571,26 @@ License: You must have a valid license purchased only from themeforest(the above
                             
                         }?>	
                             <!-- New Menu added here -->
-                            <?php if (in_array('ads', $accessArr)) {
+                            <?php if (in_array('ads', $accessArr) || in_array('ads_add', $accessArr) || in_array('ads_list', $accessArr)) {
                              $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
+                                if (in_array('ads_add', $accessArr)) {  
+                                $reservation_subsection1 = array(
                                     "ads/add" => "Ads Add",
-                                    "ads" => "Ads List",
-                                );
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('ads_list', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "ads" => "Ads List",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2);
                                 ?>
                                 
                                 <li
