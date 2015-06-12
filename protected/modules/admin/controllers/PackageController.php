@@ -52,7 +52,25 @@ class PackageController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('Package');
+        $todayDate = date('Y-m-d');
+        $fromDate = date('Y-m-d');
+        $pageSize = Yii::app()->params['defaultPageSize'];
+         if (!empty($_POST)) {
+         $todayDate = $_POST['from'];
+         $fromDate = $_POST['to'];
+         $dataProvider = new CActiveDataProvider('Package', array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
+            ));
+         }else{
+        //$dataProvider = new CActiveDataProvider('Package');
+        $dataProvider = new CActiveDataProvider('Package', array(
+                'criteria' => array(
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
+            ));
+          }
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
