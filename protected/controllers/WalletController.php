@@ -218,6 +218,7 @@ class WalletController extends Controller {
         $this->render('admin', array(
             'model' => $model,
         ));
+        
     }
 
     /**
