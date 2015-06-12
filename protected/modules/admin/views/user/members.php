@@ -24,25 +24,34 @@ if(!empty($_GET) && $_GET['successMsg'] =='1'){
 
 ?>
 <div class="col-md-12">
-<div class="expiration margin-topDefault confirmMenu">
- <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/userhasaccess/members">
-    
-    <?php 
-    
-    if(isset($_POST['res_filter']) && $_POST['res_filter'] !=''){
-      $statusId =   $_POST['res_filter'];
-    }else{
-      $statusId =   "0";   
-    } ?>
-    
-    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
-                 <option value="all" <?php if($statusId==''){?> selected="selected"<?php }?>>All</option> 
-                <option value="1" <?php if($statusId=='1'){?> selected="selected"<?php }?>>Approved</option>
-                <option value="0" <?php if($statusId=='0'){?> selected="selected"<?php }?>>Pending</option>
+
+    <div class="expiration margin-topDefault confirmMenu">
+
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/package/list" class="form-inline">
+            <div class="input-group form-group" >
+                <?php
+            $statusId = 1;
+            if (isset($_REQUEST['res_filter'])) {
+                $statusId = $_REQUEST['res_filter'];
+            }
+            ?>
+
+                <select class="customeSelect howDidYou form-control input-medium" id="ui-id-5" name="res_filter" style="margin-right: 10px;">
+
+                <option value="1" <?php if ($statusId == 1) {
+                echo "selected";
+            } ?> >Active</option>
+                <option value="0" <?php if ($statusId == 0) {
+                echo "selected";
+            } ?> >In Active</option>
             </select>
+                <input type="submit" class="btn btn-primary " value="OK" name="submit" id="submit"/>
+            </div>
+          
+        </form>
     </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
-    </form>
+    
+</form>
 
 </div>
 <div class="row">
