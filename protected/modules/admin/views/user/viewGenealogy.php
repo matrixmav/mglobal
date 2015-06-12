@@ -11,17 +11,18 @@ $this->breadcrumbs = array(
     "Tree"
 );
 echo '<link rel="stylesheet" href="' . Yii::app()->getBaseUrl(true) . '/css/main.css">';
+if (!empty($_GET) && $_GET['id'] != '') {
+    echo '<div class="row"><div class="col-md-12"><span><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;cursor:pointer;">Go Back >></a></span></div></div>';
+}
 echo '<div class="container">
       <div class="row">
-     <div class="expiration margin-topDefault confirmMenu" style="display:inline-block;">
+     <div class="col-md-12"><div class="expiration margin-topDefault confirmMenu" style="display:inline-block;">
      <form action="" class="form-inline">
      <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username"  value="'.$userObject->full_name.'" />
      <input type="button" name="submit" value="Search" onclick="submitform();" class="btn btn-primary confirmOk">';
 
-echo '</div>';
-if (!empty($_GET) && $_GET['id'] != '') {
-    echo '<a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;">Go Back >></a>';
-}
+echo '</div></div>';
+
 echo '</div>
   <span>
 
