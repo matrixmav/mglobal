@@ -355,16 +355,15 @@ class ProfileController extends Controller {
         $error = "";
         $success = "";
         $loggedInUserId = Yii::app()->session['userid'];
+        $userObject = User::model()->findByPK($loggedInUserId);
           $pageSize= 100;
-             $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+             $dataProvider = new CActiveDataProvider('User', array(
             'criteria' => array(
-                'condition' => ('sponsor_id="' . $loggedInUserId.'" AND social != ""'), 'order' => 'id DESC',
+                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != ""'), 'order' => 'id DESC',
              )));
-            $this->render('index',array(
-                'dataProvider'=>$dataProvider,
-            ));
-       $this->render('/user/invite_refferals', array(
-            'error' => $error,'success' => $success,'userObject'=>$userObject
+            
+       $this->render('/user/track_refferal', array(
+            'error' => $error,'success' => $success,'dataProvider'=>$dataProvider
         ));  
     }
     
