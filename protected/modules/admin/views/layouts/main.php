@@ -19,8 +19,6 @@ $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username'
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
 
-$UseraccessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
-$accessArr = explode(',',$UseraccessObject->access);
 ?>
 
 <!DOCTYPE html>
