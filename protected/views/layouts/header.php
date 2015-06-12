@@ -33,7 +33,7 @@
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
 
                         <li style="border: none;"><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
-                        <li style="border: none;"><a href="callto://ramhemareddy"><button id="checkout" class="btn btn-primary">Call Us</button><a/></li>
+                        <li style="border: none;"><a href="callto://ramhemareddy"><button id="checkout" class="btn  topBtn">Call Us</button><a/></li>
 
                     </ul>
               </div>
@@ -73,7 +73,7 @@
             <li class="current"><a href="#promo-block">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#team">Team</a></li>
+            <li><a href="#team">Media Center</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
            
             <li><a href="#benefits">Benefits</a></li>

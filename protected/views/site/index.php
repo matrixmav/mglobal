@@ -169,13 +169,13 @@
   <!-- About block BEGIN -->
  
   
- <!-- Message block BEGIN -->
+ <!-- Message block BEGIN 
   <div class="message-block content content-center valign-center" id="message-block">
     <div class="valign-center-elem">
       <h2 class="h-pd">The details are not the details <strong>They make the design</strong></h2>
       <em>KEEN THEMES</em>
     </div>
-  </div>
+  </div>-->
   <!-- Message block END -->
   
   
@@ -268,25 +268,32 @@
   <div class="services-block content content-center" id="services">
     <div class="container">
       <h2>Our <strong>services</strong></h2>
-      <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>
+      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers ...<a title="Lorem ipsum dolor sit amet" href="#inline1" class="fancybox pinkSm">read more</a></h4>
+      <div id="inline1" style="display:none">
+          <h2>our services</h2>
+          <p style="max-width: 600px">Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers worked as our strengths and since then they are serving as the cherished resources of the company. Later, to keep pace with the evolving digital space, we did all that was needed to earn us the tag of a digital marketing agency.</p>
+      </div>
+      
+
+
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-12 item">
-          <i class="fa fa-heart"></i>
+            <img src="images/it-services.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>IT Services</h3>
           <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-12 item">
-          <i class="fa fa-mobile"></i>
+          <img src="images/mobile-application.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Mobile Application</h3>
           <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-12 item">
-          <i class="fa fa-signal"></i>
+         <img src="images/digital-marketing.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Digital Marketing</h3>
-          <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
+          <p>Digital marketing is known to be the process of promoting a website, a business, or a product ...<a class="pinkSm" href="">read more</a>’</p>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-12 item">
-          <i class="fa fa-camera"></i>
+         <img src="images/support.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Support</h3>
           <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
         </div>
@@ -298,40 +305,40 @@
   <!-- Team block BEGIN -->
   <div class="team-block content content-center margin-bottom-40" id="team">
     <div class="container">
-      <h2>Media<strong>Center</strong></h2>
-      <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>
+     <h2>Media<strong>Center</strong></h2> 
+    <!--   <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>-->
       <div class="row">
         <div class="col-md-4 item">
-          <img src="images/img6-large.jpg" alt="Marcus Doe" class="img-responsive">
-          <h3>Marcus Doe</h3>
-          <em>Founder</em>
-          <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p>
+          <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
+          <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
+          <em></em>
+       <!--   <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> -->
           <div class="tb-socio">
-            <a href="javascript:void(0);" class="fa fa-facebook"></a>
-            <a href="javascript:void(0);" class="fa fa-twitter"></a>
-            <a href="javascript:void(0);" class="fa fa-google-plus"></a>
+              <div class="myBox">
+                  <p><span><img src="images/ppt_icon.png"></span>PPT</p>
+              </div>
           </div>
         </div>
         <div class="col-md-4 item">
-          <img src="images/img7-large.jpg" alt="Elena Taylor" class="img-responsive">
-          <h3>Elena Taylor</h3>
-          <em>Designer</em>
-          <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p>
+          <img src="images/business-plan.png" alt="Elena Taylor" class="img-responsive">
+          <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
+             <em></em>
+         <!-- <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> -->
           <div class="tb-socio">
-            <a href="javascript:void(0);" class="fa fa-facebook"></a>
-            <a href="javascript:void(0);" class="fa fa-twitter"></a>
-            <a href="javascript:void(0);" class="fa fa-google-plus"></a>
+              <div class="myBox">
+                  <p><span><img src="images/ppt_icon.png"></span>PDF</p>
+              </div>
           </div>
         </div>
         <div class="col-md-4 item">
-          <img src="images/img8-large.jpg" alt="Cris Nilson" class="img-responsive">
-          <h3>Cris Nilson</h3>
-          <em>Developer</em>
-          <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p>
+          <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
+          <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
+             <em></em>
+          <p></p>
           <div class="tb-socio">
-            <a href="javascript:void(0);" class="fa fa-facebook"></a>
-            <a href="javascript:void(0);" class="fa fa-twitter"></a>
-            <a href="javascript:void(0);" class="fa fa-google-plus"></a>
+              <div class="myBox">
+                  <p><span><img src="images/pdf_icon.png"></span>e-Brochure</p>
+              </div>
           </div>
         </div>
       </div>
@@ -341,9 +348,19 @@
   <!-- Portfolio block BEGIN -->
   <div class="portfolio-block content content-center" id="portfolio">
     <div class="container">
-      <h2 class="margin-bottom-50">Latest <strong>works</strong></h2>
+      <h2 class="margin-bottom-50"><strong> Templates </strong></h2>
     </div>
     <div class="row">
+        <div class="item col-md-2 col-sm-6 col-xs-12">
+        <img src="images/2.jpg" alt="NAME" class="img-responsive">
+        <a href="images/2.jpg" class="zoom valign-center">
+          <div class="valign-center-elem">
+            <strong>London City Project</strong>
+            <em>Property</em>
+            <b>Details</b>
+          </div>
+        </a>
+      </div>
       <div class="item col-md-2 col-sm-6 col-xs-12">
         <img src="images/2.jpg" alt="NAME" class="img-responsive">
         <a href="images/2.jpg" class="zoom valign-center">
@@ -470,14 +487,14 @@
   <!-- Choose us block BEGIN -->
   <div class="choose-us-block content text-center margin-bottom-40" id="benefits">
     <div class="container">
-      <h2>Why to <strong>choose us</strong></h2>
-      <h4>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetuer adipiscing</a> elit, sed diam nonummy<br> nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</h4>
+      <h2>Why to <strong>Choose us</strong></h2>
+      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers ...<a class="pinkSm" href="">read more</a></h4>
       <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12 text-left">
-          <img src="images/choose-us.png" alt="Why to choose us" class="img-responsive">
+          <img src="images/matrix.png" alt="Why to choose us" class="img-responsive">
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-12 text-left">
-          <div class="panel-group" id="accordion1">
+        <div class="col-md-4 col-sm-4 col-xs-12 text-left">
+<!--          <div class="panel-group" id="accordion1">
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h5 class="panel-title">
@@ -556,13 +573,62 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
+          <!-- benefit slider -->
+            <div id="carousel-example-generic" class="carousel slide benefitCarousel" data-ride="carousel">
+  <!-- Indicators 
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>-->
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+        <h3>Benefits of Choosing Us</h3>
+        <ul class="choseOpt">
+            <li><a href="">Round the clock support</a></li>
+            <li><a href="">Convenient Payment Gateway</a></li>
+            <li><a href="">Search-engine friendly websites</a></li>
+            <li><a href="">Customized web solutions</a></li>
+            <li><a href="">Numerous templates to choose from</a></li>
+            <li><a href="">Reliable hosting solutions</a></li>
+        </ul>
+      
+    </div>
+    <div class="item">
+        <h3>MLM Benefits</h3>
+       <ul class="choseOpt">
+            <li><a href="">Consistent Income</a></li>
+            <li><a href="">Low operating cost</a></li>
+            <li><a href="">Freedom to operate remotely</a></li>
+            <li><a href="">An extended distribution channel</a></li>
+            <li><a href="">No minimum commitments desired</a></li>
+            <li><a href="">Rewards at various stages</a></li>
+        </ul>
+     
+    </div>
+    
+  </div>
+
+  <!-- Controls 
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>-->
+</div>
+          <!-- end -->
         </div>
       </div>
     </div>
   </div>
   <!-- Choose us block END -->
-  <!-- Checkout block BEGIN -->
+  <!-- Checkout block BEGIN 
   <div class="checkout-block content">
     <div class="container">
       <div class="row">
@@ -574,7 +640,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
   <!-- Checkout block END -->
   <!-- Facts block BEGIN -->
   <div class="facts-block content content-center" id="facts-block">
@@ -899,4 +965,11 @@
     </div>
   </div>
   <!-- Partners block END -->
- 
+  <script type="text/javascript">
+     $(document).ready(function() {
+		$('.fancybox').fancybox({
+		 
+		});
+		});
+          //$(".myfancyTxtBox").fancybox();
+</script>
