@@ -48,7 +48,7 @@ if(!empty($success)){
         <br/>
        <input type="checkbox" name="access[]" value="mail" <?php if(in_array('mail',$accessArr)){?> checked="checked" <?php }?>>Mail<br/>
        <input type="checkbox" name="access[]" value="user" <?php if(in_array('user',$accessArr)){?> checked="checked" <?php }?>>Operation<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="wallet" <?php if(in_array('usermg',$accessArr)){?> checked="checked" <?php }?>>Member Management<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="usermg" <?php if(in_array('usermg',$accessArr)){?> checked="checked" <?php }?>>Member Management<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="wallet" <?php if(in_array('wallet',$accessArr)){?> checked="checked" <?php }?>>Wallet<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="geneology" <?php if(in_array('geneology',$accessArr)){?> checked="checked" <?php }?>>Geneology<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="document" <?php if(in_array('document',$accessArr)){?> checked="checked" <?php }?>>document<br/>
