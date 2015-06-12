@@ -548,7 +548,7 @@ public function actionConfirm(){
                 $userObject->forget_status = 1;
                 $userObject->password = BaseClass::md5Encryption($password);
                 $userObject->update();
-                $msg = "Please check your email to activate your account";
+                $msg = "Please check your email for further details.";
                 /*echo "<pre>";
                 print_r($password);
                 print_r($userObject->password);

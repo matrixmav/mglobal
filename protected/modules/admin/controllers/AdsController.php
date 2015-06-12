@@ -74,7 +74,7 @@ class AdsController extends Controller {
                 $ext1 = end((explode(".", $banner)));
 
                 if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
-                    $error = "Please upload mentioned file type.";
+                    $error = "<p class='error'>Please upload mentioned file type.</p>";
                 } else {
                     $path = Yii::getPathOfAlias('webroot') . "/upload/banner/";
                     BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);
