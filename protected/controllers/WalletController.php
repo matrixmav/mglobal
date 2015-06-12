@@ -128,8 +128,7 @@ class WalletController extends Controller {
             'dataProvider' => $dataProvider,
         ));
     }
-
-    /*
+/*
      * this will fetch rp wallet
      */
 
@@ -205,6 +204,7 @@ class WalletController extends Controller {
          )));
         $this->render('fundwallet', array('dataProvider' => $dataProvider));
     }
+
 
     /**
      * Manages all models.

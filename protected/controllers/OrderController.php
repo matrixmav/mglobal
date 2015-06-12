@@ -279,7 +279,7 @@ class OrderController extends Controller {
             $todayDate = date('Y-m-d', strtotime($_POST['from']));
             $fromDate = date('Y-m-d', strtotime($_POST['to']));
             $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '"');
-            var_dump($command); exit;
+            
         }
         
         $command = $connection->createCommand('select transaction.created_at,user.id,user.position,user.full_name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer"');

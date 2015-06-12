@@ -258,7 +258,7 @@ class ProfileController extends Controller {
                 $success .= "Your password changed successfully"; 
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'mGlobally Password Changed' ;
-                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.'.
+                $config['body'] = 'Hey '.$userObject->full_name.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
                 CommonHelper::sendMail($config);
              }  
             }
@@ -299,7 +299,7 @@ class ProfileController extends Controller {
                 $success .= "Your pin changed successfully"; 
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'mGlobally Master Pin Changed' ;
-                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.'.
+                $config['body'] = 'Hey '.$userObject->full_name.',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
                 CommonHelper::sendMail($config);
              }  
             }
@@ -320,10 +320,10 @@ class ProfileController extends Controller {
      */
     public function actionInviteRefferal()
     {
-        $error = "";
+       $error = "";
         $success = "";
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-        $link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'&social=email';
+        $link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'--email';
         if(!empty($_POST))
         {
           if($_POST['email']!='')
@@ -334,7 +334,7 @@ class ProfileController extends Controller {
             foreach($emailArray as $email)
             {
                 $config['to'] = $email;
-                $config['subject'] = 'mGlobally Invitation From'.$userObject->name ;
+                $config['subject'] = 'mGlobally Invitation From '.$userObject->name ;
                 $config['body'] = 'Hey '.$email.',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="'.$link.'">Click Here</a>';
                 CommonHelper::sendMail($config);  
             }
