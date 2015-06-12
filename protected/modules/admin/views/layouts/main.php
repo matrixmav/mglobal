@@ -430,15 +430,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "BuildTemp/categorylist" => "Category List",
                                     "BuildTemp/templatelist" => "Templates HTML",
                                 );
+								 
                                 ?>
                                 
                                 
                                 <li
-                                    class="<?php echo (($curControllerLower == 'BuildTemp') || ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
+                                    class="<?php echo ($curControllerLower == 'buildtemp') ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Builder</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'buildtemp') ? "open" : ''; ?>">
                                         </span>
                                     </a>
 
@@ -449,7 +450,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             if ($ctName == "search/create") {
                                                 $ctName = "search/create/type/details";
                                             }
-                                        if ($ctName == "BuildTemp" && $curControllerLower == "BuildTemp")
+                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
                                                 $class_content = 'class="active"';
                                             else
                                                 $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
