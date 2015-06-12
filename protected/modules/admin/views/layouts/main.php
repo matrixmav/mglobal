@@ -18,7 +18,7 @@ $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState (
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
-
+$accessArr = BaseClass::getMemberAccess();
 ?>
 
 <!DOCTYPE html>
@@ -479,85 +479,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     
                             $bases_pmenu = 4;
                             
-                        } else {
-                            ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'hotel') ? "active" : ''; ?>">
-                                <a href="/admin/hotel/index"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'Hotel List') ?></span>
-                                    <span class="selected"></span> </span>
-                                </a>
-                            </li>
-
-                            <li
-                                class="<?php echo ($curControllerLower == 'admin') ? "active" : ''; ?>">
-                                <a href="/admin/admin"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'My Profile') ?> </span>
-                                    <span class="selected"></span> </span>
-                                </a>
-                            </li>
-                            <?php
-                            $billing_subsection = array(
-                                "invoice/index" => "Invoice Reservation",
-                                "invoice/hotelbills" => "Invoices Listing",
-                                "invoice/regulationstatus" => "Payment History"
-                            );
-                            ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'invoice') ? "active" : ''; ?>">
-                                <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
-                                        class="title">Billing</span> <span class="selected"></span> <span
-                                        class="arrow <?php echo ($curControllerLower == 'invoice') ? "open" : ''; ?>">
-                                    </span>
-                                </a>
-                                <?php
-                                foreach ($billing_subsection as $hotName => $hotTitle) {
-                                    if ($hotName == "invoice/index")
-                                        echo '<ul class="sub-menu">';
-
-                                    $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-
-                                    echo '<li ' . $class_content . '>';
-                                    echo '<a href="/admin/' . $hotName . '">' . $hotTitle . '</a>';
-                                    echo '</li>';
-
-                                    if ($hotName == "invoice/regulationstatus")
-                                        echo '</ul>';
-                                }
-                                ?>						
-                            </li>
-                            <?php
-                            $reservation_subsection = array(
-                                "reservation/onrequest" => "On Request",
-                                "reservation/viewconfirmed" => "Confirmed"
-                            );
-                            ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'reservation') ? "active" : ''; ?>">
-                                <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'Reservation') ?> </span>
-                                    <span class="selected"></span> <span
-                                        class="arrow <?php echo ($curControllerLower == 'reservation') ? "open" : ''; ?>">
-                                    </span>
-                                </a>
-                                <?php
-                                foreach ($reservation_subsection as $hotName => $hotTitle) {
-                                    if ($hotName == "reservation/onrequest")
-                                        echo '<ul class="sub-menu">';
-
-                                    $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-
-                                    echo '<li ' . $class_content . '>';
-                                    echo '<a href="/admin/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
-                                    echo '</li>';
-
-                                    if ($hotName == "admin")
-                                        echo '</ul>';
-                                }
-                                ?>						
-                            </li>                                
-                        <?php } ?>	
-                            
+                        }?>	
                             <!-- New Menu added here -->
                             <?php if (in_array('ads', $accessArr)) {
                              $reservation_pmenu = 9;
