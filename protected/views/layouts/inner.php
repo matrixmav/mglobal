@@ -709,7 +709,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Cash Wallet",
                                     "order/checkinvestment" => "Check Investment",
-                                    "order/refferalincome" => "Track referral",
+                                    "order/refferalincome" => "Direct referral income",
                                      
 //                                    "profile/summery" => "Summery",
                                 );
