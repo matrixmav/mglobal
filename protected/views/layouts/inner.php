@@ -526,16 +526,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                      $hotel_subsection = array(
                                     "genealogy" => "Placement",
                                     "profile/inviterefferal" => "Invite referral",
-                                    "order/refferalincome" => "Track referral",     
+                                    "profile/trackrefferal" => "Track referral",     
                                   );  
                                  
                                 $activecls = 'active';
-                                if ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction =='refferalincome') {
+                                if ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction =='trackrefferal') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction =='refferalincome')
+                                if ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction =='trackrefferal')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -543,7 +543,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Genealogy</span>
                                         <span class="selected"></span> <span
-                            class="arrow <?php echo ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction == 'refferalincome') ? "open" : ''; ?>">
+                            class="arrow <?php echo ($curControllerLower == 'genealogy' || $curAction == 'inviterefferal' || $curAction == 'trackrefferal') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
@@ -709,11 +709,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Cash Wallet",
                                     "order/checkinvestment" => "Check Investment",
+                                    "order/refferalincome" => "Track referral",
                                      
 //                                    "profile/summery" => "Summery",
                                 );
                                 $activecls = 'active';
-                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment') {
+                                if ($curControllerLower == "wallet" && $curControllerLower == "rpwallet" || $curControllerLower == 'commisionwallet' || $curControllerLower == 'fundwallet' || $curControllerLower=='order' && $curActionLower=='checkinvestment' || $curControllerLower=='order' && $curActionLower=='refferalincome') {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
@@ -726,7 +727,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Summary</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'rpwallet') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'rpwallet' ||  $curControllerLower=='order' && $curActionLower=='refferalincome') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
