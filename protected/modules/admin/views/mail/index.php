@@ -1,7 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Email' => array('/admin/mail'),
-    'inbox'
+    'Inbox'
 );
 ?>
 <?php 
