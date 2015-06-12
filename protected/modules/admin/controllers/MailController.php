@@ -53,7 +53,7 @@ class MailController extends Controller {
     public function actionIndex() {
         $pageSize = 10;
         $emailObject = User::model()->findAll(array('condition' => 'role_id=2'));
-        if (!empty($_POST)) {
+        if (!empty($_POST) && $_POST['admin_email'] !='') {
             $dataProvider = new CActiveDataProvider('Mail', array(
                 'criteria' => array('condition' => 'to_user_id =' . $_POST['admin_email'], 'order' => 'updated_at DESC'),
                 'pagination' => array('pageSize' => $pageSize)));
