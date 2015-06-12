@@ -264,7 +264,7 @@ class UserController extends Controller {
                 exit;
             }
               
-            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
         }
         $userId = $_GET['id'];
@@ -284,7 +284,7 @@ class UserController extends Controller {
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
-                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
              
             } else {
                 $walletObject = new Wallet;
@@ -300,7 +300,7 @@ class UserController extends Controller {
                 print_r($walletObject->getErrors());
                 exit;
                 var_dump($postDataArray);exit;
-             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
                 
             }
             $this->redirect('/admin/user/wallet?successmsg=2');

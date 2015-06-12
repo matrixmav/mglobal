@@ -75,7 +75,7 @@ class MailController extends Controller {
         $dataProvider = new CActiveDataProvider('Mail', array(
             'criteria' => array('condition' => 'from_user_id = 1', 'order' => 'updated_at DESC'),
             'pagination' => array('pageSize' => $pageSize)));
-        $this->render('index', array(
+        $this->render('sent', array(
             'dataProvider' => $dataProvider,
         ));
     }
@@ -101,9 +101,9 @@ class MailController extends Controller {
                 $mailObject->created_at = new CDbExpression('NOW()');
                 $mailObject->updated_at = new CDbExpression('NOW()');
                 $mailObject->save(false);
-                $this->redirect(array('admin/mail?successMsg=1'));
+                $this->redirect(array('/admin/mail?successMsg=1'));
             }
-            $this->redirect(array('admin/mail?successMsg=1'));
+            $this->redirect(array('/admin/mail?successMsg=1'));
         }
         $this->render('compose', array('error' => ''));
     }
@@ -122,7 +122,10 @@ class MailController extends Controller {
     public function actionView($id) {
         if ($id) {
             $mailObject = Mail::model()->findByPk($id);
+            if(Yii::app()->session['userid'] != $mailObject->from_user_id)
+			{
             $mailObject->status = 1;
+			}
             $mailObject->save(false);
             $this->render('view', array(
                 'mailObject' => $mailObject,
