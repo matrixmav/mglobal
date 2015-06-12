@@ -5,6 +5,7 @@ class ProfileController extends Controller {
     public $layout = 'inner';
 
     public function init() {
+        
         BaseClass::isLoggedIn();
     }
 
@@ -24,7 +25,7 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin','inviterefferal'),
+                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin','inviterefferal','trackrefferal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -61,9 +62,10 @@ class ProfileController extends Controller {
                     $profileObject->state_name = $_POST['UserProfile']['state_name'];
                     $profileObject->country_id = $_POST['UserProfile']['country_id'];
                     $profileObject->zip_code = $_POST['UserProfile']['zip_code'];
-
                     $profileObject->updated_at = new CDbExpression('NOW()');
                     $profileObject->update();
+                    $userObject->country_id = $_POST['UserProfile']['country_id'];
+                    $userObject->update();
                     $success .= "Address Updated Successfully";
                 } else {
                     $error .= "Incorrect master pin.";
@@ -257,7 +259,7 @@ class ProfileController extends Controller {
                 $success .= "Your password changed successfully"; 
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'mGlobally Password Changed' ;
-                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.'.
+                $config['body'] = 'Hey '.$userObject->full_name.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
                 CommonHelper::sendMail($config);
              }  
             }
@@ -298,7 +300,7 @@ class ProfileController extends Controller {
                 $success .= "Your pin changed successfully"; 
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'mGlobally Master Pin Changed' ;
-                $config['body'] = 'Hey '.$userObject->email.',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.'.
+                $config['body'] = 'Hey '.$userObject->full_name.',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
                 CommonHelper::sendMail($config);
              }  
             }
@@ -319,10 +321,10 @@ class ProfileController extends Controller {
      */
     public function actionInviteRefferal()
     {
-        $error = "";
+       $error = "";
         $success = "";
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-        $link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'&social=email';
+        $link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'--email';
         if(!empty($_POST))
         {
           if($_POST['email']!='')
@@ -333,7 +335,7 @@ class ProfileController extends Controller {
             foreach($emailArray as $email)
             {
                 $config['to'] = $email;
-                $config['subject'] = 'mGlobally Invitation From'.$userObject->name ;
+                $config['subject'] = 'mGlobally Invitation From '.$userObject->name ;
                 $config['body'] = 'Hey '.$email.',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="'.$link.'">Click Here</a>';
                 CommonHelper::sendMail($config);  
             }
@@ -347,6 +349,34 @@ class ProfileController extends Controller {
             'error' => $error,'success' => $success,'userObject'=>$userObject
         ));  
     }
+    
+    public function actionTrackRefferal()
+    {
+        $error = "";
+        $success = "";
+        $todayDate = date('Y-m-d');
+        $fromDate = date('Y-m-d');
+        $loggedInUserId = Yii::app()->session['userid'];
+        $userObject = User::model()->findByPK($loggedInUserId);
+        $pageSize= 100;
+        if (!empty($_POST)) {
+        $todayDate = $_POST['from'];
+        $fromDate = $_POST['to'];
+         $dataProvider = new CActiveDataProvider('User', array(
+            'criteria' => array(
+                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+             )));
+        }else{
+          $dataProvider = new CActiveDataProvider('User', array(
+            'criteria' => array(
+                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+             )));  
+        }
+        $this->render('/user/track_refferal', array(
+            'error' => $error,'success' => $success,'dataProvider'=>$dataProvider
+        ));  
+    }
+    
 
     // Uncomment the following methods and override them if needed
     /*

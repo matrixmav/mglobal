@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Package' => array('/admin/package/list'), 'Package List'
+    'Package List'
 );
 ?>
 
@@ -21,21 +21,16 @@ $this->breadcrumbs = array(
 
     <div class="expiration margin-topDefault confirmMenu">
 
-        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/package/list">
-            <div class="input-group input-large date-picker input-daterange">
-                <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
-                <span class="input-group-addon">
-                    to </span>
-                <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
-            </div>
-            <?php
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/package/list" class="form-inline">
+            <div class="input-group form-group" >
+                <?php
             $statusId = 1;
             if (isset($_REQUEST['res_filter'])) {
                 $statusId = $_REQUEST['res_filter'];
             }
             ?>
 
-            <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
+                <select class="customeSelect howDidYou form-control input-medium" id="ui-id-5" name="res_filter" style="margin-right: 10px;">
 
                 <option value="1" <?php if ($statusId == 1) {
                 echo "selected";
@@ -44,8 +39,12 @@ $this->breadcrumbs = array(
                 echo "selected";
             } ?> >In Active</option>
             </select>
+                <input type="submit" class="btn btn-primary " value="OK" name="submit" id="submit"/>
+            </div>
+          
+        </form>
     </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+    
 </form>
 
 </div>

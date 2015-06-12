@@ -8,6 +8,10 @@ class MailController extends Controller {
      */
     public $layout = 'main';
 
+    public function init() {
+        BaseClass::isAdmin();
+    }
+
     /**
      * @return array action filters
      */
@@ -48,14 +52,22 @@ class MailController extends Controller {
      */
     public function actionIndex() {
         $pageSize = 10;
+        
+        if(Yii::app()->session['userid']=='1')
+        {
+            $string = "1,21,22,23,24";
+             
+        }else{
+           $string = Yii::app()->session['userid']; 
+        }
         $emailObject = User::model()->findAll(array('condition' => 'role_id=2'));
-        if (!empty($_POST)) {
+        if (!empty($_POST) && $_POST['admin_email'] !='') {
             $dataProvider = new CActiveDataProvider('Mail', array(
-                'criteria' => array('condition' => 'to_user_id ='.$_POST['admin_email'], 'order' => 'updated_at DESC'),
+                'criteria' => array('condition' => 'to_user_id =' . $_POST['admin_email'], 'order' => 'updated_at DESC'),
                 'pagination' => array('pageSize' => $pageSize)));
         } else {
             $dataProvider = new CActiveDataProvider('Mail', array(
-                'criteria' => array('condition' => 'to_user_id IN (1,21,22,23,24)', 'order' => 'updated_at DESC'),
+                'criteria' => array('condition' => 'to_user_id IN ('.$string.')', 'order' => 'updated_at DESC'),
                 'pagination' => array('pageSize' => $pageSize)));
         }
         $this->render('index', array(
@@ -68,10 +80,17 @@ class MailController extends Controller {
      */
     public function actionSent() {
         $pageSize = 10;
+        if(Yii::app()->session['userid']=='1')
+        {
+            $string = "1";
+             
+        }else{
+           $string = Yii::app()->session['userid']; 
+        }
         $dataProvider = new CActiveDataProvider('Mail', array(
-            'criteria' => array('condition' => 'from_user_id = 1', 'order' => 'updated_at DESC'),
+            'criteria' => array('condition' => 'from_user_id = '.$string, 'order' => 'updated_at DESC'),
             'pagination' => array('pageSize' => $pageSize)));
-        $this->render('index', array(
+        $this->render('sent', array(
             'dataProvider' => $dataProvider,
         ));
     }
@@ -84,7 +103,7 @@ class MailController extends Controller {
                 if (empty($userObject)) {
                     $this->render('compose', array('error' => 'User Does Not Exist'));
                 }
-                $fname = time().$_FILES['attachment']['name'];
+                $fname = time() . $_FILES['attachment']['name'];
                 $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                 BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                 $mailObject = new Mail();
@@ -97,9 +116,9 @@ class MailController extends Controller {
                 $mailObject->created_at = new CDbExpression('NOW()');
                 $mailObject->updated_at = new CDbExpression('NOW()');
                 $mailObject->save(false);
-                $this->redirect(array('admin/mail?successMsg=1'));
+                $this->redirect(array('/admin/mail?successMsg=1'));
             }
-            $this->redirect(array('admin/mail?successMsg=1'));
+            $this->redirect(array('/admin/mail?successMsg=1'));
         }
         $this->render('compose', array('error' => ''));
     }
@@ -118,7 +137,10 @@ class MailController extends Controller {
     public function actionView($id) {
         if ($id) {
             $mailObject = Mail::model()->findByPk($id);
+            if(Yii::app()->session['userid'] != $mailObject->from_user_id)
+			{
             $mailObject->status = 1;
+			}
             $mailObject->save(false);
             $this->render('view', array(
                 'mailObject' => $mailObject,

@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Category' => array('/admin/BuildTemp/categorylist'),'Category List'
+    'Category List'
 );
 ?>
 

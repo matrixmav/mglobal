@@ -122,11 +122,11 @@ class ReportController extends Controller {
         //By default Pending.
         $status = 0;
 
-        $condition = 'status = ' . $status;
+        $condition = 'address_proff !="" AND id_proof !="" AND status = ' . $status.' AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"';
         if (!empty($_POST)) {
             $status = $_POST['res_filter'];
             // Add status.
-            $condition = 'status = ' . $status;
+            $condition = ' address_proff !="" AND id_proof !="" AND status = ' . $status;
             if (!empty($_POST['from'])) {
                 $todayDate = $_POST['from'];
                 $condition .= ' AND created_at >= "' . $todayDate . '"';
@@ -136,6 +136,7 @@ class ReportController extends Controller {
                 $condition .= ' AND created_at <= "' . $fromDate . '"';
             }
         }
+	
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
                 'condition' => $condition, //('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',

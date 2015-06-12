@@ -13,6 +13,11 @@ class BuildTempController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = 'main';
+
+    public function init() {
+        BaseClass::isAdmin();
+    }
+
     /**
      * @return array action filters
      */
@@ -32,9 +37,9 @@ class BuildTempController extends Controller {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist', 'deletecategory',
-                                   'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit',
-                                   'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd',
-                                   'customcode'),
+                    'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit',
+                    'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd',
+                    'customcode'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -124,7 +129,8 @@ class BuildTempController extends Controller {
 
         if ($_REQUEST['id']) {
             $categoryObject = BuildCategory::model()->findByPk($_REQUEST['id']);
-            var_dump($categoryObject); die;
+            var_dump($categoryObject);
+            die;
             if ($categoryObject->status == 1) {
                 $categoryObject->status = 0;
             } else {
@@ -167,32 +173,31 @@ class BuildTempController extends Controller {
     public function actiontemplateheaderEdit() {
         $error = "";
         $success = "";
-       
+
         if ($_REQUEST['id']) {
-            
+
             //$headerObject = BuildTemp::model()->findByAttributes(array('id'=>$_REQUEST['id']));
             $headerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
-                
+
             if ($_POST) {
-                if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
+                if ($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '') {
                     //$headerObject = BuildTemp::model()->findByAttributes(array('temp_header_id'=>$_REQUEST['id']));
 
                     $headerupdateObject = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
 //                    var_dump($headerupdateObject) ; die;
-                    if(!empty($_FILES['screenshot']['name']))
-                     {
-                        $ext1 = end((explode(".", $_FILES['screenshot']['name']))); 
+                    if (!empty($_FILES['screenshot']['name'])) {
+                        $ext1 = end((explode(".", $_FILES['screenshot']['name'])));
                         if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
-                                $error .= "Please upload mentioned file type.";
-                        }else{
-                        $path = $targetdir."/screenshot/";
-                        BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, time() . $_FILES['screenshot']['name']);
-                       }
-                    $headerObject->screenshot =   time().$_FILES['screenshot']['name'];
-                    $headerObject->update();
+                            $error .= "Please upload mentioned file type.";
+                        } else {
+                            $path = $targetdir . "/screenshot/";
+                            BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, time() . $_FILES['screenshot']['name']);
+                        }
+                        $headerObject->screenshot = time() . $_FILES['screenshot']['name'];
+                        $headerObject->update();
                     }
-                    
-                    
+
+
                     $headerupdateObject->header_content = addslashes($_POST['Template']['header_code']);
                     $headerupdateObject->template_title = addslashes($_POST['Template']['template_title']);
                     $headerupdateObject->updated_at = date('Y-m-d');
@@ -221,7 +226,7 @@ class BuildTempController extends Controller {
             $bodyObject = BuildTemp::model()->findByPk($_REQUEST['id']);
 
             if ($_POST) {
-                if (!empty($_POST['Template']['body_code'] != '')) {
+                if ($_POST['Template']['body_code'] != '') {
                     $bodyupdateObject = BuildTempBody::model()->findByPk($_REQUEST['b_id']);
                     $bodyupdateObject->body_content = addslashes($_POST['Template']['body_code']);
                     $bodyupdateObject->updated_at = date('Y-m-d');
@@ -247,7 +252,7 @@ class BuildTempController extends Controller {
         if ($_REQUEST['id']) {
             $footerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
             if ($_POST) {
-                if (!empty($_POST['Template']['footer_code'] != '')) {
+                if ($_POST['Template']['footer_code'] != '') {
                     $footeraddObject = new BuildTempFooter;
                     $footeraddObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footeraddObject->updated_at = date('Y-m-d');
@@ -273,10 +278,10 @@ class BuildTempController extends Controller {
     public function actionTemplateHeaderAdd() {
         $error = "";
         $success = "";
-        if ($_POST) {            
+        if ($_POST) {
             $category = $_POST['Template']['category'];
-            if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
-               
+            if ($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '') {
+
                 $headeraddObject = new BuildTempHeader;
                 $bodyaddObject = new BuildTempBody;
                 $footeraddObject = new BuildTempFooter;
@@ -286,15 +291,16 @@ class BuildTempController extends Controller {
                 $headeraddObject->created_at = date('Y-m-d');
                 if ($headeraddObject->save(false)) {
 
-                    $bodyaddObject->body_content = addslashes('<div class="mav_content">'.$_POST['Template']['body_code'].'</div>');
+                    $bodyaddObject->body_content = addslashes('<div class="mav_content">' . $_POST['Template']['body_code'] . '</div>');
                     $bodyaddObject->created_at = date('Y-m-d');
                     $bodyaddObject->save(false);
 
-                    $footeraddObject->footer_content = addslashes('<div class="mav_footer">'.$_POST['Template']['footer_code'].'</div>');
+                    $footeraddObject->footer_content = addslashes('<div class="mav_footer">' . $_POST['Template']['footer_code'] . '</div>');
                     $footeraddObject->created_at = date('Y-m-d');
                     $footeraddObject->save(false);
-                    
-                    /* for removing folder */                    
+
+                    /* for removing folder */
+
                     function rmdir_recursive($dir) {
                         foreach (scandir($dir) as $file) {
                             if ('.' === $file || '..' === $file)
@@ -366,45 +372,47 @@ class BuildTempController extends Controller {
                             BaseClass::uploadFile($_FILES['screenshot']['tmp_name'], $path, $fileS);
                         }
                     }
-                    
+
                     $model = new BuildTemp;
                     $model->template_id = $headeraddObject->id;
                     $model->temp_header_id = $headeraddObject->id;
                     $model->temp_body_id = $bodyaddObject->id;
                     $model->temp_footer_id = $footeraddObject->id;
-                    $model->status = 0;                                                   
+                    $model->status = 0;
                     $model->created_at = date('Y-m-d');
                     $model->updated_at = date('Y-m-d');
                     $model->category_id = $category;
                     $model->folderpath = $fname;
                     $model->screenshot = $fileS;
                     $model->custom_css = addslashes($_POST['custom_css']);
-                    $model->custom_js = addslashes($_POST['custom_js']); 
-                    $model->contact_form = addslashes('<div class="mav_contact">'.$_POST['Template']['form_code'].'</div>');
+                    $model->custom_js = addslashes($_POST['custom_js']);
+                    $model->contact_form = addslashes('<div class="mav_contact">' . $_POST['Template']['form_code'] . '</div>');
                     $model->save(false);
-                    $tmpId = $model->id  ;
-                    
-                    /*  Scan and Insert JS  */                  
-                    $scanDir = scandir($targetdir.'/js/');                    
+                    $tmpId = $model->id;
+
+                    /*  Scan and Insert JS  */
+                    $scanDir = scandir($targetdir . '/js/');
                     foreach ($scanDir as $dirName) {
-                        if ($dirName === '.' or $dirName === '..') continue;
-                        $modelJs = new BuildTempJs ;
-                        $modelJs->name = $dirName; 
+                        if ($dirName === '.' or $dirName === '..')
+                            continue;
+                        $modelJs = new BuildTempJs;
+                        $modelJs->name = $dirName;
                         $modelJs->temp_id = $tmpId;
                         $modelJs->created_at = date('Y-m-d');
                         $modelJs->save(false);
                     }
-                    
-                    $scanDir = scandir($targetdir.'/css/');                    
+
+                    $scanDir = scandir($targetdir . '/css/');
                     foreach ($scanDir as $dirName) {
-                        if ($dirName === '.' or $dirName === '..') continue;
-                        $modelCss = new BuildTempCss ;
-                        $modelCss->name = $dirName; 
+                        if ($dirName === '.' or $dirName === '..')
+                            continue;
+                        $modelCss = new BuildTempCss;
+                        $modelCss->name = $dirName;
                         $modelCss->temp_id = $tmpId;
                         $modelCss->created_at = date('Y-m-d');
                         $modelCss->save(false);
                     }
-                   
+
 
                     $success .= "Header content added successfully";
                 }
@@ -421,33 +429,33 @@ class BuildTempController extends Controller {
 
     /**
      * Function to edit body code
-     
-    public function actionTemplateBodyAdd() {
-        $error = "";
-        $success = "";
-        if ($_REQUEST['id']) {
-            if ($_POST) {
-                if (!empty($_POST['Template']['body_code'] != '')) {
-                    $bodyaddObject = new BuildTempBody;
-                    $bodyaddObject->body_content = $_POST['Template']['body_code'];
-                    $bodyaddObject->updated_at = date('Y-m-d');
-                    if ($bodyaddObject->save(false)) {
-                        $model = BuildTemp::model()->findByPk($bodyaddObject->body_id);
-                        $model->temp_body_id = $bodyaddObject->id;
-                        $model->update(false);
-                        $success .= "Footer content added successfully";
-                    }
-                } else {
-                    $error .= "Please fill all required(*) marked fields.";
-                }
-            }
-        }
-        $this->render('/builder/template_body_add', array(
-            'error' => $error, 'success' => $success
-        ));
-    }
 
-    /**
+      public function actionTemplateBodyAdd() {
+      $error = "";
+      $success = "";
+      if ($_REQUEST['id']) {
+      if ($_POST) {
+      if ($_POST['Template']['body_code'] != '') {
+      $bodyaddObject = new BuildTempBody;
+      $bodyaddObject->body_content = $_POST['Template']['body_code'];
+      $bodyaddObject->updated_at = date('Y-m-d');
+      if ($bodyaddObject->save(false)) {
+      $model = BuildTemp::model()->findByPk($bodyaddObject->body_id);
+      $model->temp_body_id = $bodyaddObject->id;
+      $model->update(false);
+      $success .= "Footer content added successfully";
+      }
+      } else {
+      $error .= "Please fill all required(*) marked fields.";
+      }
+      }
+      }
+      $this->render('/builder/template_body_add', array(
+      'error' => $error, 'success' => $success
+      ));
+      }
+
+      /**
      * Function to edit footer code
      */
     public function actionTemplateFooterEdit() {
@@ -456,7 +464,7 @@ class BuildTempController extends Controller {
         if ($_REQUEST['id']) {
             $footerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
             if ($_POST) {
-                if (!empty($_POST['Template']['footer_code'] != '')) {
+                if ($_POST['Template']['footer_code'] != '') {
                     $footerupdateObject = BuildTempFooter::model()->findByPk($_REQUEST['f_id']);
                     $footerupdateObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footerupdateObject->updated_at = date('Y-m-d');
@@ -472,19 +480,20 @@ class BuildTempController extends Controller {
             'footerObject' => $footerObject, 'error' => $error, 'success' => $success
         ));
     }
-    
+
     /* Get Custom Css and Js Code */
-    public function actionCustomCode(){
-      
+
+    public function actionCustomCode() {
+
         $error = "";
         $success = "";
         if ($_REQUEST['id']) {
             $customcode = BuildTemp::model()->findByPk($_REQUEST['id']);
 
             if ($_POST) {
-                if (!empty($_POST['custom_css'] != '')) {
+                if ($_POST['custom_css'] != '') {
                     $customcode->custom_css = addslashes($_POST['custom_css']);
-                    $customcode->custom_js = addslashes($_POST['custom_js']);                    
+                    $customcode->custom_js = addslashes($_POST['custom_js']);
                     if ($customcode->update()) {
                         $success .= "Custom code has been updated successfully";
                     }
@@ -495,7 +504,7 @@ class BuildTempController extends Controller {
         }
         $this->render('/builder/customcode', array(
             'customcode' => $customcode, 'error' => $error, 'success' => $success
-        ));        
+        ));
     }
 
     // Uncomment the following methods and override them if needed

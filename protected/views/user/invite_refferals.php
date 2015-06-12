@@ -22,7 +22,8 @@ $caption = '';
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-    <form action="/profile/inviterefferal" method="post" class="form-horizontal">
+    <div class="error" id="error_msg_email" style="display:none;"></div>
+    <form action="/profile/inviterefferal" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset id="emailDiv" style="display:none;">
             <legend>Invite Refferals Using Email</legend>
@@ -30,7 +31,7 @@ $caption = '';
                 <label class="col-lg-4 control-label" for="lastname">Email</label>
                 <div class="col-lg-8">
                     <input type="text" id="email" class="form-control" name="email" value="">(Enter comma seperated email address. example : example.com,example1.com etc )<br/>
-                    <div class="" id="error_msg_email"></div>
+                    
                 </div>
             </div>
             
@@ -57,22 +58,27 @@ $caption = '';
 <script type="text/javascript">
  function validation()
  {
-       if(document.getElementById("email").value=='')
-        {
-             document.getElementById("error_msg_email").innerHTML = "Please enter your email.";
-             document.getElementById("email").focus();
+      var emailList = document.getElementById("email").value;
+      if(emailList=='')
+      {
+         $("#error_msg_email").fadeIn(); 
+         $("#error_msg_email").html("Email field can not be blank");
+         $("#email").focus();
+            return false;  
+      }
+      var emails = emailList.split(",");
+      var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      for(var i = 0; i < emails.length; i++)
+      {
+     if( emails[i] == "" || ! regex.test(emails[i])){
+         $("#error_msg_email").fadeIn(); 
+         $("#error_msg_email").html("One of your entered email is not correct.Please check");
+         $("#email").focus();
             return false;
-        }
-        var email = document.getElementById('email');
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-        if (!filter.test(email.value)) {
-            $("#error_msg_email").html("Enter valid email address ");
-            $("#email").focus();
-            return false;
-        }
+     }
+    }
           /* Phone Number Validation  */
-        $("#error_msg_phone").html("");
+        /*$("#error_msg_phone").html("");
         if ($("#phone").val() == "") {
             $("#error_msg_phone").html("Enter Mobile Number");
             $("#phone").focus();
@@ -87,7 +93,7 @@ $caption = '';
             $("#error_msg_phone").html("Enter valid phone number ");
             $("#phone").focus();  
             return false;
-        }
+        }*/
     }
    function openform(formval)
    {

@@ -39,7 +39,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'from_user_id',
-            'header' => '<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
+            'header' => '<span style="white-space: nowrap;">Receiver&nbsp; &nbsp; &nbsp;</span>',
             'value' => '$data->touser->full_name',
         ),
         array(
@@ -52,10 +52,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'header' => '<span style=" color:#1F92FF;white-space: nowrap;">Date & Time&nbsp;</span>',
             'value' => array($this, 'convertDate'),
         ),
-        array(
-            'name' => Yii::t('translation', 'Status'),
-            'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Red\') : Yii::t(\'translation\', \'Unred\')',
-        ),
+        
         array(
             'class' => 'CButtonColumn',
             'template' => '{Reply}{View}',
