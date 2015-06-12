@@ -53,6 +53,17 @@ class BaseClass extends Controller {
 
         }
     }
+    
+    /* function to fetch access /*
+     * 
+     */
+    
+    public function getmemberAccess() {
+     $userId = Yii::app()->session['userid'];// die;
+     $UseraccessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>Yii::app()->session['userid']));
+     $accessArr = explode(',',$UseraccessObject->access);
+     return $accessArr;
+    }
 
     public static function walletAmount($id) {
         $userId = Yii::app()->session['userid'];
