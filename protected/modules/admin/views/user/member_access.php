@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'User' => array('/admin/user/index'),
+     
     'Member Access'
 );
 ?>
@@ -24,12 +24,13 @@ $this->breadcrumbs = array(
 </div>
 <div class="col-md-12 form-group">
     <div class="col-md-6">
-        <input type="checkbox" name="access[]" id="builder">Builder
-        <input type="checkbox" name="access[]" id="ads">Ads
-        <input type="checkbox" name="access[]" id="package">package
-        <input type="checkbox" name="access[]" id="reports">Reports
-        <input type="checkbox" name="access[]" id="users">Member Management
-        <input type="checkbox" name="access[]" id="mail">Mail
+        <input type="checkbox" name="access[]" id="builder">Builder<br/>
+        <input type="checkbox" name="access[]" id="ads">Ads<br/>
+        <input type="checkbox" name="access[]" id="package">package<br/>
+        <input type="checkbox" name="access[]" id="reports">Reports<br/>
+        <input type="checkbox" name="access[]" id="users">Member Management<br/>
+        <input type="checkbox" name="access[]" id="mail">Mail<br/>
+        <input type="checkbox" name="access[]" id="mail">Member Access<br/>
     </div>
 </div>
  
