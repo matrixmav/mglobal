@@ -236,6 +236,66 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
 
                         <?php
+                        $hotel_pmenu = 6;
+                         if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
+                                /*$hotel_subsection = array(
+                                    "profile/dashboard" => "Dashboard",
+//                                    "profile/summery" => "Summery",
+                                );
+                                $activecls = 'active';
+                                if ($curAction == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                if ($curAction == 'dashboard')
+                                    $activecls = 'active';
+                                if ($curActionLower == 'simplename')
+                                    $activecls = '';
+                                */
+                                if ($curControllerLower == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                ?>
+                                <li class="<?php echo $activecls; ?>"><a href="/admin/dashboard"> <span
+                                            class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
+                                        <span class="selected"></span> 
+                                        <?php /*<span
+                                            class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
+                                        </span><?php */?>
+                                    </a>
+                                    <?php
+                                    /*$menusections ['sections'] = $hotel_subsection;
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($hotel_subsection as $hotName => $hotTitle) {
+                                        if (in_array($hotTitle, $menusections ['sections'])) {
+                                            if ($hotName == 'admin') {
+                                                $hotName = '/index';
+                                            }
+                                            if ($curActionLower == 'create') {
+                                                $curActionLower = 'create/type/details';
+                                            }
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+                                            echo '<li ' . $class_content . '>';
+                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($hotName == 'admin/index') {
+                                                $hotName = 'admin';
+                                            }
+
+                                            /*
+                                             * if($hotName == "admin")
+                                             * echo '</ul>';
+                                             */
+                                        /*}
+                                    }
+                                    echo '</ul>';
+                                    */?>					
+                                </li>	
+                                <?php
+                            }
                         if (in_array('user', $accessArr)) {
                         if ($access != "manager") {
                             $hotel_pmenu = 6;
@@ -708,8 +768,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <li>
                                         <?php
                                         $this->widget('zii.widgets.CBreadcrumbs', array(
-                                            'homeLink' => CHtml::link('User', array(
-                                                '/admin/user'
+                                            'homeLink' => CHtml::link('Dashboard', array(
+                                                '/admin/dashboard'
                                             )),
                                             'links' => $this->breadcrumbs
                                         ));
