@@ -35,6 +35,15 @@ if(!empty($success)){
         <input type="checkbox" name="access[]" value="user" <?php if(in_array('user',$accessArr)){?> checked="checked" <?php }?>>Member Management<br/>
         <input type="checkbox" name="access[]" value="mail" <?php if(in_array('mail',$accessArr)){?> checked="checked" <?php }?>>Mail<br/>
         <input type="checkbox" name="access[]" value="memberaccess" <?php if(in_array('memberaccess',$accessArr)){?> checked="checked" <?php }?>>Member Access<br/>
+        <input type="checkbox" name="access[]" value="wallet" <?php if(in_array('wallet',$accessArr)){?> checked="checked" <?php }?>>Wallet<br/>
+        <input type="checkbox" name="access[]" value="geneology" <?php if(in_array('geneology',$accessArr)){?> checked="checked" <?php }?>>Geneology<br/>
+       <input type="checkbox" name="access[]" value="document" <?php if(in_array('document',$accessArr)){?> checked="checked" <?php }?>>document<br/>
+       <input type="checkbox" name="access[]" value="testimonial" <?php if(in_array('testimonial',$accessArr)){?> checked="checked" <?php }?>>Testimonial<br/>
+       <input type="checkbox" name="access[]" value="package_list" <?php if(in_array('package_list',$accessArr)){?> checked="checked" <?php }?>>Package List<br/>
+       <input type="checkbox" name="access[]" value="package_add" <?php if(in_array('package_add',$accessArr)){?> checked="checked" <?php }?>>Package Add<br/>
+       <input type="checkbox" name="access[]" value="ads_add" <?php if(in_array('ads_add',$accessArr)){?> checked="checked" <?php }?>>Ads Add<br/>
+       <input type="checkbox" name="access[]" value="ads_list" <?php if(in_array('ads_list',$accessArr)){?> checked="checked" <?php }?>>Ads List<br/>
+       
     </div>
 </div>
  
