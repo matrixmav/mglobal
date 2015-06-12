@@ -52,6 +52,14 @@ class MailController extends Controller {
      */
     public function actionIndex() {
         $pageSize = 10;
+        
+        if(Yii::app()->session['userid']=='1')
+        {
+            $string = "1,21,22,23,24";
+             
+        }else{
+           $string = Yii::app()->session['userid']; 
+        }
         $emailObject = User::model()->findAll(array('condition' => 'role_id=2'));
         if (!empty($_POST) && $_POST['admin_email'] !='') {
             $dataProvider = new CActiveDataProvider('Mail', array(
@@ -59,7 +67,7 @@ class MailController extends Controller {
                 'pagination' => array('pageSize' => $pageSize)));
         } else {
             $dataProvider = new CActiveDataProvider('Mail', array(
-                'criteria' => array('condition' => 'to_user_id IN (1,21,22,23,24)', 'order' => 'updated_at DESC'),
+                'criteria' => array('condition' => 'to_user_id IN ('.$string.')', 'order' => 'updated_at DESC'),
                 'pagination' => array('pageSize' => $pageSize)));
         }
         $this->render('index', array(
