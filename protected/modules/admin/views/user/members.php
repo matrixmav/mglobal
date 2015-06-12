@@ -17,6 +17,12 @@ $this->breadcrumbs = array(
     top: 8px;}
     .confirmMenu{position: relative;}
 </style>
+<?php 
+if(!empty($_GET) && $_GET['successMsg'] =='1'){
+    echo "<p class='success'>Member Status Changed Successfully.</p>";
+}
+
+?>
 <div class="col-md-12">
 <div class="expiration margin-topDefault confirmMenu">
  <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/userhasaccess/members">
@@ -61,49 +67,36 @@ $this->breadcrumbs = array(
             'columns' => array(
                 //'idJob',
                  array(
-                   'name' => 'user_id',
+                   'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Sl.No &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$row+1',
                 ),
                 array(
-                    'name' => 'user_id',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
+                    'name' => 'name',
+                    'header' => '<span style="white-space: nowrap;">User Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->name)?$data->name:""',
                 ),
                 
                 array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">Address Proof &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => array($this,'gridAddressImagePopup'),
+                    'name' => 'full_name',
+                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->full_name)? $data->full_name:""',
                 ),
                 array(
                     'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">Id Proof &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => array($this,'gridIdImagePopup'),
+                    'header' => '<span style="white-space: nowrap;">Email &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->email)?$data->email:""',
                 ),
                 array(
                     'name' => 'created_at',
                     'header' => '<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->created_at',
+                    'value' => 'isset($data->created_at)? $data->created_at : ""',
                 ),
-                array(
-                    'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">State &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->state_name',
-                ),
-                array(
-                    'name' => 'country_id',
-                    'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->country->name)?$data->country->name:""',
-                ),
-                array(
-                    'name' => 'user_id',
-                    'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->user->phone',
-                ),
+                 
+                 
                 array(
                     'name' => 'status',
-                    'value' => '($data->document_status == 1) ? Yii::t(\'translation\', \'Approved\') : Yii::t(\'translation\', \'Pending\')',
+                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
                 ),
                  array(
                     'class' => 'CButtonColumn',
@@ -114,7 +107,7 @@ $this->breadcrumbs = array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/user/changeapprovalstatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/userhasaccess/changeapprovalstatus", array("id"=>$data->id))',
                         ),
                          
                     ),
