@@ -188,4 +188,8 @@ class GenealogyController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionBinary(){
+             
+        }
 }

@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Reports' => array('/admin/report/address'),'Member Address'
+    'Member Address Report'
 );
 ?>
 
@@ -23,10 +23,10 @@ $this->breadcrumbs = array(
                     
     <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report/address">
     <div class="input-group input-large date-picker input-daterange">
-        <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
+        <input type="text" name="from" placeholder="To Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['from'] !='') ?  $_POST['from'] :  DATE('Y-m-d');?>">
         <span class="input-group-addon">
         to </span>
-        <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
+        <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['to'] !='') ?  $_POST['to'] :  DATE('Y-m-d');?>">
     </div>
     <?php 
     $statusId =   1;

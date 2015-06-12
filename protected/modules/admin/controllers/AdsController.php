@@ -53,6 +53,7 @@ class AdsController extends Controller {
     public function actionIndex() {
         $pageSize = 10;
         $dataProvider = new CActiveDataProvider('Ads', array(
+            'criteria' => array('order' => 'updated_at DESC'),
             'pagination' => array('pageSize' => $pageSize)));
 
         $this->render('index', array(

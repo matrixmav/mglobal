@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Reports' => array('/admin/report/transaction'),'Social Account'
+    'Transaction Report'
 );
 ?>
 
@@ -23,10 +23,10 @@ $this->breadcrumbs = array(
                     
     <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report/transaction">
     <div class="input-group input-large date-picker input-daterange">
-        <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
+        <input type="text" name="from" placeholder="To Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['from'] !='') ?  $_POST['from'] :  DATE('Y-m-d');?>">
         <span class="input-group-addon">
         to </span>
-        <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
+        <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['to'] !='') ?  $_POST['to'] :  DATE('Y-m-d');?>">
     </div>
     <?php 
     $statusId =   1;
@@ -101,7 +101,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Used RP &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->used_rp)?$datatransaction->->used_rp:""',
+                    'value' => 'isset($data->transaction->used_rp)? $data->transaction->used_rp:"N/A"',
                 ),
                  array(
                     'name' => 'id',

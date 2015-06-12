@@ -1,10 +1,13 @@
 <?php
 $this->breadcrumbs = array(
-    'Email' => array('/admin/mail'),
-    'inbox'
+    'Inbox'
 );
 ?>
-
+<?php 
+if(!empty($_GET) && $_GET['successMsg']=='1'){
+    echo "<div class='success'>Your message sent successfully.</div>";
+}
+?>
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-3">   
@@ -12,7 +15,7 @@ $this->breadcrumbs = array(
             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/admin/mail/compose', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/admin/mail/sent', array("class" => "btn  green margin-right-20")); ?>
         </div>
-        <?php if (isset($emailObject)): ?>
+        <?php if(Yii::app()->session['userid']=='1'){ if (isset($emailObject)){ ?>
             <div class="col-md-6">   
                 <div class="expiration margin-topDefault confirmMenu">
                     <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/mail" class="form-inline">
@@ -28,7 +31,7 @@ $this->breadcrumbs = array(
                     </form>
                 </div>
             </div>
-        <?php endif; ?>
+        <?php } } ?>
     </div>
 </div>
 

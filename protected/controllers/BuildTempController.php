@@ -76,10 +76,12 @@ class BuildTempController extends Controller {
             $pat1 = '*' . $i . '*';
             $pat2 = '$' . $i . '$';
             $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
-            $tempMenu = str_replace($pat2, $pages->page_name, $tempMenu);
+            $tempMenu = str_replace($pat2, ($pages->page_name), $tempMenu);
             $i++;
         }
+       // echo $tempMenu;
         $tempMenu = stripcslashes($tempMenu);
+//        print_r($tempMenu); die;
         
         $path = Yii::getPathOfAlias('webroot');       
         /*Create Folder And Permission */        
@@ -121,10 +123,12 @@ $headMeta = '<!DOCTYPE html>
             
             foreach($builderObjectCss as $builderObjectListCss){
                $data = "\n".'<link rel="stylesheet" href="css/'.$builderObjectListCss->name.'" type="text/css" media="all">' ;           
+                //stripslashes($userpagesObject->page_content) ;
                 fwrite($handle, $data);
             } 
             foreach($builderObjectJs as $builderObjectListJs){
                $data = "\n".'<script type="text/javascript" src="js/'.$builderObjectListJs->name.'"></script>' ;           
+                //stripslashes($userpagesObject->page_content) ;
                 fwrite($handle, $data);
             }
 
@@ -139,9 +143,13 @@ $headMeta = '<!DOCTYPE html>
         
 $dataHeader .= "<script>    
     $(document).ready(function() {         
-        $('.mav_menu').html('".$tempMenu."');         
+        var test = $('.mav_menu').html('".$tempMenu."');         
     });
     </script>";
+
+            
+            
+            
             
             $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
             fwrite($handle, $data);           

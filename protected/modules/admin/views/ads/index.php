@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-    'Ads' => array('/admin/Ads')    
+    'Ads'    
 ); 
 ?>
 
