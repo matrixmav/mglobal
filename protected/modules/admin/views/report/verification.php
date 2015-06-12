@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-     'Reports' => array('/admin/report/verification'),'Verification'
+     'Verification Report'
 );
 ?>
 

@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Reports' => array('/admin/report/adminsponsor'),'Admin Sponsor'
+    'Admin Sponsor Report'
 );
 ?>
 
