@@ -5,74 +5,74 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
-    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
-    <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-   
+    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
+    <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
+
     <form action="/admin/package/add" method="post" class="form-horizontal" onsubmit="return validation();">
-     
+
         <fieldset>
             <legend>Add Package</legend>
-            
+
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Package Name<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="name" class="form-control" name="Package[name]" >
-                    <span id="name_error"></span>
+                    <span style="color:red;" id="name_error"></span>
                 </div>
             </div>
-            
-           <div class="form-group">
+
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Price<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="amount" class="form-control" name="Package[amount]">
-                    <span id="amount_error"></span>
+                    <span style="color:red;" id="amount_error"></span>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Description<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="description" class="form-control" name="Package[description]"></textarea>
-                    <span id="description_error"></span>
+                    <span style="color:red;" id="description_error"></span>
                 </div>
             </div>
-            
-            
-          <div class="form-group">
-                    <label for="country" class="col-lg-4 control-label">No of Pages </label>
-                    <div class="col-lg-8">
-                      <input type="text" id="no_of_pages" class="form-control" name="Package[no_of_pages]" >
-                      
-                    </div>
-                     
-                </div>
-            
-           
+
+
             <div class="form-group">
-                    <label for="country" class="col-lg-4 control-label">No of images </label>
-                    <div class="col-lg-8">
-                     <input type="text" id="no_of_images" class="form-control" name="Package[no_of_images]">
-                      
-                    </div>
-                     
+                <label for="country" class="col-lg-4 control-label">No of Pages </label>
+                <div class="col-lg-8">
+                    <input type="text" id="no_of_pages" class="form-control" name="Package[no_of_pages]" >
+                    <span style="color:red;" id="pages_error"></span>
                 </div>
-            
-            
+
+            </div>
+
+
             <div class="form-group">
-                    <label for="country" class="col-lg-4 control-label">No of forms </label>
-                    <div class="col-lg-8">
-                     <input type="text" id="no_of_forms" class="form-control" name="Package[no_of_forms]">
-                        
-                    </div>
-                     
+                <label for="country" class="col-lg-4 control-label">No of images </label>
+                <div class="col-lg-8">
+                    <input type="text" id="no_of_images" class="form-control" name="Package[no_of_images]">
+                    <span style="color:red;" id="images_error"></span>
                 </div>
-             
+
+            </div>
+
+
+            <div class="form-group">
+                <label for="country" class="col-lg-4 control-label">No of forms </label>
+                <div class="col-lg-8">
+                    <input type="text" id="no_of_forms" class="form-control" name="Package[no_of_forms]">
+                    <span style="color:red;" id="forms_error"></span>
+                </div>
+
+            </div>
+
         </fieldset>
 
-    <div class="row">
+        <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
                 <input type="submit" name="submit" value="Submit" class="btn red">
-                 
+
             </div>
         </div>
     </form>
@@ -85,35 +85,72 @@ $this->breadcrumbs = array(
 <script type="text/javascript">
     function validation()
     {
-     var regex = /^\d*(.\d{2})?$/;
-     var amount = document.getElementById('amount');
-    $("#name_error").html("");
-     if ($("#name").val() == "") {
-      $("#name_error").html("Enter Package Name");
-      $("#name").focus();            
-      return false;
+        var regex = /^\d*(.\d{2})?$/;
+        var amount = document.getElementById('amount');
+        $("#name_error").html("");
+        if ($("#name").val() == "") {
+            $("#name_error").html("Enter Package Name");
+            $("#name").focus();
+            return false;
+        }
+        $("#amount_error").html("");
+        if ($("#amount").val() == "") {
+            $("#amount_error").html("Enter Package Price");
+            $("#amount").focus();
+            return false;
+        } else {
+            if (isNaN($("#amount").val())) {
+                $("#amount_error").html("Enter valid price.");
+                $("#amount").focus();
+                return false;
+            }
+        }
+
+        if (!regex.test(amount.value)) {
+
+            $("#amount_error").html("Enter Valid Package Price");
+            $("#amount").focus();
+            return false;
+        }
+
+        $("#description_error").html("");
+        if ($("#description").val() == "") {
+            $("#description_error").html("Enter Package Description");
+            $("#description").focus();
+            return false;
+        }
+
+        if ($("#no_of_pages").val() != "") {
+            if (isNaN($("#no_of_pages").val())) {
+                $("#pages_error").html("Enter valid number.");
+                $("#pages_error").focus();
+                return false;
+            } else {
+                $("#pages_error").html("");
+            }
+
+        }
+
+        if ($("#no_of_images").val() != "") {
+            $("#images_error").html("");
+            if (isNaN($("#no_of_images").val())) {
+                $("#images_error").html("Enter valid number.");
+                $("#images_error").focus();
+                return false;
+            }
+
+        }
+
+        if ($("#no_of_forms").val() != "") {
+            $("#forms_error").html("");
+            if (isNaN($("#no_of_forms").val())) {
+                $("#forms_error").html("Enter valid number.");
+                $("#forms_error").focus();
+                return false;
+            }
+        }
+
     }
-    $("#amount_error").html("");
-    if ($("#amount").val() == "") {
-      $("#amount_error").html("Enter Package Price");
-      $("#amount").focus();            
-      return false;
-    }
-    if (!regex.test(amount.value)){
-     
-      $("#amount_error").html("Enter Valid Package Price");
-      $("#amount").focus();            
-      return false;
-    }
-    
-    $("#description_error").html("");
-     if ($("#description").val() == "") {
-      $("#description_error").html("Enter Package Description");
-      $("#description").focus();            
-      return false;
-    }
-        
-    }
-    </script>
-     
-     
+</script>
+
+

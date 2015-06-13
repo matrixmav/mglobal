@@ -1825,3 +1825,33 @@ Pre-Header and pre-header elements
 .pre-header li{margin:2px 0;}
 .pre-header .btn-primary{background-color:#337ab7 !important}
 .fa.fa-share-alt{color:#FFF;}
+
+
+.service_icon{ display: inline-block; text-align: center; padding: 0 0 35px 0;}
+.pinkSm{color:#e54a1a !important;}
+.pinkSm:hover{text-decoration: underline;}
+.choseOpt{}
+.choseOpt li{ list-style: none;  background: url(/images/arrow-circle.png) left center no-repeat; margin: 10px; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
+.choseOpt li a{ padding: 0 0 0 40px; font-family: "Open Sans"; font-size:18px; color: #757575;}
+.choseOpt{ padding: 0}
+.benefitCarousel h3{font-size: 24px; text-align: center;}
+
+@media (max-device-width: 960px) and (min-device-width: 320px)
+{
+		.choseOpt li a{ padding: 0 0 0 35px; font-family: "Open Sans"; font-size:14px;}
+}
+@media (max-device-width: 980px) and (min-device-width: 961px)
+{
+		.choseOpt li a{ padding: 0 0 0 35px; font-family: "Open Sans"; font-size:16px;}
+}
+
+.topBtn{color: #78828c; border-radius: 3px; background: #f0ec6b;}
+.downloadTxt{}
+.downloadTxt a{color:#78828c;}
+.downloadTxt a span{padding: 0 20px;}
+.downloadTxt a:hover{color:#78828c; text-decoration: underline;}
+.tb-socio .myBox{display: inline-block;
+    text-align: left;
+    width: 120px;}
+.tb-socio .myBox p{font-weight: bold; color: #f15d2a;}
+.tb-socio .myBox span{margin-right: 20px;}

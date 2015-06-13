@@ -18,6 +18,8 @@ $menusections = ''; //BaseClass::getmenusections ( Yii::app ()->user->getState (
 $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username' ) );
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
+$accessArr = BaseClass::getMemberAccess();
+$userName = BaseClass::getUserName();
 ?>
 
 <!DOCTYPE html>
@@ -182,8 +184,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown user"><a href="#" class="dropdown-toggle"
                                                  data-toggle="dropdown" data-hover="dropdown"
-                                                 data-close-others="true"> <span class="username">
-                                                         <?php echo Yii::app()->user->getState('username'); ?>
+                                                 data-close-others="true"> <span class="username" style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
+                                                         <?php echo ucfirst($userName); ?>
                             </span> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -207,11 +209,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- END USER LOGIN DROPDOWN -->
                 </ul>
 
-                <div class="pull-right inlineBlock"
+                <!--<div class="pull-right inlineBlock"
                      style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
                     <!--<img src="<?php //echo Yii::app()->request->baseUrl . "/images/admin/"; ?>"><br />-->
-                    Admin
-                </div>
+                    <!--Admin
+                </div>-->
 
                 <!-- END TOP NAVIGATION MENU -->
             </div>
@@ -234,16 +236,113 @@ License: You must have a valid license purchased only from themeforest(the above
                         </li>
 
                         <?php
+                        $hotel_pmenu = 6;
+                         if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
+                                /*$hotel_subsection = array(
+                                    "profile/dashboard" => "Dashboard",
+//                                    "profile/summery" => "Summery",
+                                );
+                                $activecls = 'active';
+                                if ($curAction == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                if ($curAction == 'dashboard')
+                                    $activecls = 'active';
+                                if ($curActionLower == 'simplename')
+                                    $activecls = '';
+                                */
+                                if ($curControllerLower == "dashboard") {
+                                    $activecls = 'active';
+                                } else {
+                                    $activecls = '';
+                                }
+                                ?>
+                                <li class="<?php echo $activecls; ?>"><a href="/admin/dashboard"> <span
+                                            class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
+                                        <span class="selected"></span> 
+                                        <?php /*<span
+                                            class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
+                                        </span><?php */?>
+                                    </a>
+                                    <?php
+                                    /*$menusections ['sections'] = $hotel_subsection;
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($hotel_subsection as $hotName => $hotTitle) {
+                                        if (in_array($hotTitle, $menusections ['sections'])) {
+                                            if ($hotName == 'admin') {
+                                                $hotName = '/index';
+                                            }
+                                            if ($curActionLower == 'create') {
+                                                $curActionLower = 'create/type/details';
+                                            }
+                                            $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
+                                            echo '<li ' . $class_content . '>';
+                                            echo '<a href="/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($hotName == 'admin/index') {
+                                                $hotName = 'admin';
+                                            }
+
+                                            /*
+                                             * if($hotName == "admin")
+                                             * echo '</ul>';
+                                             */
+                                        /*}
+                                    }
+                                    echo '</ul>';
+                                    */?>					
+                                </li>	
+                                <?php
+                            }
+                        if (in_array('user', $accessArr)) {
                         if ($access != "manager") {
                             $hotel_pmenu = 6;
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
-                                $hotel_subsection = array(
+                              if (in_array('usermg', $accessArr)) {  
+                                $hotel_subsection1 = array(
                                     "user/index" => "Member Management",
-                                    "user/wallet" => "Wallet",
-                                    "user/genealogy" => "Genealogy binary",
-                                    "user/verificationapproval" => "Document Approval",
-                                    "user/testimonialapproval" => "Testimonial Approval",
-                                );
+                                    );
+                              }else{
+                                    $hotel_subsection1 = array();
+                                            
+                                }
+                                if (in_array('wallet', $accessArr)) { 
+                                    $hotel_subsection2 = array(
+                                      "user/wallet" => "Wallet",   
+                                   );
+                                }else{
+                                    $hotel_subsection2 = array();
+                                            
+                                }
+                                if (in_array('geneology', $accessArr)) { 
+                                    $hotel_subsection3 = array(
+                                      "user/genealogy" => "Genealogy binary",   
+                                   );
+                                }else{
+                                    $hotel_subsection3 = array();
+                                            
+                                }
+                                if (in_array('document', $accessArr)) { 
+                                    $hotel_subsection4 = array(
+                                      "user/verificationapproval" => "Document Approval",   
+                                   );
+                                }else{
+                                    $hotel_subsection4 = array();
+                                            
+                                }
+                                if (in_array('testimonial', $accessArr)) { 
+                                    $hotel_subsection5 = array(
+                                      "user/testimonialapproval" => "Testimonial Approval",  
+                                   );
+                                }else{
+                                    $hotel_subsection5 = array();
+                                            
+                                }
+                                 
+                                $hotel_subsection = array_merge($hotel_subsection1, $hotel_subsection2, $hotel_subsection3, $hotel_subsection4, $hotel_subsection5);
+                                 
                                 $activecls = 'active';
                                 if ($curControllerLower == "user" || $curControllerLower == "admin") {
                                     $activecls = 'active';
@@ -290,8 +389,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                     ?>					
                                 </li>	
                                 <?php
-                            }
-                            
+                             
+                        }}
+                           if (in_array('mail', $accessArr)) { 
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
                                 $billing_subsection = array(
@@ -323,27 +423,69 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
+                           }
+                           if (in_array('reports', $accessArr)) {
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
+                                 
+                               if (in_array('userreport', $accessArr)) {  
+                                $reservation_subsection1 = array(
                                     "report/" => "Registration",
-                                    "report/address" => "Member Address",
-                                    "report/adminsponsor" => "Admin Sponsor",
-                                    "report/package" => "Package",
-                                    "report/transaction"=>"Transaction",
-//                                    "report/inbox4" => "Binary",
-//                                    "report/inbox5" => "Deposit",
-//                                    "report/inbox6" => "Check Investments",
-                                    "report/verification" => "Member  Verification",
-//                                    "report/inbox8" => "Invite referrals",
-                                    "report/socialaccount" => "Social profile",
-                                    "report/contact" => "Contact",
-//                                    "report/inbox11" => "Bug",
-//                                    "report/inbox12" => "Call back",
-//                                    "report/inbox13" => "feed back",
-//                                    "report/inbox14" => "Recharge Wallet",
-//                                    "report/inbox15" => "Deduct Wallet"
-                                );
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('reportaddress', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "report/address" => "Member Address",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                if (in_array('reportsponsor', $accessArr)) { 
+                                    $reservation_subsection3 = array(
+                                      "report/adminsponsor" => "Admin Sponsor",   
+                                   );
+                                }else{
+                                    $reservation_subsection3 = array();
+                                            
+                                }
+                                if (in_array('reportpackage', $accessArr)) { 
+                                    $reservation_subsection4 = array(
+                                      "report/package" => "Package",   
+                                   );
+                                }else{
+                                    $reservation_subsection4 = array();
+                                            
+                                }
+                                if (in_array('reporttransaction', $accessArr)) { 
+                                    $reservation_subsection5 = array(
+                                      "report/transaction"=>"Transaction",  
+                                   );
+                                }else{
+                                    $reservation_subsection5 = array();
+                                            
+                                }
+                                if (in_array('reportsocial', $accessArr)) { 
+                                    $reservation_subsection5 = array(
+                                      "report/socialaccount" => "Social profile",  
+                                   );
+                                }else{
+                                    $reservation_subsection5 = array();
+                                            
+                                }
+                                if (in_array('reportcontact', $accessArr)) { 
+                                    $reservation_subsection5 = array(
+                                      "report/contact" => "Contact",  
+                                   );
+                                }else{
+                                    $reservation_subsection5 = array();
+                                            
+                                }
+                                 
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
@@ -379,14 +521,29 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                            
+                           }
+                            if (in_array('package', $accessArr) || in_array('package_add', $accessArr) || in_array('package_list', $accessArr)) {
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
+                                 if (in_array('package_add', $accessArr)) {  
+                                $reservation_subsection1 = array(
                                     "package/add" => "Add",
-                                    "package/list" => "List",
-                                    
-                                );
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('package_list', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "package/list" => "List",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                 
+                                 
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'package') || ($curControllerLower == 'package')) ? "active" : ''; ?>">
@@ -422,7 +579,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                            
+                            }
+                            if (in_array('builder', $accessArr)) {
                             $reservation_pmenu = 7;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
@@ -430,15 +588,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "BuildTemp/categorylist" => "Category List",
                                     "BuildTemp/templatelist" => "Templates HTML",
                                 );
+								 
                                 ?>
                                 
                                 
                                 <li
-                                    class="<?php echo (($curControllerLower == 'BuildTemp') || ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
+                                    class="<?php echo ($curControllerLower == 'buildtemp') ? "active" : ''; ?>">
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
                                         <span class="title">Builder</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curControllerLower == 'buildtemp') ? "open" : ''; ?>">
                                         </span>
                                     </a>
 
@@ -449,7 +608,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             if ($ctName == "search/create") {
                                                 $ctName = "search/create/type/details";
                                             }
-                                        if ($ctName == "BuildTemp" && $curControllerLower == "BuildTemp")
+                                        if ($ctName == "buildtemp" && $curControllerLower == "buildtemp")
                                                 $class_content = 'class="active"';
                                             else
                                                 $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
@@ -467,96 +626,32 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                            }
                                     
                             $bases_pmenu = 4;
                             
-                        } else {
-                            ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'hotel') ? "active" : ''; ?>">
-                                <a href="/admin/hotel/index"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'Hotel List') ?></span>
-                                    <span class="selected"></span> </span>
-                                </a>
-                            </li>
-
-                            <li
-                                class="<?php echo ($curControllerLower == 'admin') ? "active" : ''; ?>">
-                                <a href="/admin/admin"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'My Profile') ?> </span>
-                                    <span class="selected"></span> </span>
-                                </a>
-                            </li>
-                            <?php
-                            $billing_subsection = array(
-                                "invoice/index" => "Invoice Reservation",
-                                "invoice/hotelbills" => "Invoices Listing",
-                                "invoice/regulationstatus" => "Payment History"
-                            );
-                            ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'invoice') ? "active" : ''; ?>">
-                                <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
-                                        class="title">Billing</span> <span class="selected"></span> <span
-                                        class="arrow <?php echo ($curControllerLower == 'invoice') ? "open" : ''; ?>">
-                                    </span>
-                                </a>
-                                <?php
-                                foreach ($billing_subsection as $hotName => $hotTitle) {
-                                    if ($hotName == "invoice/index")
-                                        echo '<ul class="sub-menu">';
-
-                                    $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-
-                                    echo '<li ' . $class_content . '>';
-                                    echo '<a href="/admin/' . $hotName . '">' . $hotTitle . '</a>';
-                                    echo '</li>';
-
-                                    if ($hotName == "invoice/regulationstatus")
-                                        echo '</ul>';
-                                }
-                                ?>						
-                            </li>
-                            <?php
-                            $reservation_subsection = array(
-                                "reservation/onrequest" => "On Request",
-                                "reservation/viewconfirmed" => "Confirmed"
-                            );
-                            ?>
-                            <li
-                                class="<?php echo ($curControllerLower == 'reservation') ? "active" : ''; ?>">
-                                <a href="javascript:;"> <i class="fa fa-cogs"></i> <span
-                                        class="title"><?php echo Yii::t('translation', 'Reservation') ?> </span>
-                                    <span class="selected"></span> <span
-                                        class="arrow <?php echo ($curControllerLower == 'reservation') ? "open" : ''; ?>">
-                                    </span>
-                                </a>
-                                <?php
-                                foreach ($reservation_subsection as $hotName => $hotTitle) {
-                                    if ($hotName == "reservation/onrequest")
-                                        echo '<ul class="sub-menu">';
-
-                                    $class_content = ($curControllerLower . "/" . $curActionLower == $hotName) ? 'class="active"' : '';
-
-                                    echo '<li ' . $class_content . '>';
-                                    echo '<a href="/admin/' . $hotName . '">' . Yii::t('translation', $hotTitle) . '</a>';
-                                    echo '</li>';
-
-                                    if ($hotName == "admin")
-                                        echo '</ul>';
-                                }
-                                ?>						
-                            </li>                                
-                        <?php } ?>	
-                            
+                        }?>	
                             <!-- New Menu added here -->
-                            
-                            <?php $reservation_pmenu = 9;
+                            <?php if (in_array('ads', $accessArr) || in_array('ads_add', $accessArr) || in_array('ads_list', $accessArr)) {
+                             $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
+                                if (in_array('ads_add', $accessArr)) {  
+                                $reservation_subsection1 = array(
                                     "ads/add" => "Ads Add",
-                                    "ads" => "Ads List",
-                                );
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('ads_list', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "ads" => "Ads List",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2);
                                 ?>
                                 
                                 <li
@@ -593,7 +688,53 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                            }
+                            if (in_array('memberaccess', $accessArr)) {
+                            /*access menu start*/     
+                            $reservation_pmenu = 9;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
                                     
+                                    "userhasaccess/members" => "Members",
+                                   
+                                );
+                                ?>
+                                
+                                <li
+                                    class="<?php echo (($curControllerLower == 'userhasaccess') || ($curControllerLower == 'userhasaccess')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <span class="title">Member Access</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'userhasaccess') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($ctName == "BuildTemp" && $curControllerLower == "userhasaccess")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                            }
                             $bases_pmenu = 4; ?>
                             
                     </ul>
@@ -627,8 +768,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <li>
                                         <?php
                                         $this->widget('zii.widgets.CBreadcrumbs', array(
-                                            'homeLink' => CHtml::link('User', array(
-                                                '/admin/user'
+                                            'homeLink' => CHtml::link('Dashboard', array(
+                                                '/admin/dashboard'
                                             )),
                                             'links' => $this->breadcrumbs
                                         ));

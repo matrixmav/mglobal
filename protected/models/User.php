@@ -45,14 +45,14 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sponsor_id, name, password, parent, full_name, email, country_id, country_code, phone, date_of_birth, master_pin, unique_id, status, updated_at', 'required'),
+			array('sponsor_id, name, password, parent, full_name, email, country_id, country_code, phone,social, date_of_birth, master_pin, unique_id, status, updated_at', 'required'),
 			array('parent, country_id, country_code, phone, master_pin, status, activation_key', 'numerical', 'integerOnly'=>true),
 			array('sponsor_id, name, password, full_name, email, skype_id, facebook_id, twitter_id, forget_key, forget_status', 'length', 'max'=>100),
 			array('position', 'length', 'max'=>30),
 			array('created_at', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, sponsor_id, name, password, position, parent, full_name, email, country_id, country_code, phone, date_of_birth, skype_id, facebook_id, twitter_id, master_pin, status, activation_key, forget_key, forget_status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, sponsor_id, name, password, position, parent, full_name, email, country_id, country_code, phone, date_of_birth, skype_id, facebook_id, twitter_id, master_pin, status, activation_key, forget_key, forget_status,social, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -86,6 +86,7 @@ class User extends CActiveRecord
 			'full_name' => 'Full Name',
 			'email' => 'Email',
 			'country_id' => 'Country',
+			'social'=>'Social',
 			'country_code' => 'Country Code',
 			'phone' => 'Phone',
 			'date_of_birth' => 'Date Of Birth',
@@ -130,6 +131,7 @@ class User extends CActiveRecord
 		$criteria->compare('full_name',$this->full_name,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('country_id',$this->country_id);
+		$criteria->compare('social',$this->social);
 		$criteria->compare('country_code',$this->country_code);
 		$criteria->compare('phone',$this->phone);
 		$criteria->compare('date_of_birth',$this->date_of_birth,true);

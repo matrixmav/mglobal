@@ -28,7 +28,7 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
     <div class="col-md-12 form-group">
         <label class="col-md-2">To *</label>
         <div class="col-md-6">
-            <input type="text" class="form-control dvalid" name="to_email[]"  onchange="getFullName(this.value);" id="search_username" size="60" maxlength="75" value="<?php echo (isset($mailObject)) ? $mailObject->fromuser->email : ""; ?>" />
+            <input type="text" class="form-control dvalid" name="to_email[]"  onchange="getFullName(this.value);" id="search_username" size="60" maxlength="75" value="<?php echo (isset($mailObject)) ? $mailObject->fromuser->full_name : ""; ?>" />
             <span id="search_user_error" style="color:red"></span>
         </div>
     </div>

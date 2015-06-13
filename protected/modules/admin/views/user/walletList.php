@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Wallet' => array('/admin/user/wallet'),
+    'Wallet'
 );
 ?>
 
