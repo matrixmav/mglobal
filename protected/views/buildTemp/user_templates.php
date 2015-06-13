@@ -1,131 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title><?php echo $builderObjectmeta->header->meta_title;?></title>
-    
 <?php foreach($builderObjectCss as $builderObjectListCss){ ?>
     <link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/<?php echo $builderObjectListCss->name ?>" rel="stylesheet" type="text/css" media="all" />
 <?php } ?>
-    <?php foreach($builderObjectJs as $builderObjectListJs){ ?>
+
+<?php
+    foreach($builderObjectJs as $builderObjectListJs){ ?>
     <script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/<?php echo $builderObjectListJs->name ?>" ></script>
-    <?php } ?>
-    <?php
-    if($builderObject->custom_js){ 
-        echo '<script type="text/javascript"> '. stripslashes($builderObject->custom_js) ." </script>";
-    } ?>
-<!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>--> 
-<script type="text/javascript">    
-    
-$(document).ready(function() { 
-    dataString = 'fetchmenu';
-    $.ajax({
-        type: "GET",
-        url: "/BuildTemp/fetchmenu",        
-        data: dataString,
-        cache: false,
-        success: function(html) {
-            //alert(html);
-            $(".mav_menu").html(html);
-        }
-    });
-    $.ajax({
-        type: "GET",
-        url: "/BuildTemp/fetchlogo",
-        data: dataString,
-        cache: false,
-        success: function(html) {
-            //alert(html);
-            $(".mav_logo").html(html);
-        }
-    });
-    var url = document.URL;
-    var str = url.split('/');
-    var dValue = $("#defaultPage").val();
-    if (str[5] != '' && str[5] != 'undefined') {
-        var pageID = str[5];
-    } else {
-        var pageID = dValue;
-    }
-
-    dataString = 'fetchContent=yes&page_id=' + pageID;
-    $.ajax({
-        type: "GET",
-        url: "/BuildTemp/pagecontent",
-        data: dataString,
-        cache: false,
-        success: function(html) {
-            alert(html);
-            var htmlArr = html.split('aaaaa');
-            if(htmlArr[0] != ''){             
-                $(".mav_content").html(htmlArr[0]);
-            }
-            if(htmlArr[1] != ''){            
-                $(".mav_contact_form").html(htmlArr[1]);
-            }
-            
-        }
-    });
-    
-       
-    dataString = 'fetchFooter=yes&page_id=' + pageID;
-    $.ajax({
-        type: "GET",
-        url: "/BuildTemp/pagefooter",
-        data: dataString,
-        cache: false,
-        success: function(html) {
-              // alert(html);
-            $(".mav_footer").html(html);
-        }
-    });
-    
-});
-
-</script>
+<?php } 
+    /* For getting JS */
+    if($builderObject->custom_js){ echo '<script type="text/javascript"> '. stripslashes($builderObject->custom_js) ." </script>"; } ?>
 
 </head>	
-<!--<body onload="myOnloadFunc();">   -->
-<body>   
-<?php if($builderTempId){
-echo stripslashes($builderTempId->main_div);   
-} ?>
-    <?php echo stripslashes($builderObject->temp_header); ?>     
 
-    <div class="mav_content">
-        <?php echo stripslashes($builderObject->temp_body); ?> 
-    </div>
+<body>   
     
-    <div class="mav_footer">
-        <?php echo stripslashes($builderObject->temp_footer); ?>   
-    </div>    
-    <?php
+<?php 
+    /* For getting root div */
+    if($builderTempId){ echo stripslashes($builderTempId->main_div); } 
+
+    /* Getting header content and Replace Logo and Menu */
+    $userHeader = stripslashes($builderObject->temp_header); 
+    $removeSpaces = preg_replace('/\s+/', ' ', $userHeader);    
+    $logoReplace = preg_replace('#<div class="mav_logo">(.*?)</div>#', stripslashes($logoImage) , $removeSpaces);            
+    echo $result = preg_replace('#<div class="mav_menu">(.*?)</div>#', stripslashes($bb) , $logoReplace);
     
-    if($builderObject->custom_css){ 
-        echo "<style>". stripslashes($builderObject->custom_css) ."</style>";
+    /* For the contact form */
+    if($responseForm){     
+        $pageContent1 = stripslashes($pageContent);
+        $removeSpaces = preg_replace('/\s+/', ' ', $pageContent1);
+        echo $pageContent2 = preg_replace('#<div class="mav_contact_form">(.*?)</div>#', stripslashes($responseForm) , $removeSpaces);               
+    }else{
+        echo $pageContent;
     }
+
+    /* Getting the footer content */
+    echo stripslashes($builderObject->temp_footer);    
+
+    /* Getting Custom Css Code */
+    if($builderObject->custom_css){ echo "<style>". stripslashes($builderObject->custom_css) ."</style>"; }
+    
     // for the root div closing.
-    if($builderTempId){
-echo '</div>';   
-    }
-    ?>
+    if($builderTempId){ echo '</div>';}
+
+ ?>
     
 </body>
 </html>
 
-<!--<script>
-    function myOnloadFunc(){
-        
-        $("#slider").responsiveSlides({
-            auto: true,
-            pager: false,
-            nav: true,
-            speed: 500,
-            maxwidth: 962,
-            namespace: "centered-btns"
-      });
-    }
-	</script>-->
 <!--
 Logo class="mav_logo"
 Menu class="mav_menu"
