@@ -44,7 +44,7 @@ $this->breadcrumbs = array(
                 </div>
             </div>
             
-             <div class="form-group">
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input id="template_title" type="text" class="form-control" name="Template[template_title]">
@@ -52,10 +52,38 @@ $this->breadcrumbs = array(
                 </div>
             </div>
             
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="Main Div">Main Div</label>
+                <div class="col-lg-8">
+                    <input id="main_div" type="text" class="form-control" name="main_div" placeholder="If you want any root div">
+                    <span id="template_title_error"></span>
+                </div>
+            </div>
+            
+            
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="menucode">Menu Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" style="width: 482px; height: 150px;">
+                    <ul>
+                        <li class="current">
+                            <a href="*1*">$1$</a>
+                        </li>
+                        <li>
+                            <a href="*2*">$2$</a>
+                        </li>
+                        <li>
+                            <a href="*3*">$3$</a>
+                        </li>
+                        <li>
+                            <a href="*4*">$4$</a>
+                        </li>
+                        <li>
+                            <a href="*5*">$5$</a>
+                        </li>
+                        </ul> 
+                    </textarea>
                     <span id="menu_code_error"></span>
                 </div>
             </div>
