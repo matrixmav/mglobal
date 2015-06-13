@@ -1,4 +1,4 @@
-get<?php
+<?php
 
 require_once Yii::app()->basePath . '/components/Mobile_Detect.php';
 
@@ -42,7 +42,7 @@ class BaseClass extends Controller {
     }
 
     public static function isLoggedIn() {
-        echo $userId = Yii::app()->session['userid'];// die;
+        $userId = Yii::app()->session['userid'];// die;
        // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if ( !isset($userId)) {
             //ob_start();
@@ -52,6 +52,37 @@ class BaseClass extends Controller {
             
 
         }
+    }
+    
+    /* function to fetch access /*
+     * 
+     */
+    
+    public function getMemberAccess() {  
+        try{
+            $userId = Yii::app()->session['userid'];// die;
+            $accessArr = array();
+            $userAccessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>$userId));
+            if($userAccessObject){
+                $accessArr = explode(',',$userAccessObject->access);
+            }
+        } catch (Exception $ex) {
+            echo $ex->message();exit;
+        }
+        return $accessArr;
+     
+    }
+    
+    function getUserName() {
+     $userId = Yii::app()->session['userid'];// die; 
+     $userName = User::model()->findByPK(array('user_id'=>$userId));
+     if(!empty($userName))
+     {
+        $name = $userName->name;
+     }else{
+        $name = ""; 
+     }
+     return $name;
     }
 
     public static function walletAmount($id) {

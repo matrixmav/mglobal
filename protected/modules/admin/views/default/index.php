@@ -4,7 +4,9 @@
    <!-- END PAGE LEVEL SCRIPTS -->
 <div class="content">
       <!-- BEGIN LOGIN FORM -->
-
+<?php if(Yii::app()->session['frontloggedIN']=='1'){?>
+<h3 class="form-title">Sorry! someone already loggedIN. Please try in another browser.</h3>
+<?php }else {?>
      <form class="login-form" action="index.html" method="post">
          <h3 class="form-title">Admin Login</h3>
          <div class="alert alert-error hide">
@@ -42,6 +44,7 @@
             </p>
          </div>-->
       </form>
+<?php }?>
       <!-- END LOGIN FORM -->        
       <!-- BEGIN FORGOT PASSWORD FORM -->
       <form class="forget-form" action="index.html" method="post">

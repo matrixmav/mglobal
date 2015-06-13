@@ -264,7 +264,7 @@ class UserController extends Controller {
                 exit;
             }
               
-            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
         }
         $userId = $_GET['id'];
@@ -284,7 +284,7 @@ class UserController extends Controller {
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
-                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
              
             } else {
                 $walletObject = new Wallet;
@@ -300,7 +300,7 @@ class UserController extends Controller {
                 print_r($walletObject->getErrors());
                 exit;
                 var_dump($postDataArray);exit;
-             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount);
+             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
                 
             }
             $this->redirect('/admin/user/wallet?successmsg=2');
@@ -385,9 +385,9 @@ class UserController extends Controller {
             $status = $_POST['res_filter'];
               if($status  != 'all')
             {
-              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" OR document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
             }else{
-              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" OR document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
             }
              
             $dataProvider = new CActiveDataProvider($model, array(
@@ -399,7 +399,7 @@ class UserController extends Controller {
            
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
@@ -439,14 +439,14 @@ class UserController extends Controller {
             $status = $_POST['res_filter'];
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" OR testimonials !="" AND testimonial_status = "' . $status . '" ' ), 'order' => 'id DESC',
+                    'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"  AND testimonial_status = "' . $status . '" ' ), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => 10),
             ));
         } else {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('testimonials != ""'), 'order' => 'id DESC',
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonials != ""'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
@@ -479,6 +479,7 @@ class UserController extends Controller {
         $success = "";
         if ($_REQUEST['id']) {
             $userObject = User::model()->findByPK($_REQUEST['id']);
+            
             $profileObject = UserProfile::model()->findByAttributes(array('user_id' => $_REQUEST['id']));
             if ($_REQUEST['id'] && $_POST) {
                 if ($_POST['UserProfile']['address'] != '' && $_POST['UserProfile']['street'] != '' && $_POST['UserProfile']['city_name'] != '' && $_POST['UserProfile']['state_name'] != '' && $_POST['UserProfile']['country_id'] != '' && $_POST['UserProfile']['zip_code'] != '' && $_POST['UserProfile']['phone'] != '') {
@@ -489,6 +490,7 @@ class UserController extends Controller {
                     $userObject->date_of_birth = $_POST['UserProfile']['date_of_birth'];
                     $userObject->skype_id = $_POST['UserProfile']['skype_id'];
                     $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
+                    $userObject->country_id = $_POST['UserProfile']['country_id'];
                     $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
                     $userObject->updated_at = new CDbExpression('NOW()');
                     $userObject->update();

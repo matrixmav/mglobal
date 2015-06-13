@@ -53,6 +53,7 @@ class AdsController extends Controller {
     public function actionIndex() {
         $pageSize = 10;
         $dataProvider = new CActiveDataProvider('Ads', array(
+            'criteria' => array('order' => 'updated_at DESC'),
             'pagination' => array('pageSize' => $pageSize)));
 
         $this->render('index', array(
@@ -74,7 +75,7 @@ class AdsController extends Controller {
                 $ext1 = end((explode(".", $banner)));
 
                 if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
-                    $error = "Please upload mentioned file type.";
+                    $error = "<p class='error'>Please upload mentioned file type.</p>";
                 } else {
                     $path = Yii::getPathOfAlias('webroot') . "/upload/banner/";
                     BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);

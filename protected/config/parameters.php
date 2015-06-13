@@ -32,7 +32,7 @@ return array(
     'adminEmail'=>'info@mglobally.com',
     'adminName' => 'Admin',
     'defaultPageSize' => 500,
-    'startDate' =>date('2014-m-d'),
+    'startDate' =>date('Y-m-d'),
     'clientInvoicePercentage'=>5,
     'pageSizeOptions'=>array(10=>10,20=>20,50=>50,100=>100),
     'timeZone' => array(

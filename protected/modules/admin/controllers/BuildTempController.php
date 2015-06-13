@@ -180,7 +180,7 @@ class BuildTempController extends Controller {
             $headerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
 
             if ($_POST) {
-                if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
+                if ($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '') {
                     //$headerObject = BuildTemp::model()->findByAttributes(array('temp_header_id'=>$_REQUEST['id']));
 
                     $headerupdateObject = BuildTempHeader::model()->findByPk($_REQUEST['h_id']);
@@ -226,7 +226,7 @@ class BuildTempController extends Controller {
             $bodyObject = BuildTemp::model()->findByPk($_REQUEST['id']);
 
             if ($_POST) {
-                if (!empty($_POST['Template']['body_code'] != '')) {
+                if ($_POST['Template']['body_code'] != '') {
                     $bodyupdateObject = BuildTempBody::model()->findByPk($_REQUEST['b_id']);
                     $bodyupdateObject->body_content = addslashes($_POST['Template']['body_code']);
                     $bodyupdateObject->updated_at = date('Y-m-d');
@@ -252,7 +252,7 @@ class BuildTempController extends Controller {
         if ($_REQUEST['id']) {
             $footerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
             if ($_POST) {
-                if (!empty($_POST['Template']['footer_code'] != '')) {
+                if ($_POST['Template']['footer_code'] != '') {
                     $footeraddObject = new BuildTempFooter;
                     $footeraddObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footeraddObject->updated_at = date('Y-m-d');
@@ -280,7 +280,7 @@ class BuildTempController extends Controller {
         $success = "";
         if ($_POST) {
             $category = $_POST['Template']['category'];
-            if (!empty($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '')) {
+            if ($_POST['Template']['header_code'] != '' && $_POST['Template']['template_title'] != '') {
 
                 $headeraddObject = new BuildTempHeader;
                 $bodyaddObject = new BuildTempBody;
@@ -387,6 +387,7 @@ class BuildTempController extends Controller {
                     $model->custom_css = addslashes($_POST['custom_css']);
                     $model->custom_js = addslashes($_POST['custom_js']);
                     $model->contact_form = addslashes('<div class="mav_contact">' . $_POST['Template']['form_code'] . '</div>');
+                    $model->main_div = $_POST['main_div'] ? addslashes($_POST['main_div']) : '' ;
                     $model->save(false);
                     $tmpId = $model->id;
 
@@ -435,7 +436,7 @@ class BuildTempController extends Controller {
       $success = "";
       if ($_REQUEST['id']) {
       if ($_POST) {
-      if (!empty($_POST['Template']['body_code'] != '')) {
+      if ($_POST['Template']['body_code'] != '') {
       $bodyaddObject = new BuildTempBody;
       $bodyaddObject->body_content = $_POST['Template']['body_code'];
       $bodyaddObject->updated_at = date('Y-m-d');
@@ -464,7 +465,7 @@ class BuildTempController extends Controller {
         if ($_REQUEST['id']) {
             $footerObject = BuildTemp::model()->findByPk($_REQUEST['id']);
             if ($_POST) {
-                if (!empty($_POST['Template']['footer_code'] != '')) {
+                if ($_POST['Template']['footer_code'] != '') {
                     $footerupdateObject = BuildTempFooter::model()->findByPk($_REQUEST['f_id']);
                     $footerupdateObject->footer_content = addslashes($_POST['Template']['footer_code']);
                     $footerupdateObject->updated_at = date('Y-m-d');
@@ -491,7 +492,7 @@ class BuildTempController extends Controller {
             $customcode = BuildTemp::model()->findByPk($_REQUEST['id']);
 
             if ($_POST) {
-                if (!empty($_POST['custom_css'] != '')) {
+                if ($_POST['custom_css'] != '') {
                     $customcode->custom_css = addslashes($_POST['custom_css']);
                     $customcode->custom_js = addslashes($_POST['custom_js']);
                     if ($customcode->update()) {

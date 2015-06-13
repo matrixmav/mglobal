@@ -127,23 +127,26 @@ class PackageController extends Controller {
      */
 
     public function actionList() {
-
-        $model = new Package();
-        $pageSize = 10;
-        $todayDate = date('Y-m-d');
-        $fromDate = date('Y-m-d');
-        $status = "1";
-        if (!empty($_POST)) {
-            $todayDate = $_POST['from'];
-            $fromDate = $_POST['to'];
-            $status = $_POST['res_filter'];
-        }
-
-
-        $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' => array(
-                'condition' => ('status = "' . $status . '"' ), 'order' => 'id DESC',
-            ), 'pagination' => array('pageSize' => $pageSize),));
+        $status = 1;
+        $pageSize = Yii::app()->params['defaultPageSize'];
+         if (!empty($_POST)) {
+         $status = $_POST['res_filter'];
+          
+         $dataProvider = new CActiveDataProvider('Package', array(
+                'criteria' => array(
+                   'condition' => ('status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
+            ));
+          
+         }else{
+        //$dataProvider = new CActiveDataProvider('Package');
+        $dataProvider = new CActiveDataProvider('Package', array(
+                'criteria' => array(
+                    'condition' => ('status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
+            ));
+         
+          }
 
         $this->render('package_list', array(
             'dataProvider' => $dataProvider, 'msg' => 0

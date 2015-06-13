@@ -33,19 +33,21 @@
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
 
                         <li style="border: none;"><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
-                        <li style="border: none;"><a href="callto://ramhemareddy"><button id="checkout" class="btn btn-primary">Call Us</button><a/></li>
+                        <li style="border: none;"><a href="callto://ramhemareddy"><button id="checkout" class="btn  topBtn">Call Us</button><a/></li>
 
                     </ul>
               </div>
             <div class="col-md-6 col-sm-6 additional-nav col-xs-12">
                     <ul class="list-unstyled list-inline pull-right">
-                       <?php if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
+                       <?php 
+if(Yii::app()->session['adminID']!= '1'){ 
+if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/profile/dashboard">My Account</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/site/logout">Logout</a></li>
                     <?php }else{?>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/login">Log In</a></li>
                     <li><a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/registration">Registration</a></li>
-                    <?php }?>
+                    <?php }}?>
                     </ul>
                 </div>
             </div>
@@ -73,7 +75,7 @@
             <li class="current"><a href="#promo-block">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#team">Team</a></li>
+            <li><a href="#team">Media Center</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
            
             <li><a href="#benefits">Benefits</a></li>

@@ -1,9 +1,8 @@
 <?php
-$this->breadcrumbs = array(
-    'Templates' => array('BuildTemp/templates'),
+$this->breadcrumbs = array(    
     'Choose Template',
 );
- $i = 1 ;
+$i = 1 ;
 ?>
 
 <?php foreach($builderObject as $buildertemp){?>
@@ -28,13 +27,19 @@ $this->breadcrumbs = array(
       </div>
      <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
+        <form action="/BuildTemp/userinput" method="post">
+            <input type="hidden" name="user_id" id="user_id" value="<?php echo Yii::app()->session['userid'];?>">
+            <input type="hidden" name="template_id" id="template_id" value="<?php echo $buildertemp->template_id;?>">
+            <input type="submit" name="submitInput" id="submit" class="btn btn-primary" value="Get Started">
+        </form>
+        
+        
       </div>
     </div>
   </div>
 </div>
 <?php $i++; } ?>
-
 
 <style>
    .myModalImg .modal-dialog{max-width:800px !important;}

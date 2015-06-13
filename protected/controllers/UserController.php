@@ -63,7 +63,6 @@ public function actionConfirm(){
                     $userObject = User::model()->findByPk($getUserObject->id);
                     $userObject->status = 1;
                     $userObject->password = BaseClass::md5Encryption($password);
-                    $userObject->master_pin = BaseClass::md5Encryption($masterPin);
                     $userObject->update();
                     $msg = "Your account has been verified.";
                     
@@ -549,7 +548,7 @@ public function actionConfirm(){
                 $userObject->forget_status = 1;
                 $userObject->password = BaseClass::md5Encryption($password);
                 $userObject->update();
-                $msg = "Please check your email to activate your account";
+                $msg = "Please check your email for further details.";
                 /*echo "<pre>";
                 print_r($password);
                 print_r($userObject->password);

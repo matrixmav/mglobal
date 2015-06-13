@@ -9,10 +9,15 @@ $this->breadcrumbs=array(
 	'Genealogies'=>array('index'),
         "Tree"
 ); ?>
+<div class="row">
+	
+                        <div class="col-md-12">
+							 <span><?php if(!empty($_GET) && $_GET['id']!=''){?><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;cursor:pointer;text-decoration:none;">Go Back >></a><?php } ?></span>
+						</div>
+</div>
 <div class="container">
     <div class="row">
-        <span><?php if(!empty($_GET) && $_GET['id']!=''){?><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;">Go Back >></a><?php } ?></span>
-        <div class="col-lg-12">
+         <div class="col-lg-12">
             <div class="tree">
                 <ul>
                     <li>
