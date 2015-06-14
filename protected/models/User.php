@@ -9,7 +9,7 @@
  * @property string $name
  * @property string $password
  * @property string $position
- * @property integer $parent
+ * @property integer $user_sponsor_id
  * @property string $full_name
  * @property string $email
  * @property integer $country_id
@@ -19,11 +19,13 @@
  * @property string $skype_id
  * @property string $facebook_id
  * @property string $twitter_id
- * @property integer $master_pin
+ * @property string $master_pin
+ * @property string $unique_id
  * @property integer $status
- * @property integer $activation_key
+ * @property string $activation_key
  * @property string $forget_key
  * @property string $forget_status
+ * @property integer $role_id
  * @property string $created_at
  * @property string $updated_at
  */
@@ -45,14 +47,15 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('sponsor_id, name, password, parent, full_name, email, country_id, country_code, phone,social, date_of_birth, master_pin, unique_id, status, updated_at', 'required'),
-			array('parent, country_id, country_code, phone, master_pin, status, activation_key', 'numerical', 'integerOnly'=>true),
-			array('sponsor_id, name, password, full_name, email, skype_id, facebook_id, twitter_id, forget_key, forget_status', 'length', 'max'=>100),
+			array('sponsor_id, name, password, user_sponsor_id, full_name, email, country_id, country_code, phone, date_of_birth, master_pin, unique_id, status, role_id, updated_at', 'required'),
+			array('user_sponsor_id, country_id, country_code, phone, status, role_id', 'numerical', 'integerOnly'=>true),
+			array('sponsor_id, name, password, full_name, email, skype_id, facebook_id, twitter_id, master_pin, activation_key, forget_key, forget_status', 'length', 'max'=>100),
 			array('position', 'length', 'max'=>30),
+			array('unique_id', 'length', 'max'=>255),
 			array('created_at', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, sponsor_id, name, password, position, parent, full_name, email, country_id, country_code, phone, date_of_birth, skype_id, facebook_id, twitter_id, master_pin, status, activation_key, forget_key, forget_status,social, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, sponsor_id, name, password, position, user_sponsor_id, full_name, email, country_id, country_code, phone, date_of_birth, skype_id, facebook_id, twitter_id, master_pin, unique_id, status, activation_key, forget_key, forget_status, role_id, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,10 +67,6 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'userprofile' => array(self::BELONGS_TO, 'UserProfile', 'id'),
-                    'touser' => array(self::BELONGS_TO, 'MoneyTransfer', 'to_user_id'),
-                    'fromuser' => array(self::BELONGS_TO, 'MoneyTransfer', 'from_user_id'),
-                     
 		);
 	}
 
@@ -82,11 +81,10 @@ class User extends CActiveRecord
 			'name' => 'Name',
 			'password' => 'Password',
 			'position' => 'Position',
-			'parent' => 'Parent',
+			'user_sponsor_id' => 'User Sponsor',
 			'full_name' => 'Full Name',
 			'email' => 'Email',
 			'country_id' => 'Country',
-			'social'=>'Social',
 			'country_code' => 'Country Code',
 			'phone' => 'Phone',
 			'date_of_birth' => 'Date Of Birth',
@@ -94,11 +92,12 @@ class User extends CActiveRecord
 			'facebook_id' => 'Facebook',
 			'twitter_id' => 'Twitter',
 			'master_pin' => 'Master Pin',
-			'unique_id' => 'Unique Id',
+			'unique_id' => 'Unique',
 			'status' => 'Status',
 			'activation_key' => 'Activation Key',
 			'forget_key' => 'Forget Key',
 			'forget_status' => 'Forget Status',
+			'role_id' => '1:User,2:Admin',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
 		);
@@ -127,23 +126,23 @@ class User extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('position',$this->position,true);
-		$criteria->compare('parent',$this->parent);
+		$criteria->compare('user_sponsor_id',$this->user_sponsor_id);
 		$criteria->compare('full_name',$this->full_name,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('country_id',$this->country_id);
-		$criteria->compare('social',$this->social);
 		$criteria->compare('country_code',$this->country_code);
 		$criteria->compare('phone',$this->phone);
 		$criteria->compare('date_of_birth',$this->date_of_birth,true);
 		$criteria->compare('skype_id',$this->skype_id,true);
 		$criteria->compare('facebook_id',$this->facebook_id,true);
 		$criteria->compare('twitter_id',$this->twitter_id,true);
-		$criteria->compare('master_pin',$this->master_pin);
-		$criteria->compare('unique_id',$this->unique_id);
+		$criteria->compare('master_pin',$this->master_pin,true);
+		$criteria->compare('unique_id',$this->unique_id,true);
 		$criteria->compare('status',$this->status);
-		$criteria->compare('activation_key',$this->activation_key);
+		$criteria->compare('activation_key',$this->activation_key,true);
 		$criteria->compare('forget_key',$this->forget_key,true);
 		$criteria->compare('forget_status',$this->forget_status,true);
+		$criteria->compare('role_id',$this->role_id);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);
 

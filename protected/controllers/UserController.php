@@ -56,7 +56,7 @@ public function actionConfirm(){
             if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
                 $activationKey = $_GET['activation_key'];
                 $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
-                if (count($getUserObject) > 0) {
+                if (count($getUserObject) > 0) { 
                     $masterPin = BaseClass::getUniqInt(5);
                     $password = BaseClass::getPassword();
                     $userObject = new User;
@@ -81,7 +81,7 @@ public function actionConfirm(){
                     CommonHelper::sendMail($config);
             
                     $this->redirect(array("login",'successMsg'=>$msg));
-                } else {
+                } else { echo "cool";exit;
                    $msg = "<p class='error'>Invalid Key.</p>";
                  $this->redirect(array("login",'successMsg'=>$msg));
                 }
@@ -839,7 +839,7 @@ public function actionConfirm(){
     }
     
     public function actionGetFullName(){
-        if($_POST){
+        if($_POST){ 
             $userName = $_POST['userName'];
             $getUserObject = User::model()->findByAttributes(array('name' => $userName));
             if($getUserObject){
