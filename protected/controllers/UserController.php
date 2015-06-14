@@ -529,7 +529,7 @@ public function actionConfirm(){
             $config['subject'] = 'Registration Confirmation' ;
             $config['body'] = 'Hi,' .$model->full_name.'<br/>Congratulations! You have been registered successfully'.
                     '<strong>Please click the link below to activate your account:</strong><br/>'.
-                    '<a href="http://mglobally.maverickinfosoft.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
+                    '<a href="http://demo.mglobally.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
             $response = CommonHelper::sendMail($config);
             $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
             $this->redirect(array('login','successMsg'=> $successMsg));
