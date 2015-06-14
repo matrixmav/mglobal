@@ -63,6 +63,7 @@ public function actionConfirm(){
                     $userObject = User::model()->findByPk($getUserObject->id);
                     $userObject->status = 1;
                     $userObject->password = BaseClass::md5Encryption($password);
+                    $userObject->master_pin = BaseClass::md5Encryption($masterPin);
                     $userObject->update();
                     $msg = "Your account has been verified.";
                     
@@ -73,7 +74,7 @@ public function actionConfirm(){
                     }
                     $config['to'] = $userObject->email; 
                     $config['subject'] = 'Login Details' ;
-                    $config['body'] = 'Hi,' .$userObject->full_name.'<br/>! You have been registered successfully'.
+                    $config['body'] = 'Hi,' .$userObject->full_name.'<br/> Login Details'.
                     '<br/><br/><strong>User:</strong>'.$userObject->name.'<br/>'.
                     '<br/><strong>Password:</strong>'.$password.'<br/>'.
                     '<strong>Master Pin:</strong>'.$masterPin.'<br/><br/>';
@@ -374,7 +375,9 @@ public function actionConfirm(){
 
     public function actionLogin() {
         $error = "";
-
+         if(Yii::app()->session['userid'] !=''){
+         $this->redirect('/profile/dashboard/');
+        }else{
         // collect user input data
         if (isset($_POST['name']) && isset($_POST['password'])) {
 
@@ -385,7 +388,7 @@ public function actionConfirm(){
             $masterkey = $_POST['masterkey'];
 
             if ((!empty($username)) && (!empty($password)) && (!empty($masterkey))) {
-                $getUserObject = User::model()->findByAttributes(array('name' => $username, 'status' => 1));
+                $getUserObject = User::model()->findByAttributes(array('name' => $username, 'status' => 1,'role_id' => 1 ));
                 if (!empty($getUserObject)) {
                     $flagPassword = '';
                     $flagMaster = '';
@@ -420,10 +423,22 @@ public function actionConfirm(){
         }
         $this->render("login", array("msg" => $error));
     }
+ }
 
     public function actionRegistration() {
 
         $error = "";
+ if(!empty($_GET))
+		{
+		$arra = explode('--',$_GET['spid']);
+		if(!empty($arra))
+                {  
+		$social = $arra[1];
+		}
+		else{
+                $social = '';
+               }
+}
         if ($_POST) {
 
             $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
@@ -432,6 +447,7 @@ public function actionConfirm(){
             $model->attributes = $_POST;
             $password = BaseClass::getPassword();
             $model->password = BaseClass::md5Encryption($password);
+            $model->social= $_POST['social'];
             $model->sponsor_id = $_POST['sponsor_id'];
             $model->master_pin = BaseClass::md5Encryption($masterPin);
             $model->created_at = date('Y-m-d');
@@ -526,7 +542,12 @@ public function actionConfirm(){
         }
         $spnId = "";
         if ($_GET) {
-            $spnId = $_GET['spid'];
+		if(!empty($arra))
+		{
+		$spnId = $arra[0];
+		}else{
+		 $spnId = $_GET['spid'];           
+		}
         }
         $countryObject = Country::model()->findAll();
 
@@ -548,7 +569,7 @@ public function actionConfirm(){
                 $userObject->forget_status = 1;
                 $userObject->password = BaseClass::md5Encryption($password);
                 $userObject->update();
-                $msg = "Please check your email for further details.";
+                $msg = "Please check your email to activate your account";
                 /*echo "<pre>";
                 print_r($password);
                 print_r($userObject->password);
@@ -563,7 +584,7 @@ public function actionConfirm(){
                 $config['to'] = $userObject->email; 
                 $config['subject'] = 'Forgot Password' ;
                 $config['body'] = 'Hi,' .$userObject->full_name.'<br/>'
-                        . 'New Password:'.$password.'">Click to activate </a>';
+                        . 'New Password:'.$password;
                 $response = CommonHelper::sendMail($config);
             
                 $this->redirect(array('login', 'successMsg' => $msg));
