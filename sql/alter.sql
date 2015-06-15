@@ -76,7 +76,7 @@ ALTER TABLE `user_pages` ADD `status` INT(11) NOT NULL DEFAULT '1' AFTER `page_f
 --
 
 CREATE TABLE IF NOT EXISTS `user_has_access` (
-`id` int(11) NOT NULL,
+`id` int(11) NOT NULL  AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `access` varchar(255) NOT NULL,
   `created_at` date NOT NULL
@@ -95,7 +95,8 @@ INSERT INTO `user_has_access` (`id`, `user_id`, `access`, `created_at`) VALUES
 --
 -- Indexes for dumped tables
 --
-
+INSERT INTO `user_has_access` (`id`, `user_id`, `access`, `created_at`) VALUES
+(1, 1, 'reports,user,mail,memberaccess,package,ads,builder,ads_add,ads_list,package_list,package_add,userreport,reportaddress,reportsponsor,reportpackage,reporttransaction,reportsocial,reportcontact,usermg,wallet,geneology,document,testimonial', '2015-06-12');
 --
 -- Indexes for table `user_has_access`
 --
