@@ -76,7 +76,7 @@ ALTER TABLE `user_pages` ADD `status` INT(11) NOT NULL DEFAULT '1' AFTER `page_f
 --
 
 CREATE TABLE IF NOT EXISTS `user_has_access` (
-`id` int(11) NOT NULL,
+`id` int(11) NOT NULL  AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `access` varchar(255) NOT NULL,
   `created_at` date NOT NULL
