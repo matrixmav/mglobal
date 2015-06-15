@@ -340,7 +340,7 @@ class OrderController extends Controller {
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
         if($orderObject->status==1)
         {
-        $title = '<a href="/order/invoice?id="'.$data['id'].' title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
+        $title = '<a href="/order/invoice?id="'.$data['id'].' title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
         }else{
         $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
          }
