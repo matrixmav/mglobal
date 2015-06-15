@@ -267,7 +267,12 @@ class UserController extends Controller {
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
         }
+        if(!empty($_GET))
+        {
         $userId = $_GET['id'];
+        }else{
+         $userId = 0;   
+        }
         $userObject = User::model()->findByPk($userId);
         $this->render('creditwallet', array('userObject' => $userObject));
     }
