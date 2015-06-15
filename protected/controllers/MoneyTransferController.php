@@ -220,7 +220,7 @@ class MoneyTransferController extends Controller {
                 $transactionObject->save();
                 $message = $_POST['comment'];
                 //Admin transaction
-                $postDataArray['mode'] = 'admin_commission';
+                $postDataArray['mode'] = 'transfer';
                 $postDataArray['paid_amount'] = BaseClass::getPercentage($transactionObject->paid_amount,1);
                 //Super Admin Id is !1: Need to call from param file
                 $adminId = 1;

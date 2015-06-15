@@ -143,7 +143,6 @@ class TransactionController extends Controller {
 //            $fromDate = ($_POST['to'])?$_POST['to']:$fromDate;
             $status = $_POST['res_filter'];
         }
-
         $walletType = "";
         if (!empty($_POST['res_filter'])) {
             $walletType = ' AND wallet.type = ' . $_POST['res_filter'];
@@ -156,7 +155,6 @@ class TransactionController extends Controller {
         // . 'AND t.created_at >= ' . $todayDate . ' AND t.created_at <= ' . $fromDate ;
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
-
         $this->render('fund_list', array(
             'dataProvider' => $dataProvider,
         ));
