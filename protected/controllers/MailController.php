@@ -55,6 +55,7 @@ class MailController extends Controller
 	{  
             $loggedInUserId = Yii::app()->session['userid'];
             $pageSize= 100;
+            $successMsg = "";
             $dataProvider = new CActiveDataProvider('Mail', array(
                         'criteria'=>array('condition' => 'to_user_id = '.$loggedInUserId,'order'=>'updated_at DESC'),
                         'pagination' => array('pageSize' => $pageSize)));
@@ -104,7 +105,7 @@ class MailController extends Controller
                         else{
                          $fname = "";   
                         }
-                        echo $fname;exit;
+                        
                        $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                         BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                         $mailObject = new Mail();
