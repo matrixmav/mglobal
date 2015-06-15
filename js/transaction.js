@@ -7,6 +7,7 @@ function getExistingFund(userId,walletId){
                 $("#transaction_data").html("");
                 if(amount != 0){
                     $("#transaction_data").html("<b>"+amount+"</b>");
+                    $("#transaction_data_amt").val("");
                 } else {
                     $("#transaction_data").html("<b>0.00</b>");
                 }
