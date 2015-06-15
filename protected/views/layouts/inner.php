@@ -135,7 +135,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="<?php echo Yii::app()->baseUrl . '/ckeditor/ckeditor.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->baseUrl . '/ckfinder/ckfinder.js'; ?>"></script>
         <script src="/metronic/assets/scripts/core/app.js"></script>
-        <script type="text/javascript" src="/chat/js/chat.js"></script>
+        <!--<script type="text/javascript" src="/chat/js/chat.js"></script>-->
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.init();
@@ -159,15 +159,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 });
             });
              
-           function openChat()
-           {
-             var IDSVal = document.getElementById('username').value;
-             chatWith(IDSVal);  
-           }
+//           function openChat()
+//           {
+//             var IDSVal = document.getElementById('username').value;
+//             chatWith(IDSVal);  
+//           }
         </script>
 
 
-        <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
+        <!--<link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />-->
 
         <!-- END JAVASCRIPTS -->
 
