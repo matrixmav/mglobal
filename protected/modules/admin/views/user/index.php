@@ -79,11 +79,6 @@ $this->breadcrumbs = array(
                     'value' => '$data->sponsor_id',
                 ),
                 array(
-                    'name' => 'sponsor_id',
-                    'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:"N/A"   ',
-                ),
-                 array(
                     'name' => 'created_at',
                     'header' => '<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->created_at)?$data->created_at:"N/A"',
@@ -98,11 +93,6 @@ $this->breadcrumbs = array(
                     'template' => '{Change}{Edit}{Delete}',
                     'htmlOptions' => array('width' => '20%'),
                     'buttons' => array(
-//                        'Edit' => array(
-//                            'label' => 'Edit',
-//                            'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
-//                            'url' => 'Yii::app()->createUrl("admin/state/update", array("id"=>$data->id))',
-//                        ),
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
