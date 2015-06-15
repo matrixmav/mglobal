@@ -64,6 +64,7 @@ public function actionConfirm(){
                     $userObject->status = 1;
                     $userObject->password = BaseClass::md5Encryption($password);
                     $userObject->master_pin = BaseClass::md5Encryption($masterPin);
+                    $userObject->activation_key = "";
                     $userObject->update();
                     $msg = "Your account has been verified.";
                     
@@ -81,9 +82,9 @@ public function actionConfirm(){
                     CommonHelper::sendMail($config);
             
                     $this->redirect(array("login",'successMsg'=>$msg));
-                } else { echo "cool";exit;
-                   $msg = "<p class='error'>Invalid Key.</p>";
-                 $this->redirect(array("login",'successMsg'=>$msg));
+                } else { 
+                    $msg = "<p class='error'>Invalid Key.</p>";
+                    $this->redirect(array("login",'successMsg'=>$msg));
                 }
             }        
     }
