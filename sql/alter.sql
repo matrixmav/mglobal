@@ -95,7 +95,8 @@ INSERT INTO `user_has_access` (`id`, `user_id`, `access`, `created_at`) VALUES
 --
 -- Indexes for dumped tables
 --
-
+INSERT INTO `user_has_access` (`id`, `user_id`, `access`, `created_at`) VALUES
+(1, 1, 'reports,user,mail,memberaccess,package,ads,builder,ads_add,ads_list,package_list,package_add,userreport,reportaddress,reportsponsor,reportpackage,reporttransaction,reportsocial,reportcontact,usermg,wallet,geneology,document,testimonial', '2015-06-12');
 --
 -- Indexes for table `user_has_access`
 --
