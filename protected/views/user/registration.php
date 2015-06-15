@@ -1,6 +1,6 @@
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/registration.js?ver=<?php echo strtotime("now");?>"></script>
 <?php 
-$_GET['position'] = "right";
+
 $curAction = @Yii::app()->getController()->getAction()->controller->action->id; 
  if($curAction != 'loginregistration'){ ?>
  <div class="main">

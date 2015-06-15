@@ -1,4 +1,4 @@
- 
+<?php $_GET['position'] = "right";?> 
 <div class="main">
       <div class="container">
       <div class="row margin-bottom-40">
