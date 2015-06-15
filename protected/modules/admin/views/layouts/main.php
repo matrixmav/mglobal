@@ -259,7 +259,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = '';
                                 }
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="/admin/dashboard"> <span
+                                <li class="<?php echo $activecls; ?>"><a href="/admin/default/dashboard"> <span
                                             class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
                                         <span class="selected"></span> 
                                         <?php /*<span
