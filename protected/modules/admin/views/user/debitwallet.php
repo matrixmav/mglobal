@@ -64,8 +64,8 @@ if(!empty($error)){
 </form>
 <script language = "Javascript">
     function validateForm(){
-        var val = ("#fundval").val();
-        alert(val);return false;
+       
+        
         if ($("#fund").val() == "") {
             $("#fund_error").html("Please Add Fund!");
             return false;
@@ -73,14 +73,16 @@ if(!empty($error)){
         if (isNaN($('#fund').val())){
             return false;
         }
-        
-        
-        if(($("#fundval").val())<($('#fund').val())){
+        var fund = parseFloat($('#fund').val());
+        var fundVal = parseFloat($('#fundval').val());
+        alert(fund); alert(fundVal);return false;
+        if(fundVal < fund){
             $("#fund_error").html("Deducting fund should not be more the existing fund!");
             return false;
         }
     }
     function getExistingFund(userId,walletId){
+        
         $.ajax({
             type: "post",
             url: "/admin/wallet/getfundbyamount",
@@ -90,8 +92,9 @@ if(!empty($error)){
                 $("#wallet_amount").show();
                 if(amount != 0){
                     $("#existing_fund").html(amount);
-                    $("#fundval").html(amount);
+                    $("#fundval").val(amount);
                 } else {
+                    $("#fundval").val("0.00");
                     $("#existing_fund").html("<b>0.00</b>");
                 }
             }
