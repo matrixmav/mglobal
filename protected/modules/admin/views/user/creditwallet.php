@@ -13,11 +13,11 @@ if(!empty($error)){
 
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/creditwallet" method="post" onsubmit="return validateForm()">
 <input type="hidden" name="userId" id="userId" value="<?php echo (!empty($userObject))? $userObject->id : ""; ?>"/>
-<?php if(!empty($userObject)) { ?>
+<?php if(empty($_GET)) {  ?>
 <div class="col-md-12 form-group">
     <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
-        <p><?php echo (!empty($userObject))? $userObject->full_name : ""; ?></p>
+         <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username" />
         <span style="color:red"  id="first_name_error"></span>
     </div>
 </div>
@@ -68,3 +68,4 @@ if(!empty($error)){
         }
     }
 </script>
+<script type="text/javascript" src="/js/transaction.js"></script>
