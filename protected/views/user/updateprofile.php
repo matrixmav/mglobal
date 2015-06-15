@@ -35,21 +35,21 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Full Name<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject)) ? $userObject->full_name : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?>>
+                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject)) ? $userObject->full_name : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> maxlength="30">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Email<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject)) ? $userObject->email : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?>>
+                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject)) ? $userObject->email : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> maxlength="30">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:88%;float:right;">
+                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:88%;float:right;" maxlength="30">
                 </div>
             </div>
             <div class="form-group">
@@ -62,21 +62,21 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Skype ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="skype_id" class="form-control" name="UserProfile[skype_id]" value="<?php echo (!empty($userObject)) ? $userObject->skype_id : ""; ?>">
+                    <input type="text" id="skype_id" class="form-control" name="UserProfile[skype_id]" value="<?php echo (!empty($userObject)) ? $userObject->skype_id : ""; ?>" maxlength="40">
                     <span class="example">Ex: example12</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Facebook ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="facebook_id" class="form-control" name="UserProfile[facebook_id]" value="<?php echo (!empty($userObject)) ? $userObject->facebook_id : ""; ?>">
+                    <input type="text" id="facebook_id" class="form-control" name="UserProfile[facebook_id]" value="<?php echo (!empty($userObject)) ? $userObject->facebook_id : ""; ?>" maxlength="40">
                     <span class="example">Ex: http://facebook.com</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Twitter ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="twitter_id" class="form-control" name="UserProfile[twitter_id]" value="<?php echo (!empty($userObject)) ? $userObject->twitter_id : ""; ?>">
+                    <input type="text" id="twitter_id" class="form-control" name="UserProfile[twitter_id]" value="<?php echo (!empty($userObject)) ? $userObject->twitter_id : ""; ?>" maxlength="40">
                     <span class="example">Ex: http://twitter.com</span>
                 </div>
             </div>
@@ -139,7 +139,9 @@ $this->breadcrumbs = array(
         var filter = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
         if (!filter.test(phone.value)) {
-            $("#error_msg").html("Enter valid phone number ");
+            document.getElementById("error_msg").style.display = "block";
+            document.getElementById("error_msg").innerHTML = "Enter valid phone number.";
+//            $("#error_msg").html("Enter valid phone number ");
             $("#phone").focus();
             return false;
         }

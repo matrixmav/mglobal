@@ -56,7 +56,8 @@ public function actionConfirm(){
             if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
                 $activationKey = $_GET['activation_key'];
                 $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
-                if (count($getUserObject) > 0) { 
+                
+                if (count($getUserObject) > 0) {                    
                     $masterPin = BaseClass::getUniqInt(5);
                     $password = BaseClass::getPassword();
                     $userObject = new User;
@@ -64,6 +65,7 @@ public function actionConfirm(){
                     $userObject->status = 1;
                     $userObject->password = BaseClass::md5Encryption($password);
                     $userObject->master_pin = BaseClass::md5Encryption($masterPin);
+                    $userObject->activation_key = "";
                     $userObject->update();
                     $msg = "Your account has been verified.";
                     
@@ -81,9 +83,9 @@ public function actionConfirm(){
                     CommonHelper::sendMail($config);
             
                     $this->redirect(array("login",'successMsg'=>$msg));
-                } else { echo "cool";exit;
-                   $msg = "<p class='error'>Invalid Key.</p>";
-                 $this->redirect(array("login",'successMsg'=>$msg));
+                } else { 
+                    $error = "Invalid Key.";
+                    $this->redirect(array("login",'errorMsg'=>$error));
                 }
             }        
     }
