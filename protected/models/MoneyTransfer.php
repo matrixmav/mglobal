@@ -121,7 +121,7 @@ class MoneyTransfer extends CActiveRecord
 		return parent::model($className);
 	}
         
-        public function createMoneyTransfer($postDataArray, $userObject,$transactionId,$paid_amount,$role=''){
+        public function createMoneyTransfer($postDataArray, $userObject,$transactionId,$paidAmount,$role=''){
             try {
                 $comment = "fund transfer";
                 if(!empty($postDataArray['comment'])){
@@ -139,8 +139,8 @@ class MoneyTransfer extends CActiveRecord
                 }
 
                 $fundType = 1;
-                if(!empty($postDataArray['fund'])){
-                    $fundType = $postDataArray['fund'];
+                if(!empty($postDataArray['fundType'])){
+                    $fundType = $postDataArray['fundType'];
                 }
 
                 $createdTime = new CDbExpression('NOW()');
@@ -149,14 +149,19 @@ class MoneyTransfer extends CActiveRecord
                 $moneyTransfertoObj->to_user_id = $userObject->id;
                 $moneyTransfertoObj->transaction_id = $transactionId;
                 $moneyTransfertoObj->fund_type = $fundType;//1:RP,2:Cash
-                $moneyTransfertoObj->fund = $paid_amount;//1:RP,2:Cash
+                $moneyTransfertoObj->fund = $paidAmount;//1:RP,2:Cash
                 $moneyTransfertoObj->comment = $comment;
                 $moneyTransfertoObj->status = $status;
                 $moneyTransfertoObj->wallet_id = $walletId;
                 $moneyTransfertoObj->created_at = $createdTime;
                 $moneyTransfertoObj->updated_at = $createdTime;
                  //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
-                $moneyTransfertoObj->save();
+                if(!$moneyTransfertoObj->save()){
+                    echo "<pre>";
+                    print_r($moneyTransfertoObj->getErrors());
+                exit;
+                    }
+                
             } catch (Exception $ex) {
                 echo "<pre>";
                 print_r($ex->getMessage());
