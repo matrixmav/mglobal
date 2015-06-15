@@ -356,6 +356,7 @@
             var payableAmount = total - totalAmount;
             $('#totalAmount').val(0);
             $('#payamount').html('$0');
+            $("totalusedrp").val(totalAmount);
             }
             
             var dataString = 'payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
