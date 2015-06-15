@@ -33,6 +33,7 @@
         
         $("#name_error").html("");
         if ($("#name").val() == "") {
+            $("#name_available").html("");            
             $("#name_error").html("Enter User Name");
             $("#name").focus();            
             return false;
