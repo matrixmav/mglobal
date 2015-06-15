@@ -12,7 +12,7 @@ if(!empty($error)){
 ?>
 
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/creditwallet" method="post" onsubmit="return validateForm()">
-<input type="hidden" name="userId" id="userId" value="<?php echo (!empty($userObject))? $userObject->id : ""; ?>"/>
+<input type="hidden" name="userId" id="search_user_id" value="<?php echo (!empty($userObject))? $userObject->id : ""; ?>"/>
 <?php if(empty($_GET)) {  ?>
 <div class="col-md-12 form-group">
     <label class="col-md-2">User Name: </label>
