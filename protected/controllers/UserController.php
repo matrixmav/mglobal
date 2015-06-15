@@ -416,7 +416,7 @@ public function actionConfirm(){
                         }
                     } else {
                         // echo "0"; 
-                        $error = "<p class='error'>Invalid Information</p>";
+                        $error = "<p class='error'>The user name and password you entered don't match. </p>";
                     }
                 } else {
                    $error = "<p class='error'>Invalid User Name</p>";
