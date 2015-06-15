@@ -77,7 +77,7 @@ class MoneyTransferController extends Controller {
 
     public function actionTransfer() {
         $error = "";
-        $userid = Yii::app()->session['userid'];
+        $loggedInUserId = Yii::app()->session['userid'];
         if (isset($_POST['transfer'])) { //echo "cool";exit;
             if ($_POST['paid_amount'] < 10) {
                 $error = "Sorry! you can not transfer amount less then $10";
@@ -91,11 +91,12 @@ class MoneyTransferController extends Controller {
                     $this->redirect(array('moneytransfer/status', 'status' => 'U'));
                 }
                 //getFund Wallet
-                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
+                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId, 'type'=>$walletType));
                 if(!$toUserWalletObject){
                     //create wallet for to user
                     $toUserWalletObject = Wallet::model()->create($toUserId,$fund,$walletType);
                 }
+                $postDataArray['walletId'] = $toUserWalletObject->id;
                 //create transaction record entry
                 $transactionObjectect = Transaction::model()->createTransaction($postDataArray, $userObject);
 
@@ -104,11 +105,11 @@ class MoneyTransferController extends Controller {
                 $this->redirect(array('MoneyTransfer/confirm', 'tu' => base64_encode($moneyTransferObject->id), 'a' => base64_encode($transactionObjectect->paid_amount)));
             }
         }
-        $userObject = User::model()->findAll(array('condition'=>'role_id = 1 AND status = 1 AND id !='.$userid));
+        $userObject = User::model()->findAll(array('condition'=>'role_id = 1 AND status = 1 AND id !='.$loggedInUserId));
         $this->render('transfer', 
                 array('userObject'=>$userObject,
                     'error' => $error,
-                    'userId'=>$userid));
+                    'userId'=>$loggedInUserId));
     }
 
     /* autocomplete of username for user view excluding logged in user and admin */
@@ -217,7 +218,7 @@ class MoneyTransferController extends Controller {
                 }
                 $transactionObject->status = 1;
                 $transactionObject->save();
-                $message = 'admin commission transfer';
+                $message = $_POST['comment'];
                 //Admin transaction
                 $postDataArray['mode'] = $message;
                 $postDataArray['paid_amount'] = BaseClass::getPercentage($transactionObject->paid_amount,1);;
@@ -230,9 +231,16 @@ class MoneyTransferController extends Controller {
                 $moneyTransferDataArray['comment'] = $message;
                 $moneyTransferDataArray['walletId'] = $walletObject->type;
                 //create money transfer record entry
-                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount);
+                $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount);
+                
+                //user money transfer change status
+                $moneyTransferObject->status = 1; //setting success
+                $moneyTransferObject->save();
 
-
+                //user money transfer change status
+                $adminMoneyTransferObject->status = 1; //setting success
+                $adminMoneyTransferObject->save();
+                
                 //exit();
                 $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObject->id));
             } else {
