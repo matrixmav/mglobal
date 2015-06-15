@@ -88,7 +88,7 @@ if(!empty($error)){
             return false;
         }
         if ($("#email_body").val() == "") {
-            $("#email_body").html("Enter the Mail Boday!!!");
+            $("#email_body_error").html("Enter the Mail Body!!!");
             return false;
         }
     }
