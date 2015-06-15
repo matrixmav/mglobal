@@ -720,7 +720,7 @@ public function actionConfirm(){
 
         $countryObject = Country::model()->findAll();
 //            echo "<pre>";print_r($countryObject);exit;
-        $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId));
+        $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId,'position'=>'right'));
     }
 
     /**
