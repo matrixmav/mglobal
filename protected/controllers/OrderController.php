@@ -328,7 +328,7 @@ class OrderController extends Controller {
             $title = '<a href="/buildtemp/templates/?id=' . $data['id'] . '" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>';
         }
         }else{
-        $title = '<a class="class="btn red fa fa-edit margin-right15">N/A</a>';
+        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
             
         }
         echo $title;
@@ -342,7 +342,7 @@ class OrderController extends Controller {
         {
         $title = '<a href="/order/invoice?id="'.$data['id'].' title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
         }else{
-        $title = '<a class="class="btn red fa fa-edit margin-right15">N/A</a>';
+        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
          }
         echo $title;
     }
