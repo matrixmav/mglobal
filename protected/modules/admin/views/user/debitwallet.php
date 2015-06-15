@@ -75,7 +75,7 @@ if(!empty($error)){
         }
         var fund = parseFloat($('#fund').val());
         var fundVal = parseFloat($('#fundval').val());
-        alert(fund); alert(fundVal);return false;
+        
         if(fundVal < fund){
             $("#fund_error").html("Deducting fund should not be more the existing fund!");
             return false;
@@ -92,7 +92,7 @@ if(!empty($error)){
                 $("#wallet_amount").show();
                 if(amount != 0){
                     $("#existing_fund").html(amount);
-                    $("#fundval").val(amount);
+                    $("#fundval").val(amount.replace(/[^\d\.\-\ ]/g, ''));
                 } else {
                     $("#fundval").val("0.00");
                     $("#existing_fund").html("<b>0.00</b>");
