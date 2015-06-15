@@ -49,7 +49,7 @@
 
                       <input type="text" class="form-control " id="login-name" name="name">
                   
-                  <span id="name_error" class="clrred"></span></div>
+                  <span id="login_name_error" class="clrred"></span></div>
                 </div>
                 <div class="form-group">
                   <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
@@ -135,9 +135,9 @@
       <?php }?>
 <script>
  function validateFrm() {
-    $("#name_error").html("");
+    $("#login_name_error").html("");
     if ($("#login-name").val() == "") {
-      $("#name_error").html("Enter User Name");
+      $("#login_name_error").html("Enter User Name");
       $("#login-name").focus();            
       return false;
     }
