@@ -83,7 +83,8 @@ class PackageController extends Controller {
         }
 
         $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transactionid']));
-
+        
+        echo "<pre>";print_r($transactionObject1);exit;
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
 
         if ($transactionObject1) {
