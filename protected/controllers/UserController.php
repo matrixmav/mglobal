@@ -569,7 +569,7 @@ public function actionConfirm(){
         }
         $countryObject = Country::model()->findAll();
 
-        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error,'social'=$social));
+        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error,'social'=>$social));
     }
 
     /* User Forget Password Strat Here */
