@@ -336,7 +336,7 @@ class ProfileController extends Controller {
             {
                 $config['to'] = $email;
                 $config['subject'] = 'mGlobally Invitation From '.$userObject->name ;
-                $config['body'] = 'Hey '.$email.',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="'.$link.'">Click Here</a>';
+                $config['body'] = 'Hey '.$email.',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="'.$link.'">'.$link.'</a>';
                 CommonHelper::sendMail($config);  
             }
            $success .= "Email sent successfully.";   

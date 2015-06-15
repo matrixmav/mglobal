@@ -140,11 +140,7 @@ $this->breadcrumbs = array(
         if (phoneValid == false) {            
             return false;
         }
-        
-        var masterPin = requiredField('master_pin', 'master_pin_error', 'Please Enter Master Pin');        
-        if (masterPin == false) {            
-            return false;            
-        }
+
         
     }
 </script>

@@ -76,32 +76,15 @@ class PackageController extends Controller {
         $createdDate = date("Y-m-d");
         $tarnsactionID = BaseClass::gettransactionID();
         $transactionObject = new Transaction;
-        if (isset(Yii::app()->session['transactionid'])) {
+        if (!isset(Yii::app()->session['transactionid']) && Yii::app()->session['transactionid']=='') {
             Yii::app()->session['transactionid'] = $tarnsactionID;
-        } else {
-            Yii::app()->session['transactionid'] = $tarnsactionID;
-        }
-
-        $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transactionid']));
+        } 
+         
+        $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . Yii::app()->session['transactionid']));
 
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
 
-        if ($transactionObject1) {
-
-            $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
-            $transactionObject1->mode = 'paypal';
-            $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
-            $transactionObject1->paid_amount = $total;
-            $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
-            $transactionObject1->total_rp = 0;
-            $transactionObject1->used_rp = 0;
-            $transactionObject1->status = 0;
-            $transactionObject1->gateway_id = 1;
-            $transactionObject1->updated_at = new CDbExpression('NOW()');
-            $transactionObject1->update();
-        } else {
-
-
+        if (count($transactionObject1) == 0) {
             $transactionObject->user_id = Yii::app()->session['userid'];
             $transactionObject->transaction_id = Yii::app()->session['transactionid'];
             $transactionObject->mode = 'paypal';
@@ -114,6 +97,20 @@ class PackageController extends Controller {
             $transactionObject->gateway_id = 1;
             $transactionObject->created_at = new CDbExpression('NOW()');
             $transactionObject->save(false);
+            
+        } else {
+
+            $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
+            $transactionObject1->mode = 'paypal';
+            $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
+            $transactionObject1->paid_amount = $total;
+            $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
+            $transactionObject1->total_rp = 0;
+            $transactionObject1->used_rp = 0;
+            $transactionObject1->status = 0;
+            $transactionObject1->gateway_id = 1;
+            $transactionObject1->updated_at = new CDbExpression('NOW()');
+            $transactionObject1->update();
         }
         $transactionID = $transactionObject->id;
 
@@ -237,45 +234,44 @@ class PackageController extends Controller {
             <button id="checkout" class="btn-flat-green btn-orange" onclick="RedirectCart();">Checkout</button>
             </div>
             </div>';
-        
-        $userEnteredDomain = Yii::app()->session['domain'];
-        $doaminArr = explode('.', $userEnteredDomain);
-        $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $doaminArr[0] . "%'"));
-        $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
-        $UserDomainPart = explode('.', $userEnteredDomain);
-        
-
-        // $pos = array_search($UserDomainPart[1], $AllDomainArray);
-        //unset($AllDomainArray[$pos]);
-        //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
         $SuggestedDomain = "";
-        foreach ($domainTakenArray as $alldomain) {
-            
-            foreach ($AllDomainArray as $allext) {
-                $domainName = "'" . $alldomain->name . "." . $allext . "'";
-                $domainNameF = "'" . $alldomain->name . "." . $allext . "'";
+        $userEnteredDomain = Yii::app()->session['domain'];
+        if ($userEnteredDomain != '') {
+            $doaminArr = explode('.', $userEnteredDomain);
+            $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $doaminArr[0] . "%'"));
+            $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
+            $UserDomainPart = explode('.', $userEnteredDomain);
 
-                $SuggestedDomain .= '<div class="searchWrap"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
+
+            // $pos = array_search($UserDomainPart[1], $AllDomainArray);
+            //unset($AllDomainArray[$pos]);
+            //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
+
+            foreach ($domainTakenArray as $alldomain) {
+
+                foreach ($AllDomainArray as $allext) {
+                    $domainName = "'" . $alldomain->name . "." . $allext . "'";
+                    $domainNameF = "'" . $alldomain->name . "." . $allext . "'";
+
+                    $SuggestedDomain .= '<div class="searchWrap"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
                                     <div class="txtComent">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div></div></div>
                                     <div class="col-sm-2 col-xs-2">
                                     <p class="priceDomain"> <span>$</span>' . $alldomain->price . '</p></div>
                                     <input type="hidden" name="domain" id="domain" value="' . $alldomain->name . "." . $allext . '">
                                     <input type="hidden" name="amount" id="amount" value="">';
 
-                if (in_array($domainNameF, $domainTakenArray)) {
+                    if (in_array($domainNameF, $domainTakenArray)) {
 
-                    $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><span class="btn btn-success">N/A</span></div></div></div>';
-                } else {
+                        $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><span class="btn btn-success">N/A</span></div></div></div>';
+                    } else {
 
 
-                    $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><button class="btn btn-success" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>
+                        $SuggestedDomain .= '<div class="col-sm-2 col-xs-2"><button class="btn btn-success" id="test"  onclick="DomainAdd(' . $domainName . ');"  type="button">Add</button>
                     </div></div></div>';
+                    }
                 }
-               
             }
         }
-
-
 
 
         $this->render('domainsearch', array(
@@ -506,6 +502,7 @@ class PackageController extends Controller {
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
+                
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
@@ -602,11 +599,11 @@ class PackageController extends Controller {
                 CommonHelper::sendMail($config);
             }
             if ($transactionObject->status == 1) {
-                Yii::app()->session['transactionid'] = 0;
-                Yii::app()->session['amount'] = 0;
-                Yii::app()->session['package_id'] = 0;
-                Yii::app()->session['transaction_id'] = 0;
-                Yii::app()->session['domain'] = 0;
+                unset(Yii::app()->session['transactionid']);
+                unset(Yii::app()->session['amount']);
+                unset(Yii::app()->session['package_id']);
+                unset(Yii::app()->session['transaction_id']);
+                unset(Yii::app()->session['domain']);
             }
         }
 

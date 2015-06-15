@@ -4,7 +4,7 @@
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-                 
+
                     <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span><a onclick="OpenDiv('editIcon');" id="editIcon" style="display:none;" class="edit-icon">Edit</a></p>
                     <div class="contentBlock CartSection" id="cartDiv">
                         <table class="cartItemsWrp table table-condensed">
@@ -125,16 +125,17 @@
                                     </tbody></table>
                             </div>
                         </div>
-                        <div class="btnWrp">
+                        <div class="btnWrp col-sm-11">
                             <a id="summary-btn" class="btn btn-success btn-lg" onclick="proceedPayment();">Proceed to Payment</a>
                         </div>
                     </div>
-                    <div class="sectionWrp paymentOptions">
+                    <div class="sectionWrp paymentOptions clearfix">
                         <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
                         <div id="paymentOption" style="display:none;">
-                            <?php if ($walletObject) { ?>
-                                <div id="walletOption">
-                                    <form id="walletform" name="walletform">
+                            <form id="walletform" name="walletform">  
+                                <?php if ($walletObject) { ?>
+                                    <div id="walletOption" class="col-sm-4">
+
                                         <?php
                                         $i = 1;
                                         foreach ($walletObject as $wallet) {
@@ -151,66 +152,68 @@
                                                 $fund = $wallet->fund;
                                             }
                                             ?>
-                                            <div class="col-sm-4 col-xs-12 tleft">
+                                            <div class="col-sm-12 col-xs-12 tleft">
                                                 <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
                                                 <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                             </div>
                                             <?php $i++;
-                                        } ?>
+                                        }
+                                        ?>
                                         <br/><br/>
+
+                                    </div>
+                               <?php } ?>
+                           
+                                <div class="payChoose col-sm-4">
+                                    <div class="payOption clearfix">
+                                        <div class="col-sm-12 col-xs-12 tleft">
+                                            <input type="radio" id="myRadio" name="myRadio" value="paypal">
+                                            <label for="myRadio">Paypal</label>
+
+                                        </div>
+                                    </div>
+ </form>
+                                    <form action="<?php echo Yii::app()->params['paypalurl']; ?>" method="post" id="frmPayPal">
+                                        <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
+                                        <input type="hidden" name="cmd" value="_xclick">
+                                        <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
+                                        <input type="hidden" name="item_number" value="1">
+                                        <input type="hidden" name="credits" value="">
+                                        <input type="hidden" name="userid" value="<?php echo Yii::app()->session['userid']; ?>">
+                                        <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>" id="ppamount">
+                                        <input type="hidden" name="no_shipping" value="1">
+                                        <input type="hidden" name="currency_code" value="USD">
+                                        <input type="hidden" name="handling" value="0">
+                                        <input type="hidden" name="cancel_return" value="">
+                                        <input type="hidden" id ="return" name="return" value="<?php echo Yii::app()->params['returnurl']; ?>transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
                                     </form>
                                 </div>
-
-<?php } ?>
-                            <div class="payChoose col-sm-4">
-                                <div class="payOption clearfix" id="paymentOption">
-                                    <div class="col-sm-12 col-xs-12 tleft">
-                                                 <input type="radio" id="myRadio" name="myRadio" value="paypal">
-                                                 <label for="myRadio">Paypal</label>
-
-                                            </div>
+                                <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
+                                    <table width="100%">
+                                        <tr>
+                                            <td> <div id="actualamountDiv">  Total Amount</div> </td>
+                                            <td><span id="actualamount"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div id="walletamountDiv">  Wallet Amount</div> </td>
+                                            <td><span id="walletamount"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div id="walletamountDiv"> Payable Amount </div></td>
+                                            <td> <span id="payamount"></span></td>
+                                        </tr>
+                                    </table>
                                 </div>
-
-                            <form action="<?php echo Yii::app()->params['paypalurl'];?>" method="post" id="frmPayPal">
-                                <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
-                                <input type="hidden" name="cmd" value="_xclick">
-                                <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
-                                <input type="hidden" name="item_number" value="1">
-                                <input type="hidden" name="credits" value="">
-                                <input type="hidden" name="userid" value="<?php echo Yii::app()->session['userid']; ?>">
-                                <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>" id="ppamount">
-                                <input type="hidden" name="no_shipping" value="1">
-                                <input type="hidden" name="currency_code" value="USD">
-                                <input type="hidden" name="handling" value="0">
-                                <input type="hidden" name="cancel_return" value="">
-                                <input type="hidden" id ="return" name="return" value="<?php echo Yii::app()->params['returnurl'];?>transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
-                            </form>
-                            </div>
-                             <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
-                                <table width="100%">
-                                    <tr>
-                                        <td> <div id="actualamountDiv">  Total Amount</div> </td>
-                                        <td><span id="actualamount"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><div id="walletamountDiv">  Wallet Amount</div> </td>
-                                        <td><span id="walletamount"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><div id="walletamountDiv"> Payable Amount </div></td>
-                                        <td> <span id="payamount"></span></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg"></div>
-                            </div>
+                                <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg"></div>
+                            
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-  
+
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="payAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
@@ -225,7 +228,7 @@
         if (coupon_code == '')
         {
             document.getElementById("coupon_error").style.display = "block";
-            document.getElementById("coupon_error").innerHTML = "Please enter a domain name.";
+            document.getElementById("coupon_error").innerHTML = "Please enter coupon code.";
             document.getElementById("coupon_error").focus();
         } else {
             var dataString = 'coupon_code=' + coupon_code;
@@ -271,15 +274,16 @@
             data: dataString,
             cache: false,
             success: function (html) {
-             var htmlArr = html.split('-');
-            
+                var htmlArr = html.split('-');
+
                 if (htmlArr[0] == 1)
                 {
-                    $('#return').val('http://mglobally.maverickinfosoft.com/package/thankyou?transaction_id='+htmlArr[1]);
+                    $('#return').val('http://mglobally.maverickinfosoft.com/package/thankyou?transaction_id=' + htmlArr[1]);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
-
-                    document.getElementById('paymentOption').style.display = "block";
+                    document.getElementById('paymentOption').style.display = "";
+                    document.getElementById('walletOption').style.display = "";
+                    
 
 
                 }
@@ -306,69 +310,80 @@
     function makepayment()
     {
         var valx = $('input[name=myRadio]:checked').val();
-        var totalusedrp = $("#totalusedrp").val();
-        var transID = $("#transID").val();
-        var totalamount = $("#totalAmount").val();
-         if (totalusedrp == totalamount)
-        {
-            location.href = "/package/thankyou?transaction_id="+transID;
-        } else {
-            if (valx == '')
+        var group = document.walletform.myRadio;
+         var totalusedrp = $("#totalusedrp").val();
+            var transID = $("#transID").val();
+            var totalamount = $("#totalAmount").val();
+            if (totalamount==0)
             {
-                alert('Please choose payment gateway.');
-                return false;
-            }
-            if (valx == 'paypal')
-            {
-                document.getElementById("frmPayPal").submit();
-            }
-        }
-
-    }
-    function walletamountcalculation(ID, key)
-    {
-        str1 = $('#walletused').val();
-        var str = ID + '-' + key + ',' + str1;
-        $('#walletused').val(str);
-        var input = document.getElementsByName("wallet_type");
-        var wallet = $("#walletused").val();
-        var totalAmount = $('#totalAmount').val();
-        var total = 0;
-        for (var i = 0; i < input.length; i++) {
-            if (input[i].checked) {
-                total += parseFloat(input[i].value);
-            }
-        }
-        $("#totalusedrp").val(total);
-        var totalusedRP = $("#totalusedrp").val();
-        var payableAmount = totalAmount - total;
-        $("#ppamount").val(payableAmount);
-        $("#payAmount").val(payableAmount);
-        var dataString = 'payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
-
-        $.ajax({
-            type: "GET",
-            url: "/package/walletcalc",
-            data: dataString,
-            cache: false,
-            success: function (html) {
-                if (html == 1)
+                location.href = "/package/thankyou?transaction_id=" + transID;
+            } else {
+                
+                if (group.checked == false)
                 {
-                    totalAmounDiv
-                    $('#totalAmounDiv').fadeIn();
-                    $('#actualamount').html('$'+totalAmount);
-                    $('#walletamount').html('$'+total);
-                    $('#payamount').html('$'+payableAmount);
-                    $('#cartDiv').fadeOut();
-                    $('#editIcon').fadeIn();
-
-                    //document.getElementById('walletOption').style.display = "none";
-                    //document.getElementById('paymentOption').style.display = "block";
+                    alert('Please choose payment gateway.');
+                    return false;
+                }
+           
+                if (valx == 'paypal')
+                {
+                    document.getElementById("frmPayPal").submit();
                 }
             }
-        });
+
+        }
+        function walletamountcalculation(ID, key)
+        {
+            str1 = $('#walletused').val();
+            var str = ID + '-' + key + ',' + str1;
+            $('#walletused').val(str);
+            var input = document.getElementsByName("wallet_type");
+            var wallet = $("#walletused").val();
+            var totalAmount = $('#totalAmount').val();
+            var total = 0;
+            for (var i = 0; i < input.length; i++) {
+                if (input[i].checked) {
+                    total += parseFloat(input[i].value);
+                }
+            }
+            $("#totalusedrp").val(total);
+            var totalusedRP = $("#totalusedrp").val();
+            if(totalAmount > total)
+            {
+            var payableAmount = totalAmount - total;
+            $("#ppamount").val(payableAmount);
+            $('#payamount').html('$' + payableAmount);
+            }else{
+            var payableAmount = total - totalAmount;
+            $('#totalAmount').val(0);
+            $('#payamount').html('$0');
+            $("totalusedrp").val(totalAmount);
+            }
+            
+            var dataString = 'payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
+
+            $.ajax({
+                type: "GET",
+                url: "/package/walletcalc",
+                data: dataString,
+                cache: false,
+                success: function (html) {
+                    if (html == 1)
+                    {
+                        totalAmounDiv
+                        $('#totalAmounDiv').fadeIn();
+                        $('#actualamount').html('$' + totalAmount);
+                        $('#walletamount').html('$' + total);
+                        //$('#payamount').html('$' + payableAmount);
+                        $('#cartDiv').fadeOut();
+                        $('#editIcon').fadeIn();
+
+                        //document.getElementById('walletOption').style.display = "none";
+                        //document.getElementById('paymentOption').style.display = "block";
+                    }
+                }
+            });
 
     }
 
 </script>    
- 

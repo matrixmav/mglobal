@@ -52,7 +52,7 @@ class MailController extends Controller {
      */
     public function actionIndex() {
         $pageSize = 10;
-        
+        $successMsg = "";
         if(Yii::app()->session['userid']=='1')
         {
             $string = "1,21,22,23,24";
@@ -71,7 +71,7 @@ class MailController extends Controller {
                 'pagination' => array('pageSize' => $pageSize)));
         }
         $this->render('index', array(
-            'dataProvider' => $dataProvider, 'emailObject' => $emailObject,
+            'dataProvider' => $dataProvider, 'emailObject' => $emailObject,'successMsg'=>$successMsg
         ));
     }
 
@@ -103,9 +103,20 @@ class MailController extends Controller {
                 if (empty($userObject)) {
                     $this->render('compose', array('error' => 'User Does Not Exist'));
                 }
+                if($_FILES['attachment']['name'] !='')
+                {
                 $fname = time() . $_FILES['attachment']['name'];
                 $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                 BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
+                }
+                else if($_POST['attachment1']!='')
+                {
+                  $fname = $_POST['attachment1'];  
+                }
+                else{
+                 $fname = "";   
+                }
+                
                 $mailObject = new Mail();
                 $mailObject->to_user_id = $userObject->id;
                 $mailObject->from_user_id = Yii::app()->params['adminId'];

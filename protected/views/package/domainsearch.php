@@ -27,7 +27,7 @@
                     </div>-->
                 </form>
             </div>
-            <div class="row" id="suggestedDomain">
+            <div class="row" id="suggestedDomain" style="display:none;">
                 <div class="col-sm-12">
                     <h3>More domains to consider:</h3>
                 </div>

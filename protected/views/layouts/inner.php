@@ -156,11 +156,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 });
             });
              
-//           function openChat()
-//           {
-//             var IDSVal = document.getElementById('username').value;
-//             chatWith(IDSVal);  
-//           }
+
+           /*function openChat()
+           {
+             var IDSVal = document.getElementById('username').value;
+             chatWith(IDSVal);  
+           }*/
+
         </script>
 
 
@@ -410,9 +412,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 {
                                   $hotel_subsection = array(
                                     "order/list" => "My Order",
+                                    "profile/updateprofile" => "Profile",
                                     "profile/changepassword" => "Change Password",
                                     "profile/changepin" => "Change Master Pin",
-                                    "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
@@ -423,9 +425,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 }else{
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
+                                    "profile/updateprofile" => "Profile",
                                     "profile/changepassword" => "Change Password",
                                     "profile/changepin" => "Change Master Pin",
-                                    "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     
@@ -434,14 +436,15 @@ License: You must have a valid license purchased only from themeforest(the above
 //                                    "profile/summery" => "Summery",
                                 );
                                 }
+                                
                                 $activecls = 'active';
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') {
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') {
                                     
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') 
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') 
                                      
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
@@ -450,7 +453,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">My Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
