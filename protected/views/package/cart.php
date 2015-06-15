@@ -125,15 +125,15 @@
                                     </tbody></table>
                             </div>
                         </div>
-                        <div class="btnWrp">
+                        <div class="btnWrp col-sm-11">
                             <a id="summary-btn" class="btn btn-success btn-lg" onclick="proceedPayment();">Proceed to Payment</a>
                         </div>
                     </div>
-                    <div class="sectionWrp paymentOptions">
+                    <div class="sectionWrp paymentOptions clearfix">
                         <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
                         <div id="paymentOption" style="display:none;">
                             <?php if ($walletObject) { ?>
-                                <div id="walletOption">
+                                <div id="walletOption" class="col-sm-4">
                                     <form id="walletform" name="walletform">
                                         <?php
                                         $i = 1;
@@ -151,7 +151,7 @@
                                                 $fund = $wallet->fund;
                                             }
                                             ?>
-                                            <div class="col-sm-4 col-xs-12 tleft">
+                                            <div class="col-sm-12 col-xs-12 tleft">
                                                 <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
                                                 <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                             </div>
