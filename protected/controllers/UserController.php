@@ -89,11 +89,7 @@ public function actionConfirm(){
             
                     $this->redirect(array("login",'successMsg'=>$msg));
 
-                } else { echo "cool";exit;
-                   $msg = "<p class='error'>Invalid Key.</p>";
-                 $this->redirect(array("login",'successMsg'=>$msg));
-
-                } else { 
+                }else { 
                     $error = "Invalid Key.";
                     $this->redirect(array("login",'errorMsg'=>$error));
 
