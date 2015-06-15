@@ -428,17 +428,18 @@ public function actionConfirm(){
     public function actionRegistration() {
 
         $error = "";
- if(!empty($_GET))
+                if(!empty($_GET) && $_GET['spid'] !='')
 		{
 		$arra = explode('--',$_GET['spid']);
-		if(!empty($arra))
+                 
+		if(count($arra) > 1)
                 {  
 		$social = $arra[1];
 		}
 		else{
                 $social = '';
                }
-}
+              }
         if ($_POST) {
 
             $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
