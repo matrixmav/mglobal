@@ -122,46 +122,47 @@ class MoneyTransfer extends CActiveRecord
 	}
         
         public function createMoneyTransfer($postDataArray, $userObject,$transactionId,$paid_amount,$role=''){
-            $comment = "fund transfer";
-            if(!empty($postDataArray['comment'])){
-                $comment = $postDataArray['comment'];
-            }
-            $status = 0;
-            
-            $useridN = Yii::app()->session['userid'];
-            
-           
-            if(!empty($role))
-            {
-            $status= 1;
-            }
-             
-            $fundType = 1;
-            if(!empty($postDataArray['fund'])){
-                $fundType = $postDataArray['fund'];
-            }
-            
-            $userid = $userObject->id;
-            $Wallobj = Wallet::model()->findByAttributes(array('type' => $postDataArray['walletId'],'user_id' => $userid));
-             
-            $createdTime = new CDbExpression('NOW()');
-            $moneyTransfertoObj = new MoneyTransfer;
-            $moneyTransfertoObj->from_user_id = $useridN;
-            $moneyTransfertoObj->to_user_id = $userObject->id;
-            $moneyTransfertoObj->transaction_id = $transactionId;
-            $moneyTransfertoObj->fund_type = $fundType;//1:RP,2:Cash
-            $moneyTransfertoObj->fund = $paid_amount;//1:RP,2:Cash
-            $moneyTransfertoObj->comment = $comment;
-            $moneyTransfertoObj->status = $status;
-            $moneyTransfertoObj->wallet_id = $Wallobj->id;
-            $moneyTransfertoObj->created_at = $createdTime;
-            $moneyTransfertoObj->updated_at = $createdTime;
-             //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
-            if (!$moneyTransfertoObj->save()) {
+            try {
+                $comment = "fund transfer";
+                if(!empty($postDataArray['comment'])){
+                    $comment = $postDataArray['comment'];
+                }
+                $status = 0;
+                $fromUserId = Yii::app()->session['userid'];
+
+                if(!empty($role)) {
+                    $status= 1;
+                }
+
+                $fundType = 1;
+                if(!empty($postDataArray['fund'])){
+                    $fundType = $postDataArray['fund'];
+                }
+
+                $toUserId = $userObject->id;
+                $userWalletObject = Wallet::model()->findByAttributes(array('type' => $postDataArray['walletId'],'user_id' => $toUserId));
+
+                $createdTime = new CDbExpression('NOW()');
+                $moneyTransfertoObj = new MoneyTransfer;
+                $moneyTransfertoObj->from_user_id = $fromUserId;
+                $moneyTransfertoObj->to_user_id = $userObject->id;
+                $moneyTransfertoObj->transaction_id = $transactionId;
+                $moneyTransfertoObj->fund_type = $fundType;//1:RP,2:Cash
+                $moneyTransfertoObj->fund = $paid_amount;//1:RP,2:Cash
+                $moneyTransfertoObj->comment = $comment;
+                $moneyTransfertoObj->status = $status;
+                $moneyTransfertoObj->wallet_id = $userWalletObject->id;
+                $moneyTransfertoObj->created_at = $createdTime;
+                $moneyTransfertoObj->updated_at = $createdTime;
+                 //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
+                $moneyTransfertoObj->save();
+            } catch (Exception $ex) {
                 echo "<pre>";
+                print_r($ex->getMessage());
                 print_r($moneyTransfertoObj->getErrors());
                 exit;
             }
+          
             return $moneyTransfertoObj;
         }
 }
