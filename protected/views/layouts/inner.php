@@ -438,7 +438,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 }
                                 
                                 $activecls = 'active';
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') {
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curControllerLower = 'transaction' && $curAction == 'list') {
                                     
                                     $activecls = 'active';
                                 } else {
