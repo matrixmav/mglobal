@@ -434,21 +434,21 @@ class UserController extends Controller {
         $error = "";
         if (!empty($_GET)) {
             $arra = explode('--', $_GET['spid']);
-            if (!empty($arra)) {
+            if (count($arra) > 0) {
                 $social = $arra[1];
             } else {
                 $social = '';
             }
         }
         if ($_POST) {
-
+            $social = $_POST['social'];
             $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
             $masterPin = BaseClass::getUniqInt(5);
             $model = new User;
             $model->attributes = $_POST;
             $password = BaseClass::getPassword();
             $model->password = BaseClass::md5Encryption($password);
-            $model->social = $_POST['social'];
+            $model->social = $social;
             $model->sponsor_id = $_POST['sponsor_id'];
             $model->master_pin = BaseClass::md5Encryption($masterPin);
             $model->created_at = date('Y-m-d');
