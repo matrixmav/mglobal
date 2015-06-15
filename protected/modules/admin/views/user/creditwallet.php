@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 <?php 
 $mailObject = array();
 if(!empty($error)){
-    echo "<p>".$error."</p>";
+    echo "<p class='error'>".$error."</p>";
 }
 ?>
 
@@ -18,7 +18,7 @@ if(!empty($error)){
     <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
          <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username" />
-        <span style="color:red"  id="first_name_error"></span>
+        <span style="color:red"  id="search_user_error"></span>
     </div>
 </div>
 <?php }else{?>
