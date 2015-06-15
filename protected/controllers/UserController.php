@@ -1,4 +1,5 @@
 <?php
+
 class UserController extends Controller {
 
     /**
@@ -29,11 +30,11 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted', 
-                    'forgetpassword', 'login', 'changepassword', '404', 'success', 
-                    'loginregistration', 'dashboard', 'confirm','isemailexisted', 
-                    'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter', 
-                    'callback','getfullname'),
+                'actions' => array('index', 'view', 'registration', 'isuserexisted',
+                    'forgetpassword', 'login', 'changepassword', '404', 'success',
+                    'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
+                    'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
+                    'callback', 'getfullname'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -50,52 +51,46 @@ class UserController extends Controller {
         );
     }
 
-public function actionConfirm(){
-       
-       $msg = "";
-            if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
-                $activationKey = $_GET['activation_key'];
-                $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
+    public function actionConfirm() {
 
-                
-                if (count($getUserObject) > 0) {                    
+        $msg = "";
+        if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
+            $activationKey = $_GET['activation_key'];
+            $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
 
-                    $masterPin = BaseClass::getUniqInt(5);
-                    $password = BaseClass::getPassword();
-                    $userObject = new User;
-                    $userObject = User::model()->findByPk($getUserObject->id);
-                    $userObject->status = 1;
-                    $userObject->password = BaseClass::md5Encryption($password);
-                    $userObject->master_pin = BaseClass::md5Encryption($masterPin);
+            if (count($getUserObject) > 0) {
+                $masterPin = BaseClass::getUniqInt(5);
+                $password = BaseClass::getPassword();
+                $userObject = new User;
+                $userObject = User::model()->findByPk($getUserObject->id);
+                $userObject->status = 1;
+                $userObject->password = BaseClass::md5Encryption($password);
+                $userObject->master_pin = BaseClass::md5Encryption($masterPin);
+                $userObject->activation_key = "";
+                $userObject->update();
+                $msg = "Your account has been verified.";
 
-
-                    $userObject->activation_key = "";
-
-                    $userObject->update();
-                    $msg = "Your account has been verified.";
-                    
-                    if (!$userObject->update(false)) {
-                        echo "<pre>";
-                        print_r($userObject->getErrors());
-                        exit;
-                    }
-                    $config['to'] = $userObject->email; 
-                    $config['subject'] = 'Login Details' ;
-                    $config['body'] = 'Hi,' .$userObject->full_name.'<br/> Login Details'.
-                    '<br/><br/><strong>User:</strong>'.$userObject->name.'<br/>'.
-                    '<br/><strong>Password:</strong>'.$password.'<br/>'.
-                    '<strong>Master Pin:</strong>'.$masterPin.'<br/><br/>';
-                    CommonHelper::sendMail($config);
-            
-                    $this->redirect(array("login",'successMsg'=>$msg));
-
-                }else { 
-                    $error = "Invalid Key.";
-                    $this->redirect(array("login",'errorMsg'=>$error));
-
+                if (!$userObject->update(false)) {
+                    echo "<pre>";
+                    print_r($userObject->getErrors());
+                    exit;
                 }
-            }        
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Login Details';
+                $config['body'] = 'Hi,' . $userObject->full_name . '<br/> Login Details' .
+                        '<br/><br/><strong>User:</strong>' . $userObject->name . '<br/>' .
+                        '<br/><strong>Password:</strong>' . $password . '<br/>' .
+                        '<strong>Master Pin:</strong>' . $masterPin . '<br/><br/>';
+                CommonHelper::sendMail($config);
+
+                $this->redirect(array("login", 'successMsg' => $msg));
+            } else {
+                $error = "Invalid Key.";
+                $this->redirect(array("login", 'errorMsg' => $error));
+            }
+        }
     }
+
     public function actionTwitter() {
 
         $twitter = Yii::app()->twitter->getTwitter();
@@ -384,80 +379,69 @@ public function actionConfirm(){
 
     public function actionLogin() {
         $error = "";
-         if(Yii::app()->session['userid'] !=''){
-         $this->redirect('/profile/dashboard/');
-        }else{
-        // collect user input data
-        if (isset($_POST['name']) && isset($_POST['password'])) {
+        if (Yii::app()->session['userid'] != '') {
+            $this->redirect('/profile/dashboard/');
+        } else {
+            // collect user input data
+            if (isset($_POST['name']) && isset($_POST['password'])) {
 
-            $model = new User;
-            $error = "";
-            $username = $_POST['name'];
-            $password = $_POST['password'];
-            $masterkey = $_POST['masterkey'];
+                $model = new User;
+                $error = "";
+                $username = $_POST['name'];
+                $password = $_POST['password'];
+                $masterkey = $_POST['masterkey'];
 
-            if ((!empty($username)) && (!empty($password)) && (!empty($masterkey))) {
-                $getUserObject = User::model()->findByAttributes(array('name' => $username, 'status' => 1,'role_id' => 1 ));
-                if (!empty($getUserObject)) {
-                    $flagPassword = '';
-                    $flagMaster = '';
+                if ((!empty($username)) && (!empty($password)) && (!empty($masterkey))) {
+                    $getUserObject = User::model()->findByAttributes(array('name' => $username, 'status' => 1, 'role_id' => 1));
+                    if (!empty($getUserObject)) {
+                        $flagPassword = '';
+                        $flagMaster = '';
 
-                    if ($getUserObject->password == md5($password)) { // Check Password
-                        $flagPassword = 'password';
-                    }
-                    if ($getUserObject->master_pin == md5($masterkey)) { // Check master key
-                        $flagMaster = 'masterkey';
-                    }
+                        if ($getUserObject->password == md5($password)) { // Check Password
+                            $flagPassword = 'password';
+                        }
+                        if ($getUserObject->master_pin == md5($masterkey)) { // Check master key
+                            $flagMaster = 'masterkey';
+                        }
 
-                    if ($flagPassword == 'password' && $flagMaster == 'masterkey') {
-                        $identity = new UserIdentity($username, $password);
-                        if ($identity->userAuthenticate())
-                            Yii::app()->user->login($identity);
-                        Yii::app()->session['userid'] = $getUserObject->id;
-                        Yii::app()->session['username'] = $getUserObject->name;
-                        Yii::app()->session['frontloggedIN'] = "1";
-                        if (Yii::app()->session['package_id'] != '') {
-                            $this->redirect("/package/domainsearch");
+                        if ($flagPassword == 'password' && $flagMaster == 'masterkey') {
+                            $identity = new UserIdentity($username, $password);
+                            if ($identity->userAuthenticate())
+                                Yii::app()->user->login($identity);
+                            Yii::app()->session['userid'] = $getUserObject->id;
+                            Yii::app()->session['username'] = $getUserObject->name;
+                            Yii::app()->session['frontloggedIN'] = "1";
+                            if (Yii::app()->session['package_id'] != '') {
+                                $this->redirect("/package/domainsearch");
+                            } else {
+                                $this->redirect("/profile/dashboard");
+                            }
                         } else {
-                            $this->redirect("/profile/dashboard");
+                            // echo "0"; 
+                            $error = "<p class='error'>The user name and password you entered don't match. </p>";
                         }
                     } else {
-                        // echo "0"; 
-                        $error = "<p class='error'>Invalid Information</p>";
+                        $error = "<p class='error'>Invalid User Name</p>";
                     }
-                } else {
-
-                    $error = "<p class='error'>Invalid User Name</p>";
                 }
             }
+            $this->render("login", array("msg" => $error));
         }
-
-        $this->render("login", array("msg" => $error));
     }
- }
 
     public function actionRegistration() {
 
         $error = "";
-        $social = "";
-                if(!empty($_GET) && $_GET['spid'] !='')
-		{
-		$arra = explode('--',$_GET['spid']);
-                 
-		 if(count($arra) > 1)
-                {  
-		 $social = $arra[1];
-		 }
-		else{
+        if (!empty($_GET)) {
+            $arra = explode('--', $_GET['spid']);
+            if (!empty($arra)) {
+                $social = $arra[1];
+            } else {
                 $social = '';
-               }
-
-              }
-
-
-
+            }
+        }
         if ($_POST) {
-            $social = $_POST['social'];
+
             $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
             $masterPin = BaseClass::getUniqInt(5);
             $model = new User;
@@ -473,7 +457,7 @@ public function actionConfirm(){
             } else {
                 $model->role_id = 1;
             }
-            
+
 
             /* Condition for they have the child or not */
             $geneObject = Genealogy::model()->findByAttributes(array('parent' => $userObject->id, 'position' => $_POST['position']));
@@ -521,7 +505,6 @@ public function actionConfirm(){
             $modelUserProfile->user_id = $model->id;
             $modelUserProfile->created_at = date('Y-m-d');
             $modelUserProfile->referral_banner_id = 1;
-            $modelUserProfile->country_id = $_POST['country_id'];
             $modelUserProfile->save(false);
 
             /* Geneology */
@@ -543,14 +526,14 @@ public function actionConfirm(){
               $modelGenealogy->position = $_POST['position'] ;
               $modelGenealogy->save(); */
 
-            $config['to'] = $model->email; 
-            $config['subject'] = 'Registration Confirmation' ;
-            $config['body'] = 'Hi,' .$model->full_name.'<br/>Congratulations! You have been registered successfully'.
-                    '<strong>Please click the link below to activate your account:</strong><br/>'.
-                    '<a href="http://demo.mglobally.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
+            $config['to'] = $model->email;
+            $config['subject'] = 'Registration Confirmation';
+            $config['body'] = 'Hi,' . $model->full_name . '<br/>Congratulations! You have been registered successfully' .
+                    '<strong>Please click the link below to activate your account:</strong><br/>' .
+                    '<a href="'.Yii::app()->getBaseUrl(true).'/user/confirm?activation_key=' . $rand . '">Click to activate </a>';
             $response = CommonHelper::sendMail($config);
             $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
-            $this->redirect(array('login','successMsg'=> $successMsg));
+            $this->redirect(array('login', 'successMsg' => $successMsg));
 
             if ($_POST['admin'] == 1) {
                 $this->redirect(array('admin/user/index', 'successMsg' => 1));
@@ -560,21 +543,21 @@ public function actionConfirm(){
         }
         $spnId = "";
         if ($_GET) {
-		if(!empty($arra))
-		{
-		$spnId = $arra[0];
-		}else{
-		 $spnId = $_GET['spid'];           
-		}
+            if (!empty($arra)) {
+                $spnId = $arra[0];
+            } else {
+                $spnId = $_GET['spid'];
+            }
         }
         $countryObject = Country::model()->findAll();
 
-        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error,'social'=>$social));
+        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error));
     }
 
     /* User Forget Password Strat Here */
 
     public function actionForgetPassword() {
+        
         $msg = "";
         if (isset($_POST['email']) && $_POST['email'] != '') {
             $email = $_POST['email'];
@@ -588,23 +571,23 @@ public function actionConfirm(){
                 $userObject->password = BaseClass::md5Encryption($password);
                 $userObject->update();
                 $msg = "Please check your email to activate your account";
-                /*echo "<pre>";
-                print_r($password);
-                print_r($userObject->password);
-                print_r($userObject);
-                exit;*/
+                /* echo "<pre>";
+                  print_r($password);
+                  print_r($userObject->password);
+                  print_r($userObject);
+                  exit; */
                 if (!$userObject->update(false)) {
                     echo "<pre>";
                     print_r($model->getErrors());
                     exit;
                 }
-                
-                $config['to'] = $userObject->email; 
-                $config['subject'] = 'Forgot Password' ;
-                $config['body'] = 'Hi,' .$userObject->full_name.'<br/>'
-                        . 'New Password:'.$password;
+
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Forgot Password';
+                $config['body'] = 'Hi,' . $userObject->full_name . '<br/>'
+                        . 'New Password:' . $password;
                 $response = CommonHelper::sendMail($config);
-            
+
                 $this->redirect(array('login', 'successMsg' => $msg));
             } else {
                 $msg = "<p class='error'>Please Enter Your Valid Email Address.</p>";
@@ -734,14 +717,11 @@ public function actionConfirm(){
 
     public function actionloginregistration() {
         $spnId = Yii::app()->params['adminSpnId'];
-        $social = "";
         Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
 
         $countryObject = Country::model()->findAll();
 //            echo "<pre>";print_r($countryObject);exit;
-
-        $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId,'position'=>'right','social'=>$social));
-
+        $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId));
     }
 
     /**
@@ -858,17 +838,20 @@ public function actionConfirm(){
             Yii::app()->end();
         }
     }
-    
-    public function actionGetFullName(){
-        if($_POST){ 
+
+    public function actionGetFullName() {
+        if ($_POST) {
             $userName = $_POST['userName'];
             $getUserObject = User::model()->findByAttributes(array('name' => $userName));
-            if($getUserObject){
-                $userArray = array('id'=>$getUserObject->id,'fullName'=>$getUserObject->full_name);
-                echo CJSON::encode($userArray);exit;
+            if ($getUserObject) {
+                $userArray = array('id' => $getUserObject->id, 'fullName' => $getUserObject->full_name);
+                echo CJSON::encode($userArray);
+                exit;
             } else {
-                echo 0;exit;
+                echo 0;
+                exit;
             }
         }
     }
+
 }
