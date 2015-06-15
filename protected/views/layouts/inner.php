@@ -438,13 +438,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 }
                                 
                                 $activecls = 'active';
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curControllerLower = 'transaction' && $curAction == 'list') {
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curControllerLower == 'order' && $curAction == 'list') {
                                     
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') 
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curControllerLower == 'order' && $curAction == 'list') 
                                      
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
@@ -453,7 +453,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">My Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curControllerLower == 'order' && $curAction == 'list') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php
