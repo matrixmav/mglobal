@@ -76,12 +76,10 @@ class PackageController extends Controller {
         $createdDate = date("Y-m-d");
         $tarnsactionID = BaseClass::gettransactionID();
         $transactionObject = new Transaction;
-        if (isset(Yii::app()->session['transactionid'])) {
+        if (!isset(Yii::app()->session['transactionid']) && Yii::app()->session['transactionid']=='') {
             Yii::app()->session['transactionid'] = $tarnsactionID;
-        } else {
-            Yii::app()->session['transactionid'] = $tarnsactionID;
-        }
-
+        } 
+         
         $transactionObject1 = Transaction::model()->findAll(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . Yii::app()->session['transactionid']));
 
 
