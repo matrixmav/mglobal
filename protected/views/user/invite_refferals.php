@@ -3,7 +3,7 @@ $this->breadcrumbs = array(
     'Invite Refferals'
 );
  
-$link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'&social=fb'; 
+$link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name."--fb"; 
 $name = 'Refferal Invite';
 $desc = 'Refferal Invite';
 $caption = '';
@@ -13,7 +13,7 @@ $caption = '';
 <div class="row">
     <div class="col-md-12">
         <a onclick = "postToFeedInvite('<?= $link; ?>', '<?= $name; ?>', '<?= $desc; ?>', '<?= $caption; ?>')" class="btn  green margin-right-20">Facebook</a>
-        <a href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name;?>&social=gp" class="btn  green margin-right-20">Google+</a>
+        <a href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--gp";?>" class="btn  green margin-right-20">Google+</a>
         <a onclick = "openform('Email');" class="btn  green margin-right-20">Email</a>
         <a onclick = "openform('SMS');" class="btn  green margin-right-20">SMS</a>
       </div>
