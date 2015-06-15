@@ -227,7 +227,7 @@
           <img src="images/what-we-do.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
         
-          <h3>Chania</h3>
+          <h3>Who We Are </h3>
           <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
       </div>
       </div>
@@ -236,7 +236,7 @@
           <img src="images/who-we-are.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
        
-          <h3>Chania</h3>
+          <h3>WHAT WE DO</h3>
           <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
       </div>  
       </div>
@@ -268,10 +268,10 @@
   <div class="services-block content content-center" id="services">
     <div class="container">
       <h2>Our <strong>services</strong></h2>
-      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers ...<a title="Lorem ipsum dolor sit amet" href="#inline1" class="fancybox pinkSm">read more</a></h4>
-      <div id="inline1" style="display:none">
-          <h2>our services</h2>
-          <p style="max-width: 600px">Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers worked as our strengths and since then they are serving as the cherished resources of the company. Later, to keep pace with the evolving digital space, we did all that was needed to earn us the tag of a digital marketing agency.</p>
+      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers ...<a href="#inline" class="fancybox pinkSm">read more</a></h4>
+      <div id="inline" style="display:none" class="readMoreBox content">
+          <h2>Our <strong>services</strong></h2>
+          <p >Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers worked as our strengths and since then they are serving as the cherished resources of the company. Later, to keep pace with the evolving digital space, we did all that was needed to earn us the tag of a digital marketing agency.</p>
       </div>
       
 
@@ -279,24 +279,51 @@
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-12 item">
             <img src="images/it-services.png" alt="Marcus Doe" class="img-responsive service_icon">
-          <h3>IT Services</h3>
-          <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
+          <h3>Website Designing</h3>
+          <p>A website’s design is as crucial as the quality of the services delivered by it. How a customer ...<a href="#inline3" class="fancybox pinkSm">read more</a> </p>
+          <div id="inline3" style="display:none" class="readMoreBox content">
+               <h2>website<strong> designing </strong></h2>
+          <p>A website’s design is as crucial as the quality of the services delivered by it. How a customer perceives an organization through its web design is a relevant question that has to be taken into consideration. Data says that the layout, color schemes, and visual value decide how influential is the website going to be for the viewers. Every element that may be crucial for a user’s point of view has to be included while designing a website. Our designers are known to every element that a reader’s eye locate quickly.  </p>
+          <p>Besides, we understand the value of a responsive and a visually appealing web design, which we recommend to each of our clients. MGlobally welcomes companies from varied domains to get suitable web designs for their businesses to further create an impact on the online audiences</p>
+      </div>
+        </div>
+            <div class="col-md-3 col-sm-3 col-xs-12 item">
+         <img src="images/it-services.png" alt="Marcus Doe" class="img-responsive service_icon">
+          <h3>Web Development</h3>
+          <p>The idea of developing websites that deliver the right message to the potential customers in the right ...<a href="#inline4" class="fancybox pinkSm">read more</a> </p>
+          <div id="inline4" style="display:none" class="readMoreBox content">
+               <h2>web<strong> development </strong></h2>
+          <p>The idea of developing websites that deliver the right message to the potential customers in the right manner is what we stand by. We are powered by technology and tech enthusiasts, who help us stick to the pledge that we have taken to deliver the best web services. We are supported by a team of web developers, who are specialized in varied technologies used for web development.  </p>
+          <p><strong>Our web development services include:</strong></p>
+          <ul>
+              <li>Drag and Drop Based Web Builder</li>
+              <li>Web Application Development</li>
+              <li>Website Architecture and Strategy</li>
+              <li>Content Management Systems</li>
+              <li>Custom Web Applications</li>
+              <li>Usability and User Interface Designs </li>
+              <li>Independent QA & Testing</li>
+              <li>Maintenance & Support</li>
+          </ul>
+      </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-12 item">
           <img src="images/mobile-application.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Mobile Application</h3>
           <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
         </div>
+        
         <div class="col-md-3 col-sm-3 col-xs-12 item">
          <img src="images/digital-marketing.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Digital Marketing</h3>
-          <p>Digital marketing is known to be the process of promoting a website, a business, or a product ...<a class="pinkSm" href="">read more</a>’</p>
+          <p>Digital marketing is known to be the process of promoting a website, a business, or a product ...<a href="#inline2" class="fancybox pinkSm">read more</a></p>
+           <div id="inline2" style="display:none" class="readMoreBox content">
+               <h2>Digital<strong> Marketing </strong></h2>
+          <p >Digital marketing is known to be the process of promoting a website, a business, or a product through the online mediums’. The concept of digital marketing has become the buzz of the town in the recent years. It seems to have held the attention of every small or large business entity, which aims to reach out to the audiences that have moved online. </p>
+          <p>Digital marketing, also known as online marketing has evolved as a major tool for most of the traffic recorded by the websites. It involves usage of channels that allow marketers to identify the brand’s real time performance and even the competitive analysis. This form of marketing has empowered the businesses to access its prospective client base and garner a new market place, which ensures better conversions for them.</p>
+      </div>
         </div>
-        <div class="col-md-3 col-sm-3 col-xs-12 item">
-         <img src="images/support.png" alt="Marcus Doe" class="img-responsive service_icon">
-          <h3>Support</h3>
-          <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -308,38 +335,38 @@
      <h2>Media<strong>Center</strong></h2> 
     <!--   <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>-->
       <div class="row">
-        <div class="col-md-4 item">
-          <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
-          <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
+        <div class="col-md-4 item col-xs-12 col-sm-4">
+            <a href=""> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive"></a>
+         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
           <em></em>
-       <!--   <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> -->
+         <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
           <div class="tb-socio">
               <div class="myBox">
                   <p><span><img src="images/ppt_icon.png"></span>PPT</p>
               </div>
-          </div>
+          </div>-->
         </div>
-        <div class="col-md-4 item">
-          <img src="images/business-plan.png" alt="Elena Taylor" class="img-responsive">
-          <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
+        <div class="col-md-4 item col-xs-12 col-sm-4">
+            <a href=""> <img src="images/business-plan.png" alt="Elena Taylor" class="img-responsive"></a>
+         <!-- <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
-         <!-- <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> -->
+          <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
           <div class="tb-socio">
               <div class="myBox">
                   <p><span><img src="images/ppt_icon.png"></span>PDF</p>
               </div>
-          </div>
+          </div>-->
         </div>
-        <div class="col-md-4 item">
-          <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
-          <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
+        <div class="col-md-4 item col-xs-12 col-sm-4">
+            <a href="">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive"></a>
+        <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
           <p></p>
           <div class="tb-socio">
               <div class="myBox">
                   <p><span><img src="images/pdf_icon.png"></span>e-Brochure</p>
               </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -351,16 +378,7 @@
       <h2 class="margin-bottom-50"><strong> Templates </strong></h2>
     </div>
     <div class="row">
-        <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/2.jpg" alt="NAME" class="img-responsive">
-        <a href="images/2.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
-          </div>
-        </a>
-      </div>
+        
       <div class="item col-md-2 col-sm-6 col-xs-12">
         <img src="images/2.jpg" alt="NAME" class="img-responsive">
         <a href="images/2.jpg" class="zoom valign-center">
@@ -493,7 +511,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12 text-left">
           <img src="images/matrix.png" alt="Why to choose us" class="img-responsive">
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12 text-left">
+        <div class="col-md-4 col-sm-5 col-xs-12 text-left">
 <!--          <div class="panel-group" id="accordion1">
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -968,7 +986,9 @@
   <script type="text/javascript">
      $(document).ready(function() {
 		$('.fancybox').fancybox({
-		 
+		 helpers: { 
+        title: null
+    }
 		});
 		});
           //$(".myfancyTxtBox").fancybox();
