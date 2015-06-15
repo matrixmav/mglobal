@@ -734,12 +734,13 @@ public function actionConfirm(){
 
     public function actionloginregistration() {
         $spnId = Yii::app()->params['adminSpnId'];
+        $social = "";
         Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
 
         $countryObject = Country::model()->findAll();
 //            echo "<pre>";print_r($countryObject);exit;
 
-        $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId,'position'=>'right'));
+        $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId,'position'=>'right','social'=>$social));
 
     }
 
