@@ -58,8 +58,7 @@ class DefaultController extends Controller {
     }
 
     public function actionDashboard() {
-        echo "dream";
-        exit;
+        $this->render('managerlogin', array('model' => $model));
     }
 
    /* public function actionAdminLogin() {
