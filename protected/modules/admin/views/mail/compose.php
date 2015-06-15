@@ -55,7 +55,7 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
     <div class="col-md-12 form-group">
     <label class="col-md-2">Attachement </label>
     <div class="col-md-6">
-        <input type="hidden" name="attachment1" id="" value="<?php echo $mailObject->attachment;?>"/>
+        <input type="hidden" name="attachment1" id="" value="<?php echo (!empty($mailObject)) ? $mailObject->attachment : "";?>"/>
         <input type="file" name="attachment" id="attachement"/>
         <?php if(!empty($mailObject) && $mailObject->attachment !=''){ ?>
         <?php echo $mailObject->attachment;?>
