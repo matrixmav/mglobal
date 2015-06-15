@@ -1831,7 +1831,7 @@ Pre-Header and pre-header elements
 .pinkSm{color:#e54a1a !important;}
 .pinkSm:hover{text-decoration: underline;}
 .choseOpt{}
-.choseOpt li{ list-style: none;  background: url(/images/arrow-circle.png) left center no-repeat; margin: 10px; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
+.choseOpt li{ list-style: none;  background: url(/images/arrow-circle.png) left center no-repeat; margin: 10px 0 10px 10px; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
 .choseOpt li a{ padding: 0 0 0 40px; font-family: "Open Sans"; font-size:18px; color: #757575;}
 .choseOpt{ padding: 0}
 .benefitCarousel h3{font-size: 24px; text-align: center;}
@@ -1855,3 +1855,11 @@ Pre-Header and pre-header elements
     width: 120px;}
 .tb-socio .myBox p{font-weight: bold; color: #f15d2a;}
 .tb-socio .myBox span{margin-right: 20px;}
+
+.readMoreBox {max-width: 600px;}
+.readMoreBox p{color:#6b6b6b; text-align: justify; margin: 0 10px 10px 10px;}
+
+@media (max-device-width: 767px) and (min-device-width: 320px)
+{
+.team-block .img-responsive{ max-width: 60%; display: inline-block;}
+}
