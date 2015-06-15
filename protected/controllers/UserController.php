@@ -464,7 +464,7 @@ public function actionConfirm(){
             $model->attributes = $_POST;
             $password = BaseClass::getPassword();
             $model->password = BaseClass::md5Encryption($password);
-            //$model->social = $social;
+            $model->social = $_POST['social'];
             $model->sponsor_id = $_POST['sponsor_id'];
             $model->master_pin = BaseClass::md5Encryption($masterPin);
             $model->created_at = date('Y-m-d');
