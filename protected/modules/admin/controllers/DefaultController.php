@@ -9,6 +9,7 @@ class DefaultController extends Controller {
         $timing = date('hms');
         Yii::app()->session['timestamp'] = $timing;
     }
+    public $layout = 'main';
 
     public function actionIndex() {
         //$this->render('index');
@@ -58,7 +59,7 @@ class DefaultController extends Controller {
     }
 
     public function actionDashboard() {
-        $this->render('managerlogin', array('model' => $model));
+        $this->render('/user/dashboard');
     }
 
    /* public function actionAdminLogin() {
