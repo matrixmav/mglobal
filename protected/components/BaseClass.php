@@ -42,47 +42,45 @@ class BaseClass extends Controller {
     }
 
     public static function isLoggedIn() {
-        $userId = Yii::app()->session['userid'];// die;
-       // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
-        if ( !isset($userId)) {
+        $userId = Yii::app()->session['userid']; // die;
+        // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
+        if (!isset($userId)) {
             //ob_start();
             //$this->redirect('/user/login');
 
-            header('Location:/user/login');  die; 
-            
-
+            header('Location:/user/login');
+            die;
         }
     }
-    
+
     /* function to fetch access /*
      * 
      */
-    
-    public function getMemberAccess() {  
-        try{
-            $userId = Yii::app()->session['userid'];// die;
+
+    public static function getMemberAccess() {
+        try {
+            $userId = Yii::app()->session['userid']; // die;
             $accessArr = array();
-            $userAccessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>$userId));
-            if($userAccessObject){
-                $accessArr = explode(',',$userAccessObject->access);
+            $userAccessObject = UserHasAccess::model()->findByAttributes(array('user_id' => $userId));
+            if ($userAccessObject) {
+                $accessArr = explode(',', $userAccessObject->access);
             }
         } catch (Exception $ex) {
-            echo $ex->message();exit;
+            echo $ex->message();
+            exit;
         }
         return $accessArr;
-     
     }
-    
-    function getUserName() {
-     $userId = Yii::app()->session['userid'];// die; 
-     $userName = User::model()->findByPK(array('user_id'=>$userId));
-     if(!empty($userName))
-     {
-        $name = $userName->name;
-     }else{
-        $name = ""; 
-     }
-     return $name;
+
+    public static function getUserName() {
+        $userId = Yii::app()->session['userid']; // die; 
+        $userName = User::model()->findByPK(array('user_id' => $userId));
+        if (!empty($userName)) {
+            $name = $userName->name;
+        } else {
+            $name = "";
+        }
+        return $name;
     }
 
     public static function walletAmount($id) {
@@ -91,15 +89,14 @@ class BaseClass extends Controller {
 
         return $walletObject;
     }
-   
-    public static function getPassword(){
+
+    public static function getPassword() {
         $chars = '0123456789abcd345efghijklmnopq*&%$rstuvwxyzAB345CDEFGH!@#$IJKLMNOPQRSTUVWXYZ$#@!&*';
         $randomString = '';
 
-        for ($i = 0; $i < 8; $i++) 
-        {
-            $randomString .= $chars[rand(0, strlen($chars)-1)];
-        }	
+        for ($i = 0; $i < 8; $i++) {
+            $randomString .= $chars[rand(0, strlen($chars) - 1)];
+        }
 
         return $randomString;
     }
@@ -135,31 +132,28 @@ class BaseClass extends Controller {
         return $generateid;
     }
 
+    public static function getUnredMails($userId) {
 
-    public static function getUnredMails($userId){
+        return Mail::model()->count(array('condition' => 'to_user_id=' . $userId . ' AND status = 0'));
+    }
 
-        return Mail::model()->count(array('condition'=>'to_user_id='.$userId. ' AND status = 0'));
-
-}
-
-    /*public static function getUnredMails($userId) {
-        $count = Mail::model()->count(array(
-            'condition' => 'to_user_id = :uid AND status = :status',
-            'params' => array(
-                ':uid' => $userId,
-                ':status' => 0,
-            ),
-        ));        
-        return $count;        
-        /*return Mail::model()->count(array('condition' => 'from_user_id=' . $userId . ' AND status = 0'));}*/ 
-
-    
+    /* public static function getUnredMails($userId) {
+      $count = Mail::model()->count(array(
+      'condition' => 'to_user_id = :uid AND status = :status',
+      'params' => array(
+      ':uid' => $userId,
+      ':status' => 0,
+      ),
+      ));
+      return $count;
+      /*return Mail::model()->count(array('condition' => 'from_user_id=' . $userId . ' AND status = 0'));} */
 
     public static function isAdmin() {
         $userId = Yii::app()->session['userid'];
         $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '2'));
         if (!$adminObject) {
-            header('Location:/admin');die;
+            header('Location:/admin');
+            die;
         }
     }
 
