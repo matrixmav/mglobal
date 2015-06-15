@@ -521,6 +521,7 @@ public function actionConfirm(){
             $modelUserProfile->user_id = $model->id;
             $modelUserProfile->created_at = date('Y-m-d');
             $modelUserProfile->referral_banner_id = 1;
+            $modelUserProfile->country_id = $_POST['country_id'];
             $modelUserProfile->save(false);
 
             /* Geneology */
