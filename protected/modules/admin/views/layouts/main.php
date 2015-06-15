@@ -460,6 +460,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection4 = array();
                                             
                                 }
+                                if (in_array('reportverification', $accessArr)) { 
+                                    $reservation_subsection4 = array(
+                                      "report/verification" => "Verification",   
+                                   );
+                                }else{
+                                    $reservation_subsection4 = array();
+                                            
+                                }
                                 if (in_array('reporttransaction', $accessArr)) { 
                                     $reservation_subsection5 = array(
                                       "report/transaction"=>"Transaction",  
