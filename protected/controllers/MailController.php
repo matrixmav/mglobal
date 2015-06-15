@@ -61,7 +61,7 @@ class MailController extends Controller
                         'pagination' => array('pageSize' => $pageSize)));
             
             $this->render('index',array(
-                'dataProvider'=>$dataProvider,
+                'dataProvider'=>$dataProvider,'successMsg'=>$successMsg
             ));
 	}
         /**
