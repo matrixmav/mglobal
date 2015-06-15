@@ -387,6 +387,7 @@ class BuildTempController extends Controller {
                     $model->custom_css = addslashes($_POST['custom_css']);
                     $model->custom_js = addslashes($_POST['custom_js']);
                     $model->contact_form = addslashes('<div class="mav_contact">' . $_POST['Template']['form_code'] . '</div>');
+                    $model->main_div = $_POST['main_div'] ? addslashes($_POST['main_div']) : '' ;
                     $model->save(false);
                     $tmpId = $model->id;
 

@@ -187,10 +187,14 @@ class TransactionController extends Controller {
             $status = $_POST['res_filter'];
         }
 
+        $criteria=new CDbCriteria;
+        $mode = "transfer";
+        $criteria->with=array('transaction','wallet');
+        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode != "'.$mode.'" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '" AND t.status = "' . $status . '" AND t.from_user_id = ' . $loggedInUserId;
+        $criteria->order = 't.id DESC';
+        
         $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '" AND t.from_user_id = ' . $loggedInUserId  ), 'order' => 'id DESC',
-            ), 'pagination' => array('pageSize' => $pageSize),));
+            'criteria' =>$criteria, 'pagination' => array('pageSize' => $pageSize),));
 
         $this->render('list', array(
             'dataProvider' => $dataProvider,

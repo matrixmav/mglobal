@@ -128,11 +128,7 @@ class MailController extends Controller
 	{ 
             if($id){ 
                 $mailObject = Mail::model()->findByPk($id);
-                 if(Yii::app()->session['userid'] != $mailObject->from_user_id)
-			{
-                 $mailObject->status = 1;
-			}
-                 
+                $mailObject->status = 1;
                 $mailObject->save(false);
 		$this->render('view',array(
 			'mailObject'=>$mailObject,

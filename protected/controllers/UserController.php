@@ -56,13 +56,14 @@ public function actionConfirm(){
             if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
                 $activationKey = $_GET['activation_key'];
                 $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
-                if (count($getUserObject) > 0) {
+                if (count($getUserObject) > 0) { 
                     $masterPin = BaseClass::getUniqInt(5);
                     $password = BaseClass::getPassword();
                     $userObject = new User;
                     $userObject = User::model()->findByPk($getUserObject->id);
                     $userObject->status = 1;
                     $userObject->password = BaseClass::md5Encryption($password);
+                    $userObject->master_pin = BaseClass::md5Encryption($masterPin);
                     $userObject->update();
                     $msg = "Your account has been verified.";
                     
@@ -73,14 +74,14 @@ public function actionConfirm(){
                     }
                     $config['to'] = $userObject->email; 
                     $config['subject'] = 'Login Details' ;
-                    $config['body'] = 'Hi,' .$userObject->full_name.'<br/>! You have been registered successfully'.
+                    $config['body'] = 'Hi,' .$userObject->full_name.'<br/> Login Details'.
                     '<br/><br/><strong>User:</strong>'.$userObject->name.'<br/>'.
                     '<br/><strong>Password:</strong>'.$password.'<br/>'.
                     '<strong>Master Pin:</strong>'.$masterPin.'<br/><br/>';
                     CommonHelper::sendMail($config);
             
                     $this->redirect(array("login",'successMsg'=>$msg));
-                } else {
+                } else { echo "cool";exit;
                    $msg = "<p class='error'>Invalid Key.</p>";
                  $this->redirect(array("login",'successMsg'=>$msg));
                 }
@@ -387,7 +388,7 @@ public function actionConfirm(){
             $masterkey = $_POST['masterkey'];
 
             if ((!empty($username)) && (!empty($password)) && (!empty($masterkey))) {
-                $getUserObject = User::model()->findByAttributes(array('name' => $username, 'status' => 1));
+                $getUserObject = User::model()->findByAttributes(array('name' => $username, 'status' => 1,'role_id' => 1 ));
                 if (!empty($getUserObject)) {
                     $flagPassword = '';
                     $flagMaster = '';
@@ -427,19 +428,17 @@ public function actionConfirm(){
     public function actionRegistration() {
 
         $error = "";
-                if(!empty($_GET))
+ if(!empty($_GET))
 		{
 		$arra = explode('--',$_GET['spid']);
-                 
-		if(!empty($arra) && count($arra) > 1)
+		if(!empty($arra))
                 {  
 		$social = $arra[1];
 		}
 		else{
                 $social = '';
                }
-              }
-              
+}
         if ($_POST) {
 
             $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
@@ -530,7 +529,7 @@ public function actionConfirm(){
             $config['subject'] = 'Registration Confirmation' ;
             $config['body'] = 'Hi,' .$model->full_name.'<br/>Congratulations! You have been registered successfully'.
                     '<strong>Please click the link below to activate your account:</strong><br/>'.
-                    '<a href="http://mglobally.maverickinfosoft.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
+                    '<a href="http://demo.mglobally.com/user/confirm?activation_key='.$rand.'">Click to activate </a>';
             $response = CommonHelper::sendMail($config);
             $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
             $this->redirect(array('login','successMsg'=> $successMsg));
@@ -840,7 +839,7 @@ public function actionConfirm(){
     }
     
     public function actionGetFullName(){
-        if($_POST){
+        if($_POST){ 
             $userName = $_POST['userName'];
             $getUserObject = User::model()->findByAttributes(array('name' => $userName));
             if($getUserObject){
@@ -852,5 +851,3 @@ public function actionConfirm(){
         }
     }
 }
-
-?>

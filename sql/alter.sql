@@ -64,6 +64,7 @@ INSERT INTO `mglobal`.`user` (`id`, `sponsor_id`, `name`, `password`, `position`
 
 INSERT INTO `mglobal`.`user` (`id`, `sponsor_id`, `name`, `password`, `position`, `user_sponsor_id`, `full_name`, `email`, `country_id`, `country_code`, `phone`, `date_of_birth`, `skype_id`, `facebook_id`, `twitter_id`, `master_pin`, `unique_id`, `status`, `activation_key`, `forget_key`, `forget_status`, `role_id`, `created_at`, `updated_at`) VALUES (NULL, '', 'sales', '', NULL, '', '', 'sales@mglobally.com', '', '', '', '', NULL, NULL, NULL, '', '', '1', NULL, NULL, NULL, '2', '2015-06-05', CURRENT_TIMESTAMP), (NULL, '', 'marketing@mglobally.com', '', NULL, '', '', '', '', '', '', '', NULL, NULL, NULL, '', '', '1', NULL, NULL, NULL, '2', '2015-06-01', CURRENT_TIMESTAMP);
 
+
 ALTER TABLE `user_pages` ADD `status` INT(11) NOT NULL DEFAULT '1' AFTER `page_form`;
 
 
@@ -113,3 +114,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `user_pages` ADD `status` INT(11) NOT NULL DEFAULT '1' AFTER `page_form`;
+
+
+/*12/6/2015*/
+
+ALTER TABLE `build_temp` ADD `main_div` VARCHAR(255) NOT NULL AFTER `contact_form`;
+

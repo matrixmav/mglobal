@@ -52,14 +52,14 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" value="<?php echo (!empty($userObject))? $userObject->country_code:"";?>" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>"  style="width:88%;float:right;">
-                   <div  id="error_msg_phone"> </div> 
+                   <div  style="color:red;" id="error_msg_phone"> </div> 
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="date_of_birth" class="form-control" name="UserProfile[date_of_birth]" value="<?php echo (!empty($userObject))?$userObject->date_of_birth:"";?>" >
-                   <div id="error_msg"> </div> 
+                   <div style="color:red;" id="error_msg"> </div> 
                 </div>
             </div>
              <div class="form-group">
@@ -87,14 +87,14 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="firstname">Address <span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="address" name="UserProfile[address]" class="form-control" ><?php echo (!empty($profileObject)) ? $profileObject->address : "";?></textarea>
-                 <div  id="error_msg_address"> </div> 
+                 <div  style="color:red;" id="error_msg_address"> </div> 
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Street<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="street" class="form-control" name="UserProfile[street]" value="<?php echo (!empty($profileObject)) ? $profileObject->street: "";?>">
-               <div id="error_msg_street"> </div> 
+               <div style="color:red;" id="error_msg_street"> </div> 
                 </div>
             </div>
             
@@ -108,7 +108,7 @@ $this->breadcrumbs = array(
                             <option value="<?php echo $country->id; ?>" <?php if(!empty($userObject)) { if( $country->id== $profileObject->country_id){?>selected="selected<?php }}?>"><?php echo $country->name;?></option>
                             <?php } ?>
                         </select>
-                    <div id="error_msg_country"></div> 
+                    <div style="color:red;" id="error_msg_country"></div> 
                     </div>
                   
                 </div>
@@ -117,7 +117,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="email">State <span class="require">*</span></label>
                 <div class="col-lg-8">
                    <input type="text" id="state_id" class="form-control" name="UserProfile[state_name]" value="<?php echo (!empty($profileObject)) ?  $profileObject->state_name : ""; ?>">
-                 <div id="error_msg_state"> </div> 
+                 <div style="color:red;" id="error_msg_state"> </div> 
                 </div>
                  </div>
             
@@ -125,7 +125,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="email">City <span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="city_id" class="form-control" name="UserProfile[city_name]" value="<?php echo (!empty($profileObject)) ?  $profileObject->city_name : ""; ?>">
-                 <div id="error_msg_city"> </div> 
+                 <div style="color:red;" id="error_msg_city"> </div> 
                 </div>
             </div>
             
@@ -133,7 +133,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Zip Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="zip_code" class="form-control" name="UserProfile[zip_code]" value="<?php echo (!empty($profileObject)) ?  $profileObject->zip_code : ""; ?>">
-                <div id="error_msg_zip"> </div> 
+                <div style="color:red;" id="error_msg_zip"> </div> 
                 </div>
             </div>
             

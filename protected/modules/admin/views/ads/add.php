@@ -10,6 +10,7 @@ $this->breadcrumbs = array(
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype = "multipart/form-data">
      
         <?php if(!empty($success)){ echo $success ; }  ?>
+        <?php if(!empty($error)){ echo $error; }  ?>
         <fieldset>
             <legend>Add Ads</legend>
             
@@ -32,7 +33,7 @@ $this->breadcrumbs = array(
                 <div class="col-lg-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
                          <span class="btn btn-primary btn-file btn-1"><span class="fileupload-new"><input type="file" id="ads_banner" class="form-control11" name="ads_banner"></span></div>
-                    <span class="example1">(Upload jpg ,png , pdf files only)</span> 
+                    <span class="example1">(Upload jpg ,png , jpeg files only)</span> 
                    
                 </div>
             </div>
