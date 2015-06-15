@@ -98,20 +98,16 @@ License: You must have a valid license purchased only from themeforest(the above
            <script src="/metronic/assets/plugins/respond.min.js"></script>
            <script src="/metronic/assets/plugins/excanvas.min.js"></script> 
            <![endif]-->
-        <script src="/metronic/assets/plugins/jquery-1.10.2.min.js"
-        type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
         <script src="/js/jquery.ba-bbq.js" type="text/javascript"></script>
-        <script src="/metronic/assets/plugins/jquery-migrate-1.2.1.min.js"
-        type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
         <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
         <script
             src="/metronic/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js"
         type="text/javascript"></script>
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.min.js"
         type="text/javascript"></script>
-        <script
-            src="/metronic/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"
-        type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
         <script
             src="/metronic/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"
         type="text/javascript"></script>
@@ -130,12 +126,13 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
 
         <script src="/metronic/assets/plugins/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-         <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="/metronic/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
         <link href="/metronic/assets/plugins/bootstrap-datepicker/datepicker.css" rel="stylesheet" type="text/css" />
         <script src="<?php echo Yii::app()->baseUrl . '/ckeditor/ckeditor.js'; ?>"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->baseUrl . '/ckfinder/ckfinder.js'; ?>"></script>
         <script src="/metronic/assets/scripts/core/app.js"></script>
-        <script type="text/javascript" src="/chat/js/chat.js"></script>
+        <!--<script type="text/javascript" src="/chat/js/chat.js"></script>-->
+        <script type="text/javascript" src="/js/custom_msg.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.init();
@@ -159,15 +156,17 @@ License: You must have a valid license purchased only from themeforest(the above
                 });
             });
              
-           function openChat()
+
+           /*function openChat()
            {
              var IDSVal = document.getElementById('username').value;
              chatWith(IDSVal);  
-           }
+           }*/
+
         </script>
 
 
-        <link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />
+        <!--<link type="text/css" rel="stylesheet" media="all" href="/chat/css/chat.css" />-->
 
         <!-- END JAVASCRIPTS -->
 
@@ -413,9 +412,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 {
                                   $hotel_subsection = array(
                                     "order/list" => "My Order",
+                                    "profile/updateprofile" => "Profile",
                                     "profile/changepassword" => "Change Password",
                                     "profile/changepin" => "Change Master Pin",
-                                    "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
@@ -426,9 +425,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 }else{
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
+                                    "profile/updateprofile" => "Profile",
                                     "profile/changepassword" => "Change Password",
                                     "profile/changepin" => "Change Master Pin",
-                                    "profile/updateprofile" => "Profile",
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     
@@ -437,14 +436,15 @@ License: You must have a valid license purchased only from themeforest(the above
 //                                    "profile/summery" => "Summery",
                                 );
                                 }
+                                
                                 $activecls = 'active';
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') {
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') {
                                     
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') 
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') 
                                      
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
@@ -453,7 +453,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
                                             class="leftmenu-hotel"></span> <span class="title">My Account</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'list') ? "open" : ''; ?>">
                                         </span>
                                     </a>
                                     <?php

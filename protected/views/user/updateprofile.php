@@ -5,7 +5,6 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
-    <div class="error" id="error_msg" style="display: none;"></div>
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
     <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
     <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return validation();">
@@ -35,22 +34,37 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Full Name<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject)) ? $userObject->full_name : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?>>
+                    <input type="text" id="full_name" class="form-control" name="UserProfile[full_name]" value="<?php echo (!empty($userObject)) ? $userObject->full_name : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> maxlength="30">
+                    <div id="full_name_error" class="form_error"></div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Email<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject)) ? $userObject->email : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?>>
+                    <input type="text" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject)) ? $userObject->email : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> maxlength="30">
+                <div id="email_error" class="form_error"></div>
                 </div>
             </div>
 
             <div class="form-group">
+                
+                <label class="col-lg-4 control-label" for="country">Country<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <label> <?php echo (!empty($userObject)) ? $userObject->country->name : ""; ?></label>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:88%;float:right;">
+                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:20%;float:left;" class="form-control">&nbsp;&nbsp;
+                    <input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:75%;float:right;" maxlength="30">
+                <div id="phone_error" class="form_error"></div>
                 </div>
+                
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
@@ -62,21 +76,21 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Skype ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="skype_id" class="form-control" name="UserProfile[skype_id]" value="<?php echo (!empty($userObject)) ? $userObject->skype_id : ""; ?>">
+                    <input type="text" id="skype_id" class="form-control" name="UserProfile[skype_id]" value="<?php echo (!empty($userObject)) ? $userObject->skype_id : ""; ?>" maxlength="40">
                     <span class="example">Ex: example12</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Facebook ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="facebook_id" class="form-control" name="UserProfile[facebook_id]" value="<?php echo (!empty($userObject)) ? $userObject->facebook_id : ""; ?>">
+                    <input type="text" id="facebook_id" class="form-control" name="UserProfile[facebook_id]" value="<?php echo (!empty($userObject)) ? $userObject->facebook_id : ""; ?>" maxlength="40">
                     <span class="example">Ex: http://facebook.com</span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Twitter ID</label>
                 <div class="col-lg-8">
-                    <input type="text" id="twitter_id" class="form-control" name="UserProfile[twitter_id]" value="<?php echo (!empty($userObject)) ? $userObject->twitter_id : ""; ?>">
+                    <input type="text" id="twitter_id" class="form-control" name="UserProfile[twitter_id]" value="<?php echo (!empty($userObject)) ? $userObject->twitter_id : ""; ?>" maxlength="40">
                     <span class="example">Ex: http://twitter.com</span>
                 </div>
             </div>
@@ -85,6 +99,7 @@ $this->breadcrumbs = array(
                 <div class="col-lg-8">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
                 </div>
+                <div id="master_pin_error" class="form_error"></div>
             </div>
 
         </fieldset>
@@ -98,60 +113,35 @@ $this->breadcrumbs = array(
     </form>
 </div>
 
+            
 
-
-
-
-<script type="text/javascript">
+<script type="text/javascript">    
+    
     function validation()
     {
-        if (document.getElementById("full_name").value == '')
-        {
-            document.getElementById("error_msg").style.display = "block";
-            document.getElementById("error_msg").innerHTML = "Please enter your full name.";
-            document.getElementById("full_name").focus();
+        var errorFlag = 0;
+       
+        var email = requiredField('email', 'email_error', 'Please Enter Email');        
+        if (email == false) {            
             return false;
         }
-        if (document.getElementById("email").value == '')
-        {
-            document.getElementById("error_msg").style.display = "block";
-            document.getElementById("error_msg").innerHTML = "Please enter your email.";
-            document.getElementById("email").focus();
+        
+        var emailValid = isValidEmail('email','email_error',"Enter valid email!");
+        if (emailValid == false) {            
             return false;
         }
-        var email = document.getElementById('email');
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-        if (!filter.test(email.value)) {
-            document.getElementById("error_msg").style.display = "block";
-            $("#error_msg").html("Enter valid email address ");
-            $("#email").focus();
+        
+        var phone = requiredField('phone', 'phone_error', 'Enter Mobile Number');       
+        if (phone == false) {            
             return false;
         }
-        if (document.getElementById("phone").value == '')
-        {
-            document.getElementById("error_msg").style.display = "block";
-            document.getElementById("error_msg").innerHTML = "Please enter phone number.";
-            document.getElementById("phone").focus();
-            return false;
-        }
-        var phone = document.getElementById('phone');
-        var filter = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
-        if (!filter.test(phone.value)) {
-            $("#error_msg").html("Enter valid phone number ");
-            $("#phone").focus();
-            return false;
-        }
-        if (document.getElementById("master_pin").value == '')
-        {
-            document.getElementById("error_msg").style.display = "block";
-            document.getElementById("error_msg").innerHTML = "Please enter your master pin.";
-            document.getElementById("master_pin").focus();
+        
+        var phoneValid = numaricField('phone', 'phone_error', 'Enter valid phone number');       
+        if (phoneValid == false) {            
             return false;
         }
 
-
+        
     }
 </script>
 

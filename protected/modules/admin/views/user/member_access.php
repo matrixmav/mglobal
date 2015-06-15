@@ -42,6 +42,7 @@ if(!empty($success)){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportaddress" <?php if(in_array('reportaddress',$accessArr)){?> checked="checked" <?php }?>>Address Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportsponsor" <?php if(in_array('reportsponsor',$accessArr)){?> checked="checked" <?php }?>>Sponsor Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportpackage" <?php if(in_array('reportpackage',$accessArr)){?> checked="checked" <?php }?>>Package Report<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportverification" <?php if(in_array('reportverification',$accessArr)){?> checked="checked" <?php }?>>Verification Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reporttransaction" <?php if(in_array('reporttransaction',$accessArr)){?> checked="checked" <?php }?>>Transaction Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportsocial" <?php if(in_array('reportsocial',$accessArr)){?> checked="checked" <?php }?>>Social Profile Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportcontact" <?php if(in_array('reportcontact',$accessArr)){?> checked="checked" <?php }?>>Contact Report<br/>

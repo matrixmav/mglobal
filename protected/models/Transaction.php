@@ -130,14 +130,11 @@ class Transaction extends CActiveRecord
         
         public function createTransaction($postDataArray, $userObject,$role=''){
             $transferAmount = $postDataArray['paid_amount'];
-            $percentage = $transferAmount;
-            
-            if(empty($role))
-            {
-            $percentage = BaseClass::getPercentage($transferAmount,1);
+            $percentage = 0;
+            if(empty($role)) {
+                $percentage = BaseClass::getPercentage($transferAmount,1);
             }
             
-            $actualAmount = ($transferAmount + $percentage);
             $discountAmount = 0;
             if(!empty($postDataArray['discount'])){
                $discountAmount = $postDataArray['discount'];
@@ -150,12 +147,16 @@ class Transaction extends CActiveRecord
             if(!empty($postDataArray['used_rp'])){
                 $userRp = $postDataArray['used_rp'];
             }
+            $mode = 'transfer';
+            if(!empty($postDataArray['mode'])){
+                $mode = $postDataArray['mode'];
+            }
             $createdTime = new CDbExpression('NOW()');
             $tarnsactionID = BaseClass::gettransactionID();
             $transactionObjuser = new Transaction;
             $transactionObjuser->user_id = $userObject->id;
             $transactionObjuser->transaction_id = $tarnsactionID;
-            $transactionObjuser->mode = 'transfer';
+            $transactionObjuser->mode = $mode;
             $transactionObjuser->gateway_id = $gatewayId;
             $transactionObjuser->coupon_discount = $discountAmount;
             $transactionObjuser->actual_amount = $transferAmount;

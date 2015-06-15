@@ -238,9 +238,11 @@ class UserController extends Controller {
     }
 
     public function actionCreditWallet() {
-
+        $error = "";
         if ($_POST) {
             $userId = $_POST['userId'];
+           if($userId != 0)
+           {
             $userObject = User::model()->findByPk($userId);
             $type = $_POST['walletId'];
             $fundAmount = $_POST['paid_amount'];
@@ -266,10 +268,20 @@ class UserController extends Controller {
               
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
+        }else{
+            $error .= "User doesnot exist.";
         }
+        }
+        
+        if(!empty($_GET))
+        {
         $userId = $_GET['id'];
+        }else{
+         $userId = 0;   
+        }
         $userObject = User::model()->findByPk($userId);
-        $this->render('creditwallet', array('userObject' => $userObject));
+        
+        $this->render('creditwallet', array('userObject' => $userObject,'error'=>$error));
     }
 
     public function actionDebitWallet() {
@@ -479,7 +491,6 @@ class UserController extends Controller {
         $success = "";
         if ($_REQUEST['id']) {
             $userObject = User::model()->findByPK($_REQUEST['id']);
-            
             $profileObject = UserProfile::model()->findByAttributes(array('user_id' => $_REQUEST['id']));
             if ($_REQUEST['id'] && $_POST) {
                 if ($_POST['UserProfile']['address'] != '' && $_POST['UserProfile']['street'] != '' && $_POST['UserProfile']['city_name'] != '' && $_POST['UserProfile']['state_name'] != '' && $_POST['UserProfile']['country_id'] != '' && $_POST['UserProfile']['zip_code'] != '' && $_POST['UserProfile']['phone'] != '') {

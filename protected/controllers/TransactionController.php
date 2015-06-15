@@ -30,7 +30,7 @@ class TransactionController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list','fund', 'rpwallet', 'commisionwallet', 'fundwallet'),
+                'actions' => array('index', 'view', 'list', 'fund', 'rpwallet', 'commisionwallet', 'fundwallet'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -126,7 +126,8 @@ class TransactionController extends Controller {
     /*
      * this will fetch all transactions
      */
-    public function testing($data, $row){
+
+    public function testing($data, $row) {
         echo $data->transaction_id;
     }
 
@@ -144,13 +145,13 @@ class TransactionController extends Controller {
         }
 
         $walletType = "";
-        if(!empty($_POST['res_filter'])){
-            $walletType = ' AND wallet.type = '.$_POST['res_filter'];
+        if (!empty($_POST['res_filter'])) {
+            $walletType = ' AND wallet.type = ' . $_POST['res_filter'];
         }
-        $criteria=new CDbCriteria;
+        $criteria = new CDbCriteria;
         $mode = "transfer";
-        $criteria->with=array('transaction','wallet');
-        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode = "'.$mode.'" AND t.from_user_id = ' . $loggedInUserId . $walletType;
+        $criteria->with = array('transaction', 'wallet');
+        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode = "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId . $walletType;
         $criteria->order = 't.id DESC';
         // . 'AND t.created_at >= ' . $todayDate . ' AND t.created_at <= ' . $fromDate ;
         $dataProvider = new CActiveDataProvider($model, array(
@@ -160,16 +161,17 @@ class TransactionController extends Controller {
             'dataProvider' => $dataProvider,
         ));
     }
-    
-    public function getWalletName($data,$row){
-        if($data->wallet()->type == 1){
+
+    public function getWalletName($data, $row) {
+        if ($data->wallet()->type == 1) {
             echo 'Cash';
-        } elseif($data->wallet()->type == 2){
+        } elseif ($data->wallet()->type == 2) {
             echo 'RP Wallet';
         } else {
             echo 'Commission';
         }
     }
+
     /*
      * this will fetch all transactions
      */
@@ -181,25 +183,28 @@ class TransactionController extends Controller {
         $todayDate = Yii::app()->params['startDate'];
         $fromDate = date('Y-m-d');
         $status = 1;
+        $criteria = new CDbCriteria;
+        $mode = "transfer";
         if (!empty($_POST)) {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
-            $status = $_POST['res_filter'];
+            //$status = $_POST['res_filter'];
+            $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
+        } else {
+            $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId;
         }
 
-        $criteria=new CDbCriteria;
-        $mode = "transfer";
-        $criteria->with=array('transaction','wallet');
-        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode != "'.$mode.'" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '" AND t.status = "' . $status . '" AND t.from_user_id = ' . $loggedInUserId;
+
+        $criteria->with = array('transaction', 'wallet');
+        $criteria->condition = $condition;
         $criteria->order = 't.id DESC';
-        
+
         $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' =>$criteria, 'pagination' => array('pageSize' => $pageSize),));
+            'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
 
         $this->render('list', array(
             'dataProvider' => $dataProvider,
         ));
-
     }
 
     /*

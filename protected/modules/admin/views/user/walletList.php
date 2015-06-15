@@ -27,6 +27,7 @@ if(!empty($_GET) && $_GET['successmsg']=='2'){
     echo "<div class='success'>Wallet amount deducted successfully.</div>";
 }
 ?>
+
 <div class="col-md-12">
     
         <div class="expiration margin-topDefault confirmMenu">
@@ -43,8 +44,8 @@ if(!empty($_GET) && $_GET['successmsg']=='2'){
     </select>
         </div>
     <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
-    </form>
-
+    </form><br/>
+<a class="btn  green margin-right-20" href="/admin/user/creditwallet">Create Wallet+</a>
 </div>
 <div class="row">
     <div class="col-md-12">

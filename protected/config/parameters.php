@@ -107,5 +107,6 @@ return array(
    'sitename'=>'mGlobal',
    'transactionid'=>'67',
    'paypalurl'=>'https://www.sandbox.paypal.com/cgi-bin/webscr',  
-   'returnurl'=>'http://localhost/package/thankyou',         
+   'returnurl'=>'http://demo.mglobally.com/package/thankyou',         
+   'twitterLink' => 'https://twitter.com/intent/tweet?text='
 );
