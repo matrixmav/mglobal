@@ -52,7 +52,7 @@ class MailController extends Controller {
      */
     public function actionIndex() {
         $pageSize = 10;
-        
+        $successMsg = "";
         if(Yii::app()->session['userid']=='1')
         {
             $string = "1,21,22,23,24";
@@ -71,7 +71,7 @@ class MailController extends Controller {
                 'pagination' => array('pageSize' => $pageSize)));
         }
         $this->render('index', array(
-            'dataProvider' => $dataProvider, 'emailObject' => $emailObject,
+            'dataProvider' => $dataProvider, 'emailObject' => $emailObject,'successMsg'=>$successMsg
         ));
     }
 
