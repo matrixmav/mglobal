@@ -12,7 +12,7 @@ $this->breadcrumbs = array(
 if(!empty($error)){
     echo "<p class='error'>".$error."</p>";
 }
-
+var_dump($attachment);exit;
 ?>
 <div class="row">
     <div class="col-md-12">
