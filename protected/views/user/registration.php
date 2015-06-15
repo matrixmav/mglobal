@@ -20,7 +20,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                 <input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="0"/>
                                 <input type="hidden" id="sponsorIdExistedErrorFlag" name="sponsorIdExistedErrorFlag" value="0"/>
                                 <input type="hidden" id="admin" name="admin" value="0"/>
-                                <input type="hidden" name="social" value="<?php echo $social;?>"/>
+                                <input type="hidden" name="social" value="<?php echo (!empty($social)) ? $social : '';?>"/>
                                 <fieldset> 
                                     <legend>Your personal details</legend>
                                     <div class="form-group">

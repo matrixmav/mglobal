@@ -599,11 +599,11 @@ class PackageController extends Controller {
                 CommonHelper::sendMail($config);
             }
             if ($transactionObject->status == 1) {
-                Yii::app()->session['transactionid'] = 0;
-                Yii::app()->session['amount'] = 0;
-                Yii::app()->session['package_id'] = 0;
-                Yii::app()->session['transaction_id'] = 0;
-                Yii::app()->session['domain'] = 0;
+                unset(Yii::app()->session['transactionid']);
+                unset(Yii::app()->session['amount']);
+                unset(Yii::app()->session['package_id']);
+                unset(Yii::app()->session['transaction_id']);
+                unset(Yii::app()->session['domain']);
             }
         }
 

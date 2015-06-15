@@ -7,12 +7,21 @@ $this->breadcrumbs = array(
 <?php 
 $mailObject = array();
 if(!empty($error)){
-    echo "<p>".$error."</p>";
+    echo "<p class='error'>".$error."</p>";
 }
 ?>
 
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/creditwallet" method="post" onsubmit="return validateForm()">
-<input type="hidden" name="userId" id="userId" value="<?php echo (!empty($userObject))? $userObject->id : ""; ?>"/>
+<input type="hidden" name="userId" id="search_user_id" value="<?php echo (!empty($userObject))? $userObject->id : ""; ?>"/>
+<?php if(empty($_GET)) {  ?>
+<div class="col-md-12 form-group">
+    <label class="col-md-2">User Name: </label>
+    <div class="col-md-6">
+         <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username" />
+        <span style="color:red"  id="search_user_error"></span>
+    </div>
+</div>
+<?php }else{?>
 <div class="col-md-12 form-group">
     <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
@@ -20,6 +29,7 @@ if(!empty($error)){
         <span style="color:red"  id="first_name_error"></span>
     </div>
 </div>
+<?php }?>
 <?php $walletList = BaseClass::getWalletList(); ?>
 <div class="col-md-12 form-group">
     <label class="col-md-2">Wallet Type: </label>
@@ -58,3 +68,4 @@ if(!empty($error)){
         }
     }
 </script>
+<script type="text/javascript" src="/js/transaction.js"></script>
