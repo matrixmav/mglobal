@@ -39,7 +39,7 @@ $this->breadcrumbs=array(
                                     <?php if(count($genealogyLeftRighttListObject) > 0 ){ ?>
                                         <li><a href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></a></li>
                                     <?php }else{ ?>
-                                         <li><a href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=left">+</a></li>   
+                                         <li><a href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=right">+</a></li>   
                                     <?php } ?> 
                                 </ul>
                                 <?php } else { ?>
@@ -54,7 +54,7 @@ $this->breadcrumbs=array(
                                     <?php if(count($genealogyRightLeftListObject) > 0 ){ ?>
                                         <li><a href="<?php echo $treeVar.'?id='.$genealogyRightLeftListObject[0]->user_id; ?>"><?php echo $genealogyRightLeftListObject[0]->user->name; ?></a></li>
                                     <?php }else{ ?>
-                                         <li><a href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=right">+</a></li>   
+                                         <li><a href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=left">+</a></li>   
                                     <?php } ?>     
                                      
                                     <?php $genealogyRightRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'right'"); ?>   

@@ -1,4 +1,5 @@
 function getExistingFund(userId,walletId){ 
+   // alert(userId);return false;
         $.ajax({
             type: "post",
             url: "/admin/wallet/getfundbyamount",
@@ -7,6 +8,7 @@ function getExistingFund(userId,walletId){
                 $("#transaction_data").html("");
                 if(amount != 0){
                     $("#transaction_data").html("<b>"+amount+"</b>");
+                    
                 } else {
                     $("#transaction_data").html("<b>0.00</b>");
                 }
@@ -14,6 +16,7 @@ function getExistingFund(userId,walletId){
         });
     }
 function getExistingFund(userId, walletId) {
+    //alert(userId);return false;
     $.ajax({
         type: "post",
         url: "/admin/wallet/getfundbyamount",
@@ -22,8 +25,10 @@ function getExistingFund(userId, walletId) {
             $("#transaction_data").html("");
             if (amount != 0) {
                 $("#transaction_data").html("<b>" + amount + "</b>");
+                $("#transaction_data_amt").val(amount);
             } else {
                 $("#transaction_data").html("<b>0.00</b>");
+                $("#transaction_data_amt").val("0.00");
             }
         }
     });

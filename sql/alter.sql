@@ -123,3 +123,6 @@ ALTER TABLE `user_pages` ADD `status` INT(11) NOT NULL DEFAULT '1' AFTER `page_f
 
 ALTER TABLE `build_temp` ADD `main_div` VARCHAR(255) NOT NULL AFTER `contact_form`;
 
+INSERT INTO `mglobal`.`user_profile` (`id`, `user_id`, `address`, `street`, `city_name`, `state_name`, `country_id`, `zip_code`, `id_proof`, `address_proff`, `referral_banner_id`, `testimonials`, `testimonial_status`, `document_status`, `status`, `created_at`, `updated_at`) VALUES (NULL, '21', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP), (NULL, '22', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP);
+
+INSERT INTO `mglobal`.`user_profile` (`id`, `user_id`, `address`, `street`, `city_name`, `state_name`, `country_id`, `zip_code`, `id_proof`, `address_proff`, `referral_banner_id`, `testimonials`, `testimonial_status`, `document_status`, `status`, `created_at`, `updated_at`) VALUES (NULL, '23', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP), (NULL, '24', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP);
