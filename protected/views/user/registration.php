@@ -20,7 +20,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                 <input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="0"/>
                                 <input type="hidden" id="sponsorIdExistedErrorFlag" name="sponsorIdExistedErrorFlag" value="0"/>
                                 <input type="hidden" id="admin" name="admin" value="0"/>
-                                <input type="hidden" id="admin" name="social" value="<?php echo $social;?>"/>
+                                <input type="hidden" name="social" value="<?php echo $social;?>"/>
                                 <fieldset> 
                                     <legend>Your personal details</legend>
                                     <div class="form-group">
@@ -41,7 +41,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                     <div class="form-group">
                                         <label for="position" class="col-lg-4 control-label">Position <span class="require">*</span></label>
                                         <div class="col-lg-8">        
-                                            <input type="radio" name="position" id="position" value="right" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='right'){?> checked="checked" <?php }?>/>
+                                            <input type="radio" name="position" id="position" value="right" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='right'){?> checked="checked" <?php }?> checked="checked"/>
                                             <label class="gender">Right</label>
                                             <input type="radio" name="position" id="position" value="left" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='left'){?> checked="checked" <?php }?>/>
                                             <label class="gender">Left</label>
@@ -91,7 +91,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                         <div class="col-lg-8">
                                             <div class="row">
                                             <div class="col-lg-3 col-sm-3 col-xs-4">
-                                                <input  name="country_code" id="country_code" placeholder="Country Code" class="form-control" readonly="true">                                            </div>
+                                                <input  name="country_code" id="country_code" class="form-control" readonly="true">                                            </div>
                                             <div class="col-lg-9 colo-sm-9 col-xs-8">
                                                 
                                             <input  name="phone" id="phone" maxlength="10" placeholder="phone number" class="form-control" > <br>
