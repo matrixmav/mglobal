@@ -127,6 +127,10 @@ class MoneyTransfer extends CActiveRecord
                 if(!empty($postDataArray['comment'])){
                     $comment = $postDataArray['comment'];
                 }
+                $walletId = 2;//2 RP wallet 
+                if(!empty($postDataArray['walletId'])){
+                    $walletId = $postDataArray['walletId'];
+                }
                 $status = 0;
                 $fromUserId = Yii::app()->session['userid'];
 
@@ -139,9 +143,6 @@ class MoneyTransfer extends CActiveRecord
                     $fundType = $postDataArray['fund'];
                 }
 
-                $toUserId = $userObject->id;
-                $userWalletObject = Wallet::model()->findByAttributes(array('type' => $postDataArray['walletId'],'user_id' => $toUserId));
-
                 $createdTime = new CDbExpression('NOW()');
                 $moneyTransfertoObj = new MoneyTransfer;
                 $moneyTransfertoObj->from_user_id = $fromUserId;
@@ -151,7 +152,7 @@ class MoneyTransfer extends CActiveRecord
                 $moneyTransfertoObj->fund = $paid_amount;//1:RP,2:Cash
                 $moneyTransfertoObj->comment = $comment;
                 $moneyTransfertoObj->status = $status;
-                $moneyTransfertoObj->wallet_id = $userWalletObject->id;
+                $moneyTransfertoObj->wallet_id = $walletId;
                 $moneyTransfertoObj->created_at = $createdTime;
                 $moneyTransfertoObj->updated_at = $createdTime;
                  //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
