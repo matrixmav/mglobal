@@ -108,4 +108,5 @@ return array(
    'transactionid'=>'67',
    'paypalurl'=>'https://www.sandbox.paypal.com/cgi-bin/webscr',  
    'returnurl'=>'http://demo.mglobally.com/package/thankyou',         
+   'twitterLink' => 'https://twitter.com/intent/tweet?text='
 );

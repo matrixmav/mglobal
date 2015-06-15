@@ -1,4 +1,4 @@
-      FB.init({appId: "1631227090425674", status: true, cookie: true});
+      FB.init({appId: "470691686428254", status: true, cookie: true});
       function postToFeed(link, name, description, caption) {
           
         var obj = {
