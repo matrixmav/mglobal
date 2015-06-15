@@ -137,7 +137,6 @@ $this->breadcrumbs = array(
         }
         var phone = document.getElementById('phone');
         var filter = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
         if (!filter.test(phone.value)) {
             $("#error_msg").html("Enter valid phone number ");
             $("#phone").focus();
