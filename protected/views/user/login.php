@@ -7,9 +7,9 @@
        
  
  <?php }?>
- <?php if(Yii::app()->session['adminID']==1){?>
+ <?php if(Yii::app()->session['adminID']==1){ ?>
        <div class="error">User already loggedIn. Please try in other browser.</div>     
-       <?php }else{?>
+       <?php }else{ ?>
             
         
       <!-- BEGIN CONTENT -->
@@ -21,6 +21,9 @@
         if(!empty($_GET['errorMsg'])){
             echo "<p class='error'>".$_GET['errorMsg']."</p>";
         }
+        
+        if(!empty($msg)){ echo $msg; }
+        
         
         
         if (array_key_exists("login", $_GET)) {
