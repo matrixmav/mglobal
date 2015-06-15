@@ -220,18 +220,21 @@ class MoneyTransferController extends Controller {
                 $transactionObject->save();
                 $message = $_POST['comment'];
                 //Admin transaction
-                $postDataArray['mode'] = $message;
-                $postDataArray['paid_amount'] = BaseClass::getPercentage($transactionObject->paid_amount,1);;
+                $postDataArray['mode'] = 'transfer';
+                $postDataArray['paid_amount'] = BaseClass::getPercentage($transactionObject->paid_amount,1);
                 //Super Admin Id is !1: Need to call from param file
-                $adminObject = User::model()->findByPk(1);
-                //Create transaction for Admin
-                $adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject);
+                $adminId = 1;
+                $adminObject = User::model()->findByPk($adminId);
+                $adminWalletObject = Wallet::model()->findByAttributes(array('type' => $walletObject->type, 'user_id'=> $adminId));
                 
-                $moneyTransferDataArray['fund'] = $transactionObject->paid_amount;
+                //Create transaction for Admin
+                $adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
+                $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->paid_amount,1);
                 $moneyTransferDataArray['comment'] = $message;
-                $moneyTransferDataArray['walletId'] = $walletObject->type;
+                $moneyTransferDataArray['walletId'] = $adminWalletObject->id;
+                $moneyTransferDataArray['fundType'] = $walletObject->type;
                 //create money transfer record entry
-                $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount);
+                $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount,1);
                 
                 //user money transfer change status
                 $moneyTransferObject->status = 1; //setting success

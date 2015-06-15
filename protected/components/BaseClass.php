@@ -619,7 +619,7 @@ class BaseClass extends Controller {
      * @return int
      */
     public static function getPercentage($value1, $value2, $flag = 0) {
-        $percentage = $value1 + $value1 * 1 / 100;
+        $percentage = ($value1 * $value2) / 100;
         return $percentage;
         /* if($flag){
           if(($value1!=0 && $value1!='') && ($value2!=0 && $value2!='')) {

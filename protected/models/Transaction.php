@@ -160,7 +160,7 @@ class Transaction extends CActiveRecord
             $transactionObjuser->gateway_id = $gatewayId;
             $transactionObjuser->coupon_discount = $discountAmount;
             $transactionObjuser->actual_amount = $transferAmount;
-            $transactionObjuser->paid_amount = $percentage;
+            $transactionObjuser->paid_amount = ($transferAmount+$percentage);
             $transactionObjuser->used_rp = $userRp; //change this to current Used RPs
             $transactionObjuser->status = 0;//pending
             $transactionObjuser->created_at = $createdTime;
