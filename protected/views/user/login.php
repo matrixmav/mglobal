@@ -42,7 +42,7 @@
         <div class="content-form-page">
           <div class="row">
                             <div class="col-md-12 col-sm-12">
-                <form class="form-horizontal form-without-legend" method="post" name="LoginForm" id=LoginForm" role="form" onsubmit="return validateFrm()" action="/user/login">
+                <form class="form-horizontal form-without-legend" method="post" name="LoginForm" id=LoginForm" role="form" onsubmit="return validateForm()" action="/user/login">
                 <div class="form-group">
                   <label for="email" class="col-lg-4 control-label">User Name <span class="require">*</span></label>
                   <div class="col-lg-8">
@@ -134,7 +134,7 @@
 </div>
       <?php }?>
 <script>
- function validateFrm() {
+ function validateForm() {
     $("#login_name_error").html("");
     if ($("#login-name").val() == "") {
       $("#login_name_error").html("Enter User Name");
