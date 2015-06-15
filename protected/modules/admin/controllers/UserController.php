@@ -205,7 +205,7 @@ class UserController extends Controller {
     public function actionWallet() {
 
         $model = new Wallet;
-        $pageSize = 10;
+        $pageSize = 100;
 //           $roomObject = Wallet::model()->with('user')->findByAttributes(array('name'=>1,'status'=>1));
 //            $roomOptionCondition = array('condition' => 'room_id =' . $roomId);
 
@@ -252,20 +252,9 @@ class UserController extends Controller {
             if (!empty($walletObject)) {
                 $fundAmount = ($fundAmount + $walletObject->fund);
             } else {
-                $walletObject = new Wallet;
+                $walletObject = Wallet::model()->create($userId,$fundAmount,$type);
             }
-            $walletObject->user_id = $userId;
-            $walletObject->fund = $fundAmount;
-            $walletObject->type = $type; //fund added by admin
-            $walletObject->status = 1; //success
-            $walletObject->created_at = new CDbExpression('NOW()');
-            $walletObject->updated_at = new CDbExpression('NOW()');
-            if (!$walletObject->save()) {
-                echo "<pre>";
-                print_r($walletObject->getErrors());
-                exit;
-            }
-              
+            $postDataArray['walletId'] = $walletObject->id;
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
         }else{

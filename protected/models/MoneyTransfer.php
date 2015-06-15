@@ -122,7 +122,6 @@ class MoneyTransfer extends CActiveRecord
 	}
         
         public function createMoneyTransfer($postDataArray, $userObject,$transactionId,$paidAmount,$role=''){
-            try {
                 $comment = "fund transfer";
                 if(!empty($postDataArray['comment'])){
                     $comment = $postDataArray['comment'];
@@ -142,7 +141,6 @@ class MoneyTransfer extends CActiveRecord
                 if(!empty($postDataArray['fundType'])){
                     $fundType = $postDataArray['fundType'];
                 }
-
                 $createdTime = new CDbExpression('NOW()');
                 $moneyTransfertoObj = new MoneyTransfer;
                 $moneyTransfertoObj->from_user_id = $fromUserId;
@@ -155,19 +153,11 @@ class MoneyTransfer extends CActiveRecord
                 $moneyTransfertoObj->wallet_id = $walletId;
                 $moneyTransfertoObj->created_at = $createdTime;
                 $moneyTransfertoObj->updated_at = $createdTime;
-                 //print_r($moneyTransfertoObjsave); echo $moneyTransfertoObj->id; exit;
-                if(!$moneyTransfertoObj->save()){
+                if(!$moneyTransfertoObj->save(false)){
                     echo "<pre>";
                     print_r($moneyTransfertoObj->getErrors());
                 exit;
-                    }
-                
-            } catch (Exception $ex) {
-                echo "<pre>";
-                print_r($ex->getMessage());
-                print_r($moneyTransfertoObj->getErrors());
-                exit;
-            }
+                }
           
             return $moneyTransfertoObj;
         }
