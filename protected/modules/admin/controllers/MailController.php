@@ -108,9 +108,15 @@ class MailController extends Controller {
                 $fname = time() . $_FILES['attachment']['name'];
                 $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                 BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
-                }else{
+                }
+                else if($_FILES['attachment1']['name'] !='')
+                {
+                  $fname = $_FILES['attachment1']['name'];  
+                }
+                else{
                  $fname = "";   
                 }
+                echo $fname;exit;
                 $mailObject = new Mail();
                 $mailObject->to_user_id = $userObject->id;
                 $mailObject->from_user_id = Yii::app()->params['adminId'];
