@@ -165,7 +165,7 @@
                                <?php } ?>
                            
                                 <div class="payChoose col-sm-4">
-                                    <div class="payOption clearfix" id="paymentOption">
+                                    <div class="payOption clearfix">
                                         <div class="col-sm-12 col-xs-12 tleft">
                                             <input type="radio" id="myRadio" name="myRadio" value="paypal">
                                             <label for="myRadio">Paypal</label>
@@ -281,8 +281,9 @@
                     $('#return').val('http://mglobally.maverickinfosoft.com/package/thankyou?transaction_id=' + htmlArr[1]);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
-                    document.getElementById('walletOption').style.display = "block";
-                    document.getElementById('paymentOption').style.display = "block";
+                    document.getElementById('paymentOption').style.display = "";
+                    document.getElementById('walletOption').style.display = "";
+                    
 
 
                 }
