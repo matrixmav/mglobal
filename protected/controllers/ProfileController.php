@@ -5,7 +5,7 @@ class ProfileController extends Controller {
     public $layout = 'inner';
 
     public function init() {
-        
+
         BaseClass::isLoggedIn();
     }
 
@@ -25,7 +25,7 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword','changepin','inviterefferal','trackrefferal'),
+                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword', 'changepin', 'inviterefferal', 'trackrefferal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -134,17 +134,18 @@ class ProfileController extends Controller {
             $edit = "no";
         }
         //print_r($_POST['UserProfile']);exit;
-        if (isset($_POST['UserProfile'])) {
+        if (isset($_POST['UserProfile'])) {  
             if ($_POST['UserProfile'] == '') {
                 $error .= "Please fill required(*) marked fields.";
             } else {
-                
-                   if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
-                    $dob = date("Y-m-d",strtotime($_POST['UserProfile']['date_of_birth']));    
+
+                if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
+                    $dob = date("Y-m-d", strtotime($_POST['UserProfile']['date_of_birth']));
                     $userObject->full_name = $_POST['UserProfile']['full_name'];
                     $userObject->email = $_POST['UserProfile']['email'];
                     $userObject->phone = $_POST['UserProfile']['phone'];
                     $userObject->date_of_birth = $dob;
+                    $userObject->country_id = $_POST['UserProfile']['country_id'];
                     $userObject->skype_id = $_POST['UserProfile']['skype_id'];
                     $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
                     $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
@@ -156,7 +157,11 @@ class ProfileController extends Controller {
                 }
             }
         }
-        $this->render('/user/updateprofile', array('userObject' => $userObject, 'success' => $success, 'error' => $error, 'edit' => $edit));
+        $countryObject = BaseClass::getCountryList();
+        $this->render('/user/updateprofile', array('userObject' => $userObject,
+            'countryObject' => $countryObject,
+            'success' => $success,
+            'error' => $error, 'edit' => $edit));
     }
 
     /*
@@ -201,35 +206,6 @@ class ProfileController extends Controller {
         $this->render('/user/verification', array('success' => $success, 'error' => $error, 'userObject' => $profileObject));
     }
 
-    /*
-     * To fetch state name according to country
-
-      public function actionFetchState()
-      {
-
-      $stateObject = State::model()->findAll(array('condition'=>'country_id='.$_REQUEST['country_id']));
-
-      $stateHTML = "<option value=''>Select State</option>";
-      foreach($stateObject as $state) {
-      $stateHTML .= "<option value='".$state->id."'>".ucwords($state->name)."</option>";
-      }
-      echo $stateHTML;
-
-      }
-
-      /*
-     * To fetch state name according to country
-
-      public function actionFetchCity()
-      {
-      $cityObject = City::model()->findAll(array('condition'=>'state_id='.$_REQUEST['state_id']));
-      $cityHTML = "<option value=''>Select City</option>";
-      foreach($cityObject as $city) {
-      $cityHTML .= "<option value='".$city->id."'>".ucwords($city->name)."</option>";
-      }
-      echo $cityHTML;
-      }
-
       /*
      * This will load user dashboard
      */
@@ -247,136 +223,125 @@ class ProfileController extends Controller {
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
         if (!empty($_POST)) {
-          if($_POST['UserProfile']['old_password']!='' && $_POST['UserProfile']['new_password']!='' && $_POST['UserProfile']['confirm_password']!='' )  
-          {
-              if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
-            if($userObject->password != md5($_POST['UserProfile']['old_password']))
-            {
-               $error .= "Incorrect old password"; 
-            }else{
-             $userObject->password = md5($_POST['UserProfile']['new_password']);   
-             if ($userObject->update()) {
-                $success .= "Your password changed successfully"; 
-                $config['to'] = $userObject->email;
-                $config['subject'] = 'mGlobally Password Changed' ;
-                $config['body'] = 'Hey '.$userObject->full_name.',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
-                CommonHelper::sendMail($config);
-             }  
-            }
+            if ($_POST['UserProfile']['old_password'] != '' && $_POST['UserProfile']['new_password'] != '' && $_POST['UserProfile']['confirm_password'] != '') {
+                if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
+                    if ($userObject->password != md5($_POST['UserProfile']['old_password'])) {
+                        $error .= "Incorrect old password";
+                    } else {
+                        $userObject->password = md5($_POST['UserProfile']['new_password']);
+                        if ($userObject->update()) {
+                            $success .= "Your password changed successfully";
+                            $config['to'] = $userObject->email;
+                            $config['subject'] = 'mGlobally Password Changed';
+                            $config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
+                            CommonHelper::sendMail($config);
+                        }
+                    }
+                } else {
+                    $error .= "Incorrect master pin";
+                }
             } else {
-                $error .= "Incorrect master pin";
+                $error .="Please fill all required(*) marked fields.";
             }
-        } else {
-            $error .="Please fill all required(*) marked fields.";
         }
-        }
-        
+
         $this->render('/user/change_password', array(
-            'error' => $error,'success' => $success,
+            'error' => $error, 'success' => $success,
         ));
     }
-    
+
     /*
      * Function to change master pin
      */
-    public function actionChangePin()
-    { 
+
+    public function actionChangePin() {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
-         
+
         if (!empty($_POST)) {
-          if($_POST['UserProfile']['old_master_pin']!='' && $_POST['UserProfile']['new_master_pin']!='' && $_POST['UserProfile']['confirm_master_pin']!='' )  
-          {
-             
-             if($userObject->master_pin != md5($_POST['UserProfile']['old_master_pin']))
-             {
-               $error .= "Incorrect old master pin"; 
-             }else{
-             $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);
-             
-             if ($userObject->update()) {
-                 
-                $success .= "Your pin changed successfully"; 
-                $config['to'] = $userObject->email;
-                $config['subject'] = 'mGlobally Master Pin Changed' ;
-                $config['body'] = 'Hey '.$userObject->full_name.',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
-                CommonHelper::sendMail($config);
-             }  
+            if ($_POST['UserProfile']['old_master_pin'] != '' && $_POST['UserProfile']['new_master_pin'] != '' && $_POST['UserProfile']['confirm_master_pin'] != '') {
+
+                if ($userObject->master_pin != md5($_POST['UserProfile']['old_master_pin'])) {
+                    $error .= "Incorrect old master pin";
+                } else {
+                    $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);
+
+                    if ($userObject->update()) {
+
+                        $success .= "Your pin changed successfully";
+                        $config['to'] = $userObject->email;
+                        $config['subject'] = 'mGlobally Master Pin Changed';
+                        $config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
+                        CommonHelper::sendMail($config);
+                    }
+                }
+            } else {
+                $error .="Please fill all required(*) marked fields.";
             }
-             
-        } else {
-            $error .="Please fill all required(*) marked fields.";
         }
-        }
-        
+
         $this->render('/user/change_master_pin', array(
-            'error' => $error,'success' => $success,
-        ));   
-        
+            'error' => $error, 'success' => $success,
+        ));
     }
-    
+
     /*
      * function to invite refferals
      */
-    public function actionInviteRefferal()
-    {
-       $error = "";
+
+    public function actionInviteRefferal() {
+        $error = "";
         $success = "";
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-        $link =   Yii::app()->params['baseUrl'] . '/user/registration?spid='.$userObject->name.'--email';
-        if(!empty($_POST))
-        {
-          if($_POST['email']!='')
-          {
-            $emailArr = $_POST['email'];
-            $emailArray = explode(',',$emailArr);
-            
-            foreach($emailArray as $email)
-            {
-                $config['to'] = $email;
-                $config['subject'] = 'mGlobally Invitation From '.$userObject->name ;
-                $config['body'] = 'Hey '.$email.',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="'.$link.'">'.$link.'</a>';
-                CommonHelper::sendMail($config);  
+        $link = Yii::app()->params['baseUrl'] . '/user/registration?spid=' . $userObject->name . '--email';
+        if (!empty($_POST)) {
+            if ($_POST['email'] != '') {
+                $emailArr = $_POST['email'];
+                $emailArray = explode(',', $emailArr);
+
+                foreach ($emailArray as $email) {
+                    $config['to'] = $email;
+                    $config['subject'] = 'mGlobally Invitation From ' . $userObject->name;
+                    $config['body'] = 'Hey ' . $email . ',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="' . $link . '">' . $link . '</a>';
+                    CommonHelper::sendMail($config);
+                }
+                $success .= "Email sent successfully.";
+            } else {
+                $error .= "Email field can not be blank.";
             }
-           $success .= "Email sent successfully.";   
-          }else{
-              $error .= "Email field can not be blank.";
-          }
         }
-        
-       $this->render('/user/invite_refferals', array(
-            'error' => $error,'success' => $success,'userObject'=>$userObject
-        ));  
+
+        $this->render('/user/invite_refferals', array(
+            'error' => $error, 'success' => $success, 'userObject' => $userObject
+        ));
     }
-    
-    public function actionTrackRefferal()
-    {
+
+    public function actionTrackRefferal() {
         $error = "";
         $success = "";
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
         $loggedInUserId = Yii::app()->session['userid'];
         $userObject = User::model()->findByPK($loggedInUserId);
-        $pageSize= 100;
+        $pageSize = 100;
         if (!empty($_POST)) {
-        $todayDate = $_POST['from'];
-        $fromDate = $_POST['to'];
-         $dataProvider = new CActiveDataProvider('User', array(
-            'criteria' => array(
-                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
-             )));
-        }else{
-          $dataProvider = new CActiveDataProvider('User', array(
-            'criteria' => array(
-                'condition' => ('sponsor_id="' . $userObject->name.'" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
-             )));  
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            $dataProvider = new CActiveDataProvider('User', array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id="' . $userObject->name . '" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+            )));
+        } else {
+            $dataProvider = new CActiveDataProvider('User', array(
+                'criteria' => array(
+                    'condition' => ('sponsor_id="' . $userObject->name . '" AND social != "" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"'), 'order' => 'id DESC',
+            )));
         }
         $this->render('/user/track_refferal', array(
-            'error' => $error,'success' => $success,'dataProvider'=>$dataProvider
-        ));  
+            'error' => $error, 'success' => $success, 'dataProvider' => $dataProvider
+        ));
     }
-    
 
     // Uncomment the following methods and override them if needed
     /*

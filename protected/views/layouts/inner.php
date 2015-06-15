@@ -19,6 +19,7 @@ $adImg = ''; //BaseClass::getadminImg ( Yii::app ()->user->getState ( 'username'
 $menusections ['psections'] = array(6, 7, 8, 9, 33, 4, 5);
 $baseURL = "http://localhost";
 
+$orderObject = Order::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
 ?>
 
 
@@ -404,12 +405,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                             }
-                            $arraytransaction = BaseClass:: transactionStatus(); 
+                            $orderObject = BaseClass:: isUserHavingActiveOrder(); 
+                            
                             if ((in_array($hotel_pmenu, $menusections ['psections'])) || (in_array($hotel_pmenu, $menusections ['section_ids']))) {
                                 
-                                
-                                if($arraytransaction!='' && $arraytransaction->status==1)
-                                {
+                                if(!empty($orderObject)) {
                                   $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/updateprofile" => "Profile",
@@ -418,11 +418,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
-                                     
-                                    
-//                                    "profile/summery" => "Summery",
-                                );  
-                                }else{
+                                );
+                                } else {
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/updateprofile" => "Profile",
@@ -655,8 +652,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                             if($arraytransaction!='' && $arraytransaction->status==1)
-                                {
+                             if(!empty($orderObject)) {
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(

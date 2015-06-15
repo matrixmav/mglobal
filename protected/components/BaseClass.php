@@ -117,6 +117,13 @@ class BaseClass extends Controller {
 
         return $transactionObject;
     }
+    
+    public static function isUserHavingActiveOrder() {
+        $userId = Yii::app()->session['userid'];
+        $transactionObject = Order::model()->findByAttributes(array('user_id' => $userId,'status'=>1));
+
+        return $transactionObject;
+    }
 
     public static function gettransactionID() {
 
@@ -771,8 +778,8 @@ class BaseClass extends Controller {
         return $return_url;
     }
 
-    public static function getCountryCode() {
-        return $countryObject = Country::model()->findAll(array("order" => "iso_code ASC",));
+    public static function getCountryList() {
+        return $countryObject = Country::model()->findAll();
     }
 
     public static function getCountryDropdown() {

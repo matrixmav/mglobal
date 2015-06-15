@@ -46,14 +46,17 @@ $this->breadcrumbs = array(
                 <div id="email_error" class="form_error"></div>
                 </div>
             </div>
-
             <div class="form-group">
-                
-                <label class="col-lg-4 control-label" for="country">Country<span class="require">*</span></label>
+                <label for="country" class="col-lg-4 control-label">Country <span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <label> <?php echo (!empty($userObject)) ? $userObject->country->name : ""; ?></label>
-                    
+                    <select name="UserProfile[country_id]" id="country_id" onchange="getStateList(this.value)" class="form-control">
+                        <option value="">Select Country</option>
+                        <?php foreach ( $countryObject as  $country) { ?>
+                        <option value="<?php echo $country->id; ?>" <?php echo ($country->id== $userObject->country_id)? "selected":""; ?> ><?php echo $country->name;?></option>
+                        <?php } ?>
+                    </select>
                 </div>
+                <span id="country_id_error"></span>
             </div>
             
             
