@@ -61,7 +61,7 @@
                 </div>
 
                  <div class="form-group">
-                  <label for="masterkey" class="col-lg-4 control-label">Master Key <span class="require">*</span></label>
+                  <label for="masterkey" class="col-lg-4 control-label">Master Pin <span class="require">*</span></label>
                   <div class="col-lg-8">
                       <input type="password" class="form-control" id="masterkey" name="masterkey">
                   
