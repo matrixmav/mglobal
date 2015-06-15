@@ -13,6 +13,7 @@ if(!empty($error)){
 
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/creditwallet" method="post" onsubmit="return validateForm()">
 <input type="hidden" name="userId" id="userId" value="<?php echo (!empty($userObject))? $userObject->id : ""; ?>"/>
+<?php if(!empty($userObject)) { ?>
 <div class="col-md-12 form-group">
     <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
@@ -20,6 +21,15 @@ if(!empty($error)){
         <span style="color:red"  id="first_name_error"></span>
     </div>
 </div>
+<?php }else{?>
+<div class="col-md-12 form-group">
+    <label class="col-md-2">User Name: </label>
+    <div class="col-md-6">
+        <p><?php echo (!empty($userObject))? $userObject->full_name : ""; ?></p>
+        <span style="color:red"  id="first_name_error"></span>
+    </div>
+</div>
+<?php }?>
 <?php $walletList = BaseClass::getWalletList(); ?>
 <div class="col-md-12 form-group">
     <label class="col-md-2">Wallet Type: </label>
