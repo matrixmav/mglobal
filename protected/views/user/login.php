@@ -18,8 +18,9 @@
         if(!empty($_GET['successMsg'])){
             echo "<p class='success'>".$_GET['successMsg']."</p>";
         }
-        
-        if(!empty($msg)){ echo $msg; } 
+        if(!empty($_GET['errorMsg'])){
+            echo "<p class='error'>".$_GET['errorMsg']."</p>";
+        }
         
         
         if (array_key_exists("login", $_GET)) {

@@ -56,7 +56,8 @@ public function actionConfirm(){
             if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
                 $activationKey = $_GET['activation_key'];
                 $getUserObject = User::model()->findByAttributes(array('activation_key' => $activationKey));
-                if (count($getUserObject) > 0) { 
+                
+                if (count($getUserObject) > 0) {                    
                     $masterPin = BaseClass::getUniqInt(5);
                     $password = BaseClass::getPassword();
                     $userObject = new User;
@@ -83,8 +84,8 @@ public function actionConfirm(){
             
                     $this->redirect(array("login",'successMsg'=>$msg));
                 } else { 
-                    $msg = "<p class='error'>Invalid Key.</p>";
-                    $this->redirect(array("login",'successMsg'=>$msg));
+                    $error = "Invalid Key.";
+                    $this->redirect(array("login",'errorMsg'=>$error));
                 }
             }        
     }
