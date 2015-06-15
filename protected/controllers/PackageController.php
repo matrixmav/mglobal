@@ -237,8 +237,10 @@ class PackageController extends Controller {
             <button id="checkout" class="btn-flat-green btn-orange" onclick="RedirectCart();">Checkout</button>
             </div>
             </div>';
-        
+        $SuggestedDomain = "";
         $userEnteredDomain = Yii::app()->session['domain'];
+        if($userEnteredDomain !='')
+        {
         $doaminArr = explode('.', $userEnteredDomain);
         $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $doaminArr[0] . "%'"));
         $AllDomainArray = array('com', 'net', 'co.in', 'co.uk', 'org');
@@ -248,7 +250,7 @@ class PackageController extends Controller {
         // $pos = array_search($UserDomainPart[1], $AllDomainArray);
         //unset($AllDomainArray[$pos]);
         //$SuggestedDomain = "<div>Oops!Domain you entered not available.Please choose some other.</div><br/>";
-        $SuggestedDomain = "";
+        
         foreach ($domainTakenArray as $alldomain) {
             
             foreach ($AllDomainArray as $allext) {
@@ -275,7 +277,7 @@ class PackageController extends Controller {
             }
         }
 
-
+        }
 
 
         $this->render('domainsearch', array(
