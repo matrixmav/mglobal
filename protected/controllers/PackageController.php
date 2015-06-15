@@ -80,13 +80,11 @@ class PackageController extends Controller {
             Yii::app()->session['transactionid'] = $tarnsactionID;
         } 
          
-        $transactionObject1 = Transaction::model()->findAll(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . Yii::app()->session['transactionid']));
-
+        $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . Yii::app()->session['transactionid']));
 
         $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
 
         if (count($transactionObject1) == 0) {
-
             $transactionObject->user_id = Yii::app()->session['userid'];
             $transactionObject->transaction_id = Yii::app()->session['transactionid'];
             $transactionObject->mode = 'paypal';
@@ -99,6 +97,7 @@ class PackageController extends Controller {
             $transactionObject->gateway_id = 1;
             $transactionObject->created_at = new CDbExpression('NOW()');
             $transactionObject->save(false);
+            
         } else {
 
             $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
