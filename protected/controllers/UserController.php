@@ -444,10 +444,10 @@ public function actionConfirm(){
 		{
 		$arra = explode('--',$_GET['spid']);
                  
-		if(count($arra) > 1)
+		 if(count($arra) > 1)
                 {  
-		$social = $arra[1];
-		}
+		 $social = $arra[1];
+		 }
 		else{
                 $social = '';
                }
@@ -569,7 +569,7 @@ public function actionConfirm(){
         }
         $countryObject = Country::model()->findAll();
 
-        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error));
+        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error,'social'=$social));
     }
 
     /* User Forget Password Strat Here */
