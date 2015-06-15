@@ -12,7 +12,7 @@ $this->breadcrumbs = array(
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
 
-    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" >
+    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off">
         <fieldset> 
             <legend>Transfer Funds</legend>
                 <div class="form-group">
@@ -26,8 +26,10 @@ $this->breadcrumbs = array(
                                     <option value="2">RP Wallet</option>	 
                                     <option value="3">Commission Points</option>									   
                                 </select>
+                                <span id="transaction_error" style="color:red"></span>
                             </div>
                             <div class="col-lg-4">
+                                <input type="hidden" class="form-control" id="transaction_data_amt" name="transaction_data" value=""/>
                                 <div id="transaction_data" name="transaction_data" class="form-control">0</div>
                             </div>
                         </div>
@@ -38,23 +40,24 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullName(this.value);"/>
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullName(this.value);" />
                         <span id="search_user_error" style="color:red"></span>
                     </div>     
                 </div>
                 <div class="form-group">
                     <label for="paid_amount" class="col-lg-4 control-label">Amount<span class="require"> * $</span></label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" id="paid_amount" name="paid_amount"  required class="form-control">
+                        <input type="text" class="form-control" id="paid_amount" name="paid_amount"  class="form-control">
+                    <span id="email_error" style="color:red"></span>
                     </div>
-                    <span id="email_error"></span>
+                    
                 </div>
 
 
             </fieldset>
             <div class="row">
                 <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">  
-                    <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" />                     
+                    <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
 
                     <button type="reset" class="btn btn-default">Cancel</button>
                 </div>
@@ -65,3 +68,40 @@ $this->breadcrumbs = array(
 <style>
         #s2id_search_username{ width: 100% !important;}
 </style>
+<script type="text/javascript">
+function validationfrom()
+{
+    $('#transaction_error').html("");
+    if($('#transactiontype').val()=='')
+    {
+       $('#transaction_error').html("Please choose wallet type"); 
+       return false;
+    }
+    $('#search_user_error').html("");
+   if($('#search_username').val()=='')
+    {
+       $('#search_user_error').html("Please choose user to transfer amount."); 
+       return false;
+    }
+    $('#search_user_error').html("");
+     if($('#transaction_data_amt').val()== '0.00')
+    {
+       $('#search_user_error').html("Transfer amount can not be 0.00"); 
+       return false;
+    }
+    if($('#paid_amount').val()== '')
+    {
+       $('#email_error').html("Transfer amount can not be blank"); 
+       return false;
+    }
+     var fund = parseFloat($('#transaction_data_amt').val());
+     var fundVal = parseFloat($('#paid_amount').val());
+      
+     $('#email_error').html("");   
+    if(fund < fundVal)
+    {
+       $('#email_error').html("Transfer amount can not be more than existing amount."); 
+       return false;
+    }
+}
+</script>
