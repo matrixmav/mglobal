@@ -419,10 +419,10 @@ public function actionConfirm(){
                         $error = "<p class='error'>Invalid Information</p>";
                     }
                 } else {
-                    $error = "<p class='error'>Invalid User Name</p>";
+                   $error = "<p class='error'>Invalid User Name</p>";
                 }
             }
-        }
+        } 
         $this->render("login", array("msg" => $error));
     }
  }
