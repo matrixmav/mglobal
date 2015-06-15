@@ -60,9 +60,12 @@ if(!empty($error)){
         <input type="submit" class="btn green" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
     </div>
 </div> 
+<input type="hidden" id="fundval" value="">
 </form>
 <script language = "Javascript">
     function validateForm(){
+        var val = ("#fundval").val();
+        alert(val);return false;
         if ($("#fund").val() == "") {
             $("#fund_error").html("Please Add Fund!");
             return false;
@@ -71,7 +74,8 @@ if(!empty($error)){
             return false;
         }
         
-        if(($("#existing_fund").html())<($('#fund').val())){
+        
+        if(($("#fundval").val())<($('#fund').val())){
             $("#fund_error").html("Deducting fund should not be more the existing fund!");
             return false;
         }
@@ -86,6 +90,7 @@ if(!empty($error)){
                 $("#wallet_amount").show();
                 if(amount != 0){
                     $("#existing_fund").html(amount);
+                    $("#fundval").html(amount);
                 } else {
                     $("#existing_fund").html("<b>0.00</b>");
                 }
