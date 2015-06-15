@@ -12,7 +12,7 @@ $this->breadcrumbs = array(
 if(!empty($error)){
     echo "<p class='error'>".$error."</p>";
 }
-var_dump($attachment);exit;
+ 
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -64,7 +64,7 @@ var_dump($attachment);exit;
     </div>
 </div>
 <div class="col-md-12 form-group">
-    <label class="col-md-2">Attachement </label>
+    <label class="col-md-2">Attachement111111 </label>
     <div class="col-md-6">
         <input type="hidden" name="attachment1" id=""/>
         <input type="file" name="attachment" id="attachement"/>
