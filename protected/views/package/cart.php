@@ -228,7 +228,7 @@
         if (coupon_code == '')
         {
             document.getElementById("coupon_error").style.display = "block";
-            document.getElementById("coupon_error").innerHTML = "Please enter a domain name.";
+            document.getElementById("coupon_error").innerHTML = "Please enter coupon code.";
             document.getElementById("coupon_error").focus();
         } else {
             var dataString = 'coupon_code=' + coupon_code;
