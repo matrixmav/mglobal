@@ -89,20 +89,13 @@ $this->menu=array(
 			'value'=>array($this,'GetButtonTitle'),
 		),
 		 
-		 
-            
-                array( 
-			'class'=>'CButtonColumn',
-                        'template'=>'{Invoice}',
-			'htmlOptions'=>array('width'=>'23%'),
-			'buttons'=>array(
-				'Invoice' => array(
-					'label'=>'Invoice',
-					'options'=>array('class'=>'btn red fa fa-edit margin-right15','target'=>'_blank'),
-					'url'=>'($data->status == 1) ? Yii::app()->createUrl("/order/invoice?id=$data->id"): ""',
-				),
-                       ),
+		  array(
+			'name'=>'action',
+                        'header'=>'<span style="white-space: nowrap;"> &nbsp; &nbsp; &nbsp;</span>',
+			'value'=>array($this,'GetInvoiceButtonTitle'),
 		),
+            
+                
             
             
 	),
