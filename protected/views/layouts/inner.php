@@ -655,7 +655,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                             if($arraytransaction!='' && $arraytransaction->status==1)
+                             if($arraytransaction !='' && $arraytransaction->status==1)
                                 {
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
