@@ -6,10 +6,10 @@ class AdsController extends Controller {
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-    public $layout = 'inner';
+    public $layout = 'main';
 
     public function init() {
-//            BaseClass::isLoggedIn();
+        BaseClass::isAdmin();
     }
 
     /**
@@ -30,7 +30,7 @@ class AdsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view', 'add', 'changestatus', 'edit'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -48,6 +48,143 @@ class AdsController extends Controller {
     }
 
     /**
+     * Lists all models.
+     */
+    public function actionIndex() {
+        $pageSize = 10;
+        $dataProvider = new CActiveDataProvider('Ads', array(
+            'criteria' => array('order' => 'updated_at DESC'),
+            'pagination' => array('pageSize' => $pageSize)));
+
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+
+    /*  Add ads code start here */
+
+    public function actionAdd() {
+
+        $error = "";
+        $success = "";
+        $baseURL = Yii::app()->getBaseUrl(true);
+        $getCode = '';
+
+        if ($_POST) {
+            $banner = time() . $_FILES['ads_banner']['name'];
+            if ($_FILES) {
+                $ext1 = end((explode(".", $banner)));
+
+                if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
+                    $error = "<p class='error'>Please upload mentioned file type.</p>";
+                } else {
+                    $path = Yii::getPathOfAlias('webroot') . "/upload/banner/";
+                    //BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);
+                    $serverPath = $baseURL . "/upload/banner/";                    
+
+                    $getCode .= '<p>';
+                    $getCode .= '<b>' . $_POST['ads_name'] . '</b>';
+                    if (isset($_POST['ads_desc']) && !empty($_POST['ads_desc'])) {
+                        $getCode .= '<p>' . $_POST['ads_desc'] . '</p>';
+                    }
+
+                    $getCode .= '<p> <img src=' . $serverPath . $banner . ' height=100 width=100> </p>';
+                    $getCode .= '</p>';
+
+                    $model = new Ads;
+                    $model->attributes = $_POST;
+                    $model->banner = $banner;
+                    $model->name = $_POST['ads_name'];
+                    $model->description = $_POST['ads_desc'];
+                    $model->created_at = date('Y-m-d');
+                    //$model->get_code = '<p><img src=' . $serverPath . $banner . ' height=100 width=100></p>';
+                    $model->get_code = $getCode;
+                    $model->status = 1;
+                    $success = "<p class='success'>Banner Added Successfully</p>";
+                    if (!$model->save(false)) {
+                        echo "<pre>";
+                        print_r($model->getErrors());
+                        exit;
+                    }
+                }
+            } else {
+                $error = "Please fill required(*) marked fields.";
+            }
+        }
+        $this->render('add', array('success' => $success, 'error' => $error));
+    }
+
+    protected function gridBannerImage($data, $row) {
+        $bigImagefolder = '/upload/banner/'; // folder with uploaded files
+        echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->banner</a>" . '<div class="modal fade" id="zoom_' . $data->id . '" tabindex="-1" role="basic" aria-hidden="true">
+                <div class="modal-dialog" style="width:500px;">
+                    <div class="modal-content">
+                        <div class="modal-body" style="width: 500px;overflow: auto;height: 500px;padding: 0;">
+                            <img src="' . $bigImagefolder . $data->banner . '">
+                        </div>
+                    </div>
+                </div>
+            </div>';
+    }
+
+    public function actionChangeStatus() {
+        if ($_REQUEST['id']) {
+            $userprofileObject = Ads::model()->findByPk($_REQUEST['id']);
+            if ($userprofileObject->status == 1) {
+                $userprofileObject->status = 0;
+            } else {
+                $userprofileObject->status = 1;
+            }
+            $userprofileObject->save(false);
+            $this->redirect(array('index', 'successMsg' => 1));
+        }
+    }
+
+    /* Update data */
+
+    public function actionEdit() {
+        if ($_REQUEST['id']) {
+            $adsObject = Ads::model()->findByPk($_REQUEST['id']);
+
+            $error = "";
+            $success = "";
+            if ($_POST) {
+
+                $pageSize = 10;
+                $dataProvider = new CActiveDataProvider('Ads', array(
+                    'pagination' => array('pageSize' => $pageSize)));
+
+                $banner = "";
+                if (isset($_FILES['ads_banner']['name'])) {
+                    $banner = time() . $_FILES['ads_banner']['name'];
+                    $ext1 = end((explode(".", $banner)));
+
+                    if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
+                        $error = "Please upload mentioned file type.";
+                    } else {
+                        $path = Yii::getPathOfAlias('webroot') . "/upload/banner/";
+                        BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);
+                        $adsObject->banner = $banner;
+                        $adsObject->get_code = '<p><img src=' . $path . $banner . ' height=100 width=100></p>';
+                    }
+                }
+
+                $adsObject->attributes = $_POST;
+                $adsObject->name = $_POST['ads_name'];
+                $adsObject->description = $_POST['ads_desc'];
+                $successMsg = 1;
+                if (!$adsObject->update(false)) {
+                    echo "<pre>";
+                    print_r($model->getErrors());
+                    exit;
+                }
+                $this->redirect('index?successMsg=' . $successMsg, array('dataProvider' => $dataProvider));
+            }
+            $this->render('edit', array('adsObject' => $adsObject));
+        }
+    }
+
+    /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
      */
@@ -55,10 +192,6 @@ class AdsController extends Controller {
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
-    }
-
-    public function getSocialButton($data, $row) {
-        $this->renderPartial('shareoptions', array('data' => $data), false, true);
     }
 
     /**
@@ -115,28 +248,6 @@ class AdsController extends Controller {
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-    }
-
-    /**
-     * Lists all models.
-     */
-    public function actionIndex() {
-
-        $model = new Ads;
-        $pageSize = 100;
-        $successMsg = "";
-
-        $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' => array(
-                'condition' => ('name != "admin"'), 'order' => 'id DESC',
-            ), 'pagination' => array('pageSize' => $pageSize),
-        ));
-        if (!empty($_POST['search'])) {
-            $dataProvider = CommonHelper::search(isset($_REQUEST['search']) ? $_REQUEST['search'] : "", $model, array('name', 'description'), array(), isset($_REQUEST['selected']) ? $_REQUEST['selected'] : "");
-        }
-        $this->render('list', array(
-            'dataProvider' => $dataProvider, 'successMsg' => $successMsg
-        ));
     }
 
     /**
