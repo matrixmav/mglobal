@@ -7,8 +7,8 @@ $this->breadcrumbs = array(
 ?>
 
 <div class="col-md-7 col-sm-7">
-    <div class="error" id="error_msg" style="display: none;"></div>
-    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
+   
+<?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
 <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
     <form action="/profile/testimonial" method="post" class="form-horizontal" onsubmit="return validation();">
      
@@ -18,6 +18,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="firstname">Testimonial <span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="testimonial" name="UserProfile[testimonials]" class="form-control" ><?php echo (!empty($profileObject))?$profileObject->testimonials : "";?></textarea>
+                    <div id="testimonial_error" class="form_error"></div>
                 </div>
             </div>
             
@@ -25,6 +26,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
+                    <div id="master_pin_error" class="form_error"></div>
                 </div>
             </div>
         </fieldset>
@@ -38,23 +40,15 @@ $this->breadcrumbs = array(
     </form>
 </div>
 <script>
-     function validation()
-    {
-        if(document.getElementById("testimonial").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter your testimonial text.";
-            document.getElementById("testimonial").focus();
+    function validation(){        
+        var testimonial = requiredField('testimonial', 'testimonial_error', 'Please enter your testimonial text.');        
+        if (testimonial == false) {            
             return false;
         }
-         if(document.getElementById("master_pin").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter master pin.";
-            document.getElementById("master_pin").focus();
+                
+        var masterPin = requiredField('master_pin', 'master_pin_error', 'Enter master pin');       
+        if (masterPin == false) {            
             return false;
-        }
+        } 
     }
 </script>
-
-
