@@ -4397,3 +4397,6 @@ UI Loading
     border-left: 1px solid #f15c2b !important;
     border-right: 1px solid #f15c2b !important;
 }
+.form_error{
+    color :red;
+}
