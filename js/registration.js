@@ -154,8 +154,13 @@
     }
     function isUserExisted() {
         $("#name_error").html("");
-        if ($("#name").val().match(/\s/g)) {
+        $("#name_available").html("");
+        if ($("#name").val().match(/\s/g)) {           
             $("#name_error").html("Username should not contain blank spaces.");
+            $("#name").focus();            
+            return false;
+        }else if($("#name").val().length < 5 ){
+            $("#name_error").html("Enter atleast 5 chars in the input box.");
             $("#name").focus();            
             return false;
         }
