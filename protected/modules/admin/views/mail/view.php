@@ -39,7 +39,7 @@ $this->breadcrumbs = array(
 </div>
 <?php if(!empty($mailObject->attachment)){ ?>
 <div class="col-md-12 form-group">
-    <label class="col-md-1">Attachement </label>
+    <label class="col-md-1">Attachement</label>
     <div class="col-md-6">
         <p><a href="<?php echo Yii::app()->getBaseUrl(true);?>/upload/attachement/<?php echo $mailObject->attachment; ?>" target="_blank">Click here to download</p>
     </div>
