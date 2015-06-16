@@ -123,7 +123,9 @@ return array(
                                 'class' => 'ext.yiitwitteroauth.YiiTwitter',
                                 'consumer_key' => 'JsUWA9cpSn8cCoIdCZQRHba32',
                                 'consumer_secret' => 'IA5qJ66PxsOtlqgwwsqcG1Bk5bVh3hhyaP87UHErE7vECTv8IW',
-                                'callback' => 'http://demo.mglobally.com/user/callback',
+
+                                'callback' => 'http://localhost/user/callback',
+
                 ),
 		
 		// Error handler

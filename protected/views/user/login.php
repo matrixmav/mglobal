@@ -70,7 +70,7 @@
 
                 <div class="row">
                   <div class="col-lg-8 col-md-offset-4 padding-left-0">
-                    <a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/forgetpassword">Forget Password?</a>
+                    <a href="<?php echo Yii::app()->getBaseUrl(true); ?>/user/forgetpassword">Forgot Password?</a>
                   </div>
                 </div>
                 <div class="row">

@@ -249,8 +249,11 @@ class UserController extends Controller {
             $postDataArray = $_POST;
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
+            
             if (!empty($walletObject)) {
                 $fundAmount = ($fundAmount + $walletObject->fund);
+                $walletObject->fund = $fundAmount;
+                $walletObject->update();
             } else {
                 $walletObject = Wallet::model()->create($userId,$fundAmount,$type);
             }
@@ -258,7 +261,7 @@ class UserController extends Controller {
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
         }else{
-            $error .= "User doesnot exist.";
+            $error .= "User does not exist.";
         }
         }
         
@@ -285,6 +288,7 @@ class UserController extends Controller {
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
+                $postDataArray['walletId'] = $walletObject->id;
                 $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
              
             } else {
