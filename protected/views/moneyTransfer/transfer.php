@@ -95,11 +95,11 @@ function validationfrom()
        $('#email_error').html("Transfer amount can not be blank"); 
        return false;
     }
-     var fund = parseFloat($('#transaction_data_amt').val());
-     var fundVal = parseFloat($('#paid_amount').val());
-      
-     $('#email_error').html("");   
-    if(fund < fundVal)
+    var fund = $('#transaction_data_amt').val();
+    var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""))
+    var fundVal = parseFloat($('#paid_amount').val());
+    $('#email_error').html("");   
+    if(fundFinal < fundVal)
     {
        $('#email_error').html("Transfer amount can not be more than existing amount."); 
        return false;
