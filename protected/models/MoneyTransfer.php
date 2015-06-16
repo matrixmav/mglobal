@@ -143,6 +143,10 @@ class MoneyTransfer extends CActiveRecord
                 if(!empty($postDataArray['fundType'])){
                     $fundType = $postDataArray['fundType'];
                 }
+                $toWalletId="";
+                if(!empty($postDataArray['toWalletId'])){
+                    $toWalletId = $postDataArray['toWalletId'];
+                }
                 
                 $createdTime = new CDbExpression('NOW()');
                 $moneyTransfertoObj = new MoneyTransfer;
@@ -154,7 +158,7 @@ class MoneyTransfer extends CActiveRecord
                 $moneyTransfertoObj->comment = $comment;
                 $moneyTransfertoObj->status = $status;
                 $moneyTransfertoObj->wallet_id = $walletId;
-                $moneyTransfertoObj->to_wallet_id = $towalletId;
+                $moneyTransfertoObj->to_wallet_id = $toWalletId;
                 $moneyTransfertoObj->created_at = $createdTime;
                 $moneyTransfertoObj->updated_at = $createdTime;
                 if(!$moneyTransfertoObj->save(false)){
