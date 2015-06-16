@@ -71,7 +71,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Transaction Id &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->transaction_id)?$data->transaction->transaction_id:""',
+                    'value' => 'isset($data->transaction_id)?$data->transaction_id:""',
                 ),
                  array(
                     'name' => 'created_at',
@@ -80,14 +80,14 @@ $this->breadcrumbs = array(
                 ),
                  array(
                     'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">To User &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->touser->full_name)?$data->touser->full_name:""',
                 ),
-                 array(
+                 /*array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">From User &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->fromuser->full_name)?$data->fromuser->full_name:""',
-                ),
+                ),*/
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Actual Amt &nbsp; &nbsp; &nbsp;</span>',
