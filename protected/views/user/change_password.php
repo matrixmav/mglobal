@@ -18,21 +18,21 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Old Password<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="old_password" class="form-control" name="UserProfile[old_password]">
-                    <div id="old_error_msg"></div>
+                    <div id="old_error_msg" class="form_error"></div>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">New Password<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="new_password" class="form-control" name="UserProfile[new_password]">
-                    <div id="new_error_msg"></div>
+                    <div id="new_error_msg" class="form_error"></div>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Confirm Password<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="confirm_password" class="form-control" name="UserProfile[confirm_password]">
-                    <div id="confirm_error_msg"></div>
+                    <div id="confirm_error_msg" class="form_error"></div>
                 </div>
             </div>
              
@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
-                    <div id="master_error_msg"></div>
+                    <div id="master_error_msg" class="form_error"></div>
                 </div>
             </div>
         </fieldset>
