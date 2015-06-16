@@ -131,8 +131,13 @@ class Transaction extends CActiveRecord
         public function createTransaction($postDataArray, $userObject,$role=''){
             $transferAmount = $postDataArray['paid_amount'];
             $percentage = 0;
+            $status = 0;
             if(empty($role)) {
                 $percentage = BaseClass::getPercentage($transferAmount,1);
+            }
+            
+            if(empty($role)) {
+                $status = 1;
             }
             
             $discountAmount = 0;
@@ -162,7 +167,7 @@ class Transaction extends CActiveRecord
             $transactionObjuser->actual_amount = $transferAmount;
             $transactionObjuser->paid_amount = ($transferAmount+$percentage);
             $transactionObjuser->used_rp = $userRp; //change this to current Used RPs
-            $transactionObjuser->status = 0;//pending
+            $transactionObjuser->status = $status;//pending
             $transactionObjuser->created_at = $createdTime;
             $transactionObjuser->updated_at = $createdTime;
             if (!$transactionObjuser->save()) {
