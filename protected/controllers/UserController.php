@@ -77,10 +77,10 @@ class UserController extends Controller {
                 }
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Login Details';
-                $config['body'] = 'Hi,' . $userObject->full_name . '<br/> Login Details' .
-                        '<br/><br/><strong>User:</strong>' . $userObject->name . '<br/>' .
-                        '<br/><strong>Password:</strong>' . $password . '<br/>' .
-                        '<strong>Master Pin:</strong>' . $masterPin . '<br/><br/>';
+                $config['body'] = 'Hi, ' . $userObject->full_name . '<br/> Login Details' .
+                        '<br/><br/><strong>User : </strong>' . $userObject->name .
+                        '<br/><strong>Password : </strong>' . $password . '<br/>' .
+                        '<strong>Master Pin : </strong>' . $masterPin . '<br/><br/>';
                 CommonHelper::sendMail($config);
 
                 $this->redirect(array("login", 'successMsg' => $msg));
@@ -432,6 +432,7 @@ class UserController extends Controller {
     public function actionRegistration() {
 
         $error = "";
+        $social = '';
         if (!empty($_GET)) {
             $arra = explode('--', $_GET['spid']);
             if (count($arra) > 0) {
@@ -536,7 +537,7 @@ class UserController extends Controller {
 
                 $config['to'] = $model->email;
                 $config['subject'] = 'Registration Confirmation';
-                $config['body'] = 'Hi,' . $model->full_name . '<br/>Congratulations! You have been registered successfully' .
+                $config['body'] = 'Hi,' . $model->full_name . '<br/> Congratulations! You have been registered successfully ' .
                         '<strong>Please click the link below to activate your account:</strong><br/>' .
                         '<a href="'.Yii::app()->getBaseUrl(true).'/user/confirm?activation_key=' . $rand . '">Click to activate </a>';
                 $response = CommonHelper::sendMail($config);
@@ -597,7 +598,7 @@ class UserController extends Controller {
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Forgot Password';
                 $config['body'] = 'Hi,' . $userObject->full_name . '<br/>'
-                        . 'New Password:' . $password;
+                        . 'New Password : ' . $password;
                 $response = CommonHelper::sendMail($config);
 
                 $this->redirect(array('login', 'successMsg' => $msg));
