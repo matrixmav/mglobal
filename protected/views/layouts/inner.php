@@ -435,13 +435,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 }
                                 
                                 $activecls = 'active';
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curControllerLower == 'order' && $curAction == 'list') {
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'testimonial'  || $curControllerLower == 'order' && $curAction == 'list') {
                                     
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curControllerLower == 'order' && $curAction == 'list') 
+                                if ($curAction == 'changepassword' || $curAction == "changepin" || $curAction == 'updateprofile' || $curAction == 'address' || $curAction == 'documentverification' || $curAction == 'testimonial' || $curControllerLower == 'order' && $curAction == 'list') 
                                      
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
