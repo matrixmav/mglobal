@@ -170,6 +170,103 @@ License: You must have a valid license purchased only from themeforest(the above
                         src="/metronic/assets/img/menu-toggler.png" alt="" />
                 </a>
                 <!-- END RESPONSIVE MENU TOGGLER -->
+                 <!-- BEGIN TOP NAVIGATION MENU -->
+                <ul class="nav navbar-nav pull-right topWallet">
+                    
+
+                    <li class="cash"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
+                            <i class="fa fa-money"></i>
+
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('1');
+                                foreach ($arrayRP as $RP) {
+                                    
+                                }
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2)  : "0.00";
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="commision"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
+                            <i class="glyphicon glyphicon-briefcase"></i>
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayFund = BaseClass::walletAmount('2');
+                                foreach ($arrayFund as $fund) {
+                                    
+                                }
+                                echo (!empty($arrayFund)) ?  number_format($fund->fund, 2)  : "0.00";
+                                ?>
+                            </span></a>
+                    </li>
+
+                    <li class="credit"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
+                            <i class="fa fa-credit-card"></i>
+
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('3');
+                                foreach ($arrayRP as $RP) {
+                                    
+                                }
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2) : "0.00";
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                     
+                    <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+                        <a href="/admin/mail/" class="dropdown-toggle"  data-hover="dropdown"  title="Inbox">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            <span class="badge badge-default">
+                                <?php
+                                $userId = Yii::app()->session['userid'];
+                                $mailCount = BaseClass::getUnredMails($userId);
+                                if (!empty($mailCount)) {
+                                    echo $mailCount;
+                                } else {
+                                    echo "0";
+                                }
+                                ?></span>
+                        </a>
+                    </li>
+
+                      
+                    <!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
+
+                    <!-- BEGIN NOTIFICATION DROPDOWN -->
+
+                    <!-- END NOTIFICATION DROPDOWN -->
+                    <!-- BEGIN INBOX DROPDOWN -->
+
+                    <!-- END INBOX DROPDOWN -->
+                    <!-- BEGIN TODO DROPDOWN -->
+
+                    <!-- END TODO DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown user">
+                       
+                        <ul class="dropdown-menu">
+                            <!-- <li>
+                            <a href="javascript:void(0);">
+                                    <i class="fa fa-user"></i> My Profile
+                            </a>
+                    </li> -->
+                            <li>
+                                <?php if ($access == "manager") { ?>
+                                    <a href="/admin/default/managerlogout"> <i class="fa fa-key"></i>
+                                        Log Out
+                                    </a>
+<?php } else { ?>
+                                    <a href="/site/logout"> <i class="fa fa-key"></i> Log Out
+                                    </a>
+<?php } ?> 
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
                 <!-- BEGIN TOP NAVIGATION MENU -->
                 <ul class="nav navbar-nav pull-right">
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
