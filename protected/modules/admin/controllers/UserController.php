@@ -282,6 +282,10 @@ class UserController extends Controller {
             $userObject = User::model()->findByPk($userId);
             $type = $_POST['walletId'];
             $fundAmount = $_POST['paid_amount'];
+            if($_POST['comment']== '')
+            {
+               $_POST['comment'] = 'Fund deducted by admin'; 
+            }
             $postDataArray = $_POST;
              
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
@@ -289,6 +293,7 @@ class UserController extends Controller {
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
                 $postDataArray['walletId'] = $walletObject->id;
+                
                 $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
              
             } else {
@@ -436,7 +441,7 @@ class UserController extends Controller {
         $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
-        $status = 1;
+        $status = 0;
         if (!empty($_POST)) {
 
             $todayDate = $_POST['from'];
@@ -451,7 +456,7 @@ class UserController extends Controller {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonials != ""'), 'order' => 'id DESC',
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonial_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));

@@ -97,6 +97,7 @@ class PackageController extends Controller {
             $transactionObject->gateway_id = 1;
             $transactionObject->created_at = new CDbExpression('NOW()');
             $transactionObject->save(false);
+            Yii::app()->session['transaction_id'] = $transactionObject->id;
             
         } else {
 
@@ -111,14 +112,10 @@ class PackageController extends Controller {
             $transactionObject1->gateway_id = 1;
             $transactionObject1->updated_at = new CDbExpression('NOW()');
             $transactionObject1->update();
-        }
-        $transactionID = $transactionObject->id;
-
-        if ($transactionID != '') {
-            Yii::app()->session['transaction_id'] = $transactionObject->id;
-        } else {
             Yii::app()->session['transaction_id'] = $transactionObject1->id;
         }
+         
+        
         //$transactionObject->used_rp = 0;
         $orderObject = new Order;
         $orderObject1 = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transaction_id']));
@@ -495,14 +492,13 @@ class PackageController extends Controller {
 
         if (isset($_GET)) {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
-
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-                
+                echo "<pre>";print_r($orderObject);exit;
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');

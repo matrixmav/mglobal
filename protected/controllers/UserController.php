@@ -444,7 +444,7 @@ class UserController extends Controller {
         if ($_POST) {
             
             /*Already Exits */
-
+          $social = $_POST['social'];
             //echo $uName = $_POST['name']; 
             $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
             
@@ -456,12 +456,12 @@ class UserController extends Controller {
                 $model->attributes = $_POST;
                 $password = BaseClass::getPassword();
                 $model->password = BaseClass::md5Encryption($password);
-                $model->social = $_POST['social'];
+                $model->social = $social;
                 $model->sponsor_id = $_POST['sponsor_id'];
                 $model->master_pin = BaseClass::md5Encryption($masterPin);
                 $model->created_at = date('Y-m-d');
                 if ($_POST['admin'] == 1) {
-                    $model->role_id = 3;
+                    $model->role_id = 2;
                 } else {
                     $model->role_id = 1;
                 }
@@ -541,7 +541,11 @@ class UserController extends Controller {
                         '<a href="'.Yii::app()->getBaseUrl(true).'/user/confirm?activation_key=' . $rand . '">Click to activate </a>';
                 $response = CommonHelper::sendMail($config);
                 $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
-                $this->redirect(array('login', 'successMsg' => $successMsg));
+                if ($_POST['admin'] == 1) {
+                $this->redirect(array('admin/user/index', 'successMsg' => 1));
+                }else{
+                $this->redirect(array('login', 'successMsg' => $successMsg));  
+                }
 
                 if ($_POST['admin'] == 1) {
                     $this->redirect(array('admin/user/index', 'successMsg' => 1));
@@ -560,7 +564,7 @@ class UserController extends Controller {
         }
         $countryObject = Country::model()->findAll();
 
-        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error));
+        $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error,'social' => $social));
     }
     /* User Forget Password Strat Here */
 

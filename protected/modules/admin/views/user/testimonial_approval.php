@@ -29,14 +29,14 @@ $this->breadcrumbs = array(
         <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['to'] !='') ?  $_POST['to'] :  DATE('Y-m-d');?>">
     </div>
     <?php 
-    $statusId =   1;
+    $statusId =   0;
     if(isset($_REQUEST['res_filter'])){
       $statusId =   $_REQUEST['res_filter'];
     } ?>
     
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
                 <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Approved</option>
-                <option value="0" <?php if($statusId == 3){ echo "selected"; } ?> >Pending</option>
+                <option value="0" <?php if($statusId == 0){ echo "selected"; } ?> >Pending</option>
             </select>
     </div>
     <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
