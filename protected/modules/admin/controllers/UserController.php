@@ -258,6 +258,8 @@ class UserController extends Controller {
                 $walletObject = Wallet::model()->create($userId,$fundAmount,$type);
             }
             $postDataArray['walletId'] = $walletObject->id;
+            $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
+            $postDataArray['toWalletId'] = $adminWalletObject->id;
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
         }else{
@@ -290,6 +292,8 @@ class UserController extends Controller {
              
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
+            $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
+            $postDataArray['toWalletId'] = $adminWalletObject->id;
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
                 $postDataArray['walletId'] = $walletObject->id;
@@ -299,6 +303,7 @@ class UserController extends Controller {
             } else {
                 $walletObject = new Wallet;
             }
+            
             $walletObject->user_id = $userId;
             $walletObject->fund = $fundAmount;
             $walletObject->type = $type; //fund added by admin
