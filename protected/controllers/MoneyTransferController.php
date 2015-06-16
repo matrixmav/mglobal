@@ -240,8 +240,8 @@ class MoneyTransferController extends Controller {
                 $adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
                 $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->paid_amount,1);
                 $moneyTransferDataArray['comment'] = $message;
-                $moneyTransferDataArray['walletId'] = $adminWalletObject->id;
-                $moneyTransferDataArray['toWalletId'] =$adminId;
+                $moneyTransferDataArray['walletId'] = $toUserWalletObject->id;
+                $moneyTransferDataArray['toWalletId'] =$adminWalletObject->id;
                 $moneyTransferDataArray['fundType'] = $walletObject->type;
                 //create money transfer record entry
                 $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount,1);
