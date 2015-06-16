@@ -397,7 +397,7 @@ class UserController extends Controller {
             {
               $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
             }else{
-              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status = "0" AND id_proof != "" AND address_proff != ""';
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
             }
              
             $dataProvider = new CActiveDataProvider($model, array(
@@ -441,7 +441,7 @@ class UserController extends Controller {
         $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
-        $status = 1;
+        $status = 0;
         if (!empty($_POST)) {
 
             $todayDate = $_POST['from'];
@@ -456,7 +456,7 @@ class UserController extends Controller {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonial_status = "0"'), 'order' => 'id DESC',
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonial_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
