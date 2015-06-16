@@ -19,12 +19,14 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="firstname">Address <span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="address" name="UserProfile[address]" class="form-control" ><?php echo (!empty($profileObject)) ? $profileObject->address : "";?></textarea>
+                    <div id="address_error" class="form_error"></div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Street<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="Street">Street<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="street" class="form-control" name="UserProfile[street]" value="<?php echo (!empty($profileObject)) ? $profileObject->street: "";?>">
+                    <div id="street_error" class="form_error"></div>
                 </div>
             </div>
             
@@ -38,35 +40,40 @@ $this->breadcrumbs = array(
                             <option value="<?php echo $country->id; ?>" <?php echo ($country->id== $profileObject->country_id)? "selected":""; ?> ><?php echo $country->name;?></option>
                             <?php } ?>
                         </select>
+                        <span id="country_id_error" class="form_error"></span>
                     </div>
-                    <span id="country_id_error"></span>
+                    
                 </div>
 
             <div class="form-group" id="stateList" >
-                <label class="col-lg-4 control-label" for="email">State <span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="State">State <span class="require">*</span></label>
                 <div class="col-lg-8">
                    <input type="text" id="state_id" class="form-control" name="UserProfile[state_name]" value="<?php echo (!empty($profileObject)) ?  $profileObject->state_name : ""; ?>">
-                 </div>
-                 </div>
+                   <div id="state_id_error" class="form_error"></div>
+                </div>
+            </div>
             
             <div class="form-group" id="cityList">
                 <label class="col-lg-4 control-label" for="email">City <span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="text" id="city_id" class="form-control" name="UserProfile[city_name]" value="<?php echo (!empty($profileObject)) ?  $profileObject->city_name : ""; ?>">
-                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Zip Code<span class="require">*</span></label>
-                <div class="col-lg-8">
-                    <input type="text" id="zip_code" class="form-control" name="UserProfile[zip_code]" value="<?php echo (!empty($profileObject)) ?  $profileObject->zip_code : ""; ?>">
+                    <div id="city_id_error" class="form_error"></div>
                 </div>
             </div>
             
             <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
+                <label class="col-lg-4 control-label" for="Zipcode">Zip Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <input type="text" id="zip_code" class="form-control" name="UserProfile[zip_code]" value="<?php echo (!empty($profileObject)) ?  $profileObject->zip_code : ""; ?>">
+                    <div id="zip_code_error" class="form_error"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="MasterPin">Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
+                    <div id="master_pin_error" class="form_error"></div>
                 </div>
             </div>
             
@@ -81,101 +88,42 @@ $this->breadcrumbs = array(
     </form>
 </div>
 
-
-
-
-
 <script type="text/javascript">
     function validation()
     {
-        if(document.getElementById("address").value=='')
-        {
-            
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter your address.";
-            document.getElementById("address").focus();
-            return false;
-        }
-        if(document.getElementById("street").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter your street.";
-            document.getElementById("street").focus();
-            return false;
-        }
-        if(document.getElementById("country_id").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please select country.";
-            document.getElementById("country_id").focus();
-            return false;
-        }
-        if(document.getElementById("state_id").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter state.";
-            document.getElementById("state_id").focus();
-            return false;
-        }
-        if(document.getElementById("city_id").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter city.";
-            document.getElementById("city_id").focus();
-            return false;
-        }
-        if(document.getElementById("zip_code").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter zip code.";
-            document.getElementById("zip_code").focus();
-            return false;
-        }
-         if(document.getElementById("master_pin").value=='')
-        {
-            document.getElementById("error_msg").style.display="block";
-            document.getElementById("error_msg").innerHTML = "Please enter master pin.";
-            document.getElementById("master_pin").focus();
+        var address = requiredField('address', 'address_error', 'Please enter address');        
+        if (address == false) {            
             return false;
         }
         
-    }
-    </script>
-    <!--function getStateList(country_id)
-    {
-        var country_id = country_id;
+        var street = requiredField('street', 'street_error', 'Enter street name');       
+        if (street == false) {            
+            return false;
+        }
+                
+        var country = requiredField('country_id', 'country_id_error', 'Select Country');       
+        if (country == false) {            
+            return false;
+        }        
         
-        var dataString = 'country_id='+country_id;
-        $.ajax({
-            type: "GET",
-            url: "/profile/fetchstate",
-            data: dataString,
-            cache: false,
-            success: function (html) {  
-                if (html != '') {
-                    document.getElementById("stateList").style.display = "block";
-                    $('#stateId').html(html);
-                }
-            }
-        });
+        var state = requiredField('state_id', 'state_id_error', 'Please enter state');        
+        if (state == false) {            
+            return false;
+        }
+        
+        var city = requiredField('city_id', 'city_id_error', 'Please enter city');        
+        if (city == false) {            
+            return false;
+        }
+        
+        var zip = requiredField('zip_code', 'zip_code_error', 'Please enter zip code');        
+        if (zip == false) {            
+            return false;
+        }
+                
+        var masterPin = requiredField('master_pin', 'master_pin_error', 'Enter master pin');       
+        if (masterPin == false) {            
+            return false;
+        }         
     }
-    function showCity(state_id)
-    {
-        var state_id = state_id;
-        var dataString = 'state_id='+state_id;
-        $.ajax({
-            type: "GET",
-            url: "/profile/fetchcity",
-            data: dataString,
-            cache: false,
-            success: function (html) {
-                if (html != '')
-                {
-                    document.getElementById("cityList").style.display = "block";
-                    document.getElementById("cityId").innerHTML = html;
-
-                }
-            }
-        });
-    }*/
-</script>    
+    </script>  
