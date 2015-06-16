@@ -541,7 +541,11 @@ class UserController extends Controller {
                         '<a href="'.Yii::app()->getBaseUrl(true).'/user/confirm?activation_key=' . $rand . '">Click to activate </a>';
                 $response = CommonHelper::sendMail($config);
                 $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
-                $this->redirect(array('login', 'successMsg' => $successMsg));
+                if ($_POST['admin'] == 1) {
+                $this->redirect(array('admin/user/index', 'successMsg' => 1));
+                }else{
+                $this->redirect(array('login', 'successMsg' => $successMsg));  
+                }
 
                 if ($_POST['admin'] == 1) {
                     $this->redirect(array('admin/user/index', 'successMsg' => 1));
