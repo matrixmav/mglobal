@@ -293,7 +293,7 @@ class UserController extends Controller {
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
                 $postDataArray['walletId'] = $walletObject->id;
-                var_dump($postDataArray);exit;
+                
                 $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
              
             } else {
