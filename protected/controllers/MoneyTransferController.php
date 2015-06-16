@@ -91,12 +91,18 @@ class MoneyTransferController extends Controller {
                     $this->redirect(array('moneytransfer/status', 'status' => 'U'));
                 }
                 //getFund Wallet
-                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId, 'type'=>$walletType));
+                $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId, 'type'=>$walletType));
+                if(!$fromUserWalletObject){
+                    //create wallet for to user
+                    $fromUserWalletObject = Wallet::model()->create($loggedInUserId,$fund,$walletType);
+                }
+                $postDataArray['walletId'] = $fromUserWalletObject->id;
+                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
                 if(!$toUserWalletObject){
                     //create wallet for to user
                     $toUserWalletObject = Wallet::model()->create($toUserId,$fund,$walletType);
                 }
-                $postDataArray['walletId'] = $toUserWalletObject->id;
+                $postDataArray['toWalletId'] = $toUserWalletObject->id;
                 //create transaction record entry
                 $transactionObjectect = Transaction::model()->createTransaction($postDataArray, $userObject);
 
@@ -235,6 +241,7 @@ class MoneyTransferController extends Controller {
                 $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->paid_amount,1);
                 $moneyTransferDataArray['comment'] = $message;
                 $moneyTransferDataArray['walletId'] = $adminWalletObject->id;
+                $moneyTransferDataArray['toWalletId'] =$adminId;
                 $moneyTransferDataArray['fundType'] = $walletObject->type;
                 //create money transfer record entry
                 $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount,1);
