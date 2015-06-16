@@ -122,9 +122,7 @@ $this->breadcrumbs = array(
 
 <script type="text/javascript">    
     
-    function validation()
-    {
-        var errorFlag = 0;
+    function validation() {
        
         var email = requiredField('email', 'email_error', 'Please enter email');        
         if (email == false) {            
@@ -149,8 +147,7 @@ $this->breadcrumbs = array(
         var email = requiredField('date', 'date_error', 'Please select date');        
         if (email == false) {            
             return false;
-        }
-        
+        }        
         
         var masterPin = requiredField('master_pin', 'master_pin_error', 'Enter master pin');       
         if (masterPin == false) {            
