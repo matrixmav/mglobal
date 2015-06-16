@@ -13,6 +13,7 @@ $this->breadcrumbs = array(
         <fieldset>
             <legend>Add User</legend>
             <input type="hidden" id="admin" name="admin" value="1">
+             <input type="hidden" id="social" name="social" value="">
             <div class="form-group">
                                         <label for="firstname" class="col-lg-4 control-label">Sponsor Id <span class="require">*</span></label>
                                         <div class="col-lg-8">
@@ -55,7 +56,7 @@ $this->breadcrumbs = array(
                                         <span id="email_error" class="clrred"></span></div>
                                     </div>
                                     
-                                    <div class="form-group">
+                                    <?php /*?><div class="form-group">
                                         <label for="email" class="col-lg-4 control-label">Date Of Birth <span class="require">*</span></label>
                                         <div class="col-lg-2 wdt2" >
                                            
@@ -88,7 +89,7 @@ $this->breadcrumbs = array(
                                         </div>                                        
                                         <div class="col-lg-8">
                                         <span id="date_error" class="clrred"></span></div>
-                                    </div>
+                                    </div><?php */?>
                                     
                                     <div class="form-group">
                                         <label for="country" class="col-lg-4 control-label">Country <span class="require">*</span></label>
@@ -115,20 +116,7 @@ $this->breadcrumbs = array(
                                         
                                         <span id="phone_error" class="clrred"></span></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
-                                        <div class="col-lg-8">
-                                            <input type="password" id="password" name="password" placeholder="Password" class="form-control" > <br>
-                                        
-                                        <span id="password_error" class="clrred"></span></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="confirm_password" class="col-lg-4 control-label">Confirm Password<span class="require">*</span></label>
-                                        <div class="col-lg-8">
-                                            <input type="password" id="confirm_password" name="password" placeholder="Confirm Password" class="form-control" > <br>
-                                        
-                                        <span id="confirm_password_error" class="clrred"></span></div>
-                                    </div>
+                                     
 
                                     
 
