@@ -46,7 +46,8 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                             <input type="radio" name="position" id="position" value="left" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='left'){?> checked="checked" <?php }?>/>
                                             <label class="gender">Left</label>
                                         
-                                        <span id="position_error" class="clrred"></span></div>
+                                        <span id="position_error" class="clrred"></span>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="lastname" class="col-lg-4 control-label">User Name <span class="require">*</span></label>
