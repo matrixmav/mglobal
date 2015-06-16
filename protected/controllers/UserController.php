@@ -515,7 +515,7 @@ class UserController extends Controller {
                 $modelUserProfile->referral_banner_id = 1;
                 $modelUserProfile->save(false);
 
-                / Geneology /
+                /* Geneology */
                 $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id']));
                 //echo 
                 $modelGenealogy = new Genealogy();
@@ -526,7 +526,7 @@ class UserController extends Controller {
                 $modelGenealogy->save(false);
 
                 $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>";
-                /  For Genealogy Data /
+                /*  For Genealogy Data */
 
                 /* $modelGenealogy = new Genealogy();
                   $modelGenealogy->user_id = $model->id ;
