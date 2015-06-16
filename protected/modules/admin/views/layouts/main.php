@@ -253,7 +253,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
                                 */
-                                if ($curControllerLower == "dashboard") {
+                                if ($curControllerLower == "default") {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
