@@ -397,7 +397,7 @@ class UserController extends Controller {
             {
               $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
             }else{
-              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
+              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status = "0" AND id_proof != "" AND address_proff != ""';
             }
              
             $dataProvider = new CActiveDataProvider($model, array(
@@ -456,7 +456,7 @@ class UserController extends Controller {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonials != ""'), 'order' => 'id DESC',
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonial_status = "0"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
