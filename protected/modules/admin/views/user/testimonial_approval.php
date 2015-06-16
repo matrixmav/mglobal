@@ -29,7 +29,7 @@ $this->breadcrumbs = array(
         <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['to'] !='') ?  $_POST['to'] :  DATE('Y-m-d');?>">
     </div>
     <?php 
-    $statusId =   1;
+    $statusId =   0;
     if(isset($_REQUEST['res_filter'])){
       $statusId =   $_REQUEST['res_filter'];
     } ?>
