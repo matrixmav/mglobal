@@ -97,6 +97,7 @@ class PackageController extends Controller {
             $transactionObject->gateway_id = 1;
             $transactionObject->created_at = new CDbExpression('NOW()');
             $transactionObject->save(false);
+            Yii::app()->session['transaction_id'] = $transactionObject->id;
             
         } else {
 
@@ -111,14 +112,10 @@ class PackageController extends Controller {
             $transactionObject1->gateway_id = 1;
             $transactionObject1->updated_at = new CDbExpression('NOW()');
             $transactionObject1->update();
-        }
-        $transactionID = $transactionObject->id;
-
-        if ($transactionID != '') {
-            Yii::app()->session['transaction_id'] = $transactionObject->id;
-        } else {
             Yii::app()->session['transaction_id'] = $transactionObject1->id;
         }
+         
+        
         //$transactionObject->used_rp = 0;
         $orderObject = new Order;
         $orderObject1 = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transaction_id']));
