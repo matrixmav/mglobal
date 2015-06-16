@@ -71,6 +71,7 @@ if(!empty($error)){
             return false;
         }
         if (isNaN($('#fund').val())){
+            $("#fund_error").html("Please Enter Amount!");
             return false;
         }
         var fund = parseFloat($('#fund').val());
