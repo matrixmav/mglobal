@@ -191,11 +191,14 @@ class MoneyTransferController extends Controller {
                 try {
                     //deduct from to user wallet
                     $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->to_user_id, 'type' => $walletObject->type));
+                    
                     if($toUserWalletObject){
+                        //echo "<pre>";echo $transactionObject->paid_amount;exit;
                         $toAmount = ($toUserWalletObject->fund) + ($transactionObject->paid_amount);
                         $toUserWalletObject->fund = $toAmount;
                         $toUserWalletObject->update($moneyTransferObject->to_user_id,$transactionObject->paid_amount,$walletObject->type);
                     } else {
+                        //echo "nn";exit;
                         Wallet::model()->create($moneyTransferObject->to_user_id,$transactionObject->paid_amount,$walletObject->type);
                     }
                 } catch (Exception $ex) {
