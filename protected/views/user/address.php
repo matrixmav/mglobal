@@ -95,9 +95,6 @@ $this->breadcrumbs = array(
 <script type="text/javascript">
     function validation()
     {
-        
-         var errorFlag = 0;
-       
         var address = requiredField('address', 'address_error', 'Please enter address');        
         if (address == false) {            
             return false;
@@ -131,58 +128,6 @@ $this->breadcrumbs = array(
         var masterPin = requiredField('master_pin', 'master_pin_error', 'Enter master pin');       
         if (masterPin == false) {            
             return false;
-        } 
-        
-//        
-//        
-//        
-//        if(document.getElementById("address").value==''){            
-//            document.getElementById("error_msg").style.display="block";
-//            document.getElementById("error_msg").innerHTML = "Please enter your address.";
-//            document.getElementById("address").focus();
-//            return false;
-//        }
-//        if(document.getElementById("street").value==''){
-//            document.getElementById("error_msg").style.display="block";
-//            document.getElementById("error_msg").innerHTML = "Please enter your street.";
-//            document.getElementById("street").focus();
-//            return false;
-//        }
-//        if(document.getElementById("country_id").value=='')
-//        {
-//            document.getElementById("error_msg").style.display="block";
-//            document.getElementById("error_msg").innerHTML = "Please select country.";
-//            document.getElementById("country_id").focus();
-//            return false;
-//        }
-//        if(document.getElementById("state_id").value=='')
-//        {
-//            document.getElementById("error_msg").style.display="block";
-//            document.getElementById("error_msg").innerHTML = "Please enter state.";
-//            document.getElementById("state_id").focus();
-//            return false;
-//        }
-//        if(document.getElementById("city_id").value=='')
-//        {
-//            document.getElementById("error_msg").style.display="block";
-//            document.getElementById("error_msg").innerHTML = "Please enter city.";
-//            document.getElementById("city_id").focus();
-//            return false;
-//        }
-//        if(document.getElementById("zip_code").value=='')
-//        {
-//            document.getElementById("error_msg").style.display="block";
-//            document.getElementById("error_msg").innerHTML = "Please enter zip code.";
-//            document.getElementById("zip_code").focus();
-//            return false;
-//        }
-//         if(document.getElementById("master_pin").value=='')
-//        {
-//            document.getElementById("error_msg").style.display="block";
-//            document.getElementById("error_msg").innerHTML = "Please enter master pin.";
-//            document.getElementById("master_pin").focus();
-//            return false;
-//        }
-//        
+        }         
     }
     </script>  
