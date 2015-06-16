@@ -153,7 +153,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="header-inner">
                 <!-- BEGIN LOGO -->
-                <a class="navbar-brand" href="/admin/" style="padding:10px;">
+                <a class="navbar-brand" href="/" style="padding:10px;">
                     <?php
                     $access = Yii::app()->user->getState('access');
                     if ($access == "manager") {
