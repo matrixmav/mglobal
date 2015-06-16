@@ -150,11 +150,13 @@ class TransactionController extends Controller {
         $criteria = new CDbCriteria;
         $mode = "transfer";
         $criteria->with = array('transaction', 'wallet');
-        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode = "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId . $walletType;
+        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode = "' . $mode . '" AND t.to_user_id = ' . $loggedInUserId . $walletType;
         $criteria->order = 't.id DESC';
         // . 'AND t.created_at >= ' . $todayDate . ' AND t.created_at <= ' . $fromDate ;
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
+       
+        
         $this->render('fund_list', array(
             'dataProvider' => $dataProvider,
         ));
