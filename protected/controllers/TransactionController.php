@@ -186,25 +186,21 @@ class TransactionController extends Controller {
         $criteria = new CDbCriteria;
         $mode = "transfer";
         if (!empty($_POST)) {
-            $dataProvider = new CActiveDataProvider('Transaction', array(
-            'criteria' => array(
-                'condition' => ('user_id = "' . $loggedInUserId . '" AND mode != "' . $mode . '" AND created_at >= "'.$todayDate.'" AND created_at <= "'.$fromDate.'"'), 'order' => 'id DESC',
-        )));
-            
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            //$status = $_POST['res_filter'];
+            $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
         } else {
-            $dataProvider = new CActiveDataProvider('Transaction', array(
-            'criteria' => array(
-                'condition' => ('user_id = "' . $loggedInUserId . '" AND mode != "' . $mode . '"'), 'order' => 'id DESC',
-        )));
+            $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId;
         }
 
 
-        //$criteria->with = array('transaction', 'wallet');
-        //$criteria->condition = $condition;
-        //$criteria->order = 'transaction.id DESC';
+        $criteria->with = array('transaction', 'wallet');
+        $criteria->condition = $condition;
+        $criteria->order = 't.id DESC';
 
-        //$dataProvider = new CActiveDataProvider($model, array(
-            //'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
+        $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
 
         $this->render('list', array(
             'dataProvider' => $dataProvider,
