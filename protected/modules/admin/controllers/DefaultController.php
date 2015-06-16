@@ -24,7 +24,7 @@ class DefaultController extends Controller {
     public function actionLogin() {
 
         if (Yii::app()->session['userid'] && Yii::app()->session['frontloggedIN']!=1) {
-            $this->redirect("/admin/dashboard");
+            $this->redirect("/admin/default/dashboard");
         } else {
             $model = new LoginForm('Admin');
 
