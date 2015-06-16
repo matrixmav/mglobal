@@ -68,6 +68,7 @@ class AdsController extends Controller {
         $error = "";
         $success = "";
         $baseURL = Yii::app()->getBaseUrl(true);
+        $getCode = '';
 
         if ($_POST) {
             $banner = time() . $_FILES['ads_banner']['name'];
@@ -79,8 +80,16 @@ class AdsController extends Controller {
                 } else {
                     $path = Yii::getPathOfAlias('webroot') . "/upload/banner/";
                     BaseClass::uploadFile($_FILES['ads_banner']['tmp_name'], $path, time() . $_FILES['ads_banner']['name']);
-                    $serverPath = $baseURL . "/upload/banner/";
+                    $serverPath = $baseURL . "/upload/banner/";                    
 
+                    $getCode .= '<p>';
+                    $getCode .= '<b>' . $_POST['ads_name'] . '</b>';
+                    if (isset($_POST['ads_desc']) && !empty($_POST['ads_desc'])) {
+                        $getCode .= '<p>' . $_POST['ads_desc'] . '</p>';
+                    }
+
+                    $getCode .= '<p> <img src=' . $serverPath . $banner . ' height=100 width=100> </p>';
+                    $getCode .= '</p>';
 
                     $model = new Ads;
                     $model->attributes = $_POST;
@@ -88,7 +97,8 @@ class AdsController extends Controller {
                     $model->name = $_POST['ads_name'];
                     $model->description = $_POST['ads_desc'];
                     $model->created_at = date('Y-m-d');
-                    $model->get_code = '<p><img src=' . $serverPath . $banner . ' height=100 width=100></p>';
+                    //$model->get_code = '<p><img src=' . $serverPath . $banner . ' height=100 width=100></p>';
+                    $model->get_code = $getCode;
                     $model->status = 1;
                     $success = "<p class='success'>Banner Added Successfully</p>";
                     if (!$model->save(false)) {
