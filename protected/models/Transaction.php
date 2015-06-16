@@ -136,7 +136,7 @@ class Transaction extends CActiveRecord
                 $percentage = BaseClass::getPercentage($transferAmount,1);
             }
             
-            if(empty($role)) {
+            if(!empty($role)) {
                 $status = 1;
             }
             
