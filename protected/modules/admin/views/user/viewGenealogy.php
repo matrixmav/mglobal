@@ -26,8 +26,8 @@ echo '</div></div>';
 echo '</div>
   <span>
 
-                           <div class="tree">
-                        <ul>';
+<div class="tree">
+    <ul>';
 if (count($genealogyListObject) > 0) {
     /* if they have chind with 1st layer */
     echo '<li>';
@@ -66,8 +66,9 @@ if (count($genealogyListObject) > 0) {
                 }
                 echo'</ul>
                                         </li>';
+                //echo '</ul>';
                 echo '
-                                        </ul>
+                                        
                                             </li>
                                        </li>';
             } else {
