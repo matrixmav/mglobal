@@ -34,7 +34,7 @@ $this->breadcrumbs = array(
       $statusId =   $_REQUEST['res_filter'];
     } ?>
     
-    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter">
+    <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="res_filter" style="display:none;">
                 <option value="1" <?php if($statusId == 1){ echo "selected"; } ?> >Active</option>
                 <option value="0" <?php if($statusId == 0){ echo "selected"; } ?> >In Active</option>
             </select>
@@ -106,7 +106,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'status',
-                    'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
+                    'value' => '($data->user->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
                 ),
             ),
         ));
