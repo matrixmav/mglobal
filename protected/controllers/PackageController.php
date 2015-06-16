@@ -495,14 +495,13 @@ class PackageController extends Controller {
 
         if (isset($_GET)) {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
-
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-                
+                echo "<pre>";print_r($orderObject);exit;
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
