@@ -192,7 +192,7 @@ class TransactionController extends Controller {
             //
           $dataProvider = new CActiveDataProvider('Transaction', array(
             'criteria' => array(
-                'condition' => ('user_id = ' . $loggedInUserId . ' AND mode != "' . $mode.'"'), 'order' => 'id DESC',
+                'condition' => ('user_id = ' . $loggedInUserId . ' AND mode != "' . $mode.'" AND created_at >= "'.$todayDate.'" AND created_at <= "'.$fromDate.'"'), 'order' => 'id DESC',
         )));
             //$condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
         } else {
