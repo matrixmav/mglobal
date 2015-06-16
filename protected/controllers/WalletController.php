@@ -148,7 +148,7 @@ class WalletController extends Controller {
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('wallet_id="' . $walletId.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
 //        echo "<pre>"; print_r($dataProvider);exit;
         $this->render('rpwallet', array('dataProvider' => $dataProvider));
@@ -175,7 +175,7 @@ class WalletController extends Controller {
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('wallet_id="' . $walletId.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
         $this->render('commisionwallet', array('dataProvider' => $dataProvider));
     }
@@ -193,6 +193,7 @@ class WalletController extends Controller {
         }
         $loggedInUserId = Yii::app()->session['userid'];
         $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 1));
+        
         if ($walletobject) {
             $walletId = $walletobject->id;
         } else {
@@ -200,8 +201,9 @@ class WalletController extends Controller {
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('wallet_id="' . $walletId.'" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
          )));
+        
         $this->render('fundwallet', array('dataProvider' => $dataProvider));
     }
 
