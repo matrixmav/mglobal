@@ -31,6 +31,13 @@
             return false;
         }
         
+        $("#position_error").html("");
+        if ($("#position:checked").length == 0) {                        
+            $("#position_error").html("Enter Check Position");
+            $("#position").focus();            
+            return false;
+        }
+        
         $("#name_error").html("");
         if ($("#name").val() == "") {
             $("#name_available").html("");            
