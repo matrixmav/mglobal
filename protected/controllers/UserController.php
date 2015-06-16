@@ -432,6 +432,7 @@ class UserController extends Controller {
     public function actionRegistration() {
 
         $error = "";
+        $social = '';
         if (!empty($_GET)) {
             $arra = explode('--', $_GET['spid']);
             if (count($arra) > 0) {
