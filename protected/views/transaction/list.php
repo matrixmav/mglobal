@@ -81,7 +81,7 @@ $this->breadcrumbs = array(
                  array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->touser->full_name)?$data->touser->full_name:""',
+                    'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
                  /*array(
                     'name' => 'id',
