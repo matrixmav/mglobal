@@ -475,6 +475,7 @@ class UserController extends Controller {
                 $userprofileObject->testimonial_status = 1;
             }
             $userprofileObject->save(false);
+            
             $this->redirect(array('/admin/user/testimonialapproval', 'successMsg' => 1));
         }
     }
