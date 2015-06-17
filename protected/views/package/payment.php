@@ -7,7 +7,7 @@
             <div id="maincontent" class="pageWrp checkout abtest">
                      <div class="sectionWrp summary open">
                         <p class="title"><span class="check"></span> <span class="txt">Make Payment</span></p>
-                        <div id="paymentOption" style="min-height:150px">
+                        <div id="paymentOption" style="min-height:238px">
                             <form id="walletform" name="walletform">  
                                 <?php if ($walletObject) { ?>
                                     <div id="walletOption" class="col-sm-4">
