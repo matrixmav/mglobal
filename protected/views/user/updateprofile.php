@@ -72,7 +72,8 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
                 <div class="col-lg-8">                  
-                    <input type="text" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="d-m-yyyy" value="<?php echo (!empty($userObject)) ? date("d-m-Y", strtotime($userObject->date_of_birth)) : ""; ?>">  
+                    <input type="text" id="date" data-provide="datepicker" name="UserProfile[date_of_birth]"  class="datepicker1 form-control" data-date-format="d-m-yyyy" value="<?php echo (!empty($userObject)) ? date("d-m-Y", strtotime($userObject->date_of_birth)) : ""; ?>">  
+                <div id="date_error" class="form_error"></div>
                 </div>
 
             </div>
@@ -101,8 +102,9 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
+                    <div id="master_pin_error" class="form_error"></div>
                 </div>
-                <div id="master_pin_error" class="form_error"></div>
+                
             </div>
 
         </fieldset>
@@ -116,15 +118,13 @@ $this->breadcrumbs = array(
     </form>
 </div>
 
-            
+
 
 <script type="text/javascript">    
     
-    function validation()
-    {
-        var errorFlag = 0;
+    function validation() {
        
-        var email = requiredField('email', 'email_error', 'Please Enter Email');        
+        var email = requiredField('email', 'email_error', 'Please enter email');        
         if (email == false) {            
             return false;
         }
@@ -134,7 +134,7 @@ $this->breadcrumbs = array(
             return false;
         }
         
-        var phone = requiredField('phone', 'phone_error', 'Enter Mobile Number');       
+        var phone = requiredField('phone', 'phone_error', 'Enter phone number');       
         if (phone == false) {            
             return false;
         }
@@ -143,8 +143,16 @@ $this->breadcrumbs = array(
         if (phoneValid == false) {            
             return false;
         }
-
         
+        var email = requiredField('date', 'date_error', 'Please select date');        
+        if (email == false) {            
+            return false;
+        }        
+        
+        var masterPin = requiredField('master_pin', 'master_pin_error', 'Enter master pin');       
+        if (masterPin == false) {            
+            return false;
+        }        
     }
 </script>
 

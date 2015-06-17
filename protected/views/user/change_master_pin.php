@@ -18,21 +18,21 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Old Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="old_master_pin" class="form-control" name="UserProfile[old_master_pin]">
-                    <div id="old_error_msg"></div>
+                    <div id="old_error_msg" class="form_error"></div>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">New Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="new_master_pin" class="form-control" name="UserProfile[new_master_pin]">
-                    <div id="new_error_msg"></div>
+                    <div id="new_error_msg" class="form_error"></div>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Confirm Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="confirm_master_pin" class="form-control" name="UserProfile[confirm_master_pin]">
-                    <div id="confirm_error_msg"></div>
+                    <div id="confirm_error_msg" class="form_error"></div>
                 </div>
             </div>
              

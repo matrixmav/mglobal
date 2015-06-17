@@ -13,7 +13,7 @@ $caption = '""';
 
 <button type='button' class='btn blue fa fa-code margin-right15' data-toggle='modal' data-target='<?php echo '#' . $data->id; ?>'>Get Code</button>
 <div class="modal fade" id="<?php echo $data->id; ?>" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:700px;">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -21,7 +21,8 @@ $caption = '""';
                 <h4 class="modal-title">Copy Code...</h4>
             </div>
             <div class="modal-body">
-                <textarea cols='70'> &lt;p&gt; <?php echo $data->description; ?> " &lt;/p&gt; </textarea>
+                <textarea cols='70' rows="4"><a href=<?php echo $link; ?>> <?php echo $data->get_code; ?> </a>
+                </textarea>
             </div><div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>

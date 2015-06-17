@@ -91,12 +91,18 @@ class MoneyTransferController extends Controller {
                     $this->redirect(array('moneytransfer/status', 'status' => 'U'));
                 }
                 //getFund Wallet
-                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId, 'type'=>$walletType));
+                $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId, 'type'=>$walletType));
+                if(!$fromUserWalletObject){
+                    //create wallet for to user
+                    $fromUserWalletObject = Wallet::model()->create($loggedInUserId,$fund,$walletType);
+                }
+                $postDataArray['walletId'] = $fromUserWalletObject->id;
+                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
                 if(!$toUserWalletObject){
                     //create wallet for to user
                     $toUserWalletObject = Wallet::model()->create($toUserId,$fund,$walletType);
                 }
-                $postDataArray['walletId'] = $toUserWalletObject->id;
+                $postDataArray['toWalletId'] = $toUserWalletObject->id;
                 //create transaction record entry
                 $transactionObjectect = Transaction::model()->createTransaction($postDataArray, $userObject);
 
@@ -191,11 +197,14 @@ class MoneyTransferController extends Controller {
                 try {
                     //deduct from to user wallet
                     $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->to_user_id, 'type' => $walletObject->type));
+                    
                     if($toUserWalletObject){
+                        //echo "<pre>";echo $transactionObject->paid_amount;exit;
                         $toAmount = ($toUserWalletObject->fund) + ($transactionObject->paid_amount);
                         $toUserWalletObject->fund = $toAmount;
                         $toUserWalletObject->update($moneyTransferObject->to_user_id,$transactionObject->paid_amount,$walletObject->type);
                     } else {
+                        //echo "nn";exit;
                         Wallet::model()->create($moneyTransferObject->to_user_id,$transactionObject->paid_amount,$walletObject->type);
                     }
                 } catch (Exception $ex) {
@@ -231,7 +240,8 @@ class MoneyTransferController extends Controller {
                 $adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
                 $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->paid_amount,1);
                 $moneyTransferDataArray['comment'] = $message;
-                $moneyTransferDataArray['walletId'] = $adminWalletObject->id;
+                $moneyTransferDataArray['walletId'] = $toUserWalletObject->id;
+                $moneyTransferDataArray['toWalletId'] =$adminWalletObject->id;
                 $moneyTransferDataArray['fundType'] = $walletObject->type;
                 //create money transfer record entry
                 $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount,1);

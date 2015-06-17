@@ -150,11 +150,13 @@ class TransactionController extends Controller {
         $criteria = new CDbCriteria;
         $mode = "transfer";
         $criteria->with = array('transaction', 'wallet');
-        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode = "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId . $walletType;
+        $criteria->condition = 't.transaction_id = transaction.id AND transaction.mode = "' . $mode . '" AND (t.to_user_id = "' . $loggedInUserId.'" OR t.from_user_id = "' . $loggedInUserId.'")' . $walletType;
         $criteria->order = 't.id DESC';
         // . 'AND t.created_at >= ' . $todayDate . ' AND t.created_at <= ' . $fromDate ;
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
+       
+        
         $this->render('fund_list', array(
             'dataProvider' => $dataProvider,
         ));
@@ -176,29 +178,39 @@ class TransactionController extends Controller {
 
     public function actionList() {
         $loggedInUserId = Yii::app()->session['userid'];
-        $model = new MoneyTransfer();
+        //$model = new MoneyTransfer();
         $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = Yii::app()->params['startDate'];
         $fromDate = date('Y-m-d');
         $status = 1;
-        $criteria = new CDbCriteria;
+        //$criteria = new CDbCriteria;
         $mode = "transfer";
         if (!empty($_POST)) {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
             //$status = $_POST['res_filter'];
-            $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
+            //
+          $dataProvider = new CActiveDataProvider('Transaction', array(
+            'criteria' => array(
+                'condition' => ('user_id = ' . $loggedInUserId . ' AND mode != "' . $mode.'" AND created_at >= "'.$todayDate.'" AND created_at <= "'.$fromDate.'"'), 'order' => 'id DESC',
+        )));
+            //$condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
         } else {
-            $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId;
+            
+             $dataProvider = new CActiveDataProvider('Transaction', array(
+            'criteria' => array(
+                'condition' => ('user_id = ' . $loggedInUserId . ' AND mode != "' . $mode.'"'), 'order' => 'id DESC',
+        )));
+           // $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId;
         }
 
 
-        $criteria->with = array('transaction', 'wallet');
-        $criteria->condition = $condition;
-        $criteria->order = 't.id DESC';
+        //$criteria->with = array('transaction', 'wallet');
+        //$criteria->condition = $condition;
+        //$criteria->order = 't.id DESC';
 
-        $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
+        /*$dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));*/
 
         $this->render('list', array(
             'dataProvider' => $dataProvider,

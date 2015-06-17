@@ -71,7 +71,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Transaction Id &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->transaction_id)?$data->transaction->transaction_id:""',
+                    'value' => 'isset($data->transaction_id)?$data->transaction_id:""',
                 ),
                  array(
                     'name' => 'created_at',
@@ -80,33 +80,33 @@ $this->breadcrumbs = array(
                 ),
                  array(
                     'name' => 'id',
-                    'header' => '<span style="white-space: nowrap;">To User &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->touser->full_name)?$data->touser->full_name:""',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
                 ),
-                 array(
+                 /*array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">From User &nbsp; &nbsp; &nbsp;</span>',
                     'value' => 'isset($data->fromuser->full_name)?$data->fromuser->full_name:""',
-                ),
+                ),*/
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Actual Amt &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->actual_amount)?$data->transaction->actual_amount:""',
+                    'value' => 'isset($data->actual_amount)?$data->actual_amount:""',
                 ),
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Paid Amt &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->paid_amount)?$data->transaction->paid_amount:""',
+                    'value' => 'isset($data->paid_amount)?$data->paid_amount:""',
                 ),
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Used RP &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->used_rp)?$data->transaction->used_rp:""',
+                    'value' => 'isset($data->used_rp)?$data->used_rp:""',
                 ),
                  array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Coupon Discount &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->transaction->coupon_discount)?$data->transaction->coupon_discount:""',
+                    'value' => 'isset($data->coupon_discount)?$data->coupon_discount:""',
                 ),
                 
             ),

@@ -29,7 +29,7 @@ $this->breadcrumbs = array(
         <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">-->
     
     <?php 
-    $statusId =   1;
+    $statusId =   0;
     if(isset($_REQUEST['res_filter'])){
       $statusId =   $_REQUEST['res_filter'];
     } ?>
@@ -83,12 +83,12 @@ $this->breadcrumbs = array(
                  array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">To User &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->touser->name)?$data->touser->name:""',
+                    'value' => 'isset($data->touser->name)?$data->touser->full_name:""',
                 ),
                  array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">From User &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->fromuser->name)?$data->fromuser->name:""',
+                    'value' => 'isset($data->fromuser->name)?$data->fromuser->full_name:""',
                 ),
                  array(
                     'name' => 'id',

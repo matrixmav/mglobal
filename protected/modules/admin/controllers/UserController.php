@@ -249,16 +249,21 @@ class UserController extends Controller {
             $postDataArray = $_POST;
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
+            
             if (!empty($walletObject)) {
                 $fundAmount = ($fundAmount + $walletObject->fund);
+                $walletObject->fund = $fundAmount;
+                $walletObject->update();
             } else {
                 $walletObject = Wallet::model()->create($userId,$fundAmount,$type);
             }
             $postDataArray['walletId'] = $walletObject->id;
+            $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
+            $postDataArray['toWalletId'] = $adminWalletObject->id;
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $this->redirect('/admin/user/wallet?successmsg=1');
         }else{
-            $error .= "User doesnot exist.";
+            $error .= "User does not exist.";
         }
         }
         
@@ -279,17 +284,26 @@ class UserController extends Controller {
             $userObject = User::model()->findByPk($userId);
             $type = $_POST['walletId'];
             $fundAmount = $_POST['paid_amount'];
+            if($_POST['comment']== '')
+            {
+               $_POST['comment'] = 'Fund deducted by admin'; 
+            }
             $postDataArray = $_POST;
              
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
+            $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
+            $postDataArray['toWalletId'] = $adminWalletObject->id;
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
+                $postDataArray['walletId'] = $walletObject->id;
+                
                 $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
              
             } else {
                 $walletObject = new Wallet;
             }
+            
             $walletObject->user_id = $userId;
             $walletObject->fund = $fundAmount;
             $walletObject->type = $type; //fund added by admin
@@ -432,7 +446,7 @@ class UserController extends Controller {
         $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = date('Y-m-d');
         $fromDate = date('Y-m-d');
-        $status = 1;
+        $status = 0;
         if (!empty($_POST)) {
 
             $todayDate = $_POST['from'];
@@ -447,7 +461,7 @@ class UserController extends Controller {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonials != ""'), 'order' => 'id DESC',
+                    'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonial_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
@@ -466,6 +480,7 @@ class UserController extends Controller {
                 $userprofileObject->testimonial_status = 1;
             }
             $userprofileObject->save(false);
+            
             $this->redirect(array('/admin/user/testimonialapproval', 'successMsg' => 1));
         }
     }

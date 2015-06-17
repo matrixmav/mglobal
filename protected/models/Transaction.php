@@ -131,8 +131,13 @@ class Transaction extends CActiveRecord
         public function createTransaction($postDataArray, $userObject,$role=''){
             $transferAmount = $postDataArray['paid_amount'];
             $percentage = 0;
+            $status = 0;
             if(empty($role)) {
                 $percentage = BaseClass::getPercentage($transferAmount,1);
+            }
+            
+            if(!empty($role)) {
+                $status = 1;
             }
             
             $discountAmount = 0;
@@ -162,7 +167,7 @@ class Transaction extends CActiveRecord
             $transactionObjuser->actual_amount = $transferAmount;
             $transactionObjuser->paid_amount = ($transferAmount+$percentage);
             $transactionObjuser->used_rp = $userRp; //change this to current Used RPs
-            $transactionObjuser->status = 0;//pending
+            $transactionObjuser->status = $status;//pending
             $transactionObjuser->created_at = $createdTime;
             $transactionObjuser->updated_at = $createdTime;
             if (!$transactionObjuser->save()) {
@@ -171,5 +176,45 @@ class Transaction extends CActiveRecord
                 exit;
             }
             return $transactionObjuser;
+        }
+        
+        public function createTransactionPackage($transactionObject,$transactionArray){
+             
+            try {
+                if($transactionArray['transactionId']){
+                    $transactionId = $transactionArray['transactionId'];
+                }
+                
+                if($transactionArray['userId']){
+                    $userId = $transactionArray['userId'];
+                }
+                if($transactionArray['mode']){
+                    $mode = $transactionArray['mode'];
+                }
+                if($transactionArray['actualAmount']){
+                    $actualAmount = $transactionArray['actualAmount'];
+                }
+                if($transactionArray['paidAmount']){
+                    $paidAmount = $transactionArray['paidAmount'];
+                }
+                $couponDiscount = 0;
+                if($transactionArray['couponDiscount']){
+                    $couponDiscount = $transactionArray['couponDiscount'];
+                }
+            $transactionObject->user_id = $userId;
+            $transactionObject->transaction_id = $transactionId;
+            $transactionObject->mode = $mode;
+            $transactionObject->actual_amount = $actualAmount;
+            $transactionObject->paid_amount = $paidAmount;
+            $transactionObject->coupon_discount = $couponDiscount;
+            $transactionObject->total_rp = 0;
+            $transactionObject->used_rp = 0;
+            $transactionObject->status = 0;
+            $transactionObject->gateway_id = 1;
+            $transactionObject->created_at = new CDbExpression('NOW()');
+            $transactionObject->save(false);  
+            }catch (Exception $ex) {
+                echo $ex->getMessage();exit;
+            }
         }
 }

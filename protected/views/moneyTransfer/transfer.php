@@ -31,6 +31,7 @@ $this->breadcrumbs = array(
                             <div class="col-lg-4">
                                 <input type="hidden" class="form-control" id="transaction_data_amt" name="transaction_data" value=""/>
                                 <div id="transaction_data" name="transaction_data" class="form-control">0</div>
+                                <span id="amount_error" style="color:red"></span>
                             </div>
                         </div>
                     </div>
@@ -83,10 +84,10 @@ function validationfrom()
        $('#search_user_error').html("Please choose user to transfer amount."); 
        return false;
     }
-    $('#search_user_error').html("");
+    $('#amount_error').html("");
      if($('#transaction_data_amt').val()== '0.00')
     {
-       $('#search_user_error').html("Transfer amount can not be 0.00"); 
+       $('#amount_error').html("Transfer amount can not be 0.00"); 
        return false;
     }
     if($('#paid_amount').val()== '')
@@ -94,11 +95,11 @@ function validationfrom()
        $('#email_error').html("Transfer amount can not be blank"); 
        return false;
     }
-     var fund = parseFloat($('#transaction_data_amt').val());
-     var fundVal = parseFloat($('#paid_amount').val());
-      
-     $('#email_error').html("");   
-    if(fund < fundVal)
+    var fund = $('#transaction_data_amt').val();
+    var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""))
+    var fundVal = parseFloat($('#paid_amount').val());
+    $('#email_error').html("");   
+    if(fundFinal < fundVal)
     {
        $('#email_error').html("Transfer amount can not be more than existing amount."); 
        return false;

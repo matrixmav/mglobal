@@ -149,29 +149,100 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN BODY -->
     <body class="page-header-fixed">
         <!-- BEGIN HEADER -->
-        <div class="header navbar navbar-fixed-top">
-            <!-- BEGIN TOP NAVIGATION BAR -->
+        <div class="header navbar navbar-fixed-top" style="height:45px!important;">
+          <!-- BEGIN TOP NAVIGATION BAR -->
             <div class="header-inner">
+                
+                <a class="navbar-brand" href="<?php echo Yii::app()->getBaseUrl(true); ?>" style="padding:10px;">
+                     <img width="82px" src="../../../images/logo/logo.png" class="img-responsive ">
+                 </a> 
+
                 <!-- BEGIN LOGO -->
-                <a class="navbar-brand" href="/admin/" style="padding:10px;">
-                    <?php
-                    $access = Yii::app()->user->getState('access');
-                    if ($access == "manager") {
-                        ?>
-                       <img width="70px" src="../../../images/logo/logo.png" class="img-responsive ">
-                         <?php } else { ?>
-                        <img width="70px" src="../../../images/logo/logo.png" class="img-responsive ">
-                         <?php } ?>
-                </a>
+                <?php /* <a class="navbar-brand" href="/admin/">
+                  <?php
+                  $access = Yii::app()->user->getState('access');
+                  if ($access == "manager") {
+                  ?>
+                  <img src="#" alt="logo"
+                  class="img-responsive" />
+                  <?php } else { ?>
+                  <img src="#" alt="logo"
+                  class="img-responsive" />
+                  <?php } ?>
+                  </a> */ ?>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
                 <a href="javascript:;" class="navbar-toggle" data-toggle="collapse"
                    data-target=".navbar-collapse"> <img
                         src="/metronic/assets/img/menu-toggler.png" alt="" />
                 </a>
+
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN TOP NAVIGATION MENU -->
-                <ul class="nav navbar-nav pull-right">
+                <ul class="nav navbar-nav pull-right topWallet">
+                    
+
+                    <li class="cash"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
+                            <i class="fa fa-money"></i>
+
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('1');
+                                foreach ($arrayRP as $RP) {
+                                    
+                                }
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2)  : "0.00";
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="commision"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
+                            <i class="glyphicon glyphicon-briefcase"></i>
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayFund = BaseClass::walletAmount('2');
+                                foreach ($arrayFund as $fund) {
+                                    
+                                }
+                                echo (!empty($arrayFund)) ?  number_format($fund->fund, 2)  : "0.00";
+                                ?>
+                            </span></a>
+                    </li>
+
+                    <li class="credit"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
+                            <i class="fa fa-credit-card"></i>
+
+                            <span class="badge badge-default">
+                                <?php
+                                $arrayRP = BaseClass::walletAmount('3');
+                                foreach ($arrayRP as $RP) {
+                                    
+                                }
+                                echo (!empty($arrayRP)) ? number_format($RP->fund, 2) : "0.00";
+                                ?>
+                            </span>
+                        </a>
+                    </li>
+                     
+                    <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+                        <a href="/admin/mail/" class="dropdown-toggle"  data-hover="dropdown"  title="Inbox">
+                            <i class="glyphicon glyphicon-envelope"></i>
+                            <span class="badge badge-default">
+                                <?php
+                                $userId = Yii::app()->session['userid'];
+                                $mailCount = BaseClass::getUnredMails($userId);
+                                if (!empty($mailCount)) {
+                                    echo $mailCount;
+                                } else {
+                                    echo "0";
+                                }
+                                ?></span>
+                        </a>
+                    </li>
+
+                      
+                    <!--                    <li> <a class="dropdown-toggle single_2" href="/buildtemp/managewebsite" target="_blank">Preview</li>-->
+
                     <!-- BEGIN NOTIFICATION DROPDOWN -->
 
                     <!-- END NOTIFICATION DROPDOWN -->
@@ -182,10 +253,16 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!-- END TODO DROPDOWN -->
                     <!-- BEGIN USER LOGIN DROPDOWN -->
-                    <li class="dropdown user"><a href="#" class="dropdown-toggle"
-                                                 data-toggle="dropdown" data-hover="dropdown"
-                                                 data-close-others="true"> <span class="username" style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
-                                                         <?php echo ucfirst($userName); ?>
+                    <li class="dropdown user">
+                        <a href="#" class="dropdown-toggle"
+                           data-toggle="dropdown" data-hover="dropdown"
+                           data-close-others="true"> <span class="username">
+                                   <?php
+                                   $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                                   if ($userObject) {
+                                       echo ucfirst($userObject->name);
+                                   }
+                                   ?>
                             </span> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
@@ -194,26 +271,25 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <i class="fa fa-user"></i> My Profile
                             </a>
                     </li> -->
-                            <!--<li><a href="/admin/admin/changepassword"> Change Password </a></li>-->
                             <li>
                                 <?php if ($access == "manager") { ?>
                                     <a href="/admin/default/managerlogout"> <i class="fa fa-key"></i>
                                         Log Out
                                     </a>
-                                <?php } else { ?>
-                                    <a href="/admin/default/logout"> <i class="fa fa-key"></i> Log Out
+<?php } else { ?>
+                                    <a href="/site/logout"> <i class="fa fa-key"></i> Log Out
                                     </a>
-                                <?php } ?> 
+<?php } ?> 
                             </li>
                         </ul></li>
                     <!-- END USER LOGIN DROPDOWN -->
                 </ul>
 
-                <!--<div class="pull-right inlineBlock"
-                     style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
-                    <!--<img src="<?php //echo Yii::app()->request->baseUrl . "/images/admin/"; ?>"><br />-->
-                    <!--Admin
-                </div>-->
+                <!--                <div class="pull-right inlineBlock"
+                                     style="text-align: center; color: #ff0; margin-top: 2px; margin-left: 6px;">
+                                    <img
+                                        src="<?php echo Yii::app()->request->baseUrl . "/images/admin/"; ?>"><br />Admin
+                                </div>-->
 
                 <!-- END TOP NAVIGATION MENU -->
             </div>
@@ -253,7 +329,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
                                 */
-                                if ($curControllerLower == "dashboard") {
+                                if ($curControllerLower == "default") {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
@@ -855,6 +931,9 @@ License: You must have a valid license purchased only from themeforest(the above
               $(".glyphicon-comment").click(function(){
              $(".chatuserList").toggle();
              });
+              $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
         </script>
        
     </body>

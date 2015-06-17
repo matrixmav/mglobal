@@ -98,20 +98,22 @@ class ReportController extends Controller {
         $pageSize = Yii::app()->params['defaultPageSize'];
         $todayDate = Yii::app()->params['startDate'];
         $fromDate = date('Y-m-d');
-        $status = 1;
+         
         if (!empty($_POST)) {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
-            $status = $_POST['res_filter'];
+            
         }
 
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status = "' . $status . '"' ), 'order' => 'id DESC',
+                'condition' => ('address !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
+        
         $this->render('address', array(
             'dataProvider' => $dataProvider,
         ));
+        
     }
 
     public function actionVerification() {
