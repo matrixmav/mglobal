@@ -91,7 +91,7 @@ class PackageController extends Controller {
         $transactionArray['transactionId'] = $tarnsactionId;
  
         if (count($transactionObject) > 0) {
-            echo "nidhi";exit;
+            
             Transaction::model()->createTransactionPackage($transactionObject,$transactionArray);
         } else {
             
