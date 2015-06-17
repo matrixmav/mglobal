@@ -271,7 +271,7 @@
         var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID;
         alert(dataString);
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "orderadd",
             data: dataString,
             cache: false,
