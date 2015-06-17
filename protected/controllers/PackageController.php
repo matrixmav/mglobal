@@ -77,9 +77,8 @@ class PackageController extends Controller {
         $tarnsactionId = BaseClass::gettransactionID();
         if(!empty($_POST) && $_POST['transactionId']){
             $tarnsactionId = $_POST['transactionId'];
-            Yii::app()->session['transactionId'] = $tarnsactionId;
         }
-        Yii::app()->session['transactionId'] = $tarnsactionId;
+        
         $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
 
         $total = $_POST['totalAmount'] - $_POST['couponDiscount'];
@@ -205,6 +204,7 @@ class PackageController extends Controller {
             </div>
             </div>';
         $SuggestedDomain = "";
+        unset(Yii::app()->session['domain']);
         $userEnteredDomain = Yii::app()->session['domain'];
         if ($userEnteredDomain != '') {
             $doaminArr = explode('.', $userEnteredDomain);
