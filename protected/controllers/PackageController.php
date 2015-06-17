@@ -103,7 +103,7 @@ class PackageController extends Controller {
          
         
         //$transactionObject->used_rp = 0;
-        $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . $tarnsactionId));
+        $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . $transactionObject->id));
 
         $orderArray['transaction_id'] = $transactionObject->id;
         $orderArray['user_id'] = Yii::app()->session['userid'];
@@ -470,7 +470,7 @@ class PackageController extends Controller {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
-                echo "";exit;
+                
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
@@ -587,7 +587,7 @@ class PackageController extends Controller {
 
     public function actionWalletCalc() {
         if ($_REQUEST) {
-            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => Yii::app()->session['transactionid']));
+            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => Yii::app()->session['transactionId']));
             if ($transactionObject) {
                 $transactionObject->paid_amount = $_REQUEST['payableAmount'];
                 $transactionObject->used_rp = $_REQUEST['totalusedRP'];
