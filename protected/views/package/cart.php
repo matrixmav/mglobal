@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="/css/themes/font-awesome.min.css">
 <div class="container">
     <div class="row">
+        <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-
-                    <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span></p>
+                   <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span></p>
                     <div class="contentBlock CartSection" id="cartDiv">
                         <table class="cartItemsWrp table table-condensed">
                             <thead>
@@ -143,9 +143,7 @@
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
-<form action="/package/payment" id="makepayment" method="post">
-<input type="hidden" id="transID" value="" name="transID">
-</form>
+<input type="hidden" id="transID" value="<?php if(!empty($_GET)) { echo $_GET['transactionId'];} ?>" name="transID">
 <script type="text/javascript">
 
     function Couponapply() {
@@ -207,8 +205,9 @@
 
                 if (htmlArr[0] == 1)
                 {
-                    document.getElementById("makepayment").submit();
                     $("#transID").val(htmlArr[1]);
+                    location.href = "/package/payment?tID="+htmlArr[1];
+                    
                 }
             }
         });

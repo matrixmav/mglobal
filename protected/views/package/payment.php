@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="/css/themes/font-awesome.min.css">
+
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">    
+        <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?transactionId=<?php echo $_GET['tID'];?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
+         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
-<div class="sectionWrp paymentOptions clearfix">
-                        <p class="title"><span class="check">2.</span> <span class="txt">Make Payment</span> <span class="edit">edit</span></p>
-                        <div id="paymentOption" style="display:none;">
+                     <div class="sectionWrp summary open">
+                        <p class="title"><span class="check"></span> <span class="txt">Make Payment</span></p>
+                        <div id="paymentOption" style="min-height:150px">
                             <form id="walletform" name="walletform">  
                                 <?php if ($walletObject) { ?>
                                     <div id="walletOption" class="col-sm-4">
@@ -92,7 +94,8 @@
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
-<input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
+<input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id'];?>">
+<input type="hidden" id="transID" value="<?php echo $_GET['tID'];?>">
 <script type="text/javascript">
 function makepayment()
     {

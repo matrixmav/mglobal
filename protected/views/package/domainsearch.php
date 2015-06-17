@@ -10,6 +10,8 @@
 <div class="container domainSearch">
     <div class="row">
         <div class="col-sm-8 col-xs-12 col-lg-8">
+            <a href="#">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
+        <div class="col-sm-8 col-xs-12 col-lg-8">
             <div class="row">
                 <form class="form-inline">
                     <div class="form-group col-sm-12  has-success has-feedback">
