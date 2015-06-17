@@ -143,7 +143,7 @@
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
-<form action="" id="makepayment">
+<form action="/package/payment" id="makepayment" method="post">
 <input type="hidden" id="transID" value="" name="transID">
 </form>
 <script type="text/javascript">
@@ -190,13 +190,11 @@
     function proceedPayment()
     {
         var coupon_discount = $('#coupon_discount_price').val();
+        
         var walletVal = $('#wallet').val();
         var totalAmount = $('#totalAmount').val();
         var transID = $("#transID").val();
-        if(transID == '')
-        {
-           location.href = "/package/domainsearch?package_id="+; 
-        }
+        
         var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID;
         
         $.ajax({
