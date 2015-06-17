@@ -285,6 +285,7 @@
                     $('#editIcon').fadeIn();
                     document.getElementById('paymentOption').style.display = "";
                     document.getElementById('walletOption').style.display = "";
+                    $("#transID").val(htmlArr[1]);
                     
 
 
@@ -372,7 +373,7 @@
                 success: function (html) {
                     if (html == 1)
                     {
-                        totalAmounDiv
+                        
                         $('#totalAmounDiv').fadeIn();
                         $('#actualamount').html('$' + totalAmount);
                         $('#walletamount').html('$' + total);
