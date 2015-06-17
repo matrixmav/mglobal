@@ -478,8 +478,9 @@ class PackageController extends Controller {
 
     public function actionThankYou() {
 
-        if (isset($_GET)) {
-            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
+        if (!(empty($_GET))) {
+            $transactionId = base64_decode($_GET['transaction_id']);
+            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
