@@ -85,13 +85,13 @@ $this->menu=array(
 		),
                 array(
                     'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Refered In &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'( $data->social=="fb") ? "facebook" : ($data->social=="tw" ? "twitter" : "email")',
+                    'header'=>'<span style="white-space: nowrap;">Email &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'( $data->email) ? $data->email:""',
 		),
                array(
-                    'name'=>'created_at',
-                    'header'=>'<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$data->created_at',
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'$data->phone',
 		),
                 
 		array(
