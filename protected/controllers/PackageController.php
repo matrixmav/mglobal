@@ -249,6 +249,17 @@ class PackageController extends Controller {
             'suggestedDomain' => $SuggestedDomain,
         ));
     }
+    
+    /*
+     * function to get make payment
+     */
+    
+    public function actionPayment()
+    {
+         $this->render('payment');
+            
+        //));
+    }
 
     /**
      * Display search domain page 
