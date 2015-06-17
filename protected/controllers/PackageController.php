@@ -498,7 +498,6 @@ class PackageController extends Controller {
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-                echo "<pre>";print_r($orderObject);exit;
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
