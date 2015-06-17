@@ -133,4 +133,40 @@ class Order extends CActiveRecord
         public function getOrderByValue($field, $value){
              return Order::model()->findByAttributes(array($field => $value ));
         }
+        
+        public function addEdit($orderObject,$orderArray) {
+            try {
+                if($orderArray['transaction_id']){
+                    $transactionId = $orderArray['transaction_id'];
+                }
+                if($orderArray['user_id']){
+                    $userId = $orderArray['user_id'];
+                }
+                if($orderArray['domain_price']){
+                    $domainPrice = $orderArray['domain_price'];
+                }
+                if($orderArray['domain']){
+                    $domain = $orderArray['domain'];
+                }
+                if($orderArray['package_id']){
+                    $packageId = $orderArray['package_id'];
+                }
+            
+                $orderObject->user_id = $userId;
+                $orderObject->package_id = $packageId;
+                $orderObject->domain = $domain;
+                $orderObject->domain_price = $domainPrice;
+                $orderObject->transaction_id = $transactionId;
+                $orderObject->status = 0;
+                $orderObject->start_date = new CDbExpression('NOW()');
+                $orderObject->end_date = new CDbExpression('NOW()');
+                $orderObject->updated_at = new CDbExpression('NOW()');
+                $orderObject->save(false);
+            } catch (Exception $ex) {
+                echo $ex->getMessage();exit;
+            }
+            
+            
+            
+        }
 }
