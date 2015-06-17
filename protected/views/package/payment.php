@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?tId=<?php echo $_GET['tId'];?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
+        <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>&tId=<?php echo $_GET['tId'];?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?tId=<?php echo $_GET['tId'];?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
          <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                      <div class="sectionWrp summary open">
@@ -56,7 +56,7 @@
                                         <input type="hidden" name="item_number" value="1">
                                         <input type="hidden" name="credits" value="">
                                         <input type="hidden" name="userid" value="<?php echo Yii::app()->session['userid']; ?>">
-                                        <input type="hidden" name="amount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>" id="ppamount">
+                                        <input type="hidden" name="amount" value="<?php echo number_format($packageObject->amount + Yii::app()->session['amount'],2); ?>" id="ppamount">
                                         <input type="hidden" name="no_shipping" value="1">
                                         <input type="hidden" name="currency_code" value="USD">
                                         <input type="hidden" name="handling" value="0">
@@ -141,13 +141,13 @@ function makepayment()
             if(totalAmount > total)
             {
             var payableAmount = totalAmount - total;
-            $("#ppamount").val(payableAmount);
-            $('#payamount').html('$' + payableAmount);
+            $("#ppamount").val(Math.round(payableAmount).toFixed(2));
+            $('#payamount').html('$' + Math.round(payableAmount).toFixed(2));
             }else{
             var payableAmount = total - totalAmount;
             $('#totalAmount').val(0);
             $('#payamount').html('$0');
-            $("totalusedrp").val(totalAmount);
+            $("totalusedrp").val(Math.round(totalAmount).toFixed(2));
             }
             
             var dataString = 'payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
