@@ -779,7 +779,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
                                     
-                                    "userhasaccess/members" => "Members",
+                                    "UserHasAccess/members" => "Members",
                                    
                                 );
                                 ?>
