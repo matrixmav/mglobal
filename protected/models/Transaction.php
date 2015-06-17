@@ -178,11 +178,13 @@ class Transaction extends CActiveRecord
             return $transactionObjuser;
         }
         
-        public function createTransactionPackage($postDataArray,$transactionArray){
+        public function createTransactionPackage($transactionObject,$transactionArray){
+             
             try {
                 if($transactionArray['transactionId']){
                     $transactionId = $transactionArray['transactionId'];
                 }
+                
                 if($transactionArray['userId']){
                     $userId = $transactionArray['userId'];
                 }
@@ -195,6 +197,7 @@ class Transaction extends CActiveRecord
                 if($transactionArray['paidAmount']){
                     $paidAmount = $transactionArray['paidAmount'];
                 }
+                $couponDiscount = 0;
                 if($transactionArray['couponDiscount']){
                     $couponDiscount = $transactionArray['couponDiscount'];
                 }
