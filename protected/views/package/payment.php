@@ -150,7 +150,7 @@ function makepayment()
             $("totalusedrp").val(Math.round(totalAmount).toFixed(2));
             }
             
-            var dataString = 'payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
+            var dataString = 'transactionId=<?php echo isset($_GET['tId']) ? $_GET['tId'] : "";?>&payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
 
             $.ajax({
                 type: "GET",
