@@ -336,9 +336,10 @@ class BuildTempController extends Controller {
                         $path = Yii::getPathOfAlias('webroot') . "/user/template/"; // absolute path to the directory where zipper.php is in
                         $filenoext = basename($filename, '.zip');  // absolute path to the directory where zipper.php is in (lowercase)
                         $filenoext = basename($filenoext, '.ZIP');  // absolute path to the directory where zipper.php is in (when uppercase)
-                        $fname = time() . $filenoext;
-                        $targetdir = $path . time() . $filenoext; // target directory
-                        $targetzip = $path . time() . $filename; // target zip file
+                        $time = time();
+                        $fname = $time . $filenoext;
+                        $targetdir = $path . $time . $filenoext; // target directory
+                        $targetzip = $path . $time . $filename; // target zip file
 
                         /* create directory if not exists', otherwise overwrite */
                         /* target directory is same as filename without extension */
