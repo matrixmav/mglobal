@@ -220,7 +220,7 @@
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
-<input type="hidden" id="transID" value="<?php echo Yii::app()->session['transactionid']; ?>">
+<input type="hidden" id="transID" value="<?php echo Yii::app()->session['transactionId']; ?>">
 <script type="text/javascript">
 
     function Couponapply() {
@@ -269,7 +269,7 @@
         var totalAmount = $('#totalAmount').val();
         var transID = $("#transID").val();
         var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID;
-        alert(dataString);
+        
         $.ajax({
             type: "POST",
             url: "orderadd",
