@@ -6,9 +6,12 @@
  */
 ?>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">     
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> 
+<?php if($error==''){?>
 <div class="container domainSearch">
     <div class="row">
+        <div class="col-sm-8 col-xs-12 col-lg-8">
+            <a href="javascript:void(0);">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
         <div class="col-sm-8 col-xs-12 col-lg-8">
             <div class="row">
                 <form class="form-inline">
@@ -44,6 +47,13 @@
     <div class="clear80"></div>
 </div>
 <input type="hidden" name="domainset" id="domainset" value="<?php echo Yii::app()->session['domain'];?>">
+<?php }else{?>
+     <div class="container">
+    <div class="row"> 
+   <?php echo "<p class='error'>Sorry! you have not chooseb any package yet. Please select any package</p>"; ?>
+       </div>  
+</div>     
+<?php }?>
   <script>
 function autocomplet()
 {
@@ -103,7 +113,7 @@ if(domainSet=='')
 {
  alert("Please choose any domain first.");return false;  
 }else{
- location.href = '/package/productcart'; 
-}
+location.href = '/package/productcart?tId=<?php echo isset($_GET['tId']) ? $_GET['tId'] : "";?>'; 
+ }
 }
   </script>

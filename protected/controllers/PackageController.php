@@ -26,7 +26,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -76,10 +76,9 @@ class PackageController extends Controller {
         $createdDate = date("Y-m-d");
         $tarnsactionId = BaseClass::gettransactionID();
         if(!empty($_POST) && $_POST['transactionId']){
-            $tarnsactionId = $_POST['transactionId'];
-            Yii::app()->session['transactionId'] = $tarnsactionId;
+           $tarnsactionId = $_POST['transactionId'];
         }
-        Yii::app()->session['transactionId'] = $tarnsactionId;
+        
         $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
 
         $total = $_POST['totalAmount'] - $_POST['couponDiscount'];
@@ -136,9 +135,8 @@ class PackageController extends Controller {
      * Display search domain page 
      */
     public function actionDomainSearch() {
-
-
-
+        
+        $error = "";    
         if (Yii::app()->session['package_id'] == '') {
 
             Yii::app()->session['package_id'] = $_GET['package_id'];
@@ -205,7 +203,8 @@ class PackageController extends Controller {
             </div>
             </div>';
         $SuggestedDomain = "";
-        $userEnteredDomain = Yii::app()->session['domain'];
+        //unset(Yii::app()->session['domain']);
+        $userEnteredDomain = "";
         if ($userEnteredDomain != '') {
             $doaminArr = explode('.', $userEnteredDomain);
             $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $doaminArr[0] . "%'"));
@@ -242,12 +241,31 @@ class PackageController extends Controller {
                 }
             }
         }
-
+        
 
         $this->render('domainsearch', array(
             'rightbar' => $rightbar,
-            'suggestedDomain' => $SuggestedDomain,
+            'suggestedDomain' => $SuggestedDomain,'error'=>$error
         ));
+        
+    }
+    
+    /*
+     * function to get make payment
+     */
+    
+    public function actionPayment()
+    {
+        
+        $loggedInUserId = Yii::app()->session['userid'];
+        $package_id = Yii::app()->session['package_id'];
+        $packageObject = Package::model()->findByPK($package_id);
+        $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
+         $this->render('payment', array(
+            'walletObject' => $walletObject,'packageObject' => $packageObject
+           ));
+            
+        //));
     }
 
     /**
@@ -333,12 +351,10 @@ class PackageController extends Controller {
 
     public function actionProductCart() {
         $package_id = Yii::app()->session['package_id'];
-
         $packageObject = Package::model()->findByPK($package_id);
         $loggedInUserId = Yii::app()->session['userid'];
-        $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
         $this->render('cart', array(
-            'packageObject' => $packageObject, 'walletObject' => $walletObject
+            'packageObject' => $packageObject
         ));
     }
 
@@ -463,24 +479,27 @@ class PackageController extends Controller {
 
     public function actionThankYou() {
 
-        if (isset($_GET)) {
-            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_GET['transaction_id']));
-            $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
+        if (!(empty($_GET))) {
+             
+            $transactionId = $_GET['transaction_id'];
+            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
+            $userObject = User::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
-                
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
                 $orderObject->update();
                 $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
+                
                 foreach ($MTObject as $mtObject) {
                     $mtObject->status = 1;
                     $mtObject->update();
                     $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mtObject->wallet_id));
+                    $MTObject1->fund - $mtObject->fund;
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
@@ -574,9 +593,10 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['transaction_id']);
                 unset(Yii::app()->session['domain']);
             }
+            $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
+        
         }
 
-        $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
     }
@@ -587,7 +607,9 @@ class PackageController extends Controller {
 
     public function actionWalletCalc() {
         if ($_REQUEST) {
-            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => Yii::app()->session['transactionId']));
+            
+            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_REQUEST['transactionId']));
+            
             if ($transactionObject) {
                 $transactionObject->paid_amount = $_REQUEST['payableAmount'];
                 $transactionObject->used_rp = $_REQUEST['totalusedRP'];
@@ -616,7 +638,8 @@ class PackageController extends Controller {
                 $moneytransferObject->status = 0;
                 $moneytransferObject->created_at = date('Y-m-d');
                 $moneytransferObject->save(false);
-
+                
+                
                 /* } */
             }
             echo 1;
