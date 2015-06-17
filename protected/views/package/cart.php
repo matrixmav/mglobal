@@ -278,7 +278,7 @@
 
                 if (htmlArr[0] == 1)
                 {
-                    $('#return').val('http://mglobally.maverickinfosoft.com/package/thankyou?transaction_id=' + htmlArr[1]);
+                    $('#return').val('http://localhost/package/thankyou?transaction_id=' + htmlArr[1]);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
                     document.getElementById('paymentOption').style.display = "";
