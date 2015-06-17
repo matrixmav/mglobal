@@ -806,7 +806,11 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
                 <div class="page-content">
+                    <div class="row">
+                            <div class="col-md-12">
                     <span class="home-link" style="font-size:14px;float:right;">Registered Date : <?php echo $userObject->created_at;?> |  <?php echo date('Y-m-d H:i:s', strtotime('now'))."\n";?> </span>
+                            </div>
+                    </div>
                     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
                     <!-- /.modal -->
                     <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
