@@ -267,7 +267,9 @@
         var coupon_discount = $('#coupon_discount_price').val();
         var walletVal = $('#wallet').val();
         var totalAmount = $('#totalAmount').val();
-        var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&coupon_discount=' + coupon_discount;
+        var transID = $("#transID").val();
+        var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID;
+        alert(dataString);
         $.ajax({
             type: "GET",
             url: "orderadd",
