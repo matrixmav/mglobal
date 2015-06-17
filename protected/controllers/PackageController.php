@@ -135,7 +135,14 @@ class PackageController extends Controller {
      * Display search domain page 
      */
     public function actionDomainSearch() {
-
+        $error = "";
+        if(empty($_GET))
+        {
+            $error = 1;
+            $this->render('domainsearch', array(
+           'error'=>$error
+        ));
+        }else{    
         if (Yii::app()->session['package_id'] == '') {
 
             Yii::app()->session['package_id'] = $_GET['package_id'];
@@ -240,12 +247,13 @@ class PackageController extends Controller {
                 }
             }
         }
-
+        
 
         $this->render('domainsearch', array(
             'rightbar' => $rightbar,
-            'suggestedDomain' => $SuggestedDomain,
+            'suggestedDomain' => $SuggestedDomain,'error'=>$error
         ));
+        }
     }
     
     /*

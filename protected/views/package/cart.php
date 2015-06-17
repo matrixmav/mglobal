@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="/css/themes/font-awesome.min.css">
-<div class="container">
+
+        <?php if(Yii::app()->session['package_id']!=''){?>
+   <div class="container">
     <div class="row">
         <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>&tId=<?php if(!empty($_GET)) { echo $_GET['tId']; }?> ">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
         <div class="col-lg-12">    
@@ -133,7 +135,8 @@
                 </div>
             </div>
         </div>
-    </div>
+         
+    </div>  
 </div>
 
 <input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
@@ -144,6 +147,13 @@
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
 <input type="hidden" id="transID" value="<?php if(!empty($_GET)) { echo $_GET['tId'];} ?>" name="tId">
+<?php }else{?>
+     <div class="container">
+    <div class="row"> 
+   <?php echo "<p class='error'>Sorry! your cart is empty</p>"; ?>
+       </div>  
+</div>     
+<?php }?>
 <script type="text/javascript">
 
     function Couponapply() {
