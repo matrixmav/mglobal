@@ -225,12 +225,13 @@ class UserController extends Controller {
             if (!empty($userObject)) {
                 $condition = 'type = ' . $walletType . ' AND user_id = ' . $userObject->id . " AND status = 1";
             }
+            
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ($condition), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),));
         }
-        //print_r($dataProvider); exit;
+        //echo "<pre>";print_r($dataProvider); exit;
         $this->render('walletList', array(
             'dataProvider' => $dataProvider,
             'walletType' => $walletType
