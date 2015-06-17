@@ -76,7 +76,7 @@ class PackageController extends Controller {
         $createdDate = date("Y-m-d");
         $tarnsactionId = BaseClass::gettransactionID();
         if(!empty($_POST) && $_POST['transactionId']){
-            $tarnsactionId = base64_decode($_POST['transactionId']);
+           $tarnsactionId = $_POST['transactionId'];
         }
         
         $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
@@ -116,7 +116,7 @@ class PackageController extends Controller {
             $orderObject = new Order;
             Order::model()->addEdit($orderObject,$orderArray);
         }
-        echo "1-" . base64_encode($tarnsactionId);
+        echo "1-" . $tarnsactionId;
     }
 
     public function actionDomainAdd() {
@@ -135,8 +135,6 @@ class PackageController extends Controller {
      * Display search domain page 
      */
     public function actionDomainSearch() {
-
-
 
         if (Yii::app()->session['package_id'] == '') {
 
@@ -479,7 +477,8 @@ class PackageController extends Controller {
     public function actionThankYou() {
 
         if (!(empty($_GET))) {
-            $transactionId = base64_decode($_GET['transaction_id']);
+            
+            $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {

@@ -105,7 +105,7 @@ if(domainSet=='')
 {
  alert("Please choose any domain first.");return false;  
 }else{
- location.href = '/package/productcart'; 
-}
+location.href = '/package/productcart?tId=<?php echo isset($_GET['tId']) ? $_GET['tId'] : "";?>'; 
+ }
 }
   </script>

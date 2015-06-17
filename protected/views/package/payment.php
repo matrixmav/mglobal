@@ -61,7 +61,7 @@
                                         <input type="hidden" name="currency_code" value="USD">
                                         <input type="hidden" name="handling" value="0">
                                         <input type="hidden" name="cancel_return" value="">
-                                        <input type="hidden" id="return" name="return" value="<?php //echo Yii::app()->params['returnurl']; ?>http://localhost/package/thankyou/transaction_id=<?php echo $_GET['tId']; ?>">
+                                        <input type="hidden" id="return" name="return" value="<?php //echo Yii::app()->params['returnurl']; ?>http://localhost/package/thankyou?transaction_id=<?php echo $_GET['tId']; ?>">
                                     </form>
                                 </div>
                                 <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
