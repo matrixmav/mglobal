@@ -86,3 +86,85 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function makepayment()
+    {
+        var valx = $('input[name=myRadio]:checked').val();
+        var group = document.walletform.myRadio;
+         var totalusedrp = $("#totalusedrp").val();
+            var transID = $("#transID").val();
+            var totalamount = $("#totalAmount").val();
+            if (totalamount==0)
+            {
+                location.href = "/package/thankyou?transaction_id=" + transID;
+            } else {
+                
+                if (group.checked == false)
+                {
+                    alert('Please choose payment gateway.');
+                    return false;
+                }
+           
+                if (valx == 'paypal')
+                {
+                    document.getElementById("frmPayPal").submit();
+                }
+            }
+
+        }
+        function walletamountcalculation(ID, key)
+        {
+            str1 = $('#walletused').val();
+            var str = ID + '-' + key + ',' + str1;
+            $('#walletused').val(str);
+            var input = document.getElementsByName("wallet_type");
+            var wallet = $("#walletused").val();
+            var totalAmount = $('#totalAmount').val();
+            var total = 0;
+            for (var i = 0; i < input.length; i++) {
+                if (input[i].checked) {
+                    total += parseFloat(input[i].value);
+                }
+            }
+            $("#totalusedrp").val(total);
+            var totalusedRP = $("#totalusedrp").val();
+            if(totalAmount > total)
+            {
+            var payableAmount = totalAmount - total;
+            $("#ppamount").val(payableAmount);
+            $('#payamount').html('$' + payableAmount);
+            }else{
+            var payableAmount = total - totalAmount;
+            $('#totalAmount').val(0);
+            $('#payamount').html('$0');
+            $("totalusedrp").val(totalAmount);
+            }
+            
+            var dataString = 'payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
+
+            $.ajax({
+                type: "GET",
+                url: "/package/walletcalc",
+                data: dataString,
+                cache: false,
+                success: function (html) {
+                    if (html == 1)
+                    {
+                        
+                        $('#totalAmounDiv').fadeIn();
+                        $('#actualamount').html('$' + totalAmount);
+                        $('#walletamount').html('$' + total);
+                        //$('#payamount').html('$' + payableAmount);
+                        $('#cartDiv').fadeOut();
+                        $('#editIcon').fadeIn();
+
+                        //document.getElementById('walletOption').style.display = "none";
+                        //document.getElementById('paymentOption').style.display = "block";
+                    }
+                }
+            });
+
+    }
+
+
+</script>
