@@ -79,22 +79,22 @@ class PackageController extends Controller {
             $tarnsactionId = $_POST['transactionId'];
         }
         
-        $transactionObject = new Transaction;
-         
         $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
 
-        $total = $_REQUEST['totalAmount'] - $_REQUEST['couponDiscount'];
+        $total = $_POST['totalAmount'] - $_POST['couponDiscount'];
         
         $transactionArray['paidAmount'] = $total;
         $transactionArray['userId'] = Yii::app()->session['userid'];
         $transactionArray['mode'] = 'paypal';
         $transactionArray['actualAmount'] = $_POST['totalAmount'];
         $transactionArray['couponDiscount'] = $_POST['couponDiscount'];
-        
-
-        if (count($transactionObject1) > 0) {
+        $transactionArray['transactionId'] = $tarnsactionId;
+ 
+        if (count($transactionObject) > 0) {
+            echo "nidhi";exit;
             Transaction::model()->createTransactionPackage($transactionObject,$transactionArray);
         } else {
+            
             $transactionObject = new Transaction;
             Transaction::model()->createTransactionPackage($transactionObject,$transactionArray);
         }
@@ -102,7 +102,7 @@ class PackageController extends Controller {
          
         
         //$transactionObject->used_rp = 0;
-        $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transaction_id']));
+        $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . $tarnsactionId));
 
         $orderArray['transaction_id'] = $transactionObject->id;
         $orderArray['user_id'] = Yii::app()->session['userid'];
