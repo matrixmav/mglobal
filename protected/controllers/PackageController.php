@@ -135,14 +135,8 @@ class PackageController extends Controller {
      * Display search domain page 
      */
     public function actionDomainSearch() {
-        $error = "";
-        if(empty($_GET))
-        {
-            $error = 1;
-            $this->render('domainsearch', array(
-           'error'=>$error
-        ));
-        }else{    
+        
+        $error = "";    
         if (Yii::app()->session['package_id'] == '') {
 
             Yii::app()->session['package_id'] = $_GET['package_id'];
@@ -253,7 +247,7 @@ class PackageController extends Controller {
             'rightbar' => $rightbar,
             'suggestedDomain' => $SuggestedDomain,'error'=>$error
         ));
-        }
+        
     }
     
     /*
@@ -262,6 +256,7 @@ class PackageController extends Controller {
     
     public function actionPayment()
     {
+        
         $loggedInUserId = Yii::app()->session['userid'];
         $package_id = Yii::app()->session['package_id'];
         $packageObject = Package::model()->findByPK($package_id);
@@ -485,25 +480,26 @@ class PackageController extends Controller {
     public function actionThankYou() {
 
         if (!(empty($_GET))) {
-            
+             
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
-            $userObject = Transaction::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
+            $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+            if ($transactionObject->status == 1) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
-                
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
                 $orderObject->update();
                 $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
+                var_dump($MTObject1);exit;
                 foreach ($MTObject as $mtObject) {
                     $mtObject->status = 1;
                     $mtObject->update();
                     $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mtObject->wallet_id));
+                    var_dump($MTObject1);exit;
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
@@ -597,9 +593,10 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['transaction_id']);
                 unset(Yii::app()->session['domain']);
             }
+            $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
+        
         }
 
-        $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
     }
@@ -610,7 +607,9 @@ class PackageController extends Controller {
 
     public function actionWalletCalc() {
         if ($_REQUEST) {
-            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => Yii::app()->session['transactionId']));
+            
+            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $_REQUEST['transactionId']));
+            
             if ($transactionObject) {
                 $transactionObject->paid_amount = $_REQUEST['payableAmount'];
                 $transactionObject->used_rp = $_REQUEST['totalusedRP'];
@@ -639,7 +638,8 @@ class PackageController extends Controller {
                 $moneytransferObject->status = 0;
                 $moneytransferObject->created_at = date('Y-m-d');
                 $moneytransferObject->save(false);
-
+                
+                
                 /* } */
             }
             echo 1;
