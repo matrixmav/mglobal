@@ -74,77 +74,49 @@ class PackageController extends Controller {
     function actionOrderAdd() {
 
         $createdDate = date("Y-m-d");
-        $tarnsactionID = BaseClass::gettransactionID();
-        $transactionObject = new Transaction;
-        if (!isset(Yii::app()->session['transactionid']) && Yii::app()->session['transactionid']=='') {
-            Yii::app()->session['transactionid'] = $tarnsactionID;
-        } 
-         
-        $transactionObject1 = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . Yii::app()->session['transactionid']));
-
-        $total = $_REQUEST['totalAmount'] - $_REQUEST['coupon_discount'];
-
-        if (count($transactionObject1) == 0) {
-            $transactionObject->user_id = Yii::app()->session['userid'];
-            $transactionObject->transaction_id = Yii::app()->session['transactionid'];
-            $transactionObject->mode = 'paypal';
-            $transactionObject->actual_amount = $_REQUEST['totalAmount'];
-            $transactionObject->paid_amount = $total;
-            $transactionObject->coupon_discount = $_REQUEST['coupon_discount'];
-            $transactionObject->total_rp = 0;
-            $transactionObject->used_rp = 0;
-            $transactionObject->status = 0;
-            $transactionObject->gateway_id = 1;
-            $transactionObject->created_at = new CDbExpression('NOW()');
-            $transactionObject->save(false);
-            Yii::app()->session['transaction_id'] = $transactionObject->id;
-            
-        } else {
-
-            $transactionObject1->transaction_id = Yii::app()->session['transactionid'];
-            $transactionObject1->mode = 'paypal';
-            $transactionObject1->actual_amount = $_REQUEST['totalAmount'];
-            $transactionObject1->paid_amount = $total;
-            $transactionObject1->coupon_discount = $_REQUEST['coupon_discount'];
-            $transactionObject1->total_rp = 0;
-            $transactionObject1->used_rp = 0;
-            $transactionObject1->status = 0;
-            $transactionObject1->gateway_id = 1;
-            $transactionObject1->updated_at = new CDbExpression('NOW()');
-            $transactionObject1->update();
-            Yii::app()->session['transaction_id'] = $transactionObject1->id;
+        $tarnsactionId = BaseClass::gettransactionID();
+        if(!empty($_POST) && $_POST['transactionId']){
+            $tarnsactionId = $_POST['transactionId'];
         }
+        
+        $transactionObject = new Transaction;
+         
+        $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
+
+        $total = $_REQUEST['totalAmount'] - $_REQUEST['couponDiscount'];
+        
+        $transactionArray['paidAmount'] = $total;
+        $transactionArray['userId'] = Yii::app()->session['userid'];
+        $transactionArray['mode'] = 'paypal';
+        $transactionArray['actualAmount'] = $_POST['totalAmount'];
+        $transactionArray['couponDiscount'] = $_POST['couponDiscount'];
+        
+
+        if (count($transactionObject1) > 0) {
+            Transaction::model()->createTransactionPackage($transactionObject,$transactionArray);
+        } else {
+            $transactionObject = new Transaction;
+            Transaction::model()->createTransactionPackage($transactionObject,$transactionArray);
+        }
+         
          
         
         //$transactionObject->used_rp = 0;
-        $orderObject = new Order;
-        $orderObject1 = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transaction_id']));
+        $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . Yii::app()->session['transaction_id']));
 
-        if (count($orderObject1) > 0) {
-            $orderObject1->user_id = Yii::app()->session['userid'];
-            $orderObject1->package_id = Yii::app()->session['package_id'];
-            $orderObject1->domain = Yii::app()->session['domain'];
-            $orderObject1->domain_price = Yii::app()->session['amount'];
-            $orderObject1->transaction_id = Yii::app()->session['transaction_id'];
-            $orderObject1->status = 0;
-            $orderObject1->start_date = new CDbExpression('NOW()');
-            $orderObject1->end_date = new CDbExpression('NOW()');
-            $orderObject1->updated_at = new CDbExpression('NOW()');
-            $orderObject1->update();
+        $orderArray['transaction_id'] = $transactionObject->id;
+        $orderArray['user_id'] = Yii::app()->session['userid'];
+        $orderArray['domain_price'] = Yii::app()->session['amount'];
+        $orderArray['domain'] = Yii::app()->session['domain'];
+        $orderArray['package_id'] = Yii::app()->session['package_id'];
+        
+        if (count($orderObject) > 0) {
+            Order::model()->addEdit($orderObject,$orderArray);
         } else {
-            $orderObject->user_id = Yii::app()->session['userid'];
-            $orderObject->package_id = Yii::app()->session['package_id'];
-            $orderObject->domain = Yii::app()->session['domain'];
-            $orderObject->domain_price = Yii::app()->session['amount'];
-            $orderObject->transaction_id = Yii::app()->session['transaction_id'];
-            $orderObject->status = 0;
-            $orderObject->start_date = new CDbExpression('NOW()');
-            $orderObject->end_date = new CDbExpression('NOW()');
-            $orderObject->created_at = new CDbExpression('NOW()');
-            $orderObject->save(false);
+            $orderObject = new Order;
+            Order::model()->addEdit($orderObject,$orderArray);
         }
-
-        echo "1-" . Yii::app()->session['transactionid'];
+        echo "1-" . $tarnsactionId;
     }
 
     public function actionDomainAdd() {
@@ -497,6 +469,7 @@ class PackageController extends Controller {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
+                echo "";exit;
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $orderObject->status = 1;
                 $orderObject->start_date = date('Y-m-d');
