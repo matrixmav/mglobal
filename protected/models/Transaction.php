@@ -177,4 +177,41 @@ class Transaction extends CActiveRecord
             }
             return $transactionObjuser;
         }
+        
+        public function createTransactionPackage($postDataArray,$transactionArray){
+            try {
+                if($transactionArray['transactionId']){
+                    $transactionId = $transactionArray['transactionId'];
+                }
+                if($transactionArray['userId']){
+                    $userId = $transactionArray['userId'];
+                }
+                if($transactionArray['mode']){
+                    $mode = $transactionArray['mode'];
+                }
+                if($transactionArray['actualAmount']){
+                    $actualAmount = $transactionArray['actualAmount'];
+                }
+                if($transactionArray['paidAmount']){
+                    $paidAmount = $transactionArray['paidAmount'];
+                }
+                if($transactionArray['couponDiscount']){
+                    $couponDiscount = $transactionArray['couponDiscount'];
+                }
+            $transactionObject->user_id = $userId;
+            $transactionObject->transaction_id = $transactionId;
+            $transactionObject->mode = $mode;
+            $transactionObject->actual_amount = $actualAmount;
+            $transactionObject->paid_amount = $paidAmount;
+            $transactionObject->coupon_discount = $couponDiscount;
+            $transactionObject->total_rp = 0;
+            $transactionObject->used_rp = 0;
+            $transactionObject->status = 0;
+            $transactionObject->gateway_id = 1;
+            $transactionObject->created_at = new CDbExpression('NOW()');
+            $transactionObject->save(false);  
+            }catch (Exception $ex) {
+                echo $ex->getMessage();exit;
+            }
+        }
 }
