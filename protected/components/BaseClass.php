@@ -127,7 +127,7 @@ class BaseClass extends Controller {
 
     public static function gettransactionID() {
 
-        $transactionObject = Transaction::model()->find(array('order' => 'id DESC'));
+        $transactionObject = Transaction::model()->findByAttributes(array('order' => 'id DESC'));
 
         if (!empty($transactionObject)) {
             $lastid = explode(Yii::app()->params['transactionid'], $transactionObject->transaction_id);
