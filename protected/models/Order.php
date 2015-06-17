@@ -143,6 +143,7 @@ class Order extends CActiveRecord
                 if($orderArray['user_id']){
                     $userId = $orderArray['user_id'];
                 }
+                $domainPrice = 0;
                 if($orderArray['domain_price']){
                     $domainPrice = $orderArray['domain_price'];
                 }
