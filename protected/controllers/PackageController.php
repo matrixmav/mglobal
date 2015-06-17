@@ -204,8 +204,8 @@ class PackageController extends Controller {
             </div>
             </div>';
         $SuggestedDomain = "";
-        unset(Yii::app()->session['domain']);
-        $userEnteredDomain = Yii::app()->session['domain'];
+        //unset(Yii::app()->session['domain']);
+        $userEnteredDomain = "";
         if ($userEnteredDomain != '') {
             $doaminArr = explode('.', $userEnteredDomain);
             $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $doaminArr[0] . "%'"));
