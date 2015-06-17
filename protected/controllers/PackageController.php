@@ -26,7 +26,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -256,7 +256,13 @@ class PackageController extends Controller {
     
     public function actionPayment()
     {
-         $this->render('payment');
+        $loggedInUserId = Yii::app()->session['userid'];
+        $package_id = Yii::app()->session['package_id'];
+        $packageObject = Package::model()->findByPK($package_id);
+        $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
+         $this->render('payment', array(
+            'walletObject' => $walletObject,'packageObject' => $packageObject
+           ));
             
         //));
     }
@@ -344,12 +350,10 @@ class PackageController extends Controller {
 
     public function actionProductCart() {
         $package_id = Yii::app()->session['package_id'];
-
         $packageObject = Package::model()->findByPK($package_id);
         $loggedInUserId = Yii::app()->session['userid'];
-        $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
         $this->render('cart', array(
-            'packageObject' => $packageObject, 'walletObject' => $walletObject
+            'packageObject' => $packageObject
         ));
     }
 
