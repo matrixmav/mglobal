@@ -135,6 +135,7 @@ class Order extends CActiveRecord
         }
         
         public function addEdit($orderObject,$orderArray) {
+             
             try {
                 if($orderArray['transaction_id']){
                     $transactionId = $orderArray['transaction_id'];
