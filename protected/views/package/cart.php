@@ -143,7 +143,9 @@
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
-<input type="hidden" id="transID" value="<?php //echo Yii::app()->session['transactionId']; ?>">
+<form action="" id="makepayment">
+<input type="hidden" id="transID" value="" name="transID">
+</form>
 <script type="text/javascript">
 
     function Couponapply() {
@@ -207,18 +209,8 @@
 
                 if (htmlArr[0] == 1)
                 {
-
-                    $('#return').val('http://demo.mglobally.com/package/thankyou?transaction_id=' + htmlArr[1]);
-
-                    $('#cartDiv').fadeOut();
-                    $('#editIcon').fadeIn();
-                    location.href = "/package/package/payment/"
-                    //document.getElementById('paymentOption').style.display = "";
-                    //document.getElementById('walletOption').style.display = "";
+                    document.getElementById("makepayment").submit();
                     $("#transID").val(htmlArr[1]);
-                    
-
-
                 }
             }
         });
