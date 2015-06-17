@@ -143,7 +143,7 @@
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
-<input type="hidden" id="transID" value="<?php if(!empty($_GET)) { echo $_GET['transactionId'];} ?>" name="transID">
+<input type="hidden" id="transID" value="<?php if(!empty($_GET)) { echo $_GET['tId'];} ?>" name="tId">
 <script type="text/javascript">
 
     function Couponapply() {
@@ -206,7 +206,7 @@
                 if (htmlArr[0] == 1)
                 {
                     $("#transID").val(htmlArr[1]);
-                    location.href = "/package/payment?tID="+htmlArr[1];
+                    location.href = "/package/payment?tId="+htmlArr[1];
                     
                 }
             }

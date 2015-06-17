@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?transactionId=<?php echo $_GET['tID'];?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
+        <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?tId=<?php echo $_GET['tId'];?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
          <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                      <div class="sectionWrp summary open">
@@ -61,7 +61,7 @@
                                         <input type="hidden" name="currency_code" value="USD">
                                         <input type="hidden" name="handling" value="0">
                                         <input type="hidden" name="cancel_return" value="">
-                                        <input type="hidden" id ="return" name="return" value="<?php echo Yii::app()->params['returnurl']; ?>transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
+                                        <input type="hidden" id ="return" name="return" value="<?php echo Yii::app()->params['returnurl']; ?>/transaction_id=<?php echo Yii::app()->session['transactionid']; ?>">
                                     </form>
                                 </div>
                                 <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
@@ -95,7 +95,7 @@
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id'];?>">
-<input type="hidden" id="transID" value="<?php echo $_GET['tID'];?>">
+<input type="hidden" id="transID" value="<?php echo $_GET['tId'];?>">
 <script type="text/javascript">
 function makepayment()
     {
