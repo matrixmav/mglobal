@@ -102,7 +102,7 @@ $this->breadcrumbs = array(
     $('#email_error').html("");   
     if(fundFinal < totalPaid)
     {
-       $('#email_error').html("You don't have sufficient amount to transfer. Please reduce amount"); 
+       $('#email_error').html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
        return false;
     }
     
