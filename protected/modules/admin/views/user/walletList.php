@@ -38,6 +38,7 @@ if(!empty($_GET) && $_GET['successmsg']=='2'){
     </div>
     <?php $walletList = BaseClass::getWalletList(); ?>
     <select class="customeSelect howDidYou form-control input-medium select2me confirmBtn" id="ui-id-5" name="walletType">
+        <option value="">All Wallet</option>
         <?php  foreach ($walletList as $key=>$value) { ?>
         <option value="<?php echo $key;?>" <?php echo ($walletType == $key)?"selected":"";?> ><?php echo $value;?></option>
         <?php } ?>

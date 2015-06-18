@@ -151,9 +151,10 @@ License: You must have a valid license purchased only from themeforest(the above
                 }
             });
 
-            $(function () {
-                $('.datepicker1').datepicker({
-                    dateFormat: 'dd/mm/yyyy'
+            jQuery(document).ready(function () {
+                $('#date').datepicker({
+                    dateFormat: 'dd/mm/yyyy',
+                    maxDate:"+2Y"
                 });
             });
              

@@ -16,7 +16,7 @@ if(!empty($success)){
 }
 
 ?>
-<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/userhasaccess/memberaccess?id=<?php echo (!empty($_GET) && $_GET['id']!='') ? $_GET['id']: "";?>" method="post" onsubmit="return validateForm()">
+<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/UserHasAccess/memberaccess?id=<?php echo (!empty($_GET) && $_GET['id']!='') ? $_GET['id']: "";?>" method="post" onsubmit="return validateForm()">
 <input type="hidden" id="admin_id" class="form-control" name="admin_id" readonly="readonly" value="<?php echo (!empty($_GET) && $_GET['id']!='') ? $_GET['id']: "0";?>">
 <div class="col-md-12 form-group">
     <label class="col-md-2">User Name: </label>

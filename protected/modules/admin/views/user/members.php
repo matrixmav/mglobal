@@ -22,7 +22,7 @@ $this->breadcrumbs = array(
 
     <div class="expiration margin-topDefault confirmMenu">
 
-        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/userhasaccess/members" class="form-inline">
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/UserHasAccess/members" class="form-inline">
             <div class="input-group form-group" >
                 <?php
             $statusId = 0;
@@ -111,12 +111,12 @@ $this->breadcrumbs = array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/userhasaccess/changeapprovalstatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/UserHasAccess/changeapprovalstatus", array("id"=>$data->id))',
                         ),
                          'Access' => array(
                             'label' => Yii::t('translation', 'Member Access'),
                             'options' => array('class' => 'fa fa-success btn default green delete'),
-                            'url' => 'Yii::app()->createUrl("admin/userhasaccess/memberaccess", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/UserHasAccess/memberaccess", array("id"=>$data->id))',
                         ),
                          
                     ),

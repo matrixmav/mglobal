@@ -594,7 +594,9 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['domain']);
             }
             $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
-        
+            echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
+
+
         }
 
         $this->render('thankyou', array('successMsg' => $successMsg

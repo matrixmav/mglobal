@@ -123,7 +123,7 @@ class UserHasAccessController extends Controller {
                 $userprofileObject->status = 1;
             }
             $userprofileObject->save(false);
-            $this->redirect(array('/admin/userhasaccess/members', 'successMsg' => 1));
+            $this->redirect(array('/admin/UserHasAccess/members', 'successMsg' => 1));
         }
     }
     

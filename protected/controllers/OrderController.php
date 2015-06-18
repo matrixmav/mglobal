@@ -325,7 +325,7 @@ class OrderController extends Controller {
         if (!empty($userhasObject) && $userhasObject->publish == 1) {
             $title = '<a href="' . $data['domain'] . '" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
         } else {
-            $title = '<a href="/buildtemp/templates/?id=' . $data['id'] . '" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>';
+            $title = '<a href="/buildtemp/templates/?id=' . $data->id . '" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>';
         }
         }else{
         $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
@@ -335,12 +335,13 @@ class OrderController extends Controller {
     }
     
       protected function GetInvoiceButtonTitle($data, $row) {
-        $userId = Yii::app()->session['userid'];
+         $id = $data->id;
+         $userId = Yii::app()->session['userid'];
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
         if($orderObject->status==1)
         {
-        $title = '<a href="/order/invoice?id="'.$data['id'].' title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
+        $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
         }else{
         $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
          }

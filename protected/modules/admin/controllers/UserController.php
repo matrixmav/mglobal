@@ -209,22 +209,45 @@ class UserController extends Controller {
 //           $roomObject = Wallet::model()->with('user')->findByAttributes(array('name'=>1,'status'=>1));
 //            $roomOptionCondition = array('condition' => 'room_id =' . $roomId);
 
-        $walletType = 1; //Cash wallet
+        $walletType = "";
+        //Cash wallet
         if (!empty($_POST['walletType'])) {
-            $walletType = $_POST['walletType'];
-        }
+             $walletType = $_POST['walletType'];
+        if($walletType !='')
+        {
+            $wallet = 'type = "'.$walletType.'"';
+        }else{
+            $wallet = 'type IN (1,2,3)'; 
+        }   
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('type = ' . $walletType . ' AND status = 1' ), 'order' => 'id DESC',
+                'condition' => ($wallet.'AND status = 1' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
-
+        }  
+            $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('type IN (1,2,3) AND status = 1' ), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));    
+            
+         
         if (!empty($_POST)) {
-
+            $walletType = $_POST['walletType'];
+        if($walletType !='')
+        {
+            $wallet = 'type = "'.$walletType.'"';
+        }else{
+            $wallet = 'type IN (1,2,3)'; 
+        }   
+            $userObject = "";
+          if(!empty($_POST['search']))
+          {
             $userObject = User::model()->findByAttributes(array('name' => $_POST['search']));
-            $condition = 'type = ' . $walletType . " AND status = 1";
+          }          
+            $condition = $wallet. " AND status = 1";
             if (!empty($userObject)) {
-                $condition = 'type = ' . $walletType . ' AND user_id = ' . $userObject->id . " AND status = 1";
+                $condition = $wallet.' AND user_id = ' . $userObject->id . " AND status = 1";
             }
+  
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ($condition), 'order' => 'id DESC',
