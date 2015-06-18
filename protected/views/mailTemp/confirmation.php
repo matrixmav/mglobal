@@ -5,7 +5,7 @@
           <tbody>
             <tr>
             	<td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
-                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello Sandeep</td>
+                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello <?php echo $model->full_name;?></td>
                 <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
             </tr>
             </tbody>
@@ -35,14 +35,14 @@
             </tr>
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                  Your email address <a href="" style="color:#f15c2b; display:inline">xyz@gmail.com</a>, has been set as the Registrant contact on <p style="color:#f15c2b; display:inline">mglobally </p>.com for UserName :<strong> xyz </strong> . To verify your email address, please click on the following link.
+                  Your email address <a href="" style="color:#f15c2b; display:inline"><?php echo $model->email;?></a>, has been set as the Registrant contact on <p style="color:#f15c2b; display:inline">mglobally </p>.com for UserName :<strong> <?php echo $model->name;?> </strong> . To verify your email address, please click on the following link.
                   </td>
                   <tr>
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
             <tr>
             	 <td height=""  valign="middle" align="left" style="line-height:22px; color: #3fb90f; font-size:16px; font-family:'Nunito'">
-                 <a href="" style="color:#3fb90f; display:inline">https://www.xyz.com/act-un/xyz</a>
+                 <a href="" style="color:#3fb90f; display:inline"><a href="<?php echo Yii::app()->getBaseUrl(true);?>/user/confirm?activation_key=<?php echo $rand; ?>"></a>
                   </td>
             </tr>
             <tr>
