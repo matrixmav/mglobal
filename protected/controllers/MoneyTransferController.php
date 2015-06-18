@@ -183,6 +183,7 @@ class MoneyTransferController extends Controller {
         $adminid = Yii::app()->params['adminId'];
         $userid = Yii::app()->session['userid'];
         $createdtime = new CDbExpression('NOW()');
+        $error = "";
         if (isset($_POST['confirm'])) {
             $userObject = User::model()->findByAttributes(array('id' => $userid));
             if ($userObject->master_pin == md5($_POST['master_code'])) {
@@ -258,11 +259,11 @@ class MoneyTransferController extends Controller {
                 //exit();
                 $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObject->id));
             } else {
-
-                $this->redirect(array('MoneyTransfer/status', 'status' => 'F'));
+                $error = "Incorrect master pin";
+                //$this->redirect(array('MoneyTransfer/status', 'status' => 'F'));
             }
         }
-        $this->render('confirm');
+        $this->render('confirm',array('error'=> $error));
     }
 
     public function actionStatus() {
