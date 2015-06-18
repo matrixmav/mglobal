@@ -131,7 +131,13 @@ class BaseClass extends Controller {
 
         if (count($transactionObject) > 0) {
             $transactionObject = $transactionObject[0];
+            $length = strlen($transactionObject->transaction_id);
+            if($length ==5)
+            {
             $lastid = substr($transactionObject->transaction_id,2,5);
+            }else{
+             $lastid = substr($transactionObject->transaction_id,2,6);   
+            }
             $incementID = $lastid[1] + 1;
             $generateid = Yii::app()->params['transactionid'] . $incementID . Yii::app()->params['transactionid'];
         } else {
