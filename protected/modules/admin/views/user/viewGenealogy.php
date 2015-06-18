@@ -29,7 +29,7 @@ echo '</div>
 $empty = "sm-blank" ; //no Package
 ?>
 
-    <div class="col-sm-8 col-xs-12">
+<div class="col-sm-8 col-xs-12">
         <div class="row mytree">
             <ul>
                 <li>
@@ -47,22 +47,28 @@ $empty = "sm-blank" ; //no Package
                                 <?php if(count($genealogyLeftLeftListObject) > 0 ){ 
                                     $getColor =  BaseClass::getPackageName($genealogyLeftLeftListObject[0]->user_id);
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></span></div></a></li>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></a></li>
                                 <?php }else{ ?>
                                      <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>    
                                 <?php } ?>     
 
                                 <?php $genealogyLeftRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'right'"); ?>   
                                 <?php if(count($genealogyLeftRighttListObject) > 0 ){ 
-                                      $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
+                                   echo  $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></span></div></a></li>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></a></li>
                                 <?php }else{ ?>
                                     <li><a class="<?php echo $empty   ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>   
                                 <?php } ?> 
                             </ul>
                             <?php } else { ?>
-                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=left"><div><span>+</span></div></a></li>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=left"><div><span>+</span></div></a>
+                                    <ul>
+                                        <li><a class="sm-blank" href="#"><div><span></span></div></a></li>  
+                                        <li><a class="sm-blank" href="#"><div><span></span></div></a></li>
+                                    </ul>
+                                </li>
+                                
                             <?php } ?>
                         </li>
                         <li> 
@@ -90,14 +96,21 @@ $empty = "sm-blank" ; //no Package
                                 <?php } ?> 
                             </ul>
                             <?php } else { ?>
-                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=right"><div><span>+</span></div></a></li>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=right"><div><span>+</span></div></a>
+                                <ul>
+                                    <li><a class="sm-blank" href="#"><div><span></span></div></a></li>  
+                                    <li><a class="sm-blank" href="#"><div><span></span></div></a></li>
+                                </ul>
+                                
+                            </li>
+                                
                             <?php } ?>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div> 
-    </div> 
+    </div>
 <!--        
              <div class="col-sm-4 col-xs-12">
                  <ul class="packageDetail">
