@@ -41,7 +41,7 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullName(this.value);" />
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value);" />
                         <span id="search_user_error" style="color:red"></span>
                     </div>     
                 </div>
