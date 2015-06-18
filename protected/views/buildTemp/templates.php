@@ -27,15 +27,8 @@ $i = 1 ;
       </div>
      <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        
-        <form action="/BuildTemp/userinput" method="post">
-            <input type="hidden" name="user_id" id="user_id" value="<?php echo Yii::app()->session['userid'];?>">
-            <input type="hidden" name="template_id" id="template_id" value="<?php echo $buildertemp->template_id;?>">
-            <input type="submit" name="submitInput" id="submit" class="btn btn-primary" value="Get Started">
-        </form>
-        
-        
-      </div>
+        <a href="/user/template/<?php echo $buildertemp->folderpath;?>" class="btn btn-default" target="_blank">Demo</a>
+     </div>
     </div>
   </div>
 </div>

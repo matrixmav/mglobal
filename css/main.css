@@ -188,6 +188,7 @@ right connector from last child*/
     text-align: center;}
 .mytree ul ul.newdiv::before{height: 135px;}
 .mytree ul ul::before{height: 65px;}
+.sm-blank span{font-size:20px !important;}
 }
 
 @media (max-device-width: 767px) and (min-device-width: 481px)
@@ -197,14 +198,34 @@ right connector from last child*/
     padding: 20px;
     position: relative;
     text-align: center;}
+    .sm-blank span{font-size:30px !important;}
+}
+@media (max-device-width: 1024px) and (min-device-width: 768px)
+{
+     .mytree ul li{float: left;
+    list-style: outside none none;
+    padding: 10px !important;
+    position: relative;
+    text-align: center;}
+     .mytree ul li a{border-radius: 50% !important;
+    color: #fff;
+    display: inline-block;
+    font-size: 10px;
+    height: 70px;
+    width: 70px;}
+      .sm-blank span{font-size:50px !important;}
 }
 
 .detailPackage{}
 .detailPackage h4{ text-align: center; color: #333333; padding: 20px;}
-.basicP{background: url(/images/brace_icon.png) right center no-repeat; width:235px; margin: 0 25px;}
+.basicP{background: url(/images/brace_icon.png) right center no-repeat; min-width:232px; margin: 4px 0; max-width: 300px;}
 .basicP > img{margin-right: 10px;}
-.detailPackage tr{ border: 1px dashed #c1c1c1;}
-.detailPackage th{padding: 10px; color: #aeaeae; font-size: 15px;}
+.basicP > p{display: inline-block; font-size: 14px; max-width: 160px; vertical-align: middle;}
+.detailPackage tr{}
+.detailPackage th{ color: #aeaeae; font-size: 15px;}
 .packageDetail{ width: 300px;}
 .packageDetail li{ border-bottom: 1px dashed #c1c1c1; margin-top: 5px; background: url(/images/bullets-icon.png) left 30% no-repeat; list-style: none; font-size: 15px;}
 .packageDetail p{display: inline-block; width: 200px; padding-left: 20px;} 
+
+.detailPackage .col-sm-4.col-xs-12{ border: 1px dashed #c1c1c1;}
+.detailPackage .col-sm-4.col-xs-12 table{width: 100%;}
