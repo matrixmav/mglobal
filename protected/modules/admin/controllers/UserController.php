@@ -219,19 +219,22 @@ class UserController extends Controller {
             ), 'pagination' => array('pageSize' => $pageSize),));
 
         if (!empty($_POST)) {
-
+            $userObject = "";
+          if(!empty($_POST['search']))
+          {
             $userObject = User::model()->findByAttributes(array('name' => $_POST['search']));
+          }          
             $condition = 'type = ' . $walletType . " AND status = 1";
             if (!empty($userObject)) {
                 $condition = 'type = ' . $walletType . ' AND user_id = ' . $userObject->id . " AND status = 1";
             }
-            
+  
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ($condition), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),));
         }
-        //echo "<pre>";print_r($dataProvider); exit;
+        //print_r($dataProvider); exit;
         $this->render('walletList', array(
             'dataProvider' => $dataProvider,
             'walletType' => $walletType
