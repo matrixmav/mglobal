@@ -113,16 +113,16 @@ $this->breadcrumbs=array(
 
 <div class="row">
     
-    <div class="col-sm-10 col-sm-offset-1 detailPackage">
+    <div class="col-sm-12 detailPackage">
         <h4>PACKAGE DETAILED INFORMATION</h4>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-xs-12">
                 <table>
                     <tr>
                         <th>
                     <div class="basicP">
                         <img src="/images/basic-p1.png">
-                            Basic Packages 1
+                        <p> Basic Packages 1</p>
                     </div>
                         </th>
                     </tr>
@@ -130,7 +130,7 @@ $this->breadcrumbs=array(
                          <th>
                     <div class="basicP">
                         <img src="/images/basic-p2.png">
-                            Basic Packages 2
+                        <p>  Basic Packages 2</p>
                     </div>
                         </th>
                     </tr>
@@ -138,20 +138,20 @@ $this->breadcrumbs=array(
                         <th>
                     <div class="basicP">
                         <img src="/images/basic-p3.png">
-                            Basic Packages 3
+                        <p> Basic Packages 3</p>
                     </div>
                         </th>
                     </tr>
                 </table>
             </div>
-             <div class="col-sm-4">
+             <div class="col-sm-4 col-xs-12">
                
                    <table>
                     <tr>
                         <th>
                     <div class="basicP">
                         <img src="/images/advance-p1.png">
-                            Advanced Packages 1
+                        <p> Advanced Packages 1</p>
                     </div>
                         </th>
                     </tr>
@@ -159,7 +159,7 @@ $this->breadcrumbs=array(
                          <th>
                     <div class="basicP">
                         <img src="/images/advance-p2.png">
-                            Advanced Packages 2
+                        <p>  Advanced Packages 2</p>
                     </div>
                         </th>
                     </tr>
@@ -167,21 +167,21 @@ $this->breadcrumbs=array(
                         <th>
                     <div class="basicP">
                         <img src="/images/advance-p3.png">
-                            Advanced Packages 3
+                        <p>Advanced Packages 3</p>
                     </div>
                         </th>
                     </tr>
                 </table>
                    
                 </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 col-xs-12">
                 
                    <table>
                     <tr>
                         <th>
                     <div class="basicP">
                         <img src="/images/advance-pro1.png">
-                            Advanced Pro 1
+                        <p> Advanced Pro 1</p>
                     </div>
                         </th>
                     </tr>
@@ -189,7 +189,7 @@ $this->breadcrumbs=array(
                          <th>
                     <div class="basicP">
                         <img src="/images/advance-pro2.png">
-                            Advanced Pro 2
+                        <p> Advanced Pro 2 </p>
                     </div>
                         </th>
                     </tr>
@@ -197,7 +197,7 @@ $this->breadcrumbs=array(
                         <th>
                     <div class="basicP">
                         <img src="/images/advance-pro3.png">
-                            Advanced Pro 3
+                        <p> Advanced Pro 3</p>
                     </div>
                         </th>
                     </tr>
