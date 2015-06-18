@@ -27,7 +27,7 @@ $i = 1 ;
       </div>
      <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        
+        <a href="/user/template/<?php echo $buildertemp->folderpath;?>">Demo</a>
         <form action="/BuildTemp/userinput" method="post">
             <input type="hidden" name="user_id" id="user_id" value="<?php echo Yii::app()->session['userid'];?>">
             <input type="hidden" name="template_id" id="template_id" value="<?php echo $buildertemp->template_id;?>">
