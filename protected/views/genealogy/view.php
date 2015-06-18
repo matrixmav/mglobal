@@ -15,9 +15,9 @@ $this->breadcrumbs=array(
 							 <span><?php if(!empty($_GET) && $_GET['id']!=''){?><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;cursor:pointer;text-decoration:none;">Go Back >></a><?php } ?></span>
 						</div>
 </div>
-<div class="container">
+
     <div class="row">
-         <div class="col-lg-12">
+        <!-- <div class="col-lg-12">
             <div class="tree">
                 <ul>
                     <li>
@@ -72,8 +72,145 @@ $this->breadcrumbs=array(
                     </li>
                 </ul>
             </div>			
+        </div> -->
+        <div class="col-sm-8 col-xs-12">
+            
+            <div class="mytree">
+                <h3>Genealogy Binary</h3>
+                <ul>
+                    <li>
+                        <a href="" class="sm-red"><div><span>Parent1</span></div></a>
+                        <ul class="newdiv">
+                            <li>
+                                <a href="" class="sm-navy"><div><span>Parent1</span></div></a>
+                                <ul>
+                                    <li><a href="" class="sm-blue"><div><span>Parent1</span></div></a></li>
+                                    <li><a href="" class="sm-greenLight"><div><span>Parent1</span></div></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="sm-green"><div><span>Parent1</span></div></a>
+                                <ul>
+                                    <li><a href="" class="sm-purple"><div><span>Parent1</span></div></a></li>
+                                    <li><a href="" class="sm-blank"><div><span>+</span></div></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+             <div class="col-sm-4 col-xs-12">
+                 <ul class="packageDetail">
+                     <li><p>Total Packages</p><span> 122</span> </li>
+                     <li><p>Total Packages Today</p><span> 122</span> </li>
+                      <li><p>Total Registration</p><span> 122</span> </li>
+                     
+                 </ul>
+             </div>
+    </div>
+
+<div class="row">
+    
+    <div class="col-sm-10 col-sm-offset-1 detailPackage">
+        <h4>PACKAGE DETAILED INFORMATION</h4>
+        <div class="row">
+            <div class="col-sm-4">
+                <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/basic-p1.png">
+                            Basic Packages 1
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <img src="/images/basic-p2.png">
+                            Basic Packages 2
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/basic-p3.png">
+                            Basic Packages 3
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+             <div class="col-sm-4">
+               
+                   <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-p1.png">
+                            Advanced Packages 1
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <img src="/images/advance-p2.png">
+                            Advanced Packages 2
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-p3.png">
+                            Advanced Packages 3
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+                   
+                </div>
+            <div class="col-sm-4">
+                
+                   <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-pro1.png">
+                            Advanced Pro 1
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <img src="/images/advance-pro2.png">
+                            Advanced Pro 2
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-pro3.png">
+                            Advanced Pro 3
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+                    
+                </div>
+                
+                
+            </div>
+        <h4></h4>
         </div>
     </div>
+   
 </div>
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true) ;?>/css/main.css">
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/hint.css">

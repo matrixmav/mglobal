@@ -97,7 +97,7 @@ right connector from last child*/
 .tree li a:hover+ul li::before, 
 .tree li a:hover+ul::before, 
 .tree li a:hover+ul ul::before{
-	border-color:  #94a0b4;
+	border-color:  #94a0b4;}
 
 /* ==========================================================================
    Author's custom styles
@@ -117,17 +117,94 @@ right connector from last child*/
 .tx h3{ color:#fff;}
 
 .org{ border-top:2px solid  #f37022 ;}
-.sz{ margin:50px 0px 10px 0px;}
-
- */
+.sz{ margin:50px 0px 10px 0px;}*/
 
 
 
 
+.mytree ul{padding-top:20px; position:relative;}
+.mytree ul li{ list-style:none; float:left; text-align:center;padding: 20px; position:relative;}
+.mytree ul li a{width:90px; height:90px; border-radius:50% !important; display:inline-block; color: #FFF; font-size: 16px; }
+.mytree li::before, .mytree li::after{
+	content: '';
+	position: absolute; top: 90px; right: 23%;
+	
 
+	width: 50%; height: 20px;
+}
+.mytree ul ul::before{
+	content: '';
+	position: absolute; top: 0; left: 50%;
+	border-left: 1px dashed #ccc;
+	width: 0; height: 90px;
+}
+/* .mytree ul li a:hover{background:#F00;}
+.mytree ul li a:hover + ul li a{background:#F00;}  */
 
+.mytree ul ul.newdiv:before{border-left: 1px dashed #ccc;
+    content: "";
+    height: 225px;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    width: 0;}
 
+.mytree div{display: table;
+    height: 100%;
+    width: 100%;}
+.mytree span{display: table-cell;
+    vertical-align: middle;}
 
+.mytree ul li a:hover{text-decoration: none;}
+.sm-red{background:#d26666;}
+.sm-navy{background:#33cbcc;}
+.sm-green{background:#e2d13b;}
+.sm-blue{background:#3398cc;}
+.sm-greenLight{background:#b4d749;}
+.sm-purple{background:#3a56aa;}
+.sm-grey{background:#e7b76d;}
+.sm-blank{background:#e0e0e0;}
+.sm-blank span{font-size:55px !important;}
 
+@media (max-device-width: 480px) and (min-device-width: 320px)
+{
+.mytree li::before, .mytree li::after{content: "";
+    height: 20px;
+    position: absolute;
+    right: 24%;
+    top: 80px;
+    width: 50%;}
 
+.mytree ul li a{border-radius: 50% !important;
+    color: #fff;
+    display: inline-block;
+    font-size: 10px;
+    height: 40px;
+    width: 40px;}
+.mytree ul li{float: left;
+    list-style: outside none none;
+    padding: 7px;
+    position: relative;
+    text-align: center;}
+.mytree ul ul.newdiv::before{height: 135px;}
+.mytree ul ul::before{height: 65px;}
+}
 
+@media (max-device-width: 767px) and (min-device-width: 481px)
+{
+    .mytree ul li{float: left;
+    list-style: outside none none;
+    padding: 20px;
+    position: relative;
+    text-align: center;}
+}
+
+.detailPackage{}
+.detailPackage h4{ text-align: center; color: #333333; padding: 20px;}
+.basicP{background: url(/images/brace_icon.png) right center no-repeat; width:235px; margin: 0 25px;}
+.basicP > img{margin-right: 10px;}
+.detailPackage tr{ border: 1px dashed #c1c1c1;}
+.detailPackage th{padding: 10px; color: #aeaeae; font-size: 15px;}
+.packageDetail{ width: 300px;}
+.packageDetail li{ border-bottom: 1px dashed #c1c1c1; margin-top: 5px; background: url(/images/bullets-icon.png) left 30% no-repeat; list-style: none; font-size: 15px;}
+.packageDetail p{display: inline-block; width: 200px; padding-left: 20px;} 

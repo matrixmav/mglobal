@@ -278,7 +278,7 @@
 
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-12 item">
-            <img src="images/it-services.png" alt="Marcus Doe" class="img-responsive service_icon">
+            <img src="images/design-icon.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Website Designing</h3>
           <p>A website’s design is as crucial as the quality of the services delivered by it. How a customer ...<a href="#inline3" class="fancybox pinkSm">read more</a> </p>
           <div id="inline3" style="display:none" class="readMoreBox content">
