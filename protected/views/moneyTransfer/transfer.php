@@ -115,6 +115,4 @@ $this->breadcrumbs = array(
     
     
  }
- 
-
-    </script>
+</script>
