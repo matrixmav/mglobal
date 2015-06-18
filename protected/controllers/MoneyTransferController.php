@@ -100,7 +100,8 @@ class MoneyTransferController extends Controller {
                 $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
                 if(!$toUserWalletObject){
                     //create wallet for to user
-                    $toUserWalletObject = Wallet::model()->create($toUserId,$fund,$walletType);
+                    $newWalletFund = "0";
+                    $toUserWalletObject = Wallet::model()->create($toUserId,$newWalletFund,$walletType);
                 }
                 $postDataArray['toWalletId'] = $toUserWalletObject->id;
                 //create transaction record entry
