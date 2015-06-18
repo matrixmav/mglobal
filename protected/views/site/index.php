@@ -379,123 +379,183 @@
     </div>
     <div class="row">
         
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/2.jpg" alt="NAME" class="img-responsive">
-        <a href="images/2.jpg" class="zoom valign-center">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+        <img src="images/templates/automobile.png" alt="NAME" class="img-responsive">
+        <a href="images/2.jpg" class="">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Automobile</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/6.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+        <img src="images/templates/lawyers.png" alt="NAME" class="img-responsive">
         <a href="images/6.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Lawyers</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/8.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/architect.png" alt="NAME" class="img-responsive">
         <a href="images/8.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Architect</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/3.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/food.png" alt="NAME" class="img-responsive">
         <a href="images/3.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Food</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/5.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/education.png" alt="NAME" class="img-responsive">
         <a href="images/5.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Education</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/4.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+      <img src="images/templates/automobile.png" alt="NAME" class="img-responsive">
         <a href="images/4.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
             <strong>London City Project</strong>
             <em>Property</em>
-            <b>Details</b>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/1.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+        <img src="images/templates/finance.png" alt="NAME" class="img-responsive">
         <a href="images/1.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Finance</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/10.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+      <img src="images/templates/healthcare.png" alt="NAME" class="img-responsive">
         <a href="images/10.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Healthcare</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/9.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/corporate.png" alt="NAME" class="img-responsive">
         <a href="images/9.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Corporate</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/7.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/travel.png" alt="NAME" class="img-responsive">
         <a href="images/7.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Travel</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/2.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/jewellery.png" alt="NAME" class="img-responsive">
         <a href="images/2.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Jewellery</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-6 col-xs-12">
-        <img src="images/8.jpg" alt="NAME" class="img-responsive">
+      <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/hotesl-resorts.png" alt="NAME" class="img-responsive">
         <a href="images/8.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
-            <b>Details</b>
+            <strong>Hotel & Resorts</strong>
+            <em></em>
+            <b>View</b>
+          </div>
+        </a>
+      </div>
+        <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/real-estate.png" alt="NAME" class="img-responsive">
+        <a href="images/8.jpg" class="zoom valign-center">
+          <div class="valign-center-elem">
+            <strong>Real Estate</strong>
+            <em></em>
+            <b>View</b>
+          </div>
+        </a>
+      </div>
+        <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/online-store.png" alt="NAME" class="img-responsive">
+        <a href="images/8.jpg" class="zoom valign-center">
+          <div class="valign-center-elem">
+            <strong>Online-Store</strong>
+            <em></em>
+            <b>View</b>
+          </div>
+        </a>
+      </div>
+        <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/ca.png" alt="NAME" class="img-responsive">
+        <a href="images/8.jpg" class="zoom valign-center">
+          <div class="valign-center-elem">
+            <strong>Chartered Accountants</strong>
+            <em></em>
+            <b>View</b>
+          </div>
+        </a>
+      </div>
+        <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/fitness.png" alt="NAME" class="img-responsive">
+        <a href="images/8.jpg" class="zoom valign-center">
+          <div class="valign-center-elem">
+            <strong>Fitness</strong>
+            <em></em>
+            <b>View</b>
+          </div>
+        </a>
+      </div>
+        <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/textile.png" alt="NAME" class="img-responsive">
+        <a href="images/8.jpg" class="zoom valign-center">
+          <div class="valign-center-elem">
+            <strong>Textile</strong>
+            <em></em>
+            <b>View</b>
+          </div>
+        </a>
+      </div>
+        <div class="item col-md-2 col-sm-4 col-xs-12">
+       <img src="images/templates/furniture.png" alt="NAME" class="img-responsive">
+        <a href="images/8.jpg" class="zoom valign-center">
+          <div class="valign-center-elem">
+            <strong>Furniture</strong>
+            <em></em>
+            <b>View</b>
           </div>
         </a>
       </div>
@@ -990,6 +1050,19 @@
         title: null
     }
 		});
-		});
+               
+                $('.carousel-inner').carousel({
+                interval: ,
+                duration: ,
+                });
+              $('.carousel-inner').hover(function () { 
+              $(this).carousel('pause')
+              }, function () { 
+        $(this).carousel('cycle') 
+        });
+        });
+                
+                
+               
           //$(".myfancyTxtBox").fancybox();
 </script>
