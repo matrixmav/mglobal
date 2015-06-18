@@ -1037,5 +1037,49 @@ class BaseClass extends Controller {
         closedir($dir);
         return $dir;
     }
+    
+    /* For the package info */
+    public static function getPackageName($getPackageName){      
+        $orderListObject = Order::model()->findAll(array('condition' => 'user_id = '. $getPackageName));        
+
+        $color = "sm-nothing" ;
+        $orderArray = array();
+        if(count($orderListObject)> 0){
+            $myAmount = 0;
+            foreach($orderListObject as $orderObject){ 
+                $orderAmount = $orderObject->package(array('order'=>'amount DESC'));
+                if($myAmount < $orderAmount->amount){
+                    $myAmount = $orderAmount->amount;
+                    $type = $orderAmount->type;
+                    
+                    if($type == 1){
+                         $color = "sm-red" ; //Basic Packages 2
+                    }else if($type == 2){
+                         $color = "sm-red" ; //Basic Packages 3
+                    }else if($type == 3){
+                        $color = "sm-greenLight" ; //Advance Packages 1
+                    }else if($type == 4){
+                        $color = "sm-greenLight" ; //Advance Packages 1
+                    }else if($type == 5){
+                        $color = "sm-green" ; //Advance Packages 2
+                    }else if($type == 6){
+                        $color = "sm-blue" ; //Advance Packages 3
+                    }else if($type == 7){
+                        $color = "sm-navy" ; //Advance Pro Packages 1
+                    }else if($type == 8){
+                        $color = "sm-blue" ; //Advance Pro Packages 2
+                    }else if($type == 9){
+                        $color = "sm-purple" ; //Advance Pro Packages 3
+                    }else{
+                        $color = "sm-blank" ; //kuch nhi h 
+                    }
+                    
+                }
+            }
+            
+        }
+        return $color;
+    }
+    
 
 }
