@@ -69,18 +69,23 @@ class UserController extends Controller {
                 $userObject->activation_key = "";
                 $userObject->update();
                 $msg = "Your account has been verified.";
-
+                
                 if (!$userObject->update(false)) {
                     echo "<pre>";
                     print_r($userObject->getErrors());
                     exit;
                 }
+                $userObjectArr['name'] = $userObject->name;
+                $userObjectArr['full_name'] = $userObject->full_name;
+                $userObjectArr['password'] = $password;
+                $userObjectArr['masterPin'] = $masterPin;
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Login Details';
-                $config['body'] = 'Hi, ' . $userObject->full_name . '<br/> Login Details' .
-                        '<br/><br/><strong>User : </strong>' . $userObject->name .
-                        '<br/><strong>Password : </strong>' . $password . '<br/>' .
-                        '<strong>Master Pin : </strong>' . $masterPin . '<br/><br/>';
+                $config['body'] =  $this->renderPartial('../mailTemp/login-details', array('userObjectArr'=>$userObjectArr),true);
+                //$config['body'] = 'Hi, ' . $userObject->full_name . '<br/> Login Details' .
+                        //'<br/><br/><strong>User : </strong>' . $userObject->name .
+                        //'<br/><strong>Password : </strong>' . $password . '<br/>' .
+                        //'<strong>Master Pin : </strong>' . $masterPin . '<br/><br/>';
                 CommonHelper::sendMail($config);
 
                 $this->redirect(array("login", 'successMsg' => $msg));
@@ -537,7 +542,7 @@ class UserController extends Controller {
 
                 $config['to'] = $model->email;
                 $config['subject'] = 'Registration Confirmation';
-                $config['body'] =  $this->renderPartial(array('//mailTemp/confirmation','model'=>$model,'rand'=>$rand),true);
+                $config['body'] =  $this->renderPartial('../mailTemp/confirmation', array('model'=>$model,'rand'=>$rand),true);
                 $response = CommonHelper::sendMail($config);
                 $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
                 if ($_POST['admin'] == 1) {
@@ -592,11 +597,13 @@ class UserController extends Controller {
                     print_r($model->getErrors());
                     exit;
                 }
-
+                $userObjectArr['full_name'] = $userObject->full_name;
+                $userObjectArr['password'] = $password;
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Forgot Password';
-                $config['body'] = 'Hi,' . $userObject->full_name . '<br/>'
-                        . 'New Password : ' . $password;
+                /*$config['body'] = 'Hi,' . $userObject->full_name . '<br/>'
+                        . 'New Password : ' . $password;*/
+                $config['body'] =  $this->renderPartial('../mailTemp/login-details', array('userObjectArr'=>$userObjectArr),true);
                 $response = CommonHelper::sendMail($config);
 
                 $this->redirect(array('login', 'successMsg' => $msg));
