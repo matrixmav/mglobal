@@ -54,8 +54,9 @@ function getFullName(userName) {
     });
 }
 function getFullNameAdmin(userName) {
-   if(userName=='admin' || userName=='info' || userName=='marketing' || userName=='Customercare'){
-    $("#search_user_error").html("User not existed!!!");
+   if(userName== 'admin' || userName == 'info' || userName == 'marketing' || userName=='Customercare')
+   {
+    $("#search_user_error").html("Sorry! you can not transfer fund to admin!!!");
     return false;
    }else{
        
