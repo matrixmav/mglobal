@@ -72,7 +72,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Date of Birth<span class="require">*</span></label>
                 <div class="col-lg-8">                  
-                    <input type="text" id="date"   name="UserProfile[date_of_birth]"  class="datepicker form-control"  value="<?php echo (!empty($userObject)) ? date("d-m-Y", strtotime($userObject->date_of_birth)) : " "; ?>">  
+                    <input type="text" id="date"   name="UserProfile[date_of_birth]"  class="datepicker form-control"  value="<?php echo (!empty($userObject)) ? date("d-m-Y", strtotime($userObject->date_of_birth)) : ""; ?>">  
                 <div id="date_error" class="form_error"></div>
                 </div>
 
