@@ -537,9 +537,7 @@ class UserController extends Controller {
 
                 $config['to'] = $model->email;
                 $config['subject'] = 'Registration Confirmation';
-                $config['body'] = 'Hi,' . $model->full_name . '<br/> Congratulations! You have been registered successfully ' .
-                        '<strong>Please click the link below to activate your account:</strong><br/>' .
-                        '<a href="'.Yii::app()->getBaseUrl(true).'/user/confirm?activation_key=' . $rand . '">Click to activate </a>';
+                $config['body'] = $this->renderPartial(array('//mailTemp/confirmation'),true);
                 $response = CommonHelper::sendMail($config);
                 $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
                 if ($_POST['admin'] == 1) {
