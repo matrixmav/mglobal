@@ -5,7 +5,9 @@ $this->breadcrumbs = array(
 $transactionId = base64_decode($_GET['tu']);
 $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
 ?>
+ 
 <div class="col-md-7 col-sm-7">
+    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
     <form class="form-horizontal" role="form" method="post" action="" >
         <fieldset> 
             <legend>Transfer Confirmation</legend>
@@ -25,7 +27,7 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
 
             </div>
             <div class="form-group">
-                <label for="lastname" class="col-lg-4 control-label">Actual Amount <span class="require">*</span></label>
+                <label for="lastname" class="col-lg-4 control-label">Transfer Amount <span class="require">*</span></label>
                 <div class="col-lg-8" >
                     <div class="form-control">
                         <?php

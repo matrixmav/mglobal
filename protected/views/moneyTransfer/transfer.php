@@ -41,7 +41,7 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullName(this.value);" />
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value);" />
                         <span id="search_user_error" style="color:red"></span>
                     </div>     
                 </div>
@@ -49,7 +49,7 @@ $this->breadcrumbs = array(
                     <label for="paid_amount" class="col-lg-4 control-label">Amount<span class="require"> * $</span></label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control" id="paid_amount" name="paid_amount"  class="form-control">
-                    <span id="email_error" style="color:red"></span>
+                       <span id="email_error" style="color:red"></span>
                     </div>
                     
                 </div>
@@ -69,8 +69,8 @@ $this->breadcrumbs = array(
 <style>
         #s2id_search_username{ width: 100% !important;}
 </style>
-<script type="text/javascript">
-function validationfrom()
+<script>
+    function validationfrom()
 {
     $('#transaction_error').html("");
     if($('#transactiontype').val()=='')
@@ -98,11 +98,21 @@ function validationfrom()
     var fund = $('#transaction_data_amt').val();
     var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""))
     var fundVal = parseFloat($('#paid_amount').val());
+    var totalPaid = fundVal + fundVal*1/100;
+    $('#email_error').html("");   
+    if(fundFinal < totalPaid)
+    {
+       $('#email_error').html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
+       return false;
+    }
+    
     $('#email_error').html("");   
     if(fundFinal < fundVal)
     {
        $('#email_error').html("Transfer amount can not be more than existing amount."); 
        return false;
     }
-}
+    
+    
+ }
 </script>
