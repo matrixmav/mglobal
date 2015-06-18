@@ -25,7 +25,7 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
 
             </div>
             <div class="form-group">
-                <label for="lastname" class="col-lg-4 control-label">Actual Amount <span class="require">*</span></label>
+                <label for="lastname" class="col-lg-4 control-label">Transfer Amount <span class="require">*</span></label>
                 <div class="col-lg-8" >
                     <div class="form-control">
                         <?php
