@@ -105,7 +105,8 @@ return array(
    'countrycode' => array("1"=>"US", "2"=>"can", "3"=>"in", "4"=>"FR"),
    'accountno'=>'4444',
    'sitename'=>'mGlobal',
-   'transactionid'=>'67',
+   'transactionIdPrefix'=> date('y'),
+   'transactionIdPostfix'=> date('m'),
    'paypalurl'=>'https://www.sandbox.paypal.com/cgi-bin/webscr',  
    'returnurl'=>'http://demo.mglobally.com/package/thankyou',         
    'twitterLink' => 'https://twitter.com/intent/tweet?text='
