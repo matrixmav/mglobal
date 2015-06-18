@@ -1,6 +1,6 @@
  <?php $this->renderPartial('../mailTemp/header'); ?>
     <tr>
-    	<td width="100%" valign="middle" align="left" style="line-height:0px;"> <img width="" border="0" src="banner.jpg"></td>
+    	<td width="100%" valign="middle" align="left" style="line-height:0px;"> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/banner.jpg"></td>
     </tr>
     <tr>
     	<td width="100%" valign="middle" align="center" height="50" bgcolor="#efed6a"style=" color:#828282;font-size:16px; line-height:19px; font-family:'Nunito'"> 
@@ -43,7 +43,7 @@
                   <tbody>
                   	<tr>
                     	<td width="40%" valign="top" height="" bgcolor="#fafafa" style="line-height:0px;">
-                         <img width="" border="0" src="secure.png">
+                         <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/secure.png">
                         </td>
                         <td width="60%" valign="top" height="" bgcolor="#fafafa" style="line-height:0px;">
                         	<table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -83,17 +83,7 @@
     
     
     
-    <tr>
-      <td valign="" bgcolor="#fff4f0" height="90" align="center" style="line-height:0px; border-top:1px solid #dfdfdf;">
-      <table width="100%" cellspacing="0" cellpadding="0" border="0">
-          <tbody>
-            <tr>
-              <td width="50%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"><strong>Confirm</strong> , your registration  </td>
-               <td width="50%" valign="middle" align="left" style="line-height:20px; color: #828282; font-size:18px; font-family:'Nunito'"><button type="submit" style="padding:10px 45px; color:#ffffff; background-color:#f15c2b; border:none; font-size:18px; border-radius:4px; letter-spacing:1px; cursor:pointer;">CONFIRM</button> </td>
-            </tr>
-          </tbody>
-        </table></td>
-    </tr>
+     
     
     <!-- address -->
     <tr>
