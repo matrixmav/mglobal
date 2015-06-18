@@ -34,29 +34,39 @@
           <p class="f-cnt"><a href="mailto:info@xyz.com">Info@xyz.com</a><br/> 
          91-8500425185</p>   
         </div>
-         <div class="col-md-4 col-sm-6 pre-footer-col">
-          <h2>News Update</h2>
+         <div class="col-md-5 col-sm-6 pre-footer-col">
+            <p class="f-font">News Update</p>
            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip  commodo consequat. </p>
           <p>Duis autem vel eum iriure dolor vulputate velit esse molestie at dolore.</p>
+          <p class="f-font">News Letter</p>
+          <form class="form-inline">
+              <div class="form-group">
+                  <input type="email" class="form-control mailTxt" id="" placeholder="Email">
+                   <button type="submit" class="btn  signBtn">Sign in</button>
+              </div>
+          </form>
+         
+          
         </div>
        
         <!-- END TWITTER BLOCK -->
-        <div class="col-md-4 col-sm-6 pre-footer-col">
+        <div class="col-md-3 col-sm-6 pre-footer-col">
           <!-- BEGIN BOTTOM CONTACTS -->
-          <h2>Our Contacts</h2>
+         <p class="f-font">Our Contacts</p>
           <address class="margin-bottom-20">
-          MaverickGlobal InfoSoft Services Pvt Ltd,<br/>
+              <strong> MaverickGlobal InfoSoft Services Pvt Ltd,</strong><br/>
                 Solus, 3rd Floor, # 2,1st Cross, JC Road<br/>
                 Opp.Jain University,<br/>
                 Bangalore 560 027, India<br/>
             
-            Email: <a href="mailto:maverickinfosoft@gmail.com">maverickinfosoft@gmail.com</a><br>
+            
             
           </address>
           <!-- END BOTTOM CONTACTS -->
           <div class="pre-footer-subscribe-box">
-            <img src="../../../images/whts.png" width="30" height="30" /><span class="con-f"> &nbsp;+91 1234567890</span><br/><br/>
-            <a href="callto://ramhemareddy"><img src="../../../images/skyp.png" width="100" height="50" class="img-mar" /></a>
+              <a href=""><img src="/images/mail-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
+                <a href=""><img src="/images/whatsapp-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
+                <a href=""><img src="/images/skype-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
           </div>
         </div>
       </div>
@@ -68,21 +78,24 @@
     <div class="container">
       <div class="row bg-f2">
         <!-- BEGIN COPYRIGHT -->
-        <div class="col-md-12 col-sm-12 ">
-          <div class="copyright">@ COPYRIGHT 2015, ALL RIGHTS RESERVED.</div>
+        <div class="col-md-6 col-sm-6 ">
+          <div class="copyright">@ COPYRIGHT 2015, ALL RIGHTS RESERVED, MGlobally</div>
         </div>
         <!-- END COPYRIGHT -->
         <!-- BEGIN SOCIAL ICONS -->
         <div class="col-md-6 col-sm-6 pull-right">
           <ul class="social-icons">
-            <li><a class="rss" data-original-title="rss" href="javascript:void(0);"></a></li>
-            <li><a class="facebook" data-original-title="facebook" href="javascript:void(0);"></a></li>
-            <li><a class="twitter" data-original-title="twitter" href="javascript:void(0);"></a></li>
-            <li><a class="googleplus" data-original-title="googleplus" href="javascript:void(0);"></a></li>
-            <li><a class="linkedin" data-original-title="linkedin" href="javascript:void(0);"></a></li>
-            <li><a class="youtube" data-original-title="youtube" href="javascript:void(0);"></a></li>
-            <li><a class="vimeo" data-original-title="vimeo" href="javascript:void(0);"></a></li>
-            <li><a class="skype" data-original-title="skype" href="javascript:void(0);"></a></li>
+               <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/g-footer-icon.png"></a></li>  
+                <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/ln-footer-icon.png"></a></li> 
+                <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/tw-footer-icon.png"></a></li> 
+                  <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/pinterest-footer-icon.png"></a></li>
+              <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/fb-footer-icon.png"></a></li>
+            
+              
+             
+             
+              
+           
           </ul>
         </div>
         <!-- END SOCIAL ICONS -->
