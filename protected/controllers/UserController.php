@@ -537,7 +537,7 @@ class UserController extends Controller {
 
                 $config['to'] = $model->email;
                 $config['subject'] = 'Registration Confirmation';
-                $config['body'] = $this->renderPartial(array('//mailTemp/confirmation','model'=> $model),true);
+                $config['body'] =  $this->renderPartial(array('//mailTemp/confirmation','model'=>$model,'rand'=>$rand),true);
                 $response = CommonHelper::sendMail($config);
                 $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
                 if ($_POST['admin'] == 1) {
