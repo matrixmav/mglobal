@@ -10,6 +10,7 @@ $this->breadcrumbs = array(
     'Genealogies'
     
 );
+ $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
 echo '<link rel="stylesheet" href="' . Yii::app()->getBaseUrl(true) . '/css/main.css">';
 if (!empty($_GET) && $_GET['id'] != '') {
     echo '<div class="row"><div class="col-md-12"><span><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;cursor:pointer;">Go Back >></a></span></div></div>';
@@ -24,117 +25,194 @@ echo '<div class="container">
 echo '</div></div>';
 
 echo '</div>
-  <span>
+  <span>';
+$empty = "sm-blank" ; //no Package
+?>
 
-<div class="tree">
-    <ul>';
-if (count($genealogyListObject) > 0) {
-    /* if they have chind with 1st layer */
-    echo '<li>';
-    echo $userObject->name ? '<a href="#" data-hint="This is a success hint that fades in" class="hint-top-s-small-t-notice">' . $userObject->name . "</a>" : '';
+    <div class="col-sm-8 col-xs-12">
+        <div class="row mytree">
+            <ul>
+                <li>
+                    <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); ?>
+                    <a href="" class="sm-red"><div><span><?php echo $userObject->name; ?></span></div></a>
+                    <ul>
+                        <li>
+                            <?php
+                                if(count($genealogyLeftListObject) > 0 ){
+                                    $getColor =  BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);                                        
+                            ?>
+                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftListObject[0]->user->name; ?></span></div></a>
+                            <ul>
+                                <?php $genealogyLeftLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'left'"); ?>
+                                <?php if(count($genealogyLeftLeftListObject) > 0 ){ 
+                                    $getColor =  BaseClass::getPackageName($genealogyLeftLeftListObject[0]->user_id);
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></span></div></a></li>
+                                <?php }else{ ?>
+                                     <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>    
+                                <?php } ?>     
 
-    echo '<ul>';
+                                <?php $genealogyLeftRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'right'"); ?>   
+                                <?php if(count($genealogyLeftRighttListObject) > 0 ){ 
+                                      $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></span></div></a></li>
+                                <?php }else{ ?>
+                                    <li><a class="<?php echo $empty   ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>   
+                                <?php } ?> 
+                            </ul>
+                            <?php } else { ?>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=left"><div><span>+</span></div></a></li>
+                            <?php } ?>
+                        </li>
+                        <li> 
+                            <?php if(count($genealogyRightListObject) > 0 ){                                    
+                                 $getColor =  BaseClass::getPackageName($genealogyRightListObject[0]->user_id);                                    
+                                ?>
+                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightListObject[0]->user->name; ?> </span></div></a>
+                            <ul>
+                                <?php $genealogyRightLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'left'"); ?>
+                                <?php if(count($genealogyRightLeftListObject) > 0 ){ 
+                                    $getColor =  BaseClass::getPackageName($genealogyRightLeftListObject[0]->user_id); 
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightLeftListObject[0]->user->name; ?> </span></div></a></li>
+                                <?php }else{ ?>
+                                     <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>  
+                                <?php } ?>     
 
-    foreach ($genealogyListObject as $genealogyObject) {
+                                <?php $genealogyRightRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'right'"); ?>   
+                                <?php if(count($genealogyRightRighttListObject) > 0 ){
+                                    $getColor =  BaseClass::getPackageName($genealogyRightRighttListObject[0]->user_id); 
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightRighttListObject[0]->user->name; ?></span></div></a></li>
+                                <?php }else{ ?>
+                                     <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>
+                                <?php } ?> 
+                            </ul>
+                            <?php } else { ?>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=right"><div><span>+</span></div></a></li>
+                            <?php } ?>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div> 
+    </div> 
+<!--        
+             <div class="col-sm-4 col-xs-12">
+                 <ul class="packageDetail">
+                     <li><p>Total Packages</p><span> 122</span> </li>
+                     <li><p>Total Packages Today</p><span> 122</span> </li>
+                      <li><p>Total Registration</p><span> 122</span> </li>
+                     
+                 </ul>
+             </div>-->
+   
 
-        if ($genealogyObject->position == 'left') {
-            $chiId = $genealogyObject->user_id;
-            $leftGenealogyListObject = BaseClass::getGenoalogyTree($chiId);
-            if (count($leftGenealogyListObject) > 0) {
-                echo '<li>';
-
-                $leftCurrnetIdCount = BaseClass::getGenoalogyTree($chiId);
-                /* Check for the link */
-                $rightIdCount = count($leftCurrnetIdCount) >= 1 ? $treeVar . '?id=' . $genealogyObject->user_id : $regVar;
-                echo $chiId = $genealogyObject->user_id ? '<a href="' . $rightIdCount . '">' . $genealogyObject->user->name . "</a>" : '';
-                echo '<ul>';
-
-                foreach ($leftGenealogyListObject as $leftGenealogyObject) {
-                    $leftCurrnetIdCount = BaseClass::getGenoalogyTree($leftGenealogyObject->user_id);
-                    /* Check for the link */
-
-                    $leftUrl = Yii::app()->createUrl('/user/registration', array('spid' => $leftGenealogyObject->user->sponsor_id, 'position' => 'left'));
-                    $rightIdCount = count($leftCurrnetIdCount) >= 1 ? $treeVar . '?id=' . $leftGenealogyObject->user->name : $leftUrl;
-                    $naUrl = Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id, 'position' => 'left'));
-
-                    if ($leftGenealogyObject->position == 'left') {
-                        echo $leftGenealogyObject->user_id ? '<li><a href=' . $rightIdCount . '>' . $leftGenealogyObject->user->name . "</a></li>" : '';
-                    }
-                    if ($leftGenealogyObject->position == 'right') {
-                        echo $leftGenealogyObject->user_id ? '<li><a href=' . $rightIdCount . '>' . $leftGenealogyObject->user->name . "</a></li>" : '';
-                    }
-                }
-                echo'</ul>
-                                        </li>';
-                //echo '</ul>';
-                echo '
-                                        
-                                            </li>
-                                       </li>';
-            } else {
-                echo '<li>';
-                $leftUrl = Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id, 'position' => 'left'));
-                echo $chiId = $genealogyObject->user_id ? '<a href="' . $leftUrl . '">' . $genealogyObject->user->name . "</a>" : '';
-                echo '<ul>';
-                echo '
-                                        </ul>
-                                        </li>
-                                   </li>';
-            }
-        } else { //echo "right";exit;
-            $chiId = $genealogyObject->user_id;
-            $rightGenealogyListObject = BaseClass::getGenoalogyTree($chiId);
-            if (count($rightGenealogyListObject) > 0) {
-                echo '<li>';
-                $rightCurrnetIdCount = BaseClass::getGenoalogyTree($genealogyObject->user_id);
-                /* Check for the link */
-                $rightIdCount = count($rightCurrnetIdCount) >= 1 ? $treeVar . '?id=' . $genealogyObject->user_id : $regVar;
-
-                echo $chiId = $genealogyObject->user_id ? '<a href="' . $rightIdCount . '">' . $genealogyObject->user->name . "</a>" : '';
-                echo '<ul>';
-
-                foreach ($rightGenealogyListObject as $rightGenealogyObject) {
-                    $rightCurrnetIdCount = BaseClass::getGenoalogyTree($rightGenealogyObject->user_id);
-                    /* Check for the link */
-
-                    $rightUrl = Yii::app()->createUrl('/user/registration', array('spid' => $rightGenealogyObject->user->sponsor_id, 'position' => 'right'));
-                    $naUrl = Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id, 'position' => 'right'));
-                    $rightIdCount = count($rightCurrnetIdCount) >= 1 ? $treeVar . '?id=' . $rightGenealogyObject->user_id : $rightUrl;
-
-                    if ($rightGenealogyObject->position == 'left') {
-                        echo $rightGenealogyObject->user_id ? '<li><a href=' . $rightIdCount . '>' . $rightGenealogyObject->user->name . "</a></li>" : '';
-                    }
-
-                    if ($rightGenealogyObject->position == 'right') {
-                        echo $rightGenealogyObject->user_id ? '<li><a href=' . $rightIdCount . '>' . $rightGenealogyObject->user->name . "</a></li>" : '';
-                    }
-                }
-            } else {
-                echo '<li>';
-                $rightUrl = Yii::app()->createUrl('/user/registration', array('spid' => $genealogyObject->user->sponsor_id, 'position' => 'right'));
-                echo $chiId = $genealogyObject->user_id ? '<a href="' . $rightUrl . '">' . $genealogyObject->user->name . "</a>" : '';
-                echo '<ul>';
-            }
-            echo '
-                                        </ul>
-                                            </li>
-                                       </li>';
-        }
-    }
-} else {
-    echo 'No Records Found';
-}
-echo '</ul>
+<div class="row">
+    
+    <div class="col-sm-12 detailPackage">
+        <h4>PACKAGE DETAILED INFORMATION</h4>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/basic-p1.png">
+                        <p> Basic Packages 1</p>
                     </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <img src="/images/basic-p2.png">
+                        <p>  Basic Packages 2</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/basic-p3.png">
+                        <p> Basic Packages 3</p>
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+             <div class="col-sm-4 col-xs-12">
+               
+                   <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-p1.png">
+                        <p> Advanced Packages 1</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <img src="/images/advance-p2.png">
+                        <p>  Advanced Packages 2</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-p3.png">
+                        <p>Advanced Packages 3</p>
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+                   
+                </div>
+            <div class="col-sm-4 col-xs-12">
+                
+                   <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-pro1.png">
+                        <p> Advanced Pro 1</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <img src="/images/advance-pro2.png">
+                        <p> Advanced Pro 2 </p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/advance-pro3.png">
+                        <p> Advanced Pro 3</p>
+                    </div>
+                        </th>
+                    </tr>
+                </table>
                     
                 </div>
-            </div>';
+                
+                
+            </div>
+        <h4></h4>
+        </div>
+    </div>
+   
+</div>
+<link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true) ;?>/css/main.css">
 
-echo '</span>
-        </div>';
-?>
 <input type="hidden" name='userSearch' value='' id='search_user_id'>
-<link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/hint.css">
 <script type="text/javascript">
     function showusergeneo(userVal)
     {
