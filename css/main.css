@@ -164,6 +164,7 @@ right connector from last child*/
 .sm-purple{background:#3a56aa;}
 .sm-grey{background:#e7b76d;}
 .sm-blank{background:#e0e0e0;}
+.sm-nothing{background:#ccc;}
 .sm-blank span{font-size:55px !important;}
 
 @media (max-device-width: 480px) and (min-device-width: 320px)
