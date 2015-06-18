@@ -54,7 +54,13 @@ $empty = "sm-blank" ; //no Package
                                 <?php } ?> 
                             </ul>
                             <?php } else { ?>
-                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=left"><div><span>+</span></div></a></li>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=left"><div><span>+</span></div></a>
+                                    <ul>
+                                        <li><a class="sm-blank" href="#"><div><span></span></div></a></li>  
+                                        <li><a class="sm-blank" href="#"><div><span></span></div></a></li>
+                                    </ul>
+                                </li>
+                                
                             <?php } ?>
                         </li>
                         <li> 
@@ -82,7 +88,14 @@ $empty = "sm-blank" ; //no Package
                                 <?php } ?> 
                             </ul>
                             <?php } else { ?>
-                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=right"><div><span>+</span></div></a></li>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=right"><div><span>+</span></div></a>
+                                <ul>
+                                    <li><a class="sm-blank" href="#"><div><span></span></div></a></li>  
+                                    <li><a class="sm-blank" href="#"><div><span></span></div></a></li>
+                                </ul>
+                                
+                            </li>
+                                
                             <?php } ?>
                         </li>
                     </ul>
