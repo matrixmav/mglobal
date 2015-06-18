@@ -35,6 +35,7 @@ function getExistingFund(userId, walletId) {
 }
 
 function getFullName(userName) {
+    
     $.ajax({
         type: "post",
         url: "/user/getfullname",
@@ -51,4 +52,28 @@ function getFullName(userName) {
             }
         }
     });
+}
+function getFullNameAdmin(userName) {
+   if(userName=='admin' || userName=='info' || userName=='marketing' || userName=='Customercare'){
+    $("#search_user_error").html("User not existed!!!");
+    return false;
+   }else{
+       
+    $.ajax({
+        type: "post",
+        url: "/user/getfullname",
+        data: {'userName': userName},
+        success: function (data) {
+            var userData = jQuery.parseJSON(data);
+            $("#search_user_error").html("");
+            if (userData) {
+                $("#search_username").val(userData.fullName);
+                $("#search_user_id").val(userData.id);
+            } else {
+                $("#search_user_id").val(0);
+                $("#search_user_error").html("User not existed!!!");
+            }
+        }
+    });
+}
 }
