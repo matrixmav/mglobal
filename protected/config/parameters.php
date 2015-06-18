@@ -107,6 +107,7 @@ return array(
    'sitename'=>'mGlobal',
    'transactionIdPrefix'=> date('y'),
    'transactionIdPostfix'=> date('m'),
+   'ip' => $_SERVER['REMOTE_ADDR'] ,        
    'paypalurl'=>'https://www.sandbox.paypal.com/cgi-bin/webscr',  
    'returnurl'=>'http://demo.mglobally.com/package/thankyou',         
    'twitterLink' => 'https://twitter.com/intent/tweet?text='

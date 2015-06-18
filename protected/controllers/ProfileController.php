@@ -230,14 +230,15 @@ class ProfileController extends Controller {
                     } else {
                         $userObject->password = md5($_POST['UserProfile']['new_password']);
                         if ($userObject->update()) {
+                            $userObjectArr = array();
                             $userObjectArr['full_name'] = $userObject->full_name;
                             $userObjectArr['name'] = $userObject->name;
-                            $userObjectArr['ip'] = Yii::$app->getRequest()->getUserIP();
+                            $userObjectArr['ip'] = Yii::app()->params['ip'];
                             $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
                             $success .= "Your password changed successfully";
                             $config['to'] = $userObject->email;
                             $config['subject'] = 'mGlobally Password Changed';
-                            $config['body'] =  $this->renderPartial('../mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
+                            $config['body'] =  $this->renderPartial('/mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
                         
                             //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
                             CommonHelper::sendMail($config);
@@ -274,9 +275,10 @@ class ProfileController extends Controller {
                     $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);
 
                     if ($userObject->update()) {
+                        $userObjectArr = array();
                         $userObjectArr['full_name'] = $userObject->full_name;
                         $userObjectArr['name'] = $userObject->name;
-                        $userObjectArr['ip'] = Yii::$app->getRequest()->getUserIP();
+                        $userObjectArr['ip'] = Yii::app()->params['ip'];
                         $userObjectArr['new_master_pin'] = $_POST['UserProfile']['new_master_pin'];
                         $success .= "Your pin changed successfully";
                         $config['to'] = $userObject->email;

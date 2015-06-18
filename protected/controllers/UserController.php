@@ -52,7 +52,7 @@ class UserController extends Controller {
     }
 
     public function actionConfirm() {
-
+         
         $msg = "";
         if (isset($_GET['activation_key']) && $_GET['activation_key'] != '') {
             $activationKey = $_GET['activation_key'];
@@ -75,6 +75,7 @@ class UserController extends Controller {
                     print_r($userObject->getErrors());
                     exit;
                 }
+                $userObjectArr = array();
                 $userObjectArr['name'] = $userObject->name;
                 $userObjectArr['full_name'] = $userObject->full_name;
                 $userObjectArr['password'] = $password;
@@ -597,13 +598,14 @@ class UserController extends Controller {
                     print_r($model->getErrors());
                     exit;
                 }
+                $userObjectArr = array();
                 $userObjectArr['full_name'] = $userObject->full_name;
                 $userObjectArr['password'] = $password;
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Forgot Password';
                 /*$config['body'] = 'Hi,' . $userObject->full_name . '<br/>'
                         . 'New Password : ' . $password;*/
-                $config['body'] =  $this->renderPartial('../mailTemp/login-details', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] =  $this->renderPartial('../mailTemp/forgot-password', array('userObjectArr'=>$userObjectArr),true);
                 $response = CommonHelper::sendMail($config);
 
                 $this->redirect(array('login', 'successMsg' => $msg));
