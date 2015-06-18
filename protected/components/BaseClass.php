@@ -1071,7 +1071,7 @@ class BaseClass extends Controller {
                     }else if($type == 9){
                         $color = "sm-purple" ; //Advance Pro Packages 3
                     }else{
-                        $color = "sm-blank" ; //kuch nhi h 
+                        $color = "sm-nothing" ; //kuch nhi h 
                     }
                     
                 }
