@@ -8,108 +8,99 @@ $treeVar = '/genealogy/';
 $this->breadcrumbs=array(
 	'Genealogies'=>array('index'),
         "Tree"
-); ?>
+); 
+
+/* For Define node Color */
+$empty = "sm-blank" ; //no Package
+ 
+?>
 <div class="row">
-	
-                        <div class="col-md-12">
-							 <span><?php if(!empty($_GET) && $_GET['id']!=''){?><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;cursor:pointer;text-decoration:none;">Go Back >></a><?php } ?></span>
-						</div>
+
+    <div class="col-md-12">
+        <span><?php if (!empty($_GET) && $_GET['id'] != '') { ?><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;cursor:pointer;text-decoration:none;">Go Back >></a><?php } ?></span>
+    </div>
 </div>
 
-    <div class="row">
-        <!-- <div class="col-lg-12">
-            <div class="tree">
-                <ul>
-                    <li>
-                        <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); ?>
-                        <a href="#" data-hint="This is a success hint that fades in" class="hint-top-s-small-t-notice"><?php echo $userObject->name; ?></a>
-                        <ul>
-                            <li>
-                                <?php if(count($genealogyLeftListObject) > 0 ){ ?>
-                                <a href="<?php echo $treeVar.'?id='.$genealogyLeftListObject[0]->user_id; ?>"><?php echo $genealogyLeftListObject[0]->user->name; ?></a>
-                                <ul>
-                                    <?php $genealogyLeftLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'left'"); ?>
-                                    <?php if(count($genealogyLeftLeftListObject) > 0 ){ ?>
-                                        <li><a href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></a></li>
-                                    <?php }else{ ?>
-                                         <li><a href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=left">+</a></li>    
-                                    <?php } ?>     
-                                     
-                                    <?php $genealogyLeftRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'right'"); ?>   
-                                    <?php if(count($genealogyLeftRighttListObject) > 0 ){ ?>
-                                        <li><a href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></a></li>
-                                    <?php }else{ ?>
-                                         <li><a href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=right">+</a></li>   
-                                    <?php } ?> 
-                                </ul>
-                                <?php } else { ?>
-                                    <a href="<?php echo $regVar.$userObject->name; ?>&position=left">+</a>
-                                <?php } ?>
-                            </li>
-                            <li> 
-                                <?php if(count($genealogyRightListObject) > 0 ){ ?>
-                                <a href="<?php echo $treeVar.'?id='.$genealogyRightListObject[0]->user_id; ?>"><?php echo $genealogyRightListObject[0]->user->name; ?> </a>
-                                <ul>
-                                    <?php $genealogyRightLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'left'"); ?>
-                                    <?php if(count($genealogyRightLeftListObject) > 0 ){ ?>
-                                        <li><a href="<?php echo $treeVar.'?id='.$genealogyRightLeftListObject[0]->user_id; ?>"><?php echo $genealogyRightLeftListObject[0]->user->name; ?></a></li>
-                                    <?php }else{ ?>
-                                         <li><a href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=left">+</a></li>   
-                                    <?php } ?>     
-                                     
-                                    <?php $genealogyRightRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'right'"); ?>   
-                                    <?php if(count($genealogyRightRighttListObject) > 0 ){ ?>
-                                        <li><a href="<?php echo $treeVar.'?id='.$genealogyRightRighttListObject[0]->user_id; ?>"><?php echo $genealogyRightRighttListObject[0]->user->name; ?></a></li>
-                                    <?php }else{ ?>
-                                         <li><a href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=right">+</a></li>   
-                                    <?php } ?> 
-                                </ul>
-                                <?php } else { ?>
-                                    <a href="<?php echo $regVar.$userObject->name; ?>&position=right">+</a>
-                                <?php } ?>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>			
-        </div> -->
-        <div class="col-sm-8 col-xs-12">
-            
-            <div class="mytree">
-                <h3>Genealogy Binary</h3>
-                <ul>
-                    <li>
-                        <a href="" class="sm-red"><div><span>Parent1</span></div></a>
-                        <ul class="newdiv">
-                            <li>
-                                <a href="" class="sm-navy"><div><span>Parent1</span></div></a>
-                                <ul>
-                                    <li><a href="" class="sm-blue"><div><span>Parent1</span></div></a></li>
-                                    <li><a href="" class="sm-greenLight"><div><span>Parent1</span></div></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="" class="sm-green"><div><span>Parent1</span></div></a>
-                                <ul>
-                                    <li><a href="" class="sm-purple"><div><span>Parent1</span></div></a></li>
-                                    <li><a href="" class="sm-blank"><div><span>+</span></div></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+    <div class="col-sm-8 col-xs-12">
+        <div class="row mytree">
+            <ul>
+                <li>
+                    <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); ?>
+                    <a href="" class="sm-red"><div><span><?php echo $userObject->name; ?></span></div></a>
+                    <ul>
+                        <li>
+                            <?php
+                                if(count($genealogyLeftListObject) > 0 ){
+                                    $getColor =  BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);                                        
+                            ?>
+                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftListObject[0]->user->name; ?></span></div></a>
+                            <ul>
+                                <?php $genealogyLeftLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'left'"); ?>
+                                <?php if(count($genealogyLeftLeftListObject) > 0 ){ 
+                                    $getColor =  BaseClass::getPackageName($genealogyLeftLeftListObject[0]->user_id);
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></a></li>
+                                <?php }else{ ?>
+                                     <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>    
+                                <?php } ?>     
 
-            </div>
-        </div>
-             <div class="col-sm-4 col-xs-12">
+                                <?php $genealogyLeftRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'right'"); ?>   
+                                <?php if(count($genealogyLeftRighttListObject) > 0 ){ 
+                                   echo  $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></a></li>
+                                <?php }else{ ?>
+                                    <li><a class="<?php echo $empty   ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>   
+                                <?php } ?> 
+                            </ul>
+                            <?php } else { ?>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=left"><div><span>+</span></div></a></li>
+                            <?php } ?>
+                        </li>
+                        <li> 
+                            <?php if(count($genealogyRightListObject) > 0 ){                                    
+                                 $getColor =  BaseClass::getPackageName($genealogyRightListObject[0]->user_id);                                    
+                                ?>
+                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightListObject[0]->user->name; ?> </span></div></a>
+                            <ul>
+                                <?php $genealogyRightLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'left'"); ?>
+                                <?php if(count($genealogyRightLeftListObject) > 0 ){ 
+                                    $getColor =  BaseClass::getPackageName($genealogyRightLeftListObject[0]->user_id); 
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightLeftListObject[0]->user->name; ?> </span></div></a></li>
+                                <?php }else{ ?>
+                                     <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>  
+                                <?php } ?>     
+
+                                <?php $genealogyRightRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'right'"); ?>   
+                                <?php if(count($genealogyRightRighttListObject) > 0 ){
+                                    $getColor =  BaseClass::getPackageName($genealogyRightRighttListObject[0]->user_id); 
+                                    ?>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightRighttListObject[0]->user->name; ?></span></div></a></li>
+                                <?php }else{ ?>
+                                     <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>
+                                <?php } ?> 
+                            </ul>
+                            <?php } else { ?>
+                                <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=right"><div><span>+</span></div></a></li>
+                            <?php } ?>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div> 
+    </div>    
+        
+        
+<!--             <div class="col-sm-4 col-xs-12">
                  <ul class="packageDetail">
                      <li><p>Total Packages</p><span> 122</span> </li>
                      <li><p>Total Packages Today</p><span> 122</span> </li>
                       <li><p>Total Registration</p><span> 122</span> </li>
                      
                  </ul>
-             </div>
-    </div>
+             </div>-->
+    
 
 <div class="row">
     
@@ -211,6 +202,4 @@ $this->breadcrumbs=array(
         </div>
     </div>
    
-</div>
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true) ;?>/css/main.css">
-<link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/hint.css">
