@@ -132,7 +132,7 @@ class BaseClass extends Controller {
         if (count($transactionObject) > 0) {
             $transactionObject = $transactionObject[0];
             $lastid = substr($transactionObject->transaction_id,2,5);
-            $incementID = $lastid[1] + 1;
+            $incementID = $lastid + 1;
             if(strlen($incementID) > 5)
             {
                 $incementID = '12345';
