@@ -49,7 +49,7 @@ $this->breadcrumbs = array(
                     <label for="paid_amount" class="col-lg-4 control-label">Amount<span class="require"> * $</span></label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control" id="paid_amount" name="paid_amount"  class="form-control">
-                    <span id="email_error" style="color:red"></span>
+                       <span id="email_error" style="color:red"></span>
                     </div>
                     
                 </div>
