@@ -527,6 +527,13 @@ class PackageController extends Controller {
                     exit;
                 }
                  
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $sponsorUserObject->email;
+                $config['subject'] = 'Direct Referral Income Credited';
+                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
                 
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
@@ -606,13 +613,7 @@ class PackageController extends Controller {
                 $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
                 CommonHelper::sendMail($config);
                 
-                $userObjectArr = array();
-                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
-                $userObjectArr['user_name'] = $userObject->name;
-                $config['to'] = $sponsorUserObject->email;
-                $config['subject'] = 'Direct Referral Income Credited';
-                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);
+               
             }
             if ($transactionObject->status == 1) {
                 unset(Yii::app()->session['transactionid']);
