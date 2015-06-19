@@ -51,6 +51,15 @@
             $("#name").focus();            
             return false;
         }
+        
+        
+        if($("#name").val().length > 8 ){            
+            $("#name_available").html("");
+            $("#name_error").html("Enter max 8 characters in the input box.");
+            $("#name").focus();            
+            return false;
+        }
+        
 
         $("#full_name_error").html("");
         if ($("#full_name").val() == "") {
