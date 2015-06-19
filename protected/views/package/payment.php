@@ -29,7 +29,7 @@
                                             }
                                             ?>
                                             <div class="col-sm-12 col-xs-12 tleft">
-                                                <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
+                                                <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
                                                 <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                             </div>
                                             <?php $i++;
@@ -130,12 +130,7 @@ function makepayment()
             var input = document.getElementsByName("wallet_type");
             var wallet = $("#walletused").val();
             var totalAmount = $('#totalAmount').val();
-            var total = 0;
-            for (var i = 0; i < input.length; i++) {
-                if (input[i].checked) {
-                    total += parseFloat(input[i].value);
-                }
-            }
+            var total = key;
             $("#totalusedrp").val(total);
             var totalusedRP = $("#totalusedrp").val();
             if(totalAmount > total)
