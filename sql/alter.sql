@@ -126,3 +126,6 @@ ALTER TABLE `build_temp` ADD `main_div` VARCHAR(255) NOT NULL AFTER `contact_for
 INSERT INTO `mglobal`.`user_profile` (`id`, `user_id`, `address`, `street`, `city_name`, `state_name`, `country_id`, `zip_code`, `id_proof`, `address_proff`, `referral_banner_id`, `testimonials`, `testimonial_status`, `document_status`, `status`, `created_at`, `updated_at`) VALUES (NULL, '21', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP), (NULL, '22', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP);
 
 INSERT INTO `mglobal`.`user_profile` (`id`, `user_id`, `address`, `street`, `city_name`, `state_name`, `country_id`, `zip_code`, `id_proof`, `address_proff`, `referral_banner_id`, `testimonials`, `testimonial_status`, `document_status`, `status`, `created_at`, `updated_at`) VALUES (NULL, '23', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP), (NULL, '24', NULL, '', '', '', '', '', '', '', '1', '', '0', '', '', '', CURRENT_TIMESTAMP);
+
+
+ALTER TABLE `package` ADD `type` TINYINT NOT NULL COMMENT '1:1basic,2:2basic,3:3basec,4:1advance,5:2advance.6:3advance,7:1pro,8:2pro,9:3pro' AFTER `no_of_forms`;
