@@ -221,7 +221,7 @@ class MoneyTransferController extends Controller {
                     $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->from_user_id, 'type' => $walletObject->type));
                     if($fromUserWalletObject){
                         if($fromUserWalletObject->fund > 0){
-                            $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->actual_amount);
+                            $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->paid_amount);
                         }
                         $fromUserWalletObject->fund = $fromAmount;
                         $fromUserWalletObject->update();
