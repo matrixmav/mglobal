@@ -95,6 +95,7 @@
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id'];?>">
+<input type="hidden" id="package_amt" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="transID" value="<?php echo $_GET['tId'];?>">
 <script type="text/javascript">
 function makepayment()
@@ -130,15 +131,21 @@ function makepayment()
             var input = document.getElementsByName("wallet_type");
             var wallet = $("#walletused").val();
             var totalAmount = $('#totalAmount').val();
+            var package_amt = $('#package_amt').val();
             var total = key;
             $("#totalusedrp").val(total);
             var totalusedRP = $("#totalusedrp").val();
+            
             if(totalAmount > total)
             {
+             alert('nidhi');
+            $('#payamount').html('');
             var payableAmount = totalAmount - total;
+            $('#totalAmount').val(payableAmount);
             $("#ppamount").val(Math.round(payableAmount).toFixed(2));
-            $('#payamount').html('$' + Math.round(payableAmount).toFixed(2));
+            $('#payamount').html(payableAmount);
             }else{
+            $('#payamount').html('');    
             var payableAmount = total - totalAmount;
             $('#totalAmount').val(0);
             $('#payamount').html('$0');
@@ -157,7 +164,7 @@ function makepayment()
                     {
                         
                         $('#totalAmounDiv').fadeIn();
-                        $('#actualamount').html('$' + totalAmount);
+                        $('#actualamount').html('$' + package_amt);
                         $('#walletamount').html('$' + total);
                         //$('#payamount').html('$' + payableAmount);
                         $('#cartDiv').fadeOut();
