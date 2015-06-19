@@ -505,18 +505,17 @@ class PackageController extends Controller {
                 
                 ob_start();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-                $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-                
+                $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                 /*to get sponsor email*/
-                
-                $sponsorUserObject = User::model()->findByAttributes(array('sponsor_id' => $userObject->sponsor_id));
-                
+                $packageObject = Package::model()->findByPK($orderObject->package_id);
+                $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
+                  
                 /*sponsor wallet*/
                 try {
                     //deduct from from user wallet
                     $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
                     if($sponsorWalletObject){
-                        $fromAmount = ($sponsorWalletObject->fund) + ($transactionObject->paid_amount *5/100);
+                        $fromAmount = ($sponsorWalletObject->fund) + ($packageObject->amount*5/100);
                         $sponsorWalletObject->fund = $fromAmount;
                         $sponsorWalletObject->update();
                     } else {
@@ -527,7 +526,7 @@ class PackageController extends Controller {
                     exit;
                 }
                  
-                $packageObject = Package::model()->findByPK($orderObject->package_id);
+                
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
                 if ($transactionObject->coupon_discount != '0') {
