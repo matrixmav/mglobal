@@ -484,7 +484,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
+            if ($transactionObject->status == 1) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -517,18 +517,18 @@ class PackageController extends Controller {
                     //deduct from from user wallet
                     $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
                     if($sponsorWalletObject){
-                        $fromAmount = ($sponsorWalletObject->fund) + ($transactionObject->paid_amount *5/100);
+                        $fromAmount = ($sponsorWalletObject->fund) + ($transactionObject->paid_amount *5/100);exit;
                         $sponsorWalletObject->fund = $fromAmount;
                         $sponsorWalletObject->update();
                     } else {
-                         Wallet::model()->create($sponsorUserObject->user_id,$transactionObject->paid_amount,3);
+                        
+                         Wallet::model()->create($sponsorUserObject->id,$transactionObject->paid_amount,'3');
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();
                     exit;
                 }
-                Wallet::model()->create($moneyTransferObject->from_user_id,$transactionObject->paid_amount,$walletObject->type);
-                
+                 
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
