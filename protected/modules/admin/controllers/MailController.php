@@ -137,6 +137,10 @@ class MailController extends Controller {
     public function actionReply() {
         if ($_GET) {
             $mailObject = Mail::model()->findByPk($_REQUEST['id']);
+            if(Yii::app()->session['userid'] != $mailObject->from_user_id) {
+                $mailObject->status = 1;
+            }
+            $mailObject->save(false);
             $this->render('compose', array('error' => '', 'mailObject' => $mailObject));
         }
     }
@@ -148,10 +152,9 @@ class MailController extends Controller {
     public function actionView($id) {
         if ($id) {
             $mailObject = Mail::model()->findByPk($id);
-            if(Yii::app()->session['userid'] != $mailObject->from_user_id)
-			{
-            $mailObject->status = 1;
-			}
+            if(Yii::app()->session['userid'] != $mailObject->from_user_id) {
+                $mailObject->status = 1;
+            }
             $mailObject->save(false);
             $this->render('view', array(
                 'mailObject' => $mailObject,

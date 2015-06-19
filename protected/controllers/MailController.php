@@ -201,6 +201,10 @@ class MailController extends Controller {
         if ($_GET) {
             $emailObject = User::model()->findAll(array('condition' => 'role_id=2'));
             $mailObject = Mail::model()->findByPk($_GET['id']);
+            if(Yii::app()->session['userid'] != $mailObject->from_user_id) {
+                $mailObject->status = 1;
+            }
+            $mailObject->save(false);
             $this->render('compose', array('error' => '', 'mailObject' => $mailObject, 'emailObject' => $emailObject));
         }
     }
