@@ -292,6 +292,7 @@ class UserController extends Controller {
             $fundAmount = $_POST['paid_amount'];
             $postDataArray = $_POST;
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $transactionObject = Transaction::model()->findByPk($transactionObject->id);
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             
             if (!empty($walletObject)) {
@@ -348,6 +349,7 @@ class UserController extends Controller {
             $postDataArray = $_POST;
              
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $transactionObject = Transaction::model()->findByPk($transactionObject->id);
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
             $postDataArray['toWalletId'] = $adminWalletObject->id;
