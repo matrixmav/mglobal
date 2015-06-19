@@ -74,7 +74,7 @@
         }
         
         $("#full_name_error").html("");
-        var letters = /^[A-Za-z]+$/;
+        var letters = /^[A-Za-z, ]+$/;
         if ( ! $("#full_name").val().match(letters)){
             $("#full_name_error").html("Only alphabet characters allow");           
             return false;
