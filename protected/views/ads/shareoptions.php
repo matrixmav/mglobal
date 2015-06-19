@@ -1,6 +1,6 @@
 <?php
 $img = '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$data->banner . '"'; 
-$link = '"' . Yii::app()->params['baseUrl'] . '"';
+$link = '"' . $data->description . '"';
 $name = '"' . $data->name . '"';
 $desc = '"' . $data->description . '"';
 $caption = '""';
