@@ -484,7 +484,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
+            if ($transactionObject->status == 1) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -499,7 +499,6 @@ class PackageController extends Controller {
                     $mtObject->status = 1;
                     $mtObject->update();
                     $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mtObject->wallet_id));
-                    $MTObject1->fund - $mtObject->fund;
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
@@ -521,14 +520,13 @@ class PackageController extends Controller {
                         $sponsorWalletObject->fund = $fromAmount;
                         $sponsorWalletObject->update();
                     } else {
-                         Wallet::model()->create($sponsorUserObject->user_id,$transactionObject->paid_amount,3);
+                        $walletObject = Wallet::model()->create($sponsorUserObject->id,$transactionObject->paid_amount,'3');
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();
                     exit;
                 }
-                Wallet::model()->create($moneyTransferObject->from_user_id,$transactionObject->paid_amount,$walletObject->type);
-                
+                 
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
@@ -609,6 +607,7 @@ class PackageController extends Controller {
                 CommonHelper::sendMail($config);
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
                 $config['to'] = $sponsorUserObject->email;
                 $config['subject'] = 'Direct Referral Income Credited';
                 $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);

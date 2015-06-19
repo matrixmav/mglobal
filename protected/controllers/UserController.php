@@ -361,6 +361,9 @@ class UserController extends Controller {
                         $currnetUserObject = User::model()->findByAttributes(array('unique_id' => $user_profile['id'], 'status' => 1));
                         Yii::app()->session['userid'] = $currnetUserObject->id;
                         Yii::app()->session['username'] = $currnetUserObject->name;
+                        Yii::app()->session['frontloggedIN'] = 1;
+                        $this->redirect("/profile/dashboard");
+
                         
                         $userObjectArr = array();
                         $userObjectArr['name'] = $user_profile['first_name'];
@@ -375,6 +378,7 @@ class UserController extends Controller {
                         CommonHelper::sendMail($config);
                         $this->redirect("/profile/dashboard");                        
                         
+
                     } else {
                         $error = "<p class='error'>Invalid User Name</p>";
                         $this->render("login", array("msg" => $error));
@@ -382,6 +386,7 @@ class UserController extends Controller {
                 } else {
                     Yii::app()->session['userid'] = $currnetUserObject->id;
                     Yii::app()->session['username'] = $currnetUserObject->name;
+                    Yii::app()->session['frontloggedIN'] = 1;
                     $this->redirect("/profile/dashboard");
                 }
             } else {
