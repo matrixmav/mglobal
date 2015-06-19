@@ -1,11 +1,9 @@
   function validateFrm() {
-        
-        if($("#sponsorIdExistedErrorFlag").val()==1){
-           $("#sponsor_id_error").html("Not Existed.");
-           $("#sponsor_id").focus(); 
-           return false;
-        }        
-        
+//        $("#sponsor_id_error").html('');
+      isSponsorExisted();
+      if($("#sponsorIdExistedErrorFlag").val()==1){
+          return false;
+      }
         if($("#nameExistedErrorFlag").val()==1){
            $("#name_error").html("Existed.");
            $("#name").focus(); 
@@ -103,7 +101,6 @@
            $("#email").focus(); 
            return false;
         }
-        
         /* end here */
 
         $("#date_error").html("");
@@ -127,7 +124,6 @@
             $("#phone").focus();
             return false;
         }
-        
 
         var phone = document.getElementById('phone');
         var filter = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -243,18 +239,26 @@
         });
     }
     
-    function isSponsorExisted() {   
+    function isSponsorExisted() { 
         $.ajax({
             type: "post",
             url: "/user/issponsorexisted",
             data: "sponsor_id=" + $("#sponsor_id").val(),
             success: function (msg) {
+               //alert('jj');
                 $("#sponsor_id_error").html("");
                 $("#sponsorIdExistedErrorFlag").val(0);
-                if(msg == 0){
+                if(msg == 0){ 
                     $("#sponsor_id_error").html("Sponsor Not Existed!!!");
-                    $("#sponsorIdExistedErrorFlag").val(1);    
-                }
+                    $("#sponsorIdExistedErrorFlag").val(1);   
+                    return false;
+                } else { 
+                    if( $("#sponsor_id").val()==""){
+                     $("#sponsor_id_error").html("Get Sponsor Id");
+                     $("#sponsor_id").focus();   
+                    }
+                    return false;
+                    }
             }
         });
     }
