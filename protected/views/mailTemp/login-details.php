@@ -13,7 +13,7 @@
                   <tbody>
                   	<tr>
                     <td width="30%" valign="middle" align="right" height="50" bgcolor="#7cc576"style=" color:#828282;font-size:16px; line-height:19px; font-family:'Nunito'"> 
-       <img width="" border="0" src="chekmark.png">
+       <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/chekmark.png">
         </td>
         <td width="10%" valign="middle" align="left" height="50" bgcolor="#7cc576"style=" color:#828282;font-size:16px; line-height:19px; font-family:'Nunito'"> 
         
