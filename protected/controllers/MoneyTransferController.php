@@ -260,9 +260,10 @@ class MoneyTransferController extends Controller {
                 $fromUserObjectMail = User::model()->findByPK($userid);
                 $userObjectArr['to_name'] = $toUserObjectMail->name;
                 $userObjectArr['from_name'] = $fromUserObjectMail->name;
-                $userObjectArr['date'] = $moneyTransferObject->created_at;
+                $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
+                
                 /*mail to user*/
                 $config['to'] = $toUserObjectMail->email;
                 $config['subject'] = 'Fund Transfered';

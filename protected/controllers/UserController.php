@@ -378,7 +378,7 @@ class UserController extends Controller {
                         CommonHelper::sendMail($config);
                         $this->redirect("/profile/dashboard");                        
                         
->>>>>>> 331982f1904f23ee613387c0965bc737629e07a9
+
                     } else {
                         $error = "<p class='error'>Invalid User Name</p>";
                         $this->render("login", array("msg" => $error));

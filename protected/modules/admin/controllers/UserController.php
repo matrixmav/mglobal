@@ -384,6 +384,7 @@ class UserController extends Controller {
                 $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
+                 
                 /*mail to user*/
                 $config['to'] = $toUserObjectMail->email;
                 $config['subject'] = 'Fund Deducted';
