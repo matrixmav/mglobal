@@ -137,18 +137,19 @@ class PackageController extends Controller {
     public function actionDomainSearch() {
         
         $error = "";    
-        
+        if (!empty($_GET) && $_GET['package_id']!='') {
+
             Yii::app()->session['package_id'] = $_GET['package_id'];
-        
+        }
 
-        $Package_id = Yii::app()->session['package_id'];
+         
 
-        $packageObject = Package::model()->findByPK($Package_id);
+        $packageObject = Package::model()->findByPK(Yii::app()->session['package_id']);
 
         $rightbar = '<div id="dca_cart" class="cart-wrapper">
             <div class="cart-header"><span class="ico-cart"></span>My Shopping Cart</div>
             <ul id="domainList" class="cartList cart-list">';
-        if ($Package_id == '') {
+        if (Yii::app()->session['package_id'] == '') {
             $rightbar .= '<li class="empty">Your cart is empty :(</li>';
         } else {
             $rightbar .= '<li class="cart-item">
@@ -483,7 +484,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
+            if ($transactionObject->status == 1) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -493,12 +494,13 @@ class PackageController extends Controller {
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
                 $orderObject->update();
                 $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
-                
-                foreach ($MTObject as $mtObject) {
-                    $mtObject->status = 1;
-                    $mtObject->update();
-                    $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mtObject->wallet_id));
-                    $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
+                foreach($MTObject as $mObject){}
+                if(!empty($MTObject))
+                {
+                    $mObject->status = 1;
+                    $mObject->update();
+                    $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mObject->wallet_id));
+                    $MTObject1->fund = $MTObject1->fund - $mObject->fund;
                     $MTObject1->update();
                 }
                 
@@ -525,6 +527,13 @@ class PackageController extends Controller {
                     exit;
                 }
                  
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $sponsorUserObject->email;
+                $config['subject'] = 'Direct Referral Income Credited';
+                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
                 
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
@@ -593,7 +602,7 @@ class PackageController extends Controller {
   </tr></table>';
 
                 $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
-                ;
+                
                 $orderObject = Order::model()->findByPK($orderObject->id);
                 $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
@@ -603,13 +612,8 @@ class PackageController extends Controller {
                 $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find' .
                 $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
                 CommonHelper::sendMail($config);
-                $userObjectArr = array();
-                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
-                $userObjectArr['user_name'] = $userObject->name;
-                $config['to'] = $sponsorUserObject->email;
-                $config['subject'] = 'Direct Referral Income Credited';
-                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);
+                
+               
             }
             if ($transactionObject->status == 1) {
                 unset(Yii::app()->session['transactionid']);
@@ -643,9 +647,8 @@ class PackageController extends Controller {
                 $transactionObject->update();
             }
             $delete = MoneyTransfer::model()->deleteAll('transaction_id = ' . $transactionObject->id);
-            $wallet = explode(',', rtrim($_REQUEST['wallet'], ','));
-            foreach ($wallet as $walletObj => $key) {
-                $finalArtr = explode('-', $key);
+             
+                $finalArtr = explode('-', $_REQUEST['wallet']);
                 $moneytransferObject = new MoneyTransfer;
                 /* $MTObject->transaction_id = $transactionObject->id;
                   $MTObject->to_user_id = 1;
@@ -660,7 +663,7 @@ class PackageController extends Controller {
                 $moneytransferObject->to_user_id = 1;
                 $moneytransferObject->from_user_id = Yii::app()->session['userid'];
                 $moneytransferObject->wallet_id = $finalArtr[0];
-                $moneytransferObject->fund = $finalArtr[1];
+                $moneytransferObject->fund = $_REQUEST['totalusedRP'];
                 $moneytransferObject->comment = "Package Purchased";
                 $moneytransferObject->status = 0;
                 $moneytransferObject->created_at = date('Y-m-d');
@@ -668,7 +671,7 @@ class PackageController extends Controller {
                 
                 
                 /* } */
-            }
+              
             echo 1;
         }
     }

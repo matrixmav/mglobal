@@ -325,7 +325,7 @@ class OrderController extends Controller {
         if (!empty($userhasObject) && $userhasObject->publish == 1) {
             $title = '<a href="' . $data['domain'] . '" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
         } else {
-            $title = '<a href="/buildtemp/templates/?id=' . $data->id . '" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>';
+            $title = '<a href="/BuildTemp/templates/?id=' . $data->id . '" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>';
         }
         }else{
         $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';

@@ -6,7 +6,7 @@
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php echo number_format($packageObject->amount + Yii::app()->session['amount'], 2); ?></span></p>
+                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php  if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; } ?></span></p>
                     <div id="paymentOption" style="min-height:238px">
                         <form id="walletform" name="walletform">  
                             <?php if ($walletObject) { ?>
@@ -89,14 +89,14 @@
     </div>
 </div>
 </div>
-<input type="hidden" id="totalAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
-<input type="hidden" id="payAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
+<input type="hidden" id="totalAmount" value="<?php if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; }?>">
+<input type="hidden" id="payAmount" value="<?php if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; }?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>">
-<input type="hidden" id="package_amt" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
+<input type="hidden" id="package_amt" value="<?php if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; }?>">
 <input type="hidden" id="transID" value="<?php echo $_GET['tId']; ?>">
 <script type="text/javascript">
     function makepayment()
@@ -105,8 +105,8 @@
         var group = document.walletform.myRadio;
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
-        var totalamount = $("#totalAmount").val();
-        if (totalamount == 0)
+        var ppamount = $("#ppamount").val();
+        if (ppamount == 0)
         {
             location.href = "/package/thankyou?transaction_id=" + transID;
         } else {
@@ -126,36 +126,58 @@
     }
     function walletamountcalculation(ID, key)
     {
-        str1 = $('#walletused').val();
-        var str = ID + '-' + key + ',' + str1;
+        
+        var str = ID + '-' + key;
         $('#walletused').val(str);
         var input = document.getElementsByName("wallet_type");
         var wallet = $("#walletused").val();
         var totalAmount = $('#totalAmount').val();
         var package_amt = $('#package_amt').val();
         var total = key;
-        $("#totalusedrp").val(total);
-        var totalusedRP = $("#totalusedrp").val();
-
-
+        
+        
         if (totalAmount > total)
         {
+             
             $('#payamount').html('');
             var payableAmount = totalAmount - total;
+            alert('great'+total);
 //                $('#totalAmount').val(payableAmount);
 //                $('#package_amt').val(payableAmount);
             $("#ppamount").val(Math.round(payableAmount).toFixed(2));
             $('#payamount').html(payableAmount);
-        } else {
+            $('#totalusedrp').val(total);
+        } 
+        if(total > totalAmount)
+        {
             $('#payamount').html('');
+            $('#totalusedrp').val('');
             var payableAmount = total - totalAmount;
-            $('#totalAmount').val(0);
+            $('#walletamount').html('$ '+totalAmount);
+            $("#ppamount").val(0);
+            $('#payamount').html('$ 0');
             $('#payamount').html('0');
-            $("totalusedrp").val(Math.round(totalAmount).toFixed(2));
+            $('#totalusedrp').val(totalAmount);
+         
         }
-
+        if(total == totalAmount)
+        {
+            alert(total);return false;
+            $('#payamount').html('');
+            $('#totalusedrp').val('');
+            var payableAmount = total - totalAmount;
+            $('#walletamount').html('$ '+totalAmount);
+            
+            $('#payamount').html('$ 0');
+            $('#payamount').html('0');
+            $('#totalusedrp').val(total);
+            //$('#totalAmount').val(0);
+         
+        }
+        var totalusedRP = $("#totalusedrp").val();
+        
         var dataString = 'transactionId=<?php echo isset($_GET['tId']) ? $_GET['tId'] : ""; ?>&payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
-
+         
         $.ajax({
             type: "GET",
             url: "/package/walletcalc",
@@ -165,8 +187,8 @@
                 if (html == 1)
                 {
                     $('#totalAmounDiv').fadeIn();
-                    $('#actualamount').html('$' + package_amt);
-                    $('#walletamount').html('$' + total);
+                    $('#actualamount').html('$ ' + package_amt);
+                    //$('#walletamount').html('$' + total);
                     //$('#payamount').html('$' + payableAmount);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
