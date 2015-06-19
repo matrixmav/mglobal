@@ -507,6 +507,9 @@ class PackageController extends Controller {
                 ob_start();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+                /*to get sponsor email*/
+                $sponsorUserObject = User::model()->findByAttributes(array('sponsor_id' => $userObject->sponsor_id));
+                
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
@@ -584,6 +587,11 @@ class PackageController extends Controller {
                 $config['subject'] = 'Payment Confirmation';
                 $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find' .
                         $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
+                CommonHelper::sendMail($config);
+                
+                $config['to'] = $sponsorUserObject->email;
+                $config['subject'] = 'Direct Referral Income Credited';
+                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
             }
             if ($transactionObject->status == 1) {
