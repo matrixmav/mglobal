@@ -30,7 +30,9 @@ class MoneyTransferController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 'confirm', 'status', 'userexists', 'fund', 'transactions', 'autoadmin'),
+                'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 
+                    'confirm', 'status', 'userexists', 'fund', 'transactions', 'autoadmin',
+                    'adrpfund'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -508,6 +510,52 @@ class MoneyTransferController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'money-transfer-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+    
+    public function actionAdRpFund(){
+        $userid = Yii::app()->session['userid'];
+        if($_POST){
+            $existingShareObject = UserSharedAd::model()->findByAttributes(array('user_id'=>$userid, 'created_at'=>date('Y-m-d')));
+            if(!empty($existingShareObject)){
+                return 1;
+            }
+            $userSharedAdObject = new UserSharedAd();
+            $userSharedAdObject->user_id = $userid;
+            $userSharedAdObject->ad_id = $_POST['adId'];
+            $userSharedAdObject->social_id = $_POST['socialId'];
+            $userSharedAdObject->status = 1;
+            $userSharedAdObject->created_at = new CDbExpression('NOW()');
+            $userSharedAdObject->updated_at = new CDbExpression('NOW()');
+            if(!$userSharedAdObject->save(false)){
+                echo "<pre>";
+                print_r($userSharedAdObject->getErrors());
+            }
+            
+            $postDataArray['transactionId'] = BaseClass::gettransactionID();
+            $postDataArray['userId'] = $userid;
+            $postDataArray['mode'] = 'rp';
+            $postDataArray['actualAmount'] = 1;
+            $postDataArray['paid_amount'] = 1;
+            $userObject = User::model()->findByPk($userid);
+            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,1);
+            $transactionId = $transactionObject->id;
+            
+            $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $userid, 'type' => 2));
+            if($fromUserWalletObject){
+                $fromAmount = ($fromUserWalletObject->fund) + 1;
+                $fromUserWalletObject->fund = $fromAmount;
+                $fromUserWalletObject->update();
+            } else {
+                $fromUserWalletObject =  Wallet::model()->create($userid,1,2);
+            }
+                    
+            $postDataArray['comment'] = 'Shared RP';
+            $postDataArray['walletId'] = $fromUserWalletObject->id;
+            $postDataArray['fundType'] = 1;
+            $postDataArray['toWalletId'] = $fromUserWalletObject->id;
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject,$transactionId,1,$role='1');
+            return 1;
         }
     }
 
