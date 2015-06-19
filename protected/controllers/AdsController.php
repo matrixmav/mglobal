@@ -59,6 +59,15 @@ class AdsController extends Controller {
 
     public function getSocialButton($data, $row) {
         $this->renderPartial('shareoptions', array('data' => $data), false, true);
+       
+    }
+    
+    public function isShared($data, $row) { 
+        $userid = Yii::app()->session['userid'];
+        $existingShareObject = UserSharedAd::model()->findByAttributes(array('user_id'=>$userid, 'ad_id'=>$data->id,'created_at'=>date('Y-m-d')));
+        if(!empty($existingShareObject)){
+            echo "Earned";
+        }
     }
 
     /**

@@ -1,11 +1,14 @@
 <?php
+$img = '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$data->banner . '"'; 
 $link = '"' . Yii::app()->params['baseUrl'] . '"';
 $name = '"' . $data->name . '"';
 $desc = '"' . $data->description . '"';
 $caption = '""';
+$adId = '"' . $data->id . '"';
+
 ?>
 
-<a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>);
+<a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?>);
         return false;'  >
 </a>
 

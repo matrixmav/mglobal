@@ -65,6 +65,12 @@ $this->menu = array(
                         ),
                         array(
                             'name' => 'created_at',
+                            'header' => '<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
+                            'htmlOptions' => array('width' => '25%'),
+                            'value' => array($this, 'isShared')
+                        ),
+                        array(
+                            'name' => 'created_at',
                             'header' => '<span style="white-space: nowrap;">Created On &nbsp; &nbsp; &nbsp;</span>',
                             'htmlOptions' => array('width' => '25%'),
                             'value' => array($this, 'getSocialButton')
