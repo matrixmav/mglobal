@@ -314,7 +314,7 @@ class UserController extends Controller {
                 /*mail to user*/
                 $config['to'] = $toUserObjectMail->email;
                 $config['subject'] = 'Fund Transfered';
-                $config['body'] =  $this->renderPartial('../mailTemplate/transfer_fund', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] =  $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
             
             $this->redirect('/admin/user/wallet?successmsg=1');
@@ -384,7 +384,7 @@ class UserController extends Controller {
                 /*mail to user*/
                 $config['to'] = $toUserObjectMail->email;
                 $config['subject'] = 'Fund Deducted';
-                $config['body'] =  $this->renderPartial('../mailTemplate/transfer_fund', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] =  $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
               $this->redirect('/admin/user/wallet?successmsg=2');
         }
