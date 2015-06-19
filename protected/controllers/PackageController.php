@@ -137,10 +137,9 @@ class PackageController extends Controller {
     public function actionDomainSearch() {
         
         $error = "";    
-        if (Yii::app()->session['package_id'] == '') {
-
+        
             Yii::app()->session['package_id'] = $_GET['package_id'];
-        }
+        
 
         $Package_id = Yii::app()->session['package_id'];
 
