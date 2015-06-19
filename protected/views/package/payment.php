@@ -141,10 +141,11 @@
              
             $('#payamount').html('');
             var payableAmount = totalAmount - total;
-            alert('great'+total);
+             
 //                $('#totalAmount').val(payableAmount);
 //                $('#package_amt').val(payableAmount);
             $("#ppamount").val(Math.round(payableAmount).toFixed(2));
+            $('#walletamount').html('$ '+total);
             $('#payamount').html(payableAmount);
             $('#totalusedrp').val(total);
         } 
@@ -162,7 +163,7 @@
         }
         if(total == totalAmount)
         {
-            alert(total);return false;
+             
             $('#payamount').html('');
             $('#totalusedrp').val('');
             var payableAmount = total - totalAmount;
