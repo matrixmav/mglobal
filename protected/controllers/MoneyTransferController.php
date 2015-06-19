@@ -96,6 +96,7 @@ class MoneyTransferController extends Controller {
                 $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$loggedInUserId, 'type'=>$walletType));
                 if(!$fromUserWalletObject){
                     //create wallet for to user
+                    $fund = 0;
                     $fromUserWalletObject = Wallet::model()->create($loggedInUserId,$fund,$walletType);
                 }
                 $postDataArray['walletId'] = $fromUserWalletObject->id;
@@ -219,7 +220,9 @@ class MoneyTransferController extends Controller {
                     //deduct from from user wallet
                     $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->from_user_id, 'type' => $walletObject->type));
                     if($fromUserWalletObject){
-                        $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->paid_amount);
+                        if($fromUserWalletObject->fund > 0){
+                            $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->paid_amount);
+                        }
                         $fromUserWalletObject->fund = $fromAmount;
                         $fromUserWalletObject->update();
                     } else {
