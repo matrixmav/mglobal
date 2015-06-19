@@ -503,10 +503,32 @@ class PackageController extends Controller {
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
-
+                
                 ob_start();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+                
+                /*to get sponsor email*/
+                
+                $sponsorUserObject = User::model()->findByAttributes(array('sponsor_id' => $userObject->sponsor_id));
+                
+                /*sponsor wallet*/
+                try {
+                    //deduct from from user wallet
+                    $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
+                    if($sponsorWalletObject){
+                        $fromAmount = ($sponsorWalletObject->fund) + ($transactionObject->paid_amount *5/100);
+                        $sponsorWalletObject->fund = $fromAmount;
+                        $sponsorWalletObject->update();
+                    } else {
+                         Wallet::model()->create($sponsorUserObject->user_id,$transactionObject->paid_amount,3);
+                    }
+                } catch (Exception $ex) {
+                    $ex->getMessage();
+                    exit;
+                }
+                Wallet::model()->create($moneyTransferObject->from_user_id,$transactionObject->paid_amount,$walletObject->type);
+                
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
@@ -583,7 +605,13 @@ class PackageController extends Controller {
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Payment Confirmation';
                 $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find' .
-                        $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
+                $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
+                CommonHelper::sendMail($config);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                $config['to'] = $sponsorUserObject->email;
+                $config['subject'] = 'Direct Referral Income Credited';
+                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
             }
             if ($transactionObject->status == 1) {
