@@ -484,7 +484,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
+            if ($transactionObject->status == 1) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -494,14 +494,15 @@ class PackageController extends Controller {
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
                 $orderObject->update();
                 $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
-                
-                
-                    $mtObject->status = 1;
-                    $mtObject->update();
-                    $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mtObject->wallet_id));
-                    $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
+                foreach($MTObject as $mObject){}
+                if(!empty($MTObject))
+                {
+                    $mObject->status = 1;
+                    $mObject->update();
+                    $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mObject->wallet_id));
+                    $MTObject1->fund = $MTObject1->fund - $mObject->fund;
                     $MTObject1->update();
-                
+                }
                 
                 ob_start();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
@@ -594,7 +595,7 @@ class PackageController extends Controller {
   </tr></table>';
 
                 $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
-                ;
+                
                 $orderObject = Order::model()->findByPK($orderObject->id);
                 $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
@@ -604,6 +605,7 @@ class PackageController extends Controller {
                 $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find' .
                 $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
                 CommonHelper::sendMail($config);
+                
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $sponsorUserObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
@@ -644,7 +646,8 @@ class PackageController extends Controller {
                 $transactionObject->update();
             }
             $delete = MoneyTransfer::model()->deleteAll('transaction_id = ' . $transactionObject->id);
-                $finalArtr = explode('-', $key);
+             
+                $finalArtr = explode('-', $_REQUEST['wallet']);
                 $moneytransferObject = new MoneyTransfer;
                 /* $MTObject->transaction_id = $transactionObject->id;
                   $MTObject->to_user_id = 1;
@@ -659,7 +662,7 @@ class PackageController extends Controller {
                 $moneytransferObject->to_user_id = 1;
                 $moneytransferObject->from_user_id = Yii::app()->session['userid'];
                 $moneytransferObject->wallet_id = $finalArtr[0];
-                $moneytransferObject->fund = $finalArtr[1];
+                $moneytransferObject->fund = $_REQUEST['totalusedRP'];
                 $moneytransferObject->comment = "Package Purchased";
                 $moneytransferObject->status = 0;
                 $moneytransferObject->created_at = date('Y-m-d');
@@ -667,10 +670,9 @@ class PackageController extends Controller {
                 
                 
                 /* } */
-            
+              
             echo 1;
         }
-    
+    }
 
-}
 }
