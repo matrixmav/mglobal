@@ -137,18 +137,19 @@ class PackageController extends Controller {
     public function actionDomainSearch() {
         
         $error = "";    
-        
+        if (!empty($_GET) && $_GET['package_id']!='') {
+
             Yii::app()->session['package_id'] = $_GET['package_id'];
-        
+        }
 
-        $Package_id = Yii::app()->session['package_id'];
+         
 
-        $packageObject = Package::model()->findByPK($Package_id);
+        $packageObject = Package::model()->findByPK(Yii::app()->session['package_id']);
 
         $rightbar = '<div id="dca_cart" class="cart-wrapper">
             <div class="cart-header"><span class="ico-cart"></span>My Shopping Cart</div>
             <ul id="domainList" class="cartList cart-list">';
-        if ($Package_id == '') {
+        if (Yii::app()->session['package_id'] == '') {
             $rightbar .= '<li class="empty">Your cart is empty :(</li>';
         } else {
             $rightbar .= '<li class="cart-item">
@@ -494,13 +495,13 @@ class PackageController extends Controller {
                 $orderObject->update();
                 $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
                 
-                foreach ($MTObject as $mtObject) {
+                
                     $mtObject->status = 1;
                     $mtObject->update();
                     $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mtObject->wallet_id));
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
-                }
+                
                 
                 ob_start();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
@@ -643,8 +644,6 @@ class PackageController extends Controller {
                 $transactionObject->update();
             }
             $delete = MoneyTransfer::model()->deleteAll('transaction_id = ' . $transactionObject->id);
-            $wallet = explode(',', rtrim($_REQUEST['wallet'], ','));
-            foreach ($wallet as $walletObj => $key) {
                 $finalArtr = explode('-', $key);
                 $moneytransferObject = new MoneyTransfer;
                 /* $MTObject->transaction_id = $transactionObject->id;
@@ -668,9 +667,10 @@ class PackageController extends Controller {
                 
                 
                 /* } */
-            }
+            
             echo 1;
         }
-    }
+    
 
+}
 }
