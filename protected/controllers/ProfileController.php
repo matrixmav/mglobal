@@ -238,7 +238,7 @@ class ProfileController extends Controller {
                             $success .= "Your password changed successfully";
                             $config['to'] = $userObject->email;
                             $config['subject'] = 'mGlobally Password Changed';
-                            $config['body'] =  $this->renderPartial('/mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
+                            $config['body'] =  $this->renderPartial('//mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
                         
                             //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
                             CommonHelper::sendMail($config);
@@ -283,7 +283,7 @@ class ProfileController extends Controller {
                         $success .= "Your pin changed successfully";
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
-                        $config['body'] =  $this->renderPartial('../mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
+                        $config['body'] =  $this->renderPartial('//mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
                         //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
                         CommonHelper::sendMail($config);
                     }

@@ -307,8 +307,9 @@ class UserController extends Controller {
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
                 $userObjectArr['to_name'] = $toUserObjectMail->name;
+                $userObjectArr['full_name'] = $toUserObjectMail->full_name;
                 $userObjectArr['from_name'] = 'Super Admin';
-                $userObjectArr['date'] = $moneyTransferObject->created_at;
+                $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
                 /*mail to user*/
@@ -378,7 +379,7 @@ class UserController extends Controller {
                 $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
                 $userObjectArr['to_name'] = $toUserObjectMail->name;
                 $userObjectArr['from_name'] = 'Super Admin';
-                $userObjectArr['date'] = $moneyTransferObject->created_at;
+                $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
                 /*mail to user*/

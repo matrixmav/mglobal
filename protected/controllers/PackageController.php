@@ -608,6 +608,7 @@ class PackageController extends Controller {
                 CommonHelper::sendMail($config);
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
                 $config['to'] = $sponsorUserObject->email;
                 $config['subject'] = 'Direct Referral Income Credited';
                 $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
