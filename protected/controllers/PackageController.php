@@ -484,7 +484,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 1) {
+            if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
@@ -500,7 +500,13 @@ class PackageController extends Controller {
                     $mObject->status = 1;
                     $mObject->update();
                     $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mObject->wallet_id));
-                    $MTObject1->fund = $MTObject1->fund - $mObject->fund;
+                    if($MTObject1->type == '2')
+                    {
+                     $MTObject1->fund = $MTObject1->fund*75/100 - $mObject->fund;   
+                    }else{
+                     $MTObject1->fund = $MTObject1->fund - $mObject->fund;   
+                    }
+                     
                     $MTObject1->update();
                 }
                 
@@ -520,7 +526,8 @@ class PackageController extends Controller {
                         $sponsorWalletObject->fund = $fromAmount;
                         $sponsorWalletObject->update();
                     } else {
-                        $walletObject = Wallet::model()->create($sponsorUserObject->id,$transactionObject->paid_amount,'3');
+                        $fromAmount = $packageObject->amount*5/100;
+                        $walletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmount,'3');
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();
