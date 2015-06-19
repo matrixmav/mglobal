@@ -9,7 +9,9 @@
           name: name,
           caption: caption,
           description: description,
-          picture : img
+          picture : img,
+          actions: [{name: link, link: link}]
+          
       };
         function callback(response) {
             $.ajax({
