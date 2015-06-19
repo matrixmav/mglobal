@@ -12,9 +12,9 @@ $adId = '"' . $data->id . '"';
         return false;'  >
 </a>
 
-<a target ='_blank' class='btn red fa fa-twitter margin-right15' href='<?php echo Yii::app()->params['twitterLink'] . $data->description; ?>'></a>
+<!--<a target ='_blank' class='btn red fa fa-twitter margin-right15' href='<?php echo Yii::app()->params['twitterLink'] . $data->description; ?>'></a>-->
 
-<button type='button' class='btn blue fa fa-code margin-right15' data-toggle='modal' data-target='<?php echo '#' . $data->id; ?>'>Get Code</button>
+<button type='button' class='btn red fa fa-code margin-right15' data-toggle='modal' data-target='<?php echo '#' . $data->id; ?>'>Get Code</button>
 <div class="modal fade" id="<?php echo $data->id; ?>" role="dialog">
     <div class="modal-dialog" style="width:700px;">
         <!-- Modal content-->

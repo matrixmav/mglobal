@@ -60,7 +60,7 @@ $this->menu = array(
                         ),
                         array(
                             'name' => 'created_at',
-                            'header' => '<span style="white-space: nowrap;">Created On &nbsp; &nbsp; &nbsp;</span>',
+                            'header' => '<span style="white-space: nowrap;">Date &nbsp; &nbsp; &nbsp;</span>',
                             'value' => 'isset($data->created_at)?$data->created_at:""',
                         ),
                         array(
@@ -71,7 +71,7 @@ $this->menu = array(
                         ),
                         array(
                             'name' => 'created_at',
-                            'header' => '<span style="white-space: nowrap;">Created On &nbsp; &nbsp; &nbsp;</span>',
+                            'header' => '<span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>',
                             'htmlOptions' => array('width' => '25%'),
                             'value' => array($this, 'getSocialButton')
                         ),
