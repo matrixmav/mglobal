@@ -255,8 +255,27 @@ class MoneyTransferController extends Controller {
                 //user money transfer change status
                 $adminMoneyTransferObject->status = 1; //setting success
                 $adminMoneyTransferObject->save();
+                $userObjectArr = array();
+                $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
+                $fromUserObjectMail = User::model()->findByPK($userid);
+                $userObjectArr['to_name'] = $toUserObjectMail->name;
+                $userObjectArr['from_name'] = $fromUserObjectMail->name;
+                $userObjectArr['date'] = $moneyTransferObject->created_at;
+                $userObjectArr['fund'] = $transactionObject->paid_amount;
+                $userObjectArr['transactionId'] = $transactionObject->transaction_id;
+                /*mail to user*/
+                $config['to'] = $toUserObjectMail->email;
+                $config['subject'] = 'Fund Transfered';
+                $config['body'] =  $this->renderPartial('../mailTemp/transfer_fund', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
                 
-                //exit();
+                /*mail for from user*/
+                
+                $config['to'] = $toUserObjectMail->email;
+                $config['subject'] = 'Fund Transfered';
+                $config['body'] =  $this->renderPartial('../mailTemp/transfer_fund', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
+                
                 $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObject->id));
             } else {
                 $error = "Incorrect master pin";
