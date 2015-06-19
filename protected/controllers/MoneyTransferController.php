@@ -541,13 +541,13 @@ class MoneyTransferController extends Controller {
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,1);
             $transactionId = $transactionObject->id;
             
-            $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $userid, 'type' => 3));
+            $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $userid, 'type' => 2));
             if($fromUserWalletObject){
                 $fromAmount = ($fromUserWalletObject->fund) + 1;
                 $fromUserWalletObject->fund = $fromAmount;
                 $fromUserWalletObject->update();
             } else {
-                $fromUserWalletObject =  Wallet::model()->create($userid,1,3);
+                $fromUserWalletObject =  Wallet::model()->create($userid,1,2);
             }
                     
             $postDataArray['comment'] = 'Shared RP';
