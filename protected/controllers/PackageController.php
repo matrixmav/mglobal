@@ -517,12 +517,11 @@ class PackageController extends Controller {
                     //deduct from from user wallet
                     $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
                     if($sponsorWalletObject){
-                        $fromAmount = ($sponsorWalletObject->fund) + ($transactionObject->paid_amount *5/100);exit;
+                        $fromAmount = ($sponsorWalletObject->fund) + ($transactionObject->paid_amount *5/100);
                         $sponsorWalletObject->fund = $fromAmount;
                         $sponsorWalletObject->update();
                     } else {
-                        
-                         Wallet::model()->create($sponsorUserObject->id,$transactionObject->paid_amount,'3');
+                        $walletObject = Wallet::model()->create($sponsorUserObject->id,$transactionObject->paid_amount,'3');
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();
