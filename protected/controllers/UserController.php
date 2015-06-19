@@ -280,6 +280,7 @@ class UserController extends Controller {
                     if (count($checkUserInfo) < 1) {
 
                         $userObject = User::model()->findByAttributes(array('name' => 'admin'));
+                        $password = BaseClass::getUniqInt(5);
                         $masterPin = BaseClass::getUniqInt(5);
                         $getPosition = BaseClass::getRandPosition();
 
@@ -291,7 +292,7 @@ class UserController extends Controller {
 
                         $model = new User;
                         $model->attributes = $_POST;
-                        $model->password = BaseClass::md5Encryption($masterPin);
+                        $model->password = BaseClass::md5Encryption($password);
                         $model->sponsor_id = 'admin';
                         $model->email = $user_profile['email'];
                         $model->full_name = $user_profile['name'];
@@ -362,6 +363,22 @@ class UserController extends Controller {
                         Yii::app()->session['username'] = $currnetUserObject->name;
                         Yii::app()->session['frontloggedIN'] = 1;
                         $this->redirect("/profile/dashboard");
+
+                        
+                        $userObjectArr = array();
+                        $userObjectArr['name'] = $user_profile['first_name'];
+                        $userObjectArr['full_name'] = $user_profile['name'];
+                        $userObjectArr['password'] = $password;
+                        $userObjectArr['masterPin'] = $masterPin;
+                       
+                        $config['to'] = $user_profile['email'];
+                        $config['subject'] = 'Registration Confirmation';
+                        $config['body'] =  $this->renderPartial('../mailTemp/login-details', array('userObjectArr'=>$userObjectArr),true);
+                        
+                        CommonHelper::sendMail($config);
+                        $this->redirect("/profile/dashboard");                        
+                        
+>>>>>>> 331982f1904f23ee613387c0965bc737629e07a9
                     } else {
                         $error = "<p class='error'>Invalid User Name</p>";
                         $this->render("login", array("msg" => $error));

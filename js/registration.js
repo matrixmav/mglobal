@@ -1,20 +1,12 @@
   function validateFrm() {
-        
-        if($("#sponsorIdExistedErrorFlag").val()==1){
-           $("#sponsor_id_error").html("Not Existed!!!");
-           $("#sponsor_id").focus(); 
-           return false;
-        }        
-        
+//        $("#sponsor_id_error").html('');
+      isSponsorExisted();
+      if($("#sponsorIdExistedErrorFlag").val()==1){
+          return false;
+      }
         if($("#nameExistedErrorFlag").val()==1){
-           $("#name_error").html("Existed!!!");
+           $("#name_error").html("Existed.");
            $("#name").focus(); 
-           return false;
-        }
-       
-        if($("#emailExistedErrorFlag").val()==1){
-           $("#email_error").html("Existed!!!");
-           $("#email").focus(); 
            return false;
         }
         
@@ -33,7 +25,7 @@
         
         $("#position_error").html("");
         if ($("#position:checked").length == 0) {                        
-            $("#position_error").html("Enter Check Position");
+            $("#position_error").html("Select Position");
             $("#position").focus();            
             return false;
         }
@@ -46,21 +38,26 @@
             return false;
         }
        
-        if ($("#name").val().length < 5) {
-            $("#name_error").html("Enter atleast 5 chars in the input box");
+        if ($("#name").val().match(/\s/g)) {  
+            $("#name_available").html("");
+            $("#name_error").html("Username should not contain blank spaces.");
             $("#name").focus();            
             return false;
         }
         
+        if ($("#name").val().length < 5) {
+            $("#name_error").html("User name should be min 5 characters.");
+            $("#name").focus();            
+            return false;
+        }        
         
         if($("#name").val().length > 8 ){            
             $("#name_available").html("");
-            $("#name_error").html("Enter max 8 characters in the input box.");
+            $("#name_error").html("User name should be max 8 characters.");
             $("#name").focus();            
             return false;
-        }
+        }        
         
-
         $("#full_name_error").html("");
         if ($("#full_name").val() == "") {
             $("#full_name_error").html("Enter User Full Name");
@@ -69,12 +66,18 @@
         }  
         
         if ($("#full_name").val().length < 5) {
-            $("#full_name_error").html("Enter atleast 5 chars in the input box");
+            $("#full_name_error").html("User full name should be min 5 characters");
             $("#full_name").focus();   
             return false;
         }
         
-
+        $("#full_name_error").html("");
+        var letters = /^[A-Za-z, ]+$/;
+        if ( ! $("#full_name").val().match(letters)){
+            $("#full_name_error").html("Only alphabet characters allow");           
+            return false;
+        }
+        
         /* email validation */
         $("#email_error").html("");
         if ($("#email").val() == "") {
@@ -87,9 +90,16 @@
         var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
         if (!filter.test(email.value)) {
-            $("#email_error").html("Enter valid email address ");
+            $("#email_error").html("Enter valid email address.");
             $("#email").focus();
             return false;
+        }
+        
+        $("#email_error").html("");
+        if($("#emailExistedErrorFlag").val() == 1){
+           $("#email_error").html("Existed.");
+           $("#email").focus(); 
+           return false;
         }
         /* end here */
 
@@ -114,7 +124,6 @@
             $("#phone").focus();
             return false;
         }
-        
 
         var phone = document.getElementById('phone');
         var filter = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -162,7 +171,7 @@
 
         $("#position_error").html("");
         if ($("#position").val() == "") {
-            $("#position_error").html("Enter Select Positioin");
+            $("#position_error").html("Select Positioin");
             $("#position").focus();
             return false;
         }
@@ -176,7 +185,7 @@
             $("#name").focus();            
             return false;
         }else if($("#name").val().length < 5 ){
-            $("#name_error").html("Enter atleast 5 chars in the input box.");
+            $("#name_error").html("User name should be min 5 characters.");
             $("#name").focus();            
             return false;
         }
@@ -190,10 +199,10 @@
                $("#name_available").html("");
                 $("#nameExistedErrorFlag").val("0");
                 if(msg == 1){
-                    $("#name_error").html("Existed!!!");
+                    $("#name_error").html("User Name Already Existed.");
                     $("#nameExistedErrorFlag").val(1);
                 } else {
-                    $("#name_available").html("Available!!!");
+                    $("#name_available").html("User Name Available!!!");
                 }
             }
         });
@@ -230,18 +239,26 @@
         });
     }
     
-    function isSponsorExisted() {   
+    function isSponsorExisted() { 
         $.ajax({
             type: "post",
             url: "/user/issponsorexisted",
             data: "sponsor_id=" + $("#sponsor_id").val(),
             success: function (msg) {
+               //alert('jj');
                 $("#sponsor_id_error").html("");
                 $("#sponsorIdExistedErrorFlag").val(0);
-                if(msg == 0){
-                    $("#sponsor_id_error").html("Not Existed!!!");
-                    $("#sponsorIdExistedErrorFlag").val(1);    
-                }
+                if(msg == 0){ 
+                    $("#sponsor_id_error").html("Sponsor Not Existed!!!");
+                    $("#sponsorIdExistedErrorFlag").val(1);   
+                    return false;
+                } else { 
+                    if( $("#sponsor_id").val()==""){
+                     $("#sponsor_id_error").html("Get Sponsor Id");
+                     $("#sponsor_id").focus();   
+                    }
+                    return false;
+                    }
             }
         });
     }
