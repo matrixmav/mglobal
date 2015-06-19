@@ -6,7 +6,7 @@
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php  if(!empty($_GET) && $_GET['pp'] !='') { echo number_format($_GET['pp'],2); } ?></span></p>
+                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php  if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; } ?></span></p>
                     <div id="paymentOption" style="min-height:238px">
                         <form id="walletform" name="walletform">  
                             <?php if ($walletObject) { ?>
@@ -17,21 +17,20 @@
                                     foreach ($walletObject as $wallet) {
                                         if ($wallet->type == '1') {
                                             $walletname = 'Cash Wallet';
-                                            $fund = number_format($wallet->fund,2);
+                                            $fund = $wallet->fund;
                                         }
                                         if ($wallet->type == '2') {
                                             $walletname = 'RP Wallet';
-                                            //$fund = $wallet->fund * 75 / 100;
-                                            $fund = number_format($wallet->fund,2);
+                                            $fund = $wallet->fund ;//* 75 / 100;
                                         }
                                         if ($wallet->type == '3') {
                                             $walletname = 'Commision Wallet';
-                                            $fund = number_format($wallet->fund,2);
+                                            $fund = $wallet->fund;
                                         }
                                         ?>
                                         <div class="col-sm-12 col-xs-12 tleft">
                                             <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
-                                            <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo number_format($wallet->fund,2); ?>)  </label>
+                                            <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                         </div>
                                         <?php
                                         $i++;
@@ -127,6 +126,7 @@
     }
     function walletamountcalculation(ID, key)
     {
+        
         var str = ID + '-' + key;
         $('#walletused').val(str);
         var input = document.getElementsByName("wallet_type");
@@ -134,6 +134,7 @@
         var totalAmount = $('#totalAmount').val();
         var package_amt = $('#package_amt').val();
         var total = key;
+        
         
         if (totalAmount > total)
         {
