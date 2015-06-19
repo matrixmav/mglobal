@@ -499,7 +499,6 @@ class PackageController extends Controller {
                     $mtObject->status = 1;
                     $mtObject->update();
                     $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mtObject->wallet_id));
-                    $MTObject1->fund - $mtObject->fund;
                     $MTObject1->fund = $MTObject1->fund - $mtObject->fund;
                     $MTObject1->update();
                 }
