@@ -2,7 +2,7 @@
 /* @var $this GenealogyController */
 /* @var $model Genealogy */
 
-$regVar = '';
+$regVar = '/user/registration/?spid=';
 $treeVar = '/admin/user/genealogy/';
 
 
