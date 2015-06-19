@@ -5434,7 +5434,7 @@ table.dataTable td .input-width-b {
 .con-f{ font-size:15px; color:#ff6b00!important; padding-top:20px!important; }
 .img-mar{ margin-left:22px;}
 .bg-f2{ background-color: #272626!important;}
-.bg-f1{background-color: #313030!important;}
+.bg-f1{background-color: transparent !important;}
 .row-over {
 	/*background-color: #F7FCFF*/
 	background-color: #E8E8E8
@@ -13806,3 +13806,21 @@ ul.priceList li.first {
 .f-cnt{ line-height:25px; }
 .edit-icon{color:#fff;float:right;font-size:15px;}
 .edit-icon a :hover{color:#fff;float:right;font-size:15px;}
+.pre-footer-subscribe-box .con-f{color:#FFF !important;}
+
+body { 
+	color: #3e4d5c; 
+	direction: ltr;
+	font: 400 13px 'Open Sans', Arial, sans-serif;
+	background: #fff;
+}
+
+.signBtn {
+    background: #fdd922 none repeat scroll 0 0 !important;
+    border: medium none !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 1px 0 #424242 !important;
+    color: #f15d2a !important;
+    font-size: 14px !important;
+    padding: 6px 20px !important;
+}
