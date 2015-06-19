@@ -194,7 +194,7 @@ class TransactionController extends Controller {
             'criteria' => array(
                 'condition' => ('status = 1 AND user_id = ' . $loggedInUserId . ' AND mode != "' . $mode.'" AND created_at >= "'.$todayDate.'" AND created_at <= "'.$fromDate.'"'), 'order' => 'id DESC',
         )));
-            //$condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
+        //$condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
         } else {
             
              $dataProvider = new CActiveDataProvider('Transaction', array(
