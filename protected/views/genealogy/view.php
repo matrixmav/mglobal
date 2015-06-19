@@ -46,7 +46,7 @@ $empty = "sm-blank" ; //no Package
 
                                 <?php $genealogyLeftRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'right'"); ?>   
                                 <?php if(count($genealogyLeftRighttListObject) > 0 ){ 
-                                   echo  $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
+                                     $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
                                     ?>
                                     <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></span></div></a></li>
                                 <?php }else{ ?>
