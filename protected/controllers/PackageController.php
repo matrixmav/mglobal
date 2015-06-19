@@ -526,7 +526,8 @@ class PackageController extends Controller {
                         $sponsorWalletObject->fund = $fromAmount;
                         $sponsorWalletObject->update();
                     } else {
-                        $walletObject = Wallet::model()->create($sponsorUserObject->id,$transactionObject->paid_amount,'3');
+                        $fromAmount = $packageObject->amount*5/100;
+                        $walletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmount,'3');
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();
