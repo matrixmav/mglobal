@@ -39,7 +39,7 @@ $empty = "sm-blank" ; //no Package
                                 <?php if(count($genealogyLeftLeftListObject) > 0 ){ 
                                     $getColor =  BaseClass::getPackageName($genealogyLeftLeftListObject[0]->user_id);
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></a></li>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></span></div></a></li>
                                 <?php }else{ ?>
                                      <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>    
                                 <?php } ?>     
@@ -48,7 +48,7 @@ $empty = "sm-blank" ; //no Package
                                 <?php if(count($genealogyLeftRighttListObject) > 0 ){ 
                                    echo  $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></a></li>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></span></div></a></li>
                                 <?php }else{ ?>
                                     <li><a class="<?php echo $empty   ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>   
                                 <?php } ?> 
