@@ -4364,6 +4364,7 @@ UI Loading
    .topWallet > li{ width: auto; display: inline-block; padding: 0 20px !important;}
     .topWallet > li> a> i{ font-size:20px !important; color: #fdfdfd !important;}
      .topWallet > li> a> span.badge-default{color:#595959; background: #ece869 !important;}
+     .topWallet > li> a{padding-top: 15px !important;}
     .topWallet > li.credit span{ position: absolute; right:35px; top: 8px;}
     .topWallet > li.cash span{ position: absolute; right:40px; top: 8px;}
     .topWallet > li.cash .fa.fa-money{font-size: 23px !important;}
