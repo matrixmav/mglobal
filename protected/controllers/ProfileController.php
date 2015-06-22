@@ -146,6 +146,7 @@ class ProfileController extends Controller {
                     $userObject->phone = $_POST['UserProfile']['phone'];
                     $userObject->date_of_birth = $dob;
                     $userObject->country_id = $_POST['UserProfile']['country_id'];
+                    $userObject->country_code = $_POST['UserProfile']['country_code'];
                     $userObject->skype_id = $_POST['UserProfile']['skype_id'];
                     $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
                     $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
