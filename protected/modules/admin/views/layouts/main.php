@@ -553,23 +553,23 @@ License: You must have a valid license purchased only from themeforest(the above
                                             
                                 }
                                 if (in_array('reportsocial', $accessArr)) { 
-                                    $reservation_subsection5 = array(
+                                    $reservation_subsection6 = array(
                                       "report/socialaccount" => "Social profile",  
                                    );
                                 }else{
-                                    $reservation_subsection5 = array();
+                                    $reservation_subsection6 = array();
                                             
                                 }
                                 if (in_array('reportcontact', $accessArr)) { 
-                                    $reservation_subsection5 = array(
+                                    $reservation_subsection7 = array(
                                       "report/contact" => "Contact",  
                                    );
                                 }else{
-                                    $reservation_subsection5 = array();
+                                    $reservation_subsection7 = array();
                                             
                                 }
                                  
-                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5);
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection7,$reservation_subsection7);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
