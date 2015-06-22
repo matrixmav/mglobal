@@ -121,18 +121,19 @@ class MailController extends Controller {
             $to_email = $_POST['to_email'];
             $userObject = User::model()->findByAttributes(array('id' => $to_email));
             if (empty($userObject)) {
-                //$this->render('compose',array('error'=>'User Does Not Exist'));
-                $this->render('compose', array('error' => 'User Does Not Exist', 'emailObject' => $emailObject));
-            } else {
-                if ($_FILES['attachment']['name'] != '') {
-                    $fname = time() . $_FILES['attachment']['name'];
-                    $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
-                    BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
-                } else if ($_POST['attachment1'] != '') {
-                    $fname = $_POST['attachment1'];
-                } else {
-                    $fname = "";
+                    $this->render('compose', array('error' => 'User Does Not Exist'));
                 }
+                if(!empty($_FILES['attachment']['name'] !=''))
+                {
+                $fname = time() . $_FILES['attachment']['name'];
+                $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
+                BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
+                }
+                if(!empty($_POST['attachment1']))
+                {
+                  $fname = $_POST['attachment1'];  
+                }
+                 
 
                 $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                 BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
