@@ -79,6 +79,12 @@ if (!empty($error)) {
             $("#fund_error").html("Please Enter Amount!");
             return false;
         }
+        var regexp = /^(0|[1-9]+[0-9]*)$/;
+        var newVal = $('#fund').val();
+        if (!regexp.test(newVal)) {
+          $("#fund_error").html("Invalid Fund!");
+          return false;
+        }
         var fund = parseFloat($('#fund').val());
         var fundVal = parseFloat($('#fundval').val());
 

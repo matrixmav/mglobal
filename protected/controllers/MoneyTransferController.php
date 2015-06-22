@@ -185,6 +185,7 @@ class MoneyTransferController extends Controller {
     public function actionConfirm() {
         $adminid = Yii::app()->params['adminId'];
         $userid = Yii::app()->session['userid'];
+        $this->renderPartial('//mailTemp/fund_transfer',true);
         $createdtime = new CDbExpression('NOW()');
         $error = "";
         if (isset($_POST['confirm'])) {
