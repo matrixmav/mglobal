@@ -103,11 +103,11 @@ $this->breadcrumbs = array(
                             'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/edit", array("id"=>$data->id))',
                         ),
-                        'Delete' => array(
+                        /*'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
                             'options' => array('class' => 'fa fa-success btn default red delete', 'onclick' => 'return confirm("Do u want to delete this user?");'),
                             'url' => 'Yii::app()->createUrl("admin/user/deleteuser", array("id"=>$data->id))',
-                        ),
+                        ),*/
                     ),
                 ),
             ),
