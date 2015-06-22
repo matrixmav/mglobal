@@ -90,7 +90,7 @@ $this->breadcrumbs = array(
 
                 array(
                     'class' => 'CButtonColumn',
-                    'template' => '{Change}{Edit}{Delete}',
+                    'template' => '{Change}{Edit}',
                     'htmlOptions' => array('width' => '20%'),
                     'buttons' => array(
                         'Change' => array(
