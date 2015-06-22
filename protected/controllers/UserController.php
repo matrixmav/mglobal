@@ -472,14 +472,18 @@ class UserController extends Controller {
         $error = "";
         $social = '';
         if (!empty($_GET)) {
+            //print_r($_GET); 
+//            $arra = explode('--', $_GET['spid']);
+//            echo count($arra);
+//            die;
             $arra = explode('--', $_GET['spid']);
-            if (count($arra) > 0) {
+            if (count($arra) > 1) {
                 $social = $arra[1];
             } else {
                 $social = '';
             }
         }
-        
+        //die;
         if ($_POST) {
             
             /*Already Exits */

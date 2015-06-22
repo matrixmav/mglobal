@@ -42,9 +42,9 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                     <div class="form-group">
                                         <label for="position" class="col-lg-4 control-label">Position <span class="require">*</span></label>
                                         <div class="col-lg-8">        
-                                            <input type="radio" name="position" id="position" value="right" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='right'){?> checked="checked" <?php }?> checked="checked"/>
+                                            <input type="radio" name="position" id="position" value="right" <?php if(!empty($_GET['position']) && $_GET['position'] =='right'){?> checked="checked" <?php }?> checked="checked"/>
                                             <label class="gender">Right</label>
-                                            <input type="radio" name="position" id="position" value="left" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='left'){?> checked="checked" <?php }?>/>
+                                            <input type="radio" name="position" id="position" value="left" <?php if(!empty($_GET['position'])  && $_GET['position'] =='left'){?> checked="checked" <?php }?>/>
                                             <label class="gender">Left</label>
                                         
                                         <span id="position_error" class="clrred"></span>
