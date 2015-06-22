@@ -42,9 +42,9 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                     <div class="form-group">
                                         <label for="position" class="col-lg-4 control-label">Position <span class="require">*</span></label>
                                         <div class="col-lg-8">        
-                                            <input type="radio" name="position" id="position" value="right" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='right'){?> checked="checked" <?php }?> checked="checked"/>
+                                            <input type="radio" name="position" id="position" value="right" <?php if(!empty($_GET['position']) && $_GET['position'] =='right'){?> checked="checked" <?php }?> checked="checked"/>
                                             <label class="gender">Right</label>
-                                            <input type="radio" name="position" id="position" value="left" <?php if(!empty($_GET) && $_GET['position'] !='' && $_GET['position'] =='left'){?> checked="checked" <?php }?>/>
+                                            <input type="radio" name="position" id="position" value="left" <?php if(!empty($_GET['position'])  && $_GET['position'] =='left'){?> checked="checked" <?php }?>/>
                                             <label class="gender">Left</label>
                                         
                                         <span id="position_error" class="clrred"></span>
@@ -96,7 +96,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                                 <input  name="country_code" id="country_code" class="form-control" readonly="true">                                            </div>
                                             <div class="col-lg-9 colo-sm-9 col-xs-8">
                                                 
-                                            <input  name="phone" id="phone" maxlength="10" placeholder="phone number" class="form-control" > <br>
+                                            <input  name="phone" id="phone" maxlength="12" placeholder="phone number" class="form-control" > <br>
                                             </div>
                                         <span id="phone_error" class="clrred"></span></div>
                                         </div>

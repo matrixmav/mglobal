@@ -112,62 +112,20 @@ class MailController extends Controller {
         public function actionCompose(){
             $emailObject = User::model()->findAll(array('condition'=>'role_id=2'));
             if($_POST){  
-                //$emailArray = $_POST['to_email'];
-                
-                
-                $loggedInUserId = Yii::app()->session['userid'];
-                //foreach ($emailArray as $email){
-                    $to_email = $_POST['to_email'];
-                    $userObject = User::model()->findByAttributes(array('id'=>$to_email));
-                    if(empty($userObject)){
-                        //$this->render('compose',array('error'=>'User Does Not Exist'));
-                        $this->render('compose',array('error'=>'User Does Not Exist','emailObject'=>$emailObject));
-                    }else{
-                        if($_FILES['attachment']['name'] !='')
-                        {
-                        $fname = time() . $_FILES['attachment']['name'];
-                        $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
-                        BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
-                        }
-                        else if($_FILES['attachment1']['name'] !='')
-                        {
-                          $fname = $_POST['attachment1'];  
-                        }
-                        else{
-                         $fname = "";   
-                        }
-                        
-                       $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
-                        BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
-                        $mailObject = new Mail();
-                        $mailObject->to_user_id = $_POST['to_email'];
-                        $mailObject->from_user_id = $loggedInUserId;//Yii::app()->params['adminId'];
-                        $mailObject->subject = $_POST['email_subject'];
-                        $mailObject->message = $_POST['email_body'];
-                        $mailObject->attachment = $fname;
-                        $mailObject->status = 0;
-                        $mailObject->created_at = new CDbExpression('NOW()');
-                        $mailObject->updated_at = new CDbExpression('NOW()');
-                        $mailObject->save(false);
-                    }
-                        $this->redirect(array('/mail?successMsg=1'));
-             
-            $this->redirect(array('/mail?successMsg=1'));
- 
-            //foreach ($emailArray as $email){
-            $to_email = $_POST['to_email'];
+             $loggedInUserId = Yii::app()->session['userid'];
+             $to_email = $_POST['to_email'];
             $userObject = User::model()->findByAttributes(array('id' => $to_email));
             if (empty($userObject)) {
                 //$this->render('compose',array('error'=>'User Does Not Exist'));
                 $this->render('compose', array('error' => 'User Does Not Exist', 'emailObject' => $emailObject));
             } else {
-                if($_FILES['attachment']['name'] !='')
+                if(!empty($_FILES['attachment']['name']))
                         {
                         $fname = time() . $_FILES['attachment']['name'];
                         $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                         BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                         }
-                        else if($_FILES['attachment1']['name'] !='')
+                        else if(!empty($_FILES['attachment1']['name']))
                         {
                           $fname = $_POST['attachment1'];  
                         }

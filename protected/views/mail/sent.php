@@ -64,7 +64,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
                 'Reply' => array(
                     'label' => 'Reply',
                     'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
-                    'url' => 'Yii::app()->createUrl("/mail/reply", array("id"=>$data->id))',
+                    'url' => 'Yii::app()->createUrl("/mail/reply?id=$data->id")',
                 ),
                 'View' => array(
                     'label' => 'View',

@@ -51,7 +51,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" value="<?php echo (!empty($userObject))? $userObject->country_code:"";?>" style="width:10%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>"  style="width:88%;float:right;">
+                    <input type="text" value="<?php echo (!empty($userObject))? $userObject->country_code:"";?>" style="width:15%;float:left;" class="form-control">&nbsp;&nbsp;<input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject))? $userObject->phone:"";?>"  style="width:82%;float:right;">
                    <div  style="color:red;" id="error_msg_phone"> </div> 
                 </div>
             </div>
