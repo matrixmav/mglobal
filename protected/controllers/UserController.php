@@ -449,7 +449,7 @@ class UserController extends Controller {
                             Yii::app()->session['username'] = $getUserObject->name;
                             Yii::app()->session['frontloggedIN'] = "1";
                              
-                            if (Yii::app()->session['package_id'] != '') {
+                            if (!empty(Yii::app()->session['package_id'])) {
                                 $this->redirect("/package/domainsearch");
                             } else {
                                 $this->redirect("/profile/dashboard");
