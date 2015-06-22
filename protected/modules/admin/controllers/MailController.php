@@ -109,9 +109,11 @@ class MailController extends Controller {
                 $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                 BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                 }
-                if(!empty($_POST['attachment1']))
+                else if(!empty($_POST['attachment1']))
                 {
                   $fname = $_POST['attachment1'];  
+                }else{
+                   $fname = "";   
                 }
                  
                 
