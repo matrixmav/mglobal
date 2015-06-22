@@ -49,7 +49,7 @@
           <tbody>
             <tr>
             	<td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
-                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello Sandeep</td>
+                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello <?php echo ucfirst($userObjectArr['full_name']); ?></td>
                 <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
             </tr>
             </tbody>
@@ -88,23 +88,23 @@
           <tbody>
             <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transaction id :</th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">111111</th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['transactionId']; ?></th>
             </tr>
             <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer Date :</th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">12 May 2015</th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['date']; ?></th>
             </tr>
             <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer From(Username) : </th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">abcd</td>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['from_name']; ?></td>
             </th>
              <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer To(Username) : </th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">abcd</th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['to_name']; ?></th>
             </tr>
              <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer value: </th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">100 Rs</th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">$<?php echo $userObjectArr['fund']; ?></th>
             </tr>
             </tbody>
             </table>
