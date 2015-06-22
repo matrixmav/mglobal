@@ -64,7 +64,7 @@ if(!empty($error)){
     </div>
 </div>
 <div class="col-md-12 form-group">
-    <label class="col-md-2">Attachement </label>
+    <label class="col-md-2">Attachment </label>
     <div class="col-md-6">
         <input type="hidden" name="attachment1" id="" value="<?php echo (!empty($mailObject)) ? $mailObject->attachment : "";?>"/>
         <input type="file" name="attachment" id="attachement"/>
