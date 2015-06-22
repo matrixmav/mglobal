@@ -269,14 +269,28 @@ class UserController extends Controller {
                 $user = null;
             }
 
+
             if (!empty($user_profile)) {
                 # User info ok? Let's print it (Here we will be adding the login and registering routines)
 
-                $currnetUserObject = User::model()->findByAttributes(array('unique_id' => $user_profile['id'], 'status' => 1));
+               // $currnetUserObject = User::model()->findByAttributes(array('unique_id' => $user_profile['id'], 'status' => 1));
+                $currnetUserObject = User::model()->findByAttributes(array('email' => $user_profile['email'], 'status' => 1));
+//                    echo "<pre>";
+//                    print_r($currnetUserObject);
+//                    die;
+                $myStr = $user_profile['first_name'];
 
+                if(strlen($myStr) > 8 ){
+                    $resultUser = strtolower(substr($myStr, 0, 8));
+                }else{
+                    $resultUser = strtolower($myStr);
+                }
+                
                 if (count($currnetUserObject) < 1) { // Is present in database or not                        
                     // Check Validation for user name and email id unique or not
-                    $checkUserInfo = User::model()->findByAttributes(array('name' => $user_profile['first_name'], 'email' => $user_profile['email']));
+                    
+                    $checkUserInfo = User::model()->findByAttributes(array('name' => $resultUser, 'email' => $user_profile['email']));
+                    
                     if (count($checkUserInfo) < 1) {
 
                         $userObject = User::model()->findByAttributes(array('name' => 'admin'));
@@ -296,19 +310,17 @@ class UserController extends Controller {
                         $model->sponsor_id = 'admin';
                         $model->email = $user_profile['email'];
                         $model->full_name = $user_profile['name'];
-                        $model->name = $user_profile['first_name'];
+                        $model->name = $resultUser;
                         $model->unique_id = $user_profile['id'];
                         $model->position = $getPosition;
                         $model->master_pin = BaseClass::md5Encryption($masterPin);
-                        $model->date_of_birth = '2011-05-04';
                         $model->created_at = date('Y-m-d');
                         $model->role_id = 1;
                         $model->status = 1;
 
                         /* Condition for they have the child or not */
                         $geneObject = Genealogy::model()->findByAttributes(array('parent' => $userObject->id, 'position' => $getPosition));
-                        //echo "<pre>"; print_r($geneObject);
-                        //die;
+                        
                         if (count($geneObject)) {
                             $userId = "";
                             for ($i = 1; $i <= 1000; $i++) {
