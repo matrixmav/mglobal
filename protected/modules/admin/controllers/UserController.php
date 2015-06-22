@@ -380,6 +380,7 @@ class UserController extends Controller {
                 $userObjectArr = array();
                 $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
                 $userObjectArr['to_name'] = $toUserObjectMail->name;
+                $userObjectArr['full_name'] = $toUserObjectMail->full_name;
                 $userObjectArr['from_name'] = 'Super Admin';
                 $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
