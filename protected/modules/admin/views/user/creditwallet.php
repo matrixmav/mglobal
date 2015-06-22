@@ -46,7 +46,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Add Fund *</label>
     <div class="col-md-6">
-        <input type="text" class="form-control dvalid" name="paid_amount" id="fund" size="60" maxlength="75" value="<?php echo (!empty($walletObject)) ? $walletObject->touser->email : ""; ?>" />
+        <input type="text" id ="paid_amount" class="form-control dvalid" name="paid_amount" id="fund" size="60" maxlength="75" value="<?php echo (!empty($walletObject)) ? $walletObject->touser->email : ""; ?>" />
         <span style="color:red"  id="fund_error"></span>
     </div>
 </div>
@@ -64,9 +64,17 @@ if(!empty($error)){
             return false;
         }
         if (isNaN($('#fund').val())){
-            $("#fund_error").html("Please Enter Amount!");
+            $("#fund_error").html("Please Enter Fund!");
             return false;
         }
+        var regexp = /^(0|[1-9]+[0-9]*)$/;
+        var newVal = $('#fund').val();
+        if (!regexp.test(newVal)) {
+          $("#fund_error").html("Invalid Fund!");
+          return false;
+        }
+      
     }
+    
 </script>
 <script type="text/javascript" src="/js/transaction.js"></script>
