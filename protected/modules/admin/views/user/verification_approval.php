@@ -22,7 +22,7 @@ $this->breadcrumbs = array(
         <div class="expiration margin-topDefault confirmMenu">
                     
     <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/user/verificationapproval">
-    <div class="input-group input-large date-picker input-daterange">
+        <div class="input-group input-large date-picker input-daterange" style="z-index:9;">
         <input type="text" name="from" placeholder="To Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['from'] !='') ?  $_POST['from'] :  DATE('Y-m-d');?>">
         <span class="input-group-addon">
         to </span>

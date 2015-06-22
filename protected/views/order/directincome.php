@@ -80,26 +80,22 @@ $this->menu = array(
 		array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["full_name"])? ucwords($data["full_name"]):""',
+                    'value'=>'isset($data["name"])? ucwords($data["name"]):""',
 		),
                 
               
               array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["paid_amount"])? number_format($data["paid_amount"],2):""',
+                    'value'=>'isset($data["actual_amount"])? number_format($data["actual_amount"],2):""',
 		),
                
-                array(
-                    'name'=>'id',
-                    'header'=>'<span style="white-space: nowrap;">Coupon Discount Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["coupon_discount"])? number_format($data["coupon_discount"],2):"N/A"',
-		),
+                 
                
                array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Earn Amount&nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["paid_amount"])? number_format($data["paid_amount"]*5/100,2):"N/A"',
+                    'value'=>'isset($data["actual_amount"])? number_format($data["actual_amount"]*5/100,2):"N/A"',
 		),
                array(
                     'name'=>'id',

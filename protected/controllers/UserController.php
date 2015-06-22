@@ -280,6 +280,7 @@ class UserController extends Controller {
                     if (count($checkUserInfo) < 1) {
 
                         $userObject = User::model()->findByAttributes(array('name' => 'admin'));
+                        $password = BaseClass::getUniqInt(5);
                         $masterPin = BaseClass::getUniqInt(5);
                         $getPosition = BaseClass::getRandPosition();
 
@@ -291,7 +292,7 @@ class UserController extends Controller {
 
                         $model = new User;
                         $model->attributes = $_POST;
-                        $model->password = BaseClass::md5Encryption($masterPin);
+                        $model->password = BaseClass::md5Encryption($password);
                         $model->sponsor_id = 'admin';
                         $model->email = $user_profile['email'];
                         $model->full_name = $user_profile['name'];
@@ -360,7 +361,24 @@ class UserController extends Controller {
                         $currnetUserObject = User::model()->findByAttributes(array('unique_id' => $user_profile['id'], 'status' => 1));
                         Yii::app()->session['userid'] = $currnetUserObject->id;
                         Yii::app()->session['username'] = $currnetUserObject->name;
+                        Yii::app()->session['frontloggedIN'] = 1;
                         $this->redirect("/profile/dashboard");
+
+                        
+                        $userObjectArr = array();
+                        $userObjectArr['name'] = $user_profile['first_name'];
+                        $userObjectArr['full_name'] = $user_profile['name'];
+                        $userObjectArr['password'] = $password;
+                        $userObjectArr['masterPin'] = $masterPin;
+                       
+                        $config['to'] = $user_profile['email'];
+                        $config['subject'] = 'Registration Confirmation';
+                        $config['body'] =  $this->renderPartial('../mailTemp/login-details', array('userObjectArr'=>$userObjectArr),true);
+                        
+                        CommonHelper::sendMail($config);
+                        $this->redirect("/profile/dashboard");                        
+                        
+
                     } else {
                         $error = "<p class='error'>Invalid User Name</p>";
                         $this->render("login", array("msg" => $error));
@@ -368,6 +386,7 @@ class UserController extends Controller {
                 } else {
                     Yii::app()->session['userid'] = $currnetUserObject->id;
                     Yii::app()->session['username'] = $currnetUserObject->name;
+                    Yii::app()->session['frontloggedIN'] = 1;
                     $this->redirect("/profile/dashboard");
                 }
             } else {
@@ -417,6 +436,7 @@ class UserController extends Controller {
                             Yii::app()->session['userid'] = $getUserObject->id;
                             Yii::app()->session['username'] = $getUserObject->name;
                             Yii::app()->session['frontloggedIN'] = "1";
+                             
                             if (Yii::app()->session['package_id'] != '') {
                                 $this->redirect("/package/domainsearch");
                             } else {

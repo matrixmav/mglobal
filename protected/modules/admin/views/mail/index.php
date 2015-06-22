@@ -4,9 +4,11 @@ $this->breadcrumbs = array(
 );
 ?>
 <?php 
-$_GET['successMsg'] = $successMsg;
+
 if(!empty($_GET) && $_GET['successMsg']=='1'){
     echo "<div class='success'>Your message sent successfully.</div>";
+}else{
+ $_GET['successMsg'] = $successMsg;   
 }
 ?>
 <div class="row">

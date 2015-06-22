@@ -133,7 +133,10 @@ class MoneyTransfer extends CActiveRecord
                     $walletId = $postDataArray['walletId'];
                 }
                 $status = 0;
-                $fromUserId = Yii::app()->session['userid'];
+                $fromUserId = 1;
+                if(empty($role)){
+                    $fromUserId = Yii::app()->session['userid'];
+                }
 
                 if(!empty($role)) {
                     $status= 1;
@@ -161,7 +164,7 @@ class MoneyTransfer extends CActiveRecord
                 $moneyTransfertoObj->to_wallet_id = $toWalletId;
                 $moneyTransfertoObj->created_at = $createdTime;
                 $moneyTransfertoObj->updated_at = $createdTime;
-                if(!$moneyTransfertoObj->save(false)){
+                if(!$moneyTransfertoObj->save()){
                     echo "<pre>";
                     print_r($moneyTransfertoObj->getErrors());
                 exit;

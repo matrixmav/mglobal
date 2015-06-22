@@ -146,6 +146,7 @@ class ProfileController extends Controller {
                     $userObject->phone = $_POST['UserProfile']['phone'];
                     $userObject->date_of_birth = $dob;
                     $userObject->country_id = $_POST['UserProfile']['country_id'];
+                    $userObject->country_code = $_POST['UserProfile']['country_code'];
                     $userObject->skype_id = $_POST['UserProfile']['skype_id'];
                     $userObject->facebook_id = $_POST['UserProfile']['facebook_id'];
                     $userObject->twitter_id = $_POST['UserProfile']['twitter_id'];
@@ -212,7 +213,7 @@ class ProfileController extends Controller {
 
     public function actionDashboard() {
         $loggedInUserId = Yii::app()->session['userid'];
-        $orderObject = Order::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId));
+        $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId. ' And  status = 1 '));
         $this->render('/user/dashboard', array(
             'orderObject' => $orderObject,
         ));
@@ -238,7 +239,7 @@ class ProfileController extends Controller {
                             $success .= "Your password changed successfully";
                             $config['to'] = $userObject->email;
                             $config['subject'] = 'mGlobally Password Changed';
-                            $config['body'] =  $this->renderPartial('/mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
+                            $config['body'] =  $this->renderPartial('//mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
                         
                             //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
                             CommonHelper::sendMail($config);
@@ -283,7 +284,7 @@ class ProfileController extends Controller {
                         $success .= "Your pin changed successfully";
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
-                        $config['body'] =  $this->renderPartial('../mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
+                        $config['body'] =  $this->renderPartial('//mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
                         //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
                         CommonHelper::sendMail($config);
                     }

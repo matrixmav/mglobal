@@ -46,33 +46,34 @@ $this->breadcrumbs = array(
 
                     <span class="example1">(Upload jpg ,png , pdf files only)<br/>
                         <?php if (!empty($userhasObject)) { ?>
-                            <img height="200"  src="/user/template/<?php echo $builderObjectmeta->folderpath . '/' . $userhasObject->logo; ?>">
+                            <img height="200" width="200" src="/user/template/<?php echo $builderObjectmeta->folderpath . '/' . $userhasObject->logo; ?>">
                         <?php } ?>
                     </span> 
                 </div>
                 </div>  
-                    
-            <div class="form-group">
-               <label class="col-lg-4 control-label" for="lastname">Width</label>
-               <div class="fileupload fileupload-new" data-provides="fileupload">
+            
+            <div class="form-group form-horizontal">
+               <label class="col-sm-2 control-label" for="lastname">Width</label>
+               <div class="fileupload fileupload-new col-sm-10" data-provides="fileupload">
                    <input type="text" class="form-control" id="width" name="width" placeholder="Width" value="<?php echo $userhasObject->logo_width ? $userhasObject->logo_width : '';  ?>">
                </div>
-           </div>  
-
-           <div class="form-group">
-               <label class="col-lg-4 control-label" for="lastname">Height</label>
-               <div class="fileupload fileupload-new" data-provides="fileupload">
+           </div>
+            
+            <div class="form-group  form-horizontal">
+               <label class="col-sm-2 control-label" for="lastname">Height</label>
+               <div class="fileupload fileupload-new col-sm-10" data-provides="fileupload">
                    <input type="text" class="form-control" id="height" name="height" placeholder="Height" value="<?php echo $userhasObject->logo_height ? $userhasObject->logo_height : '';  ?>">
                </div>
-           </div>  
+           </div>
+            
                     
-            <div class="form-group">
-                <label class="col-lg-4 control-label" for="lastname">Site Title</label>
+            <div class="form-group form-horizontal">
+                <label class="col-sm-2 control-label" for="lastname">Site Title</label>
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                     <input type="text" value="<?php echo $userhasObject->site_title ? stripcslashes($userhasObject->site_title) : ''; ?>" name="site_title"  class="form-control" id="copyright">  
                 </div>
-            </div>                
-
+            </div> 
+            
             <div class="row">
                 <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
                     <input type="submit" name="submit" value="Submit" class="btn red">

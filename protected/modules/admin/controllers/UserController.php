@@ -281,7 +281,7 @@ class UserController extends Controller {
         ));
     }
 
-    public function actionCreditWallet() {
+    public function actionCreditWallet() { 
         $error = "";
         if ($_POST) {
             $userId = $_POST['userId'];
@@ -292,6 +292,7 @@ class UserController extends Controller {
             $fundAmount = $_POST['paid_amount'];
             $postDataArray = $_POST;
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $transactionObject = Transaction::model()->findByPk($transactionObject->id);
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             
             if (!empty($walletObject)) {
@@ -307,14 +308,15 @@ class UserController extends Controller {
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
                 $userObjectArr['to_name'] = $toUserObjectMail->name;
+                $userObjectArr['full_name'] = $toUserObjectMail->full_name;
                 $userObjectArr['from_name'] = 'Super Admin';
-                $userObjectArr['date'] = $moneyTransferObject->created_at;
+                $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
                 /*mail to user*/
                 $config['to'] = $toUserObjectMail->email;
                 $config['subject'] = 'Fund Transfered';
-                $config['body'] =  $this->renderPartial('../mailTemp/transfer_fund', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] =  $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
             
             $this->redirect('/admin/user/wallet?successmsg=1');
@@ -347,6 +349,7 @@ class UserController extends Controller {
             $postDataArray = $_POST;
              
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $transactionObject = Transaction::model()->findByPk($transactionObject->id);
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
             $postDataArray['toWalletId'] = $adminWalletObject->id;
@@ -378,13 +381,14 @@ class UserController extends Controller {
                 $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
                 $userObjectArr['to_name'] = $toUserObjectMail->name;
                 $userObjectArr['from_name'] = 'Super Admin';
-                $userObjectArr['date'] = $moneyTransferObject->created_at;
+                $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
+                 
                 /*mail to user*/
                 $config['to'] = $toUserObjectMail->email;
                 $config['subject'] = 'Fund Deducted';
-                $config['body'] =  $this->renderPartial('../mailTemp/transfer_fund', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] =  $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
               $this->redirect('/admin/user/wallet?successmsg=2');
         }

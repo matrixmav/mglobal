@@ -33,9 +33,10 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                                 </div>
                                                 <div class="col-lg-5">
                                             <a href="javascript:void(0)" class="btn btn-default fright" onclick="getSponId();">Get Sponsor Id</a>
-                                            <span id="sponsor_id_error" class="clrred"></span>
+                                            
                                                 </div>
                                         </div>
+                                            <span id="sponsor_id_error" class="clrred"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -122,6 +123,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
 <?php }?>
 <script type="text/javascript">
  function getSponId(){ 
+//    $("#sponsor_id_error").html('');
     $("#sponsor_id").val("<?php echo Yii::app()->params['adminSpnId']; ?>");
     return false;
 }

@@ -216,7 +216,7 @@
                 if (htmlArr[0] == 1)
                 {
                     $("#transID").val(htmlArr[1]);
-                    location.href = "/package/payment?tId="+htmlArr[1];
+                    location.href = "/package/payment?tId="+htmlArr[1]+'&pp='+totalAmount;
                     
                 }
             }
