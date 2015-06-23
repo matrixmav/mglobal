@@ -48,42 +48,12 @@ class GenealogyController extends Controller
 	}
         
         public function actionBinaryCalculation(){
-            
             $adminId = 1;        
-            
             $binaryCommissionObject = BaseClass::getBinaryTest($adminId);
+            if($binaryCommissionObject){
+                echo "binary Generated Successfully";exit;
+            }
             
-//            $genealogyLeftListObject = BaseClass::getBinaryCalculationChild($adminId, "'left'"); 
-//            
-//            $genealogyRightListObject = BaseClass::getBinaryCalculationChild($adminId, "'right'");
-//            echo "<pre>"; print_r($genealogyLeftListObject);
-//            echo "<pre>"; print_r($binaryCommissionObject);exit;
-//            $this->render('view',array(
-//                        'genealogyLeftListObject'=>$genealogyLeftListObject,
-//                        'genealogyRightListObject'=>$genealogyRightListObject,
-//                        'currentUserId'=>$currentUserId
-//            ));
-            
-            
-//            if(!empty($_GET)){            
-//                $currentUserId = $_GET['id'] ;        
-//                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
-//                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
-//                $this->render('view',array(
-//                            'genealogyLeftListObject'=>$genealogyLeftListObject,
-//                            'genealogyRightListObject'=>$genealogyRightListObject,
-//                            'currentUserId'=>$currentUserId
-//                ));
-//            }else{                
-//                $currentUserId = Yii::app()->session['userid'] ;        
-//                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
-//                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
-//                $this->render('view',array(
-//                            'genealogyLeftListObject'=>$genealogyLeftListObject,
-//                            'genealogyRightListObject'=>$genealogyRightListObject,
-//                            'currentUserId'=>$currentUserId
-//                ));
-//            }
         }
 
         /**

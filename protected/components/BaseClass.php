@@ -1030,7 +1030,6 @@ class BaseClass extends Controller {
      * @return int
      */
     public static function getBinaryTest($userId) {
-        echo "parent id". $userId;
         $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent'=> $userId,'position'=> 'left'));
         if($binaryCommissionLeftObject){
             $binaryCommissionRightObject = BinaryCommissionTest::model()->findByAttributes(array('parent'=> $userId,'position'=> 'right'));
