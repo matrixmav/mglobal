@@ -57,7 +57,7 @@
                             <input type="hidden" name="item_number" value="1">
                             <input type="hidden" name="credits" value="">
                             <input type="hidden" name="userid" value="<?php echo Yii::app()->session['userid']; ?>">
-                            <input type="hidden" name="amount" value="<?php echo number_format($packageObject->amount + Yii::app()->session['amount'], 2); ?>" id="ppamount">
+                            <input type="hidden" name="amount" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>" id="ppamount">
                             <input type="hidden" name="no_shipping" value="1">
                             <input type="hidden" name="currency_code" value="USD">
                             <input type="hidden" name="handling" value="0">
@@ -89,14 +89,14 @@
     </div>
 </div>
 </div>
-<input type="hidden" id="totalAmount" value="<?php if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; }?>">
-<input type="hidden" id="payAmount" value="<?php if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; }?>">
+<input type="hidden" id="totalAmount" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>">
+<input type="hidden" id="payAmount" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>">
-<input type="hidden" id="package_amt" value="<?php if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; }?>">
+<input type="hidden" id="package_amt" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>">
 <input type="hidden" id="transID" value="<?php echo $_GET['tId']; ?>">
 <script type="text/javascript">
     function makepayment()
