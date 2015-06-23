@@ -1016,6 +1016,57 @@ class BaseClass extends Controller {
         return $genealogyListObject;
     }
 
+    
+    public static function getBinaryCalculationChild($userId, $position) {
+        $genealogyListObject = BinaryCommissionTest::model()->findAll(array('condition' => 'sponsor_id = ' . $userId . ' AND position = ' . $position, 'order' => 'position asc'));
+        return $genealogyListObject;
+    }
+    
+    
+    /**
+     * Generate Binary calculation
+     * 
+     * @param int $userId
+     * @return int
+     */
+    public static function getBinaryTest($userId) {
+        echo "parent id". $userId;
+        $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent'=> $userId,'position'=> 'left'));
+        if($binaryCommissionLeftObject){
+            $binaryCommissionRightObject = BinaryCommissionTest::model()->findByAttributes(array('parent'=> $userId,'position'=> 'right'));
+            if($binaryCommissionRightObject){
+                $commissionAmount = $binaryCommissionRightObject->order_amount;
+                if($binaryCommissionLeftObject->order_amount <= $binaryCommissionRightObject->order_amount){
+                    $commissionAmount = $binaryCommissionLeftObject->order_amount;
+                }
+                $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id'=> $userId));
+                $getPercentage = self::getPercentage($commissionAmount, 10); 
+                $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount+$getPercentage);
+                $parentCommissionObject->save(false);
+                self::getBinaryTest($binaryCommissionRightObject->user_id);
+                self::getBinaryTest($binaryCommissionLeftObject->user_id);
+            }
+        } else {
+            return 1;
+        }
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static function getRandPosition() {
         $randValue = mt_rand(1, 2);
         return $randValue;

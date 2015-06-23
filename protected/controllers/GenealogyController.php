@@ -30,7 +30,7 @@ class GenealogyController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','binarycalculation'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -46,8 +46,47 @@ class GenealogyController extends Controller
 			),
 		);
 	}
+        
+        public function actionBinaryCalculation(){
+            
+            $adminId = 1;        
+            
+            $binaryCommissionObject = BaseClass::getBinaryTest($adminId);
+            
+//            $genealogyLeftListObject = BaseClass::getBinaryCalculationChild($adminId, "'left'"); 
+//            
+//            $genealogyRightListObject = BaseClass::getBinaryCalculationChild($adminId, "'right'");
+//            echo "<pre>"; print_r($genealogyLeftListObject);
+//            echo "<pre>"; print_r($binaryCommissionObject);exit;
+//            $this->render('view',array(
+//                        'genealogyLeftListObject'=>$genealogyLeftListObject,
+//                        'genealogyRightListObject'=>$genealogyRightListObject,
+//                        'currentUserId'=>$currentUserId
+//            ));
+            
+            
+//            if(!empty($_GET)){            
+//                $currentUserId = $_GET['id'] ;        
+//                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
+//                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+//                $this->render('view',array(
+//                            'genealogyLeftListObject'=>$genealogyLeftListObject,
+//                            'genealogyRightListObject'=>$genealogyRightListObject,
+//                            'currentUserId'=>$currentUserId
+//                ));
+//            }else{                
+//                $currentUserId = Yii::app()->session['userid'] ;        
+//                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
+//                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+//                $this->render('view',array(
+//                            'genealogyLeftListObject'=>$genealogyLeftListObject,
+//                            'genealogyRightListObject'=>$genealogyRightListObject,
+//                            'currentUserId'=>$currentUserId
+//                ));
+//            }
+        }
 
-	/**
+        /**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
