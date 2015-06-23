@@ -213,7 +213,7 @@ class ProfileController extends Controller {
 
     public function actionDashboard() {
         $loggedInUserId = Yii::app()->session['userid'];
-        $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId. ' And  status = 0 '));
+        $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId. ' And  status = 1 '));
         $this->render('/user/dashboard', array(
             'orderObject' => $orderObject,
         ));
