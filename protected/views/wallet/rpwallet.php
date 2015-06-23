@@ -77,12 +77,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'name' => 'id',
             'header' => '<span style="white-space: nowrap;">Transfer To &nbsp; &nbsp; &nbsp;</span>',
-            'value' => 'isset($data->touser->name)? ucwords($data->touser->full_name):""',
+            'value' => 'isset($data->touser->name)? ucwords($data->touser->name):""',
         ),
         array(
                         'name' => 'id',
                         'header' => '<span style="white-space: nowrap;">Transfer From &nbsp; &nbsp; &nbsp;</span>',
-                        'value' => 'isset($data->fromuser->name)? ucwords($data->fromuser->full_name):""',
+                        'value' => 'isset($data->fromuser->name)? ucwords($data->fromuser->name):""',
                     ),
         array(
             'name' => 'updated_at',
