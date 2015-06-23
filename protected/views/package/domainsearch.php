@@ -11,8 +11,46 @@
 <div class="container domainSearch">
     <div class="row">
         <div class="col-sm-8 col-xs-12 col-lg-8">
-            <a href="javascript:void(0);">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
+            <div class="container">
+ 
+</div>
+            </div>
+            </div>
         <div class="col-sm-8 col-xs-12 col-lg-8">
+                               <div class="row">
+		
+                        
+            <div class="row bs-wizard" style="border-bottom:0;">
+                
+                <div class="col-xs-4 bs-wizard-step complete">
+                  <div class="text-center bs-wizard-stepnum">Step 1</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Domain Search.</div>
+                </div>
+                
+                <div class="col-xs-4 bs-wizard-step complete"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Step 2</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Proceed Payment</div>
+                </div>
+                
+                <div class="col-xs-4 bs-wizard-step active"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Step 3</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Make Payment</div>
+                </div>
+                
+                
+            </div>
+        
+        
+        
+        
+        
+	</div>
             <div class="row">
                 <form class="form-inline">
                     <div class="form-group col-sm-12  has-success has-feedback">

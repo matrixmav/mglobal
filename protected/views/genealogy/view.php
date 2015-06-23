@@ -119,8 +119,36 @@ $empty = "sm-blank" ; //no Package
     
     <div class="col-sm-12 detailPackage">
         <h4>PACKAGE DETAILED INFORMATION</h4>
-        <div class="row">
-            <div class="col-sm-4 col-xs-12">
+       <div class="row">
+            <div class="col-sm-3 col-xs-12">
+                <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/blank.png">
+                        <p> User</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <img src="/images/inactive.png">
+                        <p>  User inactive</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <img src="/images/active.png">
+                        <p> User Active</p>
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-3 col-xs-12">
                 <table>
                     <tr>
                         <th>
@@ -148,7 +176,7 @@ $empty = "sm-blank" ; //no Package
                     </tr>
                 </table>
             </div>
-             <div class="col-sm-4 col-xs-12">
+             <div class="col-sm-3 col-xs-12">
                
                    <table>
                     <tr>
@@ -178,7 +206,7 @@ $empty = "sm-blank" ; //no Package
                 </table>
                    
                 </div>
-            <div class="col-sm-4 col-xs-12">
+            <div class="col-sm-3 col-xs-12">
                 
                    <table>
                     <tr>

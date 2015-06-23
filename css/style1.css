@@ -1408,7 +1408,7 @@ Pre-Footer and pre-footer elements
 
 /* footer */
 .footer {
-  background: url(/images/footer-next-bg.png) left center repeat;;
+  background: url(/images/footer-next-bg.png) left center repeat !important;
   color: #fff;
   font-size: 12px;
   padding: 5px 0;
@@ -1832,6 +1832,21 @@ Pre-Header and pre-header elements
 .service_icon{ display: inline-block; text-align: center; padding: 0 0 35px 0;}
 .pinkSm{color:#e54a1a !important;}
 .pinkSm:hover{text-decoration: underline;}
+.benefitCarousel{}
+.benefitCarousel .carousel-control{opacity: 1;}
+.benefitCarousel .carousel-control.left{ background-image: none;}
+.benefitCarousel .carousel-control.left span img{display: inline-block;
+    position: absolute;
+    top: 50%;
+    z-index: 5; left: 50%; margin-top: -15px; }
+.benefitCarousel .carousel-control.right span img{display: inline-block;
+    position: absolute;
+    top: 50%;
+    z-index: 5; right:50%; margin-top: -15px;  }
+.benefitCarousel .carousel-control.right{ background-image: none;}
+
+.benefitCarousel .carousel-control { visibility: hidden; }
+.benefitCarousel:hover .carousel-control { visibility: visible; }
 .choseOpt{}
 .choseOpt li{ list-style: none;  background: url(/images/arrow-circle.png) left center no-repeat; margin: 10px 0 10px 10px; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
 .choseOpt li a{ padding: 0 0 0 40px; font-family: "Open Sans"; font-size:18px; color: #757575;}

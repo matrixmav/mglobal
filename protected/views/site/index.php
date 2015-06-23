@@ -310,7 +310,12 @@
         <div class="col-md-3 col-sm-3 col-xs-12 item">
           <img src="images/mobile-application.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Mobile Application</h3>
-          <p>Lorem ipsum et dolor amet<br> consectetuer diam</p>
+          <p>Beyond our web development and digital marketing services, we extend high end solutions ...<a href="#inline5" class="fancybox pinkSm">read more</a></p>
+          <div id="inline5" style="display:none" class="readMoreBox content">
+               <h2>Mobile<strong> Application </strong></h2>
+          <p >Beyond our web development and digital marketing services, we extend high end solutions for mobile application development. With the continuous support of our team of highly experienced technology professionals, we deliver mobile applications that comply with our clients’ specific requirements. We create applications for Android, Windows, iOS and other operating systems. Our development team employs latest technologies and also ensures to keep pace with the newest technologies and programming languages. We understand the significance of mobile application for a business. Thus, we ensure to deliver the best in terms of user experience with every mobile application we develop.</p>
+         
+      </div>
         </div>
         
         <div class="col-md-3 col-sm-3 col-xs-12 item">
@@ -430,11 +435,11 @@
         </a>
       </div>
       <div class="item col-md-2 col-sm-4 col-xs-12">
-      <img src="images/templates/automobile.png" alt="NAME" class="img-responsive">
+      <img src="images/templates/consultant.png" alt="NAME" class="img-responsive">
         <a href="images/4.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
-            <strong>London City Project</strong>
-            <em>Property</em>
+            <strong>Consultant</strong>
+            <em></em>
             <b>View</b>
           </div>
         </a>
@@ -676,7 +681,7 @@
       
     </div>
     <div class="item">
-        <h3>MLM Benefits</h3>
+        <h3>Multi Level Marketing Benefits</h3>
        <ul class="choseOpt">
             <li><a href="">Consistent Income</a></li>
             <li><a href="">Low operating cost</a></li>
@@ -690,15 +695,17 @@
     
   </div>
 
-  <!-- Controls 
+  <!-- Controls -->
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="" aria-hidden="true">
+    <img src="images/steps/arrow-left-active.png" alt="Why to choose us" class="img-responsive"></span>
+
     <span class="sr-only">Previous</span>
   </a>
   <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>-->
+    <span class="" aria-hidden="true">
+  <img src="images/steps/arrow-right-normal.png" alt="Why to choose us" class="img-responsive"></span>
+  </a>
 </div>
           <!-- end -->
         </div>
@@ -1043,26 +1050,13 @@
     </div>
   </div>
   <!-- Partners block END -->
-  <script type="text/javascript">
+ <script type="text/javascript">
      $(document).ready(function() {
 		$('.fancybox').fancybox({
 		 helpers: { 
         title: null
     }
 		});
-               
-                $('.carousel-inner').carousel({
-                interval: ,
-                duration: ,
-                });
-              $('.carousel-inner').hover(function () { 
-              $(this).carousel('pause')
-              }, function () { 
-        $(this).carousel('cycle') 
-        });
-        });
-                
-                
-               
+		});
           //$(".myfancyTxtBox").fancybox();
 </script>
