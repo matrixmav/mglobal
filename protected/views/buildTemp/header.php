@@ -1,10 +1,11 @@
 <?php
 $this->breadcrumbs = array(
-    'Template' => array('BuildTemp/templates'),
     'Template Header',
 );
 ?>
-
+<div class="col-md-12 col-sm-12">
+    <a class="btn red publish" href="builder?o=<?php echo base64_encode(Yii::app()->session['orderID']);?>&u=<?php echo base64_encode(Yii::app()->session['userid']);?>&t=<?php echo base64_encode(Yii::app()->session['templateID']);?>">Publish Your Site</a>
+</div>
 <div class="col-md-12 col-sm-12" id="test">
     <?php if (count($userpagesObject) < 4) { ?>
         <a href="/BuildTemp/userinput" class="btn green">Add page</a>
@@ -17,10 +18,7 @@ $this->breadcrumbs = array(
         <?php }
     }
     ?> 
-    <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
-    <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
-    <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
-    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
+    <?php echo BaseClass::buildWebsiteHeader(); ?> 
 </div>
 <div class="col-md-12 col-sm-12">
 

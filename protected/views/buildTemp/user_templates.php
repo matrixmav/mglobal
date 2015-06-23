@@ -25,9 +25,11 @@
     
     /* For the contact form */
     if($responseForm){     
-        $pageContent1 = stripslashes($pageContent);
-        $removeSpaces = preg_replace('/\s+/', ' ', $pageContent1);
-        echo $pageContent2 = preg_replace('#<div class="mav_contact_form">(.*?)</div>#', stripslashes($responseForm) , $removeSpaces);               
+        echo stripslashes($responseForm) ;
+//        $pageContent1 = stripslashes($pageContent);
+//        $removeSpaces = preg_replace('/\s+/', ' ', $pageContent1);
+      //  echo $pageContent2 = preg_replace('#<div class="mav_contact_form">(.*?)</div>#', stripslashes($responseForm) , $removeSpaces);               
+           
     }else{
         echo $pageContent;
     }
