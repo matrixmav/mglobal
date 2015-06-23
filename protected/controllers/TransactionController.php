@@ -156,7 +156,6 @@ class TransactionController extends Controller {
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => $criteria, 'pagination' => array('pageSize' => $pageSize),));
        
-        
         $this->render('fund_list', array(
             'dataProvider' => $dataProvider,
         ));

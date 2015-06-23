@@ -34,7 +34,7 @@ if(!empty($error)){
 <div class="col-md-12 form-group">
     <label class="col-md-2">Wallet Type: </label>
     <div class="col-md-6">
-        <select name="walletId" id="wallet_type" class="form-control dvalid">
+        <select name="walletId" id="wallet_type" class="form-control dvalid" onchange="getExistingFund(<?php echo Yii::app()->session['userid'];?>,this.value);">
             <?php foreach ($walletList as $key=>$value) { ?>
             <option value="<?php echo $key;?>" ><?php echo $value;?></option>
             <?php } ?>
@@ -42,6 +42,7 @@ if(!empty($error)){
         <span style="color:red"  id="first_name_error"></span>
     </div>
 </div>
+<input type="hidden" id="transaction_data_amt" value="">
 <!--BaseClass::getWalletList()-->
 <div class="col-md-12 form-group">
     <label class="col-md-2">Add Fund *</label>
@@ -65,13 +66,22 @@ if(!empty($error)){
         }
         if ($("#fund").val() != "") {
         var regexp = /^(0|[1-9]+[0-9]*)$/;
+        var regexp1 = /^[0-9]\d*\.\d{2}$/;
         var newVal = $('#fund').val();
        
-        if (!regexp.test(newVal)) {
+        if (!regexp1.test(newVal)) {
           $("#fund_error").html("Invalid Fund!");
           return false;
         }
     }
+    var fund = $('#transaction_data_amt').val();
+    var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""));
+    var fundVal = parseFloat($('#fund').val());
+    if(fundFinal < fundVal)
+    { 
+         $("#fund_error").html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
+          return false;
+        }
     }
     
 </script>

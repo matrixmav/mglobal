@@ -143,7 +143,7 @@
 <input type="hidden" id="payAmount" value="<?php echo $packageObject->amount + Yii::app()->session['amount']; ?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
-<input type="hidden" id="walletused" value="">
+<input type="hidden" id="packageused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
 <input type="hidden" id="transID" value="<?php if(!empty($_GET)) { echo $_GET['tId'];} ?>" name="tId">

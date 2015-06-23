@@ -162,13 +162,21 @@ class Order extends CActiveRecord
                 $orderObject->status = 0;
                 $orderObject->start_date = new CDbExpression('NOW()');
                 $orderObject->end_date = new CDbExpression('NOW()');
+                $orderObject->created_at = new CDbExpression('NOW()');
                 $orderObject->updated_at = new CDbExpression('NOW()');
                 $orderObject->save(false);
             } catch (Exception $ex) {
                 echo $ex->getMessage();exit;
             }
-            
-            
-            
         }
+            
+           public function fetchTotalAmount($records)
+           {
+             $total=0;
+             foreach($records as $record)
+             $total += $record->package->amount*5/100;
+             return $total;
+           }  
+            
+         
 }
