@@ -3145,7 +3145,8 @@ Styler Panel
 #actualamountDiv{font-size: 15px;}
 #walletamountDiv{font-size: 15px;}
 #payamountDiv{font-size: 15px;}
-.amountTab{padding: 20px ;}
+.amountTab{padding: 10px 14px ;}
+.amountTab .table{margin-bottom: 0;}
 .amountTab td{border:1px solid #d7d7d7; padding: 5px; width: 50%;}
 .payOption {padding: 10px 0;}
 
@@ -3210,13 +3211,13 @@ Styler Panel
 
 
 /*custom steps */
-.bs-wizard {margin-top: 40px;}
+.bs-wizard {margin-top: 0px;}
 
 /*Form Wizard*/
 .bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
 .bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
 .bs-wizard > .bs-wizard-step + .bs-wizard-step {}
-.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px; visibility: hidden;}
 .bs-wizard > .bs-wizard-step .bs-wizard-info {color: #78828c; font-size: 14px;}
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fbe8aa; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50% !important;} 
 .bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #f15c2a; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
@@ -3248,4 +3249,9 @@ Styler Panel
 .signBtn:hover{padding: 6px 20px;}
 .mailTxt{margin: 10px 0; min-width: 280px; margin-right: 10px; border-radius: 4px !important;}
 .social-icons li{ list-style: none;}
-
+/*--------------cart checkout-------------*/
+#domainTaken{ position: relative;}
+ #domainTaken .closeImg{ position: absolute; right: -60px;
+    top: -5px;}
+ #domainTaken .closeImg a i{font-size: 16px;}
+.searchWrapBlur{opacity: .5;}

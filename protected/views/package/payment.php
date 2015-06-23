@@ -2,12 +2,49 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 col-xs-12 col-lg-8"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id']; ?>&tId=<?php echo $_GET['tId']; ?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?tId=<?php echo $_GET['tId']; ?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a></div>
+        <div class="col-sm-12 col-xs-12 col-lg-12"><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id']; ?>&tId=<?php echo $_GET['tId']; ?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?tId=<?php echo $_GET['tId']; ?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a>
+            <div class="row">
+		
+                        
+            <div class=" bs-wizard" style="border-bottom:0;">
+                
+                <div class="col-xs-4 bs-wizard-step complete">
+                  <div class="text-center bs-wizard-stepnum">Step 1</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Domain Search.</div>
+                </div>
+                
+                <div class="col-xs-4 bs-wizard-step complete"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Step 2</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Proceed Payment</div>
+                </div>
+                
+                <div class="col-xs-4 bs-wizard-step active"><!-- complete -->
+                  <div class="text-center bs-wizard-stepnum">Step 3</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Make Payment</div>
+                </div>
+                
+                
+            </div>
+        
+        
+        
+        
+        
+	</div>
+        </div>
+    </div>
+        <div class="row">
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
                     <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php  if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; } ?></span></p>
-                    <div id="paymentOption" style="min-height:238px">
+                    <div id="paymentOption" class="clearfix">
                         <form id="walletform" name="walletform">  
                             <?php if ($walletObject) { ?>
                                 <div id="walletOption" class="col-sm-4">
@@ -66,16 +103,16 @@
                         </form>
                     </div>
                     <div class="col-sm-4  col-xs-12 amountTab" display="table" id="totalAmounDiv" style="display:none;">
-                        <table width="100%">
-                            <tr>
+                        <table width="100%" class="table">
+                            <tr class="danger">
                                 <td> <div id="actualamountDiv">  Total Amount</div> </td>
                                 <td><span id="actualamount"></span></td>
                             </tr>
-                            <tr>
+                            <tr tr class="info">
                                 <td><div id="walletamountDiv">  Wallet Amount</div> </td>
                                 <td><span id="walletamount"></span></td>
                             </tr>
-                            <tr>
+                            <tr class="warning">
                                 <td><div id="walletamountDiv"> Payable Amount </div></td>
                                 <td>$<span id="payamount"></span></td>
                             </tr>

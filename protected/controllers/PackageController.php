@@ -155,6 +155,7 @@ class PackageController extends Controller {
             $rightbar .= '<li class="cart-item">
             
             <span class="domaintxt">';
+            
             $rightbar .= $packageObject["name"];
             /* if($add)
               {
@@ -162,10 +163,15 @@ class PackageController extends Controller {
               } */
             //$rightbar .= $_REQUEST['domain'];    
             $rightbar .='<div id="domainTaken">';
+            
             if (Yii::app()->session['domain'] != '') {
                 $rightbar .= Yii::app()->session['domain'];
+                $rightbar .= '<div class="closeImg"> <a href=""> <i class="fa fa-times"></i></a></div>';
             }
+            
             $rightbar .='</div>
+              
+
             </li>';
         }
 
@@ -300,7 +306,7 @@ class PackageController extends Controller {
             foreach ($AllDomainArray as $allext) {
                 $domainName = "'" . $alldomain->name . "." . $allext . "'";
 
-                $SuggestedDomain .= '<div class="searchWrap"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
+                $SuggestedDomain .= '<div class="searchWrap searchWrapBlur"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
                                     <div class="txtComent">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div></div></div>
                                     <div class="col-sm-2 col-xs-2">
                                     <p class="priceDomain"> <span>$</span>' . $alldomain->price . '</p></div>
