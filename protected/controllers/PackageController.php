@@ -521,13 +521,32 @@ class PackageController extends Controller {
                 try {
                     //deduct from from user wallet
                     $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
+                    
                     if($sponsorWalletObject){
                         $fromAmount = ($sponsorWalletObject->fund) + ($packageObject->amount*5/100);
                         $sponsorWalletObject->fund = $fromAmount;
                         $sponsorWalletObject->update();
                     } else {
                         $fromAmount = $packageObject->amount*5/100;
-                        $walletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmount,'3');
+                        $sponsorWalletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmount,'3');
+                    }
+                    $createdTime = new CDbExpression('NOW()');
+                    $moneyTransfertoObj = new MoneyTransfer;
+                    $moneyTransfertoObj->from_user_id = $userObject->id;
+                    $moneyTransfertoObj->to_user_id = $sponsorUserObject->id;
+                    $moneyTransfertoObj->transaction_id = $transactionObject->id;
+                    $moneyTransfertoObj->fund_type = 2;//1:RP,2:Cash
+                    $moneyTransfertoObj->fund = $fromAmount;//1:RP,2:Cash
+                    $moneyTransfertoObj->comment = "Direct Commision Transfered";
+                    $moneyTransfertoObj->status = 1;
+                    $moneyTransfertoObj->wallet_id = $MTObject1->id;
+                    $moneyTransfertoObj->to_wallet_id = $sponsorWalletObject->id;
+                    $moneyTransfertoObj->created_at = $createdTime;
+                    $moneyTransfertoObj->updated_at = $createdTime;
+                    if(!$moneyTransfertoObj->save()){
+                        echo "<pre>";
+                        print_r($moneyTransfertoObj->getErrors());
+                    exit;
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();
