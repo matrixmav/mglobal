@@ -35,11 +35,12 @@ if(!empty($error)){
     <label class="col-md-2">Wallet Type: </label>
     <div class="col-md-6">
         <select name="walletId" id="wallet_type" class="form-control dvalid" onchange="getExistingFund(<?php echo Yii::app()->session['userid'];?>,this.value);">
+            <option value="">Select Wallet</option>
             <?php foreach ($walletList as $key=>$value) { ?>
             <option value="<?php echo $key;?>" ><?php echo $value;?></option>
             <?php } ?>
         </select>
-        <span style="color:red"  id="first_name_error"></span>
+        <span style="color:red"  id="wallet_error"></span>
     </div>
 </div>
 <input type="hidden" id="transaction_data_amt" value="">
@@ -60,6 +61,11 @@ if(!empty($error)){
 </form>
 <script language = "Javascript">
     function validateForm(){
+        $("#wallet_error").html("");
+        if ($("#wallet_type").val() == "") {
+            $("#wallet_error").html("Please Select Wallet First.");
+            return false;
+        }
         if ($("#fund").val() == "") {
             $("#fund_error").html("Please Add Fund!");
             return false;
