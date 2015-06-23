@@ -262,40 +262,45 @@ class OrderController extends Controller {
         $loggedInuserName = User::model()->findByPk(Yii::app()->session['userid']);
         $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName->name . '"'));
 
-        $connection = Yii::app()->db;
+        //$connection = Yii::app()->db;
         $userid = "";
         if ($model) {
             foreach ($model as $user) {
                 $userid .= "'" . $user->id . "',";
             }
             $userID = rtrim($userid, ',');
-            $condition = 'transaction.user_id IN(' . $userID . ') AND ';
+            $condition = 'user_id IN(' . $userID . ') AND ';
         } else {
-            $condition = "transaction.user_id IN('0') AND ";
+            $condition = "user_id IN('0') AND ";
         }
+        $pageSize = 100;
+          
         
         // Date filter.
         if (!empty($_POST)) {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
         }else{
-            $todayDate = date("Y-m-d");
-            $fromDate = date("Y-m-d");
-        }
+            $todayDate = '0000-00-00';
+            $fromDate = '0000-00-00';
+        }   
+            $dataProvider = new CActiveDataProvider('Order', array(
+            'criteria' => array(
+                'condition' => ($condition.'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status=1' ), 'order' => 'created_at DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
         
-            $command = $connection->createCommand('select transaction.actual_amount,transaction.created_at,user.id,user.position,user.full_name,user.name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '"');
-            
          
-        
-        
-        $row = $command->queryAll();
         $totalAmount = "";
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand("SELECT package.amount FROM `package`,`order` where order.user_id in (".$userID.") AND order.package_id = package.id AND order.created_at >= '" . $todayDate . "' AND order.created_at <= '" . $fromDate . "' AND order.status='1'");
+        $row = $command->queryAll();
+        
         foreach ($row as $amount) {
-            $totalAmount += $amount['paid_amount'] * 5 / 100;
-        }
+            $totalAmount += $amount['amount'] * 5 / 100;
+         }
 
-        $sqlData = new CArrayDataProvider($row, array(
-            'pagination' => array('pageSize' => 10)));
+        //$sqlData = new CArrayDataProvider($row, array(
+            //'pagination' => array('pageSize' => 100)));
         //$sqlData = $sqlData->getData();
         //$sqlData = $sqlData[0];
         //$dataProvider = new CActiveDataProvider($sqlData, array(
@@ -311,11 +316,12 @@ class OrderController extends Controller {
 
 
         $this->render('directincome', array(
-            'dataProvider' => $sqlData,
+            'dataProvider' => $dataProvider,
             'totalAmount' => $totalAmount,
         ));
     }
-
+    
+    
     protected function GetButtonTitle($data, $row) {
         $userId = Yii::app()->session['userid'];
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
