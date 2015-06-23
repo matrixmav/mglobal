@@ -278,24 +278,23 @@ class OrderController extends Controller {
         if (!empty($_POST)) {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
+            $command = $connection->createCommand('select transaction.actual_amount,transaction.created_at,user.id,user.position,user.full_name,user.name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode = "paypal" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '" ORDER BY transaction.created_at DESC');
+            
         }else{
             $todayDate = date("Y-m-d");
             $fromDate = date("Y-m-d");
-        }
-        
-            $command = $connection->createCommand('select transaction.actual_amount,transaction.created_at,user.id,user.position,user.full_name,user.name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode = "paypal" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '" ORDER BY id DESC');
+            $command = $connection->createCommand('select transaction.actual_amount,transaction.created_at,user.id,user.position,user.full_name,user.name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode = "paypal" ORDER BY transaction.created_at DESC');
             
-         
-        
+        }
         
         $row = $command->queryAll();
         $totalAmount = "";
         foreach ($row as $amount) {
-            $totalAmount += $amount['paid_amount'] * 5 / 100;
+            $totalAmount += $amount['actual_amount'] * 5 / 100;
         }
 
         $sqlData = new CArrayDataProvider($row, array(
-            'pagination' => array('pageSize' => 10)));
+            'pagination' => array('pageSize' => 100)));
         //$sqlData = $sqlData->getData();
         //$sqlData = $sqlData[0];
         //$dataProvider = new CActiveDataProvider($sqlData, array(
