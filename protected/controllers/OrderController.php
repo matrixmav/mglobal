@@ -283,7 +283,7 @@ class OrderController extends Controller {
             $fromDate = date("Y-m-d");
         }
         
-            $command = $connection->createCommand('select transaction.actual_amount,transaction.created_at,user.id,user.position,user.full_name,user.name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode != "transfer" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '"');
+            $command = $connection->createCommand('select transaction.actual_amount,transaction.created_at,user.id,user.position,user.full_name,user.name,transaction.paid_amount,transaction.coupon_discount from `user`,`transaction` WHERE ' . $condition . 'transaction.user_id = user.id AND transaction.status="1" AND transaction.mode = "paypal" AND transaction.created_at >= "' . $todayDate . '" AND transaction.created_at <= "' . $fromDate . '" ORDER BY id DESC');
             
          
         
