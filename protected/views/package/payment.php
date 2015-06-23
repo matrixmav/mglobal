@@ -29,7 +29,7 @@
                                         }
                                         ?>
                                         <div class="col-sm-12 col-xs-12 tleft">
-                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>);">
+                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);">
                                             <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                         </div>
                                         <?php
@@ -124,17 +124,22 @@
         }
 
     }
-    function walletamountcalculation(ID, key)
+    function walletamountcalculation(ID, key,type)
     {
         
         var str = ID + '-' + key;
         $('#walletused').val(str);
         var input = document.getElementsByName("wallet_type");
         var wallet = $("#walletused").val();
-        var totalAmount = $('#totalAmount').val();
+       
         var package_amt = $('#package_amt').val();
         var total = key;
-        
+        if(type=='2')
+        {
+            var totalAmount = $('#totalAmount').val()*75/100; 
+        }else{
+             var totalAmount = $('#totalAmount').val();
+        }
         
         if (totalAmount > total)
         {
@@ -156,7 +161,7 @@
             var payableAmount = total - totalAmount;
             $('#walletamount').html('$ '+totalAmount);
             $("#ppamount").val(0);
-            $('#payamount').html('$ 0');
+            $('#payamount').html('$0');
             $('#payamount').html('0');
             $('#totalusedrp').val(totalAmount);
          
