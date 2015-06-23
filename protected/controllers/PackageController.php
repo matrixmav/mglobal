@@ -534,6 +534,7 @@ class PackageController extends Controller {
                     {
                         $fromAmountpercent = $packageObject->amount*5/100;
                         $adminWalletObject->fund = ($adminWalletObject->fund) - $fromAmountpercent;
+                        $adminWalletObject->update();
                     }
                     
                     
