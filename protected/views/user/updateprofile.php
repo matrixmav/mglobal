@@ -4,7 +4,7 @@ $this->breadcrumbs = array(
     'Update Profile',
 );
 ?>
-<div class="col-md-7 col-sm-7">
+<div class="col-md-6 col-sm-6">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
     <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
     <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return validation();">
@@ -49,7 +49,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">Country <span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <select name="UserProfile[country_id]" id="country_id" onchange="getCountryCode(this.value)" class="form-control">
+                    <select name="UserProfile[country_id]" id="country_id" onchange="getStateList(this.value)" class="form-control">
                         <option value="">Select Country</option>
                         <?php foreach ( $countryObject as  $country) { ?>
                         <option value="<?php echo $country->id; ?>" <?php echo ($country->id== $userObject->country_id)? "selected":""; ?> ><?php echo $country->name;?></option>
@@ -63,8 +63,8 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" id = "country_code" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:20%;float:left;" class="form-control" name="UserProfile[country_code]">&nbsp;&nbsp;
-                    <input type="text" id="phone" class="form-control" name="UserProfile[phone]" maxlength="12" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:75%;float:right;" maxlength="30">
+                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:20%;float:left;" class="form-control" name="country_code">&nbsp;&nbsp;
+                    <input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:75%;float:right;" maxlength="30">
                 <div id="phone_error" class="form_error"></div>
                 </div>
                 
@@ -117,9 +117,10 @@ $this->breadcrumbs = array(
         </div>
     </form>
 </div>
-<script type="text/javascript" src="/js/registration.js?ver=1434950125"></script>
 
-    
+<div class="col-sm-6 col-md-6">
+    address
+</div>
 
 
 <script type="text/javascript">    

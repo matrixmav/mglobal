@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 ?>
 
  
-<div class="col-md-7 col-sm-7">
+<div class="col-md-6 col-sm-6">
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
