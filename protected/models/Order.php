@@ -167,8 +167,15 @@ class Order extends CActiveRecord
             } catch (Exception $ex) {
                 echo $ex->getMessage();exit;
             }
-            
-            
-            
         }
+            
+           public function fetchTotalAmount($records)
+           {
+             $total=0;
+             foreach($records as $record)
+             $total += $record->package->amount*5/100;
+             return $total;
+           }  
+            
+         
 }
