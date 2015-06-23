@@ -140,7 +140,7 @@
         }else{
              var totalAmount = $('#totalAmount').val();
         }
-        
+         
         if (totalAmount > total)
         {
              
@@ -154,28 +154,39 @@
             $('#payamount').html(payableAmount);
             $('#totalusedrp').val(total);
         } 
-        if(total > totalAmount)
-        {
+         if(total > totalAmount)
+          {
             $('#payamount').html('');
             $('#totalusedrp').val('');
+            var totalAmountRP = $('#totalAmount').val()*25/100; 
             var payableAmount = total - totalAmount;
             $('#walletamount').html('$ '+totalAmount);
-            $("#ppamount").val(0);
-            $('#payamount').html('$0');
-            $('#payamount').html('0');
+            if(type=='2')
+            {
+            $('#payamount').html(totalAmountRP);
+            $("#ppamount").val(totalAmountRP);
+            }else{
+             $('#payamount').html('0'); 
+             $("#ppamount").val(0);
+            }
             $('#totalusedrp').val(totalAmount);
-         
-        }
+          }
         if(total == totalAmount)
         {
              
             $('#payamount').html('');
             $('#totalusedrp').val('');
+           var totalAmountRP = $('#totalAmount').val()*25/100; 
             var payableAmount = total - totalAmount;
             $('#walletamount').html('$ '+totalAmount);
-            
-            $('#payamount').html('$ 0');
-            $('#payamount').html('0');
+            if(type=='2')
+            {
+            $('#payamount').html(totalAmountRP);
+            $("#ppamount").val(totalAmountRP);
+            }else{
+             $('#payamount').html('0'); 
+             $("#ppamount").val(0);
+            }
             $('#totalusedrp').val(total);
             //$('#totalAmount').val(0);
          
