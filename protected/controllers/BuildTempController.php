@@ -28,7 +28,7 @@ class BuildTempController extends Controller {
                 'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 
                                     'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent',
                                     'contactsetting', 'submitform','addcopyright','addfooter','addheader','pagefooter',
-                                    'builder'),
+                                    'builder','buildercreate'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -51,139 +51,321 @@ class BuildTempController extends Controller {
     
     public function actionBuilder(){
         
-        echo $tempID = Yii::app()->session['templateID']; echo "--";
-        echo $userID = Yii::app()->session['userid']; 
-        echo $orderID = Yii::app()->session['orderID'];
-        
-        $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => Yii::app()->session['orderID']));
-        
-        $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempID));        
-        /* Get template JS data */
-        $builderObjectJs = BuildTempJs::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));       
-        /* Get template CSS data */
-        $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
-        
-        $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userID . ' AND order_id=' . $orderID ));
-  
-         $tempMenu = $hasbuilderObject->user_menu;
-        $i = 1;
-        foreach ($userPagesObject as $pages) {
-            $pat1 = '*' . $i . '*';
-            $pat2 = '$' . $i . '$';
-            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
-            $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
-            $i++;
-        }
-       // echo $tempMenu;
-        $tempMenu = stripcslashes($tempMenu);
-//        print_r($tempMenu); die;
-        
-        $path = Yii::getPathOfAlias('webroot');       
-        /*Create Folder And Permission */        
-        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID)){
-            !mkdir($path."/builder_images/".$userID.'/build'.$orderID, 0777, true);
-        }
-        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID.'/images/')){
-            !mkdir($path."/builder_images/".$userID.'/build'.$orderID.'/images/', 0777, true);
-        }
-        
-        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID.'/js/')){
-            !mkdir($path."/builder_images/".$userID.'/build'.$orderID.'/js/', 0777, true);
-        }
-        
-        if(!file_exists($path."/builder_images/".$userID.'/build'.$orderID.'/css/')){
-            !mkdir($path."/builder_images/".$userID.'/build'.$orderID.'/css/', 0777, true);
-        }
-        
-        BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/images/", $path.'/builder_images/'.$userID.'/build'.$orderID."/images/");
-        BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/js/", $path.'/builder_images/'.$userID.'/build'.$orderID."/js/");
-        BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/css/", $path.'/builder_images/'.$userID.'/build'.$orderID."/css/");
-      
-        
-        /* Create File and write ka code */
-        $path = Yii::getPathOfAlias('webroot');               
-        foreach($userPagesObject as $userPagesObjectList){
-            
-            $my_file = $path."/builder_images/".$userID.'/build'.$orderID.'/'.strtolower($userPagesObjectList->page_name).".html";
-            $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
+        if (isset($_POST['master_pin'])) {
+		
+		$error = "";			
+		$masterkey = $_POST['master_pin'];
+		
+		$getUserObject = User::model()->findByAttributes(array('name' => Yii::app()->session['username'], 'status' => 1 ,'master_pin' => md5($masterkey) ));
+		
+                if (!empty($getUserObject)) {				
+                    
+                    $tempId = base64_decode($_GET['t']);         
+                    $userId = base64_decode($_GET['u']); 
+                    $orderId = base64_decode($_GET['o']);
 
-$headMeta = '<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>'.$userPagesObjectList->page_name.'</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' ;
-           
-            fwrite($handle, $headMeta);  
-            
-            foreach($builderObjectCss as $builderObjectListCss){
-               $data = "\n".'<link rel="stylesheet" href="css/'.$builderObjectListCss->name.'" type="text/css" media="all">' ;           
-                //stripslashes($userpagesObject->page_content) ;
-                fwrite($handle, $data);
-            } 
-            foreach($builderObjectJs as $builderObjectListJs){
-               $data = "\n".'<script type="text/javascript" src="js/'.$builderObjectListJs->name.'"></script>' ;           
-                //stripslashes($userpagesObject->page_content) ;
-                fwrite($handle, $data);
+                    $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $orderId ));        
+                    $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempId));        
+                    /* Get template JS data */
+                    $builderObjectJs = BuildTempJs::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));       
+                    /* Get template CSS data */
+                    $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
+
+                    $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND order_id=' . $orderId ));
+
+                    $tempMenu = $hasbuilderObject->user_menu;
+                    $i = 1;
+                    foreach ($userPagesObject as $pages) {
+                        $pat1 = '*' . $i . '*';
+                        $pat2 = '$' . $i . '$';
+                        $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
+                        $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
+                        $i++;
+                    }
+                    // echo $tempMenu;
+                    $tempMenu = stripcslashes($tempMenu);
+                    //  print_r($tempMenu); die;
+
+                    $path = Yii::getPathOfAlias('webroot');       
+                    /*Create Folder And Permission */        
+                    if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId)){
+                        !mkdir($path."/builder_images/".$userId.'/build'.$orderId, 0777, true);
+                    }
+                    if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/images/')){
+                        !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/images/', 0777, true);
+                    }
+
+                    if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/js/')){
+                        !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/js/', 0777, true);
+                    }
+
+                    if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/css/')){
+                        !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/css/', 0777, true);
+                    }
+
+                    BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/images/", $path.'/builder_images/'.$userId.'/build'.$orderId."/images/");
+                    BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/js/", $path.'/builder_images/'.$userId.'/build'.$orderId."/js/");
+                    BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/css/", $path.'/builder_images/'.$userId.'/build'.$orderId."/css/");
+
+                    /* Create File and write ka code */
+                    $path = Yii::getPathOfAlias('webroot');               
+                    foreach($userPagesObject as $userPagesObjectList){
+
+                        $my_file = $path."/builder_images/".$userId.'/build'.$orderId.'/'.strtolower($userPagesObjectList->page_name).".html";
+                        $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
+
+            $headMeta = '<!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <title>'.$userPagesObjectList->page_name.'</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' ;
+
+                        fwrite($handle, $headMeta);  
+
+                        foreach($builderObjectCss as $builderObjectListCss){
+                           $data = "\n".'<link rel="stylesheet" href="css/'.$builderObjectListCss->name.'" type="text/css" media="all">' ;           
+                            //stripslashes($userpagesObject->page_content) ;
+                            fwrite($handle, $data);
+                        } 
+                        foreach($builderObjectJs as $builderObjectListJs){
+                           $data = "\n".'<script type="text/javascript" src="js/'.$builderObjectListJs->name.'"></script>' ;           
+                            //stripslashes($userpagesObject->page_content) ;
+                            fwrite($handle, $data);
+                        }
+
+                        $headMetaEnd = "\n".'</head>';
+                        $headMetaEnd = "\n".'<body>';
+                        fwrite($handle, $headMetaEnd);
+
+                        /* For Header Content */
+                        $baseURL = Yii::app()->getBaseUrl(true);        
+                        $dataHeader = stripcslashes($hasbuilderObject->temp_header);        
+
+                        $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader);    
+                        $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $tempMenu , $removeSpaces);
+
+                        $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
+                        fwrite($handle, $data);           
+
+                        /* For Page Content */
+                        if($userPagesObjectList->page_form == 1 ){
+
+                            copy($path."/user/contact.php", $path.'/builder_images/'.$userId.'/build'.$orderId."/contact.php");
+                            //BaseClass::recurse_copy($path."/user/template/", $path.'/builder_images/'.$userId.'/build'.$orderId."/"); die;
+                            $data = file_get_contents($path.'/builder_images/'.$userId.'/build'.$orderId."/contact.php");
+                            $hasbuilderObject->contact_email ;                    
+                            $newdata = str_replace('gmail.com', $hasbuilderObject->contact_email, $data);
+                            file_put_contents("contact.php", $newdata);
+
+                            $dataContent = stripcslashes($hasbuilderObject->contact_form);        
+                            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
+                        }else{
+                            $dataContent = stripcslashes($userPagesObjectList->page_content);        
+                            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
+                        }
+
+                        fwrite($handle, $data);        
+
+                        /* For Footer Content */        
+                        $data1 = stripcslashes($hasbuilderObject->temp_footer);        
+                        $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $data1);  
+                        fwrite($handle, $data);
+                        $bodyEnd = "";
+                        $bodyEnd .= "\n".'</body>';
+                        $bodyEnd .= "\n".'</html>';
+                        fwrite($handle, $bodyEnd);
+                    }
+
+                    // define some basics
+                    $rootPath = $path."/builder_images/".$userId.'/build'.$orderId;
+                    $archiveName = 'hey.zip';
+
+                    // initialize the ZIP archive
+                    $zip = new ZipArchive;
+                    $zip->open($archiveName, ZipArchive::CREATE);
+
+                    // create recursive directory iterator
+                    $files = new RecursiveIteratorIterator (new RecursiveDirectoryIterator($rootPath), RecursiveIteratorIterator::LEAVES_ONLY);
+
+                    foreach ($files as $name => $file) {
+                            $new_filename = $name;
+                            $zip->addFile($file, $new_filename);
+                    }
+
+                    // close the zip file
+                    if (!$zip->close()) {
+                            '<p>There was a problem writing the ZIP archive.</p>';
+                    } else {
+                             '<p>Successfully created the ZIP Archive!</p>';
+                    }
+                    
+                    $builderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $orderId, 'user_id' => Yii::app()->session['userid']));
+
+                    $builderObject->publish = 1 ;
+                    $builderObject->update();
+                    
+//                    echo "<script> alert('Thank You. Your site has been publish') </script>";                 
+                    $this->redirect(array('order/list?m=msg'));    
+
+                }else{    
+                   $this->redirect(array('/BuildTemp/builder?m=msg&o='.$_GET['o']."&u=".$_GET['u']."&t=".$_GET['t']));
+ 
+                    //Yii::app()->createUrl("buildtemp",array("m"=>'msg', "o"=>$_GET['o'] ,"u"=>$_GET['u'] ,"t"=>$_GET['t']));
+                }
             }
 
-            $headMetaEnd = "\n".'</head>';
-            $headMetaEnd = "\n".'<body>';
-            fwrite($handle, $headMetaEnd);
-            
-            /* For Header Content */
-            $baseURL = Yii::app()->getBaseUrl(true);        
-            $dataHeader = stripcslashes($hasbuilderObject->temp_header);        
-            
-$dataHeader .= "<script>    
-    $(document).ready(function() {         
-        var test = $('.mav_menu').html('".$tempMenu."');         
-    });
-    </script>";            
-            
-            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
-            fwrite($handle, $data);           
-             
-            /* For Page Content */
-            $dataContent = stripcslashes($userPagesObjectList->page_content);        
-            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
-            fwrite($handle, $data);        
-
-            /* For Footer Content */        
-            $data1 = stripcslashes($hasbuilderObject->temp_footer);        
-            $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userID.'/'.$builderTempId->template_id.'/', 'src="images/' , $data1);  
-            fwrite($handle, $data);
-            $bodyEnd = "";
-            $bodyEnd .= "\n".'</body>';
-            $bodyEnd .= "\n".'</html>';
-            fwrite($handle, $bodyEnd);
-        }
-        
-        // define some basics
-        echo $rootPath = $path."/builder_images/".$userID.'/build'.$orderID;
-        $archiveName = 'build.zip';
-
-        // initialize the ZIP archive
-        $zip = new ZipArchive;
-        $zip->open($archiveName, ZipArchive::CREATE);
-
-        // create recursive directory iterator
-        $files = new RecursiveIteratorIterator (new RecursiveDirectoryIterator($rootPath), RecursiveIteratorIterator::LEAVES_ONLY);
-
-        foreach ($files as $name => $file) {
-                $new_filename = $name;
-                $zip->addFile($file, $new_filename);
-        }
-
-        // close the zip file
-        if (!$zip->close()) {
-                echo '<p>There was a problem writing the ZIP archive.</p>';
-        } else {
-                echo '<p>Successfully created the ZIP Archive!</p>';
-        }
-
-        
+            if(isset($_GET['t']) && isset($_GET['u']) &&  isset($_GET['o'])) {
+                echo "dsada";
+                $this->render('buildtemp');
+            }        
     }
+    
+    
+//    public function actionBuilder(){
+//        
+//        if(isset($_GET['t']) && isset($_GET['u']) &&  isset($_GET['o'])  ) {
+//            echo $tempId = base64_decode($_GET['t']);         
+//            echo $userId = base64_decode($_GET['u']); 
+//            echo $orderId = base64_decode($_GET['o']);
+//            
+//            $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $orderId ));        
+//            $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempId));        
+//            /* Get template JS data */
+//            $builderObjectJs = BuildTempJs::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));       
+//            /* Get template CSS data */
+//            $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
+//
+//            $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND order_id=' . $orderId ));
+//
+//            $tempMenu = $hasbuilderObject->user_menu;
+//            $i = 1;
+//            foreach ($userPagesObject as $pages) {
+//                $pat1 = '*' . $i . '*';
+//                $pat2 = '$' . $i . '$';
+//                $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
+//                $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
+//                $i++;
+//            }
+//            // echo $tempMenu;
+//            $tempMenu = stripcslashes($tempMenu);
+//            //  print_r($tempMenu); die;
+//
+//            $path = Yii::getPathOfAlias('webroot');       
+//            /*Create Folder And Permission */        
+//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId)){
+//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId, 0777, true);
+//            }
+//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/images/')){
+//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/images/', 0777, true);
+//            }
+//
+//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/js/')){
+//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/js/', 0777, true);
+//            }
+//
+//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/css/')){
+//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/css/', 0777, true);
+//            }
+//
+//            BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/images/", $path.'/builder_images/'.$userId.'/build'.$orderId."/images/");
+//            BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/js/", $path.'/builder_images/'.$userId.'/build'.$orderId."/js/");
+//            BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/css/", $path.'/builder_images/'.$userId.'/build'.$orderId."/css/");
+//
+//            /* Create File and write ka code */
+//            $path = Yii::getPathOfAlias('webroot');               
+//            foreach($userPagesObject as $userPagesObjectList){
+//
+//                $my_file = $path."/builder_images/".$userId.'/build'.$orderId.'/'.strtolower($userPagesObjectList->page_name).".html";
+//                $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
+//
+//    $headMeta = '<!DOCTYPE html>
+//    <html lang="en">
+//    <head>
+//    <title>'.$userPagesObjectList->page_name.'</title>
+//    <meta charset="utf-8">
+//    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' ;
+//
+//                fwrite($handle, $headMeta);  
+//
+//                foreach($builderObjectCss as $builderObjectListCss){
+//                   $data = "\n".'<link rel="stylesheet" href="css/'.$builderObjectListCss->name.'" type="text/css" media="all">' ;           
+//                    //stripslashes($userpagesObject->page_content) ;
+//                    fwrite($handle, $data);
+//                } 
+//                foreach($builderObjectJs as $builderObjectListJs){
+//                   $data = "\n".'<script type="text/javascript" src="js/'.$builderObjectListJs->name.'"></script>' ;           
+//                    //stripslashes($userpagesObject->page_content) ;
+//                    fwrite($handle, $data);
+//                }
+//
+//                $headMetaEnd = "\n".'</head>';
+//                $headMetaEnd = "\n".'<body>';
+//                fwrite($handle, $headMetaEnd);
+//
+//                /* For Header Content */
+//                $baseURL = Yii::app()->getBaseUrl(true);        
+//                $dataHeader = stripcslashes($hasbuilderObject->temp_header);        
+//
+//                $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader);    
+//                $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $tempMenu , $removeSpaces);
+//
+//                $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
+//                fwrite($handle, $data);           
+//
+//                /* For Page Content */
+//                if($userPagesObjectList->page_form == 1 ){
+//                    
+//                    copy($path."/user/contact.php", $path.'/builder_images/'.$userId.'/build'.$orderId."/contact.php");
+//                    //BaseClass::recurse_copy($path."/user/template/", $path.'/builder_images/'.$userId.'/build'.$orderId."/"); die;
+//                    $data = file_get_contents($path.'/builder_images/'.$userId.'/build'.$orderId."/contact.php");
+//                    $hasbuilderObject->contact_email ;                    
+//                    $newdata = str_replace('gmail.com', $hasbuilderObject->contact_email, $data);
+//                    file_put_contents("contact.php", $newdata);
+//                    
+//                    $dataContent = stripcslashes($hasbuilderObject->contact_form);        
+//                    $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
+//                }else{
+//                    $dataContent = stripcslashes($userPagesObjectList->page_content);        
+//                    $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
+//                }
+//                
+//                fwrite($handle, $data);        
+//
+//                /* For Footer Content */        
+//                $data1 = stripcslashes($hasbuilderObject->temp_footer);        
+//                $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $data1);  
+//                fwrite($handle, $data);
+//                $bodyEnd = "";
+//                $bodyEnd .= "\n".'</body>';
+//                $bodyEnd .= "\n".'</html>';
+//                fwrite($handle, $bodyEnd);
+//            }
+//
+//            // define some basics
+//            echo $rootPath = $path."/builder_images/".$userId.'/build'.$orderId;
+//            $archiveName = 'hey.zip';
+//
+//            // initialize the ZIP archive
+//            $zip = new ZipArchive;
+//            $zip->open($archiveName, ZipArchive::CREATE);
+//
+//            // create recursive directory iterator
+//            $files = new RecursiveIteratorIterator (new RecursiveDirectoryIterator($rootPath), RecursiveIteratorIterator::LEAVES_ONLY);
+//
+//            foreach ($files as $name => $file) {
+//                    $new_filename = $name;
+//                    $zip->addFile($file, $new_filename);
+//            }
+//
+//            // close the zip file
+//            if (!$zip->close()) {
+//                    echo '<p>There was a problem writing the ZIP archive.</p>';
+//            } else {
+//                    echo '<p>Successfully created the ZIP Archive!</p>';
+//            }
+//        }
+//    }
 
 
     public function actionTemplates() {  
