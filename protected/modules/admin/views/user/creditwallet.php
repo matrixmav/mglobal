@@ -75,10 +75,10 @@ if(!empty($error)){
         var regexp1 = /^[0-9]\d*\.\d{2}$/;
         var newVal = $('#fund').val();
        
-        if (!regexp1.test(newVal)) {
-          $("#fund_error").html("Invalid Fund!");
-          return false;
-        }
+//        if (!regexp1.test(newVal)) {
+//          $("#fund_error").html("Invalid Fund!");
+//          return false;
+//        }
     }
     var fund = $('#transaction_data_amt').val();
     var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""));
