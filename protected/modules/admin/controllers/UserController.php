@@ -318,6 +318,7 @@ class UserController extends Controller {
               if(!empty($adminWalletObject))
               {
                  $adminWalletObject->fund = ($adminWalletObject->fund) - ($transactionObject->paid_amount);
+                 $adminWalletObject->update(false);
              }}catch (Exception $ex) {
                     $ex->getMessage();
                     exit;
@@ -398,6 +399,7 @@ class UserController extends Controller {
               if(!empty($adminWalletObject))
               {
                  $adminWalletObject->fund = ($adminWalletObject->fund) + ($transactionObject->paid_amount);
+                 $adminWalletObject->update(false);
              }}catch (Exception $ex) {
                     $ex->getMessage();
                     exit;
