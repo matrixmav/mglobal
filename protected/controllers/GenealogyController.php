@@ -30,7 +30,7 @@ class GenealogyController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','binarycalculation'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -46,8 +46,17 @@ class GenealogyController extends Controller
 			),
 		);
 	}
+        
+        public function actionBinaryCalculation(){
+            $adminId = 1;        
+            $binaryCommissionObject = BaseClass::getBinaryTest($adminId);
+            if($binaryCommissionObject){
+                echo "binary Generated Successfully";exit;
+            }
+            
+        }
 
-	/**
+        /**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
