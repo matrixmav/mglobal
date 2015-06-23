@@ -13707,3 +13707,7 @@ Transparent Button
   background: transparent;
   color: #888;
 }
+.publish {
+    float: right;
+    margin-bottom: 21px;
+}

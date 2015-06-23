@@ -1131,5 +1131,12 @@ class BaseClass extends Controller {
         return $color;
     }
     
+    public static function buildWebsiteHeader(){
+        $link =  '<a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
+        <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
+        <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
+        <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> ';
+        return $link ;
+    }
 
 }

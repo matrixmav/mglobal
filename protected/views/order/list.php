@@ -18,6 +18,7 @@ $this->menu=array(
 
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
+             <?php if(!empty($_GET['m'])){ ?><div class="success" id="error_msg">Thank You. Your site has been publish.</div><?php } ?>
          <!-- BEGIN SIDEBAR -->
           <!-- END SIDEBAR -->
           <!-- BEGIN CONTENT -->

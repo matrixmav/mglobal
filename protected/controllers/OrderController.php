@@ -326,10 +326,11 @@ class OrderController extends Controller {
         $userId = Yii::app()->session['userid'];
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
-        if($orderObject->status==1)
-        {
+        
+        if($orderObject->status==1) {
         if (!empty($userhasObject) && $userhasObject->publish == 1) {
-            $title = '<a href="' . $data['domain'] . '" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Visit Website</a>';
+//            $title = '<a href="' . $data['domain'] . '" title="Visit Website" target="_blank" class="btn green fa fa-edit margin-right15">Visit Website</a>';
+            $title = '<a href= "/builder_images/'.$userId.'/build'.$data['id'].'" title="Visit Website" target="_blank" class="btn green fa fa-edit margin-right15">Visit Website</a>';
         } else {
             $title = '<a href="/BuildTemp/templates/?id=' . $data->id . '" title="Build Website" target="_blank" class="btn red fa fa-edit margin-right15">Build Website</a>';
         }
