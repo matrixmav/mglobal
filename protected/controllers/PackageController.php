@@ -501,13 +501,7 @@ class PackageController extends Controller {
                     $mObject->status = 1;
                     $mObject->update();
                     $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mObject->wallet_id));
-                    if($MTObject1->type == '2')
-                    {
-                     $MTObject1->fund = $MTObject1->fund*75/100 - $mObject->fund;   
-                    }else{
-                     $MTObject1->fund = $MTObject1->fund - $mObject->fund;   
-                    }
-                     
+                    $MTObject1->fund = $MTObject1->fund - $transactionObject->used_rp;    
                     $MTObject1->update();
                 }
                 
