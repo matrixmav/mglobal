@@ -293,6 +293,10 @@ class UserController extends Controller {
             $postDataArray = $_POST;
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
             $transactionObject = Transaction::model()->findByPk($transactionObject->id);
+            
+            
+            
+            /*user wallet object*/
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             
             if (!empty($walletObject)) {
@@ -307,6 +311,18 @@ class UserController extends Controller {
             $postDataArray['toWalletId'] = $adminWalletObject->id;
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
             $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
+            
+             try{
+             /*user wallet object*/
+              $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
+              if(!empty($adminWalletObject))
+              {
+                 $adminWalletObject->fund = ($adminWalletObject->fund) - ($transactionObject->paid_amount);
+                 $adminWalletObject->update(false);
+             }}catch (Exception $ex) {
+                    $ex->getMessage();
+                    exit;
+                }
                 $userObjectArr['to_name'] = $toUserObjectMail->name;
                 $userObjectArr['full_name'] = $toUserObjectMail->full_name;
                 $userObjectArr['from_name'] = 'Super Admin';
@@ -377,6 +393,17 @@ class UserController extends Controller {
              $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
                 
             }
+            try{
+             /*user wallet object*/
+              $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
+              if(!empty($adminWalletObject))
+              {
+                 $adminWalletObject->fund = ($adminWalletObject->fund) + ($transactionObject->paid_amount);
+                 $adminWalletObject->update(false);
+             }}catch (Exception $ex) {
+                    $ex->getMessage();
+                    exit;
+                }
                 $userObjectArr = array();
                 $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
                 $userObjectArr['to_name'] = $toUserObjectMail->name;

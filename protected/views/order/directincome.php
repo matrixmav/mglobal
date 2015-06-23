@@ -80,14 +80,14 @@ $this->menu = array(
 		array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["name"])? ucwords($data["name"]):""',
+                    'value'=>'isset($data->user->name)? ucwords($data->user->name):""',
 		),
                 
               
               array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Paid Amount &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["actual_amount"])? number_format($data["actual_amount"],2):""',
+                    'value'=>'isset($data->package->amount)? number_format($data->package->amount,2):""',
 		),
                
                  
@@ -95,19 +95,23 @@ $this->menu = array(
                array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Earn Amount&nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["actual_amount"])? number_format($data["actual_amount"]*5/100,2):"N/A"',
+                    'value'=>'isset($data->package->amount)? number_format($data->package->amount*5/100,2):"N/A"',
 		),
                array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Position &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["position"])? $data["position"]:""',
+                    'value'=>'isset($data->user->position)? $data->user->position:""',
 		),
             
                array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["created_at"])? $data["created_at"]:""',
+                    'value'=>'isset($data->updated_at)? $data->updated_at:""',
 		),
+            /*array(
+             'name'=>'total',
+             'footer'=>"Total: ".Order::model()->fetchTotalAmount(Order::model()->search()->getData()),
+             ),*/
             
             
              

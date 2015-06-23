@@ -96,7 +96,7 @@ $this->breadcrumbs = array(
        return false;
     }
     var fund = $('#transaction_data_amt').val();
-    var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""))
+    var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""));
     var fundVal = parseFloat($('#paid_amount').val());
     var totalPaid = fundVal + fundVal*1/100;
     $('#email_error').html("");   

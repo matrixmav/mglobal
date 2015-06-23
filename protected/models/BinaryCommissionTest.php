@@ -7,12 +7,11 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $parent
- * @property string $chield
  * @property string $position
- * @property integer $order_id
- * @property double $purchase_amount
- * @property double $comm_amount
  * @property string $date
+ * @property double $order_amount
+ * @property double $commission_amount
+ * @property double $carry_amount
  * @property integer $status
  * @property string $created_at
  * @property string $updated_at
@@ -35,15 +34,14 @@ class BinaryCommissionTest extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, parent, chield, position, order_id, purchase_amount, comm_amount, date, status, created_at, updated_at', 'required'),
-			array('user_id, order_id, status', 'numerical', 'integerOnly'=>true),
-			array('purchase_amount, comm_amount', 'numerical'),
+			array('user_id, parent, position, date, order_amount, commission_amount, status, created_at, updated_at', 'required'),
+			array('user_id, status', 'numerical', 'integerOnly'=>true),
+			array('order_amount, commission_amount, carry_amount', 'numerical'),
 			array('parent', 'length', 'max'=>100),
-			array('chield', 'length', 'max'=>50),
 			array('position', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, parent, chield, position, order_id, purchase_amount, comm_amount, date, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, user_id, parent, position, date, order_amount, commission_amount, carry_amount, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,12 +65,11 @@ class BinaryCommissionTest extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'parent' => 'Parent',
-			'chield' => 'Chield',
 			'position' => 'Position',
-			'order_id' => 'Order',
-			'purchase_amount' => 'Purchase Amount',
-			'comm_amount' => 'Comm Amount',
 			'date' => 'Date',
+			'order_amount' => 'Order Amount',
+			'commission_amount' => 'Commission Amount',
+			'carry_amount' => 'Carry Amount',
 			'status' => 'Status',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
@@ -100,12 +97,11 @@ class BinaryCommissionTest extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('parent',$this->parent,true);
-		$criteria->compare('chield',$this->chield,true);
 		$criteria->compare('position',$this->position,true);
-		$criteria->compare('order_id',$this->order_id);
-		$criteria->compare('purchase_amount',$this->purchase_amount);
-		$criteria->compare('comm_amount',$this->comm_amount);
 		$criteria->compare('date',$this->date,true);
+		$criteria->compare('order_amount',$this->order_amount);
+		$criteria->compare('commission_amount',$this->commission_amount);
+		$criteria->compare('carry_amount',$this->carry_amount);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('created_at',$this->created_at,true);
 		$criteria->compare('updated_at',$this->updated_at,true);

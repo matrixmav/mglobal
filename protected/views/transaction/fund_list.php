@@ -83,12 +83,12 @@ $this->breadcrumbs = array(
                  array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">To User &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->touser->name)?$data->touser->full_name:""',
+                    'value' => 'isset($data->touser->name)?$data->touser->name:""',
                 ),
                  array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">From User &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->fromuser->name)?$data->fromuser->full_name:""',
+                    'value' => 'isset($data->fromuser->name)?$data->fromuser->name:""',
                 ),
                  array(
                     'name' => 'id',

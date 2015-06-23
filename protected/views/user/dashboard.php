@@ -6,7 +6,9 @@ $this->breadcrumbs = array(
 <div class="row">
     <?php if(empty($orderObject)){?>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+         <a href="/#prices">
         <div class="dashboard-stat blue-madison">
+         
             <div class="visual">
                 <i class="fa fa-comments"></i>
             </div>
@@ -14,13 +16,16 @@ $this->breadcrumbs = array(
                 <div class="number">
                 </div>
                 <div class="desc label label-sm label-danger">
-                    Build your website
+                Pick a Package
+                   
                 </div>
             </div>
+            
             <a class="more" href="javascript:;">
                 Pick a package <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
+        </a>
     </div>
     <?php }else{
      foreach($orderObject as $order){  ?>
@@ -58,13 +63,10 @@ $this->breadcrumbs = array(
                    Crop Images
                 </div>
                 <div class="desc">
-                    Visit website
+                    Crop your Images
                 </div> 
             </div>
                   <span class="txtDescription">view more  <i class="m-icon-swapright m-icon-white"></i></span>
-                
-           
-            
           </div></a>
     </div>
     <!--div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
