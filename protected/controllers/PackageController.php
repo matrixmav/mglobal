@@ -486,6 +486,7 @@ class PackageController extends Controller {
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
+                $transactionObject->paid_amount = ($transactionObject->actual_amount) - ($transactionObject->used_rp);
                 $transactionObject->created_at = date('Y-m-d');
                 $transactionObject->update();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
@@ -531,16 +532,38 @@ class PackageController extends Controller {
                         $fromAmountpercent = $packageObject->amount*5/100;
                         $sponsorWalletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmountpercent,'3');
                     }
+                    
+                    /* code to deduct amount from admin commission wallet*/
+                    
+                    $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 3));
+                    if($adminWalletObject)
+                    {
+                        $fromAmountpercent = $packageObject->amount*5/100;
+                        $adminWalletObject->fund = ($adminWalletObject->fund) - $fromAmountpercent;
+                    }
+                    
+                    
+                    /* code to add sponsor transaction*/
+                    $postDataArray['transactionId'] = BaseClass::gettransactionID();
+                    $postDataArray['userId'] = $sponsorUserObject->id;
+                    $postDataArray['mode'] = 'transfer';
+                    $postDataArray['actualAmount'] = $packageObject->amount;
+                    $postDataArray['paid_amount'] = $fromAmountpercent;
+                    $userObject = User::model()->findByPk($sponsorUserObject->id);
+                    $transactionObjectSponsor = Transaction::model()->createTransaction($postDataArray, $userObject,1);
+                    
+                    /* code to add moneytransfer */
+                    
                     $createdTime = new CDbExpression('NOW()');
                     $moneyTransfertoObj = new MoneyTransfer;
-                    $moneyTransfertoObj->from_user_id = $userObject->id;
+                    $moneyTransfertoObj->from_user_id = 1;
                     $moneyTransfertoObj->to_user_id = $sponsorUserObject->id;
-                    $moneyTransfertoObj->transaction_id = $transactionObject->id;
+                    $moneyTransfertoObj->transaction_id = $transactionObjectSponsor->id;
                     $moneyTransfertoObj->fund_type = 2;//1:RP,2:Cash
                     $moneyTransfertoObj->fund = $fromAmountpercent;//1:RP,2:Cash
                     $moneyTransfertoObj->comment = "Direct Commision Transfered";
                     $moneyTransfertoObj->status = 1;
-                    $moneyTransfertoObj->wallet_id = $MTObject1->id;
+                    $moneyTransfertoObj->wallet_id = $adminWalletObject->id;
                     $moneyTransfertoObj->to_wallet_id = $sponsorWalletObject->id;
                     $moneyTransfertoObj->created_at = $createdTime;
                     $moneyTransfertoObj->updated_at = $createdTime;
