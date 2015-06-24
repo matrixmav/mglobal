@@ -51,10 +51,17 @@ class GenealogyController extends Controller
             //if(!empty($_POST)){
                 $adminId = 1;   
                 $binaryCommissionObject = BaseClass::getBinaryTest($adminId);
-                BaseClass::parentParentCommission(306);
-                if($binaryCommissionObject){
+//                //Left Last Node
+                $leftObject = BaseClass::parentParentCommission(102);
+//                //Right Last Node
+                $rightObject = BaseClass::parentParentCommission(95);
+                
+//                echo "<pre>"; print_r($leftObject);
+//                echo "<pre>"; print_r($rightObject);
+                exit;
+//                if($binaryCommissionObject){
                     echo "Binary Generated Successfully";exit;
-                }
+//                }
             //}
             
         }
