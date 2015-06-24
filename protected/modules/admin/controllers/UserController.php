@@ -89,7 +89,7 @@ class UserController extends Controller {
 //            ));
 //        }
         
-            if(!empty($_GET)){            
+            if(!empty($_GET['id'])){            
                     $currentUserId = $_GET['id'] ;        
                     $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
                     $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
