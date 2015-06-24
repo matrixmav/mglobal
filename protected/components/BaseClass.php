@@ -1040,6 +1040,19 @@ class BaseClass extends Controller {
                 }
                 $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id'=> $userId));
                 $getPercentage = self::getPercentage($commissionAmount, 10); 
+                self::createBinaryTransaction($userId,$getPercentage);
+                $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount+$getPercentage);
+                $parentCommissionObject->save(false);
+                self::getBinaryTest($binaryCommissionRightObject->user_id);
+                self::getBinaryTest($binaryCommissionLeftObject->user_id);
+            }
+        } else {
+            return 1;
+        }
+    }
+    
+    public static function createBinaryTransaction($userId,$getPercentage){
+        
                 $postDataArray['paid_amount'] = $getPercentage;
                 /* code to fetch parent data*/
                 $userObject = User::model()->findByPk($userId);
@@ -1073,31 +1086,8 @@ class BaseClass extends Controller {
                 $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount);
                 }
                 
-                $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount+$getPercentage);
-                $parentCommissionObject->save(false);
-                self::getBinaryTest($binaryCommissionRightObject->user_id);
-                self::getBinaryTest($binaryCommissionLeftObject->user_id);
-            }
-        } else {
-            return 1;
-        }
     }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
 
     public static function getRandPosition() {
         $randValue = mt_rand(1, 2);
