@@ -48,13 +48,14 @@ class GenealogyController extends Controller
 	}
         
         public function actionBinaryCalculation(){
-            if(!empty($_POST)){
+            //if(!empty($_POST)){
                 $adminId = 1;   
                 $binaryCommissionObject = BaseClass::getBinaryTest($adminId);
+                BaseClass::parentParentCommission(306);
                 if($binaryCommissionObject){
                     echo "Binary Generated Successfully";exit;
                 }
-            }
+            //}
             
         }
 
