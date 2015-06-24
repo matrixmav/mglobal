@@ -1019,6 +1019,38 @@ class BaseClass extends Controller {
         $genealogyListObject = BinaryCommissionTest::model()->findAll(array('condition' => 'parent = ' . $userId . ' AND position = "' . $position.'"', 'order' => 'position asc'));
         return $genealogyListObject;
     }
+    
+    
+    public static function getLeftRightNode($binaryCommissionObject,$position){
+//        echo "<pre>"; print_r($binaryCommissionObject->user_id);exit;
+        if($position == 'left'){
+            echo "left: ".$binaryCommissionObject->order_amount."</br>";
+            Yii::app()->session['totalLeftCount'] = Yii::app()->session['totalLeftCount']+$binaryCommissionObject->order_amount;
+        } else {
+            echo "right : ".$binaryCommissionObject->order_amount."</br>"   ;
+            Yii::app()->session['totalRightCount'] = Yii::app()->session['totalRightCount']+$binaryCommissionObject->order_amount;
+        }
+//        echo $binaryCommissionObject->user_id;
+        self::binaryCalculation($binaryCommissionObject->user_id,$binaryCommissionObject->position);
+    }
+
+    //1. find the right and left node for user
+    //2. Find the extreem right for right node 
+    //3. Find the extreem Left for left node
+    //4. Calculate the purchased amount
+    //5. Compare both and leftamount - rightamount
+         //remaining amount carryforward. 
+    
+    public static function binaryCalculation($userId,$position) {
+        echo "------------".$userId."----------";
+        $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $userId, 'position' => $position));
+        if(!empty($binaryCommissionLeftObject)){
+            self::getLeftRightNode($binaryCommissionLeftObject, $binaryCommissionLeftObject->position);
+        }
+    }
+
+    
+
 
     /**
      * Generate Binary calculation
