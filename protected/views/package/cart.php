@@ -8,7 +8,7 @@
                                 <div class="row">
 		
                         
-            <div class="row bs-wizard" style="border-bottom:0;">
+            <div class=" bs-wizard" style="border-bottom:0;">
                 
                 <div class="col-xs-4 bs-wizard-step complete">
                   <div class="text-center bs-wizard-stepnum">Step 1</div>
@@ -40,10 +40,12 @@
         
 	</div>
         </div>
+    </div>
+        <div class="row">
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-                   <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span></p>
+                    <p class="title"><span class="check">1.</span> <span class="txt" style="width: auto">Your Order Summary</span></p>
                     <div class="contentBlock CartSection" id="cartDiv">
                         <table class="cartItemsWrp table table-condensed">
                             <thead>
@@ -108,7 +110,7 @@
 
                             </tbody></table>
                         </form>
-                        <div class="cartfooter">
+                        <div class="cartfooter clearfix">
                             <div class="col-sm-4 col-xs-12">
                                 <form id="couponCodeContainer" class="couponWrp form-inline" method="post">
                                     <div class="form-group"> <input type="text" class="form-control" name="coupon_code" id="coupon_code" placeholder=" Enter Coupon Code">
