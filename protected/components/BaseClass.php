@@ -1086,6 +1086,7 @@ class BaseClass extends Controller {
                 $postDataArray['toWalletId'] = $toUserWalletObject->id;
                 $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount);
                 }
+                return true;
                 
     }
             
