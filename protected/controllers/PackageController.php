@@ -517,7 +517,7 @@ class PackageController extends Controller {
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
-                  
+                
                 /*sponsor wallet*/
                 try {
                     //deduct from from user wallet
@@ -532,6 +532,14 @@ class PackageController extends Controller {
                         $fromAmountpercent = $packageObject->amount*5/100;
                         $sponsorWalletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmountpercent,'3');
                     }
+                    
+                    /* For Binary Commision */
+                    $genealogyObject = Genealogy::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
+                    
+                    if($genealogyObject){                        
+                        BinaryCommissionTest::model()->create($genealogyObject, $packageObject->amount);     
+                    }
+                    
                     
                     /* code to deduct amount from admin commission wallet*/
                     
