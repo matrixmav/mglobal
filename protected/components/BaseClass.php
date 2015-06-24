@@ -1039,6 +1039,7 @@ class BaseClass extends Controller {
                     $commissionAmount = $binaryCommissionLeftObject->order_amount;
                 }
                 $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id'=> $userId));
+                
                 $getPercentage = self::getPercentage($commissionAmount, 10); 
                 $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount+$getPercentage);
                 $parentCommissionObject->save(false);
