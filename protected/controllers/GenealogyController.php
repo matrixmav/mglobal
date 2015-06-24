@@ -48,10 +48,12 @@ class GenealogyController extends Controller
 	}
         
         public function actionBinaryCalculation(){
-            $adminId = 1;        
-            $binaryCommissionObject = BaseClass::getBinaryTest($adminId);
-            if($binaryCommissionObject){
-                echo "binary Generated Successfully";exit;
+            if(!empty($_POST)){
+                $adminId = 1;   
+                $binaryCommissionObject = BaseClass::getBinaryTest($adminId);
+                if($binaryCommissionObject){
+                    echo "Binary Generated Successfully";exit;
+                }
             }
             
         }
@@ -133,7 +135,7 @@ class GenealogyController extends Controller
 	 */
 	public function actionIndex(){  
            // print_r($_GET);
-            if(!empty($_GET)){            
+            if(!empty($_GET['id'])){            
                 $currentUserId = $_GET['id'] ;        
                 $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
                 $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");

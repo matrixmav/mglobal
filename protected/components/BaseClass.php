@@ -1041,6 +1041,7 @@ class BaseClass extends Controller {
                 $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id'=> $userId));
                 
                 $getPercentage = self::getPercentage($commissionAmount, 10); 
+                self::createBinaryTransaction($userId,$getPercentage);
                 $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount+$getPercentage);
                 $parentCommissionObject->save(false);
                 self::getBinaryTest($binaryCommissionRightObject->user_id);
@@ -1050,22 +1051,44 @@ class BaseClass extends Controller {
             return 1;
         }
     }
-
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static function createBinaryTransaction($userId,$getPercentage){
+        
+                $postDataArray['paid_amount'] = $getPercentage;
+                /* code to fetch parent data*/
+                $userObject = User::model()->findByPk($userId);
+                
+                /*code to fetch parent wallet*/
+                $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$userId, 'type'=>3));
+                if(!$toUserWalletObject){
+                    //create wallet for to user
+                    $fund = 0;
+                    $toUserWalletObject = Wallet::model()->create($userId,$fund,3);
+                }else{
+                    $toUserWalletObject->fund = ($toUserWalletObject->fund) +  ($getPercentage);
+                    $toUserWalletObject->save(false);
+                }
+                
+                /*code to fetch admin wallet data*/
+                
+                $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>1, 'type'=>3));
+                if($fromUserWalletObject)
+                {
+                   $fromUserWalletObject->fund = ($fromUserWalletObject->fund) -  ($getPercentage);
+                   $fromUserWalletObject->save(false);
+                }
+                
+                $transactionObjectect = Transaction::model()->createTransaction($postDataArray, $userObject); 
+                if($transactionObjectect)
+                {
+                $postDataArray['comment'] = "Binary Commission Transfered";
+                $postDataArray['walletId'] = $fromUserWalletObject->id;
+                $postDataArray['toWalletId'] = $toUserWalletObject->id;
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount);
+                }
+                
+    }
+            
 
     public static function getRandPosition() {
         $randValue = mt_rand(1, 2);

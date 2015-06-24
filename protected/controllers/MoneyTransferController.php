@@ -251,6 +251,7 @@ class MoneyTransferController extends Controller {
                 $moneyTransferDataArray['toWalletId'] =$adminWalletObject->id;
                 $moneyTransferDataArray['fundType'] = $walletObject->type;
                 $adminPercentage = BaseClass::getPercentage($transactionObject->actual_amount,1);
+                
                 $adminWalletObject->fund = ($adminWalletObject->fund+$adminPercentage);
                 $adminWalletObject->save(false);
                 //create money transfer record entry
