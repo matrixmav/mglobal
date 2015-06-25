@@ -117,24 +117,23 @@ class BaseClass extends Controller {
 
         return $transactionObject;
     }
-    
+
     public static function isUserHavingActiveOrder() {
         $userId = Yii::app()->session['userid'];
-        $transactionObject = Order::model()->findByAttributes(array('user_id' => $userId,'status'=>1));
+        $transactionObject = Order::model()->findByAttributes(array('user_id' => $userId, 'status' => 1));
 
         return $transactionObject;
     }
 
     public static function gettransactionID() {
 
-        $transactionObject = Transaction::model()->findAll(array('order' => 'id DESC','limit' => '1'));
+        $transactionObject = Transaction::model()->findAll(array('order' => 'id DESC', 'limit' => '1'));
 
         if (count($transactionObject) > 0) {
             $transactionObject = $transactionObject[0];
-            $lastid = substr($transactionObject->transaction_id,2,5);
+            $lastid = substr($transactionObject->transaction_id, 2, 5);
             $incementID = $lastid + 1;
-            if(strlen($incementID) > 5)
-            {
+            if (strlen($incementID) > 5) {
                 $incementID = '12345';
             }
             $generateid = Yii::app()->params['transactionIdPrefix'] . $incementID . Yii::app()->params['transactionIdPostfix'];
@@ -1016,13 +1015,43 @@ class BaseClass extends Controller {
         return $genealogyListObject;
     }
 
-    
     public static function getBinaryCalculationChild($userId, $position) {
-        $genealogyListObject = BinaryCommissionTest::model()->findAll(array('condition' => 'sponsor_id = ' . $userId . ' AND position = ' . $position, 'order' => 'position asc'));
+        $genealogyListObject = BinaryCommissionTest::model()->findAll(array('condition' => 'parent = ' . $userId . ' AND position = "' . $position.'"', 'order' => 'position asc'));
         return $genealogyListObject;
     }
     
     
+    public static function getLeftRightNode($binaryCommissionObject,$position){
+//        echo "<pre>"; print_r($binaryCommissionObject->user_id);exit;
+        if($position == 'left'){
+            echo "left: ".$binaryCommissionObject->order_amount."</br>";
+            Yii::app()->session['totalLeftCount'] = Yii::app()->session['totalLeftCount']+$binaryCommissionObject->order_amount;
+        } else {
+            echo "right : ".$binaryCommissionObject->order_amount."</br>"   ;
+            Yii::app()->session['totalRightCount'] = Yii::app()->session['totalRightCount']+$binaryCommissionObject->order_amount;
+        }
+//        echo $binaryCommissionObject->user_id;
+        self::binaryCalculation($binaryCommissionObject->user_id,$binaryCommissionObject->position);
+    }
+
+    //1. find the right and left node for user
+    //2. Find the extreem right for right node 
+    //3. Find the extreem Left for left node
+    //4. Calculate the purchased amount
+    //5. Compare both and leftamount - rightamount
+         //remaining amount carryforward. 
+    
+    public static function binaryCalculation($userId,$position) {
+        echo "------------".$userId."----------";
+        $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $userId, 'position' => $position));
+        if(!empty($binaryCommissionLeftObject)){
+            self::getLeftRightNode($binaryCommissionLeftObject, $binaryCommissionLeftObject->position);
+        }
+    }
+
+    
+
+
     /**
      * Generate Binary calculation
      * 
@@ -1030,41 +1059,139 @@ class BaseClass extends Controller {
      * @return int
      */
     public static function getBinaryTest($userId) {
-        $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent'=> $userId,'position'=> 'left'));
-        if($binaryCommissionLeftObject){
-            $binaryCommissionRightObject = BinaryCommissionTest::model()->findByAttributes(array('parent'=> $userId,'position'=> 'right'));
-            if($binaryCommissionRightObject){
-                $commissionAmount = $binaryCommissionRightObject->order_amount;
-                if($binaryCommissionLeftObject->order_amount <= $binaryCommissionRightObject->order_amount){
-                    $commissionAmount = $binaryCommissionLeftObject->order_amount;
-                }
-                $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id'=> $userId));
-                $getPercentage = self::getPercentage($commissionAmount, 10); 
-                $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount+$getPercentage);
-                $parentCommissionObject->save(false);
-                self::getBinaryTest($binaryCommissionRightObject->user_id);
-                self::getBinaryTest($binaryCommissionLeftObject->user_id);
+        
+        $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $userId, 'position' => 'left'));
+        $binaryCommissionRightObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $userId, 'position' => 'right'));
+
+        if (!empty($binaryCommissionLeftObject) && !empty($binaryCommissionRightObject)) {
+
+            $commissionAmount = $binaryCommissionRightObject->order_amount;
+            if ($binaryCommissionLeftObject->order_amount <= $binaryCommissionRightObject->order_amount) {
+                $commissionAmount = $binaryCommissionLeftObject->order_amount;
             }
+            $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $userId));
+                      
+            $getPercentage = self::getPercentage($commissionAmount, 10);
+            // self::createBinaryTransaction($userId,$getPercentage);
+            $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount + $getPercentage);
+            $parentCommissionObject->save(false);
+            self::getBinaryTest($binaryCommissionRightObject->user_id);
+            self::getBinaryTest($binaryCommissionLeftObject->user_id);
         } else {
             return 1;
         }
     }
 
     
+    
+    
+    
+    public static function parentParentCommission($userId) {
+//        echo "parent Id :" . $userId;
+        //read parent object
+        $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $userId));
+        //verify parent object
+        if($parentCommissionObject){
+            echo "My parent Id:" . $parentCommissionObject->user_id."</br>";
+            echo "Commission Amount : ".$parentCommissionObject->commission_amount."</br>";
+               self::parentParentCommission($parentCommissionObject->parent);
+               $addParentAmountObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $parentCommissionObject->parent));
+               if($addParentAmountObject){
+                    $addParentAmountObject->commission_amount = ($addParentAmountObject->commission_amount+$parentCommissionObject->commission_amount);
+                    $addParentAmountObject->save(false);
+               }
+//                echo "Parent Parent: ". $commissionObject->parent."</br>";
+            //find commission for parent
+//            $commissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $parentCommissionObject->parent));
+//            //get commission amount
+//            if(!empty($commissionObject)){
+//                echo "</br>Amound: ".$commissionAmount = $commissionObject->commission_amount ."</br>";
+//                //run loop and pass parent id
+//                self::parentParentCommission($commissionObject->parent);
+//                echo "Parent Parent: ". $commissionObject->parent."</br>";
+//            }
+        
+//           $parentCommissionObject = BinaryCommissionTest::model()->findAll(array('parent' => $parentCommissionObject->parent));
+//           if(count($parentCommissionObject) >1){
+//               
+//           }
+           
+        }
+//        echo "<pre>";
+//        print_r($parentCommissionObject->parent);exit;
+//        
+//        $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $userId, 'position' => 'left'));
+//        $binaryCommissionRightObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $userId, 'position' => 'right'));
+//        echo "<pre>";
+//          print_r($binaryCommissionLeftObject);
+//          echo "<pre>";
+//          print_r($binaryCommissionRightObject);exit;
+//        if (!empty($binaryCommissionLeftObject) && !empty($binaryCommissionRightObject)) {
+//        
+//                    echo "<pre>";
+//                    echo $binaryCommissionLeftObject->parent;
+//                            echo $binaryCommissionRightObject->parent;
+////        print_r($binaryCommissionLeftObject->parent);exit;
+//        } exit;
+        
+//        if ($parentCommissionObject) {
+//            $parentParentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $parentCommissionObject->parent));
+//            self::getParentTotalAmount($parentParentCommissionObject->parent);
+//            //self::parentParentCommission($parentParentCommissionObject->parent);
+//        }
+//        echo "<pre>";
+//        print_r($parentParentCommissionObject);
+//        exit;
+    }
 
+    public static function getParentTotalAmount($userId) {
+        $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $userId, 'position' => 'left'));
+        $binaryCommissionRightObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $userId, 'position' => 'right'));
 
+        $commissionAmount = $binaryCommissionRightObject->commission_amount;
+        if ($binaryCommissionLeftObject->commission_amount <= $binaryCommissionRightObject->commission_amount) {
+            $commissionAmount = $binaryCommissionLeftObject->commission_amount;
+        }
+        $parentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $userId));
+        $getTotalPercentage = (2*$commissionAmount);
+        $parentCommissionObject->commission_amount = ($parentCommissionObject->commission_amount + $getTotalPercentage);
+        $parentCommissionObject->save(false);
+    }
 
+    public static function createBinaryTransaction($userId, $getPercentage) {
 
+        $postDataArray['paid_amount'] = $getPercentage;
+        /* code to fetch parent data */
+        $userObject = User::model()->findByPk($userId);
 
+        /* code to fetch parent wallet */
+        $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => 3));
+        if (!$toUserWalletObject) {
+            //create wallet for to user
+            $fund = 0;
+            $toUserWalletObject = Wallet::model()->create($userId, $fund, 3);
+        } else {
+            $toUserWalletObject->fund = ($toUserWalletObject->fund) + ($getPercentage);
+            $toUserWalletObject->save(false);
+        }
 
+        /* code to fetch admin wallet data */
 
+        $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 3));
+        if ($fromUserWalletObject) {
+            $fromUserWalletObject->fund = ($fromUserWalletObject->fund) - ($getPercentage);
+            $fromUserWalletObject->save(false);
+        }
 
-
-
-
-
-
-
+        $transactionObjectect = Transaction::model()->createTransaction($postDataArray, $userObject);
+        if ($transactionObjectect) {
+            $postDataArray['comment'] = "Binary Commission Transfered";
+            $postDataArray['walletId'] = $fromUserWalletObject->id;
+            $postDataArray['toWalletId'] = $toUserWalletObject->id;
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount);
+        }
+        return true;
+    }
 
     public static function getRandPosition() {
         $randValue = mt_rand(1, 2);
@@ -1087,56 +1214,55 @@ class BaseClass extends Controller {
         closedir($dir);
         return $dir;
     }
-    
-    /* For the package info */
-    public static function getPackageName($getPackageName){      
-        $orderListObject = Order::model()->findAll(array('condition' => 'user_id = '. $getPackageName));        
 
-        $color = "sm-nothing" ;
+    /* For the package info */
+
+    public static function getPackageName($getPackageName) {
+        $orderListObject = Order::model()->findAll(array('condition' => 'user_id = ' . $getPackageName));
+
+        $color = "sm-nothing";
         $orderArray = array();
-        if(count($orderListObject)> 0){
+        if (count($orderListObject) > 0) {
             $myAmount = 0;
-            foreach($orderListObject as $orderObject){ 
-                $orderAmount = $orderObject->package(array('order'=>'amount DESC'));
-                if($myAmount < $orderAmount->amount){
+            foreach ($orderListObject as $orderObject) {
+                $orderAmount = $orderObject->package(array('order' => 'amount DESC'));
+                if ($myAmount < $orderAmount->amount) {
                     $myAmount = $orderAmount->amount;
                     $type = $orderAmount->type;
-                    
-                    if($type == 1){
-                         $color = "sm-red" ; //Basic Packages 2
-                    }else if($type == 2){
-                         $color = "sm-red" ; //Basic Packages 3
-                    }else if($type == 3){
-                        $color = "sm-greenLight" ; //Advance Packages 1
-                    }else if($type == 4){
-                        $color = "sm-greenLight" ; //Advance Packages 1
-                    }else if($type == 5){
-                        $color = "sm-green" ; //Advance Packages 2
-                    }else if($type == 6){
-                        $color = "sm-blue" ; //Advance Packages 3
-                    }else if($type == 7){
-                        $color = "sm-navy" ; //Advance Pro Packages 1
-                    }else if($type == 8){
-                        $color = "sm-blue" ; //Advance Pro Packages 2
-                    }else if($type == 9){
-                        $color = "sm-purple" ; //Advance Pro Packages 3
-                    }else{
-                        $color = "sm-nothing" ; //kuch nhi h 
+
+                    if ($type == 1) {
+                        $color = "sm-red"; //Basic Packages 2
+                    } else if ($type == 2) {
+                        $color = "sm-red"; //Basic Packages 3
+                    } else if ($type == 3) {
+                        $color = "sm-greenLight"; //Advance Packages 1
+                    } else if ($type == 4) {
+                        $color = "sm-greenLight"; //Advance Packages 1
+                    } else if ($type == 5) {
+                        $color = "sm-green"; //Advance Packages 2
+                    } else if ($type == 6) {
+                        $color = "sm-blue"; //Advance Packages 3
+                    } else if ($type == 7) {
+                        $color = "sm-navy"; //Advance Pro Packages 1
+                    } else if ($type == 8) {
+                        $color = "sm-blue"; //Advance Pro Packages 2
+                    } else if ($type == 9) {
+                        $color = "sm-purple"; //Advance Pro Packages 3
+                    } else {
+                        $color = "sm-nothing"; //kuch nhi h 
                     }
-                    
                 }
             }
-            
         }
         return $color;
     }
-    
-    public static function buildWebsiteHeader(){
-        $link =  '<a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
+
+    public static function buildWebsiteHeader() {
+        $link = '<a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
         <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
         <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
         <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> ';
-        return $link ;
+        return $link;
     }
 
 }
