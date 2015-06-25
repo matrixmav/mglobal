@@ -1042,11 +1042,13 @@ class BaseClass extends Controller {
          //remaining amount carryforward. 
     
     public static function binaryCalculation($userId,$position) {
-        echo "------------".$userId."----------";
+//        echo "------------".$userId."----------";
         $binaryCommissionLeftObject = BinaryCommissionTest::model()->findByAttributes(array('parent' => $userId, 'position' => $position));
         if(!empty($binaryCommissionLeftObject)){
             self::getLeftRightNode($binaryCommissionLeftObject, $binaryCommissionLeftObject->position);
+            return 1;
         }
+        return 0;
     }
 
     
