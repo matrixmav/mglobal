@@ -261,9 +261,9 @@ class OrderController extends Controller {
     public function actionRefferalIncome() {
         $loggedInuserName = User::model()->findByPk(Yii::app()->session['userid']);
         $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName->name . '"'));
-
         //$connection = Yii::app()->db;
         $userid = "";
+        $userID = 0;
         if ($model) {
             foreach ($model as $user) {
                 $userid .= "'" . $user->id . "',";
