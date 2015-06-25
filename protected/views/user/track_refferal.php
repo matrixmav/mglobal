@@ -93,6 +93,12 @@ $this->menu=array(
                     'header'=>'<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
                     'value'=>'$data->phone',
 		),
+            
+                array(
+                    'name'=>'id',
+                    'header'=>'<span style="white-space: nowrap;">Reffered Using &nbsp; &nbsp; &nbsp;</span>',
+                    'value'=>'( $data->social=="fb") ? "facebook" : ($data->social=="tw" ? "twitter" : "email")',
+		),
                 
 		array(
 			'name'=>'id',
