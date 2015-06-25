@@ -123,7 +123,13 @@ class MailController extends Controller {
                         {
                         $fname = time() . $_FILES['attachment']['name'];
                         $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
+                        $uploadSize = $_FILES['attachment']["size"];
+                        if($uploadSize > 2097152)
+                        {
+                          $this->render('compose', array('error' => 'File can not be greater than 2MB', 'emailObject' => $emailObject));   
+                        }else{
                         BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
+                        }
                         }
                         else if(!empty($_FILES['attachment1']['name']))
                         {
@@ -132,6 +138,7 @@ class MailController extends Controller {
                         else{
                          $fname = "";   
                         }
+                        
                 $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                 BaseClass::uploadFile($_FILES['attachment']['tmp_name'], $path, $fname);
                 $mailObject = new Mail();
