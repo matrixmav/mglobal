@@ -417,7 +417,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/updateprofile" => "Profile",
                                     "profile/changepassword" => "Security Settings",
                                     /*"profile/changepin" => "Change Master Pin",*/
-                                    "profile/address" => "Address",
+                                    /*"profile/address" => "Address",*/
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
                                 );
@@ -427,7 +427,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "profile/updateprofile" => "Profile",
                                     "profile/changepassword" => "Security Settings",
                                     /*"profile/changepin" => "Change Master Pin",*/
-                                    "profile/address" => "Address",
+                                    /*"profile/address" => "Address",*/
                                     "profile/documentverification" => "Verification",
                                     
                                     //"profile/testimonial" => "Testimonial",
@@ -578,7 +578,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "MoneyTransfer/transfer" => "Transfer",
+                                    "MoneyTransfer/transfer" => "Transfer Reward Points",
                                 );
                                 ?>
                                 <li
@@ -586,7 +586,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     class="<?php echo (($curControllerLower == 'moneytransfer') && ($curControllerLower == 'moneytransfer')) ? "active" : ''; ?>">
 
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Fund </span>
+                                        <span class="title">Transfer</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'moneytransfer' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
                                         </span>
@@ -659,7 +659,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             $reservation_pmenu = 8;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
-                                    "ads" => "Ads List",
+                                    "ads" => "Social Sharing",
                                 );
                                 ?>
                                 <li
@@ -706,7 +706,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     "wallet/rpwallet" => "RP Wallet",
                                     "wallet/commisionwallet" => "Commision Wallet",
                                     "wallet/fundwallet" => "Cash Wallet",
-                                    "order/checkinvestment" => "Check Investment",
+                                    "order/checkinvestment" => "Purchased Packages",
                                     "order/refferalincome" => "Direct referral income",
                                      
 //                                    "profile/summery" => "Summery",
