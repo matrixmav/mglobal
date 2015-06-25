@@ -39,7 +39,7 @@ class BuildTempController extends Controller {
                 'actions' => array('index', 'categoryadd', 'categoryedit', 'categorylist', 'deletecategory',
                     'changestatus', 'templatelist', 'templateheaderedit', 'templatebodyedit',
                     'templatefooteredit', 'templateheaderadd', 'templatebodyadd', 'templatefooteradd',
-                    'customcode'),
+                    'customcode','changestatustemp'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -126,11 +126,9 @@ class BuildTempController extends Controller {
 
     public function actionChangeStatus() {
 
-
         if ($_REQUEST['id']) {
             $categoryObject = BuildCategory::model()->findByPk($_REQUEST['id']);
-            var_dump($categoryObject);
-            die;
+            
             if ($categoryObject->status == 1) {
                 $categoryObject->status = 0;
             } else {
@@ -142,6 +140,22 @@ class BuildTempController extends Controller {
         }
     }
 
+    public function actionChangeStatusTemp() {
+
+        if ($_REQUEST['id']) {
+            $categoryObject = BuildTemp::model()->findByPk($_REQUEST['id']);
+            
+            if ($categoryObject->status == 1) {
+                $categoryObject->status = 0;
+            } else {
+                $categoryObject->status = 1;
+            }
+            $categoryObject->save(false);
+            //$this->redirect('/admin/package/list',array('msg'=>'2'));
+            $this->redirect(array('/admin/BuildTemp/templatelist', 'msg' => 4));
+        }
+    }
+    
     /*
      * Function to Delete Bilder Category list
      */
@@ -150,7 +164,7 @@ class BuildTempController extends Controller {
         if ($_REQUEST['id']) {
             $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
             $categoryObject->delete();
-            $this->redirect(array('/admin/buildtemp/categorylist', 'msg' => 3));
+            $this->redirect(array('/admin/BuildTemp/categorylist', 'msg' => 3));
         }
     }
 
