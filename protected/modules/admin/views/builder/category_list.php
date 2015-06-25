@@ -66,7 +66,8 @@ $this->breadcrumbs = array(
                    array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
-                    'template' => '{Change}{Edit}{Delete}',
+                    //'template' => '{Change}{Edit}{Delete}',
+                    'template' => '{Change}{Edit}',
                     'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
                          'Change' => array(
@@ -79,11 +80,11 @@ $this->breadcrumbs = array(
                             'options' => array('class' => 'fa fa-success btn default black delete'),
                             'url' => 'Yii::app()->createUrl("admin/BuildTemp/categoryedit", array("id"=>$data->id))',
                         ),
-                        'Delete' => array(
-                            'label' => Yii::t('translation', 'Delete'),
-                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this category?')"),
-                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/deletecategory", array("id"=>$data->id))',
-                        ),
+//                        'Delete' => array(
+//                            'label' => Yii::t('translation', 'Delete'),
+//                            'options' => array('class' => 'fa fa-success btn default black delete','onclick' =>"js:alert('Do u want to delete this category?')"),
+//                            'url' => 'Yii::app()->createUrl("admin/BuildTemp/deletecategory", array("id"=>$data->id))',
+//                        ),
                     ),
                 ),
             ),
