@@ -136,7 +136,7 @@ class BuildTempController extends Controller {
             }
             $categoryObject->save(false);
             //$this->redirect('/admin/package/list',array('msg'=>'2'));
-            $this->redirect(array('/admin/buildtemp/categorylist', 'msg' => 4));
+            $this->redirect(array('/admin/BuildTemp/categorylist', 'msg' => 4));
         }
     }
 
