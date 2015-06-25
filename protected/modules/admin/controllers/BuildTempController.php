@@ -152,7 +152,7 @@ class BuildTempController extends Controller {
             }
             $categoryObject->save(false);
             //$this->redirect('/admin/package/list',array('msg'=>'2'));
-            $this->redirect(array('/admin/buildtemp/templatelist', 'msg' => 4));
+            $this->redirect(array('/admin/BuildTemp/templatelist', 'msg' => 4));
         }
     }
     
@@ -164,7 +164,7 @@ class BuildTempController extends Controller {
         if ($_REQUEST['id']) {
             $categoryObject = BuildCategory::model()->findByPK($_REQUEST['id']);
             $categoryObject->delete();
-            $this->redirect(array('/admin/buildtemp/categorylist', 'msg' => 3));
+            $this->redirect(array('/admin/BuildTemp/categorylist', 'msg' => 3));
         }
     }
 
