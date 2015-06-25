@@ -4,7 +4,7 @@
    <div class="container">
     <div class="row">
         <div class="col-sm-12 col-xs-12 col-lg-12">
-            <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>&tId=<?php if(!empty($_GET)) { echo $_GET['tId']; }?> ">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a>
+            <?php /*?><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>&tId=<?php if(!empty($_GET)) { echo $_GET['tId']; }?> ">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a>*/?>
                                 <div class="row">
 		
                         
@@ -13,7 +13,7 @@
                 <div class="col-xs-4 bs-wizard-step complete">
                   <div class="text-center bs-wizard-stepnum">Step 1</div>
                   <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#" class="bs-wizard-dot"></a>
+                  <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>&tId=<?php if(!empty($_GET)) { echo $_GET['tId']; }?> " class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Domain Search.</div>
                 </div>
                 
