@@ -50,8 +50,10 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
-        <?php if (isset($_GET['msg']) && $_GET['msg'] == '1') { ?> <div class="success"><?php echo "Record Deleted Succesfully." ?></div> <?php } ?>
-        <?php if (isset($_GET['msg']) && $_GET['msg'] == '2') { ?> <div class="success"><?php echo "Status Changed Succesfully." ?></div> <?php } ?>
+        <?php if (!empty($_GET['msg']) && $_GET['msg'] == '1') { ?> <div class="success"><?php echo "Record Deleted Succesfully." ?></div> <?php } ?>
+        <?php if (!empty($_GET['msg']) && $_GET['msg'] == '2') { ?> <div class="success"><?php echo "Status Changed Succesfully." ?></div> <?php } ?>
+        <?php if (!empty($_GET['success'])) { ?> <div class="success"><?php echo $_GET['success'];?></div> <?php } ?>
+         <?php if (!empty($_GET['error'])) { ?> <div class="error"><?php $_GET['error'];?></div> <?php } ?>
 
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
