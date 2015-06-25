@@ -102,6 +102,7 @@ class PackageController extends Controller {
         if ($_POST) {
             if ($_POST['Package']['name'] == '' && $_POST['Package']['amount'] == '' && $_POST['Package']['description'] == '') {
                 $error .= "Please fill required(*) marked fields.";
+                $this->redirect('list?error='.$error);
             } else {
 
                 $packageObject->name = $_POST['Package']['name'];
@@ -115,7 +116,7 @@ class PackageController extends Controller {
                 $packageObject->update();
 
                 $success .= "Package Successfully Updated";
-                $this->redirect('list', array('success' => $success, 'error' => $error));
+                $this->redirect('list?success='.$success);
             }
         }
 
