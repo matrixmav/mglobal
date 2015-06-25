@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs = array(
-    'Check Investment',
+    'Purchased Package',
 );
 
 
