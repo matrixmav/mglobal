@@ -79,7 +79,7 @@ $this->menu = array(
 		array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["full_name"])? ucwords($data["full_name"]):""',
+                    'value'=>'isset($data["name"])? ucwords($data["name"]):""',
 		),
                 
                array(
