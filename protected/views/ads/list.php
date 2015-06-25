@@ -33,6 +33,7 @@ $this->menu = array(
                     'summaryText' => 'Showing {start} to {end} of {count} entries',
                     'template' => '{items} {summary} {pager}',
                     'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
+                    'rowCssClassExpression' => '($data->created_at > date("Y-m-d") || $data->created_at < date("Y-m-d")) ? "rowFade" : "odd"',
                     'pager' => array(
                         'header' => false,
                         'firstPageLabel' => "<<",
@@ -40,7 +41,8 @@ $this->menu = array(
                         'nextPageLabel' => ">",
                         'lastPageLabel' => ">>",
                     ),
-                    'columns' => array(
+                    
+                   'columns'=>array(
                         //'idJob',
 
                         array(
