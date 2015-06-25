@@ -5433,7 +5433,7 @@ table.dataTable td .input-width-b {
 .btn-h{  background: linear-gradient(to bottom, #105E96 0%,#3F8EDB 100%)!important;}
 .con-f{ font-size:15px; color:#ff6b00!important; padding-top:20px!important; }
 .img-mar{ margin-left:22px;}
-.bg-f2{ background-color: #272626!important;}
+.bg-f2{  background: url(/images/footer-next-bg.png) left center repeat !important;}
 .bg-f1{background-color: transparent !important;}
 .row-over {
 	/*background-color: #F7FCFF*/

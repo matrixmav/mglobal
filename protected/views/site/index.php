@@ -381,8 +381,37 @@
   <div class="portfolio-block content content-center" id="portfolio">
     <div class="container">
       <h2 class="margin-bottom-50"><strong> Templates </strong></h2>
+      
+      <div class="row mobTemplete">
+        
+          <div class="item col-md-2 col-sm-4 col-xs-12">
+                <ul class="templeteOpt">
+            <li><a href="">Automobile</a></li>
+            <li><a href="">Lawyers</a></li>
+            <li><a href="">Architect</a></li>
+            <li><a href="">Food</a></li>
+            <li><a href="">Education</a></li>
+            <li><a href="">Consultant</a></li>
+            
+             <li><a href="">Finance</a></li>
+            <li><a href="">Healthcare</a></li>
+             <li><a href="">Corporate</a></li>
+            <li><a href="">Travel</a></li>
+            <li><a href="">Jewellery</a></li>
+            <li><a href="">Hotel & Resorts</a></li>
+            <li><a href="">Real Estate</a></li>
+            
+             <li><a href="">Online-Store</a></li>
+            <li><a href="">Chartered Accountants</a></li>
+            <li><a href="">Fitness</a></li>
+            <li><a href="">Textile</a></li>
+            <li><a href="">Furniture</a></li>
+           
+        </ul>
+          </div>
+          </div>
     </div>
-    <div class="row">
+    <div class="row deskTemplete">
         
       <div class="item col-md-2 col-sm-4 col-xs-12">
         <img src="images/templates/automobile.png" alt="NAME" class="img-responsive">

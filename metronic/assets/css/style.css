@@ -4471,3 +4471,38 @@ UI Loading
 .btn.insta {
     background: #a38769   none repeat scroll 0 0 !important;
     color: #fff !important; font-size: 18px !important;padding: 7px 8px;   border-radius: 2px !important;}
+
+.btn-twitter {
+    background: #5eaade none repeat scroll 0 0;
+    border-radius: 3px !important;
+    color: #fff;
+    display: inline ;
+    padding: 9px !important;
+    margin: 5px 0;
+}
+.btn-facebook {
+    background: #0b5eb3 none repeat scroll 0 0;
+    border-radius: 3px !important;
+    color: #fff;
+    display: inline ;
+    padding: 9px !important; margin: 5px 0;
+}
+.btn-google-plus {
+    background: #db4a37 none repeat scroll 0 0;
+    border-radius: 3px !important;
+    color: #fff;
+    display: inline ;
+    padding: 9px !important; margin: 5px 0;
+}
+.btn-envelope{ background: #6699cc none repeat scroll 0 0;
+    border-radius: 3px !important;
+    color: #fff;
+    display: inline ;
+    padding: 9px !important;  margin: 5px 0;}
+.btn-file{ background: #339933 none repeat scroll 0 0;
+    border-radius: 3px !important;
+    color: #fff;
+    display: inline ;
+    padding: 9px !important;  margin: 5px 0;}
+
+.btn-file i,.btn-envelope i, .btn-google-plus i,.btn-facebook i, .btn-twitter i{border-right: 1px solid #ccc; padding-right:5px;}

@@ -24,7 +24,7 @@
        
           <p class="f-font">Member Enquiry</p>
           <p class="f-cnt"><a href="mailto:memberenquiry@xyz.com">memberenquiry@xyz.com</a><br/> 
-          91-8500425185</p>
+          91-8500425185 </p>
           
           <p class="f-font">Sales</p>
           <p class="f-cnt"><a href="mailto:sales@xyz.com">sales@xyz.com</a><br/> 
