@@ -107,7 +107,5 @@ $this->menu=array(
 
       </div>
     </div>
-        <a  href="#orderModal" class="fancybox" data-toggle="modal" data-target="#orderModal">
-  Your Cart
-</a>
+       
 
