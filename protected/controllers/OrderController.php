@@ -30,7 +30,7 @@ class OrderController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment', 'refferalincome'),
+                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment', 'refferalincome','pendingpayment'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -350,9 +350,20 @@ class OrderController extends Controller {
         {
         $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
         }else{
-        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
+        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a><br/><br/><a class="btn green fa fa-edit margin-right15" data-target="/order/pendingpayment?id='.$id.'" data-toggle="modal" href="#">Make Payment</a>';
          }
         echo $title;
+    }
+    
+    public function actionPendingPayment() {
+        if(!empty($_GET['id']))
+        {
+        $orderObject = Order::model()->findByPk($_GET['id']);
+        }
+       $this->render('pendingPayment', array(
+            'orderObject' => $orderObject,
+             
+        )); 
     }
     
 
