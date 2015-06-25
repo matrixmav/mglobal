@@ -56,7 +56,7 @@ class BuildTempController extends Controller {
 		$error = "";			
 		$masterkey = $_POST['master_pin'];
 		
-		$getUserObject = User::model()->findByAttributes(array('name' => Yii::app()->session['username'], 'status' => 1 ,'master_pin' => md5($masterkey) ));
+		$getUserObject = User::model()->findByAttributes(array('id' => Yii::app()->session['userid'], 'status' => 1 ,'master_pin' => md5($masterkey) ));
 		
                 if (!empty($getUserObject)) {				
                     
@@ -133,6 +133,10 @@ class BuildTempController extends Controller {
                             //stripslashes($userpagesObject->page_content) ;
                             fwrite($handle, $data);
                         }
+                        
+                        $data = "\n".stripcslashes($hasbuilderObject->custom_js) ;           
+                        //stripslashes($userpagesObject->page_content) ;
+                        fwrite($handle, $data);
 
                         $headMetaEnd = "\n".'</head>';
                         $headMetaEnd = "\n".'<body>';
