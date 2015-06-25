@@ -18,12 +18,12 @@ $this->breadcrumbs = array(
     .confirmMenu{position: relative;}
 </style>
 <?php 
-if(!empty($_GET) && $_GET['successmsg']=='1'){
+if(!empty($_GET['successmsg']) && $_GET['successmsg']=='1'){
     echo "<div class='success'>Wallet amount transferred successfully.</div>";
 }
 ?>
 <?php 
-if(!empty($_GET) && $_GET['successmsg']=='2'){
+if(!empty($_GET['successmsg']) && $_GET['successmsg']=='2'){
     echo "<div class='success'>Wallet amount deducted successfully.</div>";
 }
 ?>

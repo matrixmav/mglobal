@@ -49,8 +49,8 @@ class ProfileController extends Controller {
 
     public function actionAddress() {
         $model = new UserProfile;
-        $error = "";
-        $success = "";
+        $errorMsg = "";
+        $successMsg = "";
         $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
         if (isset($_POST['UserProfile'])) {
@@ -60,18 +60,18 @@ class ProfileController extends Controller {
                     $profileObject->street = $_POST['UserProfile']['street'];
                     $profileObject->city_name = $_POST['UserProfile']['city_name'];
                     $profileObject->state_name = $_POST['UserProfile']['state_name'];
-                    $profileObject->country_id = $_POST['UserProfile']['country_id'];
                     $profileObject->zip_code = $_POST['UserProfile']['zip_code'];
                     $profileObject->updated_at = new CDbExpression('NOW()');
                     $profileObject->update();
-                    $userObject->country_id = $_POST['UserProfile']['country_id'];
-                    $userObject->update();
-                    $success .= "Address Updated Successfully";
+                    $successMsg .= "Address Updated Successfully";
+                    $this->redirect('/profile/updateprofile?successMsg='.$successMsg);
                 } else {
-                    $error .= "Incorrect master pin.";
+                    $errorMsg .= "Incorrect master pin.";
+                    $this->redirect('/profile/updateprofile?errorMsg='.$errorMsg);
                 }
             } else {
-                $error .= "Please fill required(*) marked fields.";
+                $errorMsg .= "Please fill required(*) marked fields.";
+                $this->redirect('/profile/updateprofile?errorMsg='.$errorMsg);
             }
         }
 
@@ -80,7 +80,7 @@ class ProfileController extends Controller {
         $stateObject = State::model()->findAll();
         $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
         $this->render('/user/address', array('countryObject' => $countryObject,
-            'cityObject' => $cityObject, 'stateObject' => $stateObject, 'profileObject' => $profileObject, 'success' => $success, 'error' => $error));
+            'cityObject' => $cityObject, 'stateObject' => $stateObject, 'profileObject' => $profileObject, 'successMsg' => $successMsg, 'errorMsg' => $errorMsg));
     }
 
     /*
@@ -158,10 +158,12 @@ class ProfileController extends Controller {
                 }
             }
         }
+        $profileAddressObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
         $countryObject = BaseClass::getCountryList();
         $this->render('/user/updateprofile', array('userObject' => $userObject,
             'countryObject' => $countryObject,
             'success' => $success,
+            'profileAddressObject' =>$profileAddressObject,
             'error' => $error, 'edit' => $edit));
     }
 
@@ -263,15 +265,16 @@ class ProfileController extends Controller {
      */
 
     public function actionChangePin() {
-        $error = "";
-        $success = "";
+        $errorMsg = "";
+        $successMsg = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
 
         if (!empty($_POST)) {
             if ($_POST['UserProfile']['old_master_pin'] != '' && $_POST['UserProfile']['new_master_pin'] != '' && $_POST['UserProfile']['confirm_master_pin'] != '') {
 
                 if ($userObject->master_pin != md5($_POST['UserProfile']['old_master_pin'])) {
-                    $error .= "Incorrect old master pin";
+                    $errorMsg .= "Incorrect old master pin";
+                    $this->redirect('/profile/changepassword?errorMsg='.$errorMsg);
                 } else {
                     $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);
 
@@ -281,7 +284,8 @@ class ProfileController extends Controller {
                         $userObjectArr['name'] = $userObject->name;
                         $userObjectArr['ip'] = Yii::app()->params['ip'];
                         $userObjectArr['new_master_pin'] = $_POST['UserProfile']['new_master_pin'];
-                        $success .= "Your pin changed successfully";
+                        $successMsg .= "Your pin changed successfully";
+                        $this->redirect('/profile/changepassword?successMsg='.$successMsg);
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
                         $config['body'] =  $this->renderPartial('//mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
@@ -290,12 +294,13 @@ class ProfileController extends Controller {
                     }
                 }
             } else {
-                $error .="Please fill all required(*) marked fields.";
+                $errorMsg .="Please fill all required(*) marked fields.";
+                $this->redirect('/profile/changepassword?errorMsg='.$errorMsg);
             }
         }
 
         $this->render('/user/change_master_pin', array(
-            'error' => $error, 'success' => $success,
+            'errorMsg' => $errorMsg, 'successMsg' => $successMsg,
         ));
     }
 

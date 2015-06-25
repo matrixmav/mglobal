@@ -166,7 +166,7 @@ class PackageController extends Controller {
             
             if (Yii::app()->session['domain'] != '') {
                 $rightbar .= Yii::app()->session['domain'];
-                $rightbar .= '<div class="closeImg"> <a href=""> <i class="fa fa-times"></i></a></div>';
+                $rightbar .= '<div class="closeImg" id="closeImg"> <a href=""> <i class="fa fa-times"></i></a></div>';
             }
             
             $rightbar .='</div>
