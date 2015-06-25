@@ -134,6 +134,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/scripts/core/app.js"></script>
         <!--<script type="text/javascript" src="/chat/js/chat.js"></script>-->
         <script type="text/javascript" src="/js/custom_msg.js"></script>
+        <script type="text/javascript" src="/js/registration.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.init();
@@ -414,8 +415,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                   $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/updateprofile" => "Profile",
-                                    "profile/changepassword" => "Change Password",
-                                    "profile/changepin" => "Change Master Pin",
+                                    "profile/changepassword" => "Security Settings",
+                                    /*"profile/changepin" => "Change Master Pin",*/
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     "profile/testimonial" => "Testimonial",
@@ -424,8 +425,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $hotel_subsection = array(
                                     "order/list" => "My Order",
                                     "profile/updateprofile" => "Profile",
-                                    "profile/changepassword" => "Change Password",
-                                    "profile/changepin" => "Change Master Pin",
+                                    "profile/changepassword" => "Security Settings",
+                                    /*"profile/changepin" => "Change Master Pin",*/
                                     "profile/address" => "Address",
                                     "profile/documentverification" => "Verification",
                                     

@@ -262,3 +262,144 @@
             }
         });
     }
+      function validation()
+    {
+        $("#oldpassword_error_msg").html("");
+        if($("#old_password").val()=='')
+        {
+            $("#oldpassword_error_msg").html("Please enter your old password.");
+            $("#old_password").focus();
+            return false;
+        }
+         $("#newpassword_error_msg").html("");
+         if($("#new_password").val()=='')
+        {
+            $("#newpassword_error_msg").html("Please enter your new password.");
+            $("#new_password").focus();
+            return false;
+        }
+        $("#confirmpassword_error_msg").html("");
+        if($("#confirm_password").val()=='')
+        {
+            $("#confirmpassword_error_msg").html("Please enter your confirm password.");
+            $("#confirm_password").focus();
+            return false;
+        }
+        $("#confirmpassword_error_msg").html("");
+        if($("#confirm_password").val() != $("#new_password").val())
+        {
+            $("#confirmpassword_error_msg").html("New password and confirm password must be same.");
+            $("#confirm_password").focus();
+            return false;
+        }
+        $("#masterpassword_error_msg").html("");
+        if($("#master_pin").val()=='')
+        {
+            $("#masterpassword_error_msg").html("Please enter master pin.");
+            $("#master_pin").focus();
+            return false;
+        }
+    }
+ 
+
+ 
+     function validationPin()
+    {
+        $("#old_error_msg").html("");
+        if($("#old_master_pin").val()=='')
+        {
+            $("#old_error_msg").html("Please enter your old master pin.");
+            $("#old_master_pin").focus();
+            return false;
+        }
+         $("#new_error_msg").html("");
+         if($("#new_master_pin").val()=='')
+        {
+            $("#new_error_msg").html("Please enter your new master pin.");
+            $("#new_master_pin").focus();
+            return false;
+        }
+        $("#confirm_error_msg").html("");
+        if($("#confirm_master_pin").val()=='')
+        {
+            $("#confirm_error_msg").html("Please enter your confirm master pin.");
+            $("#confirm_master_pin").focus();
+            return false;
+        }
+        if($("#confirm_master_pin").val() != $("#new_master_pin").val())
+        {
+            $("#confirm_error_msg").html("Please your confirm master pin and new master pin must be same.");
+            $("#confirm_master_pin").focus();
+            return false;
+        }
+       
+    }
+    function profileValidation() {
+       
+        var email = requiredField('email', 'email_error', 'Please enter email');        
+        if (email == false) {            
+            return false;
+        }
+        
+        var emailValid = isValidEmail('email','email_error',"Enter valid email!");
+        if (emailValid == false) {            
+            return false;
+        }
+        
+        var phone = requiredField('phone', 'phone_error', 'Enter phone number');       
+        if (phone == false) {            
+            return false;
+        }
+        
+        var phoneValid = numaricField('phone', 'phone_error', 'Enter valid phone number');       
+        if (phoneValid == false) {            
+            return false;
+        }
+        
+        var email = requiredField('date', 'date_error', 'Please select date');        
+        if (email == false) {            
+            return false;
+        }        
+        
+        var masterPin = requiredField('master_pin', 'masterprofile_pin_error', 'Enter master pin');       
+        if (masterPin == false) {            
+            return false;
+        }        
+    }
+     function addressValidation()
+    {
+        var address = requiredField('address', 'address_error', 'Please enter address');        
+        if (address == false) {            
+            return false;
+        }
+        
+        var street = requiredField('street', 'street_error', 'Enter street name');       
+        if (street == false) {            
+            return false;
+        }
+                
+        var country = requiredField('country_id', 'country_id_error', 'Select Country');       
+        if (country == false) {            
+            return false;
+        }        
+        
+        var state = requiredField('state_id', 'state_id_error', 'Please enter state');        
+        if (state == false) {            
+            return false;
+        }
+        
+        var city = requiredField('city_id', 'city_id_error', 'Please enter city');        
+        if (city == false) {            
+            return false;
+        }
+        
+        var zip = requiredField('zip_code', 'zip_code_error', 'Please enter zip code');        
+        if (zip == false) {            
+            return false;
+        }
+                
+        var masterPin = requiredField('master_pin1', 'master_pin_error', 'Enter master pin');       
+        if (masterPin == false) {            
+            return false;
+        }         
+    }
