@@ -74,7 +74,10 @@ if(!empty($error)){
         var regexp = /^(0|[1-9]+[0-9]*)$/;
         var regexp1 = /^[0-9]\d*\.\d{2}$/;
         var newVal = $('#fund').val();
-       
+       if ($("#fund").val() < 0) {
+            $("#fund_error").html("Invalid Fund");
+            return false;
+        }
 //        if (!regexp1.test(newVal)) {
 //          $("#fund_error").html("Invalid Fund!");
 //          return false;
