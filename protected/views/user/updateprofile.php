@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 <div class="col-md-6 col-sm-6">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
     <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
-    <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return profileValidation();">
 
         <fieldset>
             <legend>Update Profile</legend>
@@ -49,7 +49,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">Country <span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <select name="UserProfile[country_id]" id="country_id" onchange="getStateList(this.value)" class="form-control">
+                    <select name="UserProfile[country_id]" id="country_id" class="form-control" onchange="getCountryCode(this.value);">
                         <option value="">Select Country</option>
                         <?php foreach ( $countryObject as  $country) { ?>
                         <option value="<?php echo $country->id; ?>" <?php echo ($country->id== $userObject->country_id)? "selected":""; ?> ><?php echo $country->name;?></option>
@@ -63,7 +63,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Phone<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:20%;float:left;" class="form-control" name="country_code">&nbsp;&nbsp;
+                    <input type="text" value="<?php echo (!empty($userObject)) ? $userObject->country_code : ""; ?>" readonly="readonly" style="width:20%;float:left;" class="form-control" name="UserProfile[country_code]" id="country_code">&nbsp;&nbsp;
                     <input type="text" id="phone" class="form-control" name="UserProfile[phone]" value="<?php echo (!empty($userObject)) ? $userObject->phone : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> style="width:75%;float:right;" maxlength="30">
                 <div id="phone_error" class="form_error"></div>
                 </div>
@@ -102,7 +102,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
-                    <div id="master_pin_error" class="form_error"></div>
+                    <div id="masterprofile_pin_error" class="form_error"></div>
                 </div>
                 
             </div>
@@ -119,45 +119,75 @@ $this->breadcrumbs = array(
 </div>
 
 <div class="col-sm-6 col-md-6">
-    address
+ 
+    <div class="error" id="error_msg" style="display: none;"></div>
+     <?php if(!empty($_GET['errorMsg'])){?><div class="error" id="error_msg"><?php echo $_GET['errorMsg'];?></div><?php }?>
+    <?php if(!empty($_GET['successMsg'])) {?><div class="success" id="error_msg"><?php echo $_GET['successMsg'];?></div><?php }?>
+    <form action="/profile/address" method="post" class="form-horizontal" onsubmit="return addressValidation();">
+     
+        <fieldset>
+            <legend>Address</legend>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="firstname">Address <span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="address" name="UserProfile[address]" class="form-control" ><?php echo (!empty($profileAddressObject)) ? $profileAddressObject->address : "";?></textarea>
+                    <div id="address_error" class="form_error"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="Street">Street<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <input type="text" id="street" class="form-control" name="UserProfile[street]" value="<?php echo (!empty($profileAddressObject)) ? $profileAddressObject->street: "";?>">
+                    <div id="street_error" class="form_error"></div>
+                </div>
+            </div>
+            <div class="form-group" id="stateList" >
+                <label class="col-lg-4 control-label" for="State">State <span class="require">*</span></label>
+                <div class="col-lg-8">
+                   <input type="text" id="state_id" class="form-control" name="UserProfile[state_name]" value="<?php echo (!empty($profileAddressObject)) ?  $profileAddressObject->state_name : ""; ?>">
+                   <div id="state_id_error" class="form_error"></div>
+                </div>
+            </div>
+            
+            <div class="form-group" id="cityList">
+                <label class="col-lg-4 control-label" for="email">City <span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <input type="text" id="city_id" class="form-control" name="UserProfile[city_name]" value="<?php echo (!empty($profileAddressObject)) ?  $profileAddressObject->city_name : ""; ?>">
+                    <div id="city_id_error" class="form_error"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="Zipcode">Zip Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <input type="text" id="zip_code" class="form-control" name="UserProfile[zip_code]" value="<?php echo (!empty($profileAddressObject)) ?  $profileAddressObject->zip_code : ""; ?>">
+                    <div id="zip_code_error" class="form_error"></div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="MasterPin">Master Pin<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <input type="password" id="master_pin1" class="form-control" name="UserProfile[master_pin]">
+                    <div id="master_pin_error" class="form_error"></div>
+                </div>
+            </div>
+            
+        </fieldset>
+
+    <div class="row">
+            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
+                <input type="submit" name="submit" value="Update" class="btn red">
+                 
+            </div>
+        </div>
+    </form>
 </div>
 
 
+
 <script type="text/javascript">    
-    
-    function validation() {
-       
-        var email = requiredField('email', 'email_error', 'Please enter email');        
-        if (email == false) {            
-            return false;
-        }
-        
-        var emailValid = isValidEmail('email','email_error',"Enter valid email!");
-        if (emailValid == false) {            
-            return false;
-        }
-        
-        var phone = requiredField('phone', 'phone_error', 'Enter phone number');       
-        if (phone == false) {            
-            return false;
-        }
-        
-        var phoneValid = numaricField('phone', 'phone_error', 'Enter valid phone number');       
-        if (phoneValid == false) {            
-            return false;
-        }
-        
-        var email = requiredField('date', 'date_error', 'Please select date');        
-        if (email == false) {            
-            return false;
-        }        
-        
-        var masterPin = requiredField('master_pin', 'master_pin_error', 'Enter master pin');       
-        if (masterPin == false) {            
-            return false;
-        }        
-    }
-   $(document).ready(function() {
+  $(document).ready(function() {
                 $('.datepicker').datepicker({
                     dateFormat: 'dd/mm/yyyy',
                     maxDate:"+2Y"

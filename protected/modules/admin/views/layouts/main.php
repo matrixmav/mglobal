@@ -853,7 +853,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <?php
                                         $this->widget('zii.widgets.CBreadcrumbs', array(
                                             'homeLink' => CHtml::link('Dashboard', array(
-                                                '/admin/dashboard'
+                                                '/admin/default/dashboard'
                                             )),
                                             'links' => $this->breadcrumbs
                                         ));

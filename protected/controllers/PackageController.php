@@ -166,7 +166,8 @@ class PackageController extends Controller {
             
             if (Yii::app()->session['domain'] != '') {
                 $rightbar .= Yii::app()->session['domain'];
-                $rightbar .= '<div class="closeImg"> <a href=""> <i class="fa fa-times"></i></a></div>';
+                $domainNameToDelete = "'".Yii::app()->session['domain']."'";
+                $rightbar .= '<div class="closeImg" id="closeImg"> <a onclick="deleteData();" href="#"> <i class="fa fa-times"></i></a></div>';
             }
             
             $rightbar .='</div>
@@ -208,9 +209,14 @@ class PackageController extends Controller {
             <button id="checkout" class="btn-flat-green btn-orange" onclick="RedirectCart();">Checkout</button>
             </div>
             </div>';
+       
         $SuggestedDomain = "";
         //unset(Yii::app()->session['domain']);
         $userEnteredDomain = "";
+        if(!empty(Yii::app()->session['domain']))
+        {
+        $userEnteredDomain = Yii::app()->session['domain'];
+        } 
         if ($userEnteredDomain != '') {
             $doaminArr = explode('.', $userEnteredDomain);
             $domainTakenArray = DomainTemp::model()->findAll(array("condition" => "name LIKE '" . $doaminArr[0] . "%'"));
@@ -228,7 +234,7 @@ class PackageController extends Controller {
                     $domainName = "'" . $alldomain->name . "." . $allext . "'";
                     $domainNameF = "'" . $alldomain->name . "." . $allext . "'";
 
-                    $SuggestedDomain .= '<div class="searchWrap"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
+                    $SuggestedDomain .= '<div class="searchWrap" id="searchWrapDiv"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
                                     <div class="txtComent">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div></div></div>
                                     <div class="col-sm-2 col-xs-2">
                                     <p class="priceDomain"> <span>$</span>' . $alldomain->price . '</p></div>
@@ -306,7 +312,7 @@ class PackageController extends Controller {
             foreach ($AllDomainArray as $allext) {
                 $domainName = "'" . $alldomain->name . "." . $allext . "'";
 
-                $SuggestedDomain .= '<div class="searchWrap searchWrapBlur"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
+                $SuggestedDomain .= '<div class="searchWrap"><div class="row"><div class="col-sm-7 col-xs-7"><div class="domainName"><p>' . $alldomain->name . "." . $allext . '</p>
                                     <div class="txtComent">Get a free DIY for 6 months.<br>Use Coupon: VISA10</div></div></div>
                                     <div class="col-sm-2 col-xs-2">
                                     <p class="priceDomain"> <span>$</span>' . $alldomain->price . '</p></div>
@@ -734,5 +740,6 @@ class PackageController extends Controller {
             echo 1;
         }
     }
-
+  
+    
 }

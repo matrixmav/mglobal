@@ -20,8 +20,6 @@ $this->breadcrumbs = array(
                 </div>
             </div>
            
-             
-           
         </fieldset>
 
     <div class="row">

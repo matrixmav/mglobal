@@ -780,7 +780,7 @@
         <?php foreach($packageObject as $package){?>
         <div class="col-md-4 col-sm-6 col-xs-12">
           <?php if(Yii::app()->session['userid']!=''){?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $package['id']; ?>"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $package['id']; ?>"><?php }?><div class="pricing-item">
-            <div class="pricing-head">
+            <?php /*<div class="pricing-head">
               <h3><?php echo $package['name'];?></h3>
               <p><?php //echo $package['description1'];?></p>
             </div>
@@ -790,7 +790,8 @@
                 <p>Per Month</p>
               </div>
              <?php echo $package['Description'];?>
-            </div>
+            </div><?php */?>
+                  <img src="images/packages/dark-blue-cd.png" alt="Why to choose us" class="img-responsive">
             <div class="pricing-footer">
                 
             <?php if(Yii::app()->session['userid']!=''){?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $package['id']; ?>"><?php }else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $package['id']; ?>"><?php }?>Pick Now</a>
