@@ -94,7 +94,7 @@
        </div>  
 </div>     
 <?php }?>
-<input type="hidden" id="domainSelected" value="0">
+<input type="text" id="domainSelected" value="<?php echo (isset($_GET['tId'])) ? $_GET['tId'] : 0;?>">
  <script>
 function autocomplet()
 {
