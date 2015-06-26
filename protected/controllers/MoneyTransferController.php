@@ -32,7 +32,7 @@ class MoneyTransferController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 
                     'confirm', 'status', 'userexists', 'fund', 'transactions', 'autoadmin',
-                    'adrpfund','addcash'),
+                    'adrpfund','addcash','walletconfirm'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -526,12 +526,26 @@ class MoneyTransferController extends Controller {
         $userObject = User::model()->findByPk(Yii::app()->session['userid']);
         if(!empty($_POST))
         {
-          /*if($userObject->master_pin != $_POST]['master_pin']) 
+         if($userObject->master_pin != md5($_POST['master_pin'])) 
           {
               $error .= "Incorrect master pin";
-          }*/
+          }else{
+              $type = 1;
+            $_POST['walletId'] = '1';  
+            $postDataArray = $_POST; 
+            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $this->redirect(array('MoneyTransfer/walletconfirm', 'tId' => base64_encode($transactionObject->transaction_id),'am' => base64_encode($transactionObject->paid_amount)));
+            }
         }
         $this->render('addcash', array(
+            'error' => $error,
+        ));
+         
+    }
+    
+    public function actionWalletConfirm() {
+        $error = "";
+        $this->render('walletconfirm', array(
             'error' => $error,
         ));
          
