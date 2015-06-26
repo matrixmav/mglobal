@@ -11,7 +11,7 @@
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
 
-    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" id="walletform">
+    
         <fieldset> 
             <legend>Confirm</legend>
                <div class="form-group">
@@ -38,7 +38,7 @@
                             <input type="hidden" name="currency_code" value="USD">
                             <input type="hidden" name="handling" value="0">
                             <input type="hidden" name="cancel_return" value="">
-                            <input type="hidden" id="return" name="return" value="/package/walletThankYou/?transaction_id=<?php echo $transactionId; ?>&type=cashtransfer">
+                            <input type="hidden" id="return" name="return" value="http://localhost/package/walletThankYou?transaction_id=<?php echo $transactionId; ?>&type=cashtransfer">
                         </form>
                     </div>
                        <span id="email_error" style="color:red"></span>
@@ -48,11 +48,11 @@
             </fieldset>
             <div class="row">
                 <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">  
-                    <input type="submit"  name="transfer" id="transfer" class="btn red" value="Confirm" onClick="return validationfrom();"/>                     
+                    <input type="submit"  name="transfer" id="transfer" class="btn red" value="Confirm" onClick="validationfrom();"/>                     
  
                 </div>
             </div>
-    </form>
+    
 </div>
 <script type="text/javascript" src="/metronic/assets/plugins/select2/select2.min.js"></script>
 <style>
@@ -60,18 +60,9 @@
 </style>
 <script>
     function validationfrom()
-   {
-    var group = document.walletform.myRadio;
-    alert(group);
-    if (group.checked == false)
     {
-      $('#email_error').html("Please choose payment gateway."); 
-      return false;
+        alert('dss');
+     $("#frmPayPal").submit();
     }
- }
- function setValue()
- {
-     var price  = $('#paid_amount').val();
-     $('#ppamount').val(price);
- }
+  
 </script>
