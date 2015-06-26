@@ -263,7 +263,7 @@ function clearInput()
    $("#ppamount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
    $("#totalusedrp").val('');
    $("#walletused").val('');
-   $('.buttonradio').prop('checked', false);
+   $('.radiobutton').prop('checked', false);
    $('.paymentradio').prop('checked', false);
    $('#totalAmounDiv').fadeOut();
 }
