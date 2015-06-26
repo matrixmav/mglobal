@@ -258,7 +258,11 @@
 
 function clearInput()
 {
-   $('.radiobutton').prop('checked', false);
+   $("#totalAmount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
+   $("#payAmount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
+   $("#ppamount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
+   $("#totalusedrp").val('');
+   $("#walletused").val('');
    $('.paymentradio').prop('checked', false);
    $('#totalAmounDiv').fadeOut();
 }
