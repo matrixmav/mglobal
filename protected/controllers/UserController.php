@@ -583,6 +583,10 @@ class UserController extends Controller {
                 $response = CommonHelper::sendMail($config);
                 $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
                 if ($_POST['admin'] == 1) {
+                $accessObject = new UserHasAccess;
+                $accessObject->user_id = $model->id;
+                $accessObject->created_at = date('Y-m-d');
+                $accessObject->save();
                 $this->redirect(array('admin/user/index', 'successMsg' => 1));
                 }else{
                 $this->redirect(array('login', 'successMsg' => $successMsg));  
