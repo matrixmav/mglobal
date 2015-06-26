@@ -67,7 +67,7 @@
                                         }
                                         ?>
                                         <div class="col-sm-12 col-xs-12 tleft">
-                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);">
+                                            <input id="box<?php echo $i; ?>" type="checkbox" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);" class="radiobutton">
                                             <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                         </div>
                                         <?php
@@ -162,6 +162,10 @@
         }
 
     }
+    $("#walletform input:checkbox").change(function() {
+    $("#walletform input:checkbox").attr("checked", false);
+    $(this).attr("checked", true);
+   });
     function walletamountcalculation(ID, key,type)
     {
         
