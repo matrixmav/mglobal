@@ -491,6 +491,11 @@
    $('.radiobutton').prop('checked', false);
    $('.paymentradio').prop('checked', false);
    $('#totalAmounDiv').fadeOut();
+   $("#totalAmount").val(<?php if(!empty($orderObject)) { echo $orderObject->package->amount + $orderObject->domain_price;}?>);
+   $("#payAmount").val(<?php if(!empty($orderObject)) { echo $orderObject->package->amount + $orderObject->domain_price;}?>);
+   $("#ppamount").val(<?php if(!empty($orderObject)) { echo $orderObject->package->amount + $orderObject->domain_price;}?>);
+   $("#totalusedrp").val('');
+   $("#walletused").val('');
 }
     
 </script>    
