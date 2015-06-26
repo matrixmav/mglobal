@@ -485,6 +485,9 @@
 
      function clearInput()
 {  $("#uniform-myRadio span").removeClass("checked");
+   $("#uniform-box1 span").removeClass("checked");
+   $("#uniform-box2 span").removeClass("checked");
+   $("#uniform-box3 span").removeClass("checked");
    $('.radiobutton').prop('checked', false);
    $('.paymentradio').prop('checked', false);
    $('#totalAmounDiv').fadeOut();
