@@ -26,7 +26,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc','profilecouponapply'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -58,6 +58,30 @@ class PackageController extends Controller {
 
             $packageamount = $packageObject->amount;
             $discountedAmount = $packageObject->amount * $percentage / 100 + Yii::app()->session['amount'];
+            $discountAmountfinal = $packageamount - $discountedAmount;
+            $response .= $discountAmountfinal . "_" . $discountedAmount;
+        } else {
+            $response .= 0;
+        }
+        echo $response;
+    }
+   
+    
+     /*
+     * Coupon Code Apply
+     * Verify coupon code is valid or not
+     */
+
+    function actionProfileCouponApply() {
+        $response = '';
+        $percentage = 10;
+        $couponObject = Coupon::model()->findByAttributes(array('status' => '1'));
+        $packageObject = Package::model()->findByPK($_REQUEST['package_id']);
+        if ($couponObject->coupon_code == $_REQUEST['coupon_code']) {
+            Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
+
+            $packageamount = $packageObject->amount;
+            $discountedAmount = $packageObject->amount * $percentage / 100 + $_REQUEST['domain_price'];
             $discountAmountfinal = $packageamount - $discountedAmount;
             $response .= $discountAmountfinal . "_" . $discountedAmount;
         } else {
@@ -106,9 +130,18 @@ class PackageController extends Controller {
 
         $orderArray['transaction_id'] = $transactionObject->id;
         $orderArray['user_id'] = Yii::app()->session['userid'];
-        $orderArray['domain_price'] = Yii::app()->session['amount'];
-        $orderArray['domain'] = Yii::app()->session['domain'];
-        $orderArray['package_id'] = Yii::app()->session['package_id'];
+        if(!empty($_REQUEST['package_id']))
+        {  
+            $orderArray['domain_price'] = $_REQUEST['domain_price'];
+            $orderArray['domain'] = $_REQUEST['domain'];
+            $orderArray['package_id'] = $_REQUEST['package_id'];
+        }else{
+             
+            $orderArray['domain_price'] = Yii::app()->session['amount'];
+            $orderArray['domain'] = Yii::app()->session['domain'];
+            $orderArray['package_id'] = Yii::app()->session['package_id'];
+        }
+        
         
         if (count($orderObject) > 0) {
             Order::model()->addEdit($orderObject,$orderArray);
@@ -523,12 +556,11 @@ class PackageController extends Controller {
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
-                
-                /*sponsor wallet*/
+                 /*sponsor wallet*/
                 try {
                     //deduct from from user wallet
                     $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
-                    
+                     
                     if($sponsorWalletObject){
                         $fromAmountpercent = $packageObject->amount*5/100;
                         $fromAmount = ($sponsorWalletObject->fund) + $fromAmountpercent;
