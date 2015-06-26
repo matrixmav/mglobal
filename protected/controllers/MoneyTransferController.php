@@ -32,7 +32,7 @@ class MoneyTransferController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view', 'list', 'transfer', 'autocomplete', 
                     'confirm', 'status', 'userexists', 'fund', 'transactions', 'autoadmin',
-                    'adrpfund'),
+                    'adrpfund','addcash'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -519,6 +519,22 @@ class MoneyTransferController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    public function actionAddCash() {
+        $error = "";
+        $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+        if(!empty($_POST))
+        {
+          /*if($userObject->master_pin != $_POST]['master_pin']) 
+          {
+              $error .= "Incorrect master pin";
+          }*/
+        }
+        $this->render('addcash', array(
+            'error' => $error,
+        ));
+         
     }
     
     public function actionAdRpFund(){
