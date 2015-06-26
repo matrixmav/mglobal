@@ -29,8 +29,8 @@ return array(
             'homepageSlider'=>array("1280_646"=>"1280_646"),
             'homepageAds'=>array("960_133"=>"960_133","277_700"=>"277_700"),
     ),
-    'adminEmail'=>'info@mglobally.com',
-    'adminName' => 'Admin',
+    'adminEmail'=>'no-reply@mglobally.com',
+    'adminName' => 'Mglobally',
     'defaultPageSize' => 500,
     'startDate' =>date('Y-m-d'),
     'clientInvoicePercentage'=>5,
@@ -109,6 +109,6 @@ return array(
    'transactionIdPostfix'=> date('m'),
    'ip' => $_SERVER['REMOTE_ADDR'] ,        
    'paypalurl'=>'https://www.sandbox.paypal.com/cgi-bin/webscr',  
-   'returnurl'=>'http://demo.mglobally.com/package/thankyou',         
+   'returnurl'=>'http://61.12.64.209/package/thankyou',         
    'twitterLink' => 'https://twitter.com/intent/tweet?text='
 );

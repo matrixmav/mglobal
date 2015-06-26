@@ -1,6 +1,5 @@
 <?php
 $this->breadcrumbs = array(
-    'Template' => array('BuildTemp/templates'),
     'Page Add',
 );
 ?>

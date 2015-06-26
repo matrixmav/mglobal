@@ -53,15 +53,17 @@
 	</div>
             <div class="row">
                 <form class="form-inline">
-                    <div class="form-group col-sm-12  has-success has-feedback">
+                    <div class="form-group col-sm-12  has-success has-feedback" id="iconSuccess">
                         <form action="" method="post">
                         <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>" class="form-control searchTxt">
                         <input placeholder="Enter Your Domain Name" type="text" name="domain" class="form-control searchTxt" data-id="field_domains-input" id="domain" style="width: 100%;" onkeyup="autocomplet();" onkeydown="if (event.keyCode == 13)
 {document.getElementById('search').click(); return false;}">
                         </form> 
                         <!--<input type="search"  id="" placeholder="search" style="width: 100%;">-->
-                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" id="icon"></span>
                         <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                        
+ 
                     </div>
                     <!--<div class="form-group col-sm-3">
                         <button type="submit" class="btn btn-success btn-lg">Search Here</button>
@@ -74,7 +76,7 @@
                 </div>
 
             </div>
-            <div id="secondaryDomainResults">
+            <div id="secondaryDomainResults" <?php if(Yii::app()->session['domain'] !=''){?> class="searchWrapBlur"<?php }?> >
                 <?php echo $suggestedDomain; ?> 
             </div>
         </div>
@@ -92,7 +94,8 @@
        </div>  
 </div>     
 <?php }?>
-  <script>
+<input type="hidden" id="domainSelected" value="<?php echo (isset($_GET['tId'])) ? $_GET['tId'] : 0;?>">
+ <script>
 function autocomplet()
 {
 
@@ -114,10 +117,23 @@ url: "availabledomain",
 data: dataString,
 cache: false,
 success: function(html){
+if(html==''){
+document.getElementById("secondaryDomainResults").innerHTML = "No domain found";
+document.getElementById("suggestedDomain").style.display="block";
+$('#icon').removeClass('glyphicon-ok');
+$('#icon').addClass('glyphicon-remove');
+$('#iconSuccess').addClass('has-error');
+$('#iconSuccess').removeClass('has-success');
+
+}else{   
 document.getElementById("secondaryDomainResults").innerHTML = html;
 document.getElementById("suggestedDomain").style.display="block";
+$('#icon').addClass('glyphicon-ok');
+$('#icon').removeClass('glyphicon-remove');
+$('#iconSuccess').removeClass('has-error');
+$('#iconSuccess').addClass('has-success');
 }
-
+}
 });
 }
 //}
@@ -137,17 +153,25 @@ data: dataString,
 cache: false,
 success: function(html){
  var res = html.split("_");
- document.getElementById("domainTaken").innerHTML = res[0];
- document.getElementById("tottal").innerHTML = res[1];
+ document.getElementById("domainTaken").innerHTML = res[0]+'<div class="closeImg" id="closeImg"> <a onclick="deleteData();" href="#"> <i class="fa fa-times"></i></a></div>';
+ $('#secondaryDomainResults').addClass('searchWrapBlur');
+ $('#domainSelected').val('1');
 }
 
 });//@ sourceURL=pen.js
 }
+
+function deleteData()
+{
+$('#secondaryDomainResults').removeClass('searchWrapBlur');
+ document.getElementById("domainTaken").innerHTML = "";
+ $('#domainSelected').val('0');
+}    
 	
 function RedirectCart()
 {
-var domainSet  = $('#domainset').val();
-if(domainSet=='')
+var domainSet  = $('#domainSelected').val();
+if(domainSet=='0')
 {
  alert("Please choose any domain first.");return false;  
 }else{
