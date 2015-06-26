@@ -58,7 +58,8 @@
 
                                     </td>
                                     <td class="pDescription">
-                                        <?php echo $orderObject->domain;?>
+                                        <?php echo $orderObject->domain;?><br/>
+                                        <span style="color:#dd0808;">Domain not available.Please choose another domain <a href="/package/domainsearch?package_id=<?php echo $orderObject->package_id; ?>&tId=<?php if(!empty($transactionObject)) { echo $transactionObject->transaction_id;} ?>">Click Here</a></span>  
                                     </td>
                                     <td class="pDurationSum">
 
@@ -150,7 +151,7 @@
   </div>
 </div>
 
-<div id="makepayment">
+<div id="makepayment" style="display:none;">
     
   <div class="row">
  
@@ -161,8 +162,7 @@
                         <form id="walletform" name="walletform">  
                             <?php if ($walletObject) { ?>
                                 <div id="walletOption" class="col-sm-4">
-
-                                    <?php
+                                  <?php
                                     $i = 1;
                                     foreach ($walletObject as $wallet) {
                                         if ($wallet->type == '1') {
@@ -244,9 +244,10 @@
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
-<input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>">
-<input type="hidden" id="package_amt" value="">
+<input type="hidden" id="package_id" value="<?php echo $orderObject->package_id; ?>">
+<input type="hidden" id="package_amt" value="<?php echo $packageObject->amount; ?>">
 <input type="hidden" id="transID" value="<?php if(!empty($transactionObject)) { echo $transactionObject->transaction_id;} ?>">
+<input type="hidden" id="profilepayamount" value="">
 <script type="text/javascript">
     function makepayment()
     {
@@ -280,9 +281,11 @@
         $('#walletused').val(str);
         var input = document.getElementsByName("wallet_type");
         var wallet = $("#walletused").val();
-       
-        var package_amt = $('#package_amt').val();
+       var payAmount = $("#payAmount");
+       $('#profilepayamount').val($('#totalAmount').val());
+        var package_amt = $('#profilepayamount').val();
         var total = key;
+        
         if(type=='2')
         {
             var totalAmount = $('#totalAmount').val()*75/100; 
@@ -317,7 +320,7 @@
             $("#ppamount").val(totalAmountRP);
             }else{
              $('#payamount').html('0'); 
-             $("#ppamount").val(payableAmount);
+             $("#ppamount").val('0');
             }
             $('#totalusedrp').val(totalAmount);
           }
@@ -342,8 +345,8 @@
          
         }
         var totalusedRP = $("#totalusedrp").val();
-        
-        var dataString = 'transactionId=<?php echo isset($_GET['tId']) ? $_GET['tId'] : ""; ?>&payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
+        var transID = $("#transID").val();
+        var dataString = 'transactionId='+transID+'&payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
          
         $.ajax({
             type: "GET",
@@ -379,24 +382,27 @@
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="packageused" value="">
 <input type="hidden" id="totalusedrp" value="">
+<input type="hidden" id="domain_price" value="<?php echo $orderObject->domain_price;?>">
 <input type="hidden" id="packageId" value="<?php echo $orderObject->package_id; ?>">
 <input type="hidden" id="transID" value="<?php if(!empty($transactionObject)) { echo $transactionObject->transaction_id;} ?>" name="tId">
- 
+<input type="hidden" id="domain" value="<?php echo $orderObject->domain;?>"> 
 <script type="text/javascript">
 
     function Couponapply() {
         var coupon_code = $('#coupon_code').val();
+        var domain_price = $('#domain_price').val();
+        var packageId = $('#packageId').val();
         if (coupon_code == '')
         {
             document.getElementById("coupon_error").style.display = "block";
             document.getElementById("coupon_error").innerHTML = "Please enter coupon code.";
             document.getElementById("coupon_error").focus();
         } else {
-            var dataString = 'coupon_code=' + coupon_code;
+            var dataString = 'coupon_code=' + coupon_code + '&domain_price='+domain_price+'&package_id='+packageId;
             var url = $('#URL').val();
             $.ajax({
                 type: "GET",
-                url: "/package/couponapply",
+                url: "/package/profilecouponapply",
                 data: dataString,
                 cache: false,
                 success: function (html) {
@@ -426,14 +432,16 @@
     function proceedPayment()
     {
         var coupon_discount = $('#coupon_discount_price').val();
-        
+        var domain_price = $('#domain_price').val();
+        var domain = $('#domain').val();
+        var packageId = $('#packageId').val();
         var walletVal = $('#wallet').val();
         var totalAmount = $('#totalAmount').val();
         $('#ppamount').val(totalAmount);
         var transID = $("#transID").val();
         
-        var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID;
-        
+        var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID+'&domain_price='+domain_price+'&package_id='+packageId+'&domain='+domain;
+         
         $.ajax({
             type: "POST",
             url: "/package/orderadd",
