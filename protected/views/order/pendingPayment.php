@@ -1,5 +1,4 @@
-<!-- Modal -->
-
+ 
 
 <div class="" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
    
@@ -150,19 +149,31 @@
     </div>
   </div>
 </div>
-
-<div id="makepayment" style="display:none;">
-    
-  <div class="row">
  
+
+<div class="" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   
+    <div class="modal-dialog" role="document" style="width:auto; max-width: 900px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"> Your Cart</h4>
+      </div>
+      <div class="modal-body clearfix">
+       <div class="col-lg-12 col-sm-12 col-xs-12">    
+            <div class="pageWrp checkout abtest" id="maincontent">
+<div id="makepayment" style="display:none;">
+  <div class="row">
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
+                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$<?php echo $orderObject->package->amount;?></span></p>
                     <div id="paymentOption" class="clearfix">
                         <form id="walletform" name="walletform">  
                             <?php if ($walletObject) { ?>
                                 <div id="walletOption" class="col-sm-4">
-                                  <?php
+
+                                    <?php
                                     $i = 1;
                                     foreach ($walletObject as $wallet) {
                                         if ($wallet->type == '1') {
@@ -179,7 +190,7 @@
                                         }
                                         ?>
                                         <div class="col-sm-12 col-xs-12 tleft">
-                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);">
+                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);" class="radiobutton" style="margin-left:0px!important;">
                                             <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                         </div>
                                         <?php
@@ -194,13 +205,13 @@
                             <div class="payChoose col-sm-4">
                                 <div class="payOption clearfix">
                                     <div class="col-sm-12 col-xs-12 tleft">
-                                        <input type="radio" id="" name="myRadio" value="paypal">
+                                        <input type="radio" id="myRadio" name="myRadio" value="paypal" class="paymentradio" style="margin-left:0px!important;">
                                         <label for="myRadio">Paypal</label>
 
                                     </div>
                                 </div>
                         </form>
-                        <form action="<?php echo Yii::app()->params['paypalurl']; ?>" method="post" id="frmPayPal">
+                         <form action="<?php echo Yii::app()->params['paypalurl']; ?>" method="post" id="frmPayPal">
                             <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
                             <input type="hidden" name="cmd" value="_xclick">
                             <input type="hidden" name="item_name" value="<?php echo $packageObject->name; ?>">
@@ -231,15 +242,25 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg"></div>
+                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
 
                 </div>
             </div>
         </div>
     </div>
+</div>   
+  
 </div>
+    </div>
+      </div>
+    <!--  <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
 </div>
-
+ 
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
@@ -462,6 +483,11 @@
         });
     }
 
-     
+     function clearInput()
+{  $("#uniform-myRadio span").removeClass("checked");
+   $('.radiobutton').prop('checked', false);
+   $('.paymentradio').prop('checked', false);
+   $('#totalAmounDiv').fadeOut();
+}
     
 </script>    
