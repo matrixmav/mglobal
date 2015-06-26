@@ -585,6 +585,7 @@ class UserController extends Controller {
                 if ($_POST['admin'] == 1) {
                 $accessObject = new UserHasAccess;
                 $accessObject->user_id = $model->id;
+                $accessObject->access = "dashboard";
                 $accessObject->created_at = date('Y-m-d');
                 $accessObject->save();
                 $this->redirect(array('admin/user/index', 'successMsg' => 1));
