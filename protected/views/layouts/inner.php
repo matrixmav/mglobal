@@ -142,7 +142,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 //var IDSVal = document.getElementById('username').value;
                 //chatWith(IDSVal);
             });
-            $(".single_2").fancybox({
+            /*$(".single_2").fancybox({
                 openEffect: 'elastic',
                 closeEffect: 'elastic',
                 helpers: {
@@ -150,7 +150,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         type: 'inside'
                     }
                 }
-            });
+            });*/
 
             jQuery(document).ready(function () {
                 $('#date').datepicker({
