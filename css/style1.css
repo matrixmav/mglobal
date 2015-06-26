@@ -1880,7 +1880,16 @@ Pre-Header and pre-header elements
 {
 .team-block .img-responsive{ max-width: 60%; display: inline-block;}
 }
-
+/*--------------mobile templetes------------- */
+.mobTemplete{display:none;}
+@media (max-device-width: 480px) and (min-device-width: 320px)
+{
+  .deskTemplete{display: none;}  
+ .mobTemplete{display:block;}
+.templeteOpt li{ list-style: none;  background: url(/images/arrow-circle.png) left center no-repeat; margin: 5px 0 5px 10px; border-bottom: 1px solid #e6e6e6; padding: 10px 0; text-align: left;}
+.templeteOpt li a{ padding: 0 0 0 40px; font-family: "Open Sans"; font-size:14px; color: #757575; }
+.templeteOpt{ padding: 0}
+}
 /*--------------pre footer-------------
 .pre-footer{ background: #f15d2a;}*/
 .pre-footer .container{  background: url(/images/footer-bg.png) center center no-repeat;}

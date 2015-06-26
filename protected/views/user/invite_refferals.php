@@ -11,13 +11,38 @@ $caption = '';
  
 
 <div class="row">
-    <div class="col-md-12">
-        <a onclick = "postToFeedInvite('<?= $link; ?>', '<?= $name; ?>', '<?= $desc; ?>', '<?= $caption; ?>')" class="btn  green margin-right-20">Facebook</a>
+    <div class="col-md-2">
+    <!--    <a onclick = "postToFeedInvite('<?= $link; ?>', '<?= $name; ?>', '<?= $desc; ?>', '<?= $caption; ?>')" class="btn  green margin-right-20">Facebook</a>
         <a href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--gp";?>" class="btn  green margin-right-20">Google+</a>
         <a onclick = "openform('Email');" class="btn  green margin-right-20">Email</a>
-        <a onclick = "openform('SMS');" class="btn  green margin-right-20">SMS</a>
+        <a onclick = "openform('SMS');" class="btn  green margin-right-20">SMS</a> -->
+         <a class="btn btn-block btn-social btn-google-plus">
+    <i class="fa fa-google-plus"></i> Google+ share
+  </a>
+    </div>
+    <div class="col-md-2">
+         <a class="btn btn-block btn-social btn-facebook">
+    <i class="fa fa-facebook"></i> Facebook share
+  </a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-block btn-social btn-twitter">
+    <i class="fa fa-twitter"></i> Twitter share
+  </a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-block btn-social btn-envelope">
+    <i class="fa fa fa-share"></i>  Email share
+  </a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-block btn-social btn-file">
+    <i class="fa fa-envelope-o"></i> SMS share
+  </a>
+        
       </div>
 </div><br/> 
+<div class="row">
 <div class="col-md-7 col-sm-7">
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
@@ -54,6 +79,7 @@ $caption = '';
             </div>
             </div>
               </form>
+</div>
 </div>
 <script type="text/javascript">
  function validation()
