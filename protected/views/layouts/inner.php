@@ -667,7 +667,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     class="<?php echo (($curControllerLower == 'ads') && ($curControllerLower == 'ads')) ? "active" : ''; ?>">
 
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Ads </span>
+                                        <span class="title">Social Sharing </span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'ads' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
                                         </span>
