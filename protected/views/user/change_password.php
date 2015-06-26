@@ -10,10 +10,18 @@ $this->breadcrumbs = array(
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if(!empty($error)){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
 <?php if(!empty($success)){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+
+<div class="portlet box red ">
+    <div class="portlet-title">
+							<div class="caption">
+								Change Password
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form action="/profile/changepassword" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
-            <legend>Change Password</legend>
+           <div class="form-body">
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Old Password<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -45,22 +53,31 @@ $this->breadcrumbs = array(
             </div>
         </fieldset>
 
-    <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                      
+ 
+           <div class="form-actions right">                     
                 <input type="submit" name="submit" value="Change" class="btn red">
                  
             </div>
-        </div>
+       
     </form>
+    </div>
+</div>
 </div>
 <div class="col-md-6 col-sm-6">
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if(!empty($_GET['errorMsg'])){?><div class="error" id="error_msg"><?php echo $_GET['errorMsg'];?></div><?php }?>
     <?php if(!empty($_GET['successMsg'])) {?><div class="success" id="error_msg"><?php echo $_GET['successMsg'];?></div><?php }?>
+    <div class="portlet box red   ">
+    <div class="portlet-title">
+							<div class="caption">
+								Change Password
+							</div>
+    </div>
+        <div class="portlet-body form">
     <form action="/profile/changepin" method="post" class="form-horizontal" onsubmit="return validationPin();">
      
         <fieldset>
-            <legend>Change Master Pin</legend>
+            <div class="form-body">
               <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Old Master Pin<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -86,13 +103,14 @@ $this->breadcrumbs = array(
            
         </fieldset>
 
-    <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                      
+             <div class="form-actions right">                     
                 <input type="submit" name="submit" value="Change" class="btn red">
                  
             </div>
-        </div>
+            </div>
+    
     </form>
+</div>
 </div>
 
 

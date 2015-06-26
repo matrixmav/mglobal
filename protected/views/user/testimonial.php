@@ -10,10 +10,17 @@ $this->breadcrumbs = array(
    
 <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
 <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-    <form action="/profile/testimonial" method="post" class="form-horizontal" onsubmit="return validation();">
+   <div class="portlet box red   ">
+    <div class="portlet-title">
+							<div class="caption">
+								Testimonial
+							</div>
+    </div>
+        <div class="portlet-body form">
+<form action="/profile/testimonial" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset>
-            <legend>Testimonial</legend>
+             <div class="form-body">
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="firstname">Testimonial <span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -29,15 +36,17 @@ $this->breadcrumbs = array(
                     <div id="master_pin_error" class="form_error"></div>
                 </div>
             </div>
+             </div>
         </fieldset>
-
-    <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                      
-                <input type="submit" name="submit" value="Update" class="btn red">
+ <div class="form-actions right">                     
+                 <input type="submit" name="submit" value="Update" class="btn red">
                  
             </div>
-        </div>
+       
+    
     </form>
+</div>
+   </div>
 </div>
 <script>
     function validation(){        

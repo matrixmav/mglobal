@@ -1468,7 +1468,7 @@ Portlets
 }
 
 .portlet > .portlet-body.red, .portlet.red {
-  background-color: #e02222 !important;
+  background-color: #cb5a5e  !important;
 }
 
 .portlet > .portlet-body.yellow, .portlet.yellow {
@@ -4506,3 +4506,5 @@ UI Loading
     padding: 9px !important;  margin: 5px 0;}
 
 .btn-file i,.btn-envelope i, .btn-google-plus i,.btn-facebook i, .btn-twitter i{border-right: 1px solid #ccc; padding-right:5px;}
+.portlet > .portlet-body.red, .portlet.red{background-color:#cb5a5e !important;}
+.portlet.box.red > .portlet-title{background-color:#cb5a5e !important;}
