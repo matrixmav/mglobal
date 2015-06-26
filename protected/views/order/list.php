@@ -107,5 +107,17 @@ $this->menu=array(
 
       </div>
     </div>
-      
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 
+        <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js"></script>
+         
+        <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+
+$("#tip7").click(function() {
+$.fancybox({
+ 
+});
+ 
+});
+  </script>
