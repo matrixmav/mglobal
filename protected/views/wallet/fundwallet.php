@@ -23,7 +23,7 @@ $this->menu = array(
     .confirmMenu{position: relative;}
 </style>
 <div class="col-md-12">
-
+<a href="/MoneyTransfer/addcash" class="btn  green margin-right-20">Add Cash<i class="fa fa-plus"></i></a>
     <div class="expiration margin-topDefault confirmMenu">
 
         <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/wallet/fundwallet">

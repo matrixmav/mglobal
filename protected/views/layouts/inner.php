@@ -142,7 +142,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 //var IDSVal = document.getElementById('username').value;
                 //chatWith(IDSVal);
             });
-            $(".single_2").fancybox({
+            /*$(".single_2").fancybox({
                 openEffect: 'elastic',
                 closeEffect: 'elastic',
                 helpers: {
@@ -150,7 +150,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         type: 'inside'
                     }
                 }
-            });
+            });*/
 
             jQuery(document).ready(function () {
                 $('#date').datepicker({
@@ -667,7 +667,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     class="<?php echo (($curControllerLower == 'ads') && ($curControllerLower == 'ads')) ? "active" : ''; ?>">
 
                                     <a href="javascript:;"> <span class="leftmenu-reservations"></span>
-                                        <span class="title">Ads </span>
+                                        <span class="title">Social Sharing </span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'ads' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
                                         </span>

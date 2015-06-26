@@ -466,7 +466,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                              
-                        }}
+                        }}}
                            if (in_array('mail', $accessArr)) { 
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
@@ -714,7 +714,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     
                             $bases_pmenu = 4;
                             
-                        }?>	
+                        ?>	
                             <!-- New Menu added here -->
                             <?php if (in_array('ads', $accessArr) || in_array('ads_add', $accessArr) || in_array('ads_list', $accessArr)) {
                              $reservation_pmenu = 9;

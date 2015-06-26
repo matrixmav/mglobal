@@ -4473,7 +4473,7 @@ UI Loading
     color: #fff !important; font-size: 18px !important;padding: 7px 8px;   border-radius: 2px !important;}
 
 .btn-twitter {
-    background: #5eaade none repeat scroll 0 0;
+    background: #5eaade none repeat scroll 0 0 ;
     border-radius: 3px !important;
     color: #fff;
     display: inline ;
@@ -4506,5 +4506,18 @@ UI Loading
     padding: 9px !important;  margin: 5px 0;}
 
 .btn-file i,.btn-envelope i, .btn-google-plus i,.btn-facebook i, .btn-twitter i{border-right: 1px solid #ccc; padding-right:5px;}
+
 .portlet > .portlet-body.red, .portlet.red{background-color:#cb5a5e !important;}
 .portlet.box.red > .portlet-title{background-color:#cb5a5e !important;}
+
+
+#walletOption input[type=checkbox] { display:none; }
+#walletOption input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+#walletOption input[type=checkbox] + label:before { content: "\f096"; font-size: 20px; letter-spacing: 15px; color: #a1a1a1; }
+#walletOption input[type=checkbox]:checked + label:before { content: "\f046"; font-size: 20px; letter-spacing: 13px; color: #3fb148;}
+#walletOption label{font-size: 18px;}
+#walletform{padding: 10px 0;}
+
