@@ -728,6 +728,10 @@ class PackageController extends Controller {
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
     }
+    
+    public function actionwalletThankYou() {
+        
+    }
 
     /*
      * function to save transaction data
