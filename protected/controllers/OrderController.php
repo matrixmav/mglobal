@@ -361,8 +361,7 @@ class OrderController extends Controller {
         $orderObject = Order::model()->findByPk($_GET['id']);
         $transactionObject = Transaction::model()->findByAttributes(array('id'=>$orderObject->transaction_id));
         $loggedInUserId = Yii::app()->session['userid'];
-        $package_id = Yii::app()->session['package_id'];
-        $packageObject = Package::model()->findByPK($package_id);
+        $packageObject = Package::model()->findByPK($orderObject->package_id);
         $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
         }
        $this->render('pendingPayment', array(
