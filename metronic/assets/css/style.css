@@ -4506,11 +4506,11 @@ UI Loading
     padding: 9px !important;  margin: 5px 0;}
 
 .btn-file i,.btn-envelope i, .btn-google-plus i,.btn-facebook i, .btn-twitter i{border-right: 1px solid #ccc; padding-right:5px;}
-
+.portlet > .portlet-title > .caption{margin: 0;}
 .portlet > .portlet-body.red, .portlet.red{background-color:#cb5a5e !important;}
 .portlet.box.red > .portlet-title{background-color:#cb5a5e !important;}
-
-
+.portlet.box.red{border-radius: 2px !important;}
+.form-actions.right .btn{border-radius: 2px !important;}
 #walletOption input[type=checkbox] { display:none; }
 #walletOption input[type=checkbox] + label:before {
   font-family: FontAwesome;
@@ -4520,4 +4520,7 @@ UI Loading
 #walletOption input[type=checkbox]:checked + label:before { content: "\f046"; font-size: 20px; letter-spacing: 13px; color: #3fb148;}
 #walletOption label{font-size: 18px;}
 #walletform{padding: 10px 0;}
+
+.page-sidebar .sidebar-toggler, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-toggler{margin-bottom: 5px;}
+.page-sidebar{background-color: #364150 !important;}
 
