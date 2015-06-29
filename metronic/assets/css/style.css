@@ -4523,4 +4523,5 @@ UI Loading
 
 .page-sidebar .sidebar-toggler, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-toggler{margin-bottom: 5px;}
 .page-sidebar{background-color: #364150 !important;}
+.page-content-wrapper{background-color:#364150 !important;}
 
