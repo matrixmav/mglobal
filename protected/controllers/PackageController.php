@@ -736,7 +736,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-	     if ($transactionObject->status == 0) {
+	     if ($transactionObject->status == 1) {
             $transactionObject->status = 1;
              $transactionObject->created_at = date('Y-m-d');
             $transactionObject->update();
@@ -747,7 +747,7 @@ class PackageController extends Controller {
                     $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 1));
                     if($toUserWalletObject){
                         //echo "<pre>";echo $transactionObject->paid_amount;exit;
-                        $toAmount = ($toUserWalletObject->fund) + ($transactionObject->paid_amount);
+                         $toAmount = ($toUserWalletObject->fund) + ($transactionObject->paid_amount);
                         $toUserWalletObject->fund = $toAmount;
                         $toUserWalletObject->update();
                     } else {
@@ -758,14 +758,21 @@ class PackageController extends Controller {
                     $ex->getMessage();
                     exit;
                 }		
-			
-		$moneyTransferDataArray['fund'] = $transactionObject->paid_amount;
+				
+	 try {	
+                $moneyTransferDataArray['fund'] = $transactionObject->paid_amount;
                 $moneyTransferDataArray['comment'] = "Wallet Amount Transfered";
                 $moneyTransferDataArray['walletId'] = $adminWalletObject->id;
                 $moneyTransferDataArray['toWalletId'] = $toUserWalletObject->id;
+                $moneyTransferDataArray['fromUserId'] = 1;
                 $moneyTransferDataArray['fundType'] = 1;	
-	       $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,1);
-                }   
+	        $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,1);
+                }   catch (Exception $ex) {
+                    
+                    
+                    $ex->getMessage();
+                    exit;
+                }  
         }
         $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
@@ -773,6 +780,7 @@ class PackageController extends Controller {
       $this->render('wallethankyou', array('successMsg' => $successMsg
         ));
       }
+    }
 
     /*
      * function to save transaction data
