@@ -1275,6 +1275,7 @@ class BaseClass extends Controller {
     public static function setPurchaseNode($nodeId) {
         //find left present | not
         //$totalLeftPurchase = 0;
+        
         $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
         if($binaryCommissionObjectLeft){
            $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
@@ -1293,7 +1294,15 @@ class BaseClass extends Controller {
             self::setPurchaseNode($binaryCommissionObjectRight->user_id);
             //add purchase amount
             
-        }
+        }/*else{
+            $binaryCommissionObjectRight1 = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $nodeId));
+            
+            $binaryCommissionObjectRight2 = BinaryCommissionTest::model()->findByAttributes(array('parent' => $binaryCommissionObjectRight1->parent,'position'=>'right')); 
+            if($binaryCommissionObjectRight2){
+            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight2->order_amount;
+           // self::setPurchaseNode($binaryCommissionObjectRight2->user_id);
+            }
+        }*/
         exit;
         // Total Purchase amount
         $totalPurchase = ($totalLeftPurchase + $totalRightPurchase);
