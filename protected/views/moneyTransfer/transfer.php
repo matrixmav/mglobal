@@ -8,13 +8,19 @@ $this->breadcrumbs = array(
 ?>
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2-metronic.css"/>
-<div class="col-md-7 col-sm-7">
+<div class="col-md-6 col-sm-7">
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-
+<div class="portlet box red   ">
+    <div class="portlet-title">
+							<div class="caption">
+								Transfer Funds
+							</div>
+    </div>
+        <div class="portlet-body form">
     <form class="form-horizontal" role="form" method="post" action="" autocomplete="off">
         <fieldset> 
-            <legend>Transfer Funds</legend>
+             <div class="form-body">
                 <div class="form-group">
                     <label for="transactiontype" class="col-lg-4 control-label">Choose Type of Transaction<span class="require">*</span></label>
                     <div class="col-lg-8">
@@ -54,16 +60,19 @@ $this->breadcrumbs = array(
                     
                 </div>
 
-
+             </div>
             </fieldset>
-            <div class="row">
-                <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">  
-                    <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
+        <div class="form-actions right">                     
+                <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
 
                     <button type="reset" class="btn btn-default">Cancel</button>
-                </div>
+                 
             </div>
+       
+            
     </form>
+</div>
+</div>
 </div>
 <script type="text/javascript" src="/metronic/assets/plugins/select2/select2.min.js"></script>
 <style>

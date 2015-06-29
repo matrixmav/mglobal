@@ -7,10 +7,17 @@ $this->breadcrumbs = array(
 <div class="col-md-6 col-sm-6">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
     <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
+    <div class="portlet box red ">
+    <div class="portlet-title">
+							<div class="caption">
+								Update Profile
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return profileValidation();">
 
         <fieldset>
-            <legend>Update Profile</legend>
+            <div class="form-body">
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Sponsor ID</label>
                 <div class="col-lg-8">
@@ -106,16 +113,16 @@ $this->breadcrumbs = array(
                 </div>
                 
             </div>
-
-        </fieldset>
-
-        <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Update" class="btn red">
-
             </div>
-        </div>
+        </fieldset>
+        <div class="form-actions right">                     
+                <input type="submit" name="submit" value="Update" class="btn red">
+                 
+            </div>
+        
     </form>
+</div>
+    </div>
 </div>
 
 <div class="col-sm-6 col-md-6">
@@ -123,10 +130,17 @@ $this->breadcrumbs = array(
     <div class="error" id="error_msg" style="display: none;"></div>
      <?php if(!empty($_GET['errorMsg'])){?><div class="error" id="error_msg"><?php echo $_GET['errorMsg'];?></div><?php }?>
     <?php if(!empty($_GET['successMsg'])) {?><div class="success" id="error_msg"><?php echo $_GET['successMsg'];?></div><?php }?>
+    <div class="portlet box red ">
+    <div class="portlet-title">
+							<div class="caption">
+								Address
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form action="/profile/address" method="post" class="form-horizontal" onsubmit="return addressValidation();">
      
         <fieldset>
-            <legend>Address</legend>
+             <div class="form-body">
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="firstname">Address <span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -172,16 +186,17 @@ $this->breadcrumbs = array(
                     <div id="master_pin_error" class="form_error"></div>
                 </div>
             </div>
-            
+             </div>
         </fieldset>
 
-    <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
+        <div class="form-actions right">                     
                 <input type="submit" name="submit" value="Update" class="btn red">
                  
             </div>
-        </div>
+    
     </form>
+</div>
+    </div>
 </div>
 
 
