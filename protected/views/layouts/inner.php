@@ -668,7 +668,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                     class="<?php echo (($curControllerLower == 'ads') && ($curControllerLower == 'ads')) ? "active" : ''; ?>">
 
-                                    <a href="javascript:;">  <i class="fa fa-share-alt"></i>
+                                    <a href="javascript:;">  <i class="fa fa-share"></i>
                                         <span class="title">Social Sharing </span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'ads' || $curControllerLower == 'moneytransfer') ? "open" : ''; ?>">
