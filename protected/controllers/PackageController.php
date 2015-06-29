@@ -730,7 +730,7 @@ class PackageController extends Controller {
     }
     
     public function actionwalletThankYou() {
-        echo Yii::app()->session['userid'];exit;
+        
      if (!(empty($_GET))) {
              
             $transactionId = $_GET['transaction_id'];
@@ -767,10 +767,10 @@ class PackageController extends Controller {
 	       $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,1);
                 }   
         }
-        $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
-            echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
+        $successMsg = "Your cash has been added to your wallet. Please check";
+            echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
 
-      $this->render('thankyou', array('successMsg' => $successMsg
+      $this->render('walletthankyou', array('successMsg' => $successMsg
         ));
       }
 
