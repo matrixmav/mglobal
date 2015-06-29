@@ -22,7 +22,7 @@
                 </div>
             
                <div class="form-group">
-                    <label for="master_pin" class="col-lg-4 control-label">Master Pin<span class="require"> * $</span></label>
+                    <label for="master_pin" class="col-lg-4 control-label">Master Pin<span class="require"> *</span></label>
                     <div class="col-lg-8">
                         <input type="password" class="form-control" id="master_pin" name="master_pin"  class="form-control">
                        <span id="master_pin_error" style="color:red"></span>
