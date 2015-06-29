@@ -26,7 +26,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc','profilecouponapply'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -729,7 +729,7 @@ class PackageController extends Controller {
         ));
     }
     
-    public function actionwalletThankYou() {
+    public function actionWalletThankYou() {
         
      if (!(empty($_GET))) {
              
@@ -770,7 +770,7 @@ class PackageController extends Controller {
         $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
 
-      $this->render('walletthankyou', array('successMsg' => $successMsg
+      $this->render('wallethankyou', array('successMsg' => $successMsg
         ));
       }
 
