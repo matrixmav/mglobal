@@ -1266,5 +1266,95 @@ class BaseClass extends Controller {
         <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> ';
         return $link;
     }
+    
+    /**
+     * find last purchase node
+     * 
+     * @param int $nodeId - input node
+     */
+    public static function setPurchaseNode($nodeId) {
+        //find left present | not
+        //$totalLeftPurchase = 0;
+        $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
+        if($binaryCommissionObjectLeft){
+           $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
+           echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
+           echo "Left :".$binaryCommissionObjectLeft->order_amount;
+            self::setPurchaseNode($binaryCommissionObjectLeft->user_id);
+             
+        }
+        //echo $totalLeftPurchase;
+       // exit;
+        //find right present | not
+                
+        $binaryCommissionObjectRight = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
+        if($binaryCommissionObjectRight){
+            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight->order_amount;
+            self::setPurchaseNode($binaryCommissionObjectRight->user_id);
+            //add purchase amount
+            
+        }
+        exit;
+        // Total Purchase amount
+        $totalPurchase = ($totalLeftPurchase + $totalRightPurchase);
+        //binary calculation
+        $totalBinaryAmount = self::setBinary($nodeId);
+        echo "<pre>"; print_r($totalBinaryAmount);exit;
+        
+    }
+    
+    /**
+     * Calculate Binary for specific node
+     * 
+     * @param type $nodeId
+     * @return float amount
+     */
+    public static function setBinary($nodeId){
+        $isValidNode = self::binaryEligible($nodeId);
+        //binary calculation percentage
+        $binaryPercentage = 0.01;
+        $leftFlush = 0;
+        $rightFlush = 0;
+        //is valid node
+        if(count($isValidNode)>0){
+            $leftNodeAmount = $isValidNode['leftAmount']+$leftFlush;
+            $rightNodeAmount = $isValidNode['rightAmount']+$rightFlush;
+            if($leftNodeAmount == $rightNodeAmount){
+                $binaryAmount = ($leftNodeAmount*$binaryPercentage);
+                $leftFlush = 0;
+                $rightFlush = 0;
+            }
+            if($leftNodeAmount < $rightNodeAmount){
+                $binaryAmount = ($leftNodeAmount*$binaryPercentage);
+                $leftFlush = 0;
+            }
+            if($leftNodeAmount > $rightNodeAmount){
+                $binaryAmount = ($leftNodeAmount*$binaryPercentage);
+                $rightFlush = 0;
+            }
+            return $binaryAmount;
+        }
+        
+    }
+    
+    /**
+     * Check binary node both the purchase amount for given node
+     * 
+     * @param int $nodeId
+     * @return boolean | amount
+     */
+    public static function binaryEligible($nodeId){
+        //find the left node amount
+        $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left'));   
+        //find left node amount
+        $binaryCommissionObjectRight = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId ,'position'=>'right'));
+        if (!empty($binaryCommissionObjectLeft) && !empty($binaryCommissionObjectRight)) {
+            //send both node purchase amount
+            $binaryAmount['leftAmount'] = $binaryCommissionObjectLeft->order_amount;
+            $binaryAmount['rightAmount'] = $binaryCommissionObjectRight->order_amount;
+            return $binaryAmount;
+        }
+        return false;
+    }
 
 }
