@@ -1272,17 +1272,20 @@ class BaseClass extends Controller {
      * 
      * @param int $nodeId - input node
      */
-    public static function setPurchaseNode($nodeId) {
+    public static function setPurchaseNode($parentObject) {
+        $nodeId = $parentObject->user_id;
         //find left present | not
         //$totalLeftPurchase = 0;
         
         $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
         if($binaryCommissionObjectLeft){
-           $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
+            echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
+//           $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
            echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
            echo "Left :".$binaryCommissionObjectLeft->order_amount;
-            self::setPurchaseNode($binaryCommissionObjectLeft->user_id);
-             
+            $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+            $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
+            $parentObject->save(false);
         }
         //echo $totalLeftPurchase;
        // exit;
@@ -1290,59 +1293,57 @@ class BaseClass extends Controller {
                 
         $binaryCommissionObjectRight = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
         if($binaryCommissionObjectRight){
+
             echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight->order_amount;
             self::setPurchaseNode($binaryCommissionObjectRight->user_id);
             //add purchase amount
             
-        }else{
-            $binaryCommissionObjectRight1 = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $nodeId));
-            
-            $binaryCommissionObjectRight2 = BinaryCommissionTest::model()->findByAttributes(array('parent' => $binaryCommissionObjectRight1->parent,'position'=>'right')); 
-            if($binaryCommissionObjectRight2){
-            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight2->order_amount;
-           // self::setPurchaseNode($binaryCommissionObjectRight2->user_id);
-            }
         }
-        exit;
+//        exit;
         // Total Purchase amount
-        $totalPurchase = ($totalLeftPurchase + $totalRightPurchase);
+        $totalPurchase = ($parentObject->right_purchase + $parentObject->left_purchase+ $parentObject->order_amount);
+        $parentObject->total_purchase_amount = $totalPurchase;
+        $parentObject->save(false);
         //binary calculation
-        $totalBinaryAmount = self::setBinary($nodeId);
-        echo "<pre>"; print_r($totalBinaryAmount);exit;
-        
+        $parentObject = self::setBinary($parentObject);
+        return $parentObject;
     }
     
     /**
      * Calculate Binary for specific node
      * 
-     * @param type $nodeId
-     * @return float amount
+     * @param objectd $parentObject
+     * @return object
      */
-    public static function setBinary($nodeId){
+    public static function setBinary($parentObject){
+        $nodeId = $parentObject->user_id;
         $isValidNode = self::binaryEligible($nodeId);
         //binary calculation percentage
         $binaryPercentage = 0.01;
-        $leftFlush = 0;
-        $rightFlush = 0;
+      
         //is valid node
-        if(count($isValidNode)>0){
-            $leftNodeAmount = $isValidNode['leftAmount']+$leftFlush;
-            $rightNodeAmount = $isValidNode['rightAmount']+$rightFlush;
+        if($isValidNode){
+            $leftNodeAmount = $parentObject->left_purchase+$parentObject->left_carry;
+            $rightNodeAmount = $parentObject->right_purchase+$parentObject->right_carry;
             if($leftNodeAmount == $rightNodeAmount){
                 $binaryAmount = ($leftNodeAmount*$binaryPercentage);
-                $leftFlush = 0;
-                $rightFlush = 0;
+                $parentObject->left_carry = 0;
+                $parentObject->right_carry = 0;
             }
             if($leftNodeAmount < $rightNodeAmount){
                 $binaryAmount = ($leftNodeAmount*$binaryPercentage);
-                $leftFlush = 0;
+                $parentObject->left_carry = 0;
+                $parentObject->right_carry = ($rightNodeAmount - $leftNodeAmount);
             }
             if($leftNodeAmount > $rightNodeAmount){
-                $binaryAmount = ($leftNodeAmount*$binaryPercentage);
-                $rightFlush = 0;
+                $binaryAmount = ($rightNodeAmount*$binaryPercentage);
+                $parentObject->right_carry = 0;
+                $parentObject->left_carry = ($leftNodeAmount-$rightNodeAmount);
             }
-            return $binaryAmount;
+            $parentObject->commission_amount = $binaryAmount;
+            $parentObject->save(false);
         }
+        return $parentObject;
         
     }
     
@@ -1353,17 +1354,16 @@ class BaseClass extends Controller {
      * @return boolean | amount
      */
     public static function binaryEligible($nodeId){
-        //find the left node amount
-        $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left'));   
-        //find left node amount
-        $binaryCommissionObjectRight = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId ,'position'=>'right'));
-        if (!empty($binaryCommissionObjectLeft) && !empty($binaryCommissionObjectRight)) {
-            //send both node purchase amount
-            $binaryAmount['leftAmount'] = $binaryCommissionObjectLeft->order_amount;
-            $binaryAmount['rightAmount'] = $binaryCommissionObjectRight->order_amount;
-            return $binaryAmount;
-        }
-        return false;
+        return true; 
+//        //find the left node amount
+//        $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left'));   
+//        //find left node amount
+//        $binaryCommissionObjectRight = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId ,'position'=>'right'));
+//        if (!empty($binaryCommissionObjectLeft) && !empty($binaryCommissionObjectRight)) {
+//            //send both node purchase amount
+//            return true;
+//        }
+//        return false;
     }
 
 }

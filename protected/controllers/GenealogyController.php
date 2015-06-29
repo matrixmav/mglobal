@@ -136,57 +136,11 @@ class GenealogyController extends Controller {
     
     public function actionBinaryCalc() {
         $adminId = 1;
-        BaseClass::setPurchaseNode($adminId);
-     /*$total = 0;
-     $binaryCommissionObjectAdmin = BinaryCommissionTest::model()->findByAttributes(array('user_id' => 1));
-     $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $adminId,'position'=>'left'));   
-     $binaryCommissionObjectRight = BinaryCommissionTest::model()->findByAttributes(array('parent' => $adminId ,'position'=>'right'));
-      if (!empty($binaryCommissionObjectLeft) && !empty($binaryCommissionObjectRight)) 
-     {
-         
-         $binaryCommissionObjectImmidiate = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $adminId,'position'=>'left'));
-         $binaryCommissionObjectImmidiateR = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $adminId,'position'=>'right'));
-         //echo "<pre>";var_dump($binaryCommissionObjectImmidiateR);
-         if($binaryCommissionObjectLeft->order_amount < $binaryCommissionObjectRight->order_amount)
-         {
-             $total = $binaryCommissionObjectAdmin->commission_amount + $binaryCommissionObjectLeft->order_amount*10/100;
-             
-             $totalImmidiate = $binaryCommissionObjectImmidiate->commission_amount + $binaryCommissionObjectLeft->order_amount*10/100;
-             $totalImmidiateR = $binaryCommissionObjectImmidiateR->commission_amount + $binaryCommissionObjectLeft->order_amount*10/100;
-            
-         }
-         elseif($binaryCommissionObjectLeft->order_amount > $binaryCommissionObjectRight->order_amount){
-             $total = $binaryCommissionObjectAdmin->commission_amount + $binaryCommissionObjectRight->order_amount*10/100;
-             
-             $totalImmidiate = $binaryCommissionObjectImmidiate->commission_amount + $binaryCommissionObjectRight->order_amount*10/100;
-             $totalImmidiateR = $binaryCommissionObjectImmidiateR->commission_amount + $binaryCommissionObjectRight->order_amount*10/100;
-             
-         }
-         else{
-             $total = $binaryCommissionObjectAdmin->commission_amount + $binaryCommissionObjectRight->order_amount*10/100;
-             
-             $totalImmidiate = $binaryCommissionObjectImmidiate->commission_amount + $binaryCommissionObjectRight->order_amount*10/100;
-             $totalImmidiateR = $binaryCommissionObjectImmidiateR->commission_amount + $binaryCommissionObjectRight->order_amount*10/100;
-             
-         }
-         $binaryCommissionObjectAdmin->commission_amount = $total;
-         $binaryCommissionObjectAdmin->save();
-         if($binaryCommissionObjectImmidiate->user_id !=1){
-         $binaryCommissionObjectImmidiate->commission_amount = $totalImmidiate;
-         $binaryCommissionObjectAdmin->save();
-         $binaryCommissionObjectImmidiateR->commission_amount = $totalImmidiateR;
-         $binaryCommissionObjectImmidiateR->save();
-         }
-         $this->actionBinaryCalc($binaryCommissionObjectLeft->user_id);
-         $this->actionBinaryCalc($binaryCommissionObjectRight->user_id);
-        
-         //$searchModel = new Genealogy();
-         //$myInfo = $searchModel->BinaryCalc($binaryCommissionObjectLeft->user_id);
-         //self::binarycalc($binaryCommissionObjectRight->user_id); 
-     }else{
-         echo "failed";exit;
-     }*/
-        //self::BinaryCalc($binaryCommissionObjectLeft->user_id);
+        $parentObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $adminId)); 
+        $parentObject = BaseClass::setPurchaseNode($parentObject);
+        if($parentObject){
+            echo "done!!";exit;
+        }
     }
     
     
