@@ -61,7 +61,7 @@
 <script>
     function validationfrom()
     {
-        alert('dss');
+        
      $("#frmPayPal").submit();
     }
   
