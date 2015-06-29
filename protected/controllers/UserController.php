@@ -450,6 +450,22 @@ class UserController extends Controller {
                             Yii::app()->session['frontloggedIN'] = "1";
                              
                             if (!empty(Yii::app()->session['package_id'])) {
+                            $orderObject = Order::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'status' => 1));
+                            
+                            $packageObject = Package::model()->findByPk(Yii::app()->session['package_id']);
+                            if(!empty($orderObject))
+                            {
+                                if($orderObject->package->type == 'basic' && $packageObject->type == 'advance' || $packageObject->type=='pro')
+                                {
+                                    $error = "<p class='error'>You are not allowed to choose higher package. Please choose another package</p>";
+                                }
+                                elseif($orderObject->package->type == 'advance' && $packageObject->type=='pro')
+                                {
+                                    $error = "<p class='error'>You are not allowed to choose higher package. Please choose another package</p>";
+                                }else{
+                                    $this->redirect("/package/domainsearch");
+                                }
+                            }
                                 $this->redirect("/package/domainsearch");
                             } else {
                                 $this->redirect("/profile/dashboard");
