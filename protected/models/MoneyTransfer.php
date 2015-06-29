@@ -134,9 +134,12 @@ class MoneyTransfer extends CActiveRecord
                 }
                 $status = 0;
                 //$fromUserId = 1;
-                //if(empty($role)){
-                    $fromUserId = Yii::app()->session['userid'];
-                //}
+                
+                 
+               $fromUserId = Yii::app()->session['userid'];
+               if(!empty($postDataArray['fromUserId'])){
+                    $fromUserId = $postDataArray['fromUserId'];
+                }
 
                 if(!empty($role)) {
                     $status= 1;
