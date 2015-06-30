@@ -30,7 +30,7 @@ class GenealogyController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'binarycalculation'),
+                'actions' => array('index', 'view', 'binarycalculation','binarycalc'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -130,6 +130,20 @@ class GenealogyController extends Controller {
 //                }
         //}
     }
+    
+    
+    
+    
+    public function actionBinaryCalc() {
+        $adminId = 1;
+        $parentObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $adminId)); 
+        $parentObject = BaseClass::setPurchaseNode($parentObject);
+        if($parentObject){
+            echo "done!!";exit;
+        }
+    }
+    
+    
 
     /**
      * Displays a particular model.

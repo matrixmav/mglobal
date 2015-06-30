@@ -350,7 +350,7 @@ class OrderController extends Controller {
         {
         $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
         }else{
-        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a><br/><br/><a class="btn green fa fa-edit margin-right15 fancybox" href="/order/pendingpayment?id='.$id.'" data-toggle="modal">Make Payment</a>';
+        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a><br/><br/><a class="btn green fa fa-edit margin-right15" href="/order/pendingpayment?id='.$id.'" id="tip7">Make Payment</a>';
          }
         echo $title;
     }

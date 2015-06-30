@@ -9,16 +9,25 @@ $this->breadcrumbs = array(
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+   <div class="portlet box red   ">
+    <div class="portlet-title">
+							<div class="caption">
+								Verification
+							</div>
+    </div>
+        <div class="portlet-body form">
     <form action="/profile/documentverification" method="post" class="form-horizontal" onsubmit="return validation();" enctype = "multipart/form-data">
      
         <fieldset>
-            <legend>Verification</legend>
+            <div class="form-body">
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="firstname">Upload / Update ID Proof <span class="require">*</span></label>
-                <div class="col-lg-8 fileupload fileupload-new">
+                <div class="col-lg-6 col-xs-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
-                        <span class="btn btn-primary btn-file btn-1"><span class="fileupload-new"><input type="file" id="id_proof" class="form-control11" name="id_proof"></span></div>
-                        <span class="example1">(Upload jpg ,png files only)</span> 
+                       <span class="fileupload-new"><input type="file" id="id_proof" class="form-control11" name="id_proof"></span></div>
+                    <p class="help-block">(Upload jpg ,png files only)</p>
+                </div>
+                <div class="col-lg-2 col-xs-4">
                         <?php 
                         if(!empty($userObject) && $userObject->id_proof!=''){?>
                         <span class="example">
@@ -30,10 +39,12 @@ $this->breadcrumbs = array(
          
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Upload / Update Address Proof <span class="require">*</span></label>
-                <div class="col-lg-8 fileupload fileupload-new">
+                <div class="col-lg-6 col-xs-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
-                         <span class="btn btn-primary btn-file btn-1"><input type="file" id="address_proof" class="form-control11" name="address_proof"></span></div>
-                         <span class="example1">(Upload jpg ,png files only)</span> 
+                        <span class="fileupload-new"><input type="file" id="address_proof" class="form-control11" name="address_proof"></span></div>
+                    <p class="help-block">(Upload jpg ,png files only)</p>
+                </div>
+                   <div class="col-lg-2 col-xs-4">
                              <?php if(!empty($userObject) && $userObject->address_proff!=''){?>
                     <span class="example"><a href="/upload/verification-document/<?php echo $userObject->address_proff;?>" target="_blank"><img src="/upload/verification-document/<?php echo $userObject->address_proff;?>" width="50" height="50"></a></span>
                     <?php }?>
@@ -48,16 +59,17 @@ $this->breadcrumbs = array(
                     <div id="master_pin_error" class="form_error"></div>
                 </div>
             </div>
-            
+            </div>
         </fieldset>
 
-    <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Update" class="btn red">
-                
+        <div class="form-actions right">                     
+               <input type="submit" name="submit" value="Update" class="btn red">
+                 
             </div>
-        </div>
+    
     </form>
+</div>
+   </div>
 </div>
 
 <script>

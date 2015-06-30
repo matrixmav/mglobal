@@ -67,7 +67,7 @@
                                         }
                                         ?>
                                         <div class="col-sm-12 col-xs-12 tleft">
-                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);">
+                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);" class="radiobutton">
                                             <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                         </div>
                                         <?php
@@ -82,7 +82,7 @@
                             <div class="payChoose col-sm-4">
                                 <div class="payOption clearfix">
                                     <div class="col-sm-12 col-xs-12 tleft">
-                                        <input type="radio" id="myRadio" name="myRadio" value="paypal">
+                                        <input type="radio" id="myRadio" name="myRadio" value="paypal" class="paymentradio">
                                         <label for="myRadio">Paypal</label>
 
                                     </div>
@@ -119,7 +119,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg"></div>
+                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
 
                 </div>
             </div>
@@ -256,5 +256,15 @@
 
     }
 
-
+function clearInput()
+{
+   $("#totalAmount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
+   $("#payAmount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
+   $("#ppamount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
+   $("#totalusedrp").val('');
+   $("#walletused").val('');
+   $('.radiobutton').prop('checked', false);
+   $('.paymentradio').prop('checked', false);
+   $('#totalAmounDiv').fadeOut();
+}
 </script>

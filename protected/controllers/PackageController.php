@@ -26,7 +26,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletcalculation', 'walletcalc','profilecouponapply'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -727,6 +727,59 @@ class PackageController extends Controller {
 
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
+    }
+    
+    public function actionWalletThankYou() {
+        
+     if (!(empty($_GET))) {
+             
+            $transactionId = $_GET['transaction_id'];
+            $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
+            $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+	     if ($transactionObject->status == 1) {
+            $transactionObject->status = 1;
+             $transactionObject->created_at = date('Y-m-d');
+            $transactionObject->update();
+			
+	 try {
+                    //deduct from to user wallet
+                    $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => 1));
+                    $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 1));
+                    if($toUserWalletObject){
+                        //echo "<pre>";echo $transactionObject->paid_amount;exit;
+                         $toAmount = ($toUserWalletObject->fund) + ($transactionObject->paid_amount);
+                        $toUserWalletObject->fund = $toAmount;
+                        $toUserWalletObject->update();
+                    } else {
+                        //echo "nn";exit;
+                        Wallet::model()->create(Yii::app()->session['userid'],$transactionObject->paid_amount,1);
+                    }
+                } catch (Exception $ex) {
+                    $ex->getMessage();
+                    exit;
+                }		
+				
+	 try {	
+                $moneyTransferDataArray['fund'] = $transactionObject->paid_amount;
+                $moneyTransferDataArray['comment'] = "Wallet Amount Transfered";
+                $moneyTransferDataArray['walletId'] = $adminWalletObject->id;
+                $moneyTransferDataArray['toWalletId'] = $toUserWalletObject->id;
+                $moneyTransferDataArray['fromUserId'] = 1;
+                $moneyTransferDataArray['fundType'] = 1;	
+	        $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,1);
+                }   catch (Exception $ex) {
+                    
+                    
+                    $ex->getMessage();
+                    exit;
+                }  
+        }
+        $successMsg = "Your cash has been added to your wallet. Please check";
+            echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
+
+      $this->render('wallethankyou', array('successMsg' => $successMsg
+        ));
+      }
     }
 
     /*

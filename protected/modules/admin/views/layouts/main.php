@@ -335,8 +335,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = '';
                                 }
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="/admin/default/dashboard"> <span
-                                            class="leftmenu-hotel"></span> <span class="title">Dashboard</span>
+                                <li class="<?php echo $activecls; ?>"><a href="/admin/default/dashboard"><i class="fa fa-home"></i>  <span class="title">Dashboard</span>
                                         <span class="selected"></span> 
                                         <?php /*<span
                                             class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
@@ -430,8 +429,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <span
-                                            class="leftmenu-hotel"></span> <span class="title">Operation</span>
+                                <li class="<?php echo $activecls; ?>"><a href="javascript:;"> <i class="fa fa-cog"></i>
+                                    <span class="title">Operation</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'user') ? "open" : ''; ?>">
                                         </span>
@@ -466,7 +465,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>	
                                 <?php
                              
-                        }}
+                        }}}
                            if (in_array('mail', $accessArr)) { 
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
@@ -476,7 +475,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                                 <li
                                     class="<?php echo ($curControllerLower == 'mail') ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-hotel"></span> <span
+                                    <a href="javascript:;"> <i class="fa fa-envelope-o"></i> <span
                                             class="title">Mail</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'mail') ? "open" : ''; ?>">
@@ -573,7 +572,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                    <a href="javascript:;"> <i class="fa fa-file-text-o"></i>
+
                                         <span class="title">Reports</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'report') ? "open" : ''; ?>">
@@ -631,7 +631,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'package') || ($curControllerLower == 'package')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                    <a href="javascript:;"> <i class="fa fa-archive"></i>
+
                                         <span class="title">Package</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'package') ? "open" : ''; ?>">
@@ -678,7 +679,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 
                                 <li
                                     class="<?php echo ($curControllerLower == 'buildtemp') ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                    <a href="javascript:;"> <i class="fa fa-building-o"></i>
                                         <span class="title">Builder</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'buildtemp') ? "open" : ''; ?>">
@@ -714,7 +715,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     
                             $bases_pmenu = 4;
                             
-                        }?>	
+                        ?>	
                             <!-- New Menu added here -->
                             <?php if (in_array('ads', $accessArr) || in_array('ads_add', $accessArr) || in_array('ads_list', $accessArr)) {
                              $reservation_pmenu = 9;
@@ -740,7 +741,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                 
                                 <li
                                     class="<?php echo (($curControllerLower == 'BuildTemp') || ($curControllerLower == 'ads')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                    <a href="javascript:;"> <i class="fa fa-slideshare"></i>
+
                                         <span class="title">Ads</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'BuildTemp') ? "open" : ''; ?>">
@@ -786,7 +788,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 
                                 <li
                                     class="<?php echo (($curControllerLower == 'userhasaccess') || ($curControllerLower == 'userhasaccess')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                    <a href="javascript:;"> <i class="fa fa-user"></i>
                                         <span class="title">Member Access</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curControllerLower == 'userhasaccess') ? "open" : ''; ?>">
