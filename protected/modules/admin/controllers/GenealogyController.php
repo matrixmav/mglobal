@@ -51,7 +51,7 @@ class GenealogyController extends Controller {
         $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
         $parentObject = BaseClass::setPurchaseNode($parentObject);
         if($parentObject){
-            echo "<script>alert('Binary Generarted Successfully.');return false;</script>";
+            echo "<script type='text/javascript'>alert('Binary Generarted Successfully.');return false;</script>";
         }
     }
 }
