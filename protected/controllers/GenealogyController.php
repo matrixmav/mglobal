@@ -134,14 +134,7 @@ class GenealogyController extends Controller {
     
     
     
-    public function actionBinaryCalc() {
-        $adminId = 1;
-        $parentObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $adminId)); 
-        $parentObject = BaseClass::setPurchaseNode($parentObject);
-        if($parentObject){
-            echo "done!!";exit;
-        }
-    }
+    
     
     
 
