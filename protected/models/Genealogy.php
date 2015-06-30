@@ -31,7 +31,7 @@ class Genealogy extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('parent, user_id, sponsor_user_id, position, status, created_at, updated_at', 'required'),
+			array('parent, user_id, sponsor_user_id, position,order_amount,total_purchase_amount,commission_amount,left_purchase,right_purchase,right_carry,left_carry, status, created_at, updated_at', 'required'),
 			array('user_id, sponsor_user_id, status', 'numerical', 'integerOnly'=>true),
 			array('parent', 'length', 'max'=>50),
 			array('position', 'length', 'max'=>100),
@@ -64,6 +64,13 @@ class Genealogy extends CActiveRecord
 			'user_id' => 'User',
 			'sponsor_user_id' => 'Sponsor User',
 			'position' => 'Position',
+                        'order_amount' => 'Order Amount',
+                        'total_purchase_amount' => 'Total Purchase Amount',
+                        'commission_amount' => 'Commission Amount',
+                        'left_purchase' => 'Left Purchase',
+                        'right_purchase' => 'Right Purchase',
+                        'right_carry' => 'Right Carry',
+                        'left_carry'=>'Left Carry',
 			'status' => 'Status',
                         'order_status' => 'Order Status',
                         'order_amount' => 'Order Amount',
@@ -96,6 +103,14 @@ class Genealogy extends CActiveRecord
 		$criteria->compare('sponsor_user_id',$this->sponsor_user_id);
 		$criteria->compare('position',$this->position,true);
 		$criteria->compare('status',$this->status);
+                $criteria->compare('order_amount',$this->order_amount);
+                $criteria->compare('total_purchase_amount',$this->total_purchase_amount);
+                $criteria->compare('commission_amount',$this->commission_amount);
+                $criteria->compare('left_purchase',$this->left_purchase);
+                $criteria->compare('right_purchase',$this->right_purchase);
+                $criteria->compare('right_carry',$this->right_carry);
+                $criteria->compare('left_carry',$this->left_carry);
+                //$criteria->compare('right_carry',$this->right_carry);
                 $criteria->compare('order_status',$this->order_status);
                 $criteria->compare('order_amount',$this->order_amount);
 		$criteria->compare('created_at',$this->created_at,true);
