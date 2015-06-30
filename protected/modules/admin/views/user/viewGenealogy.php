@@ -30,15 +30,20 @@ if (!empty($_GET['id'])) {
         </div>
         <div class="col-md-3">
             <?php 
-            if(isset($_GET['msg'])){
+            if(isset($_POST['submit'])){
                 echo '<p class="btn green"> Binary Generated Successfully</p>';
             }
+            
             ?>
             <p id="loader"></p>
         </div>
         <div class="col-md-3">
 
-            <a href="" id="generateCommission" class="btn red" onclick="generateBinary()">Generate Binary Commission</a>
+            <form action="binarycalculation" method="post" class="form-inline">                
+                <input type="submit" name="submit" class="btn red btn-primary confirmOk" value="Generate Binary Commission">
+            </form>
+            
+            <!--<a href="" id="generateCommission" class="btn red" onclick="generateBinary()">Generate Binary Commission</a>-->
 
         </div>
 
@@ -97,14 +102,14 @@ if (!empty($_GET['id'])) {
                         if (count($genealogyRightListObject) > 0) {
                             $getColor = BaseClass::getPackageName($genealogyRightListObject[0]->user_id);
                             ?>
-                            <a class="<?php echo $getColor; ?>" href="<?php echo $treeVar . '?id=' . $genealogyRightListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightListObject[0]->user->name; ?> </span></div></a>
+                            <a class="<?php echo $getColor; ?>" href="<?php echo $treeVar . '?id=' . $genealogyRightListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightListObject[0]->user->name; ?></span></div></a>
                             <ul>
                                 <?php $genealogyRightLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'left'"); ?>
                                 <?php
                                 if (count($genealogyRightLeftListObject) > 0) {
                                     $getColor = BaseClass::getPackageName($genealogyRightLeftListObject[0]->user_id);
                                     ?>
-                                    <li><a class="<?php echo $getColor; ?>" href="<?php echo $treeVar . '?id=' . $genealogyRightLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightLeftListObject[0]->user->name; ?> </span></div></a></li>
+                                    <li><a class="<?php echo $getColor; ?>" href="<?php echo $treeVar . '?id=' . $genealogyRightLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightLeftListObject[0]->user->name; ?></span></div></a></li>
                                 <?php } else { ?>
                                     <li><a class="<?php echo $empty; ?>" href="<?php echo $regVar . $genealogyRightListObject[0]->user->name; ?>&position=left"><div><span>+</span></div></a></li>  
                                 <?php } ?>     
@@ -291,14 +296,16 @@ if (!empty($_GET['id'])) {
     function generateBinary() {
         $.ajax({
             type: "post",
-            url: "/genealogy/binarycalculation",
+            url: "/admin/genealogy/binarycalculation",
             data: "adminId=" + 1,
+            dataType: "json",
             beforeSend: function () {
                 $('#loader').html('loading...');
             },
             success: function (msg) {
+              alert(msg);
                 $('#loader').html(msg);
-                window.location.href = "/admin/user/genealogy?msg=1";
+               // window.location.href = "/admin/user/genealogy?msg=1";
             }
         });
     }

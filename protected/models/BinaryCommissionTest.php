@@ -121,7 +121,7 @@ class BinaryCommissionTest extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        public function create($genealogyObject , $packageObject){
+        /*public function create($genealogyObject , $packageObject){
             $modelBinary = new BinaryCommissionTest;
             $modelBinary->parent = $genealogyObject->parent ;
             $modelBinary->user_id = Yii::app()->session['userid'];
@@ -134,5 +134,5 @@ class BinaryCommissionTest extends CActiveRecord
 
             }  
             return ;
-        }
+        }*/
 }

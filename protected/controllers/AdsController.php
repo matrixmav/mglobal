@@ -30,7 +30,7 @@ class AdsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view','yearadslist'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -57,18 +57,45 @@ class AdsController extends Controller {
         ));
     }
 
-    public function getSocialButton($data, $row) {
+    public function getSocialButton($data, $row) {        
         $this->renderPartial('shareoptions', array('data' => $data), false, true);
        
     }
     
-    public function isShared($data, $row) { 
+    public function isShared($data, $row) {
+        
         $userid = Yii::app()->session['userid'];
         $existingShareObject = UserSharedAd::model()->findByAttributes(array('user_id'=>$userid, 'ad_id'=>$data->id,'created_at'=>date('Y-m-d')));
         if(!empty($existingShareObject)){
             echo "Earned";
         }
     }
+
+    /* Next One Year Insertion */
+    
+    public function actionYearAdsList(){
+        $userId = Yii::app()->session['userid'];
+        $next_year = strtotime('+1 year');
+        $current_time = time();
+        
+        $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId));
+        
+        if(count($userAdsObject) == 0 ){
+            while($current_time < $next_year){  
+                $randAds = Ads::model()->find(array('select'=>'*', 'limit'=>'1', 'order'=>'rand()'));        
+                $current_time = strtotime('+1 day', $current_time);                        
+                $modelUserShareAd = new UserSharedAd();
+                $modelUserShareAd->user_id = Yii::app()->session['userid'];
+                $modelUserShareAd->date = date('Y-m-d', $current_time);
+                $modelUserShareAd->ad_id = $randAds->id;
+                $modelUserShareAd->status = 1;
+                $modelUserShareAd->created_at = date('Y-m-d');
+                $modelUserShareAd->save(false);               
+            }
+        }
+    }
+
+
 
     /**
      * Creates a new model.
@@ -131,13 +158,13 @@ class AdsController extends Controller {
      */
     public function actionIndex() {
 
-        $model = new Ads;
-        $pageSize = 100;
+        $model = new UserSharedAd;
+        $pageSize = 400;
         $successMsg = "";
 
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('name != "admin"'), 'order' => 'id DESC',
+                'condition' => (' user_id = "'.Yii::app()->session['userid'].'"'),
             ), 'pagination' => array('pageSize' => $pageSize),
         ));
         if (!empty($_POST['search'])) {

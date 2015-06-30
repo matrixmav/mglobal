@@ -33,7 +33,7 @@ $this->menu = array(
                     'summaryText' => 'Showing {start} to {end} of {count} entries',
                     'template' => '{items} {summary} {pager}',
                     'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
-                    'rowCssClassExpression' => '($data->created_at > date("Y-m-d") || $data->created_at < date("Y-m-d")) ? "rowFade" : "odd"',
+                    'rowCssClassExpression' => '($data->date == date("Y-m-d")) ? "odd" : "rowFade"',
                     'pager' => array(
                         'header' => false,
                         'firstPageLabel' => "<<",
@@ -51,37 +51,31 @@ $this->menu = array(
                             'value' => '$row+1',
                         ),
                         array(
-                            'name' => 'name',
-                            'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->name)?$data->name:""',
-                        ),
-                        array(
-                            'name' => 'description',
-                            'header' => '<span style="white-space: nowrap;">Description &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->description)?$data->description:""',
-                        ),
-                        array(
-                            'name' => 'created_at',
+                            'name' => 'date',
                             'header' => '<span style="white-space: nowrap;">Date &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->created_at)?$data->created_at:""',
+                            'value' => 'isset($data->date)?$data->date:""',
                         ),
                         array(
-                            'name' => 'created_at',
+                            'name' => 'ad_id',
+                            'header' => '<span style="white-space: nowrap;">Ad Name &nbsp; &nbsp; &nbsp;</span>',
+                            'value' => 'isset($data->ads->name)?$data->ads->name:""',
+                        ),
+                        array(
+                            'name' => 'status',
                             'header' => '<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
-                            'htmlOptions' => array('width' => '25%'),
-                            'value' => array($this, 'isShared')
+                            'value' => 'isset($data->created_at)?$data->created_at:""',
                         ),
                         array(
                             'name' => 'created_at',
                             'header' => '<span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>',
                             'htmlOptions' => array('width' => '25%'),
+                          //  'value' => 'isset($data->created_at)?$data->created_at:""',                           
                             'value' => array($this, 'getSocialButton')
                         ),
+                        //                       
                     ),
                 ));
                 ?>
-
-
             </div>
         </div>
 

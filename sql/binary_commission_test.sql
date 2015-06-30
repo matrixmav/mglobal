@@ -63,3 +63,17 @@ INSERT INTO `binary_commission_test` (`id`, `user_id`, `parent`, `position`, `da
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+/* alerted geneology table */
+
+
+ALTER TABLE `genealogy` 
+ADD (`order_amount` float NOT NULL,
+ `total_purchase_amount` float NOT NULL,
+ `commission_amount` float NOT NULL,
+ `left_purchase` float NOT NULL,
+  `right_purchase` float NOT NULL,
+  `right_carry` float NOT NULL,
+  `left_carry` float NOT NULL );
