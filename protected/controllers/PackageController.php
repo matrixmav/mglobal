@@ -574,8 +574,9 @@ class PackageController extends Controller {
                     /* For Binary Commision */
                     $genealogyObject = Genealogy::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
                     
-                    if($genealogyObject){                        
-                        BinaryCommissionTest::model()->create($genealogyObject, $packageObject->amount);     
+                    if(!empty($genealogyObject)){                        
+                      $genealogyObject->order_amount = $packageObject->amount;
+                        $genealogyObject->save(false);  
                     }
                     
                     
