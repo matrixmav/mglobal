@@ -63,3 +63,26 @@ INSERT INTO `binary_commission_test` (`id`, `user_id`, `parent`, `position`, `da
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+/* alerted geneology table */
+
+
+CREATE TABLE IF NOT EXISTS `genealogy` (
+`id` int(11) NOT NULL,
+  `parent` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `sponsor_user_id` int(11) NOT NULL,
+  `position` varchar(100) NOT NULL,
+  `order_amount` float NOT NULL,
+  `total_purchase_amount` float NOT NULL,
+  `commission_amount` float NOT NULL,
+  `left_purchase` float NOT NULL,
+  `right_purchase` float NOT NULL,
+  `right_carry` float NOT NULL,
+  `left_carry` float NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
