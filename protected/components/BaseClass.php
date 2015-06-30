@@ -1276,13 +1276,12 @@ class BaseClass extends Controller {
         $nodeId = $parentObject->user_id;
         //find left present | not
         //$totalLeftPurchase = 0;
-        
         $binaryCommissionObjectLeft = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
-        if($binaryCommissionObjectLeft){
-            echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
+         if($binaryCommissionObjectLeft){
+            //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
 //           $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
-           echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
-           echo "Left :".$binaryCommissionObjectLeft->order_amount;
+           //echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
+           //echo "Left :".$binaryCommissionObjectLeft->order_amount;
             $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
             $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
             $parentObject->save(false);
@@ -1293,11 +1292,10 @@ class BaseClass extends Controller {
                 
         $binaryCommissionObjectRight = BinaryCommissionTest::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
         if($binaryCommissionObjectRight){
-
-            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight->order_amount;
-            self::setPurchaseNode($binaryCommissionObjectRight->user_id);
-            //add purchase amount
-            
+//            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight->order_amount;
+            $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+            $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
+            $parentObject->save(false);
         }
 //        exit;
         // Total Purchase amount
@@ -1342,10 +1340,41 @@ class BaseClass extends Controller {
             }
             $parentObject->commission_amount = $binaryAmount;
             $parentObject->save(false);
+            if($binaryAmount !=0)
+            {
+            self::createCommissionTransaction($binaryAmount,$parentObject);
+            }
+            
         }
         return $parentObject;
         
     }
+    
+    public static function createCommissionTransaction($binaryAmount,$parentObject) {
+            $nodeId = $parentObject->user_id;  
+            $postDataArray['paid_amount'] = $binaryAmount;
+            $userObject = User::model()->findByAttributes(array('id' => $parentObject->user_id));
+            $transactionObjectect = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            /* wallet object */
+            $walletObject = Wallet::model()->findByAttributes(array('user_id' => $nodeId, 'type' => 3)); 
+            if(!empty($walletObject))
+            {
+                $walletObject->fund = $walletObject->fund + $binaryAmount;
+                $walletObject->save(false);
+            }else{
+                $walletObject = Wallet::model()->create($nodeId,$binaryAmount,3);
+            }
+            $postDataArray['userId'] = $nodeId;
+            $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 3));
+            $postDataArray['toWalletId'] = $adminWalletObject->id;
+            $postDataArray['userId'] = $nodeId;
+            $postDataArray['walletId'] = $walletObject->id;
+            $postDataArray['fromUserId'] = 1;
+            $postDataArray['comment'] = 'Binary Commission Transfered.'; 
+            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount,'admin');  
+             return 1;   
+            
+            }
     
     /**
      * Check binary node both the purchase amount for given node
