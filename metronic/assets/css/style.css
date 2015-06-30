@@ -4454,7 +4454,7 @@ UI Loading
 }
 #orderModal .col-lg-12.col-sm-12.col-xs-12{ padding-left: 5px; padding-right: 5px;}
 #orderModal .modal-body{ padding: 5px;}
-.rowFade{opacity: .4;}
+.rowFade{opacity: .4;   pointer-events: none;}
 .btn.face {
     background: #0b5eb3 none repeat scroll 0 0 !important;
     border-radius: 2px !important;
