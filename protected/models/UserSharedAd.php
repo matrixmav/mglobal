@@ -46,6 +46,8 @@ class UserSharedAd extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'ads' => array(self::BELONGS_TO, 'Ads', 'ad_id'),
+                    'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
