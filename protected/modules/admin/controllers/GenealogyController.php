@@ -46,13 +46,6 @@ class GenealogyController extends Controller {
             ),
         );
     }
-    public function actionBinaryCalc() {
-        $adminId = 1;
-        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
-        $parentObject = BaseClass::setPurchaseNode($parentObject);
-        if($parentObject){
-            echo "<script type='text/javascript'>alert('Binary Generarted Successfully.');return false;</script>";
-        }
-    }
+    
 }
 ?>
