@@ -140,4 +140,19 @@ class Genealogy extends CActiveRecord
             }
             return $rightTotalAmount;
         }
+        
+       /* public function create($genealogyObject , $packageObject){
+            $modelGenealogy = new Genealogy;
+            $modelGenealogy->parent = $genealogyObject->parent ;
+            $modelGenealogy->user_id = Yii::app()->session['userid'];
+            $modelGenealogy->position = $genealogyObject->position;
+            $modelGenealogy->order_amount = $packageObject ;
+            $modelGenealogy->date = date('Y-m-d');
+            $modelGenealogy->status = 1;
+            $modelGenealogy->created_at = date('Y-m-d');
+            if ($modelBinary->save(false)) {
+
+            }  
+            return ;
+        }*/
 }
