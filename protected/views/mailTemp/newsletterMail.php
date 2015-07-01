@@ -39,6 +39,18 @@
                   <tr>
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
+           
              
             
+            <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
+            <tr>
+            	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
+               
+                  </td>
+                  <tr>
+                  <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
              <?php $this->renderPartial('/mailTemp/footer'); ?>
