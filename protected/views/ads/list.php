@@ -63,7 +63,7 @@ $this->menu = array(
                         array(
                             'name' => 'Earn',
                             'header' => '<span style="white-space: nowrap;">Earn &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->created_at)?$data->created_at:""',
+                            'value' => '$data->status == 1 ?"Earn":"Not Earn"',
                         ),
                         array(
                             'name' => 'created_at',
