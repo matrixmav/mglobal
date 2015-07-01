@@ -791,6 +791,8 @@ class PackageController extends Controller {
                     } else {
                         //echo "nn";exit;
                         Wallet::model()->create(Yii::app()->session['userid'],$transactionObject->paid_amount,1);
+                        $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => 1));
+                    
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();
