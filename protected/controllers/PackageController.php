@@ -560,7 +560,7 @@ class PackageController extends Controller {
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 
                 /*code to update membership type*/
-                if($userObject->memebership_type ==''){
+                if($userObject->memebership_type =='0'){
                 $userObject->memebership_type = $packageObject->type;
                 $userObject->save(false);
                 }       
