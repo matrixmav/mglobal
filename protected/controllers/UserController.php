@@ -444,14 +444,26 @@ class UserController extends Controller {
                         if ($flagPassword == 'password' && $flagMaster == 'masterkey') {
                             $identity = new UserIdentity($username, $password);
                             if ($identity->userAuthenticate())
-                                Yii::app()->user->login($identity);
+                            Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
                             Yii::app()->session['username'] = $getUserObject->name;
                             Yii::app()->session['frontloggedIN'] = "1";
-                             
+                            
                             if (!empty(Yii::app()->session['package_id'])) {
+                             $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                             if(!empty($userObject)){
+                             $packageObject = Package::model()->findByPk(Yii::app()->session['package_id']);   
+                             if($userObject->membership_type=='1' && $packageObject->type=='2' || $packageObject->type=='3'){
+                             echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#accordion'});</script>";   
+                            }
+                             else if($userObject->membership_type=='2' && $packageObject->type=='3'){
+                              echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#accordion'});</script>";      
+                             }else{   
                               $this->redirect("/package/domainsearch");
-                            } else {
+                             }
+                            }
+                            
+                             } else {
                                 $this->redirect("/profile/dashboard");
                             }
                         } else {
