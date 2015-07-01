@@ -42,7 +42,7 @@
           <form class="form-inline">
               <div class="form-group">
                   <input type="email" class="form-control mailTxt" id="email" placeholder="Email">
-                  <button type="submit" class="btn  signBtn" onclick="return subscription();">Sign in</button>
+                  <input type="button" class="btn  signBtn" onclick="subscription();" value="Sign in">
                   <div id="show_wornings" class="error"></div>
                   <div id="show_worningS" class="success"></div>
                    
@@ -122,7 +122,13 @@
             function subscription()
             {
             var email = document.getElementById('email').value;
-            if(!isEmail(document.getElementById('email').value)){
+            if(document.getElementById('email').value==''){
+            document.getElementById('show_wornings').style.display="block";
+            document.getElementById("show_wornings").innerHTML = "Please enter email.";
+            document.getElementById('email').focus();
+            return false;
+            }
+            else if(!isEmail(document.getElementById('email').value)){
             document.getElementById('show_wornings').style.display="block";
             document.getElementById("show_wornings").innerHTML = "Please enter valid email.";
             document.getElementById('email').focus();
