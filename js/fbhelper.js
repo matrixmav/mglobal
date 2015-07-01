@@ -1,5 +1,5 @@
       FB.init({appId: "470691686428254", status: true, cookie: true});
-      function postToFeed(link, name, description, caption ,img,adId ,rp) {
+      function postToFeed(link, name, description, caption ,img,adId ) {
         
         var obj = {
           method: 'feed',
@@ -17,7 +17,7 @@
             $.ajax({
             type: "post",
             url: "/MoneyTransfer/adrpfund",
-            data: { "socialId": "1", "adId" : adId , "rp" : rp } ,
+            data: { "socialId": "1", "adId" : adId } ,
             success: function (msg) { 
                 alert("Post was published on facebook."); 
                 location.reload();

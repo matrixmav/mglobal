@@ -558,11 +558,12 @@ class PackageController extends Controller {
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
-                
+             
                 /*code to update membership type*/
-                if($userObject->memebership_type =='0'){
-                $userObject->memebership_type = $packageObject->type;
-                $userObject->save(false);
+                
+                if($userObject->membership_type =='0'){
+                    $userObject->membership_type = $packageObject->type;
+                    $userObject->save(false);
                 }       
                 $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
                  /*sponsor wallet*/
