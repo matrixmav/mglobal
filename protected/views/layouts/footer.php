@@ -42,9 +42,10 @@
           <form class="form-inline">
               <div class="form-group">
                   <input type="email" class="form-control mailTxt" id="email" placeholder="Email">
+                  <button type="submit" class="btn  signBtn" onclick="return subscription();">Sign in</button>
                   <div id="show_wornings" class="error"></div>
                   <div id="show_worningS" class="success"></div>
-                   <button type="submit" class="btn  signBtn" onclick="return subscription();">Sign in</button>
+                   
               </div>
           </form>
          
