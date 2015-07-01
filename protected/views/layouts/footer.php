@@ -43,8 +43,8 @@
               <div class="form-group">
                   <input type="email" class="form-control mailTxt" id="email" placeholder="Email">
                   <input type="button" class="btn  signBtn" onclick="subscription();" value="Sign in">
-                  <div id="show_wornings" class="error"></div>
-                  <div id="show_worningS" class="success"></div>
+                  <div id="show_wornings" class="error1"></div>
+                  <div id="show_worningS" class="success1"></div>
                    
               </div>
           </form>
