@@ -624,7 +624,35 @@ class PackageController extends Controller {
                     $ex->getMessage();
                     exit;
                 }
-                 
+                
+                /* Insert Ads */
+                $userId = Yii::app()->session['userid'];
+                $next_year = strtotime('+1 year');
+                $current_time = time();
+                $i = 1 ;
+                $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId));
+
+                if(count($userAdsObject) == 0 ){
+                    while($current_time < $next_year){  
+
+                        $randAds = Ads::model()->find(array('select'=>'*', 'limit'=>'1', 'order'=>'rand()'));        
+                        if($i == 1){
+                            $current_time = strtotime('+0 day', $current_time);                        
+                        }else{
+                            $current_time = strtotime('+1 day', $current_time);
+                        }
+                            $modelUserShareAd = new UserSharedAd();
+                            $modelUserShareAd->user_id = Yii::app()->session['userid'];
+                            $modelUserShareAd->date = date('Y-m-d', $current_time);
+                            $modelUserShareAd->ad_id = $randAds->id;
+                            $modelUserShareAd->status = 0;
+                            $modelUserShareAd->created_at = date('Y-m-d');
+                            $modelUserShareAd->save(false);               
+                        $i++;
+                    }
+                }
+                
+                
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $sponsorUserObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
