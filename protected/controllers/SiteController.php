@@ -95,7 +95,7 @@ class SiteController extends Controller
 //            $stateCondition = array("id" => $stateName);
 //            $stateObject = $stateModel = State::model()->getStateByName($stateCondition);
 
-           $packageObject = Package::model()->findAll(array('limit' => '3'));
+           $packageObject = Package::model()->findAll(array('condition'=>'type=1','limit' => '3'));
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
           $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$userProfileObject,)); 
 	}
