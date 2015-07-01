@@ -851,7 +851,7 @@
         <!-- Pricing item BEGIN -->
         <?php foreach($advancePackageObject as $advancePackage){?>
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <?php if(Yii::app()->session['userid']!=''){?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?><div class="pricing-item">
+          <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a onclick="return showError();"> <?php }else{?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?><div class="pricing-item">
             <?php /*<div class="pricing-head">
               <h3><?php echo $package['name'];?></h3>
               <p><?php //echo $package['description1'];?></p>
@@ -866,7 +866,7 @@
                       <img src="/upload/package_image/<?php echo $advancePackage['image'];?>" alt="<?php echo $advancePackage['name'];?>" class="img-responsive">
             <div class="pricing-footer">
                 
-            <?php if(Yii::app()->session['userid']!=''){?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>Pick Now</a>
+            <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>Pick Now</a>
             </div>
                 </div>
                     </a>
@@ -894,7 +894,7 @@
         <!-- Pricing item BEGIN -->
         <?php foreach($proPackageObject as $proPackage){?>
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <?php if(Yii::app()->session['userid']!=''){?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?><div class="pricing-item">
+          <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a onclick="return showError();"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php } ?><div class="pricing-item">
             <?php /*<div class="pricing-head">
               <h3><?php echo $package['name'];?></h3>
               <p><?php //echo $package['description1'];?></p>
@@ -909,7 +909,7 @@
                       <img src="/upload/package_image/<?php echo $proPackage['image'];?>" alt="<?php echo $proPackage['name'];?>" class="img-responsive">
             <div class="pricing-footer">
                 
-            <?php if(Yii::app()->session['userid']!=''){?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>Pick Now</a>
+            <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>Pick Now</a>
             </div>
                 </div>
                     </a>
@@ -1090,5 +1090,10 @@
     }
 		});
 		});
+                
+    function showError()
+    {
+       alert('Sorry you are not allowed to pick this package. To pick this package register with different account');return false;
+    }
           //$(".myfancyTxtBox").fancybox();
 </script>
