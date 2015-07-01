@@ -480,6 +480,16 @@ class UserController extends Controller {
     }
 
     public function actionRegistration() {
+        require(__DIR__ . '/../vendor/recaptch/recaptchalib.php');
+        // Get a key from https://www.google.com/recaptcha/admin/create
+        $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";
+        $privatekey = "6LcCIgkTAAAAANss_hcRD61AmYuXJ0JA2bot4R8C";
+
+        # the response from reCAPTCHA
+        $resp = null;
+        # the error code from reCAPTCHA, if any
+        $error = null;
+        # was there a reCAPTCHA response?
 
         $error = "";
         $social = '';
@@ -498,8 +508,27 @@ class UserController extends Controller {
         //die;
         if ($_POST) {
             
+            $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+
+            if (!$resp->is_valid) {
+                $error = "Please Enter Valid Captcha ";
+                
+                $spnId = "";
+                if ($_GET) {
+                    if (!empty($arra)) {
+                        $spnId = $arra[0];
+                    } else {
+                        $spnId = $_GET['spid'];
+                    }
+                }
+                $countryObject = Country::model()->findAll();
+
+                $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error,'social' => $social));
+                
+            } 
+            
             /*Already Exits */
-          $social = $_POST['social'];
+            $social = $_POST['social'];
             //echo $uName = $_POST['name']; 
             $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
             
