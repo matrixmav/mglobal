@@ -33,7 +33,7 @@ $this->menu = array(
                     'summaryText' => 'Showing {start} to {end} of {count} entries',
                     'template' => '{items} {summary} {pager}',
                     'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
-                    'rowCssClassExpression' => '($data->date == date("Y-m-d")) ? "odd" : "odd"',
+                    'rowCssClassExpression' => '($data->date == date("Y-m-d")) ? "odd" : "rowFade"',
                     'pager' => array(
                         'header' => false,
                         'firstPageLabel' => "<<",
