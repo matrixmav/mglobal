@@ -112,7 +112,7 @@ class SiteController extends Controller
         
                     
         public function actionSubscription() {
-           
+                    
           if(!empty($_REQUEST))  
           {
              $contactObject = new Contact;
