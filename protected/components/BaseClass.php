@@ -1277,9 +1277,10 @@ class BaseClass extends Controller {
         //find left present | not
         //$totalLeftPurchase = 0;
         $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
-         if($binaryCommissionObjectLeft){
+        
+        if($binaryCommissionObjectLeft){
             //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
-//           $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
+            //  $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
            //echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
            //echo "Left :".$binaryCommissionObjectLeft->order_amount;
             $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
