@@ -88,7 +88,7 @@ class AdsController extends Controller {
                 $modelUserShareAd->user_id = Yii::app()->session['userid'];
                 $modelUserShareAd->date = date('Y-m-d', $current_time);
                 $modelUserShareAd->ad_id = $randAds->id;
-                $modelUserShareAd->status = 1;
+                $modelUserShareAd->status = 0;
                 $modelUserShareAd->created_at = date('Y-m-d');
                 $modelUserShareAd->save(false);               
             }
