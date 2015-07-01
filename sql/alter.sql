@@ -135,3 +135,5 @@ ALTER TABLE `package` ADD `image` VARCHAR(255) NOT NULL AFTER `type`;
 
 
 ALTER TABLE `package` ADD `reward_points` FLOAT NOT NULL AFTER `image`;
+
+ALTER TABLE `user` ADD `membership_type` INT(11) NOT NULL AFTER `social`;
