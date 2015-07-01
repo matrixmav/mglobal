@@ -102,7 +102,12 @@ class SiteController extends Controller
            $proPackageObject = Package::model()->findAll(array('condition'=>'type=3','limit' => '3'));
            
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
-          $this->render('index',array('basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
+           $membership_type = "";
+           if(!empty(Yii::app()->session['userid'])){
+           $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+           $membership_type = $userObject->membership_type;
+           }
+          $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
                     
