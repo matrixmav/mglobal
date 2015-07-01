@@ -140,6 +140,7 @@ class PackageController extends Controller {
                 $packageObject->no_of_forms = $_POST['Package']['no_of_forms'];
                 $packageObject->status = 1;
                 $packageObject->type = $_POST['Package']['type'];
+                $packageObject->reward_points = $_POST['Package']['reward_points'];
                 $packageObject->created_at = new CDbExpression('NOW()');
                 $packageObject->update();
 
