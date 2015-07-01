@@ -41,10 +41,10 @@
           <p class="f-font">News Letter</p>
           <form class="form-inline">
               <div class="form-group">
-                  <input type="email" class="form-control mailTxt" id="email" placeholder="Email">
+                  <input type="email" class="form-control mailTxt" id="email1" placeholder="Email">
                   <input type="button" class="btn  signBtn" onclick="subscription();" value="Sign in">
-                  <div id="show_wornings" class="error"></div>
-                  <div id="show_worningS" class="success"></div>
+                  <div id="show_wornings" class="error1"></div>
+                  <div id="show_worningS" class="success1"></div>
                    
               </div>
           </form>
@@ -121,17 +121,17 @@
 
             function subscription()
             {
-            var email = document.getElementById('email').value;
-            if(document.getElementById('email').value==''){
+            var email = document.getElementById('email1').value;
+            if(document.getElementById('email1').value==''){
             document.getElementById('show_wornings').style.display="block";
             document.getElementById("show_wornings").innerHTML = "Please enter email.";
-            document.getElementById('email').focus();
+            document.getElementById('email1').focus();
             return false;
             }
-            else if(!isEmail(document.getElementById('email').value)){
+            else if(!isEmail(document.getElementById('email1').value)){
             document.getElementById('show_wornings').style.display="block";
             document.getElementById("show_wornings").innerHTML = "Please enter valid email.";
-            document.getElementById('email').focus();
+            document.getElementById('email1').focus();
             return false;
             }else{
             var dataString = 'email='+email;
