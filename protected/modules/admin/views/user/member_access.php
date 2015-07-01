@@ -56,6 +56,8 @@ if(!empty($success)){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="testimonial" <?php if(in_array('testimonial',$accessArr)){?> checked="checked" <?php }?>>Testimonial<br/>
        
        <input type="checkbox" name="access[]" value="memberaccess" <?php if(in_array('memberaccess',$accessArr)){?> checked="checked" <?php }?>>Member Access<br/>
+       
+       <input type="checkbox" name="access[]" value="generatebinary" <?php if(in_array('generatebinary',$accessArr)){?> checked="checked" <?php }?>>Generate Binary<br/>
         
     </div>
 </div>
