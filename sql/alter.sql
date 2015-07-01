@@ -129,3 +129,9 @@ INSERT INTO `mglobal`.`user_profile` (`id`, `user_id`, `address`, `street`, `cit
 
 
 ALTER TABLE `package` ADD `type` TINYINT NOT NULL COMMENT '1:1basic,2:2basic,3:3basec,4:1advance,5:2advance.6:3advance,7:1pro,8:2pro,9:3pro' AFTER `no_of_forms`;
+
+/*1/7/2015*/
+ALTER TABLE `package` ADD `image` VARCHAR(255) NOT NULL AFTER `type`;
+
+
+ALTER TABLE `package` ADD `reward_points` FLOAT NOT NULL AFTER `image`;
