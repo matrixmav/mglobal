@@ -62,7 +62,7 @@ $this->menu = array(
                         ),
                         array(
                             'name' => 'Earn',
-                            'header' => '<span style="white-space: nowrap;">Earn &nbsp; &nbsp; &nbsp;</span>',
+                            'header' => '<span style="white-space: nowrap;">Earned &nbsp; &nbsp; &nbsp;</span>',
                             'value' => '$data->status == 1 ?"Earn":"Not Earn"',
                         ),
                         array(
