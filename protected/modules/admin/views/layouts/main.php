@@ -821,7 +821,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             }
-                             //if (in_array('generatebinary', $accessArr)) {
+                             if (in_array('generatebinary', $accessArr)) {
                             /*access menu start*/     
                             $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
@@ -866,7 +866,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                            //}
+                            }
                             
                             
                             
