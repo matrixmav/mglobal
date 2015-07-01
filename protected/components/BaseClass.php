@@ -1273,7 +1273,7 @@ class BaseClass extends Controller {
      * @param int $nodeId - input node
      */
     public static function setPurchaseNode($parentObject) {
-        $nodeId = $parentObject->user_id;
+        echo $nodeId = $parentObject->user_id;
         //find left present | not
         //$totalLeftPurchase = 0;
         $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 

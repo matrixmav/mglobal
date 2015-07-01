@@ -821,6 +821,99 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             }
+                             if (in_array('generatebinary', $accessArr)) {
+                            /*access menu start*/     
+                            $reservation_pmenu = 9;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    
+                                    "Genealogy/binarycalc" => "Generate Binary",
+                                   
+                                );
+                                ?>
+                                
+                                <li
+                                    class="<?php echo (($curControllerLower == 'genealogy') || ($curControllerLower == 'genealogy')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <i class="fa fa-user"></i>
+                                        <span class="title">Generate Binary</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'genealogy') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($ctName == "genealogy" && $curControllerLower == "genealogy")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                            }
+                            
+                              
+                            $reservation_pmenu = 9;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                $reservation_subsection = array(
+                                    
+                                    "User/resetpassword" => "Change Password",
+                                   
+                                );
+                                ?>
+                                
+                                <li
+                                    class="<?php echo (($curControllerLower == 'genealogy') || ($curControllerLower == 'genealogy')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <i class="fa fa-user"></i>
+                                        <span class="title">Change Password</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curControllerLower == 'user') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($ctName == "genealogy" && $curControllerLower == "user")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                             
+                            
                             $bases_pmenu = 4; ?>
                             
                     </ul>

@@ -444,14 +444,26 @@ class UserController extends Controller {
                         if ($flagPassword == 'password' && $flagMaster == 'masterkey') {
                             $identity = new UserIdentity($username, $password);
                             if ($identity->userAuthenticate())
-                                Yii::app()->user->login($identity);
+                            Yii::app()->user->login($identity);
                             Yii::app()->session['userid'] = $getUserObject->id;
                             Yii::app()->session['username'] = $getUserObject->name;
                             Yii::app()->session['frontloggedIN'] = "1";
-                             
+                            
                             if (!empty(Yii::app()->session['package_id'])) {
+                             $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                             if(!empty($userObject)){
+                             $packageObject = Package::model()->findByPk(Yii::app()->session['package_id']);   
+                             if($userObject->membership_type=='1' && $packageObject->type=='2' || $packageObject->type=='3'){
+                             echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#accordion'});</script>";   
+                            }
+                             else if($userObject->membership_type=='2' && $packageObject->type=='3'){
+                              echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#accordion'});</script>";      
+                             }else{   
                               $this->redirect("/package/domainsearch");
-                            } else {
+                             }
+                            }
+                            
+                             } else {
                                 $this->redirect("/profile/dashboard");
                             }
                         } else {
@@ -497,7 +509,11 @@ class UserController extends Controller {
                 $masterPin = BaseClass::getUniqInt(5);
                 $model = new User;
                 $model->attributes = $_POST;
-                $password = BaseClass::getPassword();
+                if ($_POST['admin'] == 1) {
+                $password = "mg@1234";
+                }else{
+                 $password = BaseClass::getPassword();   
+                }
                 $model->password = BaseClass::md5Encryption($password);
                 $model->social = $social;
                 $model->sponsor_id = $_POST['sponsor_id'];
@@ -509,7 +525,7 @@ class UserController extends Controller {
                     $model->role_id = 1;
                 }
 
-
+                 if ($_POST['admin'] != 1) {
                 /* Condition for they have the child or not */
                 $geneObject = Genealogy::model()->findByAttributes(array('parent' => $userObject->id, 'position' => $_POST['position']));
                 //echo "<pre>"; print_r($geneObject);
@@ -582,19 +598,31 @@ class UserController extends Controller {
                 $config['body'] =  $this->renderPartial('../mailTemp/confirmation', array('model'=>$model,'rand'=>$rand),true);
                 $response = CommonHelper::sendMail($config);
                 $successMsg = 'Your Account Created Successfully. Please Check your mail and Activate!!! ';
+            }else{
+                if (!$model->save(false)) {
+                    echo "<pre>";
+                    print_r($model->getErrors());
+                    exit;
+                }
+                $modelUserProfile = new UserProfile();
+                $modelUserProfile->user_id = $model->id;
+                $modelUserProfile->created_at = date('Y-m-d');
+                $modelUserProfile->referral_banner_id = 1;
+                $modelUserProfile->save(false);
+            }
                 if ($_POST['admin'] == 1) {
                 $accessObject = new UserHasAccess;
                 $accessObject->user_id = $model->id;
                 $accessObject->access = "dashboard";
                 $accessObject->created_at = date('Y-m-d');
                 $accessObject->save();
-                $this->redirect(array('admin/user/index', 'successMsg' => 1));
+                $this->redirect(array('/admin/default/login', 'successMsg' => 1));
                 }else{
                 $this->redirect(array('login', 'successMsg' => $successMsg));  
                 }
 
                 if ($_POST['admin'] == 1) {
-                    $this->redirect(array('admin/user/index', 'successMsg' => 1));
+                    $this->redirect(array('/admin/default/login', 'successMsg' => 1));
                 } else {
                     $this->redirect(array('login', 'successMsg' => $successMsg));
                 }

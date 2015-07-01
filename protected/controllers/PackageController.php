@@ -539,6 +539,9 @@ class PackageController extends Controller {
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
                 $orderObject->update();
+                
+                
+                 
                 $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
                 foreach($MTObject as $mObject){}
                 if(!empty($MTObject))
@@ -555,6 +558,12 @@ class PackageController extends Controller {
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
+                
+                /*code to update membership type*/
+                if($userObject->memebership_type =='0'){
+                $userObject->memebership_type = $packageObject->type;
+                $userObject->save(false);
+                }       
                 $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
                  /*sponsor wallet*/
                 try {
