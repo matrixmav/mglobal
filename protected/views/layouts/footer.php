@@ -130,7 +130,7 @@
             var dataString = 'email='+email;
             $.ajax({
             type: "GET",
-            url: "subscription.php",
+            url: "site/subscription",
             data: dataString,
             cache: false,
             success: function(html){
