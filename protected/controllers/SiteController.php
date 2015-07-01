@@ -97,9 +97,9 @@ class SiteController extends Controller
 
            $basicPackageObject = Package::model()->findAll(array('condition'=>'type=1','limit' => '3'));
            
-           $advancePackageObject = Package::model()->findAll(array('condition'=>'type=1','limit' => '3'));
+           $advancePackageObject = Package::model()->findAll(array('condition'=>'type=2','limit' => '3'));
            
-           $proPackageObject = Package::model()->findAll(array('condition'=>'type=1','limit' => '3'));
+           $proPackageObject = Package::model()->findAll(array('condition'=>'type=3','limit' => '3'));
            
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
           $this->render('index',array('basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
