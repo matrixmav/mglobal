@@ -41,8 +41,10 @@
           <p class="f-font">News Letter</p>
           <form class="form-inline">
               <div class="form-group">
-                  <input type="email" class="form-control mailTxt" id="" placeholder="Email">
-                   <button type="submit" class="btn  signBtn">Sign in</button>
+                  <input type="email" class="form-control mailTxt" id="email" placeholder="Email">
+                  <div id="show_wornings" class="error"></div>
+                  <div id="show_worningS" class="success"></div>
+                   <button type="submit" class="btn  signBtn" onclick="return subscription();">Sign in</button>
               </div>
           </form>
          
@@ -102,3 +104,50 @@
       </div>
     </div>
   </div>
+  <script>
+         function isEmail(aStr)
+             {
+
+            var reEmail=/^[0-9a-zA-Z_\.-]+\@[0-9a-zA-Z_\.-]+\.[0-9a-zA-Z_\.-]+$/;
+            if(!reEmail.test(aStr))
+            {
+            return false;
+
+            }
+            return true;
+
+            }/*End of isEmail function*/
+
+            function subscription()
+            {
+            var email = document.getElementById('email').value;
+            if(!isEmail(document.getElementById('email').value)){
+            document.getElementById('show_wornings').style.display="block";
+            document.getElementById("show_wornings").innerHTML = "Please enter valid email.";
+            document.getElementById('email').focus();
+            return false;
+            }else{
+            var dataString = 'email='+email;
+            $.ajax({
+            type: "GET",
+            url: "subscription.php",
+            data: dataString,
+            cache: false,
+            success: function(html){
+                    if(html == 1){
+                        document.getElementById('show_wornings').style.display="none";
+                        document.getElementById('show_worningS').style.display="block";
+                        document.getElementById("show_worningS").innerHTML = "Thanks! Your subscription has been confirmed with us.";
+                        $("#email").val('');
+                    }else{
+                        document.getElementById('show_worningS').style.display = "none";
+                        document.getElementById("show_wornings").innerHTML = "There might be something wrong.";
+                    }
+                    $("#show_worningS").fadeOut(10000);
+                    $("#show_wornings").fadeOut(10000); 
+              } 
+            });
+            }    
+}
+  
+  </script>
