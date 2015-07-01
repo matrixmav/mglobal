@@ -1619,6 +1619,7 @@ Box portlet
 
 .portlet.box > .portlet-title {  
   margin-bottom: 0px;
+  min-height:41px;
 }
 
 .portlet.box.blue > .portlet-title {

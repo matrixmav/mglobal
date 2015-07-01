@@ -48,87 +48,14 @@ class GenealogyController extends Controller {
     }
 
     public function actionBinaryCalculation() {
+   
         $adminId = 1;
-        Yii::app()->session['totalLeftCount'] = "";
-        Yii::app()->session['totalRightCount'] = "";
-//                 BaseClass::getBinaryTest(1);exit;
-        //Admin
-        BaseClass::binaryCalculation($adminId, 'left');
-        BaseClass::binaryCalculation($adminId, 'right');
-        //total count
-        echo "</br>Total Left Amount:" . $tatalLeftAmount = Yii::app()->session['totalLeftCount'];
-        echo "</br>Total Right Amount:" . $tatalRightAmount = Yii::app()->session['totalRightCount'];
-        //get minimum value
-        $minimumAmount = min($tatalLeftAmount, $tatalRightAmount);
-        //get the Maximum value
-        $maximumAmount = max($tatalLeftAmount, $tatalRightAmount);
-
-        //get the percentage
-        $actualCommission = BaseClass::getPercentage($minimumAmount, 10);
-        //get carry forward amount
-        $carryAmount = ($maximumAmount - $minimumAmount);
-        //insert in to database
-        $binaryCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $adminId));
-
-        if (!empty($binaryCommissionObject)) {
-            $binaryCommissionObject->commission_amount = ($binaryCommissionObject->commission_amount + $actualCommission);
-            $binaryCommissionObject->carry_amount = $carryAmount;
-            $binaryCommissionObject->save(false);
+        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
+        $parentObject = BaseClass::setPurchaseNode($parentObject);       
+        if($parentObject){
+            echo "Binary Calculaton Generated Successfully.";
+            exit;
         }
-
-        $orderListObject = BinaryCommissionTest::model()->findAll(array('select' => 't.user_id', 'distinct' => true));
-        foreach ($orderListObject as $orderObject) {
-            Yii::app()->session['totalLeftCount'] = "";
-            Yii::app()->session['totalRightCount'] = "";
-            if ($orderObject->user_id == 1) {
-                continue;
-            }
-
-            $parentObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $orderObject->user_id));
-            if (empty($parentObject)) {
-                continue;
-            }
-            BaseClass::binaryCalculation($parentObject->parent, 'left');
-            BaseClass::binaryCalculation($parentObject->parent, 'right');
-
-            //total count
-            $tatalLeftAmount = Yii::app()->session['totalLeftCount'];
-            $tatalRightAmount = Yii::app()->session['totalRightCount'];
-            if (empty($tatalLeftAmount) || empty($tatalRightAmount)) {
-                continue;
-            }
-            //get minimum value
-            $minimumAmount = min($tatalLeftAmount, $tatalRightAmount);
-            //get the Maximum value
-            $maximumAmount = max($tatalLeftAmount, $tatalRightAmount);
-            $actualCommission = 0;
-            //get the percentage
-            $actualCommission = BaseClass::getPercentage($minimumAmount, 10);
-            //get carry forward amount
-            $carryAmount = ($maximumAmount-$minimumAmount);
-            echo "</br>++++++++++++++++++" . $orderObject->user_id . "+++++++++++++++++++++++</br>";
-            //insert in to database
-            $binaryCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $orderObject->user_id));
-            if (!empty($binaryCommissionObject)) {
-                $binaryParentCommissionObject = BinaryCommissionTest::model()->findByAttributes(array('user_id' => $binaryCommissionObject->parent));
-                if ($binaryParentCommissionObject) {
-                    echo "*********" . $binaryParentCommissionObject->parent . "*************</br>";
-
-                    $binaryParentCommissionObject->commission_amount = $actualCommission;
-                    $binaryParentCommissionObject->carry_amount = $carryAmount;
-                    $binaryParentCommissionObject->save(false);
-                }
-            }
-        }
-//                BaseClass::getBinaryTest(1);
-        echo "done!!";
-        exit;
-
-//                if($binaryCommissionObject){
-        echo "Binary Generated Successfully";
-        exit;
-//                }
-        //}
     }
     
     
@@ -144,6 +71,7 @@ class GenealogyController extends Controller {
     }*/
     
     public function actionBinaryCalc() {
+        echo "adada"; die;
         $adminId = 1;
         $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
         $parentObject = BaseClass::setPurchaseNode($parentObject);
