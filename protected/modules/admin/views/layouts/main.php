@@ -419,12 +419,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                 $hotel_subsection = array_merge($hotel_subsection1, $hotel_subsection2, $hotel_subsection3, $hotel_subsection4, $hotel_subsection5);
                                  
                                 $activecls = 'active';
-                                if ($curControllerLower == "user" || $curControllerLower == "admin") {
+                                if ($curControllerLower == "user" && $curAction != 'resetpassword' || $curControllerLower == "admin") {
                                     $activecls = 'active';
                                 } else {
                                     $activecls = '';
                                 }
-                                if ($curControllerLower == 'user' && $curActionLower == 'bills')
+                                if ($curControllerLower == 'user' && $curAction != 'resetpassword' && $curActionLower == 'bills')
                                     $activecls = 'active';
                                 if ($curActionLower == 'simplename')
                                     $activecls = '';
@@ -879,11 +879,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                                 
                                 <li
-                                    class="<?php echo (($curControllerLower == 'genealogy') || ($curControllerLower == 'genealogy')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curAction == 'resetpassword') || ($curAction == 'resetpassword')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <i class="fa fa-user"></i>
                                         <span class="title">Change Password</span>
                                         <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'user') ? "open" : ''; ?>">
+                                            class="arrow <?php echo ($curAction == 'resetpassword') ? "open" : ''; ?>">
                                         </span>
                                     </a>
 
@@ -894,7 +894,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             if ($ctName == "search/create") {
                                                 $ctName = "search/create/type/details";
                                             }
-                                        if ($ctName == "genealogy" && $curControllerLower == "user")
+                                        if ($curAction == "resetpassword" && $curControllerLower == "user")
                                                 $class_content = 'class="active"';
                                             else
                                                 $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
