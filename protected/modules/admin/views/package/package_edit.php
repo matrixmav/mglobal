@@ -152,12 +152,6 @@ $this->breadcrumbs = array(
             $("#type").focus();
             return false;
         }
-        $("#image_error").html("");
-        if ($("#image").val() == "") {
-            $("#image_error").html("Please upload package image");
-            $("#image").focus();
-            return false;
-        }
         
     }
     </script>
