@@ -559,8 +559,9 @@ class MoneyTransferController extends Controller {
             if(!empty($existingShareObject->status == 1)){
                 return 1;
             }
+            $orderObject = Order::model()->findByAttributes(array('user_id' => $userid, 'status'=>1));
+            $shareCommissionAmount = $orderObject->package()->reward_points;
             
-            $shareCommissionAmount = $_POST['rp'];
             $existingShareObject->user_id = $userid;
             $existingShareObject->ad_id = $_POST['adId'];
             $existingShareObject->social_id = $_POST['socialId'];
