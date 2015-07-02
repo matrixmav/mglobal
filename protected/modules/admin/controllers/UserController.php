@@ -341,8 +341,10 @@ class UserController extends Controller {
               $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
               if(!empty($adminWalletObject))
               {
+                 if($userId != '1'){
                  $adminWalletObject->fund = ($adminWalletObject->fund) - ($transactionObject->paid_amount);
                  $adminWalletObject->update(false);
+                 }
              }}catch (Exception $ex) {
                     $ex->getMessage();
                     exit;
