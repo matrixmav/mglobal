@@ -173,7 +173,7 @@ class ReportController extends Controller {
 
 
 
-        $this->render('admindirectincome', array(
+        $this->render('admin_refferal_income', array(
             'dataProvider' => $dataProvider,
             'totalAmount' => $totalAmount,
         ));
