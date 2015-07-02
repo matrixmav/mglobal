@@ -28,7 +28,7 @@ class WalletController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list','getfundbyamount'),
+				'actions'=>array('index','view','list','getfundbyamount', 'rpwallet', 'commisionwallet', 'fundwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -195,4 +195,78 @@ class WalletController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+         /*
+     * this will fetch rp wallet
+     */
+
+    public function actionRpWallet() {
+        $loggedInUserId = Yii::app()->session['userid'];
+        $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 2));
+        if ($walletobject) {
+            $walletId = $walletobject->id;
+        } else {
+            $walletId = 0;
+        }
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'criteria' => array(
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'")  AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+        )));
+//        echo "<pre>"; print_r($dataProvider);exit;
+        $this->render('rpwallet', array('dataProvider' => $dataProvider));
+    }
+
+    /*
+     * this will fetch commision wallet
+     */
+
+    public function actionCommisionWallet() {
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+        }
+
+        $loggedInUserId = Yii::app()->session['userid'];
+        $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 3));
+        if ($walletobject) {
+            $walletId = $walletobject->id;
+        } else {
+            $walletId = 0;
+        }
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'criteria' => array(
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+        )));
+        $this->render('commisionwallet', array('dataProvider' => $dataProvider));
+    }
+
+    /*
+     * this will fetch fund wallet
+     */
+
+    public function actionFundWallet() {
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+        }
+        $loggedInUserId = Yii::app()->session['userid'];
+        $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 1));
+        
+        if ($walletobject) {
+            $walletId = $walletobject->id;
+        } else {
+            $walletId = 0;
+        }
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'criteria' => array(
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+         )));
+        
+        $this->render('fundwallet', array('dataProvider' => $dataProvider));
+    }
+
 }
