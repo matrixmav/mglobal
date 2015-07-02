@@ -108,3 +108,25 @@ $this->menu=array(
       </div>
     </div>
  
+        <!-- Add jQuery library -->
+	 
+
+	<!-- Add mousewheel plugin (this is optional) -->
+	<script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="/js/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+           <script type="text/javascript" src="/js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+
+	 <script type="text/javascript">
+              function showPendingPayment(valz)
+                {
+                 $.fancybox({
+                    width: 1190, 
+                    autoSize: true,
+                    href: "/order/pendingpayment?id="+valz,
+                    type: 'ajax'
+                });
+            }
+        </script>
