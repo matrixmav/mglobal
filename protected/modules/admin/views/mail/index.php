@@ -13,9 +13,9 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
 ?>
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-3">   
-            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/admin/mail', array("class" => "btn  green margin-right-20")); ?>
+        <div class="col-md-3"> 
             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/admin/mail/compose', array("class" => "btn  green margin-right-20")); ?>
+            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/admin/mail', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/admin/mail/sent', array("class" => "btn  green margin-right-20")); ?>
         </div>
         <?php if(Yii::app()->session['userid']=='1'){ if (isset($emailObject)){ ?>
