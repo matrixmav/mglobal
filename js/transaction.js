@@ -54,8 +54,8 @@ function getFullName(userName) {
         }
     });
 }
-function getFullNameAdmin(userName,loggedInusername) {
-   if(userName== 'admin' || userName == 'info' || userName == 'marketing' || userName=='Customercare' || userName== loggedInusername)
+function getFullNameAdmin(userName,loggedInUserName) {
+   if(userName== 'admin' || userName == 'info' || userName == 'marketing' || userName=='Customercare' || userName== loggedInUserName)
    {
     $("#search_user_error").html("Sorry! you can not transfer fund to this account!!!");
     return false;
