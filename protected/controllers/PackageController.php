@@ -26,7 +26,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply','testscript'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -866,6 +866,58 @@ class PackageController extends Controller {
               
             echo 1;
         }
+    }
+    
+    public function actiontestScript() {
+        	$datetime= gmdate('Y-m-d H:i:s');
+	$url = "https://test.httpapi.com/api/domains/available.json?auth-userid=600184&api-key=iZcvfkycZFpshLApGnRb4BgXltgOYj4x&domain-name=ramhemareddy&tlds=com";
+	echo $url;
+ echo '<br>';
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER,
+				array("Content-type: text/html" ));
+					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($curl, CURLOPT_POST, true);
+		//curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+
+		$json_response = curl_exec($curl);
+
+		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+			
+		curl_close($curl);
+
+			 $response = json_decode($json_response, true);
+			 echo '<pre>';
+			 print_r($response);
+			 echo '<br>';
+        $datetime= gmdate('Y-m-d H:i:s');
+	$url = "https://test.httpapi.com/api/domains/v5/suggest-names.json?auth-userid=600184&api-key=iZcvfkycZFpshLApGnRb4BgXltgOYj4x&keyword=ram";
+	echo $url;
+ echo '<br>';
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER,
+				array("Content-type: text/html" ));
+					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($curl, CURLOPT_POST, true);
+		//curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+
+		$json_response = curl_exec($curl);
+
+		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+			
+		curl_close($curl);
+
+			 $response = json_decode($json_response, true);
+			  echo '<pre>';
+			 print_r($response); 
     }
   
     
