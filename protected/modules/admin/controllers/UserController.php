@@ -64,7 +64,7 @@ class UserController extends Controller {
                 $password = BaseClass::getPassword();
                 $userObject->password = md5($password);
                 $userObject->master_pin = md5($masterPin);
-                $userObject->save(false);
+                
                 $userObjectArr = array();
                 $userObjectArr['name'] = $userObject->name;
                 $userObjectArr['full_name'] = $userObject->full_name;
@@ -74,6 +74,7 @@ class UserController extends Controller {
                 $config['subject'] = 'Login Details';
                 $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
+                $userObject->save(false);
             }
            $this->redirect('/admin/user');
         }
