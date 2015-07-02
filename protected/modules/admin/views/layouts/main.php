@@ -567,7 +567,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection7 = array();
                                             
                                 }
-                                if (in_array('reportdeposit', $accessArr)) { 
+                                if (in_array('reportcontact', $accessArr)) { 
                                     $reservation_subsection8 = array(
                                       "report/deposit" => "Deposit",  
                                    );
@@ -575,9 +575,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection8 = array();
                                             
                                 }
-                                if (in_array('reportrefferal', $accessArr)) { 
+                                if (in_array('reportcontact', $accessArr)) { 
                                     $reservation_subsection9 = array(
-                                      "report/refferal" => "Refferal Invite",  
+                                      "report/trackrefferal" => "Refferal Invite",  
                                    );
                                 }else{
                                     $reservation_subsection9 = array();
