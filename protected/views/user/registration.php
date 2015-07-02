@@ -103,8 +103,13 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="phone" class="col-lg-4 control-label">reCAPTCHA<span class="require">*</span></label>
+                                        <label for="phone" class="col-lg-4 control-label">Captcha<span class="require">*</span></label>
                                         <div class="col-lg-8">
+                                            <script type="text/javascript">
+                                                var RecaptchaOptions = {
+                                                   theme : 'white'
+                                                };
+                                                </script>
                                             <?php
                                             // Get a key from https://www.google.com/recaptcha/admin/create
                                             $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";

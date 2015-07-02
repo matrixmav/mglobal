@@ -482,14 +482,7 @@ class UserController extends Controller {
     public function actionRegistration() {
         require(__DIR__ . '/../vendor/recaptch/recaptchalib.php');
         // Get a key from https://www.google.com/recaptcha/admin/create
-        $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";
-        $privatekey = "6LcCIgkTAAAAANss_hcRD61AmYuXJ0JA2bot4R8C";
-
-        # the response from reCAPTCHA
-        $resp = null;
-        # the error code from reCAPTCHA, if any
-        $error = null;
-        # was there a reCAPTCHA response?
+        
 
         $error = "";
         $social = '';
@@ -507,11 +500,18 @@ class UserController extends Controller {
         }
         //die;
         if ($_POST) {
-            
-            $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+            $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";
+            $privatekey = "6LcCIgkTAAAAANss_hcRD61AmYuXJ0JA2bot4R8C";
 
-            if (!$resp->is_valid) {
-                $error = "Please Enter Valid Captcha ";
+            # the response from reCAPTCHA
+            $resp = null;
+            # the error code from reCAPTCHA, if any
+            $error = null;
+            # was there a reCAPTCHA response?
+            $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+             
+            if ($resp->is_valid != 1) {
+                $error = "<p class='error'>Please Enter Valid Captcha </p>";
                 
                 $spnId = "";
                 if ($_GET) {
@@ -525,7 +525,7 @@ class UserController extends Controller {
 
                 $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error,'social' => $social));
                 
-            } 
+            }else{ 
             
             /*Already Exits */
             $social = $_POST['social'];
@@ -656,6 +656,7 @@ class UserController extends Controller {
                     $this->redirect(array('login', 'successMsg' => $successMsg));
                 }
             }    
+        }
         }
         $spnId = "";
         if ($_GET) {
