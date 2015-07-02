@@ -221,7 +221,7 @@ right connector from last child*/
 .detailPackage h4{ text-align: center; color: #333333; padding: 20px;}
 .basicP{ min-width:232px; margin: 4px 0; max-width: 300px;}
 .basicP > img{margin-right: 10px;}
-.basicP > p{display: inline-block; font-size: 14px; max-width: 160px; vertical-align: middle;}
+.basicP > p{display: inline-block; font-size: 14px; max-width: 160px;}
 .detailPackage tr{}
 .detailPackage th{ color: #aeaeae; font-size: 15px;}
 .packageDetail{ width: 300px;}
@@ -230,3 +230,6 @@ right connector from last child*/
 
 .detailPackage .col-sm-3.col-xs-12{ border: 1px dashed #c1c1c1;}
 .detailPackage .col-sm-3.col-xs-12 table{width: 100%;}
+.colorBox{display: inline-block; position: relative;}
+.colorBox >img{position: absolute; top: 0; left: 7%;}
+.colorBox span{vertical-align: middle; font-size: 50px; line-height: 35px;}
