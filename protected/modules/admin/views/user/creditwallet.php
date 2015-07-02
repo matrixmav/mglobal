@@ -59,6 +59,7 @@ if(!empty($error)){
     </div>
 </div> 
 </form>
+<input type="hidden" value="<?php if(!empty($_GET['id'])) { echo $_GET['id']; }?>" id="getId">
 <script language = "Javascript">
     function validateForm(){
         $("#wallet_error").html("");
@@ -86,7 +87,7 @@ if(!empty($error)){
     var fund = $('#transaction_data_amt').val();
     var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""));
     var fundVal = parseFloat($('#fund').val());
-    
+    if(('#search_user_id').val() != '1' || ('#getId').val() != '1')
     if(fundFinal < fundVal)
     { 
         $("#fund_error").html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
