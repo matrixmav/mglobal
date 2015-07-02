@@ -48,6 +48,7 @@ class SiteController extends Controller
 			),
 		);
 	}
+        
 
 	/**
 	 * This is the default 'index' action that is invoked
