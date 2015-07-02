@@ -125,7 +125,10 @@ $empty = "sm-blank" ; //no Package
                     <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/blank.png">
+                       <div class="colorBox">
+                        <span style="color: #cccccc;">&#x2B22;</span>
+                            <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p> User</p>
                     </div>
                         </th>
@@ -133,7 +136,10 @@ $empty = "sm-blank" ; //no Package
                      <tr>
                          <th>
                     <div class="basicP">
-                        <img src="/images/inactive.png">
+                        <div class="colorBox">
+                        <span style="color: #a6a6a6;">&#x2B22;</span>
+                            <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p>  User inactive</p>
                     </div>
                         </th>
@@ -141,7 +147,10 @@ $empty = "sm-blank" ; //no Package
                      <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/active.png">
+                        <div class="colorBox">
+                        <span style="color: #727272;">&#x2B22;</span>
+                            <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p> User Active</p>
                     </div>
                         </th>
@@ -153,15 +162,21 @@ $empty = "sm-blank" ; //no Package
                     <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/basic-p1.png">
-                        <p> Basic Packages 1</p>
+                        <div class="colorBox">
+                        <span style="color: #8fd900;">&#x2B22;</span>
+                            <img class="img-responsive" src="images/activeM.png">
+                        </div>
+                         <p>  Basic Packages 1</p>
                     </div>
                         </th>
                     </tr>
                      <tr>
                          <th>
                     <div class="basicP">
-                        <img src="/images/basic-p2.png">
+                        <div class="colorBox">
+                        <span style="color: #db5300;">&#x2B22;</span>
+                              <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p>  Basic Packages 2</p>
                     </div>
                         </th>
@@ -169,7 +184,10 @@ $empty = "sm-blank" ; //no Package
                      <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/basic-p3.png">
+                        <div class="colorBox">
+                        <span style="color: #dce903;">&#x2B22;</span>
+                             <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p> Basic Packages 3</p>
                     </div>
                         </th>
@@ -182,7 +200,10 @@ $empty = "sm-blank" ; //no Package
                     <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/advance-p1.png">
+                        <div class="colorBox">
+                        <span style="color: #0377ea;">&#x2B22;</span>
+                              <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p> Advanced Packages 1</p>
                     </div>
                         </th>
@@ -190,7 +211,10 @@ $empty = "sm-blank" ; //no Package
                      <tr>
                          <th>
                     <div class="basicP">
-                        <img src="/images/advance-p2.png">
+                       <div class="colorBox">
+                        <span style="color: #9137ea;">&#x2B22;</span>
+                            <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p>  Advanced Packages 2</p>
                     </div>
                         </th>
@@ -198,7 +222,10 @@ $empty = "sm-blank" ; //no Package
                      <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/advance-p3.png">
+                         <div class="colorBox">
+                        <span style="color: #00c0ec;">&#x2B22;</span>
+                             <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p>Advanced Packages 3</p>
                     </div>
                         </th>
@@ -212,7 +239,10 @@ $empty = "sm-blank" ; //no Package
                     <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/advance-pro1.png">
+                        <div class="colorBox">
+                        <span style="color: #ea9000;">&#x2B22;</span>
+                              <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p> Advanced Pro 1</p>
                     </div>
                         </th>
@@ -220,7 +250,10 @@ $empty = "sm-blank" ; //no Package
                      <tr>
                          <th>
                     <div class="basicP">
-                        <img src="/images/advance-pro2.png">
+                      <div class="colorBox">
+                        <span style="color: #00c265;">&#x2B22;</span>
+                             <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p> Advanced Pro 2 </p>
                     </div>
                         </th>
@@ -228,7 +261,10 @@ $empty = "sm-blank" ; //no Package
                      <tr>
                         <th>
                     <div class="basicP">
-                        <img src="/images/advance-pro3.png">
+                       <div class="colorBox">
+                        <span style="color: #e90000;">&#x2B22;</span>
+                             <img class="img-responsive" src="images/activeM.png">
+                        </div>
                         <p> Advanced Pro 3</p>
                     </div>
                         </th>

@@ -227,8 +227,15 @@
           <img src="images/what-we-do.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
         
-          <h3>Who We Are </h3>
-          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+          <h2>who<strong> we are </strong></h2>
+          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible  ... <a href="#inline7" class="fancybox pinkSm">read more</a></p>
+          <div id="inline7" style="display:none" class="readMoreBox content">
+               <h2>who<strong> we are </strong></h2>
+               <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too? If not, then we surely have something new in store for you to discover. We are evolving as one such organization indulged in offering web development, designing, and digital marketing solutions. MGlobally was founded with the idea of creating a business model, wherein the customers are added to our network by bringing us the references. Abiding by the idea of creating an extended network of brand representatives, we aim to be the one of top most companies in direct selling IT network.</p>
+               <p>MGlobally was brought to existence with a team having combined experience of more than 15 years as a web development company. The organization seeks to provide reliable web development solutions that further inspire the customers to be a part of our network of consumers. Each of the customers, who bring references earn the referral rewards, which can be redeemed later. We are driven by the urge to deliver the best so as to have a satisfied client base. For this, we ensure that each website developed by us complies with every detail provided by our clients and displays their business values too. Besides, as an add-on, we extend alluring benefits and rewards to those customers, who can further recommend our services and choose to be a part of our network of sellers. These customers are considered to be our brand representatives, who owing to the quality of our services wish to bring more prospective clients to the company.</p>
+               <p>We, as a team work to ACHIEVE. MGlobally is supported by a team of enthusiastic developers, designers, digital marketers, tech graduates, and sales professionals, who help spread the aura of excellence. Our team of technology professionals is made of proactive techies, who not just keep up with the latest technologies but also believe in continuous innovation. In addition to these technology enthusiasts, our digital marketers make the best use of their extended knowledge of social media marketing, search engine optimization, and all the other elements of digital marketing. Besides, we are supported by a dedicated team of sales professionals, who help us bring in the prospective clients.</p>
+               <p>MGlobally doesn’t just promise the best to its customers, but also to its teammates. We believe that a motivated team maintains a positive environment at work and works for the success of the organization. Thus, we maintain employee friendly policies and an atmosphere, which is favorable for them. </p>
+      </div>
       </div>
       </div>
 
@@ -236,8 +243,13 @@
           <img src="images/who-we-are.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
        
-          <h3>WHAT WE DO</h3>
-          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+           <h2>what<strong> we do </strong></h2>
+         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services.... <a href="#inline8" class="fancybox pinkSm">read more</a></p>
+          <div id="inline8" style="display:none" class="readMoreBox content">
+               <h2>what<strong> we do </strong></h2>
+               <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief.</p>
+               <p>We operate to offer web development, web designing and digital marketing solutions. We are specialized in bringing businesses online and managing their presence across the web. With every year passing by, we have been adding new names to our clientele. The vast client base we have garnered all across the globe has further helped us expand our reach. </p>
+      </div>
       </div>  
       </div>
     

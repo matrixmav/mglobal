@@ -1905,3 +1905,13 @@ Pre-Header and pre-header elements
 .signBtn:hover{padding: 6px 20px;}
 .mailTxt{margin: 10px 0; min-width: 280px; margin-right: 10px;}
 .social-icons li{ list-style: none;}
+
+/*--------------pre footer-------------*/
+#myCarousel .carousel-caption{background: url(/images/carousel-bg.png) center center repeat; padding: 10px 20px 0 20px;}
+#myCarousel .carousel-caption >p{ font-size: 18px;}
+@media (max-device-width: 480px) and (min-device-width: 320px)
+{
+    #myCarousel .carousel-caption h2{font-size: 14px; padding-bottom: 0; padding-top: 0 !important;}
+    #myCarousel .carousel-caption h2::after{padding-top: 0 !important;}
+  #myCarousel .carousel-caption >p{ font-size: 12px;}  
+}
