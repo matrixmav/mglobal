@@ -6,7 +6,7 @@ class WalletController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='inner';
+	public $layout='main';
 
 	/**
 	 * @return array action filters
@@ -213,7 +213,7 @@ class WalletController extends Controller
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'")  AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
 //        echo "<pre>"; print_r($dataProvider);exit;
-        $this->render('/user/rpwallet', array('dataProvider' => $dataProvider));
+        $this->render('/report/rpwallet', array('dataProvider' => $dataProvider));
     }
 
     /*
@@ -239,7 +239,7 @@ class WalletController extends Controller
             'criteria' => array(
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
-        $this->render('/user/commisionwallet', array('dataProvider' => $dataProvider));
+        $this->render('/report/commisionwallet', array('dataProvider' => $dataProvider));
     }
 
     /*
@@ -266,7 +266,7 @@ class WalletController extends Controller
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
          )));
         
-        $this->render('/user/fundwallet', array('dataProvider' => $dataProvider));
+        $this->render('/report/fundwallet', array('dataProvider' => $dataProvider));
     }
 
 }
