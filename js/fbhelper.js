@@ -41,7 +41,7 @@
           picture : img
       };
       
-        function callback(response) { alert(1);
+        function callback(response) { //alert(1);
           //document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
         }
  
