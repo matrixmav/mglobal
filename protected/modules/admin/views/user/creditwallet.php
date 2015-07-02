@@ -18,7 +18,7 @@ if(!empty($error)){
     <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
          <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username" />
-         <span id="search_fullname"></span>
+         <span id="search_fullname">&nbsp;</span>
         <span style="color:red"  id="search_user_error"></span>
     </div>
 </div>
