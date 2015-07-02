@@ -1,4 +1,4 @@
- <?php $this->renderPartial('/mailTemp/header'); ?>
+ <?php $this->renderPartial('/mailTemplate/header'); ?>
     <tr>
     	<td width="100%" valign="middle" align="left" style="line-height:0px;"> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/banner.jpg"></td>
     </tr>
