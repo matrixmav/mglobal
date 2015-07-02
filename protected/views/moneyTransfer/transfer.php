@@ -48,7 +48,7 @@ $this->breadcrumbs = array(
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-8">
                         <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value);" />
-                        <span id="search_fullname"></span>
+                        <span id="search_fullname">&nbsp;</span>
                         <span id="search_user_error" style="color:red"></span>
                     </div>     
                 </div>
@@ -66,7 +66,7 @@ $this->breadcrumbs = array(
         <div class="form-actions right">                     
                 <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
 
-                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="reset" class="btn btn-default" id="reset" onclick="resetValue();">Cancel</button>
                  
             </div>
        
@@ -124,5 +124,11 @@ $this->breadcrumbs = array(
     }
     
     
+    
+ }
+ function resetValue()
+ {
+     $('#search_fullname').html('');
+     $('#transaction_data').html('');
  }
 </script>
