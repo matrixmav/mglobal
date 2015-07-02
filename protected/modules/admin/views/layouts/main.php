@@ -567,7 +567,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection7 = array();
                                             
                                 }
-                                if (in_array('reportcontact', $accessArr)) { 
+                                if (in_array('reportdeposit', $accessArr)) { 
                                     $reservation_subsection8 = array(
                                       "report/deposit" => "Deposit",  
                                    );
@@ -575,7 +575,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection8 = array();
                                             
                                 }
-                                if (in_array('reportcontact', $accessArr)) { 
+                                if (in_array('reportrefferal', $accessArr)) { 
                                     $reservation_subsection9 = array(
                                       "report/trackrefferal" => "Refferal Invite",  
                                    );
@@ -928,16 +928,38 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
-                             if (in_array('generatebinary', $accessArr)) {
+                             if (in_array('summary', $accessArr)) {
                              $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    
-                                    "Wallet/fundwallet" => "Cash Wallet",
-                                    "Wallet/rpwallet" => "RP Wallet",
-                                    "Wallet/commisionwallet" => "Commission Wallet",
-                                   
-                                );
+                                
+                                 if (in_array('cashwallet', $accessArr)) {  
+                                $reservation_subsection1 = array(
+                                    "wallet/fundwallet" => "Add",
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('rpwallet', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "wallet/rpwallet" => "List",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                if (in_array('commissionwallet', $accessArr)) { 
+                                    $reservation_subsection3 = array(
+                                      "wallet/commisionwallet" => "List",  
+                                   );
+                                }else{
+                                    $reservation_subsection3 = array();
+                                            
+                                }
+                                 
+                                 
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3);
+                                 
                                 ?>
                                 
                                 <li
