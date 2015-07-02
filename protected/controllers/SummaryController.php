@@ -19,6 +19,9 @@ class SummaryController extends Controller
 		);
 	}
 
+        public function init() {
+        BaseClass::isLoggedIn();
+        } 
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
