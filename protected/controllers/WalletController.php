@@ -17,7 +17,10 @@ class WalletController extends Controller {
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
-
+    
+    public function init() {
+        BaseClass::isLoggedIn();
+    }
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
