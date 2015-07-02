@@ -128,7 +128,7 @@ class WalletController extends Controller {
             'dataProvider' => $dataProvider,
         ));
     }
-/*
+     /*
      * this will fetch rp wallet
      */
 
