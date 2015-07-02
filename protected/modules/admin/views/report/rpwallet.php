@@ -27,12 +27,12 @@ $this->menu = array(
 
     <div class="expiration margin-topDefault confirmMenu">
 
-        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/wallet/rpwallet">
+        <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/wallet/rpwallet">
             <div class="input-group input-large date-picker input-daterange">
-                <input type="text" name="from" placeholder="To Date" class="datepicker form-control">
+                <input type="text" name="from" placeholder="To Date" class="datepicker form-control" value="<?php echo date('Y-m-d');?>">
                 <span class="input-group-addon">
                     to </span>
-                <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control">
+                <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control" value="<?php echo date('Y-m-d');?>">
             </div>
 <?php /* $statusId =   1;
   if(isset($_REQUEST['res_filter'])){
