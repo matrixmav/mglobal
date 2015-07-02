@@ -586,7 +586,8 @@ class PackageController extends Controller {
                     
                     if(!empty($genealogyObject)){                        
                       $genealogyObject->order_amount = $packageObject->amount;
-                        $genealogyObject->save(false);  
+                      $genealogyObject->order_date = date('Y-m-d');
+                      $genealogyObject->save(false);  
                     }
                     
                     
