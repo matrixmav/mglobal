@@ -70,7 +70,7 @@ class UserController extends Controller {
                 $userObjectArr['masterPin'] = $masterPin;
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Login Details';
-                $config['body'] =  $this->renderPartial('../mailTemp/login-details', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
             }
             $userObject->save(false);
