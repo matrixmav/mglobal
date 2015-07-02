@@ -38,7 +38,7 @@
                             <input type="hidden" name="currency_code" value="USD">
                             <input type="hidden" name="handling" value="0">
                             <input type="hidden" name="cancel_return" value="">
-                            <input type="hidden" id="return" name="return" value="http://localhost/package/walletThankYou?transaction_id=<?php echo $transactionId; ?>&type=cashtransfer">
+                            <input type="hidden" id="return" name="return" value="<?php echo Yii::app()->params['walletReturnUrl']; ?>?transaction_id=<?php echo $transactionId; ?>&type=cashtransfer">
                         </form>
                     </div>
                        <span id="email_error" style="color:red"></span>

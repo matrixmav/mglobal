@@ -33,7 +33,7 @@ class UserController extends Controller {
                 'actions' => array('index', 'view', 'changestatus', 'wallet',
                     'creditwallet', 'list', 'debitwallet', 'genealogy', 'add', 'deleteuser', 'edit',
                     'verificationapproval', 'testimonialapproval', 'changeapprovalstatus', 
-                    'testimonialapprovalstatus','binarycalculation'),
+                    'testimonialapprovalstatus','binarycalculation','resetpassword'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -675,6 +675,45 @@ class UserController extends Controller {
     public function getOnClickEvent($data, $row) {
         $fullName = "'" . $data->name . "'";
         echo '<a onclick="OpenChatBox(' . $fullName . ')">Click to chat</a>';
+    }
+    
+    public function actionResetPassword() {
+        $error = "";
+        $success = "";
+        $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+        if (!empty($_POST)) {
+            if ($_POST['UserProfile']['old_password'] != '' && $_POST['UserProfile']['new_password'] != '' && $_POST['UserProfile']['confirm_password'] != '') {
+                 
+                    if ($userObject->password != md5($_POST['UserProfile']['old_password'])) {
+                        $error .= "Incorrect old password";
+                    } else {
+                        $userObject->password = md5($_POST['UserProfile']['new_password']);
+                        if ($userObject->update()) {
+                            /*$userObjectArr = array();
+                            $userObjectArr['full_name'] = $userObject->full_name;
+                            $userObjectArr['name'] = $userObject->name;
+                            $userObjectArr['ip'] = Yii::app()->params['ip'];
+                            $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
+                            $success .= "Your password changed successfully";
+                            $config['to'] = $userObject->email;
+                            $config['subject'] = 'mGlobally Password Changed';
+                            $config['body'] =  $this->renderPartial('//mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
+                        
+                            //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
+                            CommonHelper::sendMail($config);*/
+                            $success .= "Your password changed successfully";
+                        }
+                    }
+                 
+            } else {
+                $error .="Please fill all required(*) marked fields.";
+            }
+        }
+
+        $this->render('resetpassword', array(
+            'error' => $error, 'success' => $success,
+        ));
+      
     }
 
     protected function gridAddressImagePopup($data, $row) {

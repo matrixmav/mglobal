@@ -32,7 +32,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index'),
+				'actions'=>array('index','subscription'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -95,13 +95,50 @@ class SiteController extends Controller
 //            $stateCondition = array("id" => $stateName);
 //            $stateObject = $stateModel = State::model()->getStateByName($stateCondition);
 
-           $packageObject = Package::model()->findAll(array('limit' => '3'));
+           $basicPackageObject = Package::model()->findAll(array('condition'=>'type=1','order' => 'name ASC','limit' => '3'));
+           
+           $advancePackageObject = Package::model()->findAll(array('condition'=>'type=2','order' => 'name ASC','limit' => '3'));
+           
+           $proPackageObject = Package::model()->findAll(array('condition'=>'type=3','order' => 'name ASC','limit' => '3'));
+           
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
-          $this->render('index',array('packageObject'=>$packageObject,'profileObject'=>$userProfileObject,)); 
+           $membership_type = "";
+           if(!empty(Yii::app()->session['userid'])){
+           $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+           $membership_type = $userObject->membership_type;
+           }
+          $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
                     
-        
+        public function actionSubscription() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $contactObject = new Contact;
+             $contactObject->email = $_REQUEST['email'];
+             $contactObject->created_at = date('Y-m-d');
+             $contactObject->status = 1;
+             $contactObject->save(false);
+             /*mail to user*/
+             $userObjectArr['email'] = $_REQUEST['email'];
+             $config['to'] = $_REQUEST['email'];
+             $config['subject'] = 'mGlobally Subscription Confirmed';
+             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+              //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
+             CommonHelper::sendMail($config);
+             
+              /*mail to user*/
+             $config['to'] = 'nehanidhi.2008@gmail.com';
+             $config['subject'] = 'mGlobally Subscription Confirmed';
+             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+              //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
+             CommonHelper::sendMail($config);
+             echo 1;
+          }else{
+            echo 0;
+          }
+        }
        
         /**
 	 *This is action label

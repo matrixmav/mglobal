@@ -539,6 +539,9 @@ class PackageController extends Controller {
                 $orderObject->start_date = date('Y-m-d');
                 $orderObject->end_date = (date('Y') + 1) . date('-m-d');
                 $orderObject->update();
+                
+                
+                 
                 $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
                 foreach($MTObject as $mObject){}
                 if(!empty($MTObject))
@@ -555,6 +558,13 @@ class PackageController extends Controller {
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
+             
+                /*code to update membership type*/
+                
+                if($userObject->membership_type =='0'){
+                    $userObject->membership_type = $packageObject->type;
+                    $userObject->save(false);
+                }       
                 $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
                  /*sponsor wallet*/
                 try {
@@ -576,7 +586,8 @@ class PackageController extends Controller {
                     
                     if(!empty($genealogyObject)){                        
                       $genealogyObject->order_amount = $packageObject->amount;
-                        $genealogyObject->save(false);  
+                      $genealogyObject->order_date = date('Y-m-d');
+                      $genealogyObject->save(false);  
                     }
                     
                     
@@ -624,7 +635,35 @@ class PackageController extends Controller {
                     $ex->getMessage();
                     exit;
                 }
-                 
+                
+                /* Insert Ads */
+                $userId = Yii::app()->session['userid'];
+                $next_year = strtotime('+1 year');
+                $current_time = time();
+                $i = 1 ;
+                $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId));
+
+                if(count($userAdsObject) == 0 ){
+                    while($current_time < $next_year){  
+
+                        $randAds = Ads::model()->find(array('select'=>'*', 'limit'=>'1', 'order'=>'rand()'));        
+                        if($i == 1){
+                            $current_time = strtotime('+0 day', $current_time);                        
+                        }else{
+                            $current_time = strtotime('+1 day', $current_time);
+                        }
+                            $modelUserShareAd = new UserSharedAd();
+                            $modelUserShareAd->user_id = Yii::app()->session['userid'];
+                            $modelUserShareAd->date = date('Y-m-d', $current_time);
+                            $modelUserShareAd->ad_id = $randAds->id;
+                            $modelUserShareAd->status = 0;
+                            $modelUserShareAd->created_at = date('Y-m-d');
+                            $modelUserShareAd->save(false);               
+                        $i++;
+                    }
+                }
+                
+                
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $sponsorUserObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
@@ -754,6 +793,8 @@ class PackageController extends Controller {
                     } else {
                         //echo "nn";exit;
                         Wallet::model()->create(Yii::app()->session['userid'],$transactionObject->paid_amount,1);
+                        $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => 1));
+                    
                     }
                 } catch (Exception $ex) {
                     $ex->getMessage();

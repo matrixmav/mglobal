@@ -10,9 +10,9 @@
   <meta content="Metronic Shop UI keywords" name="keywords">
   <meta content="keenthemes" name="author">
 
-  <meta property="og:site_name" content="-CUSTOMER VALUE-">
-  <meta property="og:title" content="-CUSTOMER VALUE-">
-  <meta property="og:description" content="-CUSTOMER VALUE-">
+  <meta property="og:site_name" content="mGlobally">
+  <meta property="og:title" content="Invite Refferal">
+  <meta property="og:description" content="Invite your friends">
   <meta property="og:type" content="website">
   <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
   <meta property="og:url" content="-CUSTOMER VALUE-">

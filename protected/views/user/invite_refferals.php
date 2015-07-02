@@ -16,27 +16,27 @@ $caption = '';
         <a href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--gp";?>" class="btn  green margin-right-20">Google+</a>
         <a onclick = "openform('Email');" class="btn  green margin-right-20">Email</a>
         <a onclick = "openform('SMS');" class="btn  green margin-right-20">SMS</a> -->
-         <a class="btn btn-block btn-social btn-google-plus">
+         <a class="btn btn-block btn-social btn-google-plus" href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--gp";?>" target="_blank">
     <i class="fa fa-google-plus"></i> Google+ share
   </a>
     </div>
     <div class="col-md-2">
-         <a class="btn btn-block btn-social btn-facebook">
+         <a class="btn btn-block btn-social btn-facebook" onclick = "postToFeedInvite('<?= $link; ?>', '<?= $name; ?>', '<?= $desc; ?>', '<?= $caption; ?>')">
     <i class="fa fa-facebook"></i> Facebook share
   </a>
     </div>
     <div class="col-md-2">
-        <a class="btn btn-block btn-social btn-twitter">
+        <a class="btn btn-block btn-social btn-twitter" href="https://twitter.com/intent/tweet?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--tw";?>" target="_blank">
     <i class="fa fa-twitter"></i> Twitter share
   </a>
     </div>
     <div class="col-md-2">
-        <a class="btn btn-block btn-social btn-envelope">
+        <a class="btn btn-block btn-social btn-envelope" onclick = "openform('Email');">
     <i class="fa fa fa-share"></i>  Email share
   </a>
     </div>
     <div class="col-md-2">
-        <a class="btn btn-block btn-social btn-file">
+        <a class="btn btn-block btn-social btn-file" onclick = "openform('SMS');">
     <i class="fa fa-envelope-o"></i> SMS share
   </a>
         

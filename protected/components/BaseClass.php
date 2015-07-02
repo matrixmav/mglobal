@@ -1273,10 +1273,11 @@ class BaseClass extends Controller {
      * @param int $nodeId - input node
      */
     public static function setPurchaseNode($parentObject) {
-        $nodeId = $parentObject->user_id;
+        echo $nodeId = $parentObject->user_id;
+        $date = date('Y-m-d');
         //find left present | not
         //$totalLeftPurchase = 0;
-        $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
+        $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'order_date' => $date, 'position'=>'left')); 
         
         if($binaryCommissionObjectLeft){
             //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
@@ -1291,7 +1292,7 @@ class BaseClass extends Controller {
        // exit;
         //find right present | not
                 
-        $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
+        $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'order_date' => $date, 'position'=>'right')); 
         if($binaryCommissionObjectRight){
 //            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight->order_amount;
             $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);

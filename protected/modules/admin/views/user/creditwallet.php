@@ -86,9 +86,10 @@ if(!empty($error)){
     var fund = $('#transaction_data_amt').val();
     var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""));
     var fundVal = parseFloat($('#fund').val());
+    
     if(fundFinal < fundVal)
     { 
-         $("#fund_error").html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
+        $("#fund_error").html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
           return false;
         }
     }

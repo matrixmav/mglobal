@@ -129,3 +129,31 @@ INSERT INTO `mglobal`.`user_profile` (`id`, `user_id`, `address`, `street`, `cit
 
 
 ALTER TABLE `package` ADD `type` TINYINT NOT NULL COMMENT '1:1basic,2:2basic,3:3basec,4:1advance,5:2advance.6:3advance,7:1pro,8:2pro,9:3pro' AFTER `no_of_forms`;
+
+ 
+/*1/7/2015*/
+ALTER TABLE `package` ADD `image` VARCHAR(255) NOT NULL AFTER `type`;
+
+
+ALTER TABLE `package` ADD `reward_points` FLOAT NOT NULL AFTER `image`;
+
+ALTER TABLE `user` ADD `membership_type` INT(11) NOT NULL AFTER `social`;
+
+ALTER TABLE `user_shared_ad` ADD `date` DATE NOT NULL AFTER `user_id`;
+
+INSERT INTO `package` (`id`, `name`, `start_date`, `end_date`, `coupon_code`, `amount`, `Description`, `no_of_pages`, `no_of_images`, `no_of_forms`, `status`, `created_at`, `update_at`, `type`, `image`, `reward_points`) VALUES
+(1, 'Basic3', '2015-05-08', '2015-05-25', 0, 499, 'Domain\r\n250 Bandwidth\r\n4 Static pages\r\ncontact form\r\ngallery', 2, 3, 4, 1, '2015-07-01', '2015-06-29 11:52:45', '1', '1435741702Basic-package-3.png', 2.5),
+(3, 'Basic2', '2015-05-08', '2015-06-18', 12345, 99, 'Domain\r\n650 Bandwidth\r\n8 Static pages\r\n2 contact form\r\n2 gallery', 0, 0, 0, 1, '2015-07-01', '2015-06-29 11:52:56', '1', '1435741688Basic-package-2.png', 0.4),
+(4, 'Basic1', '0000-00-00', '0000-00-00', 0, 49, 'Basic1', 12, 12, 4, 1, '2015-07-01', '2015-06-25 10:48:15', '1', '1435741676Basic-package 1.png', 0.3),
+(5, 'Advance1', '0000-00-00', '0000-00-00', 0, 999, 'Advance1', 0, 0, 0, 1, '2015-07-01', '2015-07-01 08:58:15', '2', '1435741659Advance-package-1.png', 6),
+(6, 'Advance2', '0000-00-00', '0000-00-00', 0, 2999, 'Advance2', 0, 0, 0, 1, '2015-07-01', '2015-07-01 08:58:50', '2', '1435741644Advance-package-2.png', 21),
+(7, 'Advance3', '0000-00-00', '0000-00-00', 0, 4999, 'Advance3', 0, 0, 0, 1, '2015-07-01', '2015-07-01 08:59:14', '2', '1435741632Advance-package-3.png', 40),
+(8, 'Advance PRO1', '0000-00-00', '0000-00-00', 0, 9999, 'Advance PRO1', 0, 0, 0, 1, '2015-07-01', '2015-07-01 08:59:45', '3', '1435741611Pro-package-1.png', 90),
+(9, 'Advance PRO2', '0000-00-00', '0000-00-00', 0, 14999, 'Advance PRO2', 0, 0, 0, 1, '2015-07-01', '2015-07-01 09:00:17', '3', '1435741600Pro-package-2.png', 150),
+(10, 'Advance PRO3', '0000-00-00', '0000-00-00', 0, 24999, 'Advance PRO3', 0, 0, 0, 1, '2015-07-01', '2015-07-01 09:00:50', '3', '1435741524Pro-package-3.png', 275);
+
+
+/*generatebinary*/
+
+
+ALTER TABLE `genealogy` ADD `order_date` DATE NOT NULL AFTER `updated_at`;

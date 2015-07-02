@@ -71,17 +71,31 @@ class PackageController extends Controller {
             if ($_POST['Package']['name'] == '' && $_POST['Package']['amount'] == '' && $_POST['Package']['description'] == '') {
                 $error .= "Please fill required(*) marked fields.";
             } else {
-
+                    if (!empty($_FILES['image']['name'])) {
+                    $fname = time() . $_FILES['image']['name'];
+                    $packageObject->image = $fname;
+                    $ext1 = end((explode(".", $packageObject->image)));
+                    if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
+                        $error = "Please upload mentioned file type.";
+                    } else{
+                    $path = Yii::getPathOfAlias('webroot') . "/upload/package_image/";
+                    BaseClass::uploadFile($_FILES['image']['tmp_name'], $path, $fname);
+                    }
+                    }else{
+                        $fname = "";
+                    }
                 $packageObject->name = $_POST['Package']['name'];
                 $packageObject->amount = $_POST['Package']['amount'];
                 $packageObject->Description = $_POST['Package']['description'];
                 $packageObject->no_of_pages = $_POST['Package']['no_of_pages'];
                 $packageObject->no_of_images = $_POST['Package']['no_of_images'];
                 $packageObject->no_of_forms = $_POST['Package']['no_of_forms'];
+                $packageObject->type = $_POST['Package']['type'];
+                $packageObject->reward_points = $_POST['Package']['reward_points'];
+                $packageObject->image = $fname;
                 $packageObject->status = 1;
                 $packageObject->created_at = new CDbExpression('NOW()');
-                $packageObject->save(false);
-
+                $packageObject->save(false);  
                 $success .= "Package Successfully Added";
             }
         }
@@ -104,7 +118,20 @@ class PackageController extends Controller {
                 $error .= "Please fill required(*) marked fields.";
                 $this->redirect('list?error='.$error);
             } else {
-
+                if (!empty($_FILES['image']['name'])) {
+                    $fname = time() . $_FILES['image']['name'];
+                    $packageObject->image = $fname;
+                    $ext1 = end((explode(".", $packageObject->image)));
+                    if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
+                        $error = "Please upload mentioned file type.";
+                    } else{
+                    $path = Yii::getPathOfAlias('webroot') . "/upload/package_image/";
+                    BaseClass::uploadFile($_FILES['image']['tmp_name'], $path, $fname);
+                    $packageObject->image = $fname;
+                    }
+                    }else{
+                        $fname = "";
+                    }
                 $packageObject->name = $_POST['Package']['name'];
                 $packageObject->amount = $_POST['Package']['amount'];
                 $packageObject->Description = $_POST['Package']['description'];
@@ -112,6 +139,8 @@ class PackageController extends Controller {
                 $packageObject->no_of_images = $_POST['Package']['no_of_images'];
                 $packageObject->no_of_forms = $_POST['Package']['no_of_forms'];
                 $packageObject->status = 1;
+                $packageObject->type = $_POST['Package']['type'];
+                $packageObject->reward_points = $_POST['Package']['reward_points'];
                 $packageObject->created_at = new CDbExpression('NOW()');
                 $packageObject->update();
 

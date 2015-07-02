@@ -14,7 +14,7 @@ $this->breadcrumbs = array(
 							</div>
     </div>
         <div class="portlet-body form">
-    <form action="/admin/package/add" method="post" class="form-horizontal" onsubmit="return validation();">
+            <form action="/admin/package/add" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
       
@@ -69,6 +69,35 @@ $this->breadcrumbs = array(
                 <div class="col-lg-8">
                     <input type="text" id="no_of_forms" class="form-control" name="Package[no_of_forms]">
                     <span style="color:red;" id="forms_error"></span>
+                </div>
+
+            </div>
+     <div class="form-group">
+                <label for="country" class="col-lg-4 control-label">Package Type</label>
+                <div class="col-lg-8">
+                    <select name="Package[type]" id="type">
+                        <option value="">Select Type</option>
+                        <option value="1">Basic</option>  
+                        <option value="2">Advance</option>
+                        <option value="3">Advance PRO</option>
+                    </select>
+                    <span style="color:red;" id="type_error"></span>
+                </div>
+
+            </div>
+     <div class="form-group">
+                <label for="country" class="col-lg-4 control-label">Package Image</label>
+                <div class="col-lg-8">
+                    <input type="file" id="image" class="form-control" name="image">
+                    <span style="color:red;" id="image_error"></span>
+                </div>
+
+            </div>
+    <div class="form-group">
+                <label for="country" class="col-lg-4 control-label">Reward Points</label>
+                <div class="col-lg-8">
+                    <input type="text" id="reward_points" class="form-control" name="Package[reward_points]">
+                    <span style="color:red;" id="image_error"></span>
                 </div>
 
             </div>
@@ -155,6 +184,19 @@ $this->breadcrumbs = array(
                 return false;
             }
         }
+        $("#type_error").html("");
+        if ($("#type").val() == "") {
+            $("#type_error").html("Enter select package type");
+            $("#type").focus();
+            return false;
+        }
+        $("#image_error").html("");
+        if ($("#image").val() == "") {
+            $("#image_error").html("Please upload package image");
+            $("#image").focus();
+            return false;
+        }
+        
 
     }
 </script>

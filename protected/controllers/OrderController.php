@@ -346,11 +346,12 @@ class OrderController extends Controller {
          $userId = Yii::app()->session['userid'];
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
+        $id = "'".$data['id']."'";
         if($orderObject->status==1)
         {
         $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
         }else{
-        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a><br/><br/><a class="btn green fa fa-edit margin-right15" href="/order/pendingpayment?id='.$id.'" id="tip7">Make Payment</a>';
+        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a><br/><br/><a class="fancybox btn green fa fa-edit margin-right15" onclick = "showPendingPayment('.$id.');">Make Payment</a>';
          }
         echo $title;
     }
@@ -364,7 +365,7 @@ class OrderController extends Controller {
         $packageObject = Package::model()->findByPK($orderObject->package_id);
         $walletObject = Wallet::model()->findAll(array('condition' => 'user_id=' . $loggedInUserId . ' AND fund >= "10"'));
         }
-       $this->render('pendingPayment', array(
+       $this->renderPartial('pendingPayment', array(
             'orderObject' => $orderObject,
             'transactionObject' => $transactionObject,
             'walletObject'=>$walletObject,

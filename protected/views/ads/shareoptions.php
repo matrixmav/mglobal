@@ -5,17 +5,13 @@ $name = '"' . $data->ads->name . '"';
 $desc = '"' . $data->ads->description . '"';
 $caption = '""';
 $adId = '"' . $data->ads->id . '"';
-
 ?>
 
-<a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?>); return false;'  >
-</a>
+<a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?>); return false;' ></a>
 
-<a class="btn tw fa fa-twitter  margin-right15" href="https://twitter.com/intent/tweet?url=<?php echo $data->ads->description; ?>" target="_blank">
-</a>
+<a class="btn tw fa fa-twitter  margin-right15" href="https://twitter.com/intent/tweet?url=<?php echo $data->ads->description; ?>" target="_blank"></a>
 
-<a class="btn gplus fa fa-google-plus  margin-right15" href="http://plus.google.com/share?url=<?php echo $data->ads->description; ?>&text=test" target="_blank">
-</a>
+<a class="btn gplus fa fa-google-plus  margin-right15" href="http://plus.google.com/share?url=<?php echo $data->ads->description; ?>&text=test" target="_blank"></a>
 
 <!--<a class="btn insta fa fa-instagram  margin-right15" href="https://instagram.com/accounts/login/?next=%2Faccounts%2Fbadges%2F?url=<?php echo $data->ads->description; ?>" target="_blank">
 </a>-->
@@ -39,4 +35,5 @@ $adId = '"' . $data->ads->id . '"';
             </div>
         </div>
     </div>
-</div>*/?>
+</div>*/
+?>

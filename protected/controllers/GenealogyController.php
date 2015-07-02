@@ -71,7 +71,6 @@ class GenealogyController extends Controller {
     }*/
     
     public function actionBinaryCalc() {
-        echo "adada"; die;
         $adminId = 1;
         $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
         $parentObject = BaseClass::setPurchaseNode($parentObject);

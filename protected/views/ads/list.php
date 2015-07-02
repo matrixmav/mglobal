@@ -61,15 +61,14 @@ $this->menu = array(
                             'value' => 'isset($data->ads->name)?$data->ads->name:""',
                         ),
                         array(
-                            'name' => 'status',
-                            'header' => '<span style="white-space: nowrap;">Status &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->created_at)?$data->created_at:""',
+                            'name' => 'Earn',
+                            'header' => '<span style="white-space: nowrap;">Earned &nbsp; &nbsp; &nbsp;</span>',
+                            'value' => '$data->status == 1 ?"Earn":"Not Earn"',
                         ),
                         array(
                             'name' => 'created_at',
                             'header' => '<span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>',
                             'htmlOptions' => array('width' => '25%'),
-                          //  'value' => 'isset($data->created_at)?$data->created_at:""',                           
                             'value' => array($this, 'getSocialButton')
                         ),
                         //                       

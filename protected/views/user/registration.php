@@ -29,7 +29,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                            
                                             <div class="row">  
                                                 <div class="col-lg-7">
-                                            <input type="text" class="form-control" value="<?php echo (isset($spnId))?$spnId:""; ?>" name="sponsor_id" id="sponsor_id" onchange="isSponsorExisted()">
+                                            <input type="text" class="form-control" value="<?php echo(isset($spnId))?$spnId:""; ?>" name="sponsor_id" id="sponsor_id" onchange="isSponsorExisted()">
                                                 </div>
                                                 <div class="col-lg-5">
                                             <a href="javascript:void(0)" class="btn btn-default fright" onclick="getSponId();">Get Sponsor Id</a>
@@ -53,7 +53,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                     <div class="form-group">
                                         <label for="lastname" class="col-lg-4 control-label">User Name <span class="require">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" onchange="isUserExisted()" id="name" name="name">
+                                            <input type="text" class="form-control" onchange="isUserExisted()" id="name" name="name" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>">
                                             <span id="name_error" class="clrred"></span>
                                             <span id="name_available" class="clr green"></span>
                                         </div>
@@ -63,14 +63,14 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                     <div class="form-group">
                                         <label for="lastname" class="col-lg-4 control-label">Full Name <span class="require">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="full_name" name="full_name">
+                                            <input type="text" class="form-control" value="<?php echo isset($_POST['full_name'])?$_POST['full_name']:''; ?>" id="full_name" name="full_name">
                                         
                                         <span id="full_name_error" class="clrred"></span></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
                                         <div class="col-lg-8">
-                                            <input type="text" class="form-control" id="email" name="email" onchange="isEmailExisted()">
+                                            <input type="text" class="form-control" id="email" value="<?php echo isset($_POST['email'])?$_POST['email']:''; ?>" name="email" onchange="isEmailExisted()">
                                         
                                         <span id="email_error" class="clrred"></span></div>
                                     </div>
@@ -93,14 +93,37 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                         <div class="col-lg-8">
                                             <div class="row">
                                             <div class="col-lg-3 col-sm-3 col-xs-4">
-                                                <input  name="country_code" id="country_code" class="form-control" readonly="true">                                            </div>
+                                                <input  name="country_code" id="country_code" class="form-control" readonly="true"  >                                            </div>
                                             <div class="col-lg-9 colo-sm-9 col-xs-8">
                                                 
-                                            <input  name="phone" id="phone" maxlength="12" placeholder="phone number" class="form-control" > <br>
+                                            <input  name="phone" id="phone" maxlength="12" placeholder="phone number" class="form-control" value="<?php echo isset($_POST['phone'])?$_POST['phone']:''; ?>" > <br>
                                             </div>
                                         <span id="phone_error" class="clrred"></span></div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="phone" class="col-lg-4 control-label">Captcha<span class="require">*</span></label>
+                                        <div class="col-lg-8">
+                                            <script type="text/javascript">
+                                                var RecaptchaOptions = {
+                                                   theme : 'white'
+                                                };
+                                                </script>
+                                            <?php
+                                            // Get a key from https://www.google.com/recaptcha/admin/create
+                                            $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";
+                                            $privatekey = "6LcCIgkTAAAAANss_hcRD61AmYuXJ0JA2bot4R8C";
+
+                                            # the response from reCAPTCHA
+                                            $resp = null;
+                                            # the error code from reCAPTCHA, if any
+                                            $error = null;
+                                            echo recaptcha_get_html($publickey, $error);
+                                            ?>
+                                        </div>
+                                    </div>
+                                    
                                 </fieldset>
                                 <div class="row">
                                     <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        

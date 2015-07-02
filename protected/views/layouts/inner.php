@@ -135,6 +135,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--<script type="text/javascript" src="/chat/js/chat.js"></script>-->
         <script type="text/javascript" src="/js/custom_msg.js"></script>
         <script type="text/javascript" src="/js/registration.js"></script>
+        
+       
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.init();

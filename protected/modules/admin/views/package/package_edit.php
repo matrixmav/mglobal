@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/package/edit?id=<?php echo $packageObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();">
+    <form action="/admin/package/edit?id=<?php echo $packageObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Edit Package </legend>
@@ -67,6 +67,39 @@ $this->breadcrumbs = array(
                     </div>
                      
                 </div>
+            
+             <div class="form-group">
+                <label for="country" class="col-lg-4 control-label">Package Type</label>
+                <div class="col-lg-8">
+                    <select name="Package[type]" id="type">
+                        <option value="">Select Type</option>
+                        <option value="1" <?php if(!empty($packageObject->type) && $packageObject->type==1){?> selected="selected" <?php } ?>>Basic</option>  
+                        <option value="2" <?php if(!empty($packageObject->type) && $packageObject->type==2){?> selected="selected" <?php } ?>>Advance</option>
+                        <option value="3" <?php if(!empty($packageObject->type) && $packageObject->type==3){?> selected="selected" <?php } ?>>Advance PRO</option>
+                    </select>
+                    <span style="color:red;" id="type_error"></span>
+                </div>
+
+            </div>
+         <div class="form-group">
+                <label for="country" class="col-lg-4 control-label">Package Image</label>
+                <div class="col-lg-8">
+                    <input type="file" id="image" class="form-control" name="image">
+                    <?php if(!empty($packageObject->image)){?> 
+                    <img src="/upload/package_image/<?php echo $packageObject->image;?>">
+                    <?php }?>
+                    <span style="color:red;" id="image_error"></span>
+                </div>
+
+            </div>
+             <div class="form-group">
+                <label for="country" class="col-lg-4 control-label">Reward Points</label>
+                <div class="col-lg-8">
+                    <input type="text" id="reward_points" class="form-control" name="Package[reward_points]" value="<?php echo (!empty($packageObject))?$packageObject->reward_points : "";?>">
+                    <span style="color:red;" id="image_error"></span>
+                </div>
+
+            </div>
              
         </fieldset>
 
@@ -113,6 +146,12 @@ $this->breadcrumbs = array(
       $("#description").focus();            
       return false;
     }
+    $("#type_error").html("");
+        if ($("#type").val() == "") {
+            $("#type_error").html("Enter select package type");
+            $("#type").focus();
+            return false;
+        }
         
     }
     </script>
