@@ -835,6 +835,7 @@ class UserController extends Controller {
     }
 
     public function actionloginregistration() {
+        require(__DIR__ . '/../vendor/recaptch/recaptchalib.php');
         $spnId = Yii::app()->params['adminSpnId'];
         Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
 
