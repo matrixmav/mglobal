@@ -963,7 +963,7 @@ class UserController extends Controller {
             $userName = $_POST['userName'];
             $getUserObject = User::model()->findByAttributes(array('name' => $userName));
             if ($getUserObject) {
-                $userArray = array('id' => $getUserObject->id, 'fullName' => $getUserObject->full_name);
+                $userArray = array('id' => $getUserObject->id, 'fullName' => $getUserObject->full_name, 'name' => $getUserObject->name);
                 echo CJSON::encode($userArray);
                 exit;
             } else {
