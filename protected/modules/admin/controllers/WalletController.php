@@ -202,7 +202,14 @@ class WalletController extends Controller
 
     public function actionRpWallet() {
         $loggedInUserId = Yii::app()->session['userid'];
+       $todayDate = Yii::app()->params['startDate'];
         $pageSize = Yii::app()->params['defaultPageSize'];
+        $fromDate = date('Y-m-d');
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+        }
+
         $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 2));
         if ($walletobject) {
             $walletId = $walletobject->id;
