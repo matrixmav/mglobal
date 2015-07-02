@@ -1,15 +1,5 @@
- 
 
-<div class="" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-   
-    <div class="modal-dialog" role="document" style="width:auto; max-width: 900px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"> Your Cart</h4>
-      </div>
-      <div class="modal-body clearfix">
-       <div class="col-lg-12 col-sm-12 col-xs-12">    
+       <div class="col-lg-12 col-sm-12 col-xs-12" style="width:97%!important" id="orderModal">    
             <div class="pageWrp checkout abtest" id="maincontent">
                 <div class="sectionWrp summary open">
                    <p class="title"><span class="check">1.</span> <span class="txt">Your Order Summary</span></p>
@@ -141,28 +131,11 @@
                 </div>
             </div>
         </div>
-      </div>
-    <!--  <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
-    </div>
-  </div>
-</div>
+      
  
-
-<div class="" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-   
-    <div class="modal-dialog" role="document" style="width:auto; max-width: 900px;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"> Your Cart</h4>
-      </div>
-      <div class="modal-body clearfix">
-       <div class="col-lg-12 col-sm-12 col-xs-12">    
+          <div class="col-lg-12 col-sm-12 col-xs-12" style="width:97%!important;display:none;" id="makepayment">    
             <div class="pageWrp checkout abtest" id="maincontent">
-<div id="makepayment" style="display:none;">
+<div>
   <div class="row">
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
@@ -242,7 +215,7 @@
                             </tr>
                         </table>
                     </div>
-                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
+                            <div class="btnWrp col-sm-11"><input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a> &nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goBack();">Go Back >></a></div>
 
                 </div>
             </div>
@@ -252,14 +225,7 @@
   
 </div>
     </div>
-      </div>
-    <!--  <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
-    </div>
-  </div>
-</div>
+    
  
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
@@ -309,7 +275,7 @@
         
         if(type=='2')
         {
-            var totalAmount = $('#totalAmount').val()*75/100; 
+             var totalAmount = $('#totalAmount').val()*75/100; 
         }else{
              var totalAmount = $('#totalAmount').val();
         }
@@ -497,5 +463,14 @@
    $("#totalusedrp").val('');
    $("#walletused").val('');
 }
+function goBack()
+{
+    $("#orderModal").fadeIn();
+    $("#makepayment").fadeOut();
+}
     
-</script>    
+</script>  
+<style>
+.fancybox-inner{width:1000px !important}
+.fancybox-skin{width:1000px !important}
+</style>
