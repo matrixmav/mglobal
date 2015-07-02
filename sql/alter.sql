@@ -154,3 +154,6 @@ INSERT INTO `package` (`id`, `name`, `start_date`, `end_date`, `coupon_code`, `a
 
 
 /*generatebinary*/
+
+
+ALTER TABLE `genealogy` ADD `order_date` DATE NOT NULL AFTER `updated_at`;
