@@ -157,3 +157,5 @@ INSERT INTO `package` (`id`, `name`, `start_date`, `end_date`, `coupon_code`, `a
 
 
 ALTER TABLE `genealogy` ADD `order_date` DATE NOT NULL AFTER `updated_at`;
+
+UPDATE `mglobal`.`user_has_access` SET `access` = 'reports,user,mail,memberaccess,package,ads,builder,ads_add,ads_list,package_list,package_add,userreport,reportaddress,reportsponsor,reportpackage,reporttransaction,reportsocial,reportcontact,usermg,wallet,geneology,document,testimonial,reportverification,generatebinary,reportrefferal,reportdeposit,summary,cashwallet,rpwallet,commissionwallet' WHERE `user_has_access`.`id` = 4;
