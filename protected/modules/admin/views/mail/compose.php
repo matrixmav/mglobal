@@ -29,7 +29,7 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
         <label class="col-md-2">To *</label>
         <div class="col-md-6">
             <input type="text" class="form-control dvalid" name="to_email[]"  onchange="getFullName(this.value);" id="search_username" size="60" maxlength="75" value="<?php echo (isset($mailObject)) ? $mailObject->fromuser->name : ""; ?>" />
-            <span id="search_fullname"></span>
+            <span id="search_fullname">&nbsp;</span>
             <span id="search_user_error" style="color:red"></span>
         </div>
     </div>
