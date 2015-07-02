@@ -934,7 +934,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 
                                  if (in_array('cashwallet', $accessArr)) {  
                                 $reservation_subsection1 = array(
-                                    "wallet/fundwallet" => "Add",
+                                    "wallet/fundwallet" => "Cash Wallet",
                                     );
                               }else{
                                     $reservation_subsection1 = array();
@@ -942,7 +942,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 }
                                 if (in_array('rpwallet', $accessArr)) { 
                                     $reservation_subsection2 = array(
-                                      "wallet/rpwallet" => "List",  
+                                      "wallet/rpwallet" => "RP Wallet",  
                                    );
                                 }else{
                                     $reservation_subsection2 = array();
@@ -950,7 +950,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 }
                                 if (in_array('commissionwallet', $accessArr)) { 
                                     $reservation_subsection3 = array(
-                                      "wallet/commisionwallet" => "List",  
+                                      "wallet/commisionwallet" => "Commission Wallet",  
                                    );
                                 }else{
                                     $reservation_subsection3 = array();
