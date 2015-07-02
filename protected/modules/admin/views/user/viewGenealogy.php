@@ -24,7 +24,7 @@ if (!empty($_GET['id'])) {
             <div class="expiration margin-topDefault confirmMenu" style="display:inline-block;">
                 <form action="" class="form-inline">
                     <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username"  value="<?php echo $userObject->full_name; ?>" />
-                    <span id="search_fullname"></span>
+                    <span id="search_fullname">&nbsp;</span>
                     <input type="button" name="submit" value="Search" onclick="submitform();" class="btn btn-primary confirmOk">
                 </form>
             </div>
