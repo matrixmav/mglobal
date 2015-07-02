@@ -285,7 +285,6 @@ class ProfileController extends Controller {
                         $userObjectArr['ip'] = Yii::app()->params['ip'];
                         $userObjectArr['new_master_pin'] = $_POST['UserProfile']['new_master_pin'];
                         $successMsg .= "Your pin changed successfully";
-                        
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
                         $config['body'] =  $this->renderPartial('//mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
