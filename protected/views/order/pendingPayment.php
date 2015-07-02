@@ -440,8 +440,8 @@
                 if (htmlArr[0] == 1)
                 {
                     $("#transID").val(htmlArr[1]);
-                    $("#orderModal").fadeOut();
-                    $("#makepayment").fadeIn();
+                    $("#orderModal").hide();
+                    $("#makepayment").show();
                     //location.href = "/package/payment?tId="+htmlArr[1]+'&pp='+totalAmount;
                     
                 }
@@ -465,8 +465,8 @@
 }
 function goBack()
 {
-    $("#orderModal").fadeIn();
-    $("#makepayment").fadeOut();
+    $("#orderModal").show();
+    $("#makepayment").hide();
 }
     
 </script>  
