@@ -16,7 +16,7 @@ $caption = '';
         <a href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--gp";?>" class="btn  green margin-right-20">Google+</a>
         <a onclick = "openform('Email');" class="btn  green margin-right-20">Email</a>
         <a onclick = "openform('SMS');" class="btn  green margin-right-20">SMS</a> -->
-         <a class="btn btn-block btn-social btn-google-plus" href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--gp";?>">
+         <a class="btn btn-block btn-social btn-google-plus" href="https://plus.google.com/share?url=<?php echo Yii::app()->params['baseUrl'];?>/user/registration?spid=<?php echo $userObject->name."--gp";?>" target="_blank">
     <i class="fa fa-google-plus"></i> Google+ share
   </a>
     </div>
