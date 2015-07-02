@@ -7,8 +7,8 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
-            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20")); ?>
+            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
     </div>
 </div><br/>
@@ -43,6 +43,12 @@ $this->breadcrumbs = array(
         <p><a download="<?php echo $mailObject->attachment; ?>" href="<?php echo Yii::app()->getBaseUrl(true);?>/upload/attachement/<?php echo $mailObject->attachment; ?>" target="_blank">Click here to download</p>
     </div>
 </div>
-<?php } ?>
 
+<?php } ?>
+ <div class="col-md-12">
+    <label class="col-md-1">&nbsp; </label>
+    <div class="col-md-6">
+<a href="/mail/reply?id=<?php echo(!empty($_GET['id'])) ? $_GET['id'] : "";?>" class="green btn margin-right-20">Reply</a>
+  </div>
+</div>
 
