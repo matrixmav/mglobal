@@ -870,9 +870,9 @@ class PackageController extends Controller {
     
     public function actiontestScript() {
         	$datetime= gmdate('Y-m-d H:i:s');
-	$url = "https://test.httpapi.com/api/domains/available.json?auth-userid=600184&api-key=iZcvfkycZFpshLApGnRb4BgXltgOYj4x&domain-name=ramhemareddy&tlds=com";
-	echo $url;
- echo '<br>';
+	$url = "https://test.httpapi.com/api/domains/available.json?auth-userid=607978&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&domain-name=ramhemareddy&tlds=com";
+	//echo $url;
+ //echo '<br>';
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -895,9 +895,9 @@ class PackageController extends Controller {
 			 print_r($response);
 			 echo '<br>';
         $datetime= gmdate('Y-m-d H:i:s');
-	$url = "https://test.httpapi.com/api/domains/v5/suggest-names.json?auth-userid=600184&api-key=iZcvfkycZFpshLApGnRb4BgXltgOYj4x&keyword=ram";
-	echo $url;
- echo '<br>';
+	$url = "https://test.httpapi.com/api/domains/v5/suggest-names.json?auth-userid=6079784&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&keyword=ram";
+	//echo $url;
+ //echo '<br>';
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -917,7 +917,7 @@ class PackageController extends Controller {
 
 			 $response = json_decode($json_response, true);
 			  echo '<pre>';
-			 print_r($response); 
+			 print_r($response);exit; 
     }
   
     
