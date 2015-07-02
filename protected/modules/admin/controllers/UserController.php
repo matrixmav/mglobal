@@ -59,7 +59,7 @@ class UserController extends Controller {
                 Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
             } else {
                 $userObject->status = 1;
-                Yii::app()->user->setFlash('success', "User status changed to Active!.");
+                
                 $masterPin = BaseClass::getUniqInt(5);
                 $password = BaseClass::getPassword();
                 $userObject->password = md5($password);
@@ -74,6 +74,7 @@ class UserController extends Controller {
                 $config['subject'] = 'Login Details';
                 $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
+                Yii::app()->user->setFlash('success', "User status changed to Active!.");
                 $userObject->save(false);
             }
            $this->redirect('/admin/user');
