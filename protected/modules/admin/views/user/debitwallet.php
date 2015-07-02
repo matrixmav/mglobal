@@ -16,7 +16,7 @@ if (!empty($error)) {
     <div class="col-md-12 form-group">
         <label class="col-md-2">User Name: </label>
         <div class="col-md-6">
-            <p><?php echo (!empty($userObject)) ? $userObject->full_name : ""; ?></p>
+            <p><?php echo (!empty($userObject)) ? $userObject->name : ""; ?></p>
             <span style="color:red"  id="first_name_error"></span>
         </div>
     </div>
