@@ -664,13 +664,7 @@ class PackageController extends Controller {
                 }
                 
                 
-                $userObjectArr = array();
-                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
-                $userObjectArr['user_name'] = $userObject->name;
-                $config['to'] = $sponsorUserObject->email;
-                $config['subject'] = 'Direct Referral Income Credited';
-                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);
+                
                 
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
@@ -748,6 +742,16 @@ class PackageController extends Controller {
                 $config['subject'] = 'Payment Confirmation';
                 $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find' .
                 $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
+                CommonHelper::sendMail($config);
+                
+                
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $sponsorUserObject->email;
+                $config['subject'] = 'Direct Referral Income Credited';
+                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
+                $config['file_path'] = "";
                 CommonHelper::sendMail($config);
                 
                
