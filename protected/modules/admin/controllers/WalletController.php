@@ -211,7 +211,7 @@ class WalletController extends Controller
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'")  AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'")  AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
 //        echo "<pre>"; print_r($dataProvider);exit;
         $this->render('/report/rpwallet', array('dataProvider' => $dataProvider));
@@ -239,9 +239,9 @@ class WalletController extends Controller
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
-        $this->render('/report/commisionwallet', array('dataProvider' => $dataProvider));
+        $this->render('/report/commissionwallet', array('dataProvider' => $dataProvider));
     }
 
     /*
@@ -266,7 +266,7 @@ class WalletController extends Controller
         }
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
-                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
         
         $this->render('/report/fundwallet', array('dataProvider' => $dataProvider));
