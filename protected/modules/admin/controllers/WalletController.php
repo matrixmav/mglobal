@@ -213,7 +213,7 @@ class WalletController extends Controller
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'")  AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
 //        echo "<pre>"; print_r($dataProvider);exit;
-        $this->render('rpwallet', array('dataProvider' => $dataProvider));
+        $this->render('/user/rpwallet', array('dataProvider' => $dataProvider));
     }
 
     /*
@@ -239,7 +239,7 @@ class WalletController extends Controller
             'criteria' => array(
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
         )));
-        $this->render('commisionwallet', array('dataProvider' => $dataProvider));
+        $this->render('/user/commisionwallet', array('dataProvider' => $dataProvider));
     }
 
     /*
@@ -266,7 +266,7 @@ class WalletController extends Controller
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
          )));
         
-        $this->render('fundwallet', array('dataProvider' => $dataProvider));
+        $this->render('/user/fundwallet', array('dataProvider' => $dataProvider));
     }
 
 }
