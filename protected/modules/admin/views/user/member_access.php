@@ -61,7 +61,7 @@ if(!empty($success)){
        
        <input type="checkbox" name="access[]" value="generatebinary" <?php if(in_array('generatebinary',$accessArr)){?> checked="checked" <?php }?>>Generate Binary<br/>
        
-       <input type="checkbox" name="access[]" value="user" <?php if(in_array('summary',$accessArr)){?> checked="checked" <?php }?>>Summary<br/>
+       <input type="checkbox" name="access[]" value="summary" <?php if(in_array('summary',$accessArr)){?> checked="checked" <?php }?>>Summary<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="cashwallet" <?php if(in_array('cashwallet',$accessArr)){?> checked="checked" <?php }?>>Cash wallet<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="rpwallet" <?php if(in_array('rpwallet',$accessArr)){?> checked="checked" <?php }?>>RP Wallet<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="commissionwallet" <?php if(in_array('commissionwallet',$accessArr)){?> checked="checked" <?php }?>>Commission Wallet<br/>
