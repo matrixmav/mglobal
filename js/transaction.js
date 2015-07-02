@@ -45,7 +45,7 @@ function getFullName(userName) {
             $("#search_user_error").html("");
             if (userData) {
                 $("#search_username").val(userData.name);
-                $("#search_fullname").val(userData.fullName);
+                $("#search_fullname").html(userData.fullName);
                 $("#search_user_id").val(userData.id);
             } else {
                 $("#search_user_id").val(0);
@@ -69,7 +69,8 @@ function getFullNameAdmin(userName) {
             var userData = jQuery.parseJSON(data);
             $("#search_user_error").html("");
             if (userData) {
-                $("#search_username").val(userData.fullName);
+                $("#search_username").val(userData.name);
+                $("#search_fullname").html(userData.fullName);
                 $("#search_user_id").val(userData.id);
             } else {
                 $("#search_user_id").val(0);
