@@ -202,6 +202,7 @@ class WalletController extends Controller
 
     public function actionRpWallet() {
         $loggedInUserId = Yii::app()->session['userid'];
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 2));
         if ($walletobject) {
             $walletId = $walletobject->id;
@@ -211,7 +212,7 @@ class WalletController extends Controller
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'")  AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
-        )));
+            ), 'pagination' => array('pageSize' => $pageSize),));
 //        echo "<pre>"; print_r($dataProvider);exit;
         $this->render('/report/rpwallet', array('dataProvider' => $dataProvider));
     }
@@ -222,6 +223,7 @@ class WalletController extends Controller
 
     public function actionCommisionWallet() {
         $todayDate = Yii::app()->params['startDate'];
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $fromDate = date('Y-m-d');
         if (!empty($_POST)) {
             $todayDate = date('Y-m-d', strtotime($_POST['from']));
@@ -238,7 +240,7 @@ class WalletController extends Controller
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
-        )));
+            ), 'pagination' => array('pageSize' => $pageSize),));
         $this->render('/report/commisionwallet', array('dataProvider' => $dataProvider));
     }
 
@@ -248,6 +250,7 @@ class WalletController extends Controller
 
     public function actionFundWallet() {
         $todayDate = Yii::app()->params['startDate'];
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $fromDate = date('Y-m-d');
         if (!empty($_POST)) {
             $todayDate = date('Y-m-d', strtotime($_POST['from']));
@@ -264,7 +267,7 @@ class WalletController extends Controller
         $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
             'criteria' => array(
                 'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
-         )));
+            ), 'pagination' => array('pageSize' => $pageSize),));
         
         $this->render('/report/fundwallet', array('dataProvider' => $dataProvider));
     }
