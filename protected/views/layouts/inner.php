@@ -136,15 +136,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script type="text/javascript" src="/js/custom_msg.js"></script>
         <script type="text/javascript" src="/js/registration.js"></script>
         
-           <script type="text/javascript" src="/js/fancybox/jquery.fancybox.pack.js"></script>
-        <script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
-        <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
- 
-        <script type="text/javascript">
-               jQuery(document).ready(function() {
-                       jQuery("#tip7").fancybox();
-               });
-       </script>
+       
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 App.init();
