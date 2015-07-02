@@ -282,7 +282,7 @@ class MoneyTransferController extends Controller {
                 
                 /*mail for from user*/
                 
-                $config['to'] = $toUserObjectMail->email;
+                $config['to'] = $fromUserObjectMail->email;
                 $config['subject'] = 'Fund Transfered';
                 $config['body'] =  $this->renderPartial('//mailTemp/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
