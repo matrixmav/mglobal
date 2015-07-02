@@ -32,7 +32,7 @@ class ReportController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view', 'address', 'wallet',
                     'creditwallet', 'package', 'adminsponsor', 'verification',
-                    'socialaccount', 'contact', 'transaction'),
+                    'socialaccount', 'contact', 'transaction','refferal','deposit'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -112,6 +112,70 @@ class ReportController extends Controller {
         
         $this->render('address', array(
             'dataProvider' => $dataProvider,
+        ));
+        
+    }
+    
+    public function actionDeposit() {
+       $loggedInuserName = User::model()->findByPk(Yii::app()->session['userid']);
+        $model = User::model()->findAll(array('condition' => 'sponsor_id = "' . $loggedInuserName->name . '"'));
+        //$connection = Yii::app()->db;
+        $userid = "";
+        $userID = 0;
+        if ($model) {
+            foreach ($model as $user) {
+                $userid .= "'" . $user->id . "',";
+            }
+            $userID = rtrim($userid, ',');
+            $condition = 'user_id IN(' . $userID . ') AND ';
+        } else {
+            $condition = "user_id IN('0') AND ";
+        }
+        $pageSize = 100;
+          
+        
+        // Date filter.
+        if (!empty($_POST)) {
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+        }else{
+            $todayDate = '0000-00-00';
+            $fromDate = '0000-00-00';
+        }   
+            $dataProvider = new CActiveDataProvider('Order', array(
+            'criteria' => array(
+                'condition' => ($condition.'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND status=1' ), 'order' => 'created_at DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        
+         
+        $totalAmount = "";
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand("SELECT package.amount FROM `package`,`order` where order.user_id in (".$userID.") AND order.package_id = package.id AND order.created_at >= '" . $todayDate . "' AND order.created_at <= '" . $fromDate . "' AND order.status='1'");
+        $row = $command->queryAll();
+        
+        foreach ($row as $amount) {
+            $totalAmount += $amount['amount'] * 5 / 100;
+         }
+
+        //$sqlData = new CArrayDataProvider($row, array(
+            //'pagination' => array('pageSize' => 100)));
+        //$sqlData = $sqlData->getData();
+        //$sqlData = $sqlData[0];
+        //$dataProvider = new CActiveDataProvider($sqlData, array(
+        //'pagination' => array('pageSize' => 10),));
+        /* foreach($dataProvider as $data)
+          {
+          $orderObject =  Order::model()->findByAttributes(array('user_id'=>$data->id));
+          $dataProvider['order'] = $orderObject;
+          $packageObject =  Package::model()->findByPK($orderObject->package_id);
+          $dataProvider['package'] = $packageObject;
+          } */
+
+
+
+        $this->render('admindirectincome', array(
+            'dataProvider' => $dataProvider,
+            'totalAmount' => $totalAmount,
         ));
         
     }
