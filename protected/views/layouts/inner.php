@@ -492,8 +492,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             $billing_pmenu = 7;
                             if ((in_array($billing_pmenu, $menusections ['psections'])) || (in_array($billing_pmenu, $menusections ['section_ids']))) {
                                 $billing_subsection = array(
-                                    "mail" => "Inbox",
                                     "mail/compose" => "Compose",
+                                    "mail" => "Inbox",
                                     "mail/sent" => "Sent",
                                 );
                                 ?>
