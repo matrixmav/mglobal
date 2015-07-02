@@ -46,6 +46,8 @@ if(!empty($success)){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reporttransaction" <?php if(in_array('reporttransaction',$accessArr)){?> checked="checked" <?php }?>>Transaction Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportsocial" <?php if(in_array('reportsocial',$accessArr)){?> checked="checked" <?php }?>>Social Profile Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportcontact" <?php if(in_array('reportcontact',$accessArr)){?> checked="checked" <?php }?>>Contact Report<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportdeposit" <?php if(in_array('reportdeposit',$accessArr)){?> checked="checked" <?php }?>>Deposit Report<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportrefferal" <?php if(in_array('reportrefferal',$accessArr)){?> checked="checked" <?php }?>>Refferal Report<br/>
         <br/>
        <input type="checkbox" name="access[]" value="mail" <?php if(in_array('mail',$accessArr)){?> checked="checked" <?php }?>>Mail<br/>
        <input type="checkbox" name="access[]" value="user" <?php if(in_array('user',$accessArr)){?> checked="checked" <?php }?>>Operation<br/>
@@ -58,7 +60,12 @@ if(!empty($success)){
        <input type="checkbox" name="access[]" value="memberaccess" <?php if(in_array('memberaccess',$accessArr)){?> checked="checked" <?php }?>>Member Access<br/>
        
        <input type="checkbox" name="access[]" value="generatebinary" <?php if(in_array('generatebinary',$accessArr)){?> checked="checked" <?php }?>>Generate Binary<br/>
-        
+       
+       <input type="checkbox" name="access[]" value="user" <?php if(in_array('summary',$accessArr)){?> checked="checked" <?php }?>>Summary<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="cashwallet" <?php if(in_array('cashwallet',$accessArr)){?> checked="checked" <?php }?>>Cash wallet<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="rpwallet" <?php if(in_array('rpwallet',$accessArr)){?> checked="checked" <?php }?>>RP Wallet<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="commissionwallet" <?php if(in_array('commissionwallet',$accessArr)){?> checked="checked" <?php }?>>Commission Wallet<br/>
+         
     </div>
 </div>
  
