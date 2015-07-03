@@ -1283,8 +1283,8 @@ class BaseClass extends Controller {
         if($binaryCommissionObjectLeft){
             //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
             //  $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
-           echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
-           echo "Left :".$binaryCommissionObjectLeft->order_amount;
+           //echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
+           //echo "Left :".$binaryCommissionObjectLeft->order_amount;
             if($todayDate==$binaryCommissionObjectLeft->order_date){
                 $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
                 $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
