@@ -55,13 +55,14 @@ class PackageController extends Controller {
     function actionCouponApply() {
         $response = '';
         $percentage = 10;
-        $couponObject = Coupon::model()->findByAttributes(array('status' => '1'));
+        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK(Yii::app()->session['package_id']);
-        if ($couponObject->coupon_code == $_REQUEST['coupon_code']) {
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+        if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
 
             $packageamount = $packageObject->amount;
-            $discountedAmount = $packageObject->amount * $percentage / 100 + Yii::app()->session['amount'];
+            $discountedAmount = $packageObject->amount * $couponObject->amount / 100 + Yii::app()->session['amount'];
             $discountAmountfinal = $packageamount - $discountedAmount;
             $response .= $discountAmountfinal . "_" . $discountedAmount;
         } else {
@@ -82,11 +83,12 @@ class PackageController extends Controller {
         $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK($_REQUEST['package_id']);
         $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+         
         if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
 
             $packageamount = $packageObject->amount;
-            $discountedAmount = $packageObject->amount * $percentage / 100 + $_REQUEST['domain_price'];
+            $discountedAmount = $packageObject->amount * $couponObject->amount / 100 + $_REQUEST['domain_price'];
             $discountAmountfinal = $packageamount - $discountedAmount;
             $response .= $discountAmountfinal . "_" . $discountedAmount;
         } else {
@@ -140,6 +142,7 @@ class PackageController extends Controller {
             $couponCodeObject->coupon_id = $couponObject->id;
             $couponCodeObject->user_id = Yii::app()->session['userid'];
             $couponCodeObject->status=0;
+            $couponCodeObject->created_at=date('Y-m-d');
             $couponCodeObject->save(false);
         }
     }
@@ -789,6 +792,7 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['amount']);
                 unset(Yii::app()->session['package_id']);
                 unset(Yii::app()->session['transaction_id']);
+                unset(Yii::app()->session['coupon_code']);
                 unset(Yii::app()->session['domain']);
             }
             $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
