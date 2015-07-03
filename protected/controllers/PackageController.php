@@ -82,7 +82,7 @@ class PackageController extends Controller {
         $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK($_REQUEST['package_id']);
         $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
-        if ($couponObject->coupon_code == $_REQUEST['coupon_code'] ) {
+        if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
 
             $packageamount = $packageObject->amount;
@@ -128,8 +128,19 @@ class PackageController extends Controller {
             Transaction::model()->createTransactionPackage($transactionObject,$transactionArray);
         }
          
-         
+         /*code to create coupon code*/
         
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+        if(count($couponCodeObject)==0)
+        {
+            /* code to fetch coupon ID*/
+            $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>Yii::app()->session['coupon_code']));
+            $couponCodeObject = new UserHasCoupon;
+            $couponCodeObject->coupon_id = $couponObject->id;
+            $couponCodeObject->user_id = Yii::app()->session['userid'];
+            $couponCodeObject->status=0;
+            $couponCodeObject->save(false);
+        }
         //$transactionObject->used_rp = 0;
         $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . $transactionObject->id));
 
