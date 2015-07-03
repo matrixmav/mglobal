@@ -174,3 +174,7 @@ CREATE TABLE IF NOT EXISTS `user_has_coupon` (
 ALTER TABLE `transaction` ADD `coupon_code` VARCHAR(100) NOT NULL AFTER `coupon_discount`;
 
 ALTER TABLE `user_has_coupon` CHANGE `coupon_code` `coupon_id` INT(11) NOT NULL;
+
+
+ALTER TABLE `user_has_coupon`
+ ADD PRIMARY KEY (`id`);
