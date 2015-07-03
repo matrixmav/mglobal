@@ -201,8 +201,8 @@
             $('#walletamount').html('$ '+totalAmount);
             if(type=='2')
             {
-            $('#payamount').html(totalAmountRP);
-            $("#ppamount").val(totalAmountRP);
+            $('#payamount').html(totalAmountRP.toFixed(2));
+            $("#ppamount").val(totalAmountRP.toFixed(2));
             }else{
              $('#payamount').html('0'); 
              $("#ppamount").val(0);
@@ -219,8 +219,8 @@
             $('#walletamount').html('$ '+totalAmount);
             if(type=='2')
             {
-            $('#payamount').html(totalAmountRP);
-            $("#ppamount").val(totalAmountRP);
+            $('#payamount').html(totalAmountRP.toFixed(2));
+            $("#ppamount").val(totalAmountRP.toFixed(2));
             }else{
              $('#payamount').html('0'); 
              $("#ppamount").val(0);
