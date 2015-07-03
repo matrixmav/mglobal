@@ -854,13 +854,13 @@ class PackageController extends Controller {
                     $ex->getMessage();
                     exit;
                 }  
-                $userObjectArr = array();
+                /*$userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Direct Referral Income Credited';
                 $config['body'] =  "Hi user,Cash added  Commission credited";//$this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);
+                CommonHelper::sendMail($config);*/
         }
         $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
