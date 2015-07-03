@@ -10,9 +10,7 @@ class ProfileController extends Controller {
     }
 
     public function actionIndex() {
-      if(!empty(Yii::app()->session['domain'])){
-               unset(Yii::app()->session['domain']);
-           }
+      
         $dataProvider = new CActiveDataProvider('User');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
@@ -217,6 +215,9 @@ class ProfileController extends Controller {
      */
 
     public function actionDashboard() {
+        if(!empty(Yii::app()->session['domain'])){
+               unset(Yii::app()->session['domain']);
+           }
         $loggedInUserId = Yii::app()->session['userid'];
         $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId. ' And  status = 1 '));
         $this->render('/user/dashboard', array(
