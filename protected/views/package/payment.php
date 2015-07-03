@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-xs-12 col-lg-12">
-            <div class="row">
+             <div class="row">
 		
                         
             <div class=" bs-wizard" style="border-bottom:0;">
@@ -200,8 +200,8 @@
             $('#walletamount').html('$ '+totalAmount);
             if(type=='2')
             {
-            $('#payamount').html(totalAmountRP.toFixed(2));
-            $("#ppamount").val(totalAmountRP.toFixed(2));
+            $('#payamount').html(totalAmountRP);
+            $("#ppamount").val(totalAmountRP);
             }else{
              $('#payamount').html('0'); 
              $("#ppamount").val(0);
@@ -218,8 +218,8 @@
             $('#walletamount').html('$ '+totalAmount);
             if(type=='2')
             {
-            $('#payamount').html(totalAmountRP.toFixed(2));
-            $("#ppamount").val(totalAmountRP.toFixed(2));
+            $('#payamount').html(totalAmountRP);
+            $("#ppamount").val(totalAmountRP);
             }else{
              $('#payamount').html('0'); 
              $("#ppamount").val(0);
