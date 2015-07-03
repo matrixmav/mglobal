@@ -19,9 +19,9 @@ class WalletController extends Controller
 		);
 	}
         
-        public function init() {
+        /*public function init() {
         BaseClass::isAdmin();
-    }
+    }*/
 
 	/**
 	 * Specifies the access control rules.

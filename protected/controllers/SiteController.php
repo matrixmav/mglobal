@@ -96,11 +96,11 @@ class SiteController extends Controller
 //            $stateCondition = array("id" => $stateName);
 //            $stateObject = $stateModel = State::model()->getStateByName($stateCondition);
 
-           $basicPackageObject = Package::model()->findAll(array('condition'=>'type=1','order' => 'name ASC','limit' => '3'));
+           $basicPackageObject = Package::model()->findAll(array('condition'=>'type=1 AND status=1','order' => 'name ASC','limit' => '3'));
            
-           $advancePackageObject = Package::model()->findAll(array('condition'=>'type=2','order' => 'name ASC','limit' => '3'));
+           $advancePackageObject = Package::model()->findAll(array('condition'=>'type=2 AND status=1','order' => 'name ASC','limit' => '3'));
            
-           $proPackageObject = Package::model()->findAll(array('condition'=>'type=3','order' => 'name ASC','limit' => '3'));
+           $proPackageObject = Package::model()->findAll(array('condition'=>'type=3 AND status=1','order' => 'name ASC','limit' => '3'));
            
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
            $membership_type = "";
