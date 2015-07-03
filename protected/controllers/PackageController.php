@@ -108,8 +108,6 @@ class PackageController extends Controller {
            $tarnsactionId = $_POST['transactionId'];
         }
         
-        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>Yii::app()->session['coupon_code']));
-            
         $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
 
         $total = $_POST['totalAmount'] - $_POST['couponDiscount'];
@@ -119,7 +117,7 @@ class PackageController extends Controller {
         $transactionArray['mode'] = 'paypal';
         $transactionArray['actualAmount'] = $_POST['totalAmount'];
         $transactionArray['couponDiscount'] = $_POST['couponDiscount'];
-        $transactionArray['couponId'] = $couponObject->id;
+        $transactionArray['couponId'] = $_POST['couponId'];
         $transactionArray['transactionId'] = $tarnsactionId;
  
         if (count($transactionObject) > 0) {
