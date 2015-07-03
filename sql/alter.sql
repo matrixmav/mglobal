@@ -178,3 +178,4 @@ ALTER TABLE `user_has_coupon` CHANGE `coupon_code` `coupon_id` INT(11) NOT NULL;
 
 ALTER TABLE `user_has_coupon`
  ADD PRIMARY KEY (`id`);
+
