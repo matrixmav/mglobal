@@ -108,6 +108,9 @@ class SiteController extends Controller
            $userObject = User::model()->findByPk(Yii::app()->session['userid']);
            $membership_type = $userObject->membership_type;
            }
+           if(!empty(Yii::app()->session['domain'])){
+               unset(Yii::app()->session['domain']);
+           }
           $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
