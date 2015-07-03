@@ -16,9 +16,7 @@
 //        });
 //    }
 function getExistingFund(userId, walletId) {
-//    alert(userId);
-//    alert(walletId);
-//    return false;
+ 
     $.ajax({
         type: "post",
         url: "/admin/wallet/getfundbyamount",
