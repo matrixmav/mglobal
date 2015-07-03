@@ -73,8 +73,8 @@ class UserController extends Controller {
                 $userObjectArr['full_name'] = $userObject->full_name;
                 $userObjectArr['password'] = $password;
                 $userObjectArr['masterPin'] = $masterPin;
+                /*code to send mail */ 
                 
-                /*code to send mail */
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Login Details';
                 $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
