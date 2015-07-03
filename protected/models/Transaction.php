@@ -34,12 +34,12 @@ class Transaction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, transaction_id,mode, gateway_id, actual_amount, paid_amount,coupon_code,coupon_discount, status, created_at, updated_at', 'required'),
+			array('user_id, transaction_id,mode, gateway_id, actual_amount, paid_amount,coupon_discount, status, created_at, updated_at', 'required'),
 			array('user_id, gateway_id, status', 'numerical', 'integerOnly'=>true),
 			array('mode', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id,transaction_id, mode, gateway_id, actual_amount, paid_amount,coupon_discount, total_rp, used_rp, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, user_id,transaction_id, mode, gateway_id, actual_amount, paid_amount,coupon_discount,coupon_code, total_rp, used_rp, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
