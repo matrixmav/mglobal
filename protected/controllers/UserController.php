@@ -493,6 +493,17 @@ class UserController extends Controller {
                 $social = '';
             }
         }
+        
+        $spnId = "";
+        if ($_GET) {
+            if (!empty($arra)) {
+                $spnId = $arra[0];
+            } else {
+                $spnId = $_GET['spid'];
+            }
+        }
+        $countryObject = Country::model()->findAll();
+        
         if ($_POST) {
             $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";
             $privatekey = "6LcCIgkTAAAAANss_hcRD61AmYuXJ0JA2bot4R8C";
@@ -506,17 +517,6 @@ class UserController extends Controller {
 
             if ($resp->is_valid != 1) {
                 $error = "<p class='error'>Please Enter Valid Captcha.</p>";
-
-                $spnId = "";
-                if ($_GET) {
-                    if (!empty($arra)) {
-                        $spnId = $arra[0];
-                    } else {
-                        $spnId = $_GET['spid'];
-                    }
-                }
-                $countryObject = Country::model()->findAll();
-
                 $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'social' => $social));
             } else {
 
@@ -621,19 +621,12 @@ class UserController extends Controller {
                     }else{
                         $this->redirect(array('login', 'successMsg' => $successMsg));
                     }
+                }else{
+                   $error = "<p class='error'>User Name is already Exits.</p>";
                 }
             }
         }
-        $spnId = "";
-        if ($_GET) {
-            if (!empty($arra)) {
-                $spnId = $arra[0];
-            } else {
-                $spnId = $_GET['spid'];
-            }
-        }
-        $countryObject = Country::model()->findAll();
-
+       
         $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'social' => $social));
     }
 
