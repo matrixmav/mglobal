@@ -10,13 +10,16 @@ class ProfileController extends Controller {
     }
 
     public function actionIndex() {
-
+      if(!empty(Yii::app()->session['domain'])){
+               unset(Yii::app()->session['domain']);
+           }
         $dataProvider = new CActiveDataProvider('User');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
     }
 
+   
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
