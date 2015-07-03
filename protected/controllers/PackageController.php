@@ -57,7 +57,7 @@ class PackageController extends Controller {
         $percentage = 10;
         $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK(Yii::app()->session['package_id']);
-        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid'],'status'=>1));
         if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
 
@@ -82,7 +82,7 @@ class PackageController extends Controller {
         $percentage = 10;
         $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK($_REQUEST['package_id']);
-        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid'],'status'=>1));
          
         if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
