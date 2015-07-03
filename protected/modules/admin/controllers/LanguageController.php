@@ -18,6 +18,10 @@ class LanguageController extends Controller
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
+        
+        public function init() {
+        BaseClass::isAdmin();
+        }
 
 	/**
 	 * Specifies the access control rules.

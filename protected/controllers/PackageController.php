@@ -752,11 +752,10 @@ class PackageController extends Controller {
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $sponsorUserObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
-                $config['to'] = $sponsorUserObject->email;
-                $config['subject'] = 'Direct Referral Income Credited';
-                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                $config['file_path'] = "";
-                CommonHelper::sendMail($config);
+                $config1['to'] = $sponsorUserObject->email;
+                $config1['subject'] = 'Direct Referral Income Credited';
+                $config1['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config1);
                 
                
             }

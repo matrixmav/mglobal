@@ -64,18 +64,24 @@ class UserController extends Controller {
                 $password = BaseClass::getPassword();
                 $userObject->password = md5($password);
                 $userObject->master_pin = md5($masterPin);
+                $userObject->save(false);
+                
+                /*array created for mailing values*/
                 
                 $userObjectArr = array();
                 $userObjectArr['name'] = $userObject->name;
                 $userObjectArr['full_name'] = $userObject->full_name;
                 $userObjectArr['password'] = $password;
                 $userObjectArr['masterPin'] = $masterPin;
+                
+                /*code to send mail */
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Login Details';
                 $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
+                
                 Yii::app()->user->setFlash('success', "User status changed to Active!.");
-                $userObject->save(false);
+                
             }
            $this->redirect('/admin/user');
         }
