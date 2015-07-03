@@ -8,10 +8,9 @@ class GenealogyController extends Controller {
      */
     public $layout = 'inner';
 
-    public function init() {
-        BaseClass::isLoggedIn();
+     public function init() {
+        BaseClass::isAdmin();
     }
-
     /**
      * @return array action filters
      */
