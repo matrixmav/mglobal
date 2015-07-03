@@ -614,7 +614,9 @@ class UserController extends Controller {
                     $modelUserProfile->created_at = date('Y-m-d');
                     $modelUserProfile->referral_banner_id = 1;
                     $modelUserProfile->save(false);
-                    if(isset(Yii::app()->session['userid'])){
+                    if(isset(Yii::app()->session['frontloggedIN'])){
+                        $this->redirect(array("profile/dashboard", 'successMsg' => $successMsg));
+                    }else if(isset(Yii::app()->session['adminID'])){
                         $this->redirect(array("admin/default/dashboard", 'successMsg' => $successMsg));
                     }else{
                         $this->redirect(array('login', 'successMsg' => $successMsg));
