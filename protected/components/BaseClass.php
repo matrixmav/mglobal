@@ -1273,7 +1273,8 @@ class BaseClass extends Controller {
      * @param int $nodeId - input node
      */
     public static function setPurchaseNode($parentObject) {
-        echo $nodeId = $parentObject->user_id;
+        $nodeId = $parentObject->user_id;
+        $todayDate = date('Y-m-d');
         //$date = date('Y-m-d');
         //find left present | not
         //$totalLeftPurchase = 0;
@@ -1283,10 +1284,14 @@ class BaseClass extends Controller {
             //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
             //  $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
            //echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
-           //echo "Left :".$binaryCommissionObjectLeft->order_amount;
-            $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
-            $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
-            $parentObject->save(false);
+           //echo "Left :".$binaryCommissionObjectLeft->order_amount;\
+            if($todayDate==$binaryCommissionObjectLeft->order_date){
+                $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+                $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
+                $parentObject->save(false);
+            } else {
+                $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+            }
         }
         //echo $totalLeftPurchase;
        // exit;
@@ -1294,10 +1299,13 @@ class BaseClass extends Controller {
                 
         $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
         if($binaryCommissionObjectRight){
-//            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight->order_amount;
-            $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
-            $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
-            $parentObject->save(false);
+            if($todayDate==$binaryCommissionObjectRight->order_date){
+                $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+                $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
+                $parentObject->save(false);
+            } else {
+                $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+            }
         }
 //        exit;
         // Total Purchase amount
