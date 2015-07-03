@@ -8,6 +8,7 @@ class DefaultController extends Controller {
     public function init() {
         $timing = date('hms');
         Yii::app()->session['timestamp'] = $timing;
+         BaseClass::isAdmin();
     }
     public $layout = 'main';
 
@@ -17,9 +18,7 @@ class DefaultController extends Controller {
         $this->actionLogin();
     }
     
-     public function init() {
-        BaseClass::isAdmin();
-    }
+     
 
     /*
      *  Admin Login form 
