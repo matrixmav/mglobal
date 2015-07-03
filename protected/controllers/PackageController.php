@@ -550,7 +550,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 1) {
+            if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->paid_amount = ($transactionObject->actual_amount) - ($transactionObject->used_rp);
                 $transactionObject->created_at = date('Y-m-d');
