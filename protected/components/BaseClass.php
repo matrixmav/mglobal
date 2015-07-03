@@ -1284,7 +1284,7 @@ class BaseClass extends Controller {
             //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
             //  $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
            //echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
-           //echo "Left :".$binaryCommissionObjectLeft->order_amount;\
+           //echo "Left :".$binaryCommissionObjectLeft->order_amount;
             if($todayDate==$binaryCommissionObjectLeft->order_date){
                 $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
                 $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
@@ -1299,6 +1299,8 @@ class BaseClass extends Controller {
                 
         $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
         if($binaryCommissionObjectRight){
+            //echo "Left Id: ".$binaryCommissionObjectRight->user_id;
+           //echo "Left :".$binaryCommissionObjectRight->order_amount;
             if($todayDate==$binaryCommissionObjectRight->order_date){
                 $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
                 $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
