@@ -94,7 +94,7 @@
        </div>  
 </div>     
 <?php }?>
-<input type="hidden" id="domainSelected" value="<?php echo (isset($_GET['tId'])) ? $_GET['tId'] : 0;?>">
+<input type="hidden" id="domainSelected" value="<?php echo (isset($_GET['tId'] ) || Yii::app()->session['domain'] !='') ? 1 : 0;?>">
  <script>
 function autocomplet()
 {
