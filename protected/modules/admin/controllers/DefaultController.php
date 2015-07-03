@@ -17,7 +17,9 @@ class DefaultController extends Controller {
         $this->actionLogin();
     }
     
-    
+     public function init() {
+        BaseClass::isAdmin();
+    }
 
     /*
      *  Admin Login form 
