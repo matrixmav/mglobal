@@ -237,7 +237,7 @@ class OrderController extends Controller {
         $row = $command->queryAll();
 
         $sqlData = new CArrayDataProvider($row, array(
-            'pagination' => array('pageSize' => 10)));
+            'pagination' => array('pageSize' => 1000)));
         //$sqlData = $sqlData->getData();
         //$sqlData = $sqlData[0];
         //$dataProvider = new CActiveDataProvider($sqlData, array(
