@@ -201,12 +201,17 @@ class Transaction extends CActiveRecord
                 if($transactionArray['couponDiscount']){
                     $couponDiscount = $transactionArray['couponDiscount'];
                 }
+                $couponId = 0;
+                if($transactionArray['couponId']){
+                    $couponId = $transactionArray['couponId'];
+                }
             $transactionObject->user_id = $userId;
             $transactionObject->transaction_id = $transactionId;
             $transactionObject->mode = $mode;
             $transactionObject->actual_amount = $actualAmount;
             $transactionObject->paid_amount = $paidAmount;
             $transactionObject->coupon_discount = $couponDiscount;
+            $transactionObject->coupon_code = $couponId;
             $transactionObject->total_rp = 0;
             $transactionObject->used_rp = 0;
             $transactionObject->status = 0;
