@@ -549,8 +549,8 @@ class PackageController extends Controller {
              
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
-            $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
+            //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
+            if ($transactionObject->status == 1) {
                 $transactionObject->status = 1;
                 $transactionObject->paid_amount = ($transactionObject->actual_amount) - ($transactionObject->used_rp);
                 $transactionObject->created_at = date('Y-m-d');
@@ -577,6 +577,7 @@ class PackageController extends Controller {
                 ob_start();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 
@@ -598,6 +599,7 @@ class PackageController extends Controller {
                     $userObject->save(false);
                 }       
                 $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
+               
                  /*sponsor wallet*/
                 try {
                     //deduct from from user wallet
@@ -640,8 +642,8 @@ class PackageController extends Controller {
                     $postDataArray['mode'] = 'transfer';
                     $postDataArray['actualAmount'] = $packageObject->amount;
                     $postDataArray['paid_amount'] = $fromAmountpercent;
-                    $userObject = User::model()->findByPk($sponsorUserObject->id);
-                    $transactionObjectSponsor = Transaction::model()->createTransaction($postDataArray, $userObject,1);
+                    $userSposorObject = User::model()->findByPk($sponsorUserObject->id);
+                    $transactionObjectSponsor = Transaction::model()->createTransaction($postDataArray, $userSposorObject,1);
                     
                     /* code to add moneytransfer */
                     
@@ -669,7 +671,7 @@ class PackageController extends Controller {
                 }
                 
                 /* Insert Ads */
-                $userId = Yii::app()->session['userid'];
+                /*$userId = Yii::app()->session['userid'];
                 $next_year = strtotime('+1 year');
                 $current_time = time();
                 $i = 1 ;
@@ -693,7 +695,7 @@ class PackageController extends Controller {
                             $modelUserShareAd->save(false);               
                         $i++;
                     }
-                }
+                }*/
                 
                 
                 
@@ -763,7 +765,7 @@ class PackageController extends Controller {
         </table>
     </td>
   </tr></table>';
-
+                  
                 $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
                 
                 $orderObject = Order::model()->findByPK($orderObject->id);
