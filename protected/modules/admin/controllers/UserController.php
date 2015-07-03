@@ -58,13 +58,14 @@ class UserController extends Controller {
                 $userObject->save(false);
                 Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
             } else {
-                $userObject->status = 1;
-                
                 $masterPin = BaseClass::getUniqInt(5);
                 $password = BaseClass::getPassword();
                 $userObject->password = md5($password);
                 $userObject->master_pin = md5($masterPin);
+                $userObject->status = 1;
                 $userObject->save(false);
+                
+                
                 
                 /*array created for mailing values*/
                 
