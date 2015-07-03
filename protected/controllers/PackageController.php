@@ -130,7 +130,8 @@ class PackageController extends Controller {
         }
          
          /*code to create coupon code*/
-        
+        if(!empty(Yii::app()->session['coupon_code'])){
+        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>Yii::app()->session['coupon_code']));
         $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
         if(count($couponCodeObject)==0)
         {
@@ -141,6 +142,7 @@ class PackageController extends Controller {
             $couponCodeObject->status=0;
             $couponCodeObject->save(false);
         }
+    }
         //$transactionObject->used_rp = 0;
         $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . $transactionObject->id));
 
