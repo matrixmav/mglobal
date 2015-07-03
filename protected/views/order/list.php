@@ -82,7 +82,7 @@ $this->menu=array(
 		array(
 			'name'=>'status',
                         'header'=>'<span style="white-space: nowrap;">Payment Status &nbsp; &nbsp; &nbsp;</span>',
-			'value'=>'($data->status == 1) ? Yii::t(\'translation\', \'Completed\') : Yii::t(\'translation\', \'Pending\')',
+			'value'=>array($this,'GetStatus'),
 		),
               array(
 			'name'=>'action',
