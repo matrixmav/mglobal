@@ -117,7 +117,7 @@ class PackageController extends Controller {
         $transactionArray['mode'] = 'paypal';
         $transactionArray['actualAmount'] = $_POST['totalAmount'];
         $transactionArray['couponDiscount'] = $_POST['couponDiscount'];
-        $transactionArray['couponId'] = $_POST['couponId'];
+        $transactionArray['couponId'] = Yii::app()->session['coupon_code'];
         $transactionArray['transactionId'] = $tarnsactionId;
  
         if (count($transactionObject) > 0) {
@@ -578,10 +578,15 @@ class PackageController extends Controller {
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
                 
                 /*code to update coupon*/
-                $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$orderObject->coupon_id ,'user_id'=> Yii::app()->session['userid']));
+                $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$transactionObject->coupon_code));
+                if(!empty($couponObject)){
+                $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+                
                 if(!empty($couponCodeObject)){
                 $couponCodeObject->status = 1;
                 $couponCodeObject->save(false);
+                }
+                
                 }
                 /*code to update membership type*/
                 
