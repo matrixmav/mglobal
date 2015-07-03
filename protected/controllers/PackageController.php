@@ -671,8 +671,9 @@ class PackageController extends Controller {
                 }
                 
                 /* Insert Ads */
-                /*$userId = Yii::app()->session['userid'];
-                $next_year = strtotime('+1 year');
+
+                $userId = Yii::app()->session['userid'];
+                $next_year = strtotime('+299 day'); //For next 300 day
                 $current_time = time();
                 $i = 1 ;
                 $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId));
@@ -695,7 +696,7 @@ class PackageController extends Controller {
                             $modelUserShareAd->save(false);               
                         $i++;
                     }
-                }*/
+                }
                 
                 
                 

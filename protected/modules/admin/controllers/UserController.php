@@ -506,7 +506,7 @@ class UserController extends Controller {
      * Function to add multiple admin by superadmin
      */
 
-    public function actionAdd() {
+    public function actionAdd1() {
         $success = "";
         $error = "";
         $countryObject = Country::model()->findAll();
@@ -766,5 +766,60 @@ class UserController extends Controller {
                         </div>
                 </div>';
     }
+    
+    
+    public function actionAdd() {
+        $error ="";
+        $success ="";
+        if ($_POST) {            
+            /* Already Exits */
+            $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
+            if (count($userObject) == 0) {
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
+                $masterPin = BaseClass::getUniqInt(5);
+                $model = new User;
+                $model->attributes = $_POST;
+                $password = "mg@1234";
+                $model->role_id = 2;
+
+                $model->password = BaseClass::md5Encryption($password);
+                $model->sponsor_id = $_POST['sponsor_id'];
+                $model->master_pin = BaseClass::md5Encryption($masterPin);
+                $model->created_at = date('Y-m-d');
+
+
+                if (!$model->save(false)) {
+                    echo "<pre>";
+                    print_r($model->getErrors());
+                    exit;
+                }
+                $modelUserProfile = new UserProfile();
+                $modelUserProfile->user_id = $model->id;
+                $modelUserProfile->created_at = date('Y-m-d');
+                $modelUserProfile->referral_banner_id = 1;
+                $modelUserProfile->save(false);
+
+                $accessObject = new UserHasAccess;
+                $accessObject->user_id = $model->id;
+                $accessObject->access = "dashboard";
+                $accessObject->created_at = date('Y-m-d');
+                $accessObject->save();
+                $success = "User Created Successfully.";
+            }
+            
+        }
+        $spnId = "";
+        if ($_GET) {
+            if (!empty($arra)) {
+                $spnId = $arra[0];
+            } else {
+                $spnId = $_GET['spid'];
+            }
+        }
+        $countryObject = Country::model()->findAll();
+
+        $this->render('user_add', array('countryObject' => $countryObject, 'spnId' => $spnId,'error' => $error,'success'=>$success));
+    }
+    
 
 }

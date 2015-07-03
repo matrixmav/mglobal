@@ -3,6 +3,7 @@ $this->breadcrumbs = array(
     'Dashboard',
 );
 ?>
+<?php if(!empty($_GET['successMsg'])){ ?><div class="success"><?php echo $_GET['successMsg']; ?></div><?php } ?>
 <div class="row">
     <?php if(empty($orderObject)){?>
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
