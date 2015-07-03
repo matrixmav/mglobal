@@ -79,9 +79,10 @@ class PackageController extends Controller {
     function actionProfileCouponApply() {
         $response = '';
         $percentage = 10;
-        $couponObject = Coupon::model()->findByAttributes(array('status' => '1'));
+        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK($_REQUEST['package_id']);
-        if ($couponObject->coupon_code == $_REQUEST['coupon_code']) {
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+        if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
 
             $packageamount = $packageObject->amount;
@@ -90,7 +91,7 @@ class PackageController extends Controller {
             $response .= $discountAmountfinal . "_" . $discountedAmount;
         } else {
             $response .= 0;
-        }
+        } 
         echo $response;
     }
 
