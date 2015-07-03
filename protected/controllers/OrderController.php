@@ -226,6 +226,7 @@ class OrderController extends Controller {
         }
         $command = $connection->createCommand('select user.position,order.created_at,order.status,user.name as uname,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND order.created_at >= "' . $todayDate . '" AND order.created_at <= "' . $fromDate . '"');
 
+        
         // Date filter.
         if (!empty($_POST)) {
             $todayDate = $_POST['from'];
