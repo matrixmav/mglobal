@@ -343,7 +343,7 @@ class OrderController extends Controller {
     
       protected function GetInvoiceButtonTitle($data, $row) {
          $id = $data->id;
-         $userId = Yii::app()->session['userid'];
+        $userId = Yii::app()->session['userid'];
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
         $id = "'".$data['id']."'";
@@ -351,11 +351,22 @@ class OrderController extends Controller {
         {
         $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
         }else{
-        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a><br/><br/><a class="fancybox btn green fa fa-edit margin-right15" onclick = "showPendingPayment('.$id.');">Make Payment</a>';
+        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
          }
         echo $title;
     }
     
+    protected function GetStatus($data, $row) {
+        $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
+        $id = $data->id;
+        if ($orderObject->status == 1) {
+            $title = 'Completed';
+        } else {
+            $title = 'Pending<br/><br/><a class="fancybox btn green fa fa-edit margin-right15" onclick = "showPendingPayment(' . $id . ');">Make Payment</a>';
+        }
+        echo $title;
+    }
+
     public function actionPendingPayment() {
         if(!empty($_GET['id']))
         {
