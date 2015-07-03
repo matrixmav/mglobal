@@ -108,6 +108,8 @@ class PackageController extends Controller {
            $tarnsactionId = $_POST['transactionId'];
         }
         
+        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>Yii::app()->session['coupon_code']));
+            
         $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
 
         $total = $_POST['totalAmount'] - $_POST['couponDiscount'];
@@ -117,6 +119,7 @@ class PackageController extends Controller {
         $transactionArray['mode'] = 'paypal';
         $transactionArray['actualAmount'] = $_POST['totalAmount'];
         $transactionArray['couponDiscount'] = $_POST['couponDiscount'];
+        $transactionArray['couponId'] = $couponObject->id;
         $transactionArray['transactionId'] = $tarnsactionId;
  
         if (count($transactionObject) > 0) {
@@ -134,7 +137,6 @@ class PackageController extends Controller {
         if(count($couponCodeObject)==0)
         {
             /* code to fetch coupon ID*/
-            $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>Yii::app()->session['coupon_code']));
             $couponCodeObject = new UserHasCoupon;
             $couponCodeObject->coupon_id = $couponObject->id;
             $couponCodeObject->user_id = Yii::app()->session['userid'];
@@ -574,7 +576,13 @@ class PackageController extends Controller {
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
-             
+                
+                /*code to update coupon*/
+                $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$orderObject->coupon_id ,'user_id'=> Yii::app()->session['userid']));
+                if(!empty($couponCodeObject)){
+                $couponCodeObject->status = 1;
+                $couponCodeObject->save(false);
+                }
                 /*code to update membership type*/
                 
                 if($userObject->membership_type =='0'){
