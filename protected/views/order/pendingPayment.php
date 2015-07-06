@@ -99,7 +99,7 @@
                                                 <p>Subtotal: </p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
+                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
                                             </td>
                                         </tr>
 
@@ -108,7 +108,7 @@
                                                 <p>Coupon Discount: </p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span></p>
+                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span></p>
                                             </td>
                                         </tr> 
                                         <tr class="ItemTotalAfterDiscount">
@@ -117,7 +117,7 @@
                                                 <p>Total Amount: </p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
+                                                <p id="TotalAmount"><span class="WebRupee"> $</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
                                             </td>
                                         </tr>
                                     </tbody></table>
