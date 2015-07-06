@@ -873,7 +873,7 @@ class PackageController extends Controller {
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->name;
                 $userObjectArr['full_name'] = $userObject->full_name;
-                $userObjectArr['from_name'] = "admin";
+                $userObjectArr['from_name'] = "Admin";
                 $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->actual_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
