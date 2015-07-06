@@ -1,15 +1,14 @@
-<?php foreach($builderObjectCss as $builderObjectListCss){ ?>
-    <link href="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/css/<?php echo $builderObjectListCss->name ?>" rel="stylesheet" type="text/css" media="all" />
-<?php } ?>
+<?php 
+$categoryObject = BuildTemp::model()->findByAttributes(array("template_id" => $builderObject->template_id));
+$baseURL = Yii::app()->getBaseUrl(true); 
+$cssURL = $baseURL."/user/template/".$categoryObject->folderpath.'/css/';
+$jsURL = $baseURL."/user/template/".$categoryObject->folderpath.'/js/';
 
-<?php
-    foreach($builderObjectJs as $builderObjectListJs){ ?>
-    <script src="/user/template/<?php echo $builderObjectmeta->folderpath; ?>/js/<?php echo $builderObjectListJs->name ?>" ></script>
-<?php } 
-    /* For getting JS */
-    if($builderObject->custom_js){ echo '<script type="text/javascript"> '. stripslashes($builderObject->custom_js) ." </script>"; } ?>
+$tempHeader = str_replace('href="css/','href="'.$cssURL , stripslashes($builderObject->head_content)); 
+echo $tempHead = str_replace('src="js/','src="'.$jsURL , $tempHeader); 
 
-</head>	
+?>
+
 
 <body>   
     
@@ -22,7 +21,7 @@
     $removeSpaces = preg_replace('/\s+/', ' ', $userHeader);    
     $logoReplace = preg_replace('#<div class="mav_logo">(.*?)</div>#', stripslashes($logoImage) , $removeSpaces);            
     echo $result = preg_replace('#<div class="mav_menu">(.*?)</div>#', stripslashes($bb) , $logoReplace);
-    
+ 
     /* For the contact form */
     if($responseForm){     
         echo stripslashes($responseForm) ;
