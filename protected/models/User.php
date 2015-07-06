@@ -70,7 +70,7 @@ class User extends CActiveRecord
                     'userprofile' => array(self::BELONGS_TO, 'UserProfile', 'id'),
                     'touser' => array(self::BELONGS_TO, 'MoneyTransfer', 'to_user_id'),
                     'fromuser' => array(self::BELONGS_TO, 'MoneyTransfer', 'from_user_id'),
-                     'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
+                    'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
                      
 		);
 	}
@@ -155,6 +155,21 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        /*code to send mail for binary commission*/  
+        /*public function binaryMail($parentObject) {
+        
+         
+                $userObject = User::model()->findByPk($parentObject->user_id);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Binary Income Credited';
+                $config['body'] =  $this->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
+        
+                }*/
+        
 
 	/**
 	 * Returns the static model of the specified AR class.

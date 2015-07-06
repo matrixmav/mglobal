@@ -9,7 +9,7 @@ class UserController extends Controller {
     public $layout = 'main';
 
     public function init() {
-        //BaseClass::isAdmin();
+        BaseClass::isAdmin();
     }
 
     /**
@@ -33,7 +33,7 @@ class UserController extends Controller {
                 'actions' => array('index', 'view', 'changestatus', 'wallet',
                     'creditwallet', 'list', 'debitwallet', 'genealogy', 'add', 'deleteuser', 'edit',
                     'verificationapproval', 'testimonialapproval', 'changeapprovalstatus', 
-                    'testimonialapprovalstatus','binarycalculation','resetpassword'),
+                    'testimonialapprovalstatus','binarycalculation','resetpassword'.'binarymail'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -98,6 +98,8 @@ class UserController extends Controller {
             $currentUserId = Yii::app()->session['userid'] ;        
             $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
             $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+             
+               
             $this->render('viewGenealogy',array(
                         'genealogyLeftListObject'=>$genealogyLeftListObject,
                         'genealogyRightListObject'=>$genealogyRightListObject,
@@ -109,7 +111,21 @@ class UserController extends Controller {
         }
     }
     
+   
+    public static function binaryMail($parentObject) {
+                $userObject = User::model()->findByPk($parentObject->user_id);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Binary Income Credited';
+                $config['body'] =  Yii::app()->controller->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config); 
+                return 1;
+    }
+        
 
+   
     public function actionGenealogy() {
         $emailObject = User::model()->findAll(array('condition' => 'sponsor_id = "admin"'));
 

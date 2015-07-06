@@ -4525,4 +4525,30 @@ UI Loading
 .page-sidebar .sidebar-toggler, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-toggler{margin-bottom: 5px;}
 .page-sidebar{background-color: #364150 !important;}
 .page-content-wrapper{background-color:#364150 !important;}
+ 
 
+.ItemTotalAfterDiscount td {
+    background-color: #feffd5;
+    border: 1px solid #c1c58c;
+    margin-top: 7px !important;
+    padding-bottom: 5px;
+    padding-right: 9px;
+    padding-top: 10px;
+    padding-left:6px;
+}
+.cartTotalWrp .itemAmount {
+    font-size: 16px !important;
+    font-weight: bold;
+}
+.cartTotalWrp tr td {
+    padding-bottom: 10px;
+}
+td.itemAmount {
+    padding-left: 15px;
+}
+#CartTotal{
+    color: #669933;
+}
+#TotalAmount {
+    color: #669933;
+}

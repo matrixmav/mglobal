@@ -549,6 +549,7 @@ class PackageController extends Controller {
              
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
+            if(!empty($transactionObject)){
             //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
@@ -788,16 +789,31 @@ class PackageController extends Controller {
                 $config1['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config1);
                 
-               
-            }
-            if ($transactionObject->status == 1) {
+              if ($transactionObject->status == 1) {
                 unset(Yii::app()->session['transactionid']);
                 unset(Yii::app()->session['amount']);
                 unset(Yii::app()->session['package_id']);
                 unset(Yii::app()->session['transaction_id']);
                 unset(Yii::app()->session['coupon_code']);
                 unset(Yii::app()->session['domain']);
+            } 
             }
+            }else{
+                $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $config1['to'] = $userObject->email;
+                $config1['subject'] = 'Mglobally Transaction Falied';
+                $config1['body'] =  $this->renderPartial('../mailTemp/failed_transaction', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config1); 
+                 unset(Yii::app()->session['transactionid']);
+                unset(Yii::app()->session['amount']);
+                unset(Yii::app()->session['package_id']);
+                unset(Yii::app()->session['transaction_id']);
+                unset(Yii::app()->session['coupon_code']);
+                unset(Yii::app()->session['domain']);
+            }
+            
             $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
             echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
 
@@ -810,7 +826,7 @@ class PackageController extends Controller {
     
     public function actionWalletThankYou() {
         
-     if (!(empty($_GET))) {
+     if (!empty($_GET)) {
              
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
@@ -854,13 +870,17 @@ class PackageController extends Controller {
                     $ex->getMessage();
                     exit;
                 }  
-                /*$userObjectArr = array();
-                $userObjectArr['to_name'] = $userObject->full_name;
-                $userObjectArr['user_name'] = $userObject->name;
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->name;
+                $userObjectArr['full_name'] = $userObject->full_name;
+                $userObjectArr['from_name'] = "Admin";
+                $userObjectArr['date'] = $transactionObject->created_at;
+                $userObjectArr['fund'] = $transactionObject->actual_amount;
+                $userObjectArr['transactionId'] = $transactionObject->transaction_id;
                 $config['to'] = $userObject->email;
-                $config['subject'] = 'Direct Referral Income Credited';
-                $config['body'] =  "Hi user,Cash added  Commission credited";//$this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);*/
+                $config['subject'] = 'Cash wallet recharged successfully.';
+                $config['body'] =  $this->renderPartial('../mailTemp/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
         }
         $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";

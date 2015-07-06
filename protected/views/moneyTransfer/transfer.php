@@ -131,4 +131,24 @@ $this->breadcrumbs = array(
      $('#search_fullname').html('');
      $('#transaction_data').html('');
  }
+function getExistingFund(userId, walletId) { 
+    $("#select_wallet_error").html("");
+    $.ajax({
+        type: "post",
+        url: "/admin/wallet/getfundbyamount",
+        data: {'userId': userId, 'walletId': walletId},
+        success: function (amount) {
+            $("#transaction_data").html("");
+            $("#wallet_amount").show();
+            if (amount != 0) {
+                $("#transaction_data").html(amount);
+                $("#transaction_data_amt").val(amount);
+                $("#fundval").val(amount.replace(/[^\d\.\-\ ]/g, ''));
+            } else {
+                $("#fundval").val("0.00");
+                $("#transaction_data").html("<b>0.00</b>");
+            }
+        }
+    });
+}
 </script>

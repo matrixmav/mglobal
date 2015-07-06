@@ -99,7 +99,7 @@ class MailController extends Controller {
                 if (empty($userObject)) {
                     $this->render('compose', array('error' => 'User Does Not Exist'));
                 }
-                if (!empty($_FILES['attachment']['name'] != '')) {
+                if (!empty($_FILES['attachment']['name'])) {
                     $fname = time() . $_FILES['attachment']['name'];
                     $path = Yii::getPathOfAlias('webroot') . "/upload/attachement/";
                     $uploadSize = $_FILES['attachment']["size"];
