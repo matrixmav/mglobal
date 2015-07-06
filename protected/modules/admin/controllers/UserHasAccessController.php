@@ -5,7 +5,7 @@ class UserHasAccessController extends Controller {
     public $layout = 'main';
 
     public function init() {
-        //BaseClass::isLoggedIn();
+        BaseClass::isAdmin();
     }
 
     /**

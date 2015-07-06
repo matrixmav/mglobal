@@ -16,8 +16,8 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
                 <div class="col-lg-8" >
                     <div>
                         <?php
-                        if(!empty($moneyTransferObject->touser()->full_name)) {
-                            echo "<b>".$moneyTransferObject->touser()->full_name."</b>";
+                        if(!empty($moneyTransferObject->touser()->name)) {
+                            echo "<b>".$moneyTransferObject->touser()->name."</b>";
                         } else {
                             echo "In Valid User";
                         }

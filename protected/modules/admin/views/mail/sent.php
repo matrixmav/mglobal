@@ -11,9 +11,9 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
 ?>
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-3">   
+        <div class="col-md-3">  
+             <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/admin/mail/compose', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/admin/mail', array("class" => "btn  green margin-right-20")); ?>
-            <?php echo CHtml::link(Yii::t('translation', 'Compose') . ' <i class="fa fa-plus"></i>', '/admin/mail/compose', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/admin/mail/sent', array("class" => "btn  green margin-right-20")); ?>
         </div>
         <?php if (isset($emailObject)): ?>
@@ -65,12 +65,12 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
                 array(
                     'name' => 'from_user_id',
                     'header' => '<span style="white-space: nowrap;">Sender &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->fromuser->full_name',
+                    'value' => '$data->fromuser->name',
                 ),
                 array(
                     'name' => 'from_user_id',
                     'header' => '<span style="white-space: nowrap;">Receiver &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->touser->full_name',
+                    'value' => '$data->touser->name',
                 ),
                 array(
                     'name' => 'subject',

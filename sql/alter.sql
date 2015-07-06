@@ -157,3 +157,29 @@ INSERT INTO `package` (`id`, `name`, `start_date`, `end_date`, `coupon_code`, `a
 
 
 ALTER TABLE `genealogy` ADD `order_date` DATE NOT NULL AFTER `updated_at`;
+
+UPDATE `mglobal`.`user_has_access` SET `access` = 'reports,user,mail,memberaccess,package,ads,builder,ads_add,ads_list,package_list,package_add,userreport,reportaddress,reportsponsor,reportpackage,reporttransaction,reportsocial,reportcontact,usermg,wallet,geneology,document,testimonial,reportverification,generatebinary,reportrefferal,reportdeposit,summary,cashwallet,rpwallet,commissionwallet' WHERE `user_has_access`.`id` = 4;
+
+/*3-7-2015*/
+CREATE TABLE IF NOT EXISTS `user_has_coupon` (
+`id` int(11) NOT NULL,
+  `coupon_code` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `status` int(1) NOT NULL,
+  `created_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+
+ALTER TABLE `transaction` ADD `coupon_code` VARCHAR(100) NOT NULL AFTER `coupon_discount`;
+
+ALTER TABLE `user_has_coupon` CHANGE `coupon_code` `coupon_id` INT(11) NOT NULL;
+
+
+ALTER TABLE `user_has_coupon`
+ ADD PRIMARY KEY (`id`);
+
+/* 06/07/2015 */
+ALTER TABLE `build_temp_header` ADD `head_content` TEXT NOT NULL AFTER `meta_description`;
+
+ALTER TABLE `user_has_template` ADD `head_content` TEXT NOT NULL AFTER `user_id`;

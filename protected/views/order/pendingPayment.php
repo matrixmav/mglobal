@@ -96,28 +96,28 @@
                                     <tbody>
                                         <tr class="ItemConvertedSubtotal">
                                             <td class="itemText">
-                                                <p>Subtotal:</p>
+                                                <p>Subtotal :</p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
+                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
                                             </td>
                                         </tr>
 
                                         <tr style="display:none;" id="coupon_discount" class="ItemConvertedSubtotal">
                                             <td class="itemText">
-                                                <p>Coupon Discount:</p>
+                                                <p>Coupon Discount: </p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span></p>
+                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span></p>
                                             </td>
                                         </tr> 
                                         <tr class="ItemTotalAfterDiscount">
 
                                             <td class="itemText">
-                                                <p>Total Amount:</p>
+                                                <p>Total Amount: </p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
+                                                <p id="TotalAmount"><span class="WebRupee"> $</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
                                             </td>
                                         </tr>
                                     </tbody></table>
@@ -215,7 +215,7 @@
                             </tr>
                         </table>
                     </div>
-                            <div class="btnWrp col-sm-11"><input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a> &nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goBack();">Go Back >></a></div>
+                            <div class="btnWrp col-sm-11"><input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();" style="color: #e02222;">Clear Input</a> &nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goBack();" style=" color: #e02222;">Go Back >></a></div>
 
                 </div>
             </div>

@@ -17,6 +17,10 @@ class PackageController extends Controller {
             'postOnly + delete', // we only allow deletion via POST request
         );
     }
+    
+    public function init() {
+        BaseClass::isLoggedIn();
+    }
 
     /**
      * Specifies the access control rules.
@@ -26,7 +30,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply','testscript'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -51,13 +55,14 @@ class PackageController extends Controller {
     function actionCouponApply() {
         $response = '';
         $percentage = 10;
-        $couponObject = Coupon::model()->findByAttributes(array('status' => '1'));
+        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK(Yii::app()->session['package_id']);
-        if ($couponObject->coupon_code == $_REQUEST['coupon_code']) {
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid'],'status'=>1));
+        if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
 
             $packageamount = $packageObject->amount;
-            $discountedAmount = $packageObject->amount * $percentage / 100 + Yii::app()->session['amount'];
+            $discountedAmount = $packageObject->amount * $couponObject->amount / 100 + Yii::app()->session['amount'];
             $discountAmountfinal = $packageamount - $discountedAmount;
             $response .= $discountAmountfinal . "_" . $discountedAmount;
         } else {
@@ -75,18 +80,20 @@ class PackageController extends Controller {
     function actionProfileCouponApply() {
         $response = '';
         $percentage = 10;
-        $couponObject = Coupon::model()->findByAttributes(array('status' => '1'));
+        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$_REQUEST['coupon_code']));
         $packageObject = Package::model()->findByPK($_REQUEST['package_id']);
-        if ($couponObject->coupon_code == $_REQUEST['coupon_code']) {
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid'],'status'=>1));
+         
+        if ($couponObject->coupon_code == $_REQUEST['coupon_code'] && count($couponCodeObject)==0) {
             Yii::app()->session['coupon_code'] = $_REQUEST['coupon_code'];
 
             $packageamount = $packageObject->amount;
-            $discountedAmount = $packageObject->amount * $percentage / 100 + $_REQUEST['domain_price'];
+            $discountedAmount = $packageObject->amount * $couponObject->amount / 100 + $_REQUEST['domain_price'];
             $discountAmountfinal = $packageamount - $discountedAmount;
             $response .= $discountAmountfinal . "_" . $discountedAmount;
         } else {
             $response .= 0;
-        }
+        } 
         echo $response;
     }
 
@@ -112,6 +119,7 @@ class PackageController extends Controller {
         $transactionArray['mode'] = 'paypal';
         $transactionArray['actualAmount'] = $_POST['totalAmount'];
         $transactionArray['couponDiscount'] = $_POST['couponDiscount'];
+        $transactionArray['couponId'] = Yii::app()->session['coupon_code'];
         $transactionArray['transactionId'] = $tarnsactionId;
  
         if (count($transactionObject) > 0) {
@@ -123,8 +131,21 @@ class PackageController extends Controller {
             Transaction::model()->createTransactionPackage($transactionObject,$transactionArray);
         }
          
-         
-        
+         /*code to create coupon code*/
+        if(!empty(Yii::app()->session['coupon_code'])){
+        $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>Yii::app()->session['coupon_code']));
+        $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+        if(count($couponCodeObject)==0)
+        {
+            /* code to fetch coupon ID*/
+            $couponCodeObject = new UserHasCoupon;
+            $couponCodeObject->coupon_id = $couponObject->id;
+            $couponCodeObject->user_id = Yii::app()->session['userid'];
+            $couponCodeObject->status=0;
+            $couponCodeObject->created_at=date('Y-m-d');
+            $couponCodeObject->save(false);
+        }
+    }
         //$transactionObject->used_rp = 0;
         $orderObject = Order::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id= ' . $transactionObject->id));
 
@@ -528,7 +549,8 @@ class PackageController extends Controller {
              
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
-            $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+            if(!empty($transactionObject)){
+            //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
             if ($transactionObject->status == 0) {
                 $transactionObject->status = 1;
                 $transactionObject->paid_amount = ($transactionObject->actual_amount) - ($transactionObject->used_rp);
@@ -556,9 +578,21 @@ class PackageController extends Controller {
                 ob_start();
                 $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                
                 /*to get sponsor email*/
                 $packageObject = Package::model()->findByPK($orderObject->package_id);
-             
+                
+                /*code to update coupon*/
+                $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$transactionObject->coupon_code));
+                if(!empty($couponObject)){
+                $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+                
+                if(!empty($couponCodeObject)){
+                $couponCodeObject->status = 1;
+                $couponCodeObject->save(false);
+                }
+                
+                }
                 /*code to update membership type*/
                 
                 if($userObject->membership_type =='0'){
@@ -566,6 +600,7 @@ class PackageController extends Controller {
                     $userObject->save(false);
                 }       
                 $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
+               
                  /*sponsor wallet*/
                 try {
                     //deduct from from user wallet
@@ -608,8 +643,8 @@ class PackageController extends Controller {
                     $postDataArray['mode'] = 'transfer';
                     $postDataArray['actualAmount'] = $packageObject->amount;
                     $postDataArray['paid_amount'] = $fromAmountpercent;
-                    $userObject = User::model()->findByPk($sponsorUserObject->id);
-                    $transactionObjectSponsor = Transaction::model()->createTransaction($postDataArray, $userObject,1);
+                    $userSposorObject = User::model()->findByPk($sponsorUserObject->id);
+                    $transactionObjectSponsor = Transaction::model()->createTransaction($postDataArray, $userSposorObject,1);
                     
                     /* code to add moneytransfer */
                     
@@ -637,8 +672,9 @@ class PackageController extends Controller {
                 }
                 
                 /* Insert Ads */
+
                 $userId = Yii::app()->session['userid'];
-                $next_year = strtotime('+1 year');
+                $next_year = strtotime('+299 day'); //For next 300 day
                 $current_time = time();
                 $i = 1 ;
                 $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId));
@@ -664,13 +700,7 @@ class PackageController extends Controller {
                 }
                 
                 
-                $userObjectArr = array();
-                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
-                $userObjectArr['user_name'] = $userObject->name;
-                $config['to'] = $sponsorUserObject->email;
-                $config['subject'] = 'Direct Referral Income Credited';
-                $config['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);
+                
                 
                 $description = substr($packageObject->Description, 20);
                 $Couponbody = "";
@@ -737,7 +767,7 @@ class PackageController extends Controller {
         </table>
     </td>
   </tr></table>';
-
+                  
                 $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
                 
                 $orderObject = Order::model()->findByPK($orderObject->id);
@@ -750,15 +780,40 @@ class PackageController extends Controller {
                 $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
                 CommonHelper::sendMail($config);
                 
-               
-            }
-            if ($transactionObject->status == 1) {
+                
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config1['to'] = $sponsorUserObject->email;
+                $config1['subject'] = 'Direct Referral Income Credited';
+                $config1['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config1);
+                
+              if ($transactionObject->status == 1) {
                 unset(Yii::app()->session['transactionid']);
                 unset(Yii::app()->session['amount']);
                 unset(Yii::app()->session['package_id']);
                 unset(Yii::app()->session['transaction_id']);
+                unset(Yii::app()->session['coupon_code']);
+                unset(Yii::app()->session['domain']);
+            } 
+            }
+            }else{
+                $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $config1['to'] = $userObject->email;
+                $config1['subject'] = 'Mglobally Transaction Falied';
+                $config1['body'] =  $this->renderPartial('../mailTemp/failed_transaction', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config1); 
+                 unset(Yii::app()->session['transactionid']);
+                unset(Yii::app()->session['amount']);
+                unset(Yii::app()->session['package_id']);
+                unset(Yii::app()->session['transaction_id']);
+                unset(Yii::app()->session['coupon_code']);
                 unset(Yii::app()->session['domain']);
             }
+            
             $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
             echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
 
@@ -771,7 +826,7 @@ class PackageController extends Controller {
     
     public function actionWalletThankYou() {
         
-     if (!(empty($_GET))) {
+     if (!empty($_GET)) {
              
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
@@ -815,6 +870,17 @@ class PackageController extends Controller {
                     $ex->getMessage();
                     exit;
                 }  
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->name;
+                $userObjectArr['full_name'] = $userObject->full_name;
+                $userObjectArr['from_name'] = "Admin";
+                $userObjectArr['date'] = $transactionObject->created_at;
+                $userObjectArr['fund'] = $transactionObject->actual_amount;
+                $userObjectArr['transactionId'] = $transactionObject->transaction_id;
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Cash wallet recharged successfully.';
+                $config['body'] =  $this->renderPartial('../mailTemp/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
         }
         $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
@@ -866,6 +932,58 @@ class PackageController extends Controller {
               
             echo 1;
         }
+    }
+    
+    public function actiontestScript() {
+        	$datetime= gmdate('Y-m-d H:i:s');
+	$url = "https://test.httpapi.com/api/domains/available.json?auth-userid=607978&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&domain-name=ramhemareddy&tlds=com";
+	//echo $url;
+ //echo '<br>';
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER,
+				array("Content-type: text/html" ));
+					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($curl, CURLOPT_POST, true);
+		//curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+
+		$json_response = curl_exec($curl);
+
+		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+			
+		curl_close($curl);
+
+			 $response = json_decode($json_response, true);
+			 echo '<pre>';
+			 print_r($response);
+			 echo '<br>';
+        $datetime= gmdate('Y-m-d H:i:s');
+	$url = "https://test.httpapi.com/api/domains/v5/suggest-names.json?auth-userid=6079784&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&keyword=ram";
+	//echo $url;
+ //echo '<br>';
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER,
+				array("Content-type: text/html" ));
+					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($curl, CURLOPT_POST, true);
+		//curl_setopt($curl, CURLOPT_POSTFIELDS, $content);
+
+		$json_response = curl_exec($curl);
+
+		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+			
+		curl_close($curl);
+
+			 $response = json_decode($json_response, true);
+			  echo '<pre>';
+			 print_r($response);exit; 
     }
   
     

@@ -80,6 +80,11 @@ class MoneyTransferController extends Controller {
     public function actionTransfer() {
         $error = "";
         $loggedInUserId = Yii::app()->session['userid'];
+        $frontUserObject = User::model()->findByPk($loggedInUserId);
+        if(!empty($frontUserObject)){
+        $frontName = $frontUserObject->name;
+        
+        }
         if (isset($_POST['transfer'])) { //echo "cool";exit;
             if ($_POST['paid_amount'] < 10) {
                 $error = "Sorry! you can not transfer amount less then $10";
@@ -119,7 +124,7 @@ class MoneyTransferController extends Controller {
         $this->render('transfer', 
                 array('userObject'=>$userObject,
                     'error' => $error,
-                    'userId'=>$loggedInUserId));
+                    'userId'=>$loggedInUserId,'frontName'=>$frontName));
     }
 
     /* autocomplete of username for user view excluding logged in user and admin */
@@ -282,7 +287,7 @@ class MoneyTransferController extends Controller {
                 
                 /*mail for from user*/
                 
-                $config['to'] = $toUserObjectMail->email;
+                $config['to'] = $fromUserObjectMail->email;
                 $config['subject'] = 'Fund Transfered';
                 $config['body'] =  $this->renderPartial('//mailTemp/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
@@ -556,7 +561,8 @@ class MoneyTransferController extends Controller {
 
         if($_POST){
             $existingShareObject = UserSharedAd::model()->findByAttributes(array('user_id'=>$userid, 'date'=>date('Y-m-d')));
-            if(!empty($existingShareObject->status == 1)){
+            echo $existingShareObject->status ; die;
+            if((!empty($existingShareObject->status) && $existingShareObject->status == 1)){
                 return 1;
             }
             $orderObject = Order::model()->findByAttributes(array('user_id' => $userid, 'status'=>1));

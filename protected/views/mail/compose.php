@@ -16,9 +16,9 @@ if(!empty($error)){
 ?>
 <div class="row">
     <div class="col-md-12">
-            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20")); ?>
             <?php echo CHtml::link(Yii::t('translation', $mailComposeMessage) . ' <i class="fa fa-plus"></i>', '/mail/compose', array("class" => "btn  green margin-right-20  red")); ?>
-            <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
+            <?php echo CHtml::link(Yii::t('translation', 'Inbox'), '/mail', array("class" => "btn  green margin-right-20")); ?>
+           <?php echo CHtml::link(Yii::t('translation', 'Sent'), '/mail/sent', array("class" => "btn  green margin-right-20")); ?>
     </div>
 </div><br/>
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/mail/compose" method="post" onsubmit="return validateForm()">

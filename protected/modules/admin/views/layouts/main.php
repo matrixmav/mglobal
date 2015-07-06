@@ -567,8 +567,24 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection7 = array();
                                             
                                 }
+                                if (in_array('reportdeposit', $accessArr)) { 
+                                    $reservation_subsection8 = array(
+                                      "report/deposit" => "Deposit",  
+                                   );
+                                }else{
+                                    $reservation_subsection8 = array();
+                                            
+                                }
+                                if (in_array('reportrefferal', $accessArr)) { 
+                                    $reservation_subsection9 = array(
+                                      "report/trackrefferal" => "Refferal Invite",  
+                                   );
+                                }else{
+                                    $reservation_subsection9 = array();
+                                            
+                                }
                                  
-                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection7,$reservation_subsection7);
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection6,$reservation_subsection7,$reservation_subsection8,$reservation_subsection9);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
@@ -912,8 +928,77 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                             if (in_array('summary', $accessArr)) {
+                             $reservation_pmenu = 9;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                
+                                 if (in_array('cashwallet', $accessArr)) {  
+                                $reservation_subsection1 = array(
+                                    "wallet/fundwallet" => "Cash Wallet",
+                                    );
+                              }else{
+                                    $reservation_subsection1 = array();
+                                            
+                                }
+                                if (in_array('rpwallet', $accessArr)) { 
+                                    $reservation_subsection2 = array(
+                                      "wallet/rpwallet" => "RP Wallet",  
+                                   );
+                                }else{
+                                    $reservation_subsection2 = array();
+                                            
+                                }
+                                if (in_array('commissionwallet', $accessArr)) { 
+                                    $reservation_subsection3 = array(
+                                      "wallet/commisionwallet" => "Commission Wallet",  
+                                   );
+                                }else{
+                                    $reservation_subsection3 = array();
+                                            
+                                }
+                                 
+                                 
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3);
+                                 
+                                ?>
+                                
+                                <li
+                                    class="<?php echo (($curAction == 'fundwallet') || ($curAction == 'rpwallet') || ($curAction == 'commisionwallet')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <i class="fa fa-user"></i>
+                                        <span class="title">Summary</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo (($curAction == 'fundwallet') || ($curAction == 'rpwallet') || ($curAction == 'commisionwallet')) ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($curAction == "resetpassword" && $curControllerLower == "user")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                             }
                              
-                            
+                            }
+                             
                             $bases_pmenu = 4; ?>
                             
                     </ul>

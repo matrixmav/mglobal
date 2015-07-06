@@ -42,6 +42,7 @@ class BaseClass extends Controller {
     }
 
     public static function isLoggedIn() {
+        
         $userId = Yii::app()->session['userid']; // die;
         // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if (!isset($userId)) {
@@ -1251,7 +1252,7 @@ class BaseClass extends Controller {
                     } else if ($type == 9) {
                         $color = "sm-purple"; //Advance Pro Packages 3
                     } else {
-                        $color = "sm-nothing"; //kuch nhi h 
+                        $color = "sm-nothing"; //No Purchase 
                     }
                 }
             }
@@ -1273,31 +1274,41 @@ class BaseClass extends Controller {
      * @param int $nodeId - input node
      */
     public static function setPurchaseNode($parentObject) {
-        echo $nodeId = $parentObject->user_id;
-        $date = date('Y-m-d');
+        $nodeId = $parentObject->user_id;
+        $todayDate = date('Y-m-d');
+        //$date = date('Y-m-d');
         //find left present | not
         //$totalLeftPurchase = 0;
-        $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'order_date' => $date, 'position'=>'left')); 
+        $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
         
         if($binaryCommissionObjectLeft){
             //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
             //  $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
            //echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
            //echo "Left :".$binaryCommissionObjectLeft->order_amount;
-            $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
-            $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
-            $parentObject->save(false);
+            if($todayDate==$binaryCommissionObjectLeft->order_date){
+                $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+                $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
+                $parentObject->save(false);
+            } else {
+                $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+            }
         }
         //echo $totalLeftPurchase;
        // exit;
         //find right present | not
                 
-        $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'order_date' => $date, 'position'=>'right')); 
+        $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
         if($binaryCommissionObjectRight){
-//            echo "Right :".$totalRightPurchase = $binaryCommissionObjectRight->order_amount;
-            $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
-            $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
-            $parentObject->save(false);
+            //echo "Left Id: ".$binaryCommissionObjectRight->user_id;
+           //echo "Left :".$binaryCommissionObjectRight->order_amount;
+            if($todayDate==$binaryCommissionObjectRight->order_date){
+                $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+                $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
+                $parentObject->save(false);
+            } else {
+                $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+            }
         }
 //        exit;
         // Total Purchase amount
@@ -1319,7 +1330,7 @@ class BaseClass extends Controller {
         $nodeId = $parentObject->user_id;
         $isValidNode = self::binaryEligible($nodeId);
         //binary calculation percentage
-        $binaryPercentage = 0.01;
+        $binaryPercentage = 0.1;
       
         //is valid node
         if($isValidNode){
@@ -1342,9 +1353,9 @@ class BaseClass extends Controller {
             }
             $parentObject->commission_amount = $binaryAmount;
             $parentObject->save(false);
-            if($binaryAmount !=0)
-            {
+            if($binaryAmount !=0) {
             self::createCommissionTransaction($binaryAmount,$parentObject);
+            
             }
             
         }
@@ -1374,7 +1385,9 @@ class BaseClass extends Controller {
             $postDataArray['fromUserId'] = 1;
             $postDataArray['comment'] = 'Binary Commission Transfered.'; 
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount,'admin');  
-             return 1;   
+            $userMailObject = UserController::binaryMail($parentObject);
+            //$mailSent = User::model()->binaryMail($parentObject);
+            return 1;   
             
             }
     

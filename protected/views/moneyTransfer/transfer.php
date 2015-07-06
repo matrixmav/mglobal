@@ -48,6 +48,9 @@ $this->breadcrumbs = array(
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                     <div class="col-lg-7">
                         <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value);" />
+                    <div class="col-lg-7">
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value,'<?php echo $frontName;?>');" />
+                        <span id="search_fullname">&nbsp;</span>
                         <span id="search_user_error" style="color:red"></span>
                     </div>     
                 </div>
@@ -65,7 +68,7 @@ $this->breadcrumbs = array(
         <div class="form-actions  right">                     
                 <input type="submit"  name="transfer" id="transfer" class="btn orange" value="Transfer Funds" onClick="return validationfrom();"/>                     
 
-                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="reset" class="btn btn-default" id="reset" onclick="resetValue();">Cancel</button>
                  
             </div>
        
@@ -123,5 +126,31 @@ $this->breadcrumbs = array(
     }
     
     
+    
  }
+ function resetValue()
+ {
+     $('#search_fullname').html('');
+     $('#transaction_data').html('');
+ }
+function getExistingFund(userId, walletId) { 
+    $("#select_wallet_error").html("");
+    $.ajax({
+        type: "post",
+        url: "/admin/wallet/getfundbyamount",
+        data: {'userId': userId, 'walletId': walletId},
+        success: function (amount) {
+            $("#transaction_data").html("");
+            $("#wallet_amount").show();
+            if (amount != 0) {
+                $("#transaction_data").html(amount);
+                $("#transaction_data_amt").val(amount);
+                $("#fundval").val(amount.replace(/[^\d\.\-\ ]/g, ''));
+            } else {
+                $("#fundval").val("0.00");
+                $("#transaction_data").html("<b>0.00</b>");
+            }
+        }
+    });
+}
 </script>

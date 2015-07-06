@@ -4541,3 +4541,32 @@ UI Loading
 .portlet.box.orange .btn.orange{background-color:#f15c2a; color:#FFF;}
 .page-content .page-breadcrumb.breadcrumb > li .breadcrumbs > a{color: #f15c2a !important;}
 .page-content .page-breadcrumb.breadcrumb > li .breadcrumbs{color:#727272 !important;}
+.page-sidebar{background-color: #364150 !important;}
+.page-content-wrapper{background-color:#364150 !important;}
+ 
+
+.ItemTotalAfterDiscount td {
+    background-color: #feffd5;
+    border: 1px solid #c1c58c;
+    margin-top: 7px !important;
+    padding-bottom: 5px;
+    padding-right: 9px;
+    padding-top: 10px;
+    padding-left:6px;
+}
+.cartTotalWrp .itemAmount {
+    font-size: 16px !important;
+    font-weight: bold;
+}
+.cartTotalWrp tr td {
+    padding-bottom: 10px;
+}
+td.itemAmount {
+    padding-left: 15px;
+}
+#CartTotal{
+    color: #669933;
+}
+#TotalAmount {
+    color: #669933;
+}

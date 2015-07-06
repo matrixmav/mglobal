@@ -8,10 +8,9 @@ class AdsController extends Controller {
      */
     public $layout = 'inner';
 
-    public function init() {
-//            BaseClass::isLoggedIn();
+  public function init() {
+        BaseClass::isLoggedIn();
     }
-
     /**
      * @return array action filters
      */

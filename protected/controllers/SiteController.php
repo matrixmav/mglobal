@@ -48,6 +48,7 @@ class SiteController extends Controller
 			),
 		);
 	}
+        
 
 	/**
 	 * This is the default 'index' action that is invoked
@@ -95,17 +96,20 @@ class SiteController extends Controller
 //            $stateCondition = array("id" => $stateName);
 //            $stateObject = $stateModel = State::model()->getStateByName($stateCondition);
 
-           $basicPackageObject = Package::model()->findAll(array('condition'=>'type=1','order' => 'name ASC','limit' => '3'));
+           $basicPackageObject = Package::model()->findAll(array('condition'=>'type=1 AND status=1','order' => 'name ASC','limit' => '3'));
            
-           $advancePackageObject = Package::model()->findAll(array('condition'=>'type=2','order' => 'name ASC','limit' => '3'));
+           $advancePackageObject = Package::model()->findAll(array('condition'=>'type=2 AND status=1','order' => 'name ASC','limit' => '3'));
            
-           $proPackageObject = Package::model()->findAll(array('condition'=>'type=3','order' => 'name ASC','limit' => '3'));
+           $proPackageObject = Package::model()->findAll(array('condition'=>'type=3 AND status=1','order' => 'name ASC','limit' => '3'));
            
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
            $membership_type = "";
            if(!empty(Yii::app()->session['userid'])){
            $userObject = User::model()->findByPk(Yii::app()->session['userid']);
            $membership_type = $userObject->membership_type;
+           }
+           if(!empty(Yii::app()->session['domain'])){
+               unset(Yii::app()->session['domain']);
            }
           $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}

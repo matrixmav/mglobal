@@ -6,7 +6,7 @@ class WalletController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='inner';
+	public $layout='main';
 
 	/**
 	 * @return array action filters
@@ -18,6 +18,10 @@ class WalletController extends Controller
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
+        
+        /*public function init() {
+        BaseClass::isAdmin();
+    }*/
 
 	/**
 	 * Specifies the access control rules.
@@ -28,7 +32,7 @@ class WalletController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','list','getfundbyamount'),
+				'actions'=>array('index','view','list','getfundbyamount', 'rpwallet', 'commisionwallet', 'fundwallet'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -195,4 +199,88 @@ class WalletController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+         /*
+     * this will fetch rp wallet
+     */
+
+    public function actionRpWallet() {
+        $loggedInUserId = Yii::app()->session['userid'];
+       $todayDate = Yii::app()->params['startDate'];
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $fromDate = date('Y-m-d');
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+        }
+
+        $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 2));
+        if ($walletobject) {
+            $walletId = $walletobject->id;
+        } else {
+            $walletId = 0;
+        }
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'criteria' => array(
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'")  AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+//        echo "<pre>"; print_r($dataProvider);exit;
+        $this->render('/report/rpwallet', array('dataProvider' => $dataProvider));
+    }
+
+    /*
+     * this will fetch commision wallet
+     */
+
+    public function actionCommisionWallet() {
+        $todayDate = Yii::app()->params['startDate'];
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $fromDate = date('Y-m-d');
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+        }
+
+        $loggedInUserId = Yii::app()->session['userid'];
+        $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 3));
+        if ($walletobject) {
+            $walletId = $walletobject->id;
+        } else {
+            $walletId = 0;
+        }
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'criteria' => array(
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        $this->render('/report/commissionwallet', array('dataProvider' => $dataProvider));
+    }
+
+    /*
+     * this will fetch fund wallet
+     */
+
+    public function actionFundWallet() {
+        $todayDate = Yii::app()->params['startDate'];
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $fromDate = date('Y-m-d');
+        if (!empty($_POST)) {
+            $todayDate = date('Y-m-d', strtotime($_POST['from']));
+            $fromDate = date('Y-m-d', strtotime($_POST['to']));
+        }
+        $loggedInUserId = Yii::app()->session['userid'];
+        $walletobject = Wallet::model()->findByAttributes(array('user_id' => $loggedInUserId, 'type' => 1));
+        
+        if ($walletobject) {
+            $walletId = $walletobject->id;
+        } else {
+            $walletId = 0;
+        }
+        $dataProvider = new CActiveDataProvider('MoneyTransfer', array(
+            'criteria' => array(
+                'condition' => ('(wallet_id="' . $walletId.'" OR to_wallet_id="' . $walletId.'") AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND (to_user_id = ' . $loggedInUserId . ' OR from_user_id = "' . $loggedInUserId . '")'), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        
+        $this->render('/report/fundwallet', array('dataProvider' => $dataProvider));
+    }
+
 }

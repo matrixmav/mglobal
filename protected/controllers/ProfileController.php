@@ -10,13 +10,14 @@ class ProfileController extends Controller {
     }
 
     public function actionIndex() {
-
+      
         $dataProvider = new CActiveDataProvider('User');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
     }
 
+   
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -214,6 +215,9 @@ class ProfileController extends Controller {
      */
 
     public function actionDashboard() {
+        if(!empty(Yii::app()->session['domain'])){
+               unset(Yii::app()->session['domain']);
+           }
         $loggedInUserId = Yii::app()->session['userid'];
         $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId. ' And  status = 1 '));
         $this->render('/user/dashboard', array(
@@ -285,12 +289,12 @@ class ProfileController extends Controller {
                         $userObjectArr['ip'] = Yii::app()->params['ip'];
                         $userObjectArr['new_master_pin'] = $_POST['UserProfile']['new_master_pin'];
                         $successMsg .= "Your pin changed successfully";
-                        $this->redirect('/profile/changepassword?successMsg='.$successMsg);
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
                         $config['body'] =  $this->renderPartial('//mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
                         //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
                         CommonHelper::sendMail($config);
+                        $this->redirect('/profile/changepassword?successMsg='.$successMsg);
                     }
                 }
             } else {

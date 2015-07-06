@@ -39,7 +39,7 @@ class Transaction extends CActiveRecord
 			array('mode', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id,transaction_id, mode, gateway_id, actual_amount, paid_amount,coupon_discount, total_rp, used_rp, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, user_id,transaction_id, mode, gateway_id, actual_amount, paid_amount,coupon_discount,coupon_code, total_rp, used_rp, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +71,7 @@ class Transaction extends CActiveRecord
 			'gateway_id' => 'Gateway',
 			'actual_amount' => 'Actual Amount',
 			'paid_amount' => 'Paid Amount',
+                        'coupon_code'=>'Coupon Code',
                         'coupon_discount'=>'Coupon',
 			'total_rp' => 'Total Rp',
 			'used_rp' => 'Used Rp',
@@ -105,6 +106,7 @@ class Transaction extends CActiveRecord
 		$criteria->compare('gateway_id',$this->gateway_id);
 		$criteria->compare('actual_amount',$this->actual_amount);
 		$criteria->compare('paid_amount',$this->paid_amount);
+                $criteria->compare('coupon_code',$this->coupon_code);
                 $criteria->compare('coupon_discount',$this->coupon_discount);
                 $criteria->compare('total_rp',$this->total_rp);
 		$criteria->compare('used_rp',$this->used_rp);
@@ -128,6 +130,7 @@ class Transaction extends CActiveRecord
 		return parent::model($className);
 	}
         
+         
         public function createTransaction($postDataArray, $userObject,$role=''){
             $transferAmount = $postDataArray['paid_amount'];
             $percentage = 0;
@@ -201,12 +204,17 @@ class Transaction extends CActiveRecord
                 if($transactionArray['couponDiscount']){
                     $couponDiscount = $transactionArray['couponDiscount'];
                 }
+                $couponId = 0;
+                if($transactionArray['couponId']){
+                    $couponId = $transactionArray['couponId'];
+                }
             $transactionObject->user_id = $userId;
             $transactionObject->transaction_id = $transactionId;
             $transactionObject->mode = $mode;
             $transactionObject->actual_amount = $actualAmount;
             $transactionObject->paid_amount = $paidAmount;
             $transactionObject->coupon_discount = $couponDiscount;
+            $transactionObject->coupon_code = $couponId;
             $transactionObject->total_rp = 0;
             $transactionObject->used_rp = 0;
             $transactionObject->status = 0;

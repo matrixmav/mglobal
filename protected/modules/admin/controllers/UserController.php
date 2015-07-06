@@ -33,7 +33,7 @@ class UserController extends Controller {
                 'actions' => array('index', 'view', 'changestatus', 'wallet',
                     'creditwallet', 'list', 'debitwallet', 'genealogy', 'add', 'deleteuser', 'edit',
                     'verificationapproval', 'testimonialapproval', 'changeapprovalstatus', 
-                    'testimonialapprovalstatus','binarycalculation','resetpassword'),
+                    'testimonialapprovalstatus','binarycalculation','resetpassword'.'binarymail'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -55,13 +55,36 @@ class UserController extends Controller {
             $userObject = User::model()->findByPk($_REQUEST['id']);
             if ($userObject->status == 1) {
                 $userObject->status = 0;
+                $userObject->save(false);
                 Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
             } else {
+                $masterPin = BaseClass::getUniqInt(5);
+                $password = BaseClass::getPassword();
+                $userObject->password = md5($password);
+                $userObject->master_pin = md5($masterPin);
                 $userObject->status = 1;
+                $userObject->save(false);
+                
+                
+                
+                /*array created for mailing values*/
+                
+                $userObjectArr = array();
+                $userObjectArr['name'] = $userObject->name;
+                $userObjectArr['full_name'] = $userObject->full_name;
+                $userObjectArr['password'] = $password;
+                $userObjectArr['masterPin'] = $masterPin;
+                /*code to send mail */ 
+                
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Login Details';
+                $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
+                
                 Yii::app()->user->setFlash('success', "User status changed to Active!.");
+                
             }
-            $userObject->save(false);
-            $this->redirect('/admin/user');
+           $this->redirect('/admin/user');
         }
     }
     
@@ -75,6 +98,8 @@ class UserController extends Controller {
             $currentUserId = Yii::app()->session['userid'] ;        
             $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
             $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+             
+               
             $this->render('viewGenealogy',array(
                         'genealogyLeftListObject'=>$genealogyLeftListObject,
                         'genealogyRightListObject'=>$genealogyRightListObject,
@@ -86,7 +111,21 @@ class UserController extends Controller {
         }
     }
     
+   
+    public static function binaryMail($parentObject) {
+                $userObject = User::model()->findByPk($parentObject->user_id);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Binary Income Credited';
+                $config['body'] =  Yii::app()->controller->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config); 
+                return 1;
+    }
+        
 
+   
     public function actionGenealogy() {
         $emailObject = User::model()->findAll(array('condition' => 'sponsor_id = "admin"'));
 
@@ -341,8 +380,10 @@ class UserController extends Controller {
               $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
               if(!empty($adminWalletObject))
               {
+                 if($userId != '1'){
                  $adminWalletObject->fund = ($adminWalletObject->fund) - ($transactionObject->paid_amount);
                  $adminWalletObject->update(false);
+                 }
              }}catch (Exception $ex) {
                     $ex->getMessage();
                     exit;
@@ -481,7 +522,7 @@ class UserController extends Controller {
      * Function to add multiple admin by superadmin
      */
 
-    public function actionAdd() {
+    public function actionAdd1() {
         $success = "";
         $error = "";
         $countryObject = Country::model()->findAll();
@@ -741,5 +782,60 @@ class UserController extends Controller {
                         </div>
                 </div>';
     }
+    
+    
+    public function actionAdd() {
+        $error ="";
+        $success ="";
+        if ($_POST) {            
+            /* Already Exits */
+            $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
+            if (count($userObject) == 0) {
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
+                $masterPin = BaseClass::getUniqInt(5);
+                $model = new User;
+                $model->attributes = $_POST;
+                $password = "mg@1234";
+                $model->role_id = 2;
+
+                $model->password = BaseClass::md5Encryption($password);
+                $model->sponsor_id = $_POST['sponsor_id'];
+                $model->master_pin = BaseClass::md5Encryption($masterPin);
+                $model->created_at = date('Y-m-d');
+
+
+                if (!$model->save(false)) {
+                    echo "<pre>";
+                    print_r($model->getErrors());
+                    exit;
+                }
+                $modelUserProfile = new UserProfile();
+                $modelUserProfile->user_id = $model->id;
+                $modelUserProfile->created_at = date('Y-m-d');
+                $modelUserProfile->referral_banner_id = 1;
+                $modelUserProfile->save(false);
+
+                $accessObject = new UserHasAccess;
+                $accessObject->user_id = $model->id;
+                $accessObject->access = "dashboard";
+                $accessObject->created_at = date('Y-m-d');
+                $accessObject->save();
+                $success = "User Created Successfully.";
+            }
+            
+        }
+        $spnId = "";
+        if ($_GET) {
+            if (!empty($arra)) {
+                $spnId = $arra[0];
+            } else {
+                $spnId = $_GET['spid'];
+            }
+        }
+        $countryObject = Country::model()->findAll();
+
+        $this->render('user_add', array('countryObject' => $countryObject, 'spnId' => $spnId,'error' => $error,'success'=>$success));
+    }
+    
 
 }

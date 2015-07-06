@@ -18,6 +18,7 @@ if(!empty($error)){
     <label class="col-md-2">User Name: </label>
     <div class="col-md-6">
          <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username" />
+         <span id="search_fullname">&nbsp;</span>
         <span style="color:red"  id="search_user_error"></span>
     </div>
 </div>
@@ -59,6 +60,7 @@ if(!empty($error)){
     </div>
 </div> 
 </form>
+<input type="hidden" value="<?php if(!empty($_GET['id'])) { echo $_GET['id']; }?>" id="getId">
 <script language = "Javascript">
     function validateForm(){
         $("#wallet_error").html("");
@@ -86,12 +88,15 @@ if(!empty($error)){
     var fund = $('#transaction_data_amt').val();
     var fundFinal = Number(fund.replace(/[^0-9\.]+/g,""));
     var fundVal = parseFloat($('#fund').val());
-    
+    var searchUser = $('#search_user_id').val();
+    var getUser = $('#getId').val();
     if(fundFinal < fundVal)
-    { 
-        $("#fund_error").html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
+    { if(getUser != '1' && searchUser != '1')
+        {
+      $("#fund_error").html("You don't have sufficient credits to transfer. Please choose lesser amount"); 
           return false;
         }
+    }
     }
     
 </script>

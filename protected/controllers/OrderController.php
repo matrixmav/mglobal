@@ -49,7 +49,7 @@ class OrderController extends Controller {
 
     public function actionList() {
         $userId = Yii::app()->session['userid'];
-        $pageSize = 10;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $dataProvider = new CActiveDataProvider('Order', array(
             'criteria' => array(
                 'condition' => ('user_id = ' . $userId ), 'order' => 'id DESC',
@@ -224,19 +224,20 @@ class OrderController extends Controller {
         } else {
             $condition = "order.user_id IN('0') AND ";
         }
-        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND order.created_at >= "' . $todayDate . '" AND order.created_at <= "' . $fromDate . '"');
+        $command = $connection->createCommand('select user.position,order.created_at,order.status,user.name as uname,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND order.created_at >= "' . $todayDate . '" AND order.created_at <= "' . $fromDate . '"');
 
+        
         // Date filter.
         if (!empty($_POST)) {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
-            $command = $connection->createCommand('select user.position,order.created_at,order.status,user.full_name,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND order.created_at >= "' . $todayDate . '" AND order.created_at <= "' . $fromDate . '"');
+            $command = $connection->createCommand('select user.position,order.created_at,order.status,user.name as uname,user.id,order.package_id,transaction.paid_amount,package.name from `user`,`order`,`package`,`transaction` WHERE ' . $condition . ' user.id = order.user_id AND order.package_id = package.id AND transaction.user_id = user.id AND order.status="1" AND transaction.mode != "transfer" AND order.created_at >= "' . $todayDate . '" AND order.created_at <= "' . $fromDate . '"');
         }
 
         $row = $command->queryAll();
 
         $sqlData = new CArrayDataProvider($row, array(
-            'pagination' => array('pageSize' => 10)));
+            'pagination' => array('pageSize' => 1000)));
         //$sqlData = $sqlData->getData();
         //$sqlData = $sqlData[0];
         //$dataProvider = new CActiveDataProvider($sqlData, array(
@@ -273,7 +274,7 @@ class OrderController extends Controller {
         } else {
             $condition = "user_id IN('0') AND ";
         }
-        $pageSize = 100;
+        $pageSize = Yii::app()->params['defaultPageSize'];
           
         
         // Date filter.
@@ -343,19 +344,30 @@ class OrderController extends Controller {
     
       protected function GetInvoiceButtonTitle($data, $row) {
          $id = $data->id;
-         $userId = Yii::app()->session['userid'];
+        $userId = Yii::app()->session['userid'];
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
-        $id = "'".$data['id']."'";
+        $id = $data['id'];
         if($orderObject->status==1)
         {
         $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn red fa fa-edit margin-right15">Invoice</a>';
         }else{
-        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a><br/><br/><a class="fancybox btn green fa fa-edit margin-right15" onclick = "showPendingPayment('.$id.');">Make Payment</a>';
+        $title = '<a class="btn red fa fa-edit margin-right15" href="#">N/A</a>';
          }
         echo $title;
     }
     
+    protected function GetStatus($data, $row) {
+        $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
+        $id = $data->id;
+        if ($orderObject->status == 1) {
+            $title = 'Completed';
+        } else {
+            $title = 'Pending<br/><br/><a class="fancybox btn green fa fa-edit margin-right15" onclick = "showPendingPayment(' . $id . ');">Make Payment</a>';
+        }
+        echo $title;
+    }
+
     public function actionPendingPayment() {
         if(!empty($_GET['id']))
         {

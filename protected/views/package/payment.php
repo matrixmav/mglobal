@@ -3,8 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-xs-12 col-lg-12">
-            <?php/*?><a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id']; ?>&tId=<?php echo $_GET['tId']; ?>">Domain Search</a> &nbsp;&nbsp;&nbsp; <a href="/package/productcart?tId=<?php echo $_GET['tId']; ?>">Proceed Payment</a> &nbsp;&nbsp;&nbsp; <a href="javascript:void(0);">Make Payment</a><?php*/?>
-            <div class="row">
+             <div class="row">
 		
                         
             <div class=" bs-wizard" style="border-bottom:0;">

@@ -299,22 +299,25 @@ class BuildTempController extends Controller {
                 $headeraddObject = new BuildTempHeader;
                 $bodyaddObject = new BuildTempBody;
                 $footeraddObject = new BuildTempFooter;
+                /* For header Part */
+                $headeraddObject->head_content = addslashes($_POST['Template']['head_code']);
                 $headeraddObject->header_content = addslashes($_POST['Template']['header_code']);
                 $headeraddObject->menu = addslashes($_POST['Template']['menu_code']);
                 $headeraddObject->template_title = addslashes($_POST['Template']['template_title']);
                 $headeraddObject->created_at = date('Y-m-d');
                 if ($headeraddObject->save(false)) {
-
+                    
+                    /* For Body Part */
                     $bodyaddObject->body_content = addslashes('<div class="mav_content">' . $_POST['Template']['body_code'] . '</div>');
                     $bodyaddObject->created_at = date('Y-m-d');
                     $bodyaddObject->save(false);
 
+                    /* For Footer Part */
                     $footeraddObject->footer_content = addslashes('<div class="mav_footer">' . $_POST['Template']['footer_code'] . '</div>');
                     $footeraddObject->created_at = date('Y-m-d');
                     $footeraddObject->save(false);
 
                     /* for removing folder */
-
                     function rmdir_recursive($dir) {
                         foreach (scandir($dir) as $file) {
                             if ('.' === $file || '..' === $file)
@@ -406,31 +409,30 @@ class BuildTempController extends Controller {
                     $model->save(false);
                     $tmpId = $model->id;
 
-                    /*  Scan and Insert JS  */
-                    $scanDir = scandir($targetdir . '/js/');
-                    foreach ($scanDir as $dirName) {
-                        if ($dirName === '.' or $dirName === '..')
-                            continue;
-                        $modelJs = new BuildTempJs;
-                        $modelJs->name = $dirName;
-                        $modelJs->temp_id = $tmpId;
-                        $modelJs->created_at = date('Y-m-d');
-                        $modelJs->save(false);
-                    }
+//                    /*  Scan and Insert JS  */
+//                    $scanDir = scandir($targetdir . '/js/');
+//                    foreach ($scanDir as $dirName) {
+//                        if ($dirName === '.' or $dirName === '..')
+//                            continue;
+//                        $modelJs = new BuildTempJs;
+//                        $modelJs->name = $dirName;
+//                        $modelJs->temp_id = $tmpId;
+//                        $modelJs->created_at = date('Y-m-d');
+//                        $modelJs->save(false);
+//                    }
+//
+//                    $scanDir = scandir($targetdir . '/css/');
+//                    foreach ($scanDir as $dirName) {
+//                        if ($dirName === '.' or $dirName === '..')
+//                            continue;
+//                        $modelCss = new BuildTempCss;
+//                        $modelCss->name = $dirName;
+//                        $modelCss->temp_id = $tmpId;
+//                        $modelCss->created_at = date('Y-m-d');
+//                        $modelCss->save(false);
+//                    }
 
-                    $scanDir = scandir($targetdir . '/css/');
-                    foreach ($scanDir as $dirName) {
-                        if ($dirName === '.' or $dirName === '..')
-                            continue;
-                        $modelCss = new BuildTempCss;
-                        $modelCss->name = $dirName;
-                        $modelCss->temp_id = $tmpId;
-                        $modelCss->created_at = date('Y-m-d');
-                        $modelCss->save(false);
-                    }
-
-
-                    $success .= "Header content added successfully";
+                    $success .= "Template added successfully";
                 }
             } else {
                 $error .= "Please fill all required(*) marked fields.";

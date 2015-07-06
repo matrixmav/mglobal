@@ -74,12 +74,12 @@ $this->menu = array(
                 array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'$row+1',
+                    'value'=>'$row+1', 
 		),
 		array(
                     'name'=>'id',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data["name"])? ucwords($data["name"]):""',
+                    'value'=>'isset($data["uname"])? ucwords($data["uname"]):""',
 		),
                 
                array(
