@@ -42,6 +42,7 @@ class BaseClass extends Controller {
     }
 
     public static function isLoggedIn() {
+        
         $userId = Yii::app()->session['userid']; // die;
         // $adminObject = User::model()->findByAttributes(array('id' => $userId, 'role_id' => '1'));
         if (!isset($userId)) {
@@ -1382,6 +1383,7 @@ class BaseClass extends Controller {
             $postDataArray['fromUserId'] = 1;
             $postDataArray['comment'] = 'Binary Commission Transfered.'; 
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount,'admin');  
+            $userMailObject = UserController::actionBinaryMail(1);
             $mailSent = User::model()->binaryMail($parentObject);
             return 1;   
             
