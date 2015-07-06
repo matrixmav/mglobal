@@ -1382,7 +1382,8 @@ class BaseClass extends Controller {
             $postDataArray['fromUserId'] = 1;
             $postDataArray['comment'] = 'Binary Commission Transfered.'; 
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount,'admin');  
-                $userObjectArr = array();
+              /* code to send mail for binary commission*/  
+                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
                 $config['to'] = $userObject->email;
