@@ -1327,7 +1327,7 @@ class BaseClass extends Controller {
         $nodeId = $parentObject->user_id;
         $isValidNode = self::binaryEligible($nodeId);
         //binary calculation percentage
-        $binaryPercentage = 0.01;
+        $binaryPercentage = 0.1;
       
         //is valid node
         if($isValidNode){
