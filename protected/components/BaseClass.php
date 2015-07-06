@@ -1350,9 +1350,9 @@ class BaseClass extends Controller {
             }
             $parentObject->commission_amount = $binaryAmount;
             $parentObject->save(false);
-            if($binaryAmount !=0)
-            {
+            if($binaryAmount !=0) {
             self::createCommissionTransaction($binaryAmount,$parentObject);
+            
             }
             
         }
@@ -1382,7 +1382,8 @@ class BaseClass extends Controller {
             $postDataArray['fromUserId'] = 1;
             $postDataArray['comment'] = 'Binary Commission Transfered.'; 
             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObjectect->id, $transactionObjectect->paid_amount,'admin');  
-             return 1;   
+             
+            return 1;   
             
             }
     
