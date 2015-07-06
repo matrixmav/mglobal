@@ -94,7 +94,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'country_id',
                     'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->country->name)?$data->country->name:""',
+                    'value' => 'isset($data->country->name)? $data->country->name: ""',
                 ),
                 array(
                     'name' => 'user_id',
