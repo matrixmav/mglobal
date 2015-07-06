@@ -100,13 +100,13 @@ class UserController extends Controller {
             $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
              
                 /*code to send mail for binary commission*/  
-                $userObject = Genealogy::model()->findByPk($parentObject);
+                $userObject = User::model()->findByPk($parentObject->user_id);
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Binary Income Credited';
-                $config['body'] =  $this->renderPartial('/mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] =  $this->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
             $this->render('viewGenealogy',array(
                         'genealogyLeftListObject'=>$genealogyLeftListObject,
