@@ -142,6 +142,7 @@ function getExistingFund(userId, walletId) {
             $("#wallet_amount").show();
             if (amount != 0) {
                 $("#transaction_data").html(amount);
+                $("#transaction_data_amt").val(amount);
                 $("#fundval").val(amount.replace(/[^\d\.\-\ ]/g, ''));
             } else {
                 $("#fundval").val("0.00");
