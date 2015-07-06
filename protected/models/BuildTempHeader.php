@@ -32,7 +32,7 @@ class BuildTempHeader extends CActiveRecord
 		return array(
 			array('created_at, updated_at', 'required'),
 			array('meta_title, meta_keywords, meta_description', 'length', 'max'=>255),
-			array('header_content', 'safe'),
+			array('head_content','header_content', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, meta_title, meta_keywords, meta_description,menu, header_content, created_at, updated_at', 'safe', 'on'=>'search'),
@@ -61,6 +61,7 @@ class BuildTempHeader extends CActiveRecord
 			'menu' => 'Menu',
 			'meta_keywords' => 'Meta Keywords',
 			'meta_description' => 'Meta Description',
+			'head_content' => 'Head Content',
 			'header_content' => 'Header Content',
 			'created_at' => 'Created At',
 			'updated_at' => 'Updated At',
