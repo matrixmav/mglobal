@@ -113,7 +113,7 @@ class UserController extends Controller {
     
    
     public static function binaryMail($parentObject) {
-        
+         
                $userObject = User::model()->findByPk($parentObject->user_id);
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->full_name;
