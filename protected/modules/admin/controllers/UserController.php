@@ -98,6 +98,16 @@ class UserController extends Controller {
             $currentUserId = Yii::app()->session['userid'] ;        
             $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
             $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+             
+                /*code to send mail for binary commission*/  
+                $userObject = Genealogy::model()->findByPk($parentObject);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Binary Income Credited';
+                $config['body'] =  $this->renderPartial('/mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
             $this->render('viewGenealogy',array(
                         'genealogyLeftListObject'=>$genealogyLeftListObject,
                         'genealogyRightListObject'=>$genealogyRightListObject,
