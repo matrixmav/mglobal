@@ -112,7 +112,21 @@ class UserController extends Controller {
     }
     
    
-    
+     public function binaryMail($parentObject) {
+        
+         /*code to send mail for binary commission*/  
+                $userObject = User::model()->findByPk($parentObject->user_id);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Binary Income Credited';
+                $config['body'] =  $this->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
+        
+       }
+        
+
    
     public function actionGenealogy() {
         $emailObject = User::model()->findAll(array('condition' => 'sponsor_id = "admin"'));
