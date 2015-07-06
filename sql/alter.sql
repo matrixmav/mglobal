@@ -179,3 +179,7 @@ ALTER TABLE `user_has_coupon` CHANGE `coupon_code` `coupon_id` INT(11) NOT NULL;
 ALTER TABLE `user_has_coupon`
  ADD PRIMARY KEY (`id`);
 
+/* 06/07/2015 */
+ALTER TABLE `build_temp_header` ADD `head_content` TEXT NOT NULL AFTER `meta_description`;
+
+ALTER TABLE `user_has_template` ADD `head_content` TEXT NOT NULL AFTER `user_id`;
