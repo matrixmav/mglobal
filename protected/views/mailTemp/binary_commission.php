@@ -50,5 +50,5 @@
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
             
-           <?php $this->renderPartial('//mailTemp/footer'); ?>
+           <?php $this->renderPartial('//mailTemp/footer');  ?>
     
