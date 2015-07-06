@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
-    <form action="/admin/BuildTemp/templateheaderadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
+    <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
             <legend>Add Template</legend>
@@ -16,7 +16,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Upload Zip Folder includes(css,images,js)<span class="require">*</span></label>
                 <div class="col-lg-8">
                   <input type="file" name="cssfolder" id="cssfolder" class="form-control">
-                    <span id="cssfolder_error"></span>
+                  <span id="cssfolder_error" class="clrred"></span>
                 </div>
             </div>
             
@@ -24,7 +24,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Upload Template Screenshot<span class="require">*</span></label>
                 <div class="col-lg-8">
                   <input type="file" name="screenshot" id="screenshot" class="form-control">
-                    <span id="screenshot_error"></span>
+                    <span id="screenshot_error" class="clrred"></span>
                 </div>
             </div>
             
@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
                             <?php }
                         } ?>
                     </select>
-                    <span id="category_error"></span>
+                    <span id="category_error" class="clrred"></span>
                 </div>
             </div>
             
@@ -48,19 +48,25 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <input id="template_title" type="text" class="form-control" name="Template[template_title]">
-                    <span id="template_title_error"></span>
+                    <span id="template_title_error" class="clrred"></span>
                 </div>
             </div>
             
+            <div class="form-group">
+                <label class="col-lg-4 control-label" for="headcode">Head Code<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <textarea id="head_code" class="form-control" name="Template[head_code]" style="width: 482px; height: 150px;"></textarea>
+                    <span id="head_code_error" class="clrred"></span>
+                </div>
+            </div>            
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="Main Div">Main Div</label>
                 <div class="col-lg-8">
                     <input id="main_div" type="text" class="form-control" name="main_div" placeholder="If you want any root div">
-                    <span id="template_title_error"></span>
+                    <span id="template_title_error" class="clrred"></span>
                 </div>
             </div>
-            
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="menucode">Menu Code<span class="require">*</span></label>
@@ -82,9 +88,9 @@ $this->breadcrumbs = array(
                         <li>
                             <a href="*5*">$5$</a>
                         </li>
-                        </ul> 
+                    </ul> 
                     </textarea>
-                    <span id="menu_code_error"></span>
+                    <span id="menu_code_error" class="clrred"></span>
                 </div>
             </div>
             
@@ -92,14 +98,14 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="header_code" class="form-control" name="Template[header_code]" style="width: 482px; height: 150px;"></textarea>
-                    <span id="header_code_error"></span>
+                    <span id="header_code_error" class="clrred"></span>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="body_code" class="form-control" name="Template[body_code]" style="width: 482px; height: 150px;"></textarea>
-                    <span id="body_code_error"></span>
+                    <span id="body_code_error" class="clrred"></span>
                 </div>
             </div>
             
@@ -107,7 +113,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="formcode">Contact Form Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="form_code" class="form-control" name="Template[form_code]" style="width: 482px; height: 150px;"></textarea>
-                    <span id="form_code_error"></span>
+                    <span id="form_code_error" class="clrred"></span>
                 </div>
             </div>
             
@@ -115,7 +121,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
                     <textarea id="footer_code" class="form-control" name="Template[footer_code]" style="width: 482px; height: 150px;"></textarea>
-                    <span id="footer_code_error"></span>
+                    <span id="footer_code_error" class="clrred"></span>
                 </div>
             </div>
             
@@ -142,7 +148,6 @@ $this->breadcrumbs = array(
         </div>
     </form>
 </div>
-
 
 <script type="text/javascript">
 function validation(){
@@ -174,6 +179,13 @@ function validation(){
         return false;
     }
     
+    $("#head_code_error").html("");
+    if ($("#head_code").val() == "") {
+        $("#head_code_error").html("Please enter Header Code");
+        $("#head_code").focus();            
+        return false;
+    }
+        
     $("#menu_code_error").html("");
     if ($("#menu_code").val() == "") {
         $("#menu_code_error").html("Please enter Header Code");
@@ -208,9 +220,7 @@ function validation(){
       $("#footer_code").focus();            
       return false;
     }
-     
-    }
-    
-    </script>
+}
+</script>
      
      

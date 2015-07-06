@@ -140,13 +140,16 @@ class UserHasTemplate extends CActiveRecord
 	}
         
         public function addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userId){
+
             $hasbuilderObject->category_id = $buildertempObject->category_id;
             $hasbuilderObject->user_id = $userId;
             $hasbuilderObject->template_id = $buildertempObject->template_id;
             $hasbuilderObject->custom_css = $buildertempObject->custom_css;
             $hasbuilderObject->custom_js = $buildertempObject->custom_js;
             $hasbuilderObject->contact_form = $buildertempObject->contact_form;
+            $hasbuilderObject->head_content = $buildertempObject->header->head_content;
            
+            //echo $hasbuilderObject->head_content ; die;
             $baseURL = Yii::app()->getBaseUrl(true)."/";
             $tempHeader = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->header->header_content)); 
             $tempFooter = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->footer->footer_content)); 

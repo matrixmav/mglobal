@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-   <div class="portlet box red   ">
+   <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
 								Verification
@@ -62,8 +62,8 @@ $this->breadcrumbs = array(
             </div>
         </fieldset>
 
-        <div class="form-actions right">                     
-               <input type="submit" name="submit" value="Update" class="btn red">
+        <div class="form-actions pad10 right">                     
+               <input type="submit" name="submit" value="Update" class="btn orange">
                  
             </div>
     

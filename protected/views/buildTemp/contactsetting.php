@@ -34,14 +34,14 @@ $this->breadcrumbs = array(
                 <label class="col-lg-2 control-label" for="lastname">Contact Email<span class="require">*</span></label>
                 <div class="col-lg-4">
                     <input type="text" id="email" class="form-control" name="email" value="<?php echo (!empty($userhasObject->contact_email)) ? $userhasObject->contact_email : ""; ?>">
-                    <span id="contact_error"></span>
+                    <span id="email_error" class="clrred"></span>
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="col-lg-2 control-label" for="lastname">Contact Form<span class="require">*</span></label>
                 <div class="col-lg-10">
-                    <textarea id="editor1" class="form-control" name="contact" style="width: 482px; height: 248px;"><?php echo (!empty($userhasObject->contact_form)) ? stripslashes($userhasObject->contact_form) : "" ; ?></textarea>
+                    <textarea id="editor1" class="form-control" name="contact" style="width: 482px; height: 248px;"><?php echo (!empty($userhasObject->contact_form)) ? htmlspecialchars(stripslashes($userhasObject->contact_form)) : "" ; ?></textarea>
                     <span id="page_content_error"></span>
                 </div>
             </div>            
@@ -64,4 +64,23 @@ $this->breadcrumbs = array(
         filebrowserFlashUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
     });
     CKFinder.setupCKEditor(editor, '../');
+    
+    function validation(){
+        $("#email_error").html("");
+        if ($("#email").val() == "") {
+          $("#email_error").html("Please enter email.");
+          $("#email").focus();            
+          return false;
+        }
+      
+        var email = document.getElementById('email');
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+        if (!filter.test(email.value)) {
+            $("#email_error").html("Enter valid email address.");
+            $("#email").focus();
+            return false;
+        }  
+    }
+    
 </script>
