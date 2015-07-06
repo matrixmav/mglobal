@@ -219,7 +219,7 @@ right connector from last child*/
 
 .detailPackage{}
 .detailPackage h4{ text-align: center; color: #333333; padding: 20px;}
-.basicP{ min-width:232px; margin: 4px 0; max-width: 300px;}
+.basicP{ min-width:232px; margin: 6px 0; max-width: 300px;}
 .basicP > img{margin-right: 10px;}
 .basicP > p{display: inline-block; font-size: 14px; max-width: 160px;}
 .detailPackage tr{}
@@ -230,8 +230,8 @@ right connector from last child*/
 
 .detailPackage .col-sm-3.col-xs-12{ border: 1px dashed #c1c1c1;}
 .detailPackage .col-sm-3.col-xs-12 table{width: 100%;}
-.colorBox{display: inline-block; position: relative;}
-.colorBox >img{position: absolute; top: 0; left: 7%;}
+.colorBox{display: inline-block; position: relative; font-family: 'DejaVuSans';}
+.colorBox >img{position: absolute; top: 0; left: 9%;}
 .colorBox span{vertical-align: middle; font-size: 50px; line-height: 35px;}
 
 .sm-user{background: #cccccc;}
@@ -249,3 +249,10 @@ right connector from last child*/
 .sm-pro1{background: #ea9000;}
 .sm-pro2{background: #00c265;;}
 .sm-pro3{background: #e90000;}
+
+/* custom-fonts */
+@font-face {
+   font-family:'DejaVuSans';
+	src: url('/font/DejaVuSans.ttf');
+	
+	}

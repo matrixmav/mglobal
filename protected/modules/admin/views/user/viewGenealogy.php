@@ -1,3 +1,4 @@
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 <?php
 /* @var $this GenealogyController */
 /* @var $model Genealogy */
