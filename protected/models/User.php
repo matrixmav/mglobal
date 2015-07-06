@@ -155,8 +155,22 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        /*code to send mail for binary commission*/ 
+        /*public function binaryMail($parentObject) {
         
-       
+          
+                $userObject = User::model()->findByPk($parentObject->user_id);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $userObjectArr['user_name'] = $userObject->name;
+                $config['to'] = $userObject->email;
+                $config['subject'] = 'Binary Income Credited';
+                $config['body'] =  $this->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config);
+        
+                }*/
+        
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
