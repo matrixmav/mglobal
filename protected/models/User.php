@@ -70,7 +70,7 @@ class User extends CActiveRecord
                     'userprofile' => array(self::BELONGS_TO, 'UserProfile', 'id'),
                     'touser' => array(self::BELONGS_TO, 'MoneyTransfer', 'to_user_id'),
                     'fromuser' => array(self::BELONGS_TO, 'MoneyTransfer', 'from_user_id'),
-                     'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
+                    'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
                      
 		);
 	}
