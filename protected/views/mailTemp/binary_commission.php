@@ -1,5 +1,5 @@
 <!-- content -->
-     <?php $this->renderPartial('/mailTemp/header'); ?>
+     <?php $this->renderPartial('//mailTemp/header'); ?>
         <tr>
     	   <td valign="" bgcolor="#efed6a" height="55" align="left" style="line-height:0px; font-size:16px">
         	<table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -50,5 +50,5 @@
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
             
-           <?php $this->renderPartial('/mailTemp/footer'); ?>
+           <?php $this->renderPartial('//mailTemp/footer'); ?>
     
