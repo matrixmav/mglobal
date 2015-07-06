@@ -101,6 +101,7 @@ class UserController extends Controller {
              
                 /*code to send mail for binary commission*/  
                 $userObject = User::model()->findByPk($parentObject->user_id);
+                echo "<pre>";print_r($userObject);
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->full_name;
                 $userObjectArr['user_name'] = $userObject->name;
