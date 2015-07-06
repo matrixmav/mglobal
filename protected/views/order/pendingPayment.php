@@ -96,7 +96,7 @@
                                     <tbody>
                                         <tr class="ItemConvertedSubtotal">
                                             <td class="itemText">
-                                                <p>Subtotal:</p>
+                                                <p>Subtotal: </p>
                                             </td>
                                             <td class="itemAmount">
                                                 <p id="CartTotal"><span class="WebRupee">$</span> <span id="total"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
@@ -105,7 +105,7 @@
 
                                         <tr style="display:none;" id="coupon_discount" class="ItemConvertedSubtotal">
                                             <td class="itemText">
-                                                <p>Coupon Discount:</p>
+                                                <p>Coupon Discount: </p>
                                             </td>
                                             <td class="itemAmount">
                                                 <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span></p>
@@ -114,7 +114,7 @@
                                         <tr class="ItemTotalAfterDiscount">
 
                                             <td class="itemText">
-                                                <p>Total Amount:</p>
+                                                <p>Total Amount: </p>
                                             </td>
                                             <td class="itemAmount">
                                                 <p id="TotalAmount"><span class="WebRupee">$</span> <span id="totalpayable"><?php echo number_format($orderObject->package->amount + $orderObject->domain_price, 2); ?></span></p>
