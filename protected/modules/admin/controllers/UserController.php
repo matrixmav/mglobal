@@ -119,7 +119,7 @@ class UserController extends Controller {
         }
     }
     
-
+ 
     public function actionGenealogy() {
         $emailObject = User::model()->findAll(array('condition' => 'sponsor_id = "admin"'));
 
