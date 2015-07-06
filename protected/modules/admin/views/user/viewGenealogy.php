@@ -152,132 +152,168 @@ if (!empty($_GET['id'])) {
 
 
         <div class="row">
-
-            <div class="col-sm-12 detailPackage">
-                <h4>PACKAGE DETAILED INFORMATION</h4>
-                <div class="row">
-                    <div class="col-sm-3 col-xs-12">
-                        <table>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/blank.png">
-                                <p> User</p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/inactive.png">
-                                <p>  User inactive</p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/active.png">
-                                <p> User Active</p>
-                            </div>
-                            </th>
-                            </tr>
-                        </table>
+    
+    <div class="col-sm-12 detailPackage">
+        <h4>PACKAGE DETAILED INFORMATION</h4>
+       <div class="row">
+            <div class="col-sm-3 col-xs-12">
+                <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                       <div class="colorBox">
+                        <span style="color: #cccccc;">&#x2B22;</span>
+                            <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p> User</p>
                     </div>
-                    <div class="col-sm-3 col-xs-12">
-                        <table>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/basic-p1.png">
-                                <p> Basic Packages 1</p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/basic-p2.png">
-                                <p>  Basic Packages 2</p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/basic-p3.png">
-                                <p> Basic Packages 3</p>
-                            </div>
-                            </th>
-                            </tr>
-                        </table>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <div class="colorBox">
+                        <span style="color: #a6a6a6;">&#x2B22;</span>
+                            <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p>  User inactive</p>
                     </div>
-                    <div class="col-sm-3 col-xs-12">
-
-                        <table>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/advance-p1.png">
-                                <p> Advanced Packages 1</p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/advance-p2.png">
-                                <p>  Advanced Packages 2</p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/advance-p3.png">
-                                <p>Advanced Packages 3</p>
-                            </div>
-                            </th>
-                            </tr>
-                        </table>
-
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <div class="colorBox">
+                        <span style="color: #727272;">&#x2B22;</span>
+                            <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p> User Active</p>
                     </div>
-                    <div class="col-sm-3 col-xs-12">
-
-                        <table>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/advance-pro1.png">
-                                <p> Advanced Pro 1</p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/advance-pro2.png">
-                                <p> Advanced Pro 2 </p>
-                            </div>
-                            </th>
-                            </tr>
-                            <tr>
-                                <th>
-                            <div class="basicP">
-                                <img src="/images/advance-pro3.png">
-                                <p> Advanced Pro 3</p>
-                            </div>
-                            </th>
-                            </tr>
-                        </table>
-
-                    </div>
-
-
-                </div>
-                <h4></h4>
+                        </th>
+                    </tr>
+                </table>
             </div>
+            <div class="col-sm-3 col-xs-12">
+                <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <div class="colorBox">
+                        <span style="color: #8fd900;">&#x2B22;</span>
+                            <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                         <p>  Basic Packages 1</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                        <div class="colorBox">
+                        <span style="color: #db5300;">&#x2B22;</span>
+                              <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p>  Basic Packages 2</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                        <div class="colorBox">
+                        <span style="color: #dce903;">&#x2B22;</span>
+                             <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p> Basic Packages 3</p>
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+             <div class="col-sm-3 col-xs-12">
+               
+                   <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <div class="colorBox">
+                        <span style="color: #0377ea;">&#x2B22;</span>
+                              <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p> Advanced Packages 1</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                       <div class="colorBox">
+                        <span style="color: #9137ea;">&#x2B22;</span>
+                            <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p>  Advanced Packages 2</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                         <div class="colorBox">
+                        <span style="color: #00c0ec;">&#x2B22;</span>
+                             <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p>Advanced Packages 3</p>
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+                   
+                </div>
+            <div class="col-sm-3 col-xs-12">
+                
+                   <table>
+                    <tr>
+                        <th>
+                    <div class="basicP">
+                        <div class="colorBox">
+                        <span style="color: #ea9000;">&#x2B22;</span>
+                              <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p> Advanced Pro 1</p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                         <th>
+                    <div class="basicP">
+                      <div class="colorBox">
+                        <span style="color: #00c265;">&#x2B22;</span>
+                             <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p> Advanced Pro 2 </p>
+                    </div>
+                        </th>
+                    </tr>
+                     <tr>
+                        <th>
+                    <div class="basicP">
+                       <div class="colorBox">
+                        <span style="color: #e90000;">&#x2B22;</span>
+                             <img class="img-responsive" src="/images/activeM.png">
+                        </div>
+                        <p> Advanced Pro 3</p>
+                    </div>
+                        </th>
+                    </tr>
+                </table>
+                    
+                </div>
+                
+                
+            </div>
+        <h4></h4>
         </div>
+    </div>
 
 </div>
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/main.css">

@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 ?>
 <div class="col-md-6 col-sm-6">
     <div class="error" id="error_msg" style="display: none;"></div>    
-    <div class="portlet box red   ">
+    <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
 								Add Ads
@@ -23,14 +23,14 @@ $this->breadcrumbs = array(
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Name</label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="ads_name" class="form-control" name="ads_name" >                
                 </div>
             </div>
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Description</label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="ads_desc" class="form-control" name="ads_desc" >                
                 </div>
             </div>
@@ -52,7 +52,7 @@ $this->breadcrumbs = array(
             </div>
         </fieldset>
 <div class="form-actions right">                     
-                   <input type="submit" name="submit" value="Update" class="btn red">
+                   <input type="submit" name="submit" value="Update" class="btn orange ">
                  
             </div>
     

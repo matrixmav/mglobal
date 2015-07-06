@@ -1029,16 +1029,16 @@ Page breadcrumb
 }
 
 .page-content .page-breadcrumb.breadcrumb {
-  -webkit-border-radius: 0px;
-     -moz-border-radius: 0px;
-          border-radius: 0px;
+  -webkit-border-radius: 2px;
+     -moz-border-radius: 2px;
+          border-radius: 2px !important;
   box-shadow: none;
   padding-right: 30px;
   padding-left: 8px;
   margin-top: 15px;
   margin-bottom: 25px;
   border:0px !important;  
-  background-color: #eee;
+  background-color: #f0f0f0;
 }
 
 .page-content .page-breadcrumb.breadcrumb > li > a, 
@@ -4523,6 +4523,21 @@ UI Loading
 #walletform{padding: 10px 0;}
 
 .page-sidebar .sidebar-toggler, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-toggler{margin-bottom: 5px;}
-.page-sidebar{background-color: #364150 !important;}
-.page-content-wrapper{background-color:#364150 !important;}
+.page-sidebar{background-color: #565656 !important;}
+.page-content-wrapper{background-color:#565656 !important;}
+.portlet.box label{color:#727272;}
 
+.portlet.box.orange > .portlet-title {
+  background-color: #f15c2a;
+} 
+
+.portlet.box.orange {  
+   border: 1px solid #f15c2a !important;
+   border-top: 0;
+}
+.portlet.box.orange .form-actions{border-top: 0 !important; background-color: #FFF; padding: 10px 55px 20px;}
+.portlet.box.orange .form-actions.pad10{padding-right: 10px;}
+.portlet.box.orange .form-control{border-radius: 2px !important;}
+.portlet.box.orange .btn.orange{background-color:#f15c2a; color:#FFF;}
+.page-content .page-breadcrumb.breadcrumb > li .breadcrumbs > a{color: #f15c2a !important;}
+.page-content .page-breadcrumb.breadcrumb > li .breadcrumbs{color:#727272 !important;}

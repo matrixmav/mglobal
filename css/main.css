@@ -233,3 +233,19 @@ right connector from last child*/
 .colorBox{display: inline-block; position: relative;}
 .colorBox >img{position: absolute; top: 0; left: 7%;}
 .colorBox span{vertical-align: middle; font-size: 50px; line-height: 35px;}
+
+.sm-user{background: #cccccc;}
+.sm-user-inactive{background: #a6a6a6;}
+.sm-user-active{background: #727272;}
+
+.sm-basicp1{background: #8fd900;}
+.sm-basicp2{background: #db5300;}
+.sm-basicp3{background: #dce903;}
+
+.sm-advancep1{background: #0377ea;}
+.sm-advancep2{background: #9137ea;}
+.sm-advancep3{background: #00c0ec;}
+
+.sm-pro1{background: #ea9000;}
+.sm-pro2{background: #00c265;;}
+.sm-pro3{background: #e90000;}
