@@ -49,7 +49,7 @@ class OrderController extends Controller {
 
     public function actionList() {
         $userId = Yii::app()->session['userid'];
-        $pageSize = 10;
+        $pageSize = Yii::app()->params['defaultPageSize'];
         $dataProvider = new CActiveDataProvider('Order', array(
             'criteria' => array(
                 'condition' => ('user_id = ' . $userId ), 'order' => 'id DESC',
@@ -274,7 +274,7 @@ class OrderController extends Controller {
         } else {
             $condition = "user_id IN('0') AND ";
         }
-        $pageSize = 100;
+        $pageSize = Yii::app()->params['defaultPageSize'];
           
         
         // Date filter.
