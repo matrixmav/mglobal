@@ -119,7 +119,8 @@ class UserController extends Controller {
                 $userObjectArr['user_name'] = $userObject->name;
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Binary Income Credited';
-                $config['body'] =  $this->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
+                 $config['body'] =  $this->renderPartial('../mailTemp/login-details', array('userObjectArr'=>$userObjectArr),true);
+                //$config['body'] =  renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config); 
                 return 1;
     }
