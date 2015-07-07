@@ -1231,26 +1231,26 @@ class BaseClass extends Controller {
                 $orderAmount = $orderObject->package(array('order' => 'amount DESC'));
                 if ($myAmount < $orderAmount->amount) {
                     $myAmount = $orderAmount->amount;
-                    $type = $orderAmount->type;
+                    echo $type = $orderAmount->type;
 
                     if ($type == 1) {
-                        $color = "sm-red"; //Basic Packages 2
+                        $color = "sm-basicp1"; //Basic Packages 2
                     } else if ($type == 2) {
-                        $color = "sm-red"; //Basic Packages 3
+                        $color = "sm-basicp2"; //Basic Packages 3
                     } else if ($type == 3) {
-                        $color = "sm-greenLight"; //Advance Packages 1
+                        $color = "sm-basicp3"; //Advance Packages 1
                     } else if ($type == 4) {
-                        $color = "sm-greenLight"; //Advance Packages 1
+                        $color = "sm-advancep1"; //Advance Packages 1
                     } else if ($type == 5) {
-                        $color = "sm-green"; //Advance Packages 2
+                        $color = "sm-advancep2"; //Advance Packages 2
                     } else if ($type == 6) {
-                        $color = "sm-blue"; //Advance Packages 3
+                        $color = "sm-advancep3"; //Advance Packages 3
                     } else if ($type == 7) {
-                        $color = "sm-navy"; //Advance Pro Packages 1
+                        $color = "sm-pro1"; //Advance Pro Packages 1
                     } else if ($type == 8) {
-                        $color = "sm-blue"; //Advance Pro Packages 2
+                        $color = "sm-pro2"; //Advance Pro Packages 2
                     } else if ($type == 9) {
-                        $color = "sm-purple"; //Advance Pro Packages 3
+                        $color = "sm-pro3"; //Advance Pro Packages 3
                     } else {
                         $color = "sm-nothing"; //No Purchase 
                     }
@@ -1264,7 +1264,8 @@ class BaseClass extends Controller {
         $link = '<a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
         <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
         <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
-        <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> ';
+        <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
+        <a href="/BuildTemp/menusetting" class="btn green">Menus Setting</a> ';
         return $link;
     }
     

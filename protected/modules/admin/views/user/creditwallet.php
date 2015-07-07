@@ -11,7 +11,7 @@ if(!empty($error)){
 }
 ?>
 
-<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/creditwallet" method="post" onsubmit="return validateForm()">
+<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/creditwallet" method="post">
 <input type="hidden" name="userId" id="search_user_id" value="<?php echo (!empty($userObject))? $userObject->id : ""; ?>"/>
 <?php if(empty($_GET)) {  ?>
 <div class="col-md-12 form-group">
@@ -57,13 +57,14 @@ if(!empty($error)){
     <label class="col-md-2"></label>
     <div class="col-md-6">
         <input type="submit" class="btn green" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
+        <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
     </div>
 </div> 
 </form>
 <input type="hidden" value="<?php if(!empty($_GET['id'])) { echo $_GET['id']; }?>" id="getId">
 <script language = "Javascript">
-    function validateForm(){
-        $("#wallet_error").html("");
+ $('#form_admin_reservation').submit(function() {
+       $("#wallet_error").html("");
         if ($("#wallet_type").val() == "") {
             $("#wallet_error").html("Please Select Wallet First.");
             return false;
@@ -97,7 +98,10 @@ if(!empty($error)){
           return false;
         }
     }
-    }
+      document.getElementById('submit').style.display="none";
+    document.getElementById('loading2').style.display="block";
+    
+});
     
 </script>
 <script type="text/javascript" src="/js/transaction.js"></script>

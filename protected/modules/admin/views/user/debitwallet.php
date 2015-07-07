@@ -11,7 +11,7 @@ if (!empty($error)) {
 }
 ?>
 
-<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/debitwallet" method="post" onsubmit="return validateForm()">
+<form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/debitwallet" method="post">
     <input type="hidden" name="userId" id="userId" value="<?php echo (!empty($userObject)) ? $userObject->id : ""; ?>"/>
     <div class="col-md-12 form-group">
         <label class="col-md-2">User Name: </label>
@@ -59,12 +59,13 @@ if (!empty($error)) {
         <label class="col-md-2"></label>
         <div class="col-md-6">
             <input type="submit" class="btn green" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
+            <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
         </div>
     </div> 
     <input type="hidden" id="fundval" value="">
 </form>
 <script language = "Javascript">
-    function validateForm() {
+   $('#form_admin_reservation').submit(function() {
 
 
         if ($("#wallet_type").val() == 0) {
@@ -92,7 +93,11 @@ if (!empty($error)) {
             $("#fund_error").html("Deducting fund should not be more the existing fund!");
             return false;
         }
-    }
+     
+    document.getElementById('submit').style.display="none";
+    document.getElementById('loading2').style.display="block";
+    
+    });
     function getExistingFund(userId, walletId) {
         $("#select_wallet_error").html("");
         $.ajax({

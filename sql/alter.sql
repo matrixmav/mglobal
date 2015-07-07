@@ -183,3 +183,5 @@ ALTER TABLE `user_has_coupon`
 ALTER TABLE `build_temp_header` ADD `head_content` TEXT NOT NULL AFTER `meta_description`;
 
 ALTER TABLE `user_has_template` ADD `head_content` TEXT NOT NULL AFTER `user_id`;
+
+ALTER TABLE `user_pages` ADD `parent` INT(11) NULL AFTER `page_content`;

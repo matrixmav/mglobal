@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
 							</div>
     </div>
         <div class="portlet-body form">
-    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off">
+    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" id="transferForm">
         <fieldset> 
              <div class="form-body">
                 <div class="form-group">
@@ -65,12 +65,11 @@ $this->breadcrumbs = array(
 
              </div>
             </fieldset>
-        <div class="form-actions  right">                     
-                <input type="submit"  name="transfer" id="transfer" class="btn orange" value="Transfer Funds" onClick="return validationfrom();"/>                     
-
-                    <button type="reset" class="btn btn-default" id="reset" onclick="resetValue();">Cancel</button>
-                 
-            </div>
+ 
+        <div class="form-actions right">                     
+                <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
+                <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
+          </div>
        
             
     </form>
@@ -82,8 +81,7 @@ $this->breadcrumbs = array(
         #s2id_search_username{ width: 100% !important;}
 </style>
 <script>
-    function validationfrom()
-{
+ $('#transferForm').submit(function() {
     $('#transaction_error').html("");
     if($('#transactiontype').val()=='')
     {
@@ -124,15 +122,10 @@ $this->breadcrumbs = array(
        $('#email_error').html("Transfer amount can not be more than existing amount."); 
        return false;
     }
-    
-    
-    
- }
- function resetValue()
- {
-     $('#search_fullname').html('');
-     $('#transaction_data').html('');
- }
+     document.getElementById('transfer').style.display="none";
+     document.getElementById('loading2').style.display="block";
+  });
+ 
 function getExistingFund(userId, walletId) { 
     $("#select_wallet_error").html("");
     $.ajax({
