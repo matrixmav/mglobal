@@ -8,7 +8,7 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
  
 <div class="col-md-7 col-sm-7">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-    <form class="form-horizontal" role="form" method="post" action="" onsubmit="return validateForm();" id="confirm">
+    <form class="form-horizontal" role="form" method="post" action="" id="confirmForm">
         <fieldset> 
             <legend>Transfer Confirmation</legend>
             <div class="form-group">
@@ -57,16 +57,18 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
         </fieldset>
         <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <button type="submit"  name="confirm" class="btn red" id="confirm" onclick="this.disabled=true;document.getElementById('confirm').submit();">Confirm</button>
-                <button type="button" class="btn">Cancel</button>
+                <button type="submit"  name="confirm" class="btn red" id="confirm">Confirm</button>
+                <div id="loading2" style="display:none;">Don't click or refresh page...your transaction id in process</div>
+                <!--<button type="button" class="btn">Cancel</button>-->
             </div>
         </div>
     </form>
 </div>
 
 <script>
- function validateForm() {   
-    $("#masterkey_error").html("");
+ 
+ $('#confirmForm').submit(function() {
+      $("#masterkey_error").html("");
     if ($("#masterkey").val() == "") {
         $("#masterkey_error").html("Enter Master Key");
         $("#masterkey").focus();
@@ -79,7 +81,8 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
         $("#comment").focus();            
         return false;
     }
+    document.getElementById('confirm').style.display="none";
+    document.getElementById('loading2').style.display="block";
     
-     
- }        
+});
 </script>
