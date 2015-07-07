@@ -105,6 +105,10 @@ class MoneyTransferController extends Controller {
                     $fund = 0;
                     $fromUserWalletObject = Wallet::model()->create($loggedInUserId,$fund,$walletType);
                 }
+                if($fromUserWalletObject->fund < $_POST['paid_amount'])
+                {
+                  $error = "Sorry! You dont'have sufficient fund to transfer.";  
+                }
                 $postDataArray['walletId'] = $fromUserWalletObject->id;
                 $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
                 if(!$toUserWalletObject){
@@ -227,8 +231,10 @@ class MoneyTransferController extends Controller {
                     //deduct from from user wallet
                     $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->from_user_id, 'type' => $walletObject->type));
                     if($fromUserWalletObject){
-                        if($fromUserWalletObject->fund > 0){
+                        if($fromUserWalletObject->fund > 0 && $fromUserWalletObject->fund > $transactionObject->paid_amount){
                             $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->paid_amount);
+                        }else{
+                            $error = "Incorrect master pin";
                         }
                         $fromUserWalletObject->fund = $fromAmount;
                         $fromUserWalletObject->update();
