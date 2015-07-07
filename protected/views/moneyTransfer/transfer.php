@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
 							</div>
     </div>
         <div class="portlet-body form">
-    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off">
+    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" id="transfer">
         <fieldset> 
              <div class="form-body">
                 <div class="form-group">
@@ -122,8 +122,20 @@ $this->breadcrumbs = array(
        $('#email_error').html("Transfer amount can not be more than existing amount."); 
        return false;
     }
-    
-    
+    var submitting = false;
+    if(submitting){
+    alert('The form is being submitted, please wait a moment...');
+    }
+    transfer.disabled = true;
+    $('#transfer').submit();
+  if(checkForm(this)) 
+  {
+  transfer.value = 'Submitting form...';
+  submitting = true;
+  return true;
+  }
+ 
+  
     
  }
  function resetValue()
