@@ -78,6 +78,7 @@ class MoneyTransferController extends Controller {
     /* code for money transfer in user view */
 
     public function actionTransfer() {
+        
         $error = "";
         $loggedInUserId = Yii::app()->session['userid'];
         $frontUserObject = User::model()->findByPk($loggedInUserId);
@@ -103,6 +104,10 @@ class MoneyTransferController extends Controller {
                     //create wallet for to user
                     $fund = 0;
                     $fromUserWalletObject = Wallet::model()->create($loggedInUserId,$fund,$walletType);
+                }
+                if($fromUserWalletObject->fund < $_POST['paid_amount'])
+                {
+                  $error = "Sorry! You dont'have sufficient fund to transfer.";  
                 }
                 $postDataArray['walletId'] = $fromUserWalletObject->id;
                 $toUserWalletObject = Wallet::model()->findByAttributes(array('user_id'=>$toUserId, 'type'=>$walletType));
@@ -192,6 +197,7 @@ class MoneyTransferController extends Controller {
         $userid = Yii::app()->session['userid'];
         $createdtime = new CDbExpression('NOW()');
         $error = "";
+        
         if (isset($_POST['confirm'])) {
             $userObject = User::model()->findByAttributes(array('id' => $userid));
             if ($userObject->master_pin == md5($_POST['master_code'])) {
@@ -225,8 +231,10 @@ class MoneyTransferController extends Controller {
                     //deduct from from user wallet
                     $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->from_user_id, 'type' => $walletObject->type));
                     if($fromUserWalletObject){
-                        if($fromUserWalletObject->fund > 0){
+                        if($fromUserWalletObject->fund > 0 && $fromUserWalletObject->fund > $transactionObject->paid_amount){
                             $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->paid_amount);
+                        }else{
+                            $error = "Incorrect master pin";
                         }
                         $fromUserWalletObject->fund = $fromAmount;
                         $fromUserWalletObject->update();
