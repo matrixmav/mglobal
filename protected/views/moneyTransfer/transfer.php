@@ -18,7 +18,7 @@ $this->breadcrumbs = array(
 							</div>
     </div>
         <div class="portlet-body form">
-    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off" onsubmit="document.getElementById('transfer').disabled = true">
+    <form class="form-horizontal" role="form" method="post" action="" autocomplete="off">
         <fieldset> 
              <div class="form-body">
                 <div class="form-group">
