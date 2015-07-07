@@ -1264,7 +1264,8 @@ class BaseClass extends Controller {
         $link = '<a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
         <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
         <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
-        <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> ';
+        <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
+        <a href="/BuildTemp/menusetting" class="btn green">Menus Setting</a> ';
         return $link;
     }
     
