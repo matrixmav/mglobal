@@ -28,7 +28,7 @@ class BuildTempController extends Controller {
                 'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 
                                     'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent',
                                     'contactsetting', 'submitform','addcopyright','addfooter','addheader','pagefooter',
-                                    'builder','buildercreate'),
+                                    'builder','buildercreate','menusetting'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -351,6 +351,40 @@ class BuildTempController extends Controller {
 //    }
 
 
+    public function actionMenuSetting(){
+        $error = "";
+        $success = "";
+        $userhasObject = UserHasTemplate::model()->find(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
+        
+        if ($_POST) {
+            $arr = json_decode(stripslashes($_POST['nestable1']),true) ;
+            foreach ($arr as $key => $jsons) { // This will search in the 2 jsons
+                foreach ($jsons as $key => $first) {
+                    if (is_array($first) || is_object($first)) {
+                        foreach ($first as $key => $second) {
+                            foreach ($second as $key => $third) {
+                                $userpagesObject = UserPages::model()->findByPk($third);
+                                $userpagesObject->parent = $firstParent;
+                                $userpagesObject->save();                                
+                            }
+                        }  // And then goes print 16,16,8 ...
+                    } else {
+                        $firstParent = "";
+                        echo $first; // This will show jsut the value f each key like "var1" will print 9
+                        $userpagesObject = UserPages::model()->findByPk($first);
+                        $userpagesObject->parent = 0;
+                        $userpagesObject->save();  
+                        $firstParent .= $first;
+                    }
+                }
+            }
+            $success = "Update Successfully.";
+        }        
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND parent = 0 ' ));       
+        $this->render('menusetting', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject,'userpagesObject'=> $userpagesObject));
+   
+    }
+    
     public function actionTemplates() {  
         $builderObject = BuildTemp::model()->findAll(array('condition' => 'screenshot != ""'));
         Yii::app()->session['orderID'] = $_GET['id'];
