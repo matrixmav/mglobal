@@ -58,7 +58,7 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
         <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
                 <button type="submit"  name="confirm" class="btn red" id="confirm">Confirm</button>
-                <div id="loading2" style="display:none;">Don't click or refresh page...your transaction id in process</div>
+                <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
                 <!--<button type="button" class="btn">Cancel</button>-->
             </div>
         </div>
