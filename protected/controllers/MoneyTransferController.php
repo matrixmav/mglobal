@@ -193,6 +193,7 @@ class MoneyTransferController extends Controller {
         $userid = Yii::app()->session['userid'];
         $createdtime = new CDbExpression('NOW()');
         $error = "";
+        
         if (isset($_POST['confirm'])) {
             $userObject = User::model()->findByAttributes(array('id' => $userid));
             if ($userObject->master_pin == md5($_POST['master_code'])) {
