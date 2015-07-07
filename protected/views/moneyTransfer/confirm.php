@@ -79,6 +79,18 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
         $("#comment").focus();            
         return false;
     }
+    var submitting = false;
+    if(submitting){
+    alert('The form is being submitted, please wait a moment...');
+    }
+    confirm.disabled = true;
+    $('#confirm').submit();
+  if(checkForm(this)) 
+  {
+  confirm.value = 'Submitting form...';
+  submitting = true;
+  return true;
+  }
     
  }        
 </script>
