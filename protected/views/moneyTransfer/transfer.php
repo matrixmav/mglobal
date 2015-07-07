@@ -65,7 +65,7 @@ $this->breadcrumbs = array(
             </fieldset>
         <div class="form-actions right">                     
                 <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
-                <div id="loading2" style="display:none;">Don't click or refresh page...your transaction id in process</div>
+                <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
                     <!--<button type="reset" class="btn btn-default" id="reset" onclick="resetValue();">Cancel</button>-->
                  
             </div>
