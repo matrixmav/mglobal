@@ -8,7 +8,7 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
  
 <div class="col-md-7 col-sm-7">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-    <form class="form-horizontal" role="form" method="post" action="" onsubmit="return validateForm();">
+    <form class="form-horizontal" role="form" method="post" action="" onsubmit="return validateForm();" id="confirm">
         <fieldset> 
             <legend>Transfer Confirmation</legend>
             <div class="form-group">
@@ -80,7 +80,6 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
         return false;
     }
     
-    $('input:submit').attr("disabled", true);
-    
+     
  }        
 </script>
