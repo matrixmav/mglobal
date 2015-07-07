@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
 <div class="col-md-6 col-sm-7">
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-<div class="portlet box red   ">
+<div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
 								Transfer Funds
@@ -23,7 +23,7 @@ $this->breadcrumbs = array(
              <div class="form-body">
                 <div class="form-group">
                     <label for="transactiontype" class="col-lg-4 control-label">Choose Type of Transaction<span class="require">*</span></label>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         <div class="row">
                             <div class="col-lg-8">
                                 <select id="transactiontype" name="walletId" class="form-control" onchange="getExistingFund(<?php echo $userId; ?>,this.value);">
@@ -46,7 +46,9 @@ $this->breadcrumbs = array(
                 <input type="hidden" class="form-control" value="" id="search_user_id" name="search_user_id" />
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value);" />
+                    <div class="col-lg-7">
                         <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value,'<?php echo $frontName;?>');" />
                         <span id="search_fullname">&nbsp;</span>
                         <span id="search_user_error" style="color:red"></span>
@@ -54,7 +56,7 @@ $this->breadcrumbs = array(
                 </div>
                 <div class="form-group">
                     <label for="paid_amount" class="col-lg-4 control-label">Amount<span class="require"> * $</span></label>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         <input type="text" class="form-control" id="paid_amount" name="paid_amount"  class="form-control">
                        <span id="email_error" style="color:red"></span>
                     </div>
@@ -63,12 +65,11 @@ $this->breadcrumbs = array(
 
              </div>
             </fieldset>
+ 
         <div class="form-actions right">                     
                 <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
                 <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
-                    <!--<button type="reset" class="btn btn-default" id="reset" onclick="resetValue();">Cancel</button>-->
-                 
-            </div>
+          </div>
        
             
     </form>

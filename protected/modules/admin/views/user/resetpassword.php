@@ -4,40 +4,51 @@ $this->breadcrumbs = array(
     'Change Password',
 );
 ?>
-<div class="col-md-7 col-sm-7">
+<div class="col-md-6 col-sm-6">
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+     <div class="portlet box orange   ">
+         <div class="portlet-title">
+							<div class="caption">
+								Change Password
+							</div>
+    </div>
                 <form class="form-horizontal form-without-legend" method="post" name="LoginForm" id=LoginForm" role="form" onsubmit="return validation()">
-                
+                <div class="form-body">
+                    <fieldset>
+            <div class="form-body">
                 <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Old Password<span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="password" id="old_password" class="form-control" name="UserProfile[old_password]">
                     <div id="oldpassword_error_msg" class="form_error"></div>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">New Password<span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="password" id="new_password" class="form-control" name="UserProfile[new_password]">
                     <div id="newpassword_error_msg" class="form_error"></div>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Confirm Password<span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="password" id="confirm_password" class="form-control" name="UserProfile[confirm_password]">
                     <div id="confirmpassword_error_msg" class="form_error"></div>
                 </div>
             </div>
-                <div class="row">
-                  <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                    <button type="submit" class="btn btn-primary red">Change Password</button>
-                  </div>
                 </div>
+                </div>
+                    </fieldset>
+                <div class="form-actions right">                     
+                   <input type="submit" name="submit" value="Update" class="btn orange ">
+                 
+            </div>
                 
               </form>
             </div>
+</div>
 <script>
  function validation()
     {

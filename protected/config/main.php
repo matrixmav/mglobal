@@ -43,7 +43,14 @@ return array(
 		),
 		'mail' => array(
  			'class' => 'ext.yii-mail.YiiMail',
- 			'transportType' => 'php',
+ 			'transportType'=>'smtp',
+                        'transportOptions'=>array(
+                                'host'=>'smtp.gmail.com',
+                                'username'=>'demo.mglobally@gmail.com',
+                                'password'=>'demo@123',
+                                'port' => '465',
+                                'encryption'=>'tls',                     
+                        ),
  			'viewPath' => 'application.views.mail',
  			'logging' => true,
  			'dryRun' => false,
