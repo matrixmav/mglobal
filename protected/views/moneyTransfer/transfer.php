@@ -122,22 +122,7 @@ $this->breadcrumbs = array(
        $('#email_error').html("Transfer amount can not be more than existing amount."); 
        return false;
     }
-    var submitting = false;
-    if(submitting){
-    alert('The form is being submitted, please wait a moment...');
     }
-    transfer.disabled = true;
-    $('#transfer').submit();
-  if(checkForm(this)) 
-  {
-  transfer.value = 'Submitting form...';
-  submitting = true;
-  return true;
-  }
- 
-  
-    
- }
  function resetValue()
  {
      $('#search_fullname').html('');
