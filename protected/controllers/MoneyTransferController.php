@@ -78,7 +78,7 @@ class MoneyTransferController extends Controller {
     /* code for money transfer in user view */
 
     public function actionTransfer() {
-        echo count($_POST);
+        
         $error = "";
         $loggedInUserId = Yii::app()->session['userid'];
         $frontUserObject = User::model()->findByPk($loggedInUserId);
