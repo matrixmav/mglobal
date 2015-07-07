@@ -1234,7 +1234,7 @@ class BaseClass extends Controller {
                     echo $type = $orderAmount->type;
 
                     if ($type == 1) {
-                        $color = "sm-red"; //Basic Packages 2
+                        $color = "sm-basicp1"; //Basic Packages 2
                     } else if ($type == 2) {
                         $color = "sm-basicp2"; //Basic Packages 3
                     } else if ($type == 3) {
