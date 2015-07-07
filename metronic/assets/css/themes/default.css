@@ -228,8 +228,8 @@ ul.page-sidebar-menu > li.active > a .arrow.open:before {
 Sidebar toggler
 ***/
 .sidebar-toggler {
-  background-image: url(../../img/sidebar-toggler.jpg);
-  background-color: #242424;
+  background-image: url(/images/sidebar-toggler.png);
+  background-color: #383838;
 }
 /* search box bg color on expanded */
 .page-sidebar-closed .page-sidebar .sidebar-search.open .form-container {

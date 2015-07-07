@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 <div class="col-md-7 col-sm-7">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
     <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
-<div class="portlet box red   ">
+<div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
 								Add Package
@@ -21,7 +21,7 @@ $this->breadcrumbs = array(
 <div class="form-body">
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Package Name<span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="name" class="form-control" name="Package[name]" >
                     <span style="color:red;" id="name_error"></span>
                 </div>
@@ -29,7 +29,7 @@ $this->breadcrumbs = array(
 
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Price<span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="amount" class="form-control" name="Package[amount]">
                     <span style="color:red;" id="amount_error"></span>
                 </div>
@@ -37,7 +37,7 @@ $this->breadcrumbs = array(
 
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Description<span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <textarea id="description" class="form-control" name="Package[description]"></textarea>
                     <span style="color:red;" id="description_error"></span>
                 </div>
@@ -46,7 +46,7 @@ $this->breadcrumbs = array(
 
             <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">No of Pages </label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="no_of_pages" class="form-control" name="Package[no_of_pages]" >
                     <span style="color:red;" id="pages_error"></span>
                 </div>
@@ -56,7 +56,7 @@ $this->breadcrumbs = array(
 
             <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">No of images </label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="no_of_images" class="form-control" name="Package[no_of_images]">
                     <span style="color:red;" id="images_error"></span>
                 </div>
@@ -66,7 +66,7 @@ $this->breadcrumbs = array(
 
             <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">No of forms </label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="no_of_forms" class="form-control" name="Package[no_of_forms]">
                     <span style="color:red;" id="forms_error"></span>
                 </div>
@@ -74,7 +74,7 @@ $this->breadcrumbs = array(
             </div>
      <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">Package Type</label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <select name="Package[type]" id="type">
                         <option value="">Select Type</option>
                         <option value="1">Basic</option>  
@@ -87,7 +87,7 @@ $this->breadcrumbs = array(
             </div>
      <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">Package Image</label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="file" id="image" class="form-control" name="image">
                     <span style="color:red;" id="image_error"></span>
                 </div>
@@ -95,7 +95,7 @@ $this->breadcrumbs = array(
             </div>
     <div class="form-group">
                 <label for="country" class="col-lg-4 control-label">Reward Points</label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="text" id="reward_points" class="form-control" name="Package[reward_points]">
                     <span style="color:red;" id="image_error"></span>
                 </div>
@@ -104,7 +104,7 @@ $this->breadcrumbs = array(
 </div>
         </fieldset>
 <div class="form-actions right">                     
-                <input type="submit" name="submit" value="Submit" class="btn red">
+                <input type="submit" name="submit" value="Submit" class="btn orange">
                  
             </div>
         

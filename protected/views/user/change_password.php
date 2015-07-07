@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
     <?php if(!empty($error)){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
 <?php if(!empty($success)){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
 
-<div class="portlet box red ">
+<div class="portlet box orange ">
     <div class="portlet-title">
 							<div class="caption">
 								Change Password
@@ -55,7 +55,7 @@ $this->breadcrumbs = array(
 
  
            <div class="form-actions right">                     
-                <input type="submit" name="submit" value="Change" class="btn red">
+                <input type="submit" name="submit" value="Change" class="btn orange">
                  
             </div>
        
@@ -67,7 +67,7 @@ $this->breadcrumbs = array(
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if(!empty($_GET['errorMsg'])){?><div class="error" id="error_msg"><?php echo $_GET['errorMsg'];?></div><?php }?>
     <?php if(!empty($_GET['successMsg'])) {?><div class="success" id="error_msg"><?php echo $_GET['successMsg'];?></div><?php }?>
-    <div class="portlet box red   ">
+    <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
 								Change Password
@@ -104,7 +104,7 @@ $this->breadcrumbs = array(
         </fieldset>
 
              <div class="form-actions right">                     
-                <input type="submit" name="submit" value="Change" class="btn red">
+                <input type="submit" name="submit" value="Change" class="btn orange">
                  
             </div>
             </div>

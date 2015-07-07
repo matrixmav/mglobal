@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
    
 <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
 <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
-   <div class="portlet box red   ">
+   <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
 								Testimonial
@@ -23,7 +23,7 @@ $this->breadcrumbs = array(
              <div class="form-body">
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="firstname">Testimonial <span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <textarea id="testimonial" name="UserProfile[testimonials]" class="form-control" ><?php echo (!empty($profileObject))?$profileObject->testimonials : "";?></textarea>
                     <div id="testimonial_error" class="form_error"></div>
                 </div>
@@ -31,7 +31,7 @@ $this->breadcrumbs = array(
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Master Pin<span class="require">*</span></label>
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <input type="password" id="master_pin" class="form-control" name="UserProfile[master_pin]">
                     <div id="master_pin_error" class="form_error"></div>
                 </div>
@@ -39,7 +39,7 @@ $this->breadcrumbs = array(
              </div>
         </fieldset>
  <div class="form-actions right">                     
-                 <input type="submit" name="submit" value="Update" class="btn red">
+                 <input type="submit" name="submit" value="Update" class="btn orange">
                  
             </div>
        
