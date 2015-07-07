@@ -25,13 +25,15 @@ $empty = "sm-blank" ; //no Package
         <div class="row mytree">
             <ul>
                 <li>
-                    <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); ?>
-                    <a href="" class="sm-red"><div><span><?php echo $userObject->name; ?></span></div></a>
+                    <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
+                          $getColor =  BaseClass::getPackageName($currentUserId);
+                    ?>
+                    <a href="" class="<?php echo $getColor ; ?>"><div><span><?php echo $userObject->name; ?></span></div></a>
                     <ul>
                         <li>
                             <?php
                                 if(count($genealogyLeftListObject) > 0 ){
-                                    $getColor =  BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);                                        
+                                  echo  $getColor =  BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);                                        
                             ?>
                             <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftListObject[0]->user->name; ?></span></div></a>
                             <ul>
