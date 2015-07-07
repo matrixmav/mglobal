@@ -97,7 +97,7 @@ if (!empty($error)) {
     document.getElementById('submit').style.display="none";
     document.getElementById('loading2').style.display="block";
     
-});
+    });
     function getExistingFund(userId, walletId) {
         $("#select_wallet_error").html("");
         $.ajax({
