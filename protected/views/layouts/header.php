@@ -18,6 +18,26 @@
       
     </div>
   </div>
+ <!-- SIDEBAR FORMS -->
+ <div class="sideForm">
+    <div class="color-mode-icons icon-color"><i class="fa fa-share-alt"></i></div>
+    <div class="color-mode-icons icon-color-close"><i class="fa fa-share-alt"></i></div>
+    <div class="color-mode">
+     
+
+      <ul class="inline">
+         
+        <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+        <li><a href=""><i class="fa fa-twitter-square"></i></a></li>
+        <li><a href=""><i class="fa fa-skype"></i></a></li>
+        <li><a href=""><i class="fa fa-linkedin-square"></i></a></li>
+        <li><a href=""><i class="fa fa-youtube-square"></i></a></li>
+         <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
+      </ul>
+      
+    </div>
+  </div>
+ <!--END  -->
   <!-- END BEGIN STYLE CUSTOMIZER -->
   <!-- Header BEGIN -->
   <div class="header header-mobi-ext">

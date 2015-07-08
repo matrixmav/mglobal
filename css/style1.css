@@ -862,7 +862,7 @@ a:hover {
 }
 .team-block h3 {
   font-size: 20px;
-  padding-top: 13px;
+  padding-top: 25px;
   margin-bottom: 2px;
 }
 .team-block em {
@@ -871,6 +871,9 @@ a:hover {
   display: block;
   font: 400 14px "Open Sans", Arial, sans-serif;
   margin-bottom: 12px;
+  display:inline-block;
+  border:1px solid #e54a1a;
+  padding: 8px;
 }
 .tb-socio {
   padding-top: 3px;
@@ -1914,4 +1917,35 @@ Pre-Header and pre-header elements
     #myCarousel .carousel-caption h2{font-size: 14px; padding-bottom: 0; padding-top: 0 !important;}
     #myCarousel .carousel-caption h2::after{padding-top: 0 !important;}
   #myCarousel .carousel-caption >p{ font-size: 12px;}  
+  .priceTab ul.nav.nav-tabs li a{font-size: 13px !important;}
+   .priceTab ul.nav.nav-tabs li{ max-width: 33%;}
+}
+/*--------------pricing-------------*/
+.priceTab{ background: #FFF; padding-bottom: 50px; border: 1px solid #dddddd; border-radius: 4px; font:400 18px "PT Sans Narrow",Arial,sans-serif}
+.priceTab ul.nav.nav-tabs{ background: #f6f6f6 ;}
+.priceTab ul.nav.nav-tabs li.active a{ color:#e54a1a !important;}
+.priceTab ul.nav.nav-tabs li a{ color:#555;}
+.priceTab .tab-content{padding-top: 40px;}
+.team-block a:hover em{background:#e54a1a; color:#FFF; }
+
+/*--------------side forms-------------*/
+.sideForm{position: fixed;
+    right: 0;
+    top: 200px;
+    z-index: 99999;}
+
+.sideForm .color-mode-icons{cursor: pointer;
+    margin: 0;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 0; font-size: 20px;
+    padding: 17px;}
+.sideForm .icon-color-close{background: #c9c9c9 none repeat scroll 0 0}
+.sideForm .color-mode {
+    background: #c9c9c9 none repeat scroll 0 0;
+    padding: 10px 0;
+    right: 0 !important;
+    top: 62px !important;
+    width: auto !important;
 }
