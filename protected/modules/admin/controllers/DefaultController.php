@@ -58,7 +58,7 @@ class DefaultController extends Controller {
             
             $this->render('index', array('model' => $model));
         }
-    }*/
+    }
 
     public function actionDashboard() {
         $this->render('/user/dashboard');
