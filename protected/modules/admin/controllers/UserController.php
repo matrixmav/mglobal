@@ -33,7 +33,7 @@ class UserController extends Controller {
                 'actions' => array('index', 'view', 'changestatus', 'wallet',
                     'creditwallet', 'list', 'debitwallet', 'genealogy', 'add', 'deleteuser', 'edit',
                     'verificationapproval', 'testimonialapproval', 'changeapprovalstatus', 
-                    'testimonialapprovalstatus','binarycalculation','resetpassword'.'binarymail'),
+                    'testimonialapprovalstatus','binarycalculation','resetpassword','binarymail'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -718,7 +718,7 @@ class UserController extends Controller {
         echo '<a onclick="OpenChatBox(' . $fullName . ')">Click to chat</a>';
     }
     
-    public function actionResetPassword() { echo "cool";exit;
+    public function actionResetPassword() { 
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
