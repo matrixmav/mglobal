@@ -96,9 +96,10 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                                 <input  name="country_code" id="country_code" class="form-control" readonly="true"  >                                            </div>
                                             <div class="col-lg-9 colo-sm-9 col-xs-8">
                                                 
-                                            <input  name="phone" id="phone" maxlength="12" placeholder="phone number" class="form-control" value="<?php echo isset($_POST['phone'])?$_POST['phone']:''; ?>" > <br>
+                                            <input  name="phone" id="phone" maxlength="14" placeholder="phone number" class="form-control" value="<?php echo isset($_POST['phone'])?$_POST['phone']:''; ?>" > <br>
                                             </div>
-                                        <span id="phone_error" class="clrred"></span></div>
+                                            <span id="phone_error" class="clrred"></span>
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -121,6 +122,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                             $error = null;
                                             echo recaptcha_get_html($publickey, $error);
                                             ?>
+                                            <span id="recaptcha_error" class="clrred"></span>
                                         </div>
                                     </div>
                                     
