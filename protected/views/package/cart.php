@@ -150,7 +150,7 @@
                                                 <p>Coupon Discount:</p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'], 2); ?></span><a onclick="removeCoupon();"><img src="" alt="Delete"></a></p>
+                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'], 2); ?></span>&nbsp;&nbsp;<a onclick="removeCoupon();"><i class="fa fa-times" title="remove coupon used"></i></a></p>
                                             </td>
                                         </tr> 
                                         <tr class="ItemTotalAfterDiscount">
