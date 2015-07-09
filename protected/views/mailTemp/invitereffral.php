@@ -30,7 +30,8 @@
             	 
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                 <?php echo ucwords($userObjectArr['full_name']); ?> has sent invitation to register with mGlobally and get available offers. 
+                 <?php echo ucwords($userObjectArr['full_name']); ?> has sent invitation to register with mGlobally and get available offers. Click below mentioned link to register.<br/>
+                 <?php echo $$userObjectArr['link'];?>
                   </td>
                   </tr>
                   
