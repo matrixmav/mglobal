@@ -1217,14 +1217,52 @@ class BaseClass extends Controller {
         closedir($dir);
         return $dir;
     }
+    
+    /* For the Left Right Binary */
+    public function getLeftRightPurchase($totalPurchase){
+        $geneObject = Genealogy::model()->findByAttributes(array('user_id' => $totalPurchase ));
+        return $geneObject ;
+    }
+
+    /* For the get User List */
+    public function getLeftRightMember($userId , $position){
+        $geneObject = Genealogy::model()->findByAttributes(array('parent' => $userId , 'position' => $position ));
+        $userCountIncrement = 0 ;
+        if (count($geneObject)) {
+            $userCount = User::model()->count(); 
+            for ($i = 1; $i <= $userCount; $i++) {
+                if ($i == 1) {
+                    $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $geneObject->user_id, 'position' => $position));
+                    if (count($geneObjectNode)) {
+                        $userCountIncrement++;
+                        $userId = $geneObjectNode->user_id;                        
+                    } else {
+                        $userCountIncrement++;
+                        $userId = $geneObject->user_id;
+                        break;
+                    }
+                } else {
+                    $geneObjectNode = Genealogy::model()->findByAttributes(array('parent' => $userId, 'position' => $position ));
+                    if (count($geneObjectNode)) {
+                        $userCountIncrement++;
+                        $userId = "";
+                        $userId .= $geneObjectNode->user_id;
+                    } else {
+                        $userCountIncrement++;
+                        $userId;
+                        break;
+                    }
+                }
+                
+            }
+            echo $userCountIncrement;
+        } 
+    }    
 
     /* For the package info */
-
     public static function getPackageName($getPackageName) {
         
         $orderListObject = Order::model()->findAll(array('condition' => 'user_id = ' . $getPackageName));
-
-
         $userObject = User::model()->findByPk($getPackageName);
         //print_r($userObject) ;
         $color = "sm-nothing";
@@ -1234,8 +1272,7 @@ class BaseClass extends Controller {
         }
         if($userObject->status == 1 ){
             $color = "sm-user-active";
-        }
-        
+        }        
         
         $orderArray = array();
         if (count($orderListObject) > 0) {
@@ -1245,7 +1282,6 @@ class BaseClass extends Controller {
                 if ($myAmount < $orderAmount->amount) {
                     $myAmount = $orderAmount->amount;
                     $type = $orderAmount->id;
-                   
                     
                     if ($type == 4) {
                         $color = "sm-basicp1"; //Basic Packages 2
@@ -1276,7 +1312,7 @@ class BaseClass extends Controller {
 
     public static function buildWebsiteHeader() {
         $link = '<a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
-        <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
+        <!--<a href="/BuildTemp/addheader" class="btn green">Header Setting</a>-->    
         <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
         <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a> 
         <a href="/BuildTemp/menusetting" class="btn green">Menus Setting</a> ';
