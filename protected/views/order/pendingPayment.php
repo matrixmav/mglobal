@@ -108,7 +108,7 @@
                                                 <p>Coupon Discount: </p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span></p>
+                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span>&nbsp;&nbsp;<a onclick="removeCoupon();"><i class="fa fa-times" title="remove coupon used"></i></a></p>
                                             </td>
                                         </tr> 
                                         <tr class="ItemTotalAfterDiscount">
@@ -215,8 +215,14 @@
                             </tr>
                         </table>
                     </div>
-                            <div class="btnWrp col-sm-11"><input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();" style="color: #e02222;">Clear Input</a> &nbsp;&nbsp;&nbsp;&nbsp;<a onclick="goBack();" style=" color: #e02222;">Go Back >></a></div>
-
+                              <div class="col-sm-12 col-xs-12 makeBtn">
+                        <div class="col-sm-8 col-xs-8 makeBtn" id="blankDiv"> </div>
+                       <div class="col-sm-4 col-xs-4 makeBtn" style="display:none;" id="masterpinDiv"> 
+                        <div class="form-group"><input type="password" name="master_pin" id="master_pin" placeholder="Enter master pin" class="form-control"></div>
+                        <div id="master_pin_error"> </div></div>
+                        <div class="col-sm-4 col-xs-4 makeBtn" id="submitDiv" style="padding-bottom:10px;"> 
+                        <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -236,30 +242,74 @@
 <input type="hidden" id="transID" value="<?php if(!empty($transactionObject)) { echo $transactionObject->transaction_id;} ?>">
 <input type="hidden" id="profilepayamount" value="">
 <script type="text/javascript">
-    function makepayment()
+       function makepayment()
     {
+        var pin = $("#master_pin").val();
         var valx = $('input[name=myRadio]:checked').val();
         var group = document.walletform.myRadio;
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
         var ppamount = $("#ppamount").val();
-        if (ppamount == 0)
-        {
-            location.href = "/package/thankyou?transaction_id=" + transID;
+        if ($("#masterpinDiv").css('display') == 'block')
+        {    
+            $("#master_pin_error").html('');
+            if ($("#master_pin").val() == '') {
+                $("#master_pin_error").html("Please enter master pin.");
+                $("#master_pin").focus();
+                return false;
+            } else {
+                var dataString = 'masterpin=' + pin;
+                $.ajax({
+                    type: "GET",
+                    url: "/package/checkmasterpin",
+                    data: dataString,
+                    cache: false,
+                    success: function (html) {
+                        if (html == 1)
+                        {
+                            if (ppamount == 0)
+                            {
+                                location.href = "/package/thankyou?transaction_id=" + transID;
+                            } else {
+
+                                if (group.checked == false)
+                                {
+                                    alert('Please choose payment gateway.');
+                                    return false;
+                                }
+
+                                if (valx == 'paypal')
+                                {
+                                    document.getElementById("frmPayPal").submit();
+                                }
+                            }
+                        } else {
+                            $("#master_pin_error").html("Incorrect master pin.");
+                        }
+                    }
+                });
+            }
         } else {
 
-            if (group.checked == false)
+            if (ppamount == 0)
             {
-                alert('Please choose payment gateway.');
-                return false;
+                location.href = "/package/thankyou?transaction_id=" + transID;
+            } else {
+
+                if (group.checked == false)
+                {
+                    alert('Please choose payment gateway.');
+                    return false;
+                }
+
+                if (valx == 'paypal')
+                {
+                    document.getElementById("frmPayPal").submit();
+                }
             }
 
-            if (valx == 'paypal')
-            {
-                document.getElementById("frmPayPal").submit();
-            }
+
         }
-
     }
     function walletamountcalculation(ID, key,type)
     {
@@ -280,56 +330,54 @@
              var totalAmount = $('#totalAmount').val();
         }
          
-        if (totalAmount > total)
+         if (totalAmount > total)
         {
-             
+
             $('#payamount').html('');
             var payableAmount = totalAmount - total;
-             
 //                $('#totalAmount').val(payableAmount);
 //                $('#package_amt').val(payableAmount);
             $("#ppamount").val(Math.round(payableAmount).toFixed(2));
-            $('#walletamount').html('$ '+total);
-            $('#payamount').html(payableAmount);
-            $("#ppamount").val(payableAmount);
+            $('#walletamount').html('$ ' + total);
+            $('#payamount').html(Math.round(payableAmount).toFixed(2));
             $('#totalusedrp').val(total);
-        } 
-         if(total > totalAmount)
-          {
+        }
+        if (total > totalAmount)
+        {
             $('#payamount').html('');
             $('#totalusedrp').val('');
-            var totalAmountRP = $('#totalAmount').val()*25/100; 
+            var totalAmountRP = $('#totalAmount').val() * 25 / 100;
             var payableAmount = total - totalAmount;
-            $('#walletamount').html('$ '+totalAmount);
-            if(type=='2')
+            $('#walletamount').html('$ ' + totalAmount);
+            if (type == '2')
             {
-            $('#payamount').html(totalAmountRP);
-            $("#ppamount").val(totalAmountRP);
-            }else{
-             $('#payamount').html('0'); 
-             $("#ppamount").val('0');
+                $('#payamount').html(Math.round(totalAmountRP).toFixed(2));
+                $("#ppamount").val(Math.round(totalAmountRP).toFixed(2));
+            } else {
+                $('#payamount').html('0');
+                $("#ppamount").val(0);
             }
             $('#totalusedrp').val(totalAmount);
-          }
-        if(total == totalAmount)
+        }
+        if (total == totalAmount)
         {
-             
+
             $('#payamount').html('');
             $('#totalusedrp').val('');
-           var totalAmountRP = $('#totalAmount').val()*25/100; 
+            var totalAmountRP = $('#totalAmount').val() * 25 / 100;
             var payableAmount = total - totalAmount;
-            $('#walletamount').html('$ '+totalAmount);
-            if(type=='2')
+            $('#walletamount').html('$ ' + totalAmount);
+            if (type == '2')
             {
-            $('#payamount').html(totalAmountRP);
-            $("#ppamount").val(totalAmountRP);
-            }else{
-             $('#payamount').html('0'); 
-             $("#ppamount").val(0);
+                $('#payamount').html(totalAmountRP);
+                $("#ppamount").val(totalAmountRP);
+            } else {
+                $('#payamount').html('0');
+                $("#ppamount").val(0);
             }
             $('#totalusedrp').val(total);
             //$('#totalAmount').val(0);
-         
+
         }
         var totalusedRP = $("#totalusedrp").val();
         var transID = $("#transID").val();
@@ -349,7 +397,11 @@
                     //$('#payamount').html('$' + payableAmount);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
-
+                    document.getElementById('masterpinDiv').style.display = "block";
+                    $('#blankDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
+                    $('#blankDiv').addClass('col-sm-4 col-xs-4 makeBtn');
+                    $('#submitDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
+                    $('#submitDiv').addClass('col-sm-4 col-xs-4 makeBtn');
                     //document.getElementById('walletOption').style.display = "none";
                     //document.getElementById('paymentOption').style.display = "block";
                 }
@@ -442,7 +494,7 @@
                     $("#transID").val(htmlArr[1]);
                     $("#orderModal").hide();
                     $("#makepayment").show();
-                    //location.href = "/package/payment?tId="+htmlArr[1]+'&pp='+totalAmount;
+                     
                     
                 }
             }
@@ -462,15 +514,40 @@
    $("#ppamount").val(<?php if(!empty($orderObject)) { echo $orderObject->package->amount + $orderObject->domain_price;}?>);
    $("#totalusedrp").val('');
    $("#walletused").val('');
+   document.getElementById('masterpinDiv').style.display = "none";
+   $("#master_pin").val('');
 }
 function goBack()
 {
     $("#orderModal").show();
     $("#makepayment").hide();
 }
+
+function removeCoupon()
+    { 
+        var totalAmount = $('#payAmount').val();
+        var dataString = 'couponRemove=yes'
+       $.ajax({
+            type: "POST",
+            url: "/package/removeCoupon",
+            data: dataString,
+            cache: false,
+            success: function (html) {
+                 if (html==1)
+                {
+                    $("#coupon_discount").fadeOut();
+                    $('#totalAmount').val(totalAmount);
+                    $('#totalpayable').html(Math.round(totalAmount).toFixed(2));
+                    $('#coupon_discount_price').val('');
+                }
+            }
+        });   
+    }
+    
     
 </script>  
 <style>
 .fancybox-inner{width:1000px !important}
 .fancybox-skin{width:1000px !important}
+#master_pin_error{color:#dd0808;}
 </style>

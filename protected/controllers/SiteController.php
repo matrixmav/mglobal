@@ -56,7 +56,7 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($action = '')
 	{   
-
+            
 //            $this->layout = '';
 //            $detector = new Mobile_Detect;
 //            if($detector->isMobile() || $detector->isTablet())

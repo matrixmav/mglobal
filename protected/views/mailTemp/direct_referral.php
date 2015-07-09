@@ -31,7 +31,7 @@
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
                We are pleased to inform you that your direct referral income of user <?php echo $userObjectArr['user_name']; ?> has been credited your wallet.
-                  </td>
+                            </td>
                   </tr>
                   
                   
@@ -105,7 +105,7 @@
 
             </tr>
             <tr>
-            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"><strong>Visit Us On:</strong> www.<p style="color:#f15c2b; display:inline">mglobally</p>.com</td>
+            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"><strong>Visit Us On:</strong> www.<p style="color:#f15c2b; display:inline">mglobally </p>.com</td>
                 
 
             </tr>
