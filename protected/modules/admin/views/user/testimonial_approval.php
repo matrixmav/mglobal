@@ -71,8 +71,8 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'user_id',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->user->full_name)?$data->user->full_name:""',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => 'isset($data->user->name)?$data->user->name:""',
                 ),
                 
                 
