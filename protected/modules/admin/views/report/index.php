@@ -69,7 +69,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'full_name',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->name',
                 ),
                 array(
