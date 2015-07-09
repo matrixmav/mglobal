@@ -150,7 +150,7 @@
                                                 <p>Coupon Discount:</p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'], 2); ?></span></p>
+                                                <p id="CartTotal"><span class="WebRupee">$</span> <span id="total-discount"><?php echo number_format($packageObject->amount + Yii::app()->session['amount'], 2); ?></span><a onclick="removeCoupon();"><img src="" alt="Delete"></a></p>
                                             </td>
                                         </tr> 
                                         <tr class="ItemTotalAfterDiscount">
@@ -276,6 +276,26 @@
             $('#walletOption').fadeIn();
         }
 
+    }
+    function removeCoupon()
+    {
+        var totalAmount = $('#payAmount').val();
+        var dataString = 'couponRemove=yes'
+       $.ajax({
+            type: "POST",
+            url: "removeCoupon",
+            data: dataString,
+            cache: false,
+            success: function (html) {
+                 if (html==1)
+                {
+                    $("#coupon_discount").fadeOut();
+                    $('#totalAmount').val(totalAmount);
+                    $('#totalpayable').html(Math.round(totalAmount).toFixed(2));
+                    $('#coupon_discount_price').val('');
+                }
+            }
+        });   
     }
     
 </script>    
