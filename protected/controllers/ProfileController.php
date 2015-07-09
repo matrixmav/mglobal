@@ -325,6 +325,8 @@ class ProfileController extends Controller {
                 foreach ($emailArray as $email) {
                     $userObjectArr['full_name'] = $userObject->full_name;
                     $userObjectArr['email'] = $email;
+                    $linkToSend = '<a href="' . $link . '">' . $link . '</a>';
+                    $userObjectArr['link'] = $linkToSend;
                     $config['to'] = $email;
                     $config['subject'] = 'mGlobally Invitation From ' . $userObject->name;
                     $config['body'] =  $this->renderPartial('//mailTemp/invitereffral', array('userObjectArr'=>$userObjectArr),true); 
