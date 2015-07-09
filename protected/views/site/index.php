@@ -336,7 +336,7 @@
           <p>Digital marketing is known to be the process of promoting a website, a business, or a product ...<a href="#inline2" class="fancybox pinkSm">read more</a></p>
            <div id="inline2" style="display:none" class="readMoreBox content">
                <h2>Digital<strong> Marketing </strong></h2>
-          <p >Digital marketing is known to be the process of promoting a website, a business, or a product through the online mediums’. The concept of digital marketing has become the buzz of the town in the recent years. It seems to have held the attention of every small or large business entity, which aims to reach out to the audiences that have moved online. </p>
+          <p >Digital marketing is known to be the process of promoting a website, a business, or a product through the online mediums. The concept of digital marketing has become the buzz of the town in the recent years. It seems to have held the attention of every small or large business entity, which aims to reach out to the audiences that have moved online. </p>
           <p>Digital marketing, also known as online marketing has evolved as a major tool for most of the traffic recorded by the websites. It involves usage of channels that allow marketers to identify the brand’s real time performance and even the competitive analysis. This form of marketing has empowered the businesses to access its prospective client base and garner a new market place, which ensures better conversions for them.</p>
       </div>
         </div>
