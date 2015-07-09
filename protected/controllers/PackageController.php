@@ -30,7 +30,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply','testscript'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply','testscript','removecoupon'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -932,6 +932,18 @@ class PackageController extends Controller {
               
             echo 1;
         }
+    }
+    
+    public function actionremoveCoupon() {
+        
+        if(!empty($_REQUEST['couponRemove']) && $_REQUEST['couponRemove']=='yes')
+        {
+            unset(Yii::app()->session['coupon_code']);
+            echo 1;
+        }else{
+            echo 0;
+        }
+        
     }
     
     public function actiontestScript() {
