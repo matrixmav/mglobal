@@ -351,5 +351,6 @@ if (!empty($_GET['pp'])) {
         $('#blankDiv').removeClass('col-sm-4 col-xs-4 makeBtn');
         $('#submitDiv').addClass('col-sm-6 col-xs-6 makeBtn');
         $('#submitDiv').removeClass('col-sm-4 col-xs-4 makeBtn');
+        $("#master_pin").val('');
     }
 </script>
