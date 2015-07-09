@@ -30,7 +30,7 @@ class PackageController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply','testscript','removecoupon'),
+                'actions' => array('index', 'view', 'payment','domainsearch', 'availabledomain', 'checkout', 'domainadd', 'productcart', 'couponapply', 'loaddomain', 'orderadd', 'thankyou', 'walletthankyou','walletcalculation', 'walletcalc','profilecouponapply','testscript','removecoupon','checkmasterpin'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -997,6 +997,20 @@ class PackageController extends Controller {
 			  echo '<pre>';
 			 print_r($response);exit; 
     }
-  
+    public function actionCheckMasterPin() {
+        
+        if(!empty($_REQUEST['masterpin']))
+        {
+           $userObject = User::model()->findByPK(Yii::app()->session['userid']);
+           if(!empty($userObject) && $userObject->master_pin == md5($_REQUEST['masterpin']))
+           {
+               echo 1;
+               
+           }else{
+               echo 0;
+           }
+        }
+        
+    }
     
 }
