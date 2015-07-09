@@ -126,11 +126,18 @@
         }
 
         var phone = document.getElementById('phone');
-        var filter = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        var filter = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2,8})$/;
 
         if (!filter.test(phone.value)) {
             $("#phone_error").html("Enter valid phone number ");
             $("#phone").focus();  
+            return false;
+        }
+        
+        $("#recaptcha_error").html("");
+        if ($("#recaptcha_response_field").val() == "") {
+            $("#recaptcha_error").html("Please Enter Captcha");
+            $("#recaptcha_response_field").focus();
             return false;
         }
 
