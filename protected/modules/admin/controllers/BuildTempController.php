@@ -409,29 +409,6 @@ class BuildTempController extends Controller {
                     $model->save(false);
                     $tmpId = $model->id;
 
-//                    /*  Scan and Insert JS  */
-//                    $scanDir = scandir($targetdir . '/js/');
-//                    foreach ($scanDir as $dirName) {
-//                        if ($dirName === '.' or $dirName === '..')
-//                            continue;
-//                        $modelJs = new BuildTempJs;
-//                        $modelJs->name = $dirName;
-//                        $modelJs->temp_id = $tmpId;
-//                        $modelJs->created_at = date('Y-m-d');
-//                        $modelJs->save(false);
-//                    }
-//
-//                    $scanDir = scandir($targetdir . '/css/');
-//                    foreach ($scanDir as $dirName) {
-//                        if ($dirName === '.' or $dirName === '..')
-//                            continue;
-//                        $modelCss = new BuildTempCss;
-//                        $modelCss->name = $dirName;
-//                        $modelCss->temp_id = $tmpId;
-//                        $modelCss->created_at = date('Y-m-d');
-//                        $modelCss->save(false);
-//                    }
-
                     $success .= "Template added successfully";
                 }
             } else {
