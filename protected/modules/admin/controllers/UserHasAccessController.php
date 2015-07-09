@@ -52,7 +52,7 @@ class UserHasAccessController extends Controller {
     $varString = "";
     $error ="";
     $success ="";
-    
+    $accessArr = array();
     $model = new UserHasAccess;
     if((isset($_GET)) && $_GET['id'] !='')
     {
@@ -91,14 +91,14 @@ class UserHasAccessController extends Controller {
          $success .= "User access permission saved successfully.";
      }
     }
+     
     }else{
       $error .= "Invalid request.";   
-    }
-    
-    }
-    
+      
+    } }
     $this->render('/user/member_access',array('emailObject'=>$emailObject,'error'=>$error,'success'=>$success,'accessArr'=>$accessArr));
     }
+    
     
     /*
      * function to fetch members
