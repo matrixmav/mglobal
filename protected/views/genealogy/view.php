@@ -25,13 +25,15 @@ $empty = "sm-blank" ; //no Package
         <div class="row mytree">
             <ul>
                 <li>
-                    <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); ?>
-                    <a href="" class="sm-red"><div><span><?php echo $userObject->name; ?></span></div></a>
+                    <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
+                          $getColor =  BaseClass::getPackageName($currentUserId);
+                    ?>
+                    <a href="" class="<?php echo $getColor ; ?>"><div><span><?php echo $userObject->name; ?></span></div></a>
                     <ul>
                         <li>
                             <?php
                                 if(count($genealogyLeftListObject) > 0 ){
-                                    $getColor =  BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);                                        
+                                  $getColor =  BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);                                        
                             ?>
                             <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftListObject[0]->user->name; ?></span></div></a>
                             <ul>
@@ -127,7 +129,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                        <div class="colorBox">
                         <span style="color: #cccccc;">&#x2B22;</span>
-                            <img class="img-responsive" src="images/activeM.png">
+                            <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p> User</p>
                     </div>
@@ -138,7 +140,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                         <div class="colorBox">
                         <span style="color: #a6a6a6;">&#x2B22;</span>
-                            <img class="img-responsive" src="images/activeM.png">
+                            <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p>  User inactive</p>
                     </div>
@@ -149,7 +151,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                         <div class="colorBox">
                         <span style="color: #727272;">&#x2B22;</span>
-                            <img class="img-responsive" src="images/activeM.png">
+                            <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p> User Active</p>
                     </div>
@@ -164,7 +166,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                         <div class="colorBox">
                         <span style="color: #8fd900;">&#x2B22;</span>
-                            <img class="img-responsive" src="images/activeM.png">
+                            <img class="img-responsive" src="/images/activeM.png">
                         </div>
                          <p>  Basic Packages 1</p>
                     </div>
@@ -175,7 +177,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                         <div class="colorBox">
                         <span style="color: #db5300;">&#x2B22;</span>
-                              <img class="img-responsive" src="images/activeM.png">
+                              <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p>  Basic Packages 2</p>
                     </div>
@@ -186,7 +188,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                         <div class="colorBox">
                         <span style="color: #dce903;">&#x2B22;</span>
-                             <img class="img-responsive" src="images/activeM.png">
+                             <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p> Basic Packages 3</p>
                     </div>
@@ -202,7 +204,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                         <div class="colorBox">
                         <span style="color: #0377ea;">&#x2B22;</span>
-                              <img class="img-responsive" src="images/activeM.png">
+                              <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p> Advanced Packages 1</p>
                     </div>
@@ -213,7 +215,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                        <div class="colorBox">
                         <span style="color: #9137ea;">&#x2B22;</span>
-                            <img class="img-responsive" src="images/activeM.png">
+                            <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p>  Advanced Packages 2</p>
                     </div>
@@ -224,7 +226,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                          <div class="colorBox">
                         <span style="color: #00c0ec;">&#x2B22;</span>
-                             <img class="img-responsive" src="images/activeM.png">
+                             <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p>Advanced Packages 3</p>
                     </div>
@@ -241,7 +243,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                         <div class="colorBox">
                         <span style="color: #ea9000;">&#x2B22;</span>
-                              <img class="img-responsive" src="images/activeM.png">
+                              <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p> Advanced Pro 1</p>
                     </div>
@@ -252,7 +254,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                       <div class="colorBox">
                         <span style="color: #00c265;">&#x2B22;</span>
-                             <img class="img-responsive" src="images/activeM.png">
+                             <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p> Advanced Pro 2 </p>
                     </div>
@@ -263,7 +265,7 @@ $empty = "sm-blank" ; //no Package
                     <div class="basicP">
                        <div class="colorBox">
                         <span style="color: #e90000;">&#x2B22;</span>
-                             <img class="img-responsive" src="images/activeM.png">
+                             <img class="img-responsive" src="/images/activeM.png">
                         </div>
                         <p> Advanced Pro 3</p>
                     </div>

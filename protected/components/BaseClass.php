@@ -1221,9 +1221,22 @@ class BaseClass extends Controller {
     /* For the package info */
 
     public static function getPackageName($getPackageName) {
+        
         $orderListObject = Order::model()->findAll(array('condition' => 'user_id = ' . $getPackageName));
 
+
+        $userObject = User::model()->findByPk($getPackageName);
+        //print_r($userObject) ;
         $color = "sm-nothing";
+        
+        if($userObject->status == 0 ){
+           $color = "sm-user-inactive";
+        }
+        if($userObject->status == 1 ){
+            $color = "sm-user-active";
+        }
+        
+        
         $orderArray = array();
         if (count($orderListObject) > 0) {
             $myAmount = 0;
@@ -1231,25 +1244,26 @@ class BaseClass extends Controller {
                 $orderAmount = $orderObject->package(array('order' => 'amount DESC'));
                 if ($myAmount < $orderAmount->amount) {
                     $myAmount = $orderAmount->amount;
-                    echo $type = $orderAmount->type;
-
-                    if ($type == 1) {
-                        $color = "sm-red"; //Basic Packages 2
-                    } else if ($type == 2) {
-                        $color = "sm-basicp2"; //Basic Packages 3
+                    $type = $orderAmount->id;
+                   
+                    
+                    if ($type == 4) {
+                        $color = "sm-basicp1"; //Basic Packages 2
                     } else if ($type == 3) {
+                        $color = "sm-basicp2"; //Basic Packages 3
+                    } else if ($type == 1) {
                         $color = "sm-basicp3"; //Advance Packages 1
-                    } else if ($type == 4) {
-                        $color = "sm-advancep1"; //Advance Packages 1
                     } else if ($type == 5) {
-                        $color = "sm-advancep2"; //Advance Packages 2
+                        $color = "sm-advancep1"; //Advance Packages 1
                     } else if ($type == 6) {
-                        $color = "sm-advancep3"; //Advance Packages 3
+                        $color = "sm-advancep2"; //Advance Packages 2
                     } else if ($type == 7) {
-                        $color = "sm-pro1"; //Advance Pro Packages 1
+                        $color = "sm-advancep3"; //Advance Packages 3
                     } else if ($type == 8) {
-                        $color = "sm-pro2"; //Advance Pro Packages 2
+                        $color = "sm-pro1"; //Advance Pro Packages 1
                     } else if ($type == 9) {
+                        $color = "sm-pro2"; //Advance Pro Packages 2
+                    } else if ($type == 10) {
                         $color = "sm-pro3"; //Advance Pro Packages 3
                     } else {
                         $color = "sm-nothing"; //No Purchase 

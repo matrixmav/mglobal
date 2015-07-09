@@ -1,4 +1,4 @@
- 
+ <script type="text/javascript" src="/metronic/assets/plugins/jquery-slimscrolljquery.slimscroll.min.js"></script>
 <?php
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
@@ -14,7 +14,7 @@ $this->menu = array(
 ?>
 <?php //echo "<pre>"; print_r($orderObject);           ?>
 <div class="main">
-    <div class="container">
+    <div class="">
 
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
@@ -27,12 +27,13 @@ $this->menu = array(
                 <?php
                 $this->widget('zii.widgets.grid.CGridView', array(
                     'id' => 'city-grid',
+                    'htmlOptions' => array('class' => 'table-responsive '),
                     'dataProvider' => $dataProvider,
                     'enableSorting' => 'true',
                     'ajaxUpdate' => true,
                     'summaryText' => 'Showing {start} to {end} of {count} entries',
                     'template' => '{items} {summary} {pager}',
-                    'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width',
+                    'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width ',
                     'rowCssClassExpression' => '($data->date == date("Y-m-d")) ? "odd" : "rowFade"',
                     'pager' => array(
                         'header' => false,
