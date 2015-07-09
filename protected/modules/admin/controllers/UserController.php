@@ -718,10 +718,10 @@ class UserController extends Controller {
         echo '<a onclick="OpenChatBox(' . $fullName . ')">Click to chat</a>';
     }
     
-    public function actionResetPassword() {
+    public function actionResetPassword() { echo "cool";exit;
         $error = "";
         $success = "";
-        $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
+        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
         if (!empty($_POST)) {
             if ($_POST['UserProfile']['old_password'] != '' && $_POST['UserProfile']['new_password'] != '' && $_POST['UserProfile']['confirm_password'] != '') {
                  
