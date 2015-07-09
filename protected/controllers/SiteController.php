@@ -56,6 +56,10 @@ class SiteController extends Controller
 	 */
 	public function actionIndex($action = '')
 	{   
+            $userObjectArr = array();
+                $userObjectArr['to_name'] = "nidhi";
+                $userObjectArr['user_name'] = "test";
+            echo $config['body'] =  $this->renderPartial('//mailTemp/invitereffral', array('userObjectArr'=>$userObjectArr),true); exit;
 
 //            $this->layout = '';
 //            $detector = new Mobile_Detect;
