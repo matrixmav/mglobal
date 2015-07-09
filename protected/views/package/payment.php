@@ -3,51 +3,55 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-xs-12 col-lg-12">
-             <div class="row">
-		
-                        
-            <div class=" bs-wizard" style="border-bottom:0;">
-                
-                <div class="col-xs-4 bs-wizard-step complete">
-                  <div class="text-center bs-wizard-stepnum">Step 1</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id']; ?>&tId=<?php echo $_GET['tId']; ?>" class="bs-wizard-dot"></a>
-                  <div class="bs-wizard-info text-center">Domain Search.</div>
+            <div class="row">
+
+
+                <div class=" bs-wizard" style="border-bottom:0;">
+
+                    <div class="col-xs-4 bs-wizard-step complete">
+                        <div class="text-center bs-wizard-stepnum">Step 1</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id']; ?>&tId=<?php echo $_GET['tId']; ?>" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Domain Search.</div>
+                    </div>
+
+                    <div class="col-xs-4 bs-wizard-step complete"><!-- complete -->
+                        <div class="text-center bs-wizard-stepnum">Step 2</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="/package/productcart?tId=<?php echo $_GET['tId']; ?>" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Proceed Payment</div>
+                    </div>
+
+                    <div class="col-xs-4 bs-wizard-step active"><!-- complete -->
+                        <div class="text-center bs-wizard-stepnum">Step 3</div>
+                        <div class="progress"><div class="progress-bar"></div></div>
+                        <a href="#" class="bs-wizard-dot"></a>
+                        <div class="bs-wizard-info text-center">Make Payment</div>
+                    </div>
+
+
                 </div>
-                
-                <div class="col-xs-4 bs-wizard-step complete"><!-- complete -->
-                  <div class="text-center bs-wizard-stepnum">Step 2</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="/package/productcart?tId=<?php echo $_GET['tId']; ?>" class="bs-wizard-dot"></a>
-                  <div class="bs-wizard-info text-center">Proceed Payment</div>
-                </div>
-                
-                <div class="col-xs-4 bs-wizard-step active"><!-- complete -->
-                  <div class="text-center bs-wizard-stepnum">Step 3</div>
-                  <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="#" class="bs-wizard-dot"></a>
-                  <div class="bs-wizard-info text-center">Make Payment</div>
-                </div>
-                
-                
+
+
+
+
+
             </div>
-        
-        
-        
-        
-        
-	</div>
         </div>
     </div>
-        <div class="row">
+    <div class="row">
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php  if(!empty($_GET) && $_GET['pp'] !='') { echo $_GET['pp']; } ?></span></p>
+                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php
+                            if (!empty($_GET) && $_GET['pp'] != '') {
+                                echo $_GET['pp'];
+                            }
+                            ?></span></p>
                     <div id="paymentOption" class="clearfix">
                         <form id="walletform" name="walletform">  
                             <?php if ($walletObject) { ?>
-                                <div id="walletOption" class="col-sm-4">
+                                <div id="walletOption" class="col-sm-4 clearfix">
 
                                     <?php
                                     $i = 1;
@@ -58,7 +62,7 @@
                                         }
                                         if ($wallet->type == '2') {
                                             $walletname = 'RP Wallet';
-                                            $fund = $wallet->fund ;//* 75 / 100;
+                                            $fund = $wallet->fund; //* 75 / 100;
                                         }
                                         if ($wallet->type == '3') {
                                             $walletname = 'Commision Wallet';
@@ -66,7 +70,7 @@
                                         }
                                         ?>
                                         <div class="col-sm-12 col-xs-12 tleft">
-                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type;?>);" class="radiobutton">
+                                            <input id="box<?php echo $i; ?>" type="radio" value="<?php echo $fund; ?>" name="wallet_type" onclick="walletamountcalculation(<?php echo $wallet->id; ?>,<?php echo $fund; ?>,<?php echo $wallet->type; ?>);" class="radiobutton">
                                             <label for="box<?php echo $i; ?>"><?php echo $walletname; ?>&nbsp;($<?php echo $wallet->fund; ?>)  </label>
                                         </div>
                                         <?php
@@ -76,7 +80,7 @@
                                     <br/><br/>
 
                                 </div>
-<?php } ?>
+                            <?php } ?>
 
                             <div class="payChoose col-sm-4">
                                 <div class="payOption clearfix">
@@ -94,7 +98,11 @@
                             <input type="hidden" name="item_number" value="1">
                             <input type="hidden" name="credits" value="">
                             <input type="hidden" name="userid" value="<?php echo Yii::app()->session['userid']; ?>">
-                            <input type="hidden" name="amount" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>" id="ppamount">
+                            <input type="hidden" name="amount" value="<?php
+                            if (!empty($_GET['pp'])) {
+                                echo $_GET['pp'];
+                            }
+                            ?>" id="ppamount">
                             <input type="hidden" name="no_shipping" value="1">
                             <input type="hidden" name="currency_code" value="USD">
                             <input type="hidden" name="handling" value="0">
@@ -118,120 +126,178 @@
                             </tr>
                         </table>
                     </div>
-                            <div class="col-sm-10 col-xs-12 makeBtn"> <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
-
+                    <div class="col-sm-11 col-xs-12 makeBtn">
+                        <div class="col-sm-6 col-xs-6 makeBtn" id="blankDiv"> </div>
+                       <div class="col-sm-4 col-xs-4 makeBtn" style="display:none;" id="masterpinDiv"> 
+                        <div class="form-group"><input type="password" name="master_pin" id="master_pin" placeholder="Enter master pin" class="form-control"></div>
+                        <div id="master_pin_error"> </div></div>
+                        <div class="col-sm-6 col-xs-6 makeBtn" id="submitDiv"> 
+                        <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-<input type="hidden" id="totalAmount" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>">
-<input type="hidden" id="payAmount" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>">
+<input type="hidden" id="totalAmount" value="<?php
+if (!empty($_GET['pp'])) {
+    echo $_GET['pp'];
+}
+?>">
+<input type="hidden" id="payAmount" value="<?php
+if (!empty($_GET['pp'])) {
+    echo $_GET['pp'];
+}
+?>">
 <input type="hidden" id="coupon_discount_price" value=""> 
 <input type="hidden" id="wallet" value="<?php echo (!empty($walletObject)) ? "1" : "0"; ?>">
 <input type="hidden" id="walletused" value="">
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="package_id" value="<?php echo Yii::app()->session['package_id']; ?>">
-<input type="hidden" id="package_amt" value="<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>">
+<input type="hidden" id="package_amt" value="<?php
+if (!empty($_GET['pp'])) {
+    echo $_GET['pp'];
+}
+?>">
 <input type="hidden" id="transID" value="<?php echo $_GET['tId']; ?>">
 <script type="text/javascript">
     function makepayment()
     {
+        var pin = $("#master_pin").val();
         var valx = $('input[name=myRadio]:checked').val();
         var group = document.walletform.myRadio;
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
         var ppamount = $("#ppamount").val();
-        if (ppamount == 0)
+        if ($("#master_pin").css('display') == 'block')
         {
-            location.href = "/package/thankyou?transaction_id=" + transID;
+            $("#master_pin_error").html('');
+            if ($("#master_pin").val() == '') {
+                $("#master_pin_error").html("Please enter master pin.");
+                $("#master_pin").focus();
+                return false;
+            } else {
+                var dataString = 'masterpin=' + pin;
+                $.ajax({
+                    type: "GET",
+                    url: "/package/checkmasterpin",
+                    data: dataString,
+                    cache: false,
+                    success: function (html) {
+                        if (html == 1)
+                        {
+                            if (ppamount == 0)
+                            {
+                                location.href = "/package/thankyou?transaction_id=" + transID;
+                            } else {
+
+                                if (group.checked == false)
+                                {
+                                    alert('Please choose payment gateway.');
+                                    return false;
+                                }
+
+                                if (valx == 'paypal')
+                                {
+                                    document.getElementById("frmPayPal").submit();
+                                }
+                            }
+                        } else {
+                            $("#master_pin_error").html("Incorrect master pin.");
+                        }
+                    }
+                });
+            }
         } else {
 
-            if (group.checked == false)
+            if (ppamount == 0)
             {
-                alert('Please choose payment gateway.');
-                return false;
+                location.href = "/package/thankyou?transaction_id=" + transID;
+            } else {
+
+                if (group.checked == false)
+                {
+                    alert('Please choose payment gateway.');
+                    return false;
+                }
+
+                if (valx == 'paypal')
+                {
+                    document.getElementById("frmPayPal").submit();
+                }
             }
 
-            if (valx == 'paypal')
-            {
-                document.getElementById("frmPayPal").submit();
-            }
+
         }
-
     }
-    function walletamountcalculation(ID, key,type)
+    function walletamountcalculation(ID, key, type)
     {
-        
+
         var str = ID + '-' + key;
         $('#walletused').val(str);
         var input = document.getElementsByName("wallet_type");
         var wallet = $("#walletused").val();
-       
         var package_amt = $('#package_amt').val();
         var total = key;
-        if(type=='2')
+        if (type == '2')
         {
-            var totalAmount = $('#totalAmount').val()*75/100; 
-        }else{
-             var totalAmount = $('#totalAmount').val();
+            var totalAmount = $('#totalAmount').val() * 75 / 100;
+        } else {
+            var totalAmount = $('#totalAmount').val();
         }
-         
+
         if (totalAmount > total)
         {
-             
+
             $('#payamount').html('');
             var payableAmount = totalAmount - total;
-             
 //                $('#totalAmount').val(payableAmount);
 //                $('#package_amt').val(payableAmount);
             $("#ppamount").val(Math.round(payableAmount).toFixed(2));
-            $('#walletamount').html('$ '+total);
-            $('#payamount').html(payableAmount);
+            $('#walletamount').html('$ ' + total);
+            $('#payamount').html(Math.round(payableAmount).toFixed(2));
             $('#totalusedrp').val(total);
-        } 
-         if(total > totalAmount)
-          {
+        }
+        if (total > totalAmount)
+        {
             $('#payamount').html('');
             $('#totalusedrp').val('');
-            var totalAmountRP = $('#totalAmount').val()*25/100; 
+            var totalAmountRP = $('#totalAmount').val() * 25 / 100;
             var payableAmount = total - totalAmount;
-            $('#walletamount').html('$ '+totalAmount);
-            if(type=='2')
+            $('#walletamount').html('$ ' + totalAmount);
+            if (type == '2')
             {
-            $('#payamount').html(totalAmountRP);
-            $("#ppamount").val(totalAmountRP);
-            }else{
-             $('#payamount').html('0'); 
-             $("#ppamount").val(0);
+                $('#payamount').html(Math.round(totalAmountRP).toFixed(2));
+                $("#ppamount").val(Math.round(totalAmountRP).toFixed(2));
+            } else {
+                $('#payamount').html('0');
+                $("#ppamount").val(0);
             }
             $('#totalusedrp').val(totalAmount);
-          }
-        if(total == totalAmount)
+        }
+        if (total == totalAmount)
         {
-             
+
             $('#payamount').html('');
             $('#totalusedrp').val('');
-           var totalAmountRP = $('#totalAmount').val()*25/100; 
+            var totalAmountRP = $('#totalAmount').val() * 25 / 100;
             var payableAmount = total - totalAmount;
-            $('#walletamount').html('$ '+totalAmount);
-            if(type=='2')
+            $('#walletamount').html('$ ' + totalAmount);
+            if (type == '2')
             {
-            $('#payamount').html(totalAmountRP);
-            $("#ppamount").val(totalAmountRP);
-            }else{
-             $('#payamount').html('0'); 
-             $("#ppamount").val(0);
+                $('#payamount').html(totalAmountRP);
+                $("#ppamount").val(totalAmountRP);
+            } else {
+                $('#payamount').html('0');
+                $("#ppamount").val(0);
             }
             $('#totalusedrp').val(total);
             //$('#totalAmount').val(0);
-         
+
         }
         var totalusedRP = $("#totalusedrp").val();
-        
         var dataString = 'transactionId=<?php echo isset($_GET['tId']) ? $_GET['tId'] : ""; ?>&payableAmount=' + payableAmount + '&wallet=' + wallet + '&totalusedRP=' + totalusedRP;
-         
         $.ajax({
             type: "GET",
             url: "/package/walletcalc",
@@ -246,24 +312,44 @@
                     //$('#payamount').html('$' + payableAmount);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
-
+                    document.getElementById('masterpinDiv').style.display = "block";
+                    $('#blankDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
+                    $('#blankDiv').addClass('col-sm-4 col-xs-4 makeBtn');
+                    $('#submitDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
+                    $('#submitDiv').addClass('col-sm-4 col-xs-4 makeBtn');
                     //document.getElementById('walletOption').style.display = "none";
                     //document.getElementById('paymentOption').style.display = "block";
                 }
             }
         });
-
     }
 
-function clearInput()
-{
-   $("#totalAmount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
-   $("#payAmount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
-   $("#ppamount").val(<?php if(!empty($_GET['pp'])) { echo $_GET['pp']; }?>);
-   $("#totalusedrp").val('');
-   $("#walletused").val('');
-   $('.radiobutton').prop('checked', false);
-   $('.paymentradio').prop('checked', false);
-   $('#totalAmounDiv').fadeOut();
-}
+    function clearInput()
+    {
+        $("#totalAmount").val(<?php
+       if (!empty($_GET['pp'])) {
+           echo $_GET['pp'];
+       }
+?>);
+        $("#payAmount").val(<?php
+       if (!empty($_GET['pp'])) {
+           echo $_GET['pp'];
+       }
+?>);
+        $("#ppamount").val(<?php
+       if (!empty($_GET['pp'])) {
+           echo $_GET['pp'];
+       }
+?>);
+        $("#totalusedrp").val('');
+        $("#walletused").val('');
+        $('.radiobutton').prop('checked', false);
+        $('.paymentradio').prop('checked', false);
+        $('#totalAmounDiv').fadeOut();
+        $('#masterpinDiv').fadeOut();
+        $('#blankDiv').addClass('col-sm-6 col-xs-6 makeBtn');
+        $('#blankDiv').removeClass('col-sm-4 col-xs-4 makeBtn');
+        $('#submitDiv').addClass('col-sm-6 col-xs-6 makeBtn');
+        $('#submitDiv').removeClass('col-sm-4 col-xs-4 makeBtn');
+    }
 </script>
