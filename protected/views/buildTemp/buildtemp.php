@@ -31,7 +31,6 @@ $this->breadcrumbs = array(
     </form>
 </div>
 
-
 <script type="text/javascript">    
     
     function validation() {      
@@ -43,4 +42,3 @@ $this->breadcrumbs = array(
     }
          
 </script>
-
