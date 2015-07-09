@@ -216,11 +216,11 @@
                         </table>
                     </div>
                               <div class="col-sm-11 col-xs-12 makeBtn">
-                        <div class="col-sm-6 col-xs-6 makeBtn" id="blankDiv"> </div>
+                        <div class="col-sm-8 col-xs-8 makeBtn" id="blankDiv"> </div>
                        <div class="col-sm-4 col-xs-4 makeBtn" style="display:none;" id="masterpinDiv"> 
                         <div class="form-group"><input type="password" name="master_pin" id="master_pin" placeholder="Enter master pin" class="form-control"></div>
                         <div id="master_pin_error"> </div></div>
-                        <div class="col-sm-6 col-xs-6 makeBtn" id="submitDiv"> 
+                        <div class="col-sm-4 col-xs-4 makeBtn" id="submitDiv" style="padding-bottom:10px;"> 
                         <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
                         </div>
                 </div>
