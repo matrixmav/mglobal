@@ -215,7 +215,7 @@
                             </tr>
                         </table>
                     </div>
-                              <div class="col-sm-11 col-xs-12 makeBtn">
+                              <div class="col-sm-12 col-xs-12 makeBtn">
                         <div class="col-sm-8 col-xs-8 makeBtn" id="blankDiv"> </div>
                        <div class="col-sm-4 col-xs-4 makeBtn" style="display:none;" id="masterpinDiv"> 
                         <div class="form-group"><input type="password" name="master_pin" id="master_pin" placeholder="Enter master pin" class="form-control"></div>
@@ -549,4 +549,5 @@ function removeCoupon()
 <style>
 .fancybox-inner{width:1000px !important}
 .fancybox-skin{width:1000px !important}
+#master_pin_error{color:#dd0808;}
 </style>
