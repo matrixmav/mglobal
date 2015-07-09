@@ -67,22 +67,51 @@ class BuildTempController extends Controller {
                     $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $orderId ));        
                     $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempId));        
                     
-                    $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND order_id=' . $orderId ));
+                    $userPagesObjectAll = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND order_id=' . $orderId ));
+                    
+                    $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND parent = 0 AND order_id=' . $orderId ));
+                    $menuHtml ="";
+                    $mainMenu =  explode(',',$hasbuilderObject->user_menu) ;
+                    $p = 1; 
+                    $menuHtml .= '<ul class="'.$mainMenu[1].'">';
+                    foreach ($userPagesObject as $data){
 
-                    $tempMenu = $hasbuilderObject->user_menu;
-                    $i = 1;
-                    foreach ($userPagesObject as $pages) {
-                        $pat1 = '*' . $i . '*';
-                        $pat2 = '$' . $i . '$';
-                        if($i == 1){
-                            $tempMenu = str_replace($pat1, "index.html", $tempMenu);
+                        $menuHtml .= '<li class="'.$mainMenu[1].'">';
+                        if($p == 1){
+                            $pageLink = "index.html";
                         }else{
-                            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
+                            $pageLink = strtolower($data->page_name).".html" ;
+                        }                                   
+                        $menuHtml .= '<a href='.$pageLink.'>'.$data->page_name.'</a>' ;
+                        $userpagesObjectAll = UserPages::model()->findAll('parent ='. $data->id);
+                        if(count($userpagesObjectAll) > 0){
+                            $menuHtml .= '<ul>';
+                                foreach ($userpagesObjectAll as $dataSecond){
+                                    $menuHtml .= '<li>'
+                                    . '<a href='.strtolower($dataSecond->page_name).".html".'>'.$dataSecond->page_name.'</a>'
+                                    .'</li>';
+                                }    
+                            $menuHtml .= '</ul>';
                         }
-                        $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
-                        $i++;
+                        $menuHtml .=  '</a></li>';    
+                        $p++;
                     }
-                    $tempMenu = stripcslashes($tempMenu);
+                     $menuHtml .=  '</ul><div class="clear"></div>';
+                    
+//                    $tempMenu = $hasbuilderObject->user_menu;
+//                    $i = 1;
+//                    foreach ($userPagesObject as $pages) {
+//                        $pat1 = '*' . $i . '*';
+//                        $pat2 = '$' . $i . '$';
+//                        if($i == 1){
+//                            $tempMenu = str_replace($pat1, "index.html", $tempMenu);
+//                        }else{
+//                            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
+//                        }
+//                        $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
+//                        $i++;
+//                    }
+//                    $tempMenu = stripcslashes($tempMenu);
 
                     $path = Yii::getPathOfAlias('webroot');       
                     /*Create Folder And Permission */        
@@ -108,7 +137,7 @@ class BuildTempController extends Controller {
                     /* Create File and write ka code */
                     $path = Yii::getPathOfAlias('webroot');               
                     $pageName= 1;
-                    foreach($userPagesObject as $userPagesObjectList){
+                    foreach($userPagesObjectAll as $userPagesObjectList){
                         if($pageName == 1 ){
                             $my_file = $path."/builder_images/".$userId.'/build'.$orderId."/index.html";
                         }else{
@@ -127,7 +156,7 @@ class BuildTempController extends Controller {
                         $baseURL = Yii::app()->getBaseUrl(true);        
                         $dataHeader = stripcslashes($hasbuilderObject->temp_header); 
                         $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader); // for replacing issue  
-                        $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $tempMenu , $removeSpaces);
+                        $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $menuHtml , $removeSpaces);
 
                         $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
                         fwrite($handle, $data);           
@@ -204,152 +233,6 @@ class BuildTempController extends Controller {
             }        
     }
     
-    
-//    public function actionBuilder(){
-//        
-//        if(isset($_GET['t']) && isset($_GET['u']) &&  isset($_GET['o'])  ) {
-//            echo $tempId = base64_decode($_GET['t']);         
-//            echo $userId = base64_decode($_GET['u']); 
-//            echo $orderId = base64_decode($_GET['o']);
-//            
-//            $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $orderId ));        
-//            $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempId));        
-//            /* Get template JS data */
-//            $builderObjectJs = BuildTempJs::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));       
-//            /* Get template CSS data */
-//            $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
-//
-//            $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND order_id=' . $orderId ));
-//
-//            $tempMenu = $hasbuilderObject->user_menu;
-//            $i = 1;
-//            foreach ($userPagesObject as $pages) {
-//                $pat1 = '*' . $i . '*';
-//                $pat2 = '$' . $i . '$';
-//                $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
-//                $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
-//                $i++;
-//            }
-//            // echo $tempMenu;
-//            $tempMenu = stripcslashes($tempMenu);
-//            //  print_r($tempMenu); die;
-//
-//            $path = Yii::getPathOfAlias('webroot');       
-//            /*Create Folder And Permission */        
-//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId)){
-//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId, 0777, true);
-//            }
-//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/images/')){
-//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/images/', 0777, true);
-//            }
-//
-//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/js/')){
-//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/js/', 0777, true);
-//            }
-//
-//            if(!file_exists($path."/builder_images/".$userId.'/build'.$orderId.'/css/')){
-//                !mkdir($path."/builder_images/".$userId.'/build'.$orderId.'/css/', 0777, true);
-//            }
-//
-//            BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/images/", $path.'/builder_images/'.$userId.'/build'.$orderId."/images/");
-//            BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/js/", $path.'/builder_images/'.$userId.'/build'.$orderId."/js/");
-//            BaseClass::recurse_copy($path."/user/template/".$builderTempId->folderpath."/css/", $path.'/builder_images/'.$userId.'/build'.$orderId."/css/");
-//
-//            /* Create File and write ka code */
-//            $path = Yii::getPathOfAlias('webroot');               
-//            foreach($userPagesObject as $userPagesObjectList){
-//
-//                $my_file = $path."/builder_images/".$userId.'/build'.$orderId.'/'.strtolower($userPagesObjectList->page_name).".html";
-//                $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
-//
-//    $headMeta = '<!DOCTYPE html>
-//    <html lang="en">
-//    <head>
-//    <title>'.$userPagesObjectList->page_name.'</title>
-//    <meta charset="utf-8">
-//    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' ;
-//
-//                fwrite($handle, $headMeta);  
-//
-//                foreach($builderObjectCss as $builderObjectListCss){
-//                   $data = "\n".'<link rel="stylesheet" href="css/'.$builderObjectListCss->name.'" type="text/css" media="all">' ;           
-//                    //stripslashes($userpagesObject->page_content) ;
-//                    fwrite($handle, $data);
-//                } 
-//                foreach($builderObjectJs as $builderObjectListJs){
-//                   $data = "\n".'<script type="text/javascript" src="js/'.$builderObjectListJs->name.'"></script>' ;           
-//                    //stripslashes($userpagesObject->page_content) ;
-//                    fwrite($handle, $data);
-//                }
-//
-//                $headMetaEnd = "\n".'</head>';
-//                $headMetaEnd = "\n".'<body>';
-//                fwrite($handle, $headMetaEnd);
-//
-//                /* For Header Content */
-//                $baseURL = Yii::app()->getBaseUrl(true);        
-//                $dataHeader = stripcslashes($hasbuilderObject->temp_header);        
-//
-//                $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader);    
-//                $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $tempMenu , $removeSpaces);
-//
-//                $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
-//                fwrite($handle, $data);           
-//
-//                /* For Page Content */
-//                if($userPagesObjectList->page_form == 1 ){
-//                    
-//                    copy($path."/user/contact.php", $path.'/builder_images/'.$userId.'/build'.$orderId."/contact.php");
-//                    //BaseClass::recurse_copy($path."/user/template/", $path.'/builder_images/'.$userId.'/build'.$orderId."/"); die;
-//                    $data = file_get_contents($path.'/builder_images/'.$userId.'/build'.$orderId."/contact.php");
-//                    $hasbuilderObject->contact_email ;                    
-//                    $newdata = str_replace('gmail.com', $hasbuilderObject->contact_email, $data);
-//                    file_put_contents("contact.php", $newdata);
-//                    
-//                    $dataContent = stripcslashes($hasbuilderObject->contact_form);        
-//                    $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
-//                }else{
-//                    $dataContent = stripcslashes($userPagesObjectList->page_content);        
-//                    $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataContent);  
-//                }
-//                
-//                fwrite($handle, $data);        
-//
-//                /* For Footer Content */        
-//                $data1 = stripcslashes($hasbuilderObject->temp_footer);        
-//                $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $data1);  
-//                fwrite($handle, $data);
-//                $bodyEnd = "";
-//                $bodyEnd .= "\n".'</body>';
-//                $bodyEnd .= "\n".'</html>';
-//                fwrite($handle, $bodyEnd);
-//            }
-//
-//            // define some basics
-//            echo $rootPath = $path."/builder_images/".$userId.'/build'.$orderId;
-//            $archiveName = 'hey.zip';
-//
-//            // initialize the ZIP archive
-//            $zip = new ZipArchive;
-//            $zip->open($archiveName, ZipArchive::CREATE);
-//
-//            // create recursive directory iterator
-//            $files = new RecursiveIteratorIterator (new RecursiveDirectoryIterator($rootPath), RecursiveIteratorIterator::LEAVES_ONLY);
-//
-//            foreach ($files as $name => $file) {
-//                    $new_filename = $name;
-//                    $zip->addFile($file, $new_filename);
-//            }
-//
-//            // close the zip file
-//            if (!$zip->close()) {
-//                    echo '<p>There was a problem writing the ZIP archive.</p>';
-//            } else {
-//                    echo '<p>Successfully created the ZIP Archive!</p>';
-//            }
-//        }
-//    }
-
 
     public function actionMenuSetting(){
         $error = "";
@@ -409,38 +292,45 @@ class BuildTempController extends Controller {
 
         /* Get template id  */
         $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $builderObjectz->template_id));        
-//        /* Get template JS data */
-//        $builderObjectJs = BuildTempJs::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));       
-//        /* Get template CSS data */
-//        $builderObjectCss = BuildTempCss::model()->findAll(array('condition' => 'temp_id ='. $builderTempId->id));
-        
         $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $builderObjectz->template_id));
         
         /*Logo Image */
         $responce = "";
         $userhasObject = UserHasTemplate::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
-        foreach ($userhasObject as $userhas) {
-            
-        }
-        $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $userhas->template_id));
+        
+        $builderObjectmeta = BuildTemp::model()->findByAttributes(array('template_id' => $userhasObject[0]->template_id));
     
         $logoImage = '<img height="'.$userhasObject[0]->logo_height.'" width="'.$userhasObject[0]->logo_width.'" src="/user/template/' .$builderObjectmeta->folderpath . '/'. $userhasObject[0]->logo . '">'; 
         
         /* For Getting Menu */
         $responce = "";
         $userId = Yii::app()->session['userid'] ;
-        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']  .' AND status = 1 ' ));        
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']  .' AND status = 1 AND parent = 0 ' ));        
         $buildTempHeader = UserHasTemplate::model()->findByAttributes(array('user_id' => $userId, 'order_id'=>Yii::app()->session['orderID']));
-        $bb = stripcslashes(stripcslashes($buildTempHeader->user_menu));       
-        $i = 1;
-        foreach ($userpagesObject as $pages) {
-            $pat1 = '*' . $i . '*';
-            $pat2 = '$' . $i . '$';
-            $bb = str_replace($pat1, $pages->id, $bb);
-            $bb = str_replace($pat2, $pages->page_name, $bb);
-            $i++;
-        }
+        $mainMenu =  explode(',',$buildTempHeader->user_menu) ;
         
+        $menuHtml ="";
+        $menuHtml .= '<ul class="'.$mainMenu[1].'">';
+        foreach ($userpagesObject as $data){
+            
+            $menuHtml .= '<li class="'.$mainMenu[1].'">
+                    <a href='.$data->id.'>'.$data->page_name.'</a>' ;
+                        $userpagesObjectAll = UserPages::model()->findAll('parent ='. $data->id);
+                        if(count($userpagesObjectAll) > 0){
+                            $menuHtml .= '<ul>';
+                                foreach ($userpagesObjectAll as $dataSecond){
+                                    $menuHtml .= '<li>'
+                                    . '<a href='.$dataSecond->id.'>'.$dataSecond->page_name.'</a>'
+                                    .'</li>';
+                                }    
+                            $menuHtml .= '</ul>';
+                        }
+                 $menuHtml .=  '</a></li>';                
+        }
+         $menuHtml .=  '</ul><div class="clear"></div>';
+  
+//        $menuHtml ;
+//        die;
         /* For Getting Page Content */
         $response = "";        
         $responseForm = "";        
@@ -455,7 +345,7 @@ class BuildTempController extends Controller {
         $pageContent = $response ;
         
         $this->renderPartial('user_templates', array('userpages1Object' => $userpages1Object, 'builderObject' => $builderObjectz, 'edit' => 1,'builderObjectmeta' => $builderObjectmeta ,
-            'builderTempId'=>$builderTempId,'bb'=>$bb,"pageContent"=>$pageContent ,'logoImage' =>$logoImage , 'responseForm' => $responseForm));
+            'builderTempId'=>$builderTempId,'menuHtml'=>$menuHtml,"pageContent"=>$pageContent ,'logoImage' =>$logoImage , 'responseForm' => $responseForm));
     }
     
     
