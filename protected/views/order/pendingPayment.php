@@ -514,6 +514,7 @@
    $("#ppamount").val(<?php if(!empty($orderObject)) { echo $orderObject->package->amount + $orderObject->domain_price;}?>);
    $("#totalusedrp").val('');
    $("#walletused").val('');
+   document.getElementById('masterpinDiv').style.display = "none";
 }
 function goBack()
 {
