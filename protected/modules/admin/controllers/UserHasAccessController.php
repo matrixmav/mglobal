@@ -58,6 +58,8 @@ class UserHasAccessController extends Controller {
     {
     $emailObject = User::model()->findBYPK($_GET['id']);
     $UseraccessObject = UserHasAccess::model()->findByAttributes(array('user_id'=>$_GET['id']));
+    if(!empty($UseraccessObject))
+    {
     $accessArr = explode(',',$UseraccessObject->access);
     if(!empty($_POST))
     {
@@ -92,6 +94,9 @@ class UserHasAccessController extends Controller {
     }else{
       $error .= "Invalid request.";   
     }
+    
+    }
+    
     $this->render('/user/member_access',array('emailObject'=>$emailObject,'error'=>$error,'success'=>$success,'accessArr'=>$accessArr));
     }
     
