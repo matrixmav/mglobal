@@ -170,8 +170,8 @@ if (!empty($_GET['pp'])) {
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
         var ppamount = $("#ppamount").val();
-        if ($("#master_pin").css('display') == 'block')
-        {
+        if ($("#masterpinDiv").css('display') == 'block')
+        {    
             $("#master_pin_error").html('');
             if ($("#master_pin").val() == '') {
                 $("#master_pin_error").html("Please enter master pin.");
