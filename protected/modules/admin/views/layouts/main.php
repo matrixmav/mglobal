@@ -182,7 +182,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <ul class="nav navbar-nav pull-right topWallet">
                     
 
-                    <li class="cash"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
+                    <li class="cash"><a href="/admin/wallet/fundwallet" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
                             <i class="fa fa-money"></i>
 
                             <span class="badge badge-default">
@@ -196,7 +196,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li class="commision"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
+                    <li class="commision"><a href="/admin/wallet/rpwallet" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
                             <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
@@ -209,7 +209,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span></a>
                     </li>
 
-                    <li class="credit"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
+                    <li class="credit"><a href="/admin/wallet/commisionwallet" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
                             <i class="fa fa-credit-card"></i>
 
                             <span class="badge badge-default">
