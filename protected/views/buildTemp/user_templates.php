@@ -13,6 +13,7 @@ echo $tempHead = str_replace('src="js/','src="'.$jsURL , $tempHeader);
 <body>   
     
 <?php 
+//print_r(stripcslashes($menuHtml)) ; die;
     /* For getting root div */
     if($builderTempId){ echo stripslashes($builderTempId->main_div); } 
 
@@ -20,7 +21,7 @@ echo $tempHead = str_replace('src="js/','src="'.$jsURL , $tempHeader);
     $userHeader = stripslashes($builderObject->temp_header); 
     $removeSpaces = preg_replace('/\s+/', ' ', $userHeader);    
     $logoReplace = preg_replace('#<div class="mav_logo">(.*?)</div>#', stripslashes($logoImage) , $removeSpaces);            
-    echo $result = preg_replace('#<div class="mav_menu">(.*?)</div>#', stripslashes($bb) , $logoReplace);
+    echo $result = preg_replace('#<div class="mav_menu">(.*?)</div>#', stripcslashes($menuHtml) , $logoReplace); 
  
     /* For the contact form */
     if($responseForm){     
