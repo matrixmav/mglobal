@@ -242,30 +242,74 @@
 <input type="hidden" id="transID" value="<?php if(!empty($transactionObject)) { echo $transactionObject->transaction_id;} ?>">
 <input type="hidden" id="profilepayamount" value="">
 <script type="text/javascript">
-    function makepayment()
+       function makepayment()
     {
+        var pin = $("#master_pin").val();
         var valx = $('input[name=myRadio]:checked').val();
         var group = document.walletform.myRadio;
         var totalusedrp = $("#totalusedrp").val();
         var transID = $("#transID").val();
         var ppamount = $("#ppamount").val();
-        if (ppamount == 0)
-        {
-            location.href = "/package/thankyou?transaction_id=" + transID;
+        if ($("#masterpinDiv").css('display') == 'block')
+        {    
+            $("#master_pin_error").html('');
+            if ($("#master_pin").val() == '') {
+                $("#master_pin_error").html("Please enter master pin.");
+                $("#master_pin").focus();
+                return false;
+            } else {
+                var dataString = 'masterpin=' + pin;
+                $.ajax({
+                    type: "GET",
+                    url: "/package/checkmasterpin",
+                    data: dataString,
+                    cache: false,
+                    success: function (html) {
+                        if (html == 1)
+                        {
+                            if (ppamount == 0)
+                            {
+                                location.href = "/package/thankyou?transaction_id=" + transID;
+                            } else {
+
+                                if (group.checked == false)
+                                {
+                                    alert('Please choose payment gateway.');
+                                    return false;
+                                }
+
+                                if (valx == 'paypal')
+                                {
+                                    document.getElementById("frmPayPal").submit();
+                                }
+                            }
+                        } else {
+                            $("#master_pin_error").html("Incorrect master pin.");
+                        }
+                    }
+                });
+            }
         } else {
 
-            if (group.checked == false)
+            if (ppamount == 0)
             {
-                alert('Please choose payment gateway.');
-                return false;
+                location.href = "/package/thankyou?transaction_id=" + transID;
+            } else {
+
+                if (group.checked == false)
+                {
+                    alert('Please choose payment gateway.');
+                    return false;
+                }
+
+                if (valx == 'paypal')
+                {
+                    document.getElementById("frmPayPal").submit();
+                }
             }
 
-            if (valx == 'paypal')
-            {
-                document.getElementById("frmPayPal").submit();
-            }
+
         }
-
     }
     function walletamountcalculation(ID, key,type)
     {
@@ -353,7 +397,11 @@
                     //$('#payamount').html('$' + payableAmount);
                     $('#cartDiv').fadeOut();
                     $('#editIcon').fadeIn();
-
+                    document.getElementById('masterpinDiv').style.display = "block";
+                    $('#blankDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
+                    $('#blankDiv').addClass('col-sm-4 col-xs-4 makeBtn');
+                    $('#submitDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
+                    $('#submitDiv').addClass('col-sm-4 col-xs-4 makeBtn');
                     //document.getElementById('walletOption').style.display = "none";
                     //document.getElementById('paymentOption').style.display = "block";
                 }
@@ -446,11 +494,7 @@
                     $("#transID").val(htmlArr[1]);
                     $("#orderModal").hide();
                     $("#makepayment").show();
-                     document.getElementById('masterpinDiv').style.display = "block";
-                    $('#blankDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
-                    $('#blankDiv').addClass('col-sm-4 col-xs-4 makeBtn');
-                    $('#submitDiv').removeClass('col-sm-6 col-xs-6 makeBtn');
-                    $('#submitDiv').addClass('col-sm-4 col-xs-4 makeBtn');
+                     
                     
                 }
             }
