@@ -108,7 +108,7 @@
                                                 <p>Coupon Discount: </p>
                                             </td>
                                             <td class="itemAmount">
-                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?>&nbsp;&nbsp;<a onclick="removeCoupon();"><i class="fa fa-times" title="remove coupon used"></i></a></span></p>
+                                                <p id="CartTotal"><span class="WebRupee"> $</span> <span id="total-discount"><?php echo number_format($orderObject->domain_price, 2); ?></span>&nbsp;&nbsp;<a onclick="removeCoupon();"><i class="fa fa-times" title="remove coupon used"></i></a></p>
                                             </td>
                                         </tr> 
                                         <tr class="ItemTotalAfterDiscount">
@@ -478,12 +478,12 @@ function goBack()
 }
 
 function removeCoupon()
-    {
+    { 
         var totalAmount = $('#payAmount').val();
         var dataString = 'couponRemove=yes'
        $.ajax({
             type: "POST",
-            url: "removeCoupon",
+            url: "/package/removeCoupon",
             data: dataString,
             cache: false,
             success: function (html) {
