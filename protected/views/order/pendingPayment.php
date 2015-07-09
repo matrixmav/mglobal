@@ -515,6 +515,7 @@
    $("#totalusedrp").val('');
    $("#walletused").val('');
    document.getElementById('masterpinDiv').style.display = "none";
+   $("#master_pin").val('');
 }
 function goBack()
 {
