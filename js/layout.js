@@ -295,6 +295,9 @@ var Layout = function () {
         });
     }
 	
+    
+        
+        
     return {
         init: function () {
             // init core variables

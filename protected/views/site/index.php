@@ -835,11 +835,38 @@
       <div class="item active">
           <?php foreach ($basicPackageObject as $basicPackage) { ?>
             <div class="col-sm-4 col-xs-12">
-                <?php if (Yii::app()->session['userid'] != '') { ?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php } else { ?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php } ?>
-                  <div class="pricing-item">
+                 <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $basicPackage['image']; ?>" alt="<?php echo $basicPackage['name']; ?>" class="img-responsive">
-                  </div>
-                <?php if (Yii::app()->session['userid'] != '') { ?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php } else { ?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php } ?>Pick Now</a>
+                  <a href="" class=" valign-center">
+                      <div class="packageInfo"> 
+                          <div> <span class="packName">Basic Web Packages</span></div>
+                          <div> <span class="packPrice"><p>$</p>49</span></div>
+                        
+                          <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
+                      </div>
+                      <div class="packageDescription"> 
+                          <div class="row">
+                              <div class="col-sm-8 col-xs-8">
+                          <ul>
+                              <li>Domain for 1 Year</li>
+                              <li>100 MB Storage Space/Year</li>
+                              <li>100 MB Bandwidth</li>
+                              <li>Advertisements</li>
+                              <li>Free Hosting</li>
+                              <li>1 Email A/C</li>
+                              <li>5 Static Pages</li>
+                              <li>Drag & Drop Builder</li>
+                              
+                          </ul>
+                              </div>
+                              <div class="col-sm-4 col-xs-4">
+                                   <span class="packPick">pick now</span>
+                               </div>
+                      </div>
+                 </div>
+        </a>
+                 </div>
+                
             </div>
             <?php } ?>
 

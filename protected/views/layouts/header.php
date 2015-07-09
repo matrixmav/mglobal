@@ -18,21 +18,159 @@
       
     </div>
   </div>
+
  <!-- SIDEBAR FORMS -->
  <div class="sideForm">
-    <div class="color-mode-icons icon-color"><i class="fa fa-share-alt"></i></div>
-    <div class="color-mode-icons icon-color-close"><i class="fa fa-share-alt"></i></div>
-    <div class="color-mode">
+    <div class="color-mode-icons icon-list"><i class="fa fa-list"></i></div>
+    
+    <div class="color-mode-list" style="display:none;">
      
 
       <ul class="inline">
          
-        <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-        <li><a href=""><i class="fa fa-twitter-square"></i></a></li>
-        <li><a href=""><i class="fa fa-skype"></i></a></li>
-        <li><a href=""><i class="fa fa-linkedin-square"></i></a></li>
-        <li><a href=""><i class="fa fa-youtube-square"></i></a></li>
-         <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
+          <li>
+              <a href="#inline11" class="fancybox"><i class="fa fa-file-text"></i></a>
+            
+              <div id="inline11" style="display:none" class="readMoreBox content" style="width: 100%">
+                <div class="">
+               <h2>contact<strong>  us</strong></h2>
+          
+               <div class="col-sm-12">
+                   <form>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+                               <input class="form-control" id="exampleInputAmount" placeholder="Subject">
+                                  
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                       <textarea class="form-control" rows="3" placeholder="message"></textarea>
+                       </div>
+                       <div class="form-group">
+   
+      <button type="submit" class="btn btn-success">Submit</button>
+    
+  </div>
+                   </form>
+                   
+               </div>
+            </div>
+      </div>
+        </li>
+        <li> <a href="#inline12" class="fancybox"><i class="fa fa-envelope-o"></i></a>
+            <div id="inline12" style="display:none" class="readMoreBox content">
+               <h2>feedback<strong> form </strong></h2>
+          
+        <div class="col-sm-12">
+                   <form>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+                               <select class="form-control" id="exampleInputAmount" placeholder="Feedback category">
+                                   <option>1</option>
+                                    <option>1</option>
+                                     <option>1</option>
+                               </select>
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                       <textarea class="form-control" rows="3" placeholder="comment"></textarea>
+                       </div>
+                       <div class="form-group">
+   
+      <button type="submit" class="btn btn-success">Submit</button>
+    
+  </div>
+                   </form>
+                   
+               </div>
+        </li>
+        <li><a href="#inline13" class="fancybox"><i class="fa fa-bug"></i></a>
+            <div id="inline13" style="display:none" class="readMoreBox content">
+               <h2>web<strong> bug </strong></h2>
+          
+         <div class="col-sm-12">
+                   <form>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="contact no">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="organization">
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
+                               <input class="form-control" id="exampleInputAmount" placeholder="problem">
+                                  
+
+                           </div>
+                        </div>
+                       <div class="form-group">
+                       <textarea class="form-control" rows="3" placeholder="problem description"></textarea>
+                       </div>
+                       <div class="form-group">
+                        
+                    <button type="submit" class="btn btn-success">Submit</button>
+    
+  </div>
+                   </form>
+                   
+               </div>
+        </li>
+       
       </ul>
       
     </div>
@@ -101,7 +239,57 @@ if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
             <li><a href="#benefits">Benefits</a></li>
             <li><a href="#prices">Pricing</a></li>
             <li><a href="#contact">Contact</a></li>
-             <li><a href="#">FAQ</a></li>
+             <li>   <a href="#inline14" class="fancybox">FAQ</a>
+                  <div id="inline14" style="display:none" class="readMoreBox content">
+               <h2><strong> faq</strong></h2>
+               <div class="faqsection">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <span class="">Q1. </span> let me ask something
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+          <span class="numAns"><strong>Ans.</strong> </span> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip commodo consequat. 
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <span class="">Q1. </span> let me ask something
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+       <span class="numAns"><strong>Ans.</strong> </span> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip commodo consequat. 
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+         <span class="">Q1. </span> let me ask something
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        
+        <span class="numAns"><strong>Ans.</strong> </span>  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip commodo consequat. 
+      </div>
+    </div>
+  </div>
+</div>
+                  </div>
+             </li>
             <!----<li><a href="user/login">Login</a></li>
             <li><a href="user/registration">Registration</a></li>----->
           </ul>
@@ -110,4 +298,18 @@ if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
       </div>
     </div>
   </div>
-  
+  <script>
+$(document).ready(function(){
+    $(".sideForm").click(function(){
+        $(".color-mode-list").toggle();
+    });
+
+ 
+		$('.fancybox').fancybox({
+		 helpers: { 
+        title: null
+    }
+		});
+               
+		});
+</script>
