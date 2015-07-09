@@ -321,11 +321,13 @@ class ProfileController extends Controller {
             if ($_POST['email'] != '') {
                 $emailArr = $_POST['email'];
                 $emailArray = explode(',', $emailArr);
-
+                $userObjectArr = array();
                 foreach ($emailArray as $email) {
+                    $userObjectArr['full_name'] = $userObject->full_name;
+                    $userObjectArr['email'] = $email;
                     $config['to'] = $email;
                     $config['subject'] = 'mGlobally Invitation From ' . $userObject->name;
-                    $config['body'] = 'Hey ' . $email . ',<br/>Click in below mentioned linkto register in Mglobally<br/><a href="' . $link . '">' . $link . '</a>';
+                    $config['body'] =  $this->renderPartial('//mailTemp/invitereffral', array('userObjectArr'=>$userObjectArr),true); 
                     CommonHelper::sendMail($config);
                 }
                 $success .= "Email sent successfully.";
