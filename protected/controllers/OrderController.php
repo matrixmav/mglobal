@@ -212,7 +212,7 @@ class OrderController extends Controller {
         $todayDate = $_POST['from'];
         $fromDate = $_POST['to'];
         }else{
-        $todayDate = date('Y-m-d');
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $fromDate = date('Y-m-d');   
         }
         if ($model) {
@@ -282,8 +282,8 @@ class OrderController extends Controller {
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
         }else{
-            $todayDate = '0000-00-00';
-            $fromDate = '0000-00-00';
+            $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+            $fromDate = date('Y-m-d');
         }   
             $dataProvider = new CActiveDataProvider('Order', array(
             'criteria' => array(
