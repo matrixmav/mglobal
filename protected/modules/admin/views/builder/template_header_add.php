@@ -5,8 +5,8 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7" id="test">
-    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
-    <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+    <?php if($error){ ?><div class="error" id="error_msg"><?php echo $error;?></div><?php } ?>
+    <?php if($success){ ?><div class="success" id="error_msg"><?php echo $success;?></div><?php } ?>
    
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
@@ -44,6 +44,22 @@ $this->breadcrumbs = array(
                 </div>
             </div>
             
+             <div class="form-group">
+                 <label class="col-lg-4 control-label" for="package" >For Which Package<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <select name="Template[package]" id="package" class="form-control">
+                        <option value="">Select Package</option>
+                        <?php 
+                        if(!empty($packageObject)){
+                            foreach($packageObject as $package){ ?>
+                                <option value="<?php echo $package->id; ?>" ><?php echo $package->name; ?></option>    
+                            <?php }
+                        } ?>
+                    </select>
+                    <span id="package_error" class="clrred"></span>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -71,25 +87,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="menucode">Menu Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" style="width: 482px; height: 150px;">
-                    <ul>
-                        <li class="current">
-                            <a href="*1*">$1$</a>
-                        </li>
-                        <li>
-                            <a href="*2*">$2$</a>
-                        </li>
-                        <li>
-                            <a href="*3*">$3$</a>
-                        </li>
-                        <li>
-                            <a href="*4*">$4$</a>
-                        </li>
-                        <li>
-                            <a href="*5*">$5$</a>
-                        </li>
-                    </ul> 
-                    </textarea>
+                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" style="width: 482px; height: 150px;"></textarea>
                     <span id="menu_code_error" class="clrred"></span>
                 </div>
             </div>
@@ -171,6 +169,13 @@ function validation(){
         $("#category").focus();            
         return false;
     }
+    
+    $("#package_error").html("");
+    if ($("#package").val() == "") {
+        $("#package_error").html("Please select package type");
+        $("#package").focus();            
+        return false;
+    }        
     
     $("#template_title_error").html("");
     if($("#template_title").val() == "") {
