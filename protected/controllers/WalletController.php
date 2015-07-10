@@ -136,7 +136,7 @@ class WalletController extends Controller {
      */
 
     public function actionRpWallet() {
-        $todayDate = Yii::app()->params['startDate'];
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $pageSize = Yii::app()->params['defaultPageSize'];
         $fromDate = date('Y-m-d');
         if (!empty($_POST)) {
@@ -163,7 +163,7 @@ class WalletController extends Controller {
      */
 
     public function actionCommisionWallet() {
-        $todayDate = Yii::app()->params['startDate'];
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $pageSize = Yii::app()->params['defaultPageSize'];
         $fromDate = date('Y-m-d');
         if (!empty($_POST)) {
@@ -190,7 +190,7 @@ class WalletController extends Controller {
      */
 
     public function actionFundWallet() {
-        $todayDate = Yii::app()->params['startDate'];
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $pageSize = Yii::app()->params['defaultPageSize'];
         $fromDate = date('Y-m-d');
         if (!empty($_POST)) {
