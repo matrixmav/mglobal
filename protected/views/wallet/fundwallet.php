@@ -28,11 +28,11 @@ $this->menu = array(
 
         <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/wallet/fundwallet">
             <div class="input-group input-large date-picker input-daterange">
-                <input type="text" name="from" placeholder="To Date" class="datepicker form-control" value="<?php echo date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));?>">
-                <span class="input-group-addon">
-                    to </span>
-                <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control" value="<?php echo date('Y-m-d');?>">
-            </div>
+          <input type="text" name="from" placeholder="To Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['from'] !='') ?  $_POST['from'] :  date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));?>">
+        <span class="input-group-addon">
+        to </span>
+        <input type="text" name="to" data-provide="datepicker" placeholder="From Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['to'] !='') ?  $_POST['to'] : date('Y-m-d');?>">
+       </div>
             <?php /* $statusId =   1;
               if(isset($_REQUEST['res_filter'])){
               $statusId =   $_REQUEST['res_filter'];
