@@ -25,8 +25,11 @@ $empty = "sm-blank" ; //no Package
         <div class="row mytree">
             <ul>
                 <li>
-                    <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
-                          $getColor =  BaseClass::getPackageName($currentUserId);
+                    <?php 
+                    $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
+                    $getColor =  BaseClass::getPackageName($currentUserId);
+                    $getUserInfoRight = BaseClass::getLeftRightMember($currentUserId ,'right');
+                    $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');                          
                     ?>
                     <a href="" class="<?php echo $getColor ; ?>"><div><span><?php echo $userObject->name; ?></span></div></a>
                     <ul>

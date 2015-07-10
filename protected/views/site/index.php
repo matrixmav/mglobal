@@ -336,7 +336,7 @@
           <p>Digital marketing is known to be the process of promoting a website, a business, or a product ...<a href="#inline2" class="fancybox pinkSm">read more</a></p>
            <div id="inline2" style="display:none" class="readMoreBox content">
                <h2>Digital<strong> Marketing </strong></h2>
-          <p >Digital marketing is known to be the process of promoting a website, a business, or a product through the online mediums’. The concept of digital marketing has become the buzz of the town in the recent years. It seems to have held the attention of every small or large business entity, which aims to reach out to the audiences that have moved online. </p>
+          <p >Digital marketing is known to be the process of promoting a website, a business, or a product through the online mediums. The concept of digital marketing has become the buzz of the town in the recent years. It seems to have held the attention of every small or large business entity, which aims to reach out to the audiences that have moved online. </p>
           <p>Digital marketing, also known as online marketing has evolved as a major tool for most of the traffic recorded by the websites. It involves usage of channels that allow marketers to identify the brand’s real time performance and even the competitive analysis. This form of marketing has empowered the businesses to access its prospective client base and garner a new market place, which ensures better conversions for them.</p>
       </div>
         </div>
@@ -346,6 +346,7 @@
   </div>
   <!-- Services block END -->
   
+ 
   <!-- Team block BEGIN -->
   <div class="team-block content content-center margin-bottom-40" id="team">
     <div class="container">
@@ -353,10 +354,10 @@
     <!--   <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>-->
       <div class="row">
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href=""> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive"></a>
-         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
-          <em></em>
-         <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
+            <a href=""> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
+         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3> -->
+            <h3><em>Our Profile</em></h3></a>
+         <!-- <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
           <div class="tb-socio">
               <div class="myBox">
                   <p><span><img src="images/ppt_icon.png"></span>PPT</p>
@@ -364,7 +365,8 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href=""> <img src="images/business-plan.png" alt="Elena Taylor" class="img-responsive"></a>
+            <a href=""> <img src="images/business-plan.png" alt="Elena Taylor" class="img-responsive">
+            <h3><em>business plan</em></h3></a>
          <!-- <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
           <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
@@ -375,7 +377,8 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive"></a>
+            <a href="">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
+            <h3><em>promo brochure</em></h3></a>
         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
           <p></p>
@@ -802,142 +805,121 @@
   </div>
   <!-- Facts block END -->
   <!-- Prices block BEGIN -->
+  <!-- pricing block new -->
   <div class="prices-block content content-center" id="prices">
-    <div class="container">
-      <h2 class="margin-bottom-50"><strong>Pricing</strong> Tables</h2>
-        <div class="panel-group tabPrice" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Basic Packages
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    <div class="row">
-        <!-- Pricing item BEGIN -->
-         <?php foreach($basicPackageObject as $basicPackage){?>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <?php if(Yii::app()->session['userid']!=''){?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php }?><div class="pricing-item">
-            <?php /*<div class="pricing-head">
-              <h3><?php echo $package['name'];?></h3>
-              <p><?php //echo $package['description1'];?></p>
-            </div>
-            <div class="pricing-content">
-              <div class="pi-price">
-                <strong>$<em><?php echo $package['amount'];?></em></strong>
-                <p>Per Month</p>
-              </div>
-             <?php echo $package['Description'];?>
-            </div><?php */?>
-                  <img src="/upload/package_image/<?php echo $basicPackage['image'];?>" alt="<?php echo $basicPackage['name'];?>" class="img-responsive">
-            <div class="pricing-footer">
+  <div class="container ">
+       <h2 class="margin-bottom-50"><strong>Pricing</strong> Tables</h2>
+       <div class="priceTab">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"> Basic Packages</a></li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"> Advance Packages </a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">   Advance PRO Packages</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+        
+        
+  <!-- Indicators 
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <?php foreach ($basicPackageObject as $basicPackage) { ?>
+            <div class="col-sm-4 col-xs-12">
+                 <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $basicPackage['image']; ?>" alt="<?php echo $basicPackage['name']; ?>" class="img-responsive">
+                  <a href="" class=" valign-center">
+                      <div class="packageInfo"> 
+                          <div> <span class="packName">Basic Web Packages</span></div>
+                          <div> <span class="packPrice"><p>$</p>49</span></div>
+                        
+                          <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
+                      </div>
+                      <div class="packageDescription"> 
+                          <div class="row">
+                              <div class="col-sm-8 col-xs-8">
+                          <ul>
+                              <li>Domain for 1 Year</li>
+                              <li>100 MB Storage Space/Year</li>
+                              <li>100 MB Bandwidth</li>
+                              <li>Advertisements</li>
+                              <li>Free Hosting</li>
+                              <li>1 Email A/C</li>
+                              <li>5 Static Pages</li>
+                              <li>Drag & Drop Builder</li>
+                              
+                          </ul>
+                              </div>
+                              <div class="col-sm-4 col-xs-4">
+                                   <span class="packPick">pick now</span>
+                               </div>
+                      </div>
+                 </div>
+        </a>
+                 </div>
                 
-            <?php if(Yii::app()->session['userid']!=''){?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php }else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php }?>Pick Now</a>
             </div>
-                </div>
-                    </a>
-        
+            <?php } ?>
+
         </div>
-        <?php }?>
-        <!-- Pricing item END -->
-        
-        
-      </div>
+    </div>
+</div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <?php foreach($advancePackageObject as $advancePackage){?>
+            <div class="col-sm-4 col-xs-12">
+                <?php if (Yii::app()->session['userid'] != '') { ?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php } else { ?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php } ?>
+                  <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image'];?>" alt="<?php echo $advancePackage['name'];?>" class="img-responsive">
                   </div>
-                </div>
-              </div>
-            <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Advance
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-       <div class="row">
-        <!-- Pricing item BEGIN -->
-        <?php foreach($advancePackageObject as $advancePackage){?>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a onclick="return showError();"> <?php }else{?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?><div class="pricing-item">
-            <?php /*<div class="pricing-head">
-              <h3><?php echo $package['name'];?></h3>
-              <p><?php //echo $package['description1'];?></p>
+                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>Pick Now</a>
             </div>
-            <div class="pricing-content">
-              <div class="pi-price">
-                <strong>$<em><?php echo $package['amount'];?></em></strong>
-                <p>Per Month</p>
-              </div>
-             <?php echo $package['Description'];?>
-            </div>*/?>
-                      <img src="/upload/package_image/<?php echo $advancePackage['image'];?>" alt="<?php echo $advancePackage['name'];?>" class="img-responsive">
-            <div class="pricing-footer">
-                
-            <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>Pick Now</a>
-            </div>
-                </div>
-                    </a>
-        
-        </div>
-        <?php }?>
-        <!-- Pricing item END -->
-        
-        
-      </div>
-      </div>
-    </div>
-  </div>
-            <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Advance PRO
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body">
-       <div class="row">
-        <!-- Pricing item BEGIN -->
-        <?php foreach($proPackageObject as $proPackage){?>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a onclick="return showError();"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php } ?><div class="pricing-item">
-            <?php /*<div class="pricing-head">
-              <h3><?php echo $package['name'];?></h3>
-              <p><?php //echo $package['description1'];?></p>
-            </div>
-            <div class="pricing-content">
-              <div class="pi-price">
-                <strong>$<em><?php echo $package['amount'];?></em></strong>
-                <p>Per Month</p>
-              </div>
-             <?php echo $package['Description'];?>
-            </div>*/?>
-                      <img src="/upload/package_image/<?php echo $proPackage['image'];?>" alt="<?php echo $proPackage['name'];?>" class="img-responsive">
-            <div class="pricing-footer">
-                
-            <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>Pick Now</a>
-            </div>
-                </div>
-                    </a>
-        
-        </div>
-        <?php }?>
-        <!-- Pricing item END -->
-        
-        
-      </div>
-      </div>
-    </div>
-  </div>
+            <?php } ?>
+
         </div>
     </div>
+</div>
+    </div>
+<div role="tabpanel" class="tab-pane" id="messages">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <?php foreach($proPackageObject as $proPackage){?>
+            <div class="col-sm-4 col-xs-12">
+                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a onclick="return showError();"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php } ?>
+                  <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image'];?>" alt="<?php echo $proPackage['name'];?>" class="img-responsive">
+                  </div>
+                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>Pick Now</a>
+            </div>
+            <?php } ?>
+
+        </div>
+    </div>
+</div>
+    </div>
+    
   </div>
+
+</div>
+  </div>
+  </div>
+  <!-- -->
+  
   <!-- Prices block END -->
   <!-- Testimonials block BEGIN -->
   <!-- Testimonials block BEGIN -->

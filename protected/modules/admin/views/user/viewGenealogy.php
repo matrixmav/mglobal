@@ -52,20 +52,33 @@ if (!empty($_GET['id'])) {
 
     </div>
     <span>
-        <?php $empty = "sm-blank"; //no Package
-        ?>
+        <?php $empty = "sm-blank"; //no Package ?>
 
         <div class="col-sm-8 col-xs-12">
             <div class="row mytree">
                 <ul>
                     <li>
-                        <?php $userObject = User::model()->findByAttributes(array('id' => $currentUserId)); ?>
-                        <a href="" class="sm-red"><div><span><?php echo $userObject->name; ?></span></div></a>
+                        <?php 
+                            $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
+                            $getColor =  BaseClass::getPackageName($currentUserId);
+                            echo "Right ". $getUserInfoRight = BaseClass::getLeftRightMember($currentUserId ,'right');
+                            echo "<br/>";
+                            echo "Left ".$getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');
+                            echo "<br/>";
+                            $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
+                            echo "Right Purchase ". $getUserPurchase->left_purchase ; 
+                            echo "<br/>";
+                            echo "Left Purchase ".$getUserPurchase->right_purchase ;                          
+                          
+                          
+                        ?>
+                        <a class="sm-red"><div><span><?php echo $userObject->name; ?></span></div></a>
                         <ul>
                             <li>
                                 <?php
                                 if (count($genealogyLeftListObject) > 0) {
                                     $getColor = BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);
+                                    //$getUserInfo = BaseClass::getLeftRightMember($currentUserId);
                                     ?>
                                     <a class="<?php echo $getColor; ?>" href="<?php echo $treeVar . '?id=' . $genealogyLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftListObject[0]->user->name; ?></span></div></a>
                                     <ul>
@@ -142,15 +155,15 @@ if (!empty($_GET['id'])) {
                 </ul>
             </div> 
         </div>
-        <!--        
-                     <div class="col-sm-4 col-xs-12">
-                         <ul class="packageDetail">
-                             <li><p>Total Packages</p><span> 122</span> </li>
-                             <li><p>Total Packages Today</p><span> 122</span> </li>
-                              <li><p>Total Registration</p><span> 122</span> </li>
-                             
-                         </ul>
-                     </div>-->
+
+<!--        <div class="col-sm-4 col-xs-12">
+            <ul class="packageDetail">
+                <li><p>Total Packages</p><span> 122</span> </li>
+                <li><p>Total Packages Today</p><span> 122</span> </li>
+                 <li><p>Total Registration</p><span> 122</span> </li>
+
+            </ul>
+        </div>-->
 
 
         <div class="row">
@@ -347,5 +360,9 @@ if (!empty($_GET['id'])) {
             }
         });
     }
+   
+   
+   
 </script>
 <script type="text/javascript" src="/js/transaction.js"></script>
+
