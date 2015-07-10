@@ -6,7 +6,16 @@ $this->breadcrumbs = array(
     'Fund Wallet'
 );
 ?>
+<style>
+    .confirmBtn{left: 333px;
+                position: absolute;
+                top: 0;}
 
+    .confirmOk{left: 610px;
+               position: absolute;
+               top: 8px;}
+    .confirmMenu{position: relative;}
+</style>
  <div class="col-md-12">
  
     <div class="expiration margin-topDefault confirmMenu">
