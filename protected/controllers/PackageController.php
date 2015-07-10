@@ -626,7 +626,7 @@ class PackageController extends Controller {
                     }
                     
                     
-                    /* code to deduct amount from admin commission wallet*/
+                    /* code to deduct amount from admin commission wallet
                     
                     $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 3));
                     if($adminWalletObject)
@@ -635,7 +635,7 @@ class PackageController extends Controller {
                         $adminWalletObject->fund = ($adminWalletObject->fund) - $fromAmountpercent;
                         $adminWalletObject->update();
                     }
-                    
+                    */
                     
                     /* code to add sponsor transaction*/
                     $postDataArray['transactionId'] = BaseClass::gettransactionID();
