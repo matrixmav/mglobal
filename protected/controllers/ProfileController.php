@@ -324,8 +324,9 @@ class ProfileController extends Controller {
                 $userObjectArr = array();
                 foreach ($emailArray as $email) {
                     $userObjectArr['full_name'] = $userObject->full_name;
+                    $userObjectArr['name'] = $userObject->name;
                     $userObjectArr['email'] = $email;
-                    $linkToSend = '<a href="' . $link . '">' . $link . '</a>';
+                    $linkToSend = '<a href="' . $link . '">Click here to register now</a>';
                     $userObjectArr['link'] = $linkToSend;
                     $config['to'] = $email;
                     $config['subject'] = 'mGlobally Invitation From ' . $userObject->name;
@@ -346,7 +347,7 @@ class ProfileController extends Controller {
     public function actionTrackRefferal() {
         $error = "";
         $success = "";
-        $todayDate = date('Y-m-d');
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $fromDate = date('Y-m-d');
         $loggedInUserId = Yii::app()->session['userid'];
         $userObject = User::model()->findByPK($loggedInUserId);

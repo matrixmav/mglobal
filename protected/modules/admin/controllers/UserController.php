@@ -53,6 +53,8 @@ class UserController extends Controller {
     public function actionChangeStatus() {
         if ($_REQUEST['id']) {
             $userObject = User::model()->findByPk($_REQUEST['id']);
+            if(!empty($userObject) && $userObject->role_id==1)
+            {
             if ($userObject->status == 1) {
                 $userObject->status = 0;
                 $userObject->save(false);
@@ -80,10 +82,20 @@ class UserController extends Controller {
                 $config['subject'] = 'Login Details';
                 $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
-                
+            }
+            }else{
+             if ($userObject->status == 1) {
+                $userObject->status = 0;
+                $userObject->save(false);
+                Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
+            } else {
+                 $userObject->status = 1;
+                $userObject->save(false);   
+            }
+            }
                 Yii::app()->user->setFlash('success', "User status changed to Active!.");
                 
-            }
+           
            $this->redirect('/admin/user');
         }
     }

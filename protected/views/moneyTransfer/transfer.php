@@ -46,9 +46,7 @@ $this->breadcrumbs = array(
                 <input type="hidden" class="form-control" value="" id="search_user_id" name="search_user_id" />
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
-                    <div class="col-lg-7">
-                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value);" />
-                    <div class="col-lg-7">
+                     <div class="col-lg-7">
                         <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value,'<?php echo $frontName;?>');" />
                         <span id="search_fullname">&nbsp;</span>
                         <span id="search_user_error" style="color:red"></span>

@@ -468,7 +468,7 @@ class UserController extends Controller {
                             }
                         } else {
                             // echo "0"; 
-                            $error = "<p class='error'>The user name and password you entered don't match. </p>";
+                            $error = "<p class='error'>Invalid Login Credientials</p>";
                         }
                     } else {
                         $error = "<p class='error'>Invalid User Name</p>";

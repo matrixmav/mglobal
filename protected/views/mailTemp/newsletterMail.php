@@ -6,7 +6,7 @@
           <tbody>
             <tr>
             	<td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
-                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello <?php echo $userObjectArr['email'];?></td>
+                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Dear User ,</td>
                 <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
             </tr>
             </tbody>
@@ -31,12 +31,18 @@
             	 
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                 This is a confirmation that your subscription with mGlobally has been confirmed on <?php echo date('Y-m-d'); ?>
+                 Thank you for subscribing to our newsletter. Our frequent newsletters will keep you updated on web designing packages, domain booking tips and a lot more to add value to your business.
                   </td>
+                   <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
                   </tr>
-                  
-                  
-                  <tr>
+                  <tr><td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Stay tuned for more updates. </td></tr> 
+                   <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
+                  <tr><td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"> You may also let us know if you need insights on any specific subject. For any such requests, you may reach us at support@mglobally.com </td></tr> 
+                <tr>
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
            

@@ -30,10 +30,26 @@
             	 
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                 <?php echo ucwords($userObjectArr['full_name']); ?> has sent invitation to register with mGlobally and get available offers. Click below mentioned link to register.<br/>
-                 <?php echo $userObjectArr['link'];?>
+                 Have you tried your hands on the newest web designing platform yet. MGlobally is here to help you book domain, hosting space and website designing & development. 
+                      
+                       has sent invitation to register with mGlobally and get available offers. Click below mentioned link to register.<br/>
+                
                   </td>
                   </tr>
+                    <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
+              <tr>
+            	  <td height="20" bgcolor="" style=""> Sign up with my referral code <?php echo $userObjectArr['name']; ?> and enjoy the ultimate IT solutions by MGlobally.</td>
+            </tr>
+                <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
+               <tr>
+            	  <td height="20" bgcolor="" style=""> <?php echo $userObjectArr['link'];?></td>
+            </tr>
+
+
                   
                   
                   <tr>
