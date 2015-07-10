@@ -67,8 +67,10 @@ class BuildTempController extends Controller {
                     $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $orderId ));        
                     $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempId));        
                     
+                    /* For all pages */
                     $userPagesObjectAll = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND order_id=' . $orderId ));
-                    
+
+                    /* For only parent pages */
                     $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND parent = 0 AND order_id=' . $orderId ));
                     $menuHtml ="";
                     $mainMenu =  explode(',',$hasbuilderObject->user_menu) ;
@@ -96,22 +98,7 @@ class BuildTempController extends Controller {
                         $menuHtml .=  '</a></li>';    
                         $p++;
                     }
-                     $menuHtml .=  '</ul><div class="clear"></div>';
-                    
-//                    $tempMenu = $hasbuilderObject->user_menu;
-//                    $i = 1;
-//                    foreach ($userPagesObject as $pages) {
-//                        $pat1 = '*' . $i . '*';
-//                        $pat2 = '$' . $i . '$';
-//                        if($i == 1){
-//                            $tempMenu = str_replace($pat1, "index.html", $tempMenu);
-//                        }else{
-//                            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
-//                        }
-//                        $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
-//                        $i++;
-//                    }
-//                    $tempMenu = stripcslashes($tempMenu);
+                    $menuHtml .=  '</ul><div class="clear"></div>';
 
                     $path = Yii::getPathOfAlias('webroot');       
                     /*Create Folder And Permission */        
@@ -145,18 +132,27 @@ class BuildTempController extends Controller {
                         }    
                         $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
                         
-                        $headMeta = stripcslashes($hasbuilderObject->head_content) ;
-                        $dataHead = str_replace( '<title>Home</title>' , '<title>'.$userPagesObjectList->page_name.'</title>' , $headMeta);  
+                        $html = '<html>'."\n". '<head>';
+                        fwrite($handle, $html);
+                        
+                        $headMeta = stripcslashes($hasbuilderObject->head_content) ;                        
+                        $siteTitle = "";
+                        if($hasbuilderObject->site_title){
+                            $siteTitle = " | ".$hasbuilderObject->site_title ;
+                        }                        
+                        $dataHead = str_replace( '<title>Home</title>' , '<title>'.$userPagesObjectList->page_name.$siteTitle.'</title>' , $headMeta);  
                         fwrite($handle, $dataHead);
                         
-                        $headMetaEnd = "\n".'<body>';
+                        $headMetaEnd = "\n". '</head>'."\n".'<body>';
                         fwrite($handle, $headMetaEnd);
 
                         /* For Header Content */
                         $baseURL = Yii::app()->getBaseUrl(true);        
                         $dataHeader = stripcslashes($hasbuilderObject->temp_header); 
-                        $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader); // for replacing issue  
-                        $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $menuHtml , $removeSpaces);
+                        $logoImage = '<img height="'.$hasbuilderObject->logo_height.'" width="'.$hasbuilderObject->logo_width.'" src="/user/template/' .$builderTempId->folderpath . '/'. $hasbuilderObject->logo . '">'; 
+                        $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader); // for replacing issue
+                        $logoReplace = preg_replace('#<div class="mav_logo">(.*?)</div>#', stripslashes($logoImage) , $removeSpaces);
+                        $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $menuHtml , $logoReplace);
 
                         $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
                         fwrite($handle, $data);           
@@ -228,7 +224,7 @@ class BuildTempController extends Controller {
             }
 
             if(isset($_GET['t']) && isset($_GET['u']) &&  isset($_GET['o'])) {
-                echo "dsada";
+                echo "hey";
                 $this->render('buildtemp');
             }        
     }
