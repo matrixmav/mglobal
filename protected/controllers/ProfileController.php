@@ -325,7 +325,7 @@ class ProfileController extends Controller {
                 foreach ($emailArray as $email) {
                     $userObjectArr['full_name'] = $userObject->full_name;
                     $userObjectArr['email'] = $email;
-                    $linkToSend = '<a href="' . $link . '">' . $link . '</a>';
+                    $linkToSend = '<a href="' . $link . '">Click here to register now</a>';
                     $userObjectArr['link'] = $linkToSend;
                     $config['to'] = $email;
                     $config['subject'] = 'mGlobally Invitation From ' . $userObject->name;
