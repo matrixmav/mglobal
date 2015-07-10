@@ -324,6 +324,7 @@ class ProfileController extends Controller {
                 $userObjectArr = array();
                 foreach ($emailArray as $email) {
                     $userObjectArr['full_name'] = $userObject->full_name;
+                    $userObjectArr['name'] = $userObject->name;
                     $userObjectArr['email'] = $email;
                     $linkToSend = '<a href="' . $link . '">Click here to register now</a>';
                     $userObjectArr['link'] = $linkToSend;
