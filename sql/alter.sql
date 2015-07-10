@@ -185,3 +185,6 @@ ALTER TABLE `build_temp_header` ADD `head_content` TEXT NOT NULL AFTER `meta_des
 ALTER TABLE `user_has_template` ADD `head_content` TEXT NOT NULL AFTER `user_id`;
 
 ALTER TABLE `user_pages` ADD `parent` INT(11) NULL AFTER `page_content`;
+
+/* 07/07/2015 */
+ALTER TABLE `build_temp` ADD `package` INT(11) NOT NULL AFTER `category_id`;
