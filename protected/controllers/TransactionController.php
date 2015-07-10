@@ -179,8 +179,6 @@ class TransactionController extends Controller {
         $loggedInUserId = Yii::app()->session['userid'];
         //$model = new MoneyTransfer();
         $pageSize = Yii::app()->params['defaultPageSize'];
-        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
-        $fromDate = date('Y-m-d');
         $status = 1;
         //$criteria = new CDbCriteria;
         $mode = "transfer";
@@ -195,10 +193,12 @@ class TransactionController extends Controller {
         )));
         //$condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.created_at >= "' . $todayDate . '" AND t.created_at <= "' . $fromDate . '"  AND t.from_user_id = ' . $loggedInUserId;
         } else {
-            
+            $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+            $fromDate = date('Y-m-d');
+        
              $dataProvider = new CActiveDataProvider('Transaction', array(
             'criteria' => array(
-                'condition' => ('status = 1 AND  user_id = ' . $loggedInUserId . ' AND mode != "' . $mode.'"'), 'order' => 'id DESC',
+                'condition' => ('status = 1 AND  user_id = ' . $loggedInUserId . ' AND mode != "' . $mode.'" AND created_at >= "'.$todayDate.'" AND created_at <= "'.$fromDate.'"'), 'order' => 'id DESC',
         )));
            // $condition = 't.transaction_id = transaction.id AND transaction.mode != "' . $mode . '" AND t.from_user_id = ' . $loggedInUserId;
         }
