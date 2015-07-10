@@ -346,7 +346,7 @@ class ProfileController extends Controller {
     public function actionTrackRefferal() {
         $error = "";
         $success = "";
-        $todayDate = date('Y-m-d');
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $fromDate = date('Y-m-d');
         $loggedInUserId = Yii::app()->session['userid'];
         $userObject = User::model()->findByPK($loggedInUserId);
