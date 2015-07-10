@@ -33,8 +33,14 @@
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
                  Thank you for subscribing to our newsletter. Our frequent newsletters will keep you updated on web designing packages, domain booking tips and a lot more to add value to your business.
                   </td>
+                   <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
                   </tr>
                   <tr><td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Stay tuned for more updates. </td></tr> 
+                   <tr>
+            	  <td height="20" bgcolor="" style=""></td>
+            </tr>
                   <tr><td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"> You may also let us know if you need insights on any specific subject. For any such requests, you may reach us at support@mglobally.com </td></tr> 
                 <tr>
             	  <td height="20" bgcolor="" style=""></td>
