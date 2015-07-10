@@ -61,8 +61,13 @@
 <script>
     function validationfrom()
     {
-        
-     $("#frmPayPal").submit();
+        var group = document.walletform.myRadio;
+        if (group.checked == false)
+      {
+         alert('Please choose payment gateway.');
+         return false;
+      }
+        $("#frmPayPal").submit();
     }
   
 </script>
