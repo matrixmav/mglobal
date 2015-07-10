@@ -62,12 +62,13 @@
     function validationfrom()
     {
         var group = document.walletform.myRadio;
-        if (group.checked == false)
+     if (group.checked == false)
       {
          alert('Please choose payment gateway.');
          return false;
-      }
+      }else{
         $("#frmPayPal").submit();
+    }
     }
   
 </script>
