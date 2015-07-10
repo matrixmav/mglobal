@@ -135,7 +135,7 @@ class TransactionController extends Controller {
         $loggedInUserId = Yii::app()->session['userid'];
         $model = new MoneyTransfer();
         $pageSize = Yii::app()->params['defaultPageSize'];
-        $todayDate = Yii::app()->params['startDate'];
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $fromDate = date('Y-m-d');
         $status = 1;
         if (!empty($_POST)) {
@@ -179,7 +179,7 @@ class TransactionController extends Controller {
         $loggedInUserId = Yii::app()->session['userid'];
         //$model = new MoneyTransfer();
         $pageSize = Yii::app()->params['defaultPageSize'];
-        $todayDate = Yii::app()->params['startDate'];
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
         $fromDate = date('Y-m-d');
         $status = 1;
         //$criteria = new CDbCriteria;
