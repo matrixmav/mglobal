@@ -862,7 +862,7 @@ a:hover {
 }
 .team-block h3 {
   font-size: 20px;
-  padding-top: 13px;
+  padding-top: 25px;
   margin-bottom: 2px;
 }
 .team-block em {
@@ -871,6 +871,9 @@ a:hover {
   display: block;
   font: 400 14px "Open Sans", Arial, sans-serif;
   margin-bottom: 12px;
+  display:inline-block;
+  border:1px solid #e54a1a;
+  padding: 8px;
 }
 .tb-socio {
   padding-top: 3px;
@@ -902,7 +905,8 @@ a:hover {
   /*border: solid 2px #8695a1;*/
   background: #fff;
   font: 400 18px "PT Sans Narrow", Arial, sans-serif;
-  margin-bottom: 30px;
+  margin: auto 20px 1px 20px;
+  position: relative;
 }
 .pricing-head {
   background: #8695a1;
@@ -1814,7 +1818,7 @@ Pre-Header and pre-header elements
 .color-mode ul li{ border:none; background: #FFF; display: table; vertical-align: middle; text-align: center; border-radius:50%;}
 .color-mode ul li a{ vertical-align: middle; color: #337ab7; display: table-cell;}
 .color-mode ul li a i{font-size: 16px;}
-.color-panel .color-mode-icons{font-size:20px; padding: 17px;}
+.color-panel .color-mode-icons{font-size:21px; padding: 17px;}
 /* .tp-leftarrow:after{content: "\f18e" !important;  font-family: FontAwesome !important;}
 .tp-leftarrow:before{content: "\f190" !important;  font-family: FontAwesome !important;}
 */
@@ -1914,4 +1918,85 @@ Pre-Header and pre-header elements
     #myCarousel .carousel-caption h2{font-size: 14px; padding-bottom: 0; padding-top: 0 !important;}
     #myCarousel .carousel-caption h2::after{padding-top: 0 !important;}
   #myCarousel .carousel-caption >p{ font-size: 12px;}  
+  .priceTab ul.nav.nav-tabs li a{font-size: 13px !important;}
+   .priceTab ul.nav.nav-tabs li{ max-width: 33%;}
+   #inline13, #inline12, #inline11{width: auto !important;}
+   .packageInfo .packPrice{font-size: 40px !important; padding: 0px !important;}
+   .pricing-item {margin:auto 0 1px 0 ;}
+   .packPick{margin-right: 4%;}
 }
+/*--------------pricing-------------*/
+.priceTab{ background: #FFF; padding-bottom: 50px; border: 1px solid #dddddd; border-radius: 4px; font:400 18px "PT Sans Narrow",Arial,sans-serif}
+.priceTab ul.nav.nav-tabs{ background: #f6f6f6 ;}
+.priceTab ul.nav.nav-tabs li.active a{ color:#e54a1a !important;}
+.priceTab ul.nav.nav-tabs li a{ color:#555;}
+.priceTab .tab-content{padding-top: 40px;}
+.team-block a:hover em{background:#e54a1a; color:#FFF; }
+
+/*--------------side forms-------------*/
+.sideForm{position: fixed;
+    right: 0;
+    top: 215px;
+    z-index: 9999;}
+
+.sideForm .color-mode-icons.icon-list{cursor: pointer;
+    margin: 0;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 0; font-size: 20px;
+    padding: 16px;
+color:#FFF; background: #c9c9c9;}
+.sideForm .color-mode-icons.icon-list:hover{background: #3d3d3d;}
+.sideForm .icon-list-close{background: #c9c9c9 none repeat scroll 0 0}
+.sideForm .color-mode-list {
+    background: #c9c9c9 none repeat scroll 0 0;
+    padding: 10px 0;
+    right: 0 !important;
+    top: 60px !important;
+    width: auto !important; position: absolute;
+}
+
+.color-mode-list ul {padding:0 8px;}
+.color-mode-list ul li{ border:none; background: #FFF; display: table; vertical-align: middle; text-align: center; border-radius:50%; width: 28px; height: 28px; margin: 4px;
+    padding: 0 5px;}
+.color-mode-list ul li a{ vertical-align: middle; color: #f15d2a; display: table-cell;}
+.color-mode-list ul li a i{font-size: 16px;}
+.color-mode-list .color-mode-icons{font-size:20px; padding: 17px;}
+#inline13, #inline12, #inline11{width: 400px;}
+#inline13 .btn, #inline12 .btn ,#inline11 .btn{ border-radius: 3px;}
+.faqsection p{margin: 0 0 5px 0;}
+.faqsection .panel-heading, .faqsection .panel-body{padding: 5px 15px;}
+.prices-block .pricing-item > a {
+  background: rgba(229,74,26,0.85);
+  position: absolute;
+  left: 0;
+  bottom: -100%;
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+
+  transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+
+  color: #fff;
+}
+.prices-block .pricing-item:hover > a {
+  bottom: 0;
+}
+.prices-block .pricing-item> a:hover {
+  text-decoration: none;
+}
+.packageInfo{height: 50%; margin: 15px 10px;}
+.packageDescription{ background: #f0f0f0; height: 50%;}
+.packageInfo .packName{font-size: 18px; padding: 5px; border: 1px solid #FFF; display: inline-block; margin:10px;}
+.packageInfo p{font-size: 11px; }
+.packageInfo .packPrice{font-size: 60px; padding:50px;}
+.packageInfo .packPrice p{display: inline; font-size: 40px;}
+.packageDescription ul{ text-align: left; padding-top: 5px;}
+.packageDescription ul li{color:#6d6e71; font-size: 10px; line-height: 17px;}
+.packPick{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 115%;}
+.packPick:hover{background: #f15d2a; color:#FFF;}

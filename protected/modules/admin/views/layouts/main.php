@@ -182,7 +182,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <ul class="nav navbar-nav pull-right topWallet">
                     
 
-                    <li class="cash"><a href="#" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
+                    <li class="cash"><a href="/admin/wallet/fundwallet" data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"> 
                             <i class="fa fa-money"></i>
 
                             <span class="badge badge-default">
@@ -196,7 +196,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span>
                         </a>
                     </li>
-                    <li class="commision"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
+                    <li class="commision"><a href="/admin/wallet/rpwallet" class="" data-toggle="tooltip" data-placement="bottom" title="RP  Wallet">
                             <i class="glyphicon glyphicon-briefcase"></i>
                             <span class="badge badge-default">
                                 <?php
@@ -209,7 +209,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </span></a>
                     </li>
 
-                    <li class="credit"><a href="#" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
+                    <li class="credit"><a href="/admin/wallet/commisionwallet" class="" data-toggle="tooltip" data-placement="bottom" title="Commission Wallet">
                             <i class="fa fa-credit-card"></i>
 
                             <span class="badge badge-default">
@@ -837,59 +837,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <?php
                             }
                             }
-                             if (in_array('generatebinary', $accessArr)) {
-                            /*access menu start*/     
-                            $reservation_pmenu = 9;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
-                                    
-                                    "Genealogy/binarycalc" => "Generate Binary",
-                                   
-                                );
-                                ?>
-                                
-                                <li
-                                    class="<?php echo (($curControllerLower == 'genealogy') || ($curControllerLower == 'genealogy')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <i class="fa fa-user"></i>
-                                        <span class="title">Generate Binary</span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo ($curControllerLower == 'genealogy') ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
-//                                        if (in_array($ctTitle, $menusections ['sections'])) {
-                                            if ($ctName == "search/create") {
-                                                $ctName = "search/create/type/details";
-                                            }
-                                        if ($ctName == "genealogy" && $curControllerLower == "genealogy")
-                                                $class_content = 'class="active"';
-                                            else
-                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-
-                                            echo '<li ' . $class_content . '>';
-                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                            echo '</li>';
-                                            if ($ctName == "search/create/type/details") {
-                                                $ctName = "search/create";
-                                            }
-//                                        }
-                                    }
-                                    echo '</ul>';
-                                    ?>			
-                                </li>
-                                <?php
-                            }
-                            }
+                       
                             
                               
                             $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
                                 $reservation_subsection = array(
                                     
-                                    "User/resetpassword" => "Change Password",
+                                    "user/resetpassword" => "Change Password",
                                    
                                 );
                                 ?>
