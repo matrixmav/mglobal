@@ -1,51 +1,55 @@
- <?php //$this->renderPartial('/mailTemp/header'); ?>
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Untitled Document</title>
-        <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
-    </head>
-    <body>
-        <table align="center" width="600" cellspacing="0" cellpadding="0" border="0">
-            <tbody>
-                <tr>
-                    <td height="20"  style=""></td>
-                </tr>
-                <tr>
-                    <td height="10" bgcolor="#f15c2b" style=""></td>
-                </tr>
-                <tr>
-                    <td valign="" bgcolor="#fafafa" height="80" style="line-height:0px; border-bottom:1px solid #dfdfdf">
-                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                            <tbody>
-                                <tr>
-                                    <td width="5%" valign="middle" style="line-height:0px"></td>
-                                    <td width="40%" valign="middle" style="line-height:0px"><a target="_blank" href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/logo.png"> </a></td>
-                                    <td width="55%" valign="middle" style="line-height:0px; color:#f15c2b; font-family:'Nunito';">
-                                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                                            <tbody>
-                                                <tr>
-                                                    <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/livechat.png"> &nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; font-family:'Nunito'"><strong> Customer Support:</strong> 1800 909 302 &nbsp; </td>
-                                                </tr>
-                                            </tbody>
-                                        </table></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+</head>
 
- <tr>
+<body>
+<table align="center" width="600" cellspacing="0" cellpadding="0" border="0">
+  <tbody>
+    <tr>
+      <td height="20"  style=""></td>
+    </tr>
+    <tr>
+      <td height="10" bgcolor="#f15c2b" style=""></td>
+    </tr>
+    <tr>
+      <td valign="" bgcolor="#fafafa" height="80" style="line-height:0px; border-bottom:1px solid #dfdfdf">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+          <tbody>
+            <tr>
+              <td width="5%" valign="middle" style="line-height:0px"></td>
+              <td width="40%" valign="middle" style="line-height:0px"><a target="_blank" href=""> <img width="" border="0" src="logo.png"> </a></td>
+              <td width="55%" valign="middle" style="line-height:0px; color:#f15c2b; font-family:'Nunito';">
+              <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <tbody>
+                  	<tr>
+                    <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="livechat.png"> &nbsp;</td>
+                    </tr>
+                    <tr>
+                 <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; font-family:'Nunito'"><strong> Customer Support:</strong> 1800 909 302 &nbsp; </td>
+                    </tr>
+                  </tbody>
+                </table></td>
+            </tr>
+          </tbody>
+        </table></td>
+    </tr>
+    
+    
+    
+    
+    <!-- content -->
+    
+    <tr>
     	   <td valign="" bgcolor="#efed6a" height="55" align="left" style="line-height:0px; font-size:16px">
         	<table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tbody>
             <tr>
             	<td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
-                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello  <?php echo $userObjectArr['to_name'];?></td>
+                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello Sandeep</td>
                 <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
             </tr>
             </tbody>
@@ -70,7 +74,7 @@
             	 
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-               We are pleased to inform you that your direct referral income of user <?php echo $userObjectArr['user_name']; ?> has been credited your wallet.
+               We are pleased to inform you that your direct referral income of user ABC has been credited your wallet.
                   </td>
                   </tr>
                   
@@ -164,16 +168,16 @@
           <tbody>
             <tr>
             <td width="5%"></td>
-             <td width="8%"><a href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/skype.png"></a></td>
+             <td width="8%"><a href=""> <img width="" border="0" src="skype.png"></a></td>
               <td width="37%" valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px; font-family:'Nunito'"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">91 80 4664 7799</a> </td>
               <td width="50%" valign="middle" style="line-height:0px;color: #828282;font-size:16px; font-family:'Nunito'">
               	<table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tbody>
             <tr>
-            	<td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/facebook-icon.png"></a></td>
-                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/googleplus.png"></a></td>
-                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/pinterest-icon.png"></a></td>
-                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/twitter-icon.png"></a></td>
+            	<td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="facebook-icon.png"></a></td>
+                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="googleplus.png"></a></td>
+                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="pinterest-icon.png"></a></td>
+                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="twitter-icon.png"></a></td>
                 <td width="40%" valign="middle" align="left"></td>
                 
             </tr>
