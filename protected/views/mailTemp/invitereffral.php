@@ -40,7 +40,7 @@
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
               <tr>
-            	  <td height="20" bgcolor="" style=""> Sign up with my referral code <?php echo ucwords($userObjectArr['name']); ?> and enjoy the ultimate IT solutions by MGlobally.</td>
+            	  <td height="20" bgcolor="" style=""> Sign up with my referral code <?php echo $userObjectArr['name']; ?> and enjoy the ultimate IT solutions by MGlobally.</td>
             </tr>
                 <tr>
             	  <td height="20" bgcolor="" style=""></td>
