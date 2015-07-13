@@ -6,7 +6,7 @@
           <tbody>
             <tr>
             	<td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
-                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello <?php echo $userObjectArr['to_name']; ?></td>
+                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello <?php echo ucwords($userObjectArr['full_name']); ?></td>
                 <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
             </tr>
             </tbody>
@@ -29,8 +29,7 @@
             </tr>
              <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                We are sorry that your payment was not successful. The amount for the said transaction has not been charged by us. In case, the amount has been charged, the refund will be processed by next 7 Business days .
-                  </td>
+                Congratulations! You’ve got hold of the domain you wanted. The domain you’ve just booked can be viewed on your dashboard at MGlobally. </td>
                   </tr>
                   
                   
@@ -39,7 +38,7 @@
             </tr>
             <tr>
             	 <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-              This could have happened due to a temporary error. You can retry this purchase by<a href="/order/list"> Clicking here </a>.
+              The invoice for this purchase can be viewed at the end of this email.
                   </td>
             </tr>
             
@@ -49,7 +48,7 @@
             </tr>
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-             We assure you that we're analysing these failures and constantly improving our systems.	
+                 For any other queries related to your booking, you may reach us at support@mglobally.com	
                   </td>
                   <tr>
                   <tr>
