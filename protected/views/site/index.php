@@ -615,7 +615,7 @@
   <div class="choose-us-block content text-center margin-bottom-40" id="benefits">
     <div class="container">
       <h2>Why to <strong>Choose us</strong></h2>
-      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers ...<a class="pinkSm" href="">read more</a></h4>
+      <h4>MGlobally is an IT company introduced with the concept of multi-level marketing. It’s a platform with extended benefits for all those associated with it. We bring ideal opportunities for those, who wish to get websites for their businesses and can further bring in references. For all the references brought to us, we provide reward points that can be redeemed later. <!--<a class="pinkSm" href="">read more</a>--></h4>
       <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12 text-left">
           <img src="images/matrix.png" alt="Why to choose us" class="img-responsive">
