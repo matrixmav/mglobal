@@ -1262,7 +1262,7 @@ class BaseClass extends Controller {
     /* For the package info */
     public static function getPackageName($getPackageName) {
         
-        $orderListObject = Order::model()->findAll(array('condition' => 'status = 1 AND user_id = ' . $getPackageName));
+        $orderListObject = Order::model()->findAll(array('condition' => 'status = 1 AND user_id = ' . $getPackageName.' Limit 1'));
         $userObject = User::model()->findByPk($getPackageName);
         //print_r($userObject) ;
         $color = "sm-nothing";
@@ -1280,7 +1280,7 @@ class BaseClass extends Controller {
                 $orderAmount = $orderObject->package(array('order' => 'amount DESC'));
                 if ($myAmount < $orderAmount->amount) {
                     $myAmount = $orderAmount->amount;
-                    $type = $orderObject->status == 1 ? $orderAmount->id : 0;
+                    $type = $orderAmount->id; 
                     
                     if ($type == 4) {
                         $color = "sm-basicp1"; //Basic Packages 2
@@ -1300,25 +1300,13 @@ class BaseClass extends Controller {
                         $color = "sm-pro2"; //Advance Pro Packages 2
                     } else if ($type == 10) {
                         $color = "sm-pro3"; //Advance Pro Packages 3
-                    } else if ($type == 0){
+                    } else {
                         $color = "sm-zzz"; //No Purchase 
-                    }else{
-                        
                     }
-                    
-//                    echo $orderObject->status ; die;
-//                    if($orderObject->status == 0){
-//                       $color = "sm-zzz"; //No Purchase  
-//                    }
                     
                 }
             }
         }
-//        else{
-//                       $color = "sm-grey"; //No Purchase  
-//                    
-//        }
-        
         return $color;
     }
 
