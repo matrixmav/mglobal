@@ -1262,7 +1262,7 @@ class BaseClass extends Controller {
     /* For the package info */
     public static function getPackageName($getPackageName) {
         
-        $orderListObject = Order::model()->findAll(array('condition' => 'user_id = ' . $getPackageName));
+        $orderListObject = Order::model()->findAll(array('condition' => 'status = 1 AND user_id = ' . $getPackageName));
         $userObject = User::model()->findByPk($getPackageName);
         //print_r($userObject) ;
         $color = "sm-nothing";
@@ -1306,6 +1306,8 @@ class BaseClass extends Controller {
                     }
                 }
             }
+        }else{
+            $color = "sm-nothing"; //No Purchase 
         }
         return $color;
     }
