@@ -788,7 +788,7 @@ class PackageController extends Controller {
     </td>
   </tr></table>';*/
                 
-                echo $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);exit;
+                $body = Package::model()->createInvoice($invoiceArr);
                 
                 $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
                 $orderObject = Order::model()->findByPK($orderObject->id);
