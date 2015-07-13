@@ -3,7 +3,7 @@
 		$name = $_POST['userName']; // required
 		$email_from = $_POST['userEmail']; // required
 		$comments = $_POST['userMsg']; // required
-		$email_to="hey@gmail.com";
+		$email_to="hey@adadsdasa@malinator.com";
 		$email_message .= "First Name: ".$name."\n";
 		$email_message .= "Email: ".$email_from."\n";	 
 		$email_message .= "Subject: ".$comments."\n";
