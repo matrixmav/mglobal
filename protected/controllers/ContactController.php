@@ -28,7 +28,7 @@ class ContactController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','contact','feedback'),
+				'actions'=>array('index','view','contact','feedback','bug'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -162,6 +162,25 @@ class ContactController extends Controller
              $feedbackObject->comment = $_REQUEST['message'];
              $feedbackObject->created_at = date('Y-m-d');
               if($feedbackObject->save(false)){
+                 echo 1;
+              }
+           }else{
+            echo 0;
+          }
+        }
+        
+         /*feedback form subbmission*/
+        public function actionBug() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $bugObject = new BugReport;
+             $bugObject->email = $_REQUEST['email'];
+             $bugObject->name = $_REQUEST['name'];
+             $bugObject->phone = $_REQUEST['feedback_category'];
+             $bugObject->description = $_REQUEST['message'];
+             $bugObject->created_at = date('Y-m-d');
+              if($bugObject->save(false)){
                  echo 1;
               }
            }else{
