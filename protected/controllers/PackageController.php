@@ -734,12 +734,14 @@ class PackageController extends Controller {
                 $invoiceArr['transaction_id'] = $transactionObject->transaction_id;
                 $invoiceArr['full_name'] = $userObject->full_name;
                 $invoiceArr['address'] = $userObject->address;
+                $invoiceArr['email'] = $userObject->email;
                 $invoiceArr['domain'] = $orderObject->domain;
                 $invoiceArr['domain_price'] = $domain_price;
                 $invoiceArr['Samount'] = $Samount;
                 $invoiceArr['paid_amount'] = $paid_amount;
-                $invoiceArr['RPBody'] = $RPBody;
-                $invoiceArr['Couponbody'] = $Couponbody;
+                $invoiceArr['RPBody'] = $transactionObject->used_rp;
+                $invoiceArr['Couponbody'] = $transactionObject->coupon_discount;
+                $invoiceArr['created_at'] = $transactionObject->created_at;
                 /*$body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
                 $body .='<tr>
                      <td>';
