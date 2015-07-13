@@ -75,10 +75,15 @@ class BuildTempController extends Controller {
                     $menuHtml ="";
                     $mainMenu =  explode(',',$hasbuilderObject->user_menu) ;
                     $p = 1; 
-                    $menuHtml .= '<ul class="'.$mainMenu[1].'">';
+                    $ul = "";
+                    $li = "";
+                    if(isset($mainMenu[0])){ $ul = stripslashes($mainMenu[0]); }
+                    if(isset($mainMenu[1])){ $li = stripslashes($mainMenu[1]); }
+                    
+                    $menuHtml .= '<ul '.$ul.'>';
                     foreach ($userPagesObject as $data){
 
-                        $menuHtml .= '<li class="'.$mainMenu[1].'">';
+                        $menuHtml .= '<li'.$li.'>';
                         if($p == 1){
                             $pageLink = "index.html";
                         }else{
@@ -304,12 +309,15 @@ class BuildTempController extends Controller {
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']  .' AND status = 1 AND parent = 0 ' ));        
         $buildTempHeader = UserHasTemplate::model()->findByAttributes(array('user_id' => $userId, 'order_id'=>Yii::app()->session['orderID']));
         $mainMenu =  explode(',',$buildTempHeader->user_menu) ;
-        
+
+        $ul = "";
+        $li = "";
+        if(isset($mainMenu[0])){ $ul = stripslashes($mainMenu[0]); }
+        if(isset($mainMenu[1])){ $li = stripslashes($mainMenu[1]); }
         $menuHtml ="";
-        $menuHtml .= '<ul class="'.$mainMenu[1].'">';
-        foreach ($userpagesObject as $data){
-            
-            $menuHtml .= '<li class="'.$mainMenu[1].'">
+        $menuHtml .= '<ul '.$ul.' >';
+        foreach ($userpagesObject as $data){            
+            $menuHtml .= '<li '.$li.' >
                     <a href='.$data->id.'>'.$data->page_name.'</a>' ;
                         $userpagesObjectAll = UserPages::model()->findAll('parent ='. $data->id);
                         if(count($userpagesObjectAll) > 0){
@@ -387,7 +395,9 @@ class BuildTempController extends Controller {
                 !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
             }
             BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
-          
+            /* Number of pages creation*/
+            $pageCount = BaseClass::pagesCount(Yii::app()->session['orderID']);
+            
             if ($hasbuilderObject) {                 
                 $hasUserTemplatePages = UserHasTemplate::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND  template_id = ' . $tempID )) ;
                
@@ -397,14 +407,14 @@ class BuildTempController extends Controller {
                     $hasbuilderObject = UserHasTemplate::model()->addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userID);
 
                     UserPages::model()->deleteAll(array('condition'=>'user_id = '.$userID .' AND order_id = '.$orderId));
-                    UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content,$buildertempObject->template_id);
+                    UserPages::model()->createNewPages($userID, $orderId, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
                 }  
                 
             } else { 
                 $orderId = Yii::app()->session['orderID'];
                 $templateObject = UserHasTemplate::model()->addAndEdit($templateObject, $buildertempObject,$orderId,$userID);
                 /* Add Home page of website */
-                UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content,$buildertempObject->template_id);
+                UserPages::model()->createNewPages($userID, $orderId, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
            }
 
            
