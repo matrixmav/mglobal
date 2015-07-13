@@ -137,6 +137,7 @@ class ContactController extends Controller
              $contactObject->email = $_REQUEST['email'];
              $contactObject->name = $_REQUEST['name'];
              $contactObject->subject = $_REQUEST['subject'];
+             $contactObject->message = $_REQUEST['message'];
              $contactObject->created_at = date('Y-m-d');
              $contactObject->status = 1;
              if($contactObject->save(false)){
