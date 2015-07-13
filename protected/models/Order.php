@@ -54,6 +54,7 @@ class Order extends CActiveRecord
                     'transaction' => array(self::BELONGS_TO, 'Transaction', 'transaction_id'),
 		    'gateway' => array(self::BELONGS_TO, 'Gateway', 'gateway_id'),
                     'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+                    'builder' => array(self::BELONGS_TO, 'UserHasTemplate', 'order_id'),
                     );
 	}
 
