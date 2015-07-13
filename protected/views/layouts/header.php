@@ -34,37 +34,39 @@
               <div id="inline11" style="display:none" class="readMoreBox content" style="width: 100%">
                 <div class="">
                <h2>contact<strong>  us</strong></h2>
-          
+               <div id="show_worningS"></div>
+               <div id="show_wornings"></div>
                <div class="col-sm-12">
                    <form>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
-
+                               <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+                               <div id="show_wornings_name"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-
+                               <input type="text" class="form-control" id="email1" placeholder="Email" name="email">
+                               <div id="show_wornings_email"></div>  
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                               <input class="form-control" id="exampleInputAmount" placeholder="Subject">
-                                  
+                               <input class="form-control" id="subject" placeholder="Subject" name="subject">
+                               <div id="show_wornings_subject"></div>   
 
                            </div>
                         </div>
                        <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="message"></textarea>
+                       <textarea class="form-control" rows="3" placeholder="message" id="message"></textarea>
+                       <div id="show_wornings_message"></div>
                        </div>
                        <div class="form-group">
    
-      <button type="submit" class="btn btn-success">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return submitForm();">Submit</button>
     
   </div>
                    </form>
@@ -312,4 +314,93 @@ $(document).ready(function(){
 		});
                
 		});
+   
+         function isEmail(aStr)
+             {
+
+            var reEmail=/^[0-9a-zA-Z_\.-]+\@[0-9a-zA-Z_\.-]+\.[0-9a-zA-Z_\.-]+$/;
+            if(!reEmail.test(aStr))
+            {
+            return false;
+
+            }
+            return true;
+
+            }/*End of isEmail function*/
+
+            function submitForm()
+            {
+            var email = $('#email1').val();
+            var name  = $('#name').val();
+            var subject = $('#subject').val();
+            var message = $('#message').val();
+          
+            $('#show_wornings_name').hide();
+            if(name ==''){
+            $('#show_wornings_name').show();
+            $("#show_wornings_name").html("Please enter name.");
+            $('#name').focus();
+            return false;
+            }
+            /*$('#show_wornings_email').hide();
+            if(email ==''){
+            $('#show_wornings_email').show();
+            $("#show_wornings_email").html("Please enter email.");
+            $('#email1').focus();
+            return false;
+            }
+             $('#show_wornings_email').hide();
+             if(!isEmail(email)){
+            $('#show_wornings_email').show();
+            $("#show_wornings_email").html("Please enter valid email.");
+            $('#email1').focus();
+            return false;
+            }*/
+             $('#show_wornings_subject').hide();
+            if(subject ==''){
+            $('#show_wornings_subject').show();
+            $("#show_wornings_subject").html("Please enter subject.");
+            $('#subject').focus();
+            return false;
+            }
+             $('#show_wornings_message').hide();
+            if(message ==''){
+            $('#show_wornings_message').show();
+            $("#show_wornings_message").html("Please enter your message.");
+            $('#message').focus();
+            return false;
+            }
+        
+        
+        
+        else{
+            var dataString = 'email='+email+'&name='+name+'&subject='+subject+'&message='+message;
+            $.ajax({
+            type: "GET",
+            url: "contact/contact",
+            data: dataString,
+            cache: false,
+            success: function(html){
+                    if(html == 1){
+                        document.getElementById('show_wornings_name').style.display="none";
+                        document.getElementById('show_wornings_email').style.display="none";
+                        document.getElementById('show_wornings_subject').style.display="none";
+                        document.getElementById('show_wornings_message').style.display="none";
+                        document.getElementById('show_worningS').style.display="block";
+                        document.getElementById("show_worningS").innerHTML = "Thanks! Your query has been submitted with us.";
+                        $("#name").val('');
+                        $("#email1").val('');
+                        $("#subject").val('');
+                        $("#message").val('');
+                    }else{
+                        document.getElementById('show_worningS').style.display = "none";
+                        document.getElementById("show_wornings").innerHTML = "There might be something wrong.";
+                    }
+                    $("#show_worningS").fadeOut(10000);
+                    
+              } 
+            });
+            }    
+}
+ 
 </script>
