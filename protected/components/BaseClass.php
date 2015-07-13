@@ -1083,9 +1083,7 @@ class BaseClass extends Controller {
         } else {
             return 1;
         }
-    }
-
-    
+    }    
     
     
     
@@ -1461,4 +1459,26 @@ class BaseClass extends Controller {
 //        return false;
     }
 
+    public static function pagesCount($orderId){
+        $pageLimit = Order::model()->findByAttributes(array('id' => $orderId));
+            
+            if($pageLimit->package_id == 1){
+                $pages = 1 ;
+            }else if($pageLimit->package_id == 2){
+                $pages = 3 ;
+            }else if($pageLimit->package_id == 4){
+                $pages = 5 ;
+            }else if($pageLimit->package_id == 5){
+                $pages = 10 ;
+            }else if($pageLimit->package_id == 6){
+                $pages = 15 ;
+            }else if($pageLimit->package_id == 7){
+                $pages = 20 ;
+            }else{
+                $pages = 2 ;
+            }
+            return $pages ;
+    }
+            
+    
 }
