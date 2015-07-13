@@ -56,6 +56,38 @@ class NewsController extends Controller
             
         }    
         $this->render('news_add', array('error' => $error,'success'=>$success));    
-        } 
+        }
         
+       
+    /*
+     * Function to fetch News list
+     */
+
+    public function actionList() {
+        $status = 1;
+        $pageSize = Yii::app()->params['defaultPageSize'];
+         if (!empty($_POST)) {
+         $status = $_POST['res_filter'];
+          
+         $dataProvider = new CActiveDataProvider('News', array(
+                'criteria' => array(
+                   'condition' => ('status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
+            ));
+          
+         }else{
+        //$dataProvider = new CActiveDataProvider('Package');
+        $dataProvider = new CActiveDataProvider('News', array(
+                'criteria' => array(
+                    'condition' => ('status = "' . $status . '"' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
+            ));
+         
+          }
+
+        $this->render('news_list', array(
+            'dataProvider' => $dataProvider, 'msg' => 0
+        ));
+    }
+
 }
