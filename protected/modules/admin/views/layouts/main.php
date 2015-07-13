@@ -896,9 +896,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 ?>
                                 
                                 <li
-                                    class="<?php echo (($curAction == 'resetpassword') || ($curAction == 'resetpassword')) ? "active" : ''; ?>">
+                                    class="<?php echo (($curAction == 'add') || ($curAction == 'edit') || ($curAction == 'list')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <i class="fa fa-user"></i>
-                                        <span class="title">Change Password</span>
+                                        <span class="title">News</span>
                                         <span class="selected"></span> <span
                                             class="arrow <?php echo ($curAction == 'resetpassword') ? "open" : ''; ?>">
                                         </span>
