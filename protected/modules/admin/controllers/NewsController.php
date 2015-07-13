@@ -63,7 +63,7 @@ class NewsController extends Controller
                $this->redirect(array('/admin/news/list', 'msg' => 3));   
               }
           }else{
-              $error .= "Please fill required(*) marked fields.";
+              $error = "Please fill required(*) marked fields.";
           }
           
         $this->render('news_add', array('error' => $error,'success'=>$success));    
@@ -139,7 +139,7 @@ class NewsController extends Controller
                $this->redirect(array('/admin/news/list', 'msg' => 3));   
               }
           }else{
-              $error .= "Please fill required(*) marked fields.";
+              $error = "Please fill required(*) marked fields.";
           }
         $this->render('news_edit', array('error' => $error,'success'=>$success));        
     }
