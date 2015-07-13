@@ -69,7 +69,11 @@ if(!empty($success)){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="cashwallet" <?php if(in_array('cashwallet',$accessArr)){?> checked="checked" <?php }?>>Cash wallet<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="rpwallet" <?php if(in_array('rpwallet',$accessArr)){?> checked="checked" <?php }?>>RP Wallet<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="commissionwallet" <?php if(in_array('commissionwallet',$accessArr)){?> checked="checked" <?php }?>>Commission Wallet<br/>
-         
+       
+         <input type="checkbox" name="access[]" value="news" <?php if(in_array('news',$accessArr)){?> checked="checked" <?php }?>>Summary<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="newsadd" <?php if(in_array('newsadd',$accessArr)){?> checked="checked" <?php }?>>News Add<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="newslist" <?php if(in_array('newslist',$accessArr)){?> checked="checked" <?php }?>>News List<br/>
+          
     </div>
 </div>
  
