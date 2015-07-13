@@ -73,12 +73,12 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'subject',
-                    'header' => '<span style="white-space: nowrap;">Country  &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Subject  &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '($data->subject) ? $data->subject : "N/A"',
                 ),
                 array(
-                    'name' => 'phone',
-                    'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
+                    'name' => 'message',
+                    'header' => '<span style="white-space: nowrap;">Message &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '($data->message) ? $data->message : "N/A"',
                 ),
                 
