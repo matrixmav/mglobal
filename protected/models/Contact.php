@@ -7,6 +7,9 @@
  * @property integer $id
  * @property string $name
  * @property string $email
+ * @property string $subject
+ * @property string $message
+ * @property string $type
  * @property integer $country_id
  * @property integer $phone
  * @property integer $status
@@ -31,13 +34,15 @@ class Contact extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, email, country_id, phone, status, created_at, updated_at', 'required'),
+			array('name, email, subject, message, type, country_id, phone, status, created_at, updated_at', 'required'),
 			array('country_id, phone, status', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>30),
 			array('email', 'length', 'max'=>100),
+			array('subject', 'length', 'max'=>255),
+			array('type', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, email, country_id, phone, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, name, email, subject, message, type, country_id, phone, status, created_at, updated_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,7 +54,6 @@ class Contact extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
 		);
 	}
 
@@ -62,6 +66,9 @@ class Contact extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Name',
 			'email' => 'Email',
+			'subject' => 'Subject',
+			'message' => 'Message',
+			'type' => 'Type',
 			'country_id' => 'Country',
 			'phone' => 'Phone',
 			'status' => 'Status',
@@ -91,6 +98,9 @@ class Contact extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('email',$this->email,true);
+		$criteria->compare('subject',$this->subject,true);
+		$criteria->compare('message',$this->message,true);
+		$criteria->compare('type',$this->type,true);
 		$criteria->compare('country_id',$this->country_id);
 		$criteria->compare('phone',$this->phone);
 		$criteria->compare('status',$this->status);
