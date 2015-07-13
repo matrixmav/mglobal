@@ -505,20 +505,20 @@ class UserController extends Controller {
         $countryObject = Country::model()->findAll();
         
         if ($_POST) {
-//            $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";
-//            $privatekey = "6LcCIgkTAAAAANss_hcRD61AmYuXJ0JA2bot4R8C";
-//
-//            # the response from reCAPTCHA
-//            $resp = null;
-//            # the error code from reCAPTCHA, if any
-//            $error = null;
-//            # was there a reCAPTCHA response?
-//            $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
-//
-//            if ($resp->is_valid != 1) {
-//                $error = "<p class='error'>Please Enter Valid Captcha.</p>";
-//                $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'social' => $social));
-//            } else {
+            $publickey = "6LcCIgkTAAAAANOtRjxKOfElrDy6BZQSKiYob3Xc";
+            $privatekey = "6LcCIgkTAAAAANss_hcRD61AmYuXJ0JA2bot4R8C";
+
+            # the response from reCAPTCHA
+            $resp = null;
+            # the error code from reCAPTCHA, if any
+            $error = null;
+            # was there a reCAPTCHA response?
+            $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+
+            if ($resp->is_valid != 1) {
+                $error = "<p class='error'>Please Enter Valid Captcha.</p>";
+                $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'social' => $social));
+            } else {
 
                 /* Already Exits */
                 $social = $_POST['social'];
