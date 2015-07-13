@@ -1302,12 +1302,15 @@ class BaseClass extends Controller {
                     } else if ($type == 10) {
                         $color = "sm-pro3"; //Advance Pro Packages 3
                     } else {
-                        $color = "sm-nothing"; //No Purchase 
+                        //$color = "sm-zzz"; //No Purchase 
                     }
+                    
+                    if($orderObject->status == 0){
+                       $color = "sm-zzz"; //No Purchase  
+                    }
+                    
                 }
             }
-        }else{
-            $color = "sm-user-active"; //No Purchase 
         }
         return $color;
     }
