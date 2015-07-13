@@ -912,16 +912,33 @@ License: You must have a valid license purchased only from themeforest(the above
                             }
                             /* code for news module*/
                             
+                           if (in_array('news', $accessArr)) { 
                             $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                $reservation_subsection = array(
+                                if (in_array('newsadd', $accessArr)) { 
+                                $reservation_subsection1 = array(
                                     
                                     "news/add" => "Add News",
-                                    "news/list" => "News List",
-                                   
                                 );
-                                ?>
                                 
+                                }else{
+                                    $reservation_subsection1 = array();
+                                }
+                                
+                                if (in_array('newslist', $accessArr)) { 
+                                $reservation_subsection2 = array(
+                                    
+                                     "news/list" => "News List",
+                                );
+                                
+                                }else{
+                                    $reservation_subsection2 = array();
+                                }
+                                   
+                                   
+                               $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2);  
+                                ?>
+                               
                                 <li
                                     class="<?php echo (($curAction == 'add') || ($curAction == 'edit') || ($curAction == 'list')) ? "active" : ''; ?>">
                                     <a href="javascript:;"> <i class="fa fa-user"></i>
@@ -956,6 +973,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                           }
                             
                              if (in_array('summary', $accessArr)) {
                              $reservation_pmenu = 9;
