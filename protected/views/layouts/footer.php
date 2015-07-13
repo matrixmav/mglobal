@@ -1,3 +1,4 @@
+<?php $newsObject = BaseClass::getNewsUpdates();?>
 <!-- BEGIN PRE-FOOTER -->
   <div class="pre-footer" id="contact">
     <div class="container">
@@ -38,7 +39,7 @@
          <div class="col-md-5 col-sm-6 pre-footer-col">
              <?php if(!empty($newsObject)){?>
             <p class="f-font">News Update</p>
-           <p><?php echo $newsObject->news;?></p>
+           <p><?php echo $newsObject;?></p>
         <?php }?>
           <p class="f-font">News Letter</p>
           <form class="form-inline">
