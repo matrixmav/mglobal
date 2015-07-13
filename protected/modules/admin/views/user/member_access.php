@@ -48,6 +48,10 @@ if(!empty($success)){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportcontact" <?php if(in_array('reportcontact',$accessArr)){?> checked="checked" <?php }?>>Contact Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportdeposit" <?php if(in_array('reportdeposit',$accessArr)){?> checked="checked" <?php }?>>Deposit Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportrefferal" <?php if(in_array('reportrefferal',$accessArr)){?> checked="checked" <?php }?>>Refferal Report<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportsubscriber" <?php if(in_array('reportsubscriber',$accessArr)){?> checked="checked" <?php }?>>Subscriber Report<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportfeedback" <?php if(in_array('reportfeedback',$accessArr)){?> checked="checked" <?php }?>>Feedback Report<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportbug" <?php if(in_array('reportbug',$accessArr)){?> checked="checked" <?php }?>>Bug Report<br/>
+         
         <br/>
        <input type="checkbox" name="access[]" value="mail" <?php if(in_array('mail',$accessArr)){?> checked="checked" <?php }?>>Mail<br/>
        <input type="checkbox" name="access[]" value="user" <?php if(in_array('user',$accessArr)){?> checked="checked" <?php }?>>Operation<br/>
