@@ -445,7 +445,7 @@ $(document).ready(function(){
         
         
         else{
-            var dataString = 'email='+email+'&name='+name+'&category='+feedback_category+'&message='+comment;
+            var dataString = 'email='+email+'&name='+name+'&feedback_category='+feedback_category+'&message='+comment;
             $.ajax({
             type: "GET",
             url: "contact/feedback",
