@@ -583,8 +583,17 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection9 = array();
                                             
                                 }
+                                
+                                if (in_array('reportsubscriber', $accessArr)) { 
+                                    $reservation_subsection10 = array(
+                                      "report/subscriber" => "Subscriber",  
+                                   );
+                                }else{
+                                    $reservation_subsection10 = array();
+                                            
+                                }
                                  
-                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection6,$reservation_subsection7,$reservation_subsection8,$reservation_subsection9);
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection6,$reservation_subsection7,$reservation_subsection8,$reservation_subsection9,$reservation_subsection10);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
