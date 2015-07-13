@@ -60,7 +60,7 @@ class NewsController extends Controller
               $newsObject = new News();
               $newsObject->news = $_POST['news'];
               $newsObject->created_at = date('Y-m-d');
-              $newsObject->staus = 1;
+              $newsObject->status = 1;
               if($newsObject->save(false)){
                $this->redirect(array('/admin/news/list', 'msg' => 3));   
               }
@@ -141,7 +141,7 @@ class NewsController extends Controller
               $newsObject = new News();
               $newsObject->news = $_POST['news'];
               $newsObject->created_at = date('Y-m-d');
-              $newsObject->staus = 1;
+              $newsObject->status = 1;
               if($newsObject->save(false)){
                $this->redirect(array('/admin/news/list', 'msg' => 3));   
               }
