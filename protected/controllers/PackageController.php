@@ -551,7 +551,7 @@ class PackageController extends Controller {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             if(!empty($transactionObject)){
             //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
+            if ($transactionObject->status == 1) {
                 $transactionObject->status = 1;
                 $transactionObject->paid_amount = ($transactionObject->actual_amount) - ($transactionObject->used_rp);
                 $transactionObject->created_at = date('Y-m-d');
@@ -728,6 +728,10 @@ class PackageController extends Controller {
                 }
                 $Samount = number_format($packageObject->amount + $orderObject->domain_price, 2);
                 $paid_amount = number_format($transactionObject->paid_amount, 2);
+                
+                /*code to fetch profile */
+                $userProfileObject = UserProfile::model()->findByAttributes(array('user_id' => $userObject->id));
+                
                 $invoiceArr = array();
                 $invoiceArr['package_name'] = $packageObject->name;
                 $invoiceArr['package_price'] = $packageObject->amount;
@@ -735,7 +739,7 @@ class PackageController extends Controller {
                 $invoiceArr['name'] = $userObject->name;
                 $invoiceArr['transaction_id'] = $transactionObject->transaction_id;
                 $invoiceArr['full_name'] = $userObject->full_name;
-                $invoiceArr['address'] = $userObject->address;
+                $invoiceArr['address'] = $userProfileObject->address;
                 $invoiceArr['email'] = $userObject->email;
                 $invoiceArr['domain'] = $orderObject->domain;
                 $invoiceArr['domain_price'] = $domain_price;
@@ -784,7 +788,7 @@ class PackageController extends Controller {
     </td>
   </tr></table>';*/
                 
-                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
+                echo $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);exit;
                 
                 $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
                 $orderObject = Order::model()->findByPK($orderObject->id);
