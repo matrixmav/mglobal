@@ -140,7 +140,7 @@ class SiteController extends Controller
               /*mail to user*/
              $config['to'] = 'nehanidhi.2008@gmail.com';
              $config['subject'] = 'mGlobally Subscription Confirmed';
-             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMailAdmin', array('userObjectArr'=>$userObjectArr),true);
               //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
              CommonHelper::sendMail($config);
              echo 1;
