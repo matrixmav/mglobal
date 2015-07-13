@@ -91,11 +91,11 @@
         <!-- BEGIN SOCIAL ICONS -->
         <div class="col-md-6 col-sm-6 pull-right">
           <ul class="social-icons">
-               <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/g-footer-icon.png"></a></li>  
-                <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/ln-footer-icon.png"></a></li> 
-                <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/tw-footer-icon.png"></a></li> 
-                  <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/pinterest-footer-icon.png"></a></li>
-              <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/fb-footer-icon.png"></a></li>
+               <li><a class="rss" data-original-title="rss" href="https://plus.google.com/b/114439069888125758419/114439069888125758419/about" target="_blank"> <img src="/images/g-footer-icon.png"></a></li>  
+                <li><a class="rss" data-original-title="rss" href="javascript:void(0);" target="_blank"> <img src="/images/ln-footer-icon.png"></a></li> 
+                <li><a class="rss" data-original-title="rss" href="https://twitter.com/MGlobally" target="_blank"> <img src="/images/tw-footer-icon.png"></a></li> 
+                  <li><a class="rss" data-original-title="rss" href="https://www.pinterest.com/mglobally/" target="_blank"> <img src="/images/pinterest-footer-icon.png"></a></li>
+              <li><a class="rss" data-original-title="rss" href="https://www.facebook.com/pages/MGlobally/516594005156691?ref=hl" target="_blank"> <img src="/images/fb-footer-icon.png"></a></li>
             
               
              
