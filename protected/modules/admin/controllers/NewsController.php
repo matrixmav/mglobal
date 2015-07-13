@@ -89,5 +89,26 @@ class NewsController extends Controller
             'dataProvider' => $dataProvider, 'msg' => 0
         ));
     }
+    
+    /*
+     * Function to change status
+     */
+
+    public function actionChangeStatus() {
+
+
+        if ($_REQUEST['id']) {
+            $newsObject = News::model()->findByPK($_REQUEST['id']);
+            if ($newsObject->status == 1) {
+                $newsObject->status = 0;
+            } else {
+                $newsObject->status = 1;
+            }
+            $newsObject->save(false);
+            //$this->redirect('/admin/package/list',array('msg'=>'2'));
+            $this->redirect(array('/admin/news/list', 'msg' => 2));
+        }
+    }
+
 
 }
