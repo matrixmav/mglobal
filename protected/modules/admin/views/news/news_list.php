@@ -51,6 +51,7 @@ $this->breadcrumbs = array(
 <div class="row">
     <div class="col-md-12">
          <?php if (!empty($_GET['msg']) && $_GET['msg'] == '2') { ?> <div class="success"><?php echo "Status Changed Succesfully." ?></div> <?php } ?>
+         <?php if (!empty($_GET['msg']) && $_GET['msg'] == '3') { ?> <div class="success"><?php echo "News Added Succesfully." ?></div> <?php } ?>
         <?php if (!empty($_GET['success'])) { ?> <div class="success"><?php echo $_GET['success'];?></div> <?php } ?>
          <?php if (!empty($_GET['error'])) { ?> <div class="error"><?php $_GET['error'];?></div> <?php } ?>
 
