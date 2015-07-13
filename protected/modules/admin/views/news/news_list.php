@@ -102,12 +102,12 @@ $this->breadcrumbs = array(
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
                             'options' => array('class' => 'fa fa-success btn default black delete'),
-                            'url' => 'Yii::app()->createUrl("admin/package/changestatus", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/news/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
                             'options' => array('class' => 'fa fa-success btn default black delete blue'),
-                            'url' => 'Yii::app()->createUrl("admin/package/edit", array("id"=>$data->id))',
+                            'url' => 'Yii::app()->createUrl("admin/news/edit", array("id"=>$data->id))',
                         ),
                          
                     ),
