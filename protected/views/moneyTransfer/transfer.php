@@ -65,7 +65,7 @@ $this->breadcrumbs = array(
             </fieldset>
  
         <div class="form-actions right">                     
-                <input type="submit"  name="transfer" id="transfer" class="btn red" value="Transfer Funds" onClick="return validationfrom();"/>                     
+                <input type="submit"  name="transfer" id="transfer" class="btn orange" value="Transfer Funds" onClick="return validationfrom();"/>                     
                 <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
           </div>
        
@@ -101,6 +101,11 @@ $this->breadcrumbs = array(
     if($('#paid_amount').val()== '')
     {
        $('#email_error').html("Transfer amount can not be blank"); 
+       return false;
+    }
+    if (isNaN($('#paid_amount').val()))
+    {
+        $('#email_error').html("Invalid amount"); 
        return false;
     }
     var fund = $('#transaction_data_amt').val();
