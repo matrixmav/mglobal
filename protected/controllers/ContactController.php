@@ -159,7 +159,7 @@ class ContactController extends Controller
              $feedbackObject->email = $_REQUEST['email'];
              $feedbackObject->name = $_REQUEST['name'];
              $feedbackObject->feedback_for = $_REQUEST['feedback_category'];
-             $feedbackObject->message = $_REQUEST['message'];
+             $feedbackObject->comment = $_REQUEST['message'];
              $feedbackObject->created_at = date('Y-m-d');
               if($feedbackObject->save(false)){
                  echo 1;
