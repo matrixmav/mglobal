@@ -324,7 +324,7 @@ class ReportController extends Controller {
 
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND type = contact' ), 'order' => 'id DESC',
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND type = "contact"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
         $this->render('contact', array(
             'dataProvider' => $dataProvider,
@@ -345,7 +345,7 @@ class ReportController extends Controller {
 
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND type = subscribe' ), 'order' => 'id DESC',
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND type = "subscribe"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
         $this->render('contact', array(
             'dataProvider' => $dataProvider,
