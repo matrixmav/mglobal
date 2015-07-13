@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Contacts Report'
+    'Subscriber Report'
 );
 ?>
 <style>
