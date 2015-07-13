@@ -126,49 +126,37 @@
                <h2>web<strong> bug </strong></h2>
           
          <div class="col-sm-12">
-                   <form>
+             <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
-
+                               <input type="text" class="form-control" id="name" placeholder="Name">
+                               <div id="show_wornings_nameB"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-
+                               <input type="text" class="form-control" id="email" placeholder="Email">
+                               <div id="show_wornings_emailB"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="contact no">
-
+                               <input type="text" class="form-control" id="phone" placeholder="contact no">
+                               
                            </div>
                         </div>
+                       
+                      
                        <div class="form-group">
-                           <div class="input-group">
-                               <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="organization">
-
-                           </div>
-                        </div>
-                       <div class="form-group">
-                           <div class="input-group">
-                               <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                               <input class="form-control" id="exampleInputAmount" placeholder="problem">
-                                  
-
-                           </div>
-                        </div>
-                       <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="problem description"></textarea>
+                       <textarea class="form-control" rows="3" placeholder="Description"></textarea>
+                       <div id="show_wornings_messageB"></div>
                        </div>
                        <div class="form-group">
                         
-                    <button type="submit" class="btn btn-success">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return bugFormSubmit();">Submit</button>
     
   </div>
                    </form>
@@ -439,6 +427,73 @@ $(document).ready(function(){
             $('#show_wornings_messageF').show();
             $("#show_wornings_messageF").html("Please enter your comment.");
             $('#comment').focus();
+            return false;
+            }
+        
+        
+        
+        else{
+            var dataString = 'email='+email+'&name='+name+'&feedback_category='+feedback_category+'&message='+message;
+            $.ajax({
+            type: "GET",
+            url: "contact/feedback",
+            data: dataString,
+            cache: false,
+            success: function(html){
+                    if(html == 1){
+                        $('#show_worningF').show();
+                        $("#show_worningF").html("Thanks! Your query has been submitted with us.");
+                        $("#nameF").val('');
+                        $("#emailF").val('');
+                        $("#feedback_category").val('');
+                        $("#comment").val('');
+                        $("#show_worningF").fadeOut(10000);
+                    }else{
+                        document.getElementById('show_worningF').style.display = "none";
+                        document.getElementById("show_worningf").innerHTML = "There might be something wrong.";
+                    }
+                    
+                    
+              } 
+            });
+            }    
+}
+
+ /* code to submit bug form */
+      function bugFormSubmit()
+            {
+            var email = $('#emailB').val();
+            var name  = $('#nameB').val();
+            var phone  = $('#phone').val();
+            var description = $('#description').val();
+          
+            $('#show_wornings_nameB').hide();
+            if(name ==''){
+            $('#show_wornings_nameB').show();
+            $("#show_wornings_nameB").html("Please enter name.");
+            $('#nameF').focus();
+            return false;
+            }
+            $('#show_wornings_emailB').hide();
+            if(email ==''){
+            $('#show_wornings_emailB').show();
+            $("#show_wornings_emailB").html("Please enter email.");
+            $('#emailF').focus();
+            return false;
+            }
+             $('#show_wornings_emailB').hide();
+             if(!isEmail(email)){
+            $('#show_wornings_emailB').show();
+            $("#show_wornings_emailB").html("Please enter valid email.");
+            $('#emailF').focus();
+            return false;
+            }
+             
+             $('#show_wornings_messageB').hide();
+            if(description ==''){
+            $('#show_wornings_messageB').show();
+            $("#show_wornings_messageB").html("Please enter your comment.");
+            $('#description').focus();
             return false;
             }
         
