@@ -335,7 +335,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = '';
                                 }
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="/admin/default/dashboard"><i class="fa fa-home"></i>  <span class="title">Dashboard</span>
+                                <li class="<?php echo $activecls; ?>"><a href="/admin/user/dashboard"><i class="fa fa-home"></i>  <span class="title">Dashboard</span>
                                         <span class="selected"></span> 
                                         <?php /*<span
                                             class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
