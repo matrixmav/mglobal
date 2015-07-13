@@ -103,6 +103,7 @@ class SiteController extends Controller
            $proPackageObject = Package::model()->findAll(array('condition'=>'type=3 AND status=1','order' => 'name ASC','limit' => '3'));
            
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
+           
            $membership_type = "";
            if(!empty(Yii::app()->session['userid'])){
            $userObject = User::model()->findByPk(Yii::app()->session['userid']);
@@ -111,7 +112,13 @@ class SiteController extends Controller
            if(!empty(Yii::app()->session['domain'])){
                unset(Yii::app()->session['domain']);
            }
-          $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
+           
+          /*function to show news feeds*/
+           
+          $newsObject = News::model()->findAll(array('condition'=>'status=1','order' => 'created_at DESC','limit' => '1'));
+           
+            
+          $this->render('index',array('newsObject'=> $newsObject,'membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
                     
