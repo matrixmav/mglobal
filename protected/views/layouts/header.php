@@ -8,12 +8,12 @@
 
       <ul class="inline">
          
-        <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-        <li><a href=""><i class="fa fa-twitter-square"></i></a></li>
-        <li><a href=""><i class="fa fa-skype"></i></a></li>
-        <li><a href=""><i class="fa fa-linkedin-square"></i></a></li>
-        <li><a href=""><i class="fa fa-youtube-square"></i></a></li>
-         <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
+          <li><a href="https://www.facebook.com/pages/MGlobally/516594005156691?ref=hl" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+        <li><a href="https://twitter.com/MGlobally" target="_blank"><i class="fa fa-twitter-square"></i></a></li>
+        <li><a href="callto://MGlobally" target="_blank"><i class="fa fa-skype"></i></a></li>
+        <li><a href="" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+        <li><a href="https://www.youtube.com/channel/UCQUJDa-Mvxee80MMrhK-_Sg" target="_blank"><i class="fa fa-youtube-square"></i></a></li>
+         <li><a href="" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
       </ul>
       
     </div>
@@ -186,7 +186,7 @@
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
 
                         <li style="border: none;"><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
-                        <li style="border: none;"><a href="callto://ramhemareddy"><button id="checkout" class="btn  topBtn">Call Us</button><a/></li>
+                        <li style="border: none;"><a href="callto://MGlobally"><button id="checkout" class="btn  topBtn">Call Us</button><a/></li>
 
                     </ul>
               </div>
