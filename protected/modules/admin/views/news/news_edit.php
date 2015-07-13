@@ -5,8 +5,8 @@ $this->breadcrumbs = array(
 );
  
 ?>
-<div class="col-md-7 col-sm-7">
-    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
+<div class="col-md-12">
+ 
     
 <div class="col-md-7 col-sm-7">
     <?php if ($error) { ?><div class="error"><?php echo $error; ?></div><?php } ?>
@@ -22,7 +22,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label for="firstname" class="col-lg-4 control-label">News Description<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea class="form-control" value="<?php echo (!empty($newsObject)) ? $newsObject->news : "" ;?>" name="news" id="news" cols="30" rows="10" style="height: 234px; width: 494px;"></textarea>
+                    <textarea class="form-control" name="news" id="news" cols="30" rows="10" style="height: 234px; width: 494px;"><?php echo (!empty($newsObject)) ? $newsObject->news : "" ;?></textarea>
                      <span id="news_error" class="clrred"></span>
                 </div>
             </div>
