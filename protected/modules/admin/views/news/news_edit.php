@@ -22,7 +22,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label for="firstname" class="col-lg-4 control-label">News Description<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control" value="" name="news" id="news">
+                    <textarea class="form-control" value="<?php echo (!empty($newsObject)) ? $newsObject->news : "" ;?>" name="news" id="news" cols="30" rows="10" style="height: 234px; width: 494px;"></textarea>
                      <span id="news_error" class="clrred"></span>
                 </div>
             </div>
