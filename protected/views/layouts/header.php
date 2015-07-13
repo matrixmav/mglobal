@@ -34,10 +34,10 @@
               <div id="inline11" style="display:none" class="readMoreBox content" style="width: 100%">
                 <div class="">
                <h2>contact<strong>  us</strong></h2>
-               <div id="show_worningS"></div>
-               <div id="show_wornings"></div>
+               <div id="show_worningS" style="display:none;"></div>
+               <div id="show_wornings" style="display:none;"></div>
                <div class="col-sm-12">
-                   <form>
+                   <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
@@ -48,7 +48,7 @@
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="email1" placeholder="Email" name="email">
+                               <input type="text" class="form-control" placeholder="Email" name="email" id="email">
                                <div id="show_wornings_email"></div>  
                            </div>
                         </div>
@@ -330,7 +330,7 @@ $(document).ready(function(){
 
             function submitForm()
             {
-            var email = $('#email1').val();
+            var email = $('#email').val();
             var name  = $('#name').val();
             var subject = $('#subject').val();
             var message = $('#message').val();
@@ -342,20 +342,20 @@ $(document).ready(function(){
             $('#name').focus();
             return false;
             }
-            /*$('#show_wornings_email').hide();
+            $('#show_wornings_email').hide();
             if(email ==''){
             $('#show_wornings_email').show();
             $("#show_wornings_email").html("Please enter email.");
-            $('#email1').focus();
+            $('#email').focus();
             return false;
             }
              $('#show_wornings_email').hide();
              if(!isEmail(email)){
             $('#show_wornings_email').show();
             $("#show_wornings_email").html("Please enter valid email.");
-            $('#email1').focus();
+            $('#email').focus();
             return false;
-            }*/
+            }
              $('#show_wornings_subject').hide();
             if(subject ==''){
             $('#show_wornings_subject').show();
