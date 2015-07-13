@@ -492,7 +492,7 @@ $(document).ready(function(){
              $('#show_wornings_messageB').hide();
             if(description ==''){
             $('#show_wornings_messageB').show();
-            $("#show_wornings_messageB").html("Please enter your comment.");
+            $("#show_wornings_messageB").html("Please enter your bug description.");
             $('#description').focus();
             return false;
             }
