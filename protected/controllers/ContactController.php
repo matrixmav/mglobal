@@ -150,7 +150,7 @@ class ContactController extends Controller
         
         
       
-        /*contact form subbmission*/
+        /*feedback form subbmission*/
         public function actionFeedback() {
                     
           if(!empty($_REQUEST))  
