@@ -78,40 +78,43 @@
         <li> <a href="#inline12" class="fancybox"><i class="fa fa-envelope-o"></i></a>
             <div id="inline12" style="display:none" class="readMoreBox content">
                <h2>feedback<strong> form </strong></h2>
-          
+               <div id="show_worningF" style="display:none;"></div>
+               <div id="show_worningf" style="display:none;"></div>
+               
         <div class="col-sm-12">
-                   <form>
+            <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
-
+                               <input type="text" class="form-control"  placeholder="Name" id="nameF">
+                               <div id="show_wornings_nameF"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-
+                               <input type="text" class="form-control"  placeholder="Email" id="emailF">
+                               <div id="show_wornings_emailF"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                               <select class="form-control" id="exampleInputAmount" placeholder="Feedback category">
+                               <select class="form-control" placeholder="Feedback category" id="feedback_category">
                                    <option>1</option>
                                     <option>1</option>
                                      <option>1</option>
                                </select>
-
+                            
                            </div>
                         </div>
                        <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="comment"></textarea>
+                       <textarea class="form-control" rows="3" placeholder="comment" id="comment"></textarea>
+                       <div id="show_wornings_messageF"></div>
                        </div>
                        <div class="form-group">
    
-      <button type="submit" class="btn btn-success">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return submitFeddbackForm();">Submit</button>
     
   </div>
                    </form>
@@ -382,25 +385,89 @@ $(document).ready(function(){
             cache: false,
             success: function(html){
                     if(html == 1){
-                        document.getElementById('show_wornings_name').style.display="none";
-                        document.getElementById('show_wornings_email').style.display="none";
-                        document.getElementById('show_wornings_subject').style.display="none";
-                        document.getElementById('show_wornings_message').style.display="none";
-                        document.getElementById('show_worningS').style.display="block";
-                        document.getElementById("show_worningS").innerHTML = "Thanks! Your query has been submitted with us.";
+                        $('#show_worningS').show();
+                        $("#show_worningS").html("Thanks! Your query has been submitted with us.");
                         $("#name").val('');
-                        $("#email1").val('');
+                        $("#email").val('');
                         $("#subject").val('');
                         $("#message").val('');
+                        $("#show_worningS").fadeOut(10000);
                     }else{
                         document.getElementById('show_worningS').style.display = "none";
                         document.getElementById("show_wornings").innerHTML = "There might be something wrong.";
                     }
-                    $("#show_worningS").fadeOut(10000);
+                    
                     
               } 
             });
             }    
 }
  
+ 
+ /* code to submit feedback form */
+      function submitFeddbackForm()
+            {
+            var email = $('#emailF').val();
+            var name  = $('#nameF').val();
+            var feedback_category  = $('#feedback_category').val();
+             var message = $('#comment').val();
+          
+            $('#show_wornings_nameF').hide();
+            if(name ==''){
+            $('#show_wornings_nameF').show();
+            $("#show_wornings_nameF").html("Please enter name.");
+            $('#nameF').focus();
+            return false;
+            }
+            $('#show_wornings_emailF').hide();
+            if(email ==''){
+            $('#show_wornings_emailF').show();
+            $("#show_wornings_emailF").html("Please enter email.");
+            $('#emailF').focus();
+            return false;
+            }
+             $('#show_wornings_emailF').hide();
+             if(!isEmail(email)){
+            $('#show_wornings_emailF').show();
+            $("#show_wornings_emailF").html("Please enter valid email.");
+            $('#emailF').focus();
+            return false;
+            }
+             
+             $('#show_wornings_messageF').hide();
+            if(message ==''){
+            $('#show_wornings_messageF').show();
+            $("#show_wornings_messageF").html("Please enter your comment.");
+            $('#comment').focus();
+            return false;
+            }
+        
+        
+        
+        else{
+            var dataString = 'email='+email+'&name='+name+'&category='+feedback_category+'&message='+comment;
+            $.ajax({
+            type: "GET",
+            url: "contact/feedback",
+            data: dataString,
+            cache: false,
+            success: function(html){
+                    if(html == 1){
+                        $('#show_worningF').show();
+                        $("#show_worningF").html("Thanks! Your query has been submitted with us.");
+                        $("#nameF").val('');
+                        $("#emailF").val('');
+                        $("#feedback_category").val('');
+                        $("#comment").val('');
+                        $("#show_worningF").fadeOut(10000);
+                    }else{
+                        document.getElementById('show_worningF').style.display = "none";
+                        document.getElementById("show_worningf").innerHTML = "There might be something wrong.";
+                    }
+                    
+                    
+              } 
+            });
+            }    
+}
 </script>
