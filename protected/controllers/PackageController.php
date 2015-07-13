@@ -730,6 +730,8 @@ class PackageController extends Controller {
                 $paid_amount = number_format($transactionObject->paid_amount, 2);
                 $invoiceArr = array();
                 $invoiceArr['package_name'] = $packageObject->name;
+                $invoiceArr['package_price'] = $packageObject->amount;
+                $invoiceArr['Description'] = $packageObject->Description;
                 $invoiceArr['name'] = $userObject->name;
                 $invoiceArr['transaction_id'] = $transactionObject->transaction_id;
                 $invoiceArr['full_name'] = $userObject->full_name;
