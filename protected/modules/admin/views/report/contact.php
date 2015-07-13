@@ -71,16 +71,16 @@ $this->breadcrumbs = array(
                     'header' => '<span style="white-space: nowrap;">Email &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->email',
                 ),
-                /*array(
-                    'name' => 'country_id',
+                array(
+                    'name' => 'subject',
                     'header' => '<span style="white-space: nowrap;">Country  &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->country->name',
+                    'value' => '($data->subject) ? $data->subject : "N/A"',
                 ),
                 array(
                     'name' => 'phone',
                     'header' => '<span style="white-space: nowrap;">Phone &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->phone',
-                ),*/
+                    'value' => '($data->message) ? $data->message : "N/A"',
+                ),
                 
             ),
         ));
