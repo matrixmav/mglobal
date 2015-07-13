@@ -130,14 +130,14 @@
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="name" placeholder="Name">
+                               <input type="text" class="form-control" id="nameB" placeholder="Name">
                                <div id="show_wornings_nameB"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="email" placeholder="Email">
+                               <input type="text" class="form-control" id="emailB" placeholder="Email">
                                <div id="show_wornings_emailB"></div>
                            </div>
                         </div>
@@ -151,7 +151,7 @@
                        
                       
                        <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="Description"></textarea>
+                       <textarea class="form-control" rows="3" placeholder="Description" id="description"></textarea>
                        <div id="show_wornings_messageB"></div>
                        </div>
                        <div class="form-group">
@@ -459,7 +459,7 @@ $(document).ready(function(){
             }    
 }
 
- /* code to submit bug form */
+         /* code to submit bug form */
       function bugFormSubmit()
             {
             var email = $('#emailB').val();
@@ -471,21 +471,21 @@ $(document).ready(function(){
             if(name ==''){
             $('#show_wornings_nameB').show();
             $("#show_wornings_nameB").html("Please enter name.");
-            $('#nameF').focus();
+            $('#nameB').focus();
             return false;
             }
             $('#show_wornings_emailB').hide();
             if(email ==''){
             $('#show_wornings_emailB').show();
             $("#show_wornings_emailB").html("Please enter email.");
-            $('#emailF').focus();
+            $('#emailB').focus();
             return false;
             }
              $('#show_wornings_emailB').hide();
              if(!isEmail(email)){
             $('#show_wornings_emailB').show();
             $("#show_wornings_emailB").html("Please enter valid email.");
-            $('#emailF').focus();
+            $('#emailB').focus();
             return false;
             }
              
@@ -500,24 +500,24 @@ $(document).ready(function(){
         
         
         else{
-            var dataString = 'email='+email+'&name='+name+'&feedback_category='+feedback_category+'&message='+message;
+            var dataString = 'email='+email+'&name='+name+'&phone='+phone+'&message='+description;
             $.ajax({
             type: "GET",
-            url: "contact/feedback",
+            url: "contact/bug",
             data: dataString,
             cache: false,
             success: function(html){
                     if(html == 1){
-                        $('#show_worningF').show();
-                        $("#show_worningF").html("Thanks! Your query has been submitted with us.");
-                        $("#nameF").val('');
-                        $("#emailF").val('');
-                        $("#feedback_category").val('');
-                        $("#comment").val('');
-                        $("#show_worningF").fadeOut(10000);
+                        $('#show_worningB').show();
+                        $("#show_worningB").html("Thanks! Your query has been submitted with us.");
+                        $("#nameB").val('');
+                        $("#emailB").val('');
+                        $("#phone").val('');
+                        $("#description").val('');
+                        $("#show_worningB").fadeOut(10000);
                     }else{
-                        document.getElementById('show_worningF').style.display = "none";
-                        document.getElementById("show_worningf").innerHTML = "There might be something wrong.";
+                        document.getElementById('show_worningB').style.display = "none";
+                        document.getElementById("show_worningb").innerHTML = "There might be something wrong.";
                     }
                     
                     
