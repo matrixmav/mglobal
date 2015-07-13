@@ -142,7 +142,7 @@ class NewsController extends Controller
                $newsObject->created_at = date('Y-m-d');
                $newsObject->status = 1;
                if($newsObject->save(false)){
-               $this->redirect(array('/admin/news/list', 'msg' => 3));   
+               $this->redirect(array('/admin/news/list', 'msg' => 4));   
               }
           }else{
               $error .= "Please fill required(*) marked fields.";
