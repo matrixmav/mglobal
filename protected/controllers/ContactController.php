@@ -127,6 +127,36 @@ class ContactController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+        
+        /*contact form subbmission*/
+        public function actionSubscription() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $contactObject = new Contact;
+             $contactObject->email = $_REQUEST['email'];
+             $contactObject->created_at = date('Y-m-d');
+             $contactObject->status = 1;
+             $contactObject->save(false);
+             /*mail to user*/
+             $userObjectArr['email'] = $_REQUEST['email'];
+             $config['to'] = $_REQUEST['email'];
+             $config['subject'] = 'mGlobally Subscription Confirmed';
+             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+              //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
+             CommonHelper::sendMail($config);
+             
+              /*mail to user*/
+             $config['to'] = 'nehanidhi.2008@gmail.com';
+             $config['subject'] = 'mGlobally Subscription Confirmed';
+             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMailAdmin', array('userObjectArr'=>$userObjectArr),true);
+              //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
+             CommonHelper::sendMail($config);
+             echo 1;
+          }else{
+            echo 0;
+          }
+        }
 
 	/**
 	 * Manages all models.
