@@ -126,6 +126,7 @@ class SiteController extends Controller
           {
              $contactObject = new Contact;
              $contactObject->email = $_REQUEST['email'];
+             $contactObject->type = "subscribe";
              $contactObject->created_at = date('Y-m-d');
              $contactObject->status = 1;
              $contactObject->save(false);
