@@ -28,7 +28,7 @@ class ContactController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','contact'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -129,31 +129,20 @@ class ContactController extends Controller
 	}
         
         /*contact form subbmission*/
-        public function actionSubscription() {
+        public function actionContact() {
                     
           if(!empty($_REQUEST))  
           {
              $contactObject = new Contact;
              $contactObject->email = $_REQUEST['email'];
+             $contactObject->name = $_REQUEST['name'];
+             $contactObject->subject = $_REQUEST['subject'];
              $contactObject->created_at = date('Y-m-d');
              $contactObject->status = 1;
-             $contactObject->save(false);
-             /*mail to user*/
-             $userObjectArr['email'] = $_REQUEST['email'];
-             $config['to'] = $_REQUEST['email'];
-             $config['subject'] = 'mGlobally Subscription Confirmed';
-             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
-              //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
-             CommonHelper::sendMail($config);
-             
-              /*mail to user*/
-             $config['to'] = 'nehanidhi.2008@gmail.com';
-             $config['subject'] = 'mGlobally Subscription Confirmed';
-             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMailAdmin', array('userObjectArr'=>$userObjectArr),true);
-              //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
-             CommonHelper::sendMail($config);
-             echo 1;
-          }else{
+             if($contactObject->save(false)){
+                 echo 1;
+              }
+           }else{
             echo 0;
           }
         }
