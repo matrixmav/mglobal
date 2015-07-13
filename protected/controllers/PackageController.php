@@ -544,7 +544,7 @@ class PackageController extends Controller {
      */
 
     public function actionThankYou() {
-
+    echo $config['body'] = $this->renderPartial('../mailTemp/paymentsuccess', true);exit;
         if (!(empty($_GET))) {
              
             $transactionId = $_GET['transaction_id'];
