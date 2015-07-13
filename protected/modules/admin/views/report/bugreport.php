@@ -62,7 +62,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'name',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '($data->name) ? $data->name : "N/A"',
                 ),
                 
@@ -73,7 +73,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'phone',
-                    'header' => '<span style="white-space: nowrap;">Subject  &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Phone  &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '($data->phone) ? $data->phone : "N/A"',
                 ),
                 array(
