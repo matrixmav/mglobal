@@ -368,7 +368,7 @@ class ReportController extends Controller {
             'criteria' => array(
                 'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
-        $this->render('subscriber', array(
+        $this->render('feedbackreport', array(
             'dataProvider' => $dataProvider,
         ));
     }
@@ -390,7 +390,7 @@ class ReportController extends Controller {
             'criteria' => array(
                 'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
-        $this->render('subscriber', array(
+        $this->render('bugreport', array(
             'dataProvider' => $dataProvider,
         ));
     }
