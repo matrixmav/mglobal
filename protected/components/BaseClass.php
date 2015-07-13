@@ -1307,7 +1307,7 @@ class BaseClass extends Controller {
                 }
             }
         }else{
-            $color = "sm-nothing"; //No Purchase 
+            $color = "sm-user-active"; //No Purchase 
         }
         return $color;
     }
