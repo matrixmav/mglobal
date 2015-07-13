@@ -34,8 +34,8 @@
               <div id="inline11" style="display:none" class="readMoreBox content" style="width: 100%">
                 <div class="">
                <h2>contact<strong>  us</strong></h2>
-               <div id="show_worningS" style="display:none;"></div>
-               <div id="show_wornings" style="display:none;"></div>
+               <div id="show_worning" style="display:none;"> </div>
+               <div id="show_worning" style="display:none;"> </div>
                <div class="col-sm-12">
                    <form method="post">
                        <div class="form-group">
@@ -379,13 +379,13 @@ $(document).ready(function(){
                         $("#email").val('');
                         $("#subject").val('');
                         $("#message").val('');
-                        $('#show_worningS').show();
-                        $("#show_worningS").html("Thanks! Your query has been submitted with us.");
+                        $('#show_worning').show();
+                        $("#show_worning").html("Thanks! Your query has been submitted with us.");
                         
-                        $("#show_worningS").fadeOut(10000);
+                        $("#show_worning").fadeOut(20000);
                     }else{
-                        document.getElementById('show_worningS').style.display = "none";
-                        document.getElementById("show_wornings").innerHTML = "There might be something wrong.";
+                        document.getElementById('show_worning').style.display = "none";
+                        document.getElementById("show_worning").innerHTML = "There might be something wrong.";
                     }
                     
                     
