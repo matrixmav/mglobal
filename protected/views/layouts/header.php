@@ -124,7 +124,9 @@
         <li><a href="#inline13" class="fancybox"><i class="fa fa-bug"></i></a>
             <div id="inline13" style="display:none" class="readMoreBox content">
                <h2>web<strong> bug </strong></h2>
-          
+          <div id="show_worningR" style="display:none;"></div>
+               <div id="show_worningr" style="display:none;"></div>
+               
          <div class="col-sm-12">
              <form method="post">
                        <div class="form-group">
@@ -508,16 +510,16 @@ $(document).ready(function(){
             cache: false,
             success: function(html){
                     if(html == 1){
-                        $('#show_worningB').show();
-                        $("#show_worningB").html("Thanks! Your query has been submitted with us.");
+                        $('#show_worningR').show();
+                        $("#show_worningR").html("Thanks! Your query has been submitted with us.");
                         $("#nameB").val('');
                         $("#emailB").val('');
                         $("#phone").val('');
                         $("#description").val('');
-                        $("#show_worningB").fadeOut(10000);
+                        $("#show_worningR").fadeOut(10000);
                     }else{
-                        document.getElementById('show_worningB').style.display = "none";
-                        document.getElementById("show_worningb").innerHTML = "There might be something wrong.";
+                        document.getElementById('show_worningR').style.display = "none";
+                        document.getElementById("show_worningr").innerHTML = "There might be something wrong.";
                     }
                     
                     
