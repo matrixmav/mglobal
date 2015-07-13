@@ -115,10 +115,8 @@ class SiteController extends Controller
            
           /*function to show news feeds*/
            
-          $newsObject = News::model()->findAll(array('condition'=>'status=1','order' => 'created_at DESC','limit' => '1'));
            
-            
-          $this->render('index',array('newsObject'=> $newsObject,'membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
+          $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
                     
