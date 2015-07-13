@@ -345,9 +345,7 @@
     </div>
   </div>
   <!-- Services block END -->
-  
- 
-  <!-- Team block BEGIN -->
+   <!-- Team block BEGIN -->
   <div class="team-block content content-center margin-bottom-40" id="team">
     <div class="container">
      <h2>Media<strong>Center</strong></h2> 
@@ -392,11 +390,341 @@
     </div>
   </div>
   <!-- Team block END -->
+ <!-- Prices block BEGIN -->
+  <!-- pricing block new -->
+  <div class="prices-block content content-center" id="prices">
+  <div class="container ">
+       <h2 class="margin-bottom-50"><strong>Pricing</strong> Tables</h2>
+       <div class="priceTab">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"> Basic Packages</a></li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"> Advance Packages </a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">   Advance PRO Packages</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+        
+        
+  <!-- Indicators 
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <?php foreach ($basicPackageObject as $basicPackage) { ?>
+            <div class="col-sm-4 col-xs-12">
+                 <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $basicPackage['image']; ?>" alt="<?php echo $basicPackage['name']; ?>" class="img-responsive">
+                  <a href="" class=" valign-center">
+                      <div class="packageInfo"> 
+                          <div> <span class="packName">Basic Web Packages</span></div>
+                          <div> <span class="packPrice"><p>$</p>49</span></div>
+                        
+                          <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
+                      </div>
+                      <div class="packageDescription"> 
+                          <div class="row">
+                              <div class="col-sm-8 col-xs-8">
+                          <ul>
+                              <li>Domain for 1 Year</li>
+                              <li>100 MB Storage Space/Year</li>
+                              <li>100 MB Bandwidth</li>
+                              <li>Advertisements</li>
+                              <li>Free Hosting</li>
+                              <li>1 Email A/C</li>
+                              <li>5 Static Pages</li>
+                              <li>Drag & Drop Builder</li>
+                              
+                          </ul>
+                              </div>
+                              <div class="col-sm-4 col-xs-4">
+                                   <span class="packPick">pick now</span>
+                               </div>
+                      </div>
+                 </div>
+        </a>
+                 </div>
+                
+            </div>
+            <?php } ?>
+
+        </div>
+    </div>
+</div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <?php foreach($advancePackageObject as $advancePackage){?>
+            <div class="col-sm-4 col-xs-12">
+                <?php if (Yii::app()->session['userid'] != '') { ?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php } else { ?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php } ?>
+                  <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image'];?>" alt="<?php echo $advancePackage['name'];?>" class="img-responsive">
+                  </div>
+                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>Pick Now</a>
+            </div>
+            <?php } ?>
+
+        </div>
+    </div>
+</div>
+    </div>
+<div role="tabpanel" class="tab-pane" id="messages">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <?php foreach($proPackageObject as $proPackage){?>
+            <div class="col-sm-4 col-xs-12">
+                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a onclick="return showError();"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php } ?>
+                  <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image'];?>" alt="<?php echo $proPackage['name'];?>" class="img-responsive">
+                  </div>
+                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>Pick Now</a>
+            </div>
+            <?php } ?>
+
+        </div>
+    </div>
+</div>
+    </div>
+    
+  </div>
+
+</div>
+  </div>
+  </div>
+  <!-- -->
+ 
+  
+  <!-- Choose us block BEGIN -->
+  <div class="choose-us-block content text-center margin-bottom-40" id="benefits">
+    <div class="container">
+      <h2>Why to <strong>Choose us</strong></h2>
+      <h4>MGlobally is an IT company introduced with the concept of multi-level marketing. It’s a platform with extended benefits for all those associated with it. We bring ideal opportunities for those, who wish to get websites for their businesses and can ...<a class="pinkSm fancybox" href="#inline16">read more</a></h4>
+      <div id="inline16" style="display:none" class="readMoreBox content">
+             <h2>Why to <strong>Choose us</strong></h2>
+               <p>MGlobally is an IT company introduced with the concept of multi-level marketing. It’s a platform with extended benefits for all those associated with it. We bring ideal opportunities for those, who wish to get websites for their businesses and can further bring in references. For all the references brought to us, we provide reward points that can be redeemed later. </p>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 text-left">
+          <img src="images/matrix.png" alt="Why to choose us" class="img-responsive">
+        </div>
+        <div class="col-md-4 col-sm-5 col-xs-12 text-left">
+<!--          <div class="panel-group" id="accordion1">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_1">Lorem ipsum dolor sit amet</a>
+                </h5>
+              </div>
+              <div id="accordion1_1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_2">Consectetur adipisicing elit</a>
+                </h5>
+              </div>
+              <div id="accordion1_2" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_3">Augue assum anteposuerit dolore</a>
+                </h5>
+              </div>
+              <div id="accordion1_3" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_4">Sollemnes in futurum</a>
+                </h5>
+              </div>
+              <div id="accordion1_4" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_5">Nostrud Tempor veniam</a>
+                </h5>
+              </div>
+              <div id="accordion1_5" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_6">Ut enem magana sed dolore</a>
+                </h5>
+              </div>
+              <div id="accordion1_6" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
+                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
+                </div>
+              </div>
+            </div>
+          </div>-->
+          <!-- benefit slider -->
+            <div id="carousel-example-generic" class="carousel slide benefitCarousel" data-ride="carousel">
+  <!-- Indicators 
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>-->
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+        <h3>Benefits of Choosing Us</h3>
+        <ul class="choseOpt">
+            <li><a href="">Round the clock support</a></li>
+            <li><a href="">Convenient Payment Gateway</a></li>
+            <li><a href="">Search-engine friendly websites</a></li>
+            <li><a href="">Customized web solutions</a></li>
+            <li><a href="">Numerous templates to choose from</a></li>
+            <li><a href="">Reliable hosting solutions</a></li>
+        </ul>
+      
+    </div>
+    <div class="item">
+        <h3>Multi Level Marketing Benefits</h3>
+       <ul class="choseOpt">
+            <li><a href="">Consistent Income</a></li>
+            <li><a href="">Low operating cost</a></li>
+            <li><a href="">Freedom to operate remotely</a></li>
+            <li><a href="">An extended distribution channel</a></li>
+            <li><a href="">No minimum commitments desired</a></li>
+            <li><a href="">Rewards at various stages</a></li>
+        </ul>
+     
+    </div>
+    
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="" aria-hidden="true">
+    <img src="images/steps/arrow-left-active.png" alt="Why to choose us" class="img-responsive"></span>
+
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="" aria-hidden="true">
+  <img src="images/steps/arrow-right-normal.png" alt="Why to choose us" class="img-responsive"></span>
+  </a>
+</div>
+          <!-- end -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Choose us block END -->
+  <!-- Checkout block BEGIN 
+  <div class="checkout-block content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <h2>CHECK OUT ADMIN THEME! <em>Most Full Featured &amp; Powerfull Admin Theme</em></h2>
+        </div>
+        <div class="col-md-2 text-right">
+          <a href="#" target="_blank" class="btn btn-primary">Live preview</a>
+        </div>
+      </div>
+    </div>
+  </div>-->
+  <!-- Checkout block END -->
+  <!-- Facts block BEGIN -->
+  <div class="facts-block content content-center" id="facts-block">
+    <h2>Some facts about us</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="item">
+            <strong>39</strong>
+            Projects Completed
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="item">
+            <strong>14</strong>
+            Team Members
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="item">
+            <strong>29k+</strong>
+            Products Sold
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="item">
+            <strong>500</strong>
+            Weekly Sales
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Facts block END -->
   <!-- Portfolio block BEGIN -->
   <div class="portfolio-block content content-center" id="portfolio">
     <div class="container">
       <h2 class="margin-bottom-50"><strong> Templates </strong></h2>
-      
+      <div class="row tempSearch">
+          <form class="form-inline">
+              <div class="searchWrap">
+              <div class="form-group">
+                 <select id="state" name="state_id" class="form-control select-style">
+                                                                                <option value="1">All categories</option>
+                                                                            </select>
+              </div>
+              <div class="form-group">
+                  <input type="search" placeholder="search something" class="search-style">
+              </div>
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-go">Go</button>
+              </div>
+          </form>
+      </div>
       <div class="row mobTemplete">
         
           <div class="item col-md-2 col-sm-4 col-xs-12">
@@ -611,314 +939,7 @@
     </div>
   </div>
   <!-- Portfolio block END -->
-  <!-- Choose us block BEGIN -->
-  <div class="choose-us-block content text-center margin-bottom-40" id="benefits">
-    <div class="container">
-      <h2>Why to <strong>Choose us</strong></h2>
-      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers ...<a class="pinkSm" href="">read more</a></h4>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 text-left">
-          <img src="images/matrix.png" alt="Why to choose us" class="img-responsive">
-        </div>
-        <div class="col-md-4 col-sm-5 col-xs-12 text-left">
-<!--          <div class="panel-group" id="accordion1">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_1">Lorem ipsum dolor sit amet</a>
-                </h5>
-              </div>
-              <div id="accordion1_1" class="panel-collapse collapse in">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_2">Consectetur adipisicing elit</a>
-                </h5>
-              </div>
-              <div id="accordion1_2" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_3">Augue assum anteposuerit dolore</a>
-                </h5>
-              </div>
-              <div id="accordion1_3" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_4">Sollemnes in futurum</a>
-                </h5>
-              </div>
-              <div id="accordion1_4" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_5">Nostrud Tempor veniam</a>
-                </h5>
-              </div>
-              <div id="accordion1_5" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_6">Ut enem magana sed dolore</a>
-                </h5>
-              </div>
-              <div id="accordion1_6" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>-->
-          <!-- benefit slider -->
-            <div id="carousel-example-generic" class="carousel slide benefitCarousel" data-ride="carousel">
-  <!-- Indicators 
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>-->
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-        <h3>Benefits of Choosing Us</h3>
-        <ul class="choseOpt">
-            <li><a href="">Round the clock support</a></li>
-            <li><a href="">Convenient Payment Gateway</a></li>
-            <li><a href="">Search-engine friendly websites</a></li>
-            <li><a href="">Customized web solutions</a></li>
-            <li><a href="">Numerous templates to choose from</a></li>
-            <li><a href="">Reliable hosting solutions</a></li>
-        </ul>
-      
-    </div>
-    <div class="item">
-        <h3>Multi Level Marketing Benefits</h3>
-       <ul class="choseOpt">
-            <li><a href="">Consistent Income</a></li>
-            <li><a href="">Low operating cost</a></li>
-            <li><a href="">Freedom to operate remotely</a></li>
-            <li><a href="">An extended distribution channel</a></li>
-            <li><a href="">No minimum commitments desired</a></li>
-            <li><a href="">Rewards at various stages</a></li>
-        </ul>
-     
-    </div>
-    
-  </div>
-
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="" aria-hidden="true">
-    <img src="images/steps/arrow-left-active.png" alt="Why to choose us" class="img-responsive"></span>
-
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="" aria-hidden="true">
-  <img src="images/steps/arrow-right-normal.png" alt="Why to choose us" class="img-responsive"></span>
-  </a>
-</div>
-          <!-- end -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Choose us block END -->
-  <!-- Checkout block BEGIN 
-  <div class="checkout-block content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10">
-          <h2>CHECK OUT ADMIN THEME! <em>Most Full Featured &amp; Powerfull Admin Theme</em></h2>
-        </div>
-        <div class="col-md-2 text-right">
-          <a href="#" target="_blank" class="btn btn-primary">Live preview</a>
-        </div>
-      </div>
-    </div>
-  </div>-->
-  <!-- Checkout block END -->
-  <!-- Facts block BEGIN -->
-  <div class="facts-block content content-center" id="facts-block">
-    <h2>Some facts about us</h2>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="item">
-            <strong>39</strong>
-            Projects Completed
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="item">
-            <strong>14</strong>
-            Team Members
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="item">
-            <strong>29k+</strong>
-            Products Sold
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <div class="item">
-            <strong>500</strong>
-            Weekly Sales
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Facts block END -->
-  <!-- Prices block BEGIN -->
-  <!-- pricing block new -->
-  <div class="prices-block content content-center" id="prices">
-  <div class="container ">
-       <h2 class="margin-bottom-50"><strong>Pricing</strong> Tables</h2>
-       <div class="priceTab">
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"> Basic Packages</a></li>
-      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"> Advance Packages </a></li>
-    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">   Advance PRO Packages</a></li>
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
-        
-        
-  <!-- Indicators 
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>-->
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-      <div class="item active">
-          <?php foreach ($basicPackageObject as $basicPackage) { ?>
-            <div class="col-sm-4 col-xs-12">
-                 <div class="pricing-item">
-                      <img class="img-responsive" src="/upload/package_image/<?php echo $basicPackage['image']; ?>" alt="<?php echo $basicPackage['name']; ?>" class="img-responsive">
-                  <a href="" class=" valign-center">
-                      <div class="packageInfo"> 
-                          <div> <span class="packName">Basic Web Packages</span></div>
-                          <div> <span class="packPrice"><p>$</p>49</span></div>
-                        
-                          <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
-                      </div>
-                      <div class="packageDescription"> 
-                          <div class="row">
-                              <div class="col-sm-8 col-xs-8">
-                          <ul>
-                              <li>Domain for 1 Year</li>
-                              <li>100 MB Storage Space/Year</li>
-                              <li>100 MB Bandwidth</li>
-                              <li>Advertisements</li>
-                              <li>Free Hosting</li>
-                              <li>1 Email A/C</li>
-                              <li>5 Static Pages</li>
-                              <li>Drag & Drop Builder</li>
-                              
-                          </ul>
-                              </div>
-                              <div class="col-sm-4 col-xs-4">
-                                   <span class="packPick">pick now</span>
-                               </div>
-                      </div>
-                 </div>
-        </a>
-                 </div>
-                
-            </div>
-            <?php } ?>
-
-        </div>
-    </div>
-</div>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="profile">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-      <div class="item active">
-          <?php foreach($advancePackageObject as $advancePackage){?>
-            <div class="col-sm-4 col-xs-12">
-                <?php if (Yii::app()->session['userid'] != '') { ?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php } else { ?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php } ?>
-                  <div class="pricing-item">
-                      <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image'];?>" alt="<?php echo $advancePackage['name'];?>" class="img-responsive">
-                  </div>
-                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>Pick Now</a>
-            </div>
-            <?php } ?>
-
-        </div>
-    </div>
-</div>
-    </div>
-<div role="tabpanel" class="tab-pane" id="messages">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-          <?php foreach($proPackageObject as $proPackage){?>
-            <div class="col-sm-4 col-xs-12">
-                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a onclick="return showError();"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php } ?>
-                  <div class="pricing-item">
-                      <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image'];?>" alt="<?php echo $proPackage['name'];?>" class="img-responsive">
-                  </div>
-                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>Pick Now</a>
-            </div>
-            <?php } ?>
-
-        </div>
-    </div>
-</div>
-    </div>
-    
-  </div>
-
-</div>
-  </div>
-  </div>
-  <!-- -->
+  
   
   <!-- Prices block END -->
   <!-- Testimonials block BEGIN -->
@@ -926,8 +947,10 @@
   <div class="testimonials-block content content-center margin-bottom-65 testi-bg">
     <div class="container">
       <h2>Customer <strong>testimonials</strong></h2>
-      <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>
+      <h4><i class="fa fa-quote-left"></i></h4>
       <div class="carousel slide" data-ride="carousel" id="testimonials-block">
+          
+
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <!-- Carousel items -->
@@ -947,8 +970,60 @@
            <?php $i++;} }?>
         </div>
         <!-- Indicators -->
-      
-       
+        <div id="thumblist">
+      <ol class="carousel-indicators ">
+          <li class="col-sm-4 clearfix" data-slide-to="0" data-target="#testimonials-block">
+              <div class="testimonialBox clearfix">
+                  <div class="customerImg pull-left">
+                      <span class="customerImgWrap">
+                      <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                      </span>
+                  </div>
+                  <div class="customerTxt ">
+                      <span>Name</span>
+                      <p>tesstimonials text</p>
+                  </div>
+              </div>
+          </li>
+          <li data-slide-to="1" data-target="#testimonials-block" class="active col-sm-4">
+              <div class="testimonialBox clearfix">
+                  <div class="customerImg pull-left">
+                      <span class="customerImgWrap">
+                      <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                      </span>
+                  </div>
+                  <div class="customerTxt ">
+                      <span>Name</span>
+                      <p>tesstimonials text</p>
+                  </div>
+              </div>
+          </li>
+          <li data-slide-to="2" data-target="#testimonials-block" class="col-sm-4">
+              <div class="testimonialBox clearfix">
+                  <div class="customerImg pull-left">
+                      <span class="customerImgWrap">
+                      <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                      </span>
+                  </div>
+                  <div class="customerTxt ">
+                      <span>Name</span>
+                      <p>tesstimonials text</p>
+                  </div>
+              </div>
+          </li>
+        </ol>
+      </div>
+        <!-- Controls -->
+        <div class="clearfix">
+  <a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#testimonials-block" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+      </div>
       </div>
     </div>
   </div>
@@ -958,15 +1033,15 @@
   <div class="partners-block">
     <div class="container">
       <div class="row">
-        <div id="myCarouselaa" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
+       <!--   <div id="myCarouselaa" class="carousel slide" data-ride="carousel">
+   Indicators -->
     
 
-    <!-- Wrapper for slides -->
+    <!-- Wrapper for slides 
     <div class="carousel-inner" role="listbox">
 
-      <div class="item">
-        
+      <div class="item">-->
+    <marquee>
         
           <div class="row">
         <div class="col-md-2 col-sm-3 col-xs-6">
@@ -988,77 +1063,13 @@
           <img src="images/gamescast.png" alt="gamescast">
         </div>
       </div>
+    </marquee>
       </div>
 
-      <div class="item active">
-       
-         <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/cisco.png" alt="cisco">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/walmart.png" alt="walmart">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/gamescast.png" alt="gamescast">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/spinwokrx.png" alt="spinwokrx">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/ngreen.png" alt="ngreen">
-        </div>
-       <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/gamescast.png" alt="gamescast">
-        </div>
-      </div>
-      </div>
+      
     
-      <div class="item">
-        
-           <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/cisco.png" alt="cisco">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/walmart.png" alt="walmart">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/gamescast.png" alt="gamescast">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/spinwokrx.png" alt="spinwokrx">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/ngreen.png" alt="ngreen">
-        </div>
-       <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/gamescast.png" alt="gamescast">
-        </div>
-        
-      </div>
-
-      <div class="item">
-       
-           <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/cisco.png" alt="cisco">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/walmart.png" alt="walmart">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/gamescast.png" alt="gamescast">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/spinwokrx.png" alt="spinwokrx">
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/ngreen.png" alt="ngreen">
-        </div>
-       <div class="col-md-2 col-sm-3 col-xs-6">
-          <img src="images/gamescast.png" alt="gamescast">
-        </div>
-       
-      </div>
+      
+      
   
     </div>
 

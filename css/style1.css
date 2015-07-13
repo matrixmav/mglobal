@@ -1007,8 +1007,9 @@ a:hover {
   margin-bottom: 57px;
 }
 .testimonials-block .carousel {
-  width: 62%;
+  width: 92%;
   margin: 0 auto;
+  alignment-adjust: central;
 }
 .testimonials-block blockquote {
   border: none;
@@ -1816,7 +1817,14 @@ Pre-Header and pre-header elements
 .color-panel .icon-color-close{background: #c9c9c9;}
 .color-mode ul {padding:0 8px;}
 .color-mode ul li{ border:none; background: #FFF; display: table; vertical-align: middle; text-align: center; border-radius:50%;}
-.color-mode ul li a{ vertical-align: middle; color: #337ab7; display: table-cell;}
+.color-mode ul li a{ vertical-align: middle; display: table-cell;}
+.color-mode ul li a.fb-icon{color:#0b5eb3; !important;}
+.color-mode ul li a.tw-icon{color:#5eaade;}
+.color-mode ul li a.skype-icon{color:#00AFF0;}
+.color-mode ul li a.link-icon{color:#0077B5;}
+.color-mode ul li a.utube-icon{color:#CD2627;}
+.color-mode ul li a.whatsap-icon{color:#21A114;}
+
 .color-mode ul li a i{font-size: 16px;}
 .color-panel .color-mode-icons{font-size:21px; padding: 17px;}
 /* .tp-leftarrow:after{content: "\f18e" !important;  font-family: FontAwesome !important;}
@@ -1924,6 +1932,7 @@ Pre-Header and pre-header elements
    .packageInfo .packPrice{font-size: 40px !important; padding: 0px !important;}
    .pricing-item {margin:auto 0 1px 0 ;}
    .packPick{margin-right: 4%;}
+   .searchWrap{width:90%;}
 }
 /*--------------pricing-------------*/
 .priceTab{ background: #FFF; padding-bottom: 50px; border: 1px solid #dddddd; border-radius: 4px; font:400 18px "PT Sans Narrow",Arial,sans-serif}
@@ -2000,3 +2009,41 @@ color:#FFF; background: #c9c9c9;}
 .packageDescription ul li{color:#6d6e71; font-size: 10px; line-height: 17px;}
 .packPick{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 115%;}
 .packPick:hover{background: #f15d2a; color:#FFF;}
+#testimonials-block ol li{width:auto !important; text-indent:0; background: none;}
+.testimonialBox{width:300px;}
+.customerImg{width: 120px; height: 120px;  float: left;
+    margin: 0 6px 0 0;
+    text-align: center;}
+.customerImgWrap{  max-width: 120px;
+  height: 120px;
+  max-height: 120px;
+  margin-right: 5px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;}
+.customerTxt {  display: table-cell;
+  vertical-align: middle;
+  height: 100px;
+  width: 180px;
+  text-align: left;}
+.customerTxt span{font-size: 20px; font-weight: bold;} 
+.testimonials-block h4 i{color:#78828c; font-size: 50px; padding:20px;}
+/*--------------tyemplate search-------------*/
+.tempSearch .select-style{ border:none; color:#FFF; font-weight: bold; min-width: 200px;
+
+    -moz-appearance: none; -webkit-appearance: none;
+    background: #f15d2a url("../images/select-arrow.png") no-repeat scroll 95% 50%;
+    border-radius: 20px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    width: 100%;box-shadow: inset 0 0 3px #000000; -moz-box-shadow: inset 0 0 3px #000000; -webkit-box-shadow: inset 0 0 3px #000000;
+}
+.tempSearch .search-style{border:none; text-align: center; background: transparent;  font-weight: bold;}
+.tempSearch .btn-go{background: #f15d2a; color:#FFF; text-transform: none; border-radius: 50% !important; padding: 10px 11px; box-shadow: inset 0 0 3px #000000; -moz-box-shadow: inset 0 0 3px #000000; -webkit-box-shadow: inset 0 0 3px #000000; font-weight: bold;}
+.tempSearch .searchWrap{display:inline-block;display: inline-block;
+    padding: 6px;
+    background: #f5f5f5;
+    border-radius: 30px; box-shadow: 0 0 15px #cecece inset; -moz-box-shadow: 0 0 15px #cecece inset; -webkit-box-shadow: 0 0 15px #cecece inset;}
+.tempSearch{ padding: 10px 0 20px 0 !important;}
+
