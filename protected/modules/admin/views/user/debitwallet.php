@@ -76,6 +76,12 @@ if (!empty($error)) {
             $("#fund_error").html("Please Add Fund!");
             return false;
         }
+        
+        if (isNaN($('#fund').val()))
+        {
+           $('#fund_error').html("Invalid amount"); 
+           return false;
+        }
          
         if ($("#fund").val() != "") {
         var regexp = /^(0|[1-9]+[0-9]*)$/;
@@ -85,7 +91,7 @@ if (!empty($error)) {
             $("#fund_error").html("Invalid Fund");
             return false;
         }
-    }
+       }
         var fund = parseFloat($('#fund').val());
         var fundVal = parseFloat($('#fundval').val());
 

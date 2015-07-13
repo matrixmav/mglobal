@@ -34,37 +34,39 @@
               <div id="inline11" style="display:none" class="readMoreBox content" style="width: 100%">
                 <div class="">
                <h2>contact<strong>  us</strong></h2>
-          
+               <div id="show_worning" style="display:none;"> </div>
+               <div id="show_worning" style="display:none;"> </div>
                <div class="col-sm-12">
-                   <form>
+                   <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
-
+                               <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+                               <div id="show_wornings_name"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-
+                               <input type="text" class="form-control" placeholder="Email" name="email" id="email">
+                               <div id="show_wornings_email"></div>  
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                               <input class="form-control" id="exampleInputAmount" placeholder="Subject">
-                                  
+                               <input class="form-control" id="subject" placeholder="Subject" name="subject">
+                               <div id="show_wornings_subject"></div>   
 
                            </div>
                         </div>
                        <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="message"></textarea>
+                       <textarea class="form-control" rows="3" placeholder="message" id="message"></textarea>
+                       <div id="show_wornings_message"></div>
                        </div>
                        <div class="form-group">
    
-      <button type="submit" class="btn btn-success">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return submitForm();">Submit</button>
     
   </div>
                    </form>
@@ -76,40 +78,43 @@
         <li> <a href="#inline12" class="fancybox"  data-toggle="tooltip" data-placement="top" title="Feedback Form"><i class="fa fa-envelope-o"></i></a>
             <div id="inline12" style="display:none" class="readMoreBox content">
                <h2>feedback<strong> form </strong></h2>
-          
+               <div id="show_worningF" style="display:none;"></div>
+               <div id="show_worningf" style="display:none;"></div>
+               
         <div class="col-sm-12">
-                   <form>
+            <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
-
+                               <input type="text" class="form-control"  placeholder="Name" id="nameF">
+                               <div id="show_wornings_nameF"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-
+                               <input type="text" class="form-control"  placeholder="Email" id="emailF">
+                               <div id="show_wornings_emailF"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                               <select class="form-control" id="exampleInputAmount" placeholder="Feedback category">
-                                   <option>1</option>
-                                    <option>1</option>
-                                     <option>1</option>
+                               <select class="form-control" placeholder="Feedback category" id="feedback_category">
+                                   <option value="">Select Category</option>
+                                   <option value="Design">Design</option>
+                                   <option value="Functionality">Functionality</option>
                                </select>
-
+                            
                            </div>
                         </div>
                        <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="comment"></textarea>
+                       <textarea class="form-control" rows="3" placeholder="comment" id="comment"></textarea>
+                       <div id="show_wornings_messageF"></div>
                        </div>
                        <div class="form-group">
    
-      <button type="submit" class="btn btn-success">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return submitFeddbackForm();">Submit</button>
     
   </div>
                    </form>
@@ -119,51 +124,41 @@
         <li><a href="#inline13" class="fancybox"  data-toggle="tooltip" data-placement="top" title="Bug Form"><i class="fa fa-bug"></i></a>
             <div id="inline13" style="display:none" class="readMoreBox content">
                <h2>web<strong> bug </strong></h2>
-          
+          <div id="show_worningR" style="display:none;"></div>
+               <div id="show_worningr" style="display:none;"></div>
+               
          <div class="col-sm-12">
-                   <form>
+             <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Name">
-
+                               <input type="text" class="form-control" id="nameB" placeholder="Name">
+                               <div id="show_wornings_nameB"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="Email">
-
+                               <input type="text" class="form-control" id="emailB" placeholder="Email">
+                               <div id="show_wornings_emailB"></div>
                            </div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="contact no">
-
+                               <input type="text" class="form-control" id="phone" placeholder="contact no">
+                               
                            </div>
                         </div>
+                       
+                      
                        <div class="form-group">
-                           <div class="input-group">
-                               <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                               <input type="text" class="form-control" id="exampleInputAmount" placeholder="organization">
-
-                           </div>
-                        </div>
-                       <div class="form-group">
-                           <div class="input-group">
-                               <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
-                               <input class="form-control" id="exampleInputAmount" placeholder="problem">
-                                  
-
-                           </div>
-                        </div>
-                       <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="problem description"></textarea>
+                       <textarea class="form-control" rows="3" placeholder="Description" id="description"></textarea>
+                       <div id="show_wornings_messageB"></div>
                        </div>
                        <div class="form-group">
                         
-                    <button type="submit" class="btn btn-success">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return bugFormSubmit();">Submit</button>
     
   </div>
                    </form>
@@ -318,4 +313,225 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
+   
+         function isEmail(aStr)
+             {
+
+            var reEmail=/^[0-9a-zA-Z_\.-]+\@[0-9a-zA-Z_\.-]+\.[0-9a-zA-Z_\.-]+$/;
+            if(!reEmail.test(aStr))
+            {
+            return false;
+
+            }
+            return true;
+
+            }/*End of isEmail function*/
+
+            function submitForm()
+            {
+            var email = $('#email').val();
+            var name  = $('#name').val();
+            var subject = $('#subject').val();
+            var message = $('#message').val();
+          
+            $('#show_wornings_name').hide();
+            if(name ==''){
+            $('#show_wornings_name').show();
+            $("#show_wornings_name").html("Please enter name.");
+            $('#name').focus();
+            return false;
+            }
+            $('#show_wornings_email').hide();
+            if(email ==''){
+            $('#show_wornings_email').show();
+            $("#show_wornings_email").html("Please enter email.");
+            $('#email').focus();
+            return false;
+            }
+             $('#show_wornings_email').hide();
+             if(!isEmail(email)){
+            $('#show_wornings_email').show();
+            $("#show_wornings_email").html("Please enter valid email.");
+            $('#email').focus();
+            return false;
+            }
+             $('#show_wornings_subject').hide();
+            if(subject ==''){
+            $('#show_wornings_subject').show();
+            $("#show_wornings_subject").html("Please enter subject.");
+            $('#subject').focus();
+            return false;
+            }
+             $('#show_wornings_message').hide();
+            if(message ==''){
+            $('#show_wornings_message').show();
+            $("#show_wornings_message").html("Please enter your message.");
+            $('#message').focus();
+            return false;
+            }
+        
+        
+        
+        else{
+            var dataString = 'email='+email+'&name='+name+'&subject='+subject+'&message='+message;
+            $.ajax({
+            type: "GET",
+            url: "contact/contact",
+            data: dataString,
+            cache: false,
+            success: function(html){
+                    if(html == 1){
+                        $("#name").val('');
+                        $("#email").val('');
+                        $("#subject").val('');
+                        $("#message").val('');
+                        $('#show_worning').show();
+                        $("#show_worning").html("Thanks! Your query has been submitted with us.");
+                        
+                        $("#show_worning").fadeOut(20000);
+                    }else{
+                        document.getElementById('show_worning').style.display = "none";
+                        document.getElementById("show_worning").innerHTML = "There might be something wrong.";
+                    }
+                    
+                    
+              } 
+            });
+            }    
+}
+ 
+ 
+ /* code to submit feedback form */
+      function submitFeddbackForm()
+            {
+            var email = $('#emailF').val();
+            var name  = $('#nameF').val();
+            var feedback_category  = $('#feedback_category').val();
+             var message = $('#comment').val();
+          
+            $('#show_wornings_nameF').hide();
+            if(name ==''){
+            $('#show_wornings_nameF').show();
+            $("#show_wornings_nameF").html("Please enter name.");
+            $('#nameF').focus();
+            return false;
+            }
+            $('#show_wornings_emailF').hide();
+            if(email ==''){
+            $('#show_wornings_emailF').show();
+            $("#show_wornings_emailF").html("Please enter email.");
+            $('#emailF').focus();
+            return false;
+            }
+             $('#show_wornings_emailF').hide();
+             if(!isEmail(email)){
+            $('#show_wornings_emailF').show();
+            $("#show_wornings_emailF").html("Please enter valid email.");
+            $('#emailF').focus();
+            return false;
+            }
+             
+             $('#show_wornings_messageF').hide();
+            if(message ==''){
+            $('#show_wornings_messageF').show();
+            $("#show_wornings_messageF").html("Please enter your comment.");
+            $('#comment').focus();
+            return false;
+            }
+        
+        
+        
+        else{
+            var dataString = 'email='+email+'&name='+name+'&feedback_category='+feedback_category+'&message='+message;
+            $.ajax({
+            type: "GET",
+            url: "contact/feedback",
+            data: dataString,
+            cache: false,
+            success: function(html){
+                    if(html == 1){
+                        $('#show_worningF').show();
+                        $("#show_worningF").html("Thanks! Your query has been submitted with us.");
+                        $("#nameF").val('');
+                        $("#emailF").val('');
+                        $("#feedback_category").val('');
+                        $("#comment").val('');
+                        $("#show_worningF").fadeOut(10000);
+                    }else{
+                        document.getElementById('show_worningF').style.display = "none";
+                        document.getElementById("show_worningf").innerHTML = "There might be something wrong.";
+                    }
+                    
+                    
+              } 
+            });
+            }    
+}
+
+         /* code to submit bug form */
+      function bugFormSubmit()
+            {
+            var email = $('#emailB').val();
+            var name  = $('#nameB').val();
+            var phone  = $('#phone').val();
+            var description = $('#description').val();
+          
+            $('#show_wornings_nameB').hide();
+            if(name ==''){
+            $('#show_wornings_nameB').show();
+            $("#show_wornings_nameB").html("Please enter name.");
+            $('#nameB').focus();
+            return false;
+            }
+            $('#show_wornings_emailB').hide();
+            if(email ==''){
+            $('#show_wornings_emailB').show();
+            $("#show_wornings_emailB").html("Please enter email.");
+            $('#emailB').focus();
+            return false;
+            }
+             $('#show_wornings_emailB').hide();
+             if(!isEmail(email)){
+            $('#show_wornings_emailB').show();
+            $("#show_wornings_emailB").html("Please enter valid email.");
+            $('#emailB').focus();
+            return false;
+            }
+             
+             $('#show_wornings_messageB').hide();
+            if(description ==''){
+            $('#show_wornings_messageB').show();
+            $("#show_wornings_messageB").html("Please enter your bug description.");
+            $('#description').focus();
+            return false;
+            }
+        
+        
+        
+        else{
+            var dataString = 'email='+email+'&name='+name+'&phone='+phone+'&message='+description;
+            $.ajax({
+            type: "GET",
+            url: "contact/bug",
+            data: dataString,
+            cache: false,
+            success: function(html){
+                    if(html == 1){
+                        $('#show_worningR').show();
+                        $("#show_worningR").html("Thanks! Your query has been submitted with us.");
+                        $("#nameB").val('');
+                        $("#emailB").val('');
+                        $("#phone").val('');
+                        $("#description").val('');
+                        $("#show_worningR").fadeOut(10000);
+                    }else{
+                        document.getElementById('show_worningR').style.display = "none";
+                        document.getElementById("show_worningr").innerHTML = "There might be something wrong.";
+                    }
+                    
+                    
+              } 
+            });
+            }    
+}
 </script>

@@ -67,16 +67,23 @@ class BuildTempController extends Controller {
                     $hasbuilderObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $orderId ));        
                     $builderTempId = BuildTemp::model()->findByAttributes(array('template_id' => $tempId));        
                     
+                    /* For all pages */
                     $userPagesObjectAll = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND order_id=' . $orderId ));
-                    
+
+                    /* For only parent pages */
                     $userPagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . $userId . ' AND parent = 0 AND order_id=' . $orderId ));
                     $menuHtml ="";
                     $mainMenu =  explode(',',$hasbuilderObject->user_menu) ;
                     $p = 1; 
-                    $menuHtml .= '<ul class="'.$mainMenu[1].'">';
+                    $ul = "";
+                    $li = "";
+                    if(isset($mainMenu[0])){ $ul = stripslashes($mainMenu[0]); }
+                    if(isset($mainMenu[1])){ $li = stripslashes($mainMenu[1]); }
+                    
+                    $menuHtml .= '<ul '.$ul.'>';
                     foreach ($userPagesObject as $data){
 
-                        $menuHtml .= '<li class="'.$mainMenu[1].'">';
+                        $menuHtml .= '<li'.$li.'>';
                         if($p == 1){
                             $pageLink = "index.html";
                         }else{
@@ -96,22 +103,7 @@ class BuildTempController extends Controller {
                         $menuHtml .=  '</a></li>';    
                         $p++;
                     }
-                     $menuHtml .=  '</ul><div class="clear"></div>';
-                    
-//                    $tempMenu = $hasbuilderObject->user_menu;
-//                    $i = 1;
-//                    foreach ($userPagesObject as $pages) {
-//                        $pat1 = '*' . $i . '*';
-//                        $pat2 = '$' . $i . '$';
-//                        if($i == 1){
-//                            $tempMenu = str_replace($pat1, "index.html", $tempMenu);
-//                        }else{
-//                            $tempMenu = str_replace($pat1, strtolower($pages->page_name).".html", $tempMenu);
-//                        }
-//                        $tempMenu = str_replace($pat2, strtoupper($pages->page_name), $tempMenu);
-//                        $i++;
-//                    }
-//                    $tempMenu = stripcslashes($tempMenu);
+                    $menuHtml .=  '</ul><div class="clear"></div>';
 
                     $path = Yii::getPathOfAlias('webroot');       
                     /*Create Folder And Permission */        
@@ -145,18 +137,27 @@ class BuildTempController extends Controller {
                         }    
                         $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
                         
-                        $headMeta = stripcslashes($hasbuilderObject->head_content) ;
-                        $dataHead = str_replace( '<title>Home</title>' , '<title>'.$userPagesObjectList->page_name.'</title>' , $headMeta);  
+                        $html = '<html>'."\n". '<head>';
+                        fwrite($handle, $html);
+                        
+                        $headMeta = stripcslashes($hasbuilderObject->head_content) ;                        
+                        $siteTitle = "";
+                        if($hasbuilderObject->site_title){
+                            $siteTitle = " | ".$hasbuilderObject->site_title ;
+                        }                        
+                        $dataHead = str_replace( '<title>Home</title>' , '<title>'.$userPagesObjectList->page_name.$siteTitle.'</title>' , $headMeta);  
                         fwrite($handle, $dataHead);
                         
-                        $headMetaEnd = "\n".'<body>';
+                        $headMetaEnd = "\n". '</head>'."\n".'<body>';
                         fwrite($handle, $headMetaEnd);
 
                         /* For Header Content */
                         $baseURL = Yii::app()->getBaseUrl(true);        
                         $dataHeader = stripcslashes($hasbuilderObject->temp_header); 
-                        $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader); // for replacing issue  
-                        $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $menuHtml , $removeSpaces);
+                        $logoImage = '<img height="'.$hasbuilderObject->logo_height.'" width="'.$hasbuilderObject->logo_width.'" src="/user/template/' .$builderTempId->folderpath . '/'. $hasbuilderObject->logo . '">'; 
+                        $removeSpaces = preg_replace('/\s+/', ' ', $dataHeader); // for replacing issue
+                        $logoReplace = preg_replace('#<div class="mav_logo">(.*?)</div>#', stripslashes($logoImage) , $removeSpaces);
+                        $dataHeader = preg_replace('#<div class="mav_menu">(.*?)</div>#', $menuHtml , $logoReplace);
 
                         $data = "\n".str_replace('src="'.$baseURL.'/builder_images/'.$userId.'/'.$builderTempId->template_id.'/', 'src="images/' , $dataHeader);  
                         fwrite($handle, $data);           
@@ -228,7 +229,7 @@ class BuildTempController extends Controller {
             }
 
             if(isset($_GET['t']) && isset($_GET['u']) &&  isset($_GET['o'])) {
-                echo "dsada";
+                echo "hey";
                 $this->render('buildtemp');
             }        
     }
@@ -308,12 +309,15 @@ class BuildTempController extends Controller {
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id ='. $userId .' AND order_id = ' .Yii::app()->session['orderID']  .' AND status = 1 AND parent = 0 ' ));        
         $buildTempHeader = UserHasTemplate::model()->findByAttributes(array('user_id' => $userId, 'order_id'=>Yii::app()->session['orderID']));
         $mainMenu =  explode(',',$buildTempHeader->user_menu) ;
-        
+
+        $ul = "";
+        $li = "";
+        if(isset($mainMenu[0])){ $ul = stripslashes($mainMenu[0]); }
+        if(isset($mainMenu[1])){ $li = stripslashes($mainMenu[1]); }
         $menuHtml ="";
-        $menuHtml .= '<ul class="'.$mainMenu[1].'">';
-        foreach ($userpagesObject as $data){
-            
-            $menuHtml .= '<li class="'.$mainMenu[1].'">
+        $menuHtml .= '<ul '.$ul.' >';
+        foreach ($userpagesObject as $data){            
+            $menuHtml .= '<li '.$li.' >
                     <a href='.$data->id.'>'.$data->page_name.'</a>' ;
                         $userpagesObjectAll = UserPages::model()->findAll('parent ='. $data->id);
                         if(count($userpagesObjectAll) > 0){
@@ -391,7 +395,9 @@ class BuildTempController extends Controller {
                 !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
             }
             BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
-          
+            /* Number of pages creation*/
+            $pageCount = BaseClass::pagesCount(Yii::app()->session['orderID']);
+            
             if ($hasbuilderObject) {                 
                 $hasUserTemplatePages = UserHasTemplate::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND  template_id = ' . $tempID )) ;
                
@@ -401,14 +407,14 @@ class BuildTempController extends Controller {
                     $hasbuilderObject = UserHasTemplate::model()->addAndEdit($hasbuilderObject, $buildertempObject,$orderId,$userID);
 
                     UserPages::model()->deleteAll(array('condition'=>'user_id = '.$userID .' AND order_id = '.$orderId));
-                    UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content,$buildertempObject->template_id);
+                    UserPages::model()->createNewPages($userID, $orderId, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
                 }  
                 
             } else { 
                 $orderId = Yii::app()->session['orderID'];
                 $templateObject = UserHasTemplate::model()->addAndEdit($templateObject, $buildertempObject,$orderId,$userID);
                 /* Add Home page of website */
-                UserPages::model()->createNewPages($userID, $orderId, 6, $buildertempObject->body()->body_content,$buildertempObject->template_id);
+                UserPages::model()->createNewPages($userID, $orderId, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
            }
 
            

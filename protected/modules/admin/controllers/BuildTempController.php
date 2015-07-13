@@ -393,13 +393,14 @@ class BuildTempController extends Controller {
 
                     $model = new BuildTemp;
                     $model->template_id = $headeraddObject->id;
+                    $model->category_id = $category;
+                    $model->package = $_POST['Template']['package'];
                     $model->temp_header_id = $headeraddObject->id;
                     $model->temp_body_id = $bodyaddObject->id;
                     $model->temp_footer_id = $footeraddObject->id;
                     $model->status = 0;
                     $model->created_at = date('Y-m-d');
-                    $model->updated_at = date('Y-m-d');
-                    $model->category_id = $category;
+                    $model->updated_at = date('Y-m-d');                    
                     $model->folderpath = $fname;
                     $model->screenshot = $fileS;
                     $model->custom_css = addslashes($_POST['custom_css']);
@@ -416,9 +417,10 @@ class BuildTempController extends Controller {
             }
         }
 
+        $packageObject = Package::model()->findAll();        
         $categoryObject = BuildCategory::model()->findAll();
         $this->render('/builder/template_header_add', array(
-            'error' => $error, 'success' => $success, 'categoryObject' => $categoryObject,
+            'error' => $error, 'success' => $success, 'categoryObject' => $categoryObject, "packageObject" => $packageObject
         ));
     }
 

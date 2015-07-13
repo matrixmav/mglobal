@@ -256,7 +256,7 @@ function SubmitLoginForm() {
             if (response == 1) {
                 showSucessMsg("Login Success", "Login");
                 showSucessMsg("Please wait a while... ", "Page Redirection");
-                setTimeout("window.location.href='/admin/default/dashboard'", 2000);
+                setTimeout("window.location.href='/admin/user/dashboard'", 2000);
             } else {
                 showError("Incorrect Username or Password!");
             }

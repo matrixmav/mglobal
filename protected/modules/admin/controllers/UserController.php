@@ -33,7 +33,7 @@ class UserController extends Controller {
                 'actions' => array('index', 'view', 'changestatus', 'wallet',
                     'creditwallet', 'list', 'debitwallet', 'genealogy', 'add', 'deleteuser', 'edit',
                     'verificationapproval', 'testimonialapproval', 'changeapprovalstatus', 
-                    'testimonialapprovalstatus','binarycalculation','resetpassword','binarymail'),
+                    'testimonialapprovalstatus','binarycalculation','resetpassword','binarymail','dashboard'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -100,6 +100,10 @@ class UserController extends Controller {
         }
     }
     
+    public function actionDashboard() {
+        $this->render('/user/dashboard');
+    }
+
     
     public function actionBinaryCalculation() {        
         

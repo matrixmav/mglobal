@@ -32,7 +32,7 @@ class ReportController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view', 'address', 'wallet',
                     'creditwallet', 'package', 'adminsponsor', 'verification',
-                    'socialaccount', 'contact', 'transaction','refferal','deposit','trackrefferal'),
+                    'socialaccount', 'contact', 'transaction','refferal','deposit','trackrefferal','subscriber','bugreport','feedback'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -324,13 +324,78 @@ class ReportController extends Controller {
 
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND type = "contact"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
         $this->render('contact', array(
             'dataProvider' => $dataProvider,
         ));
     }
 
+     public function actionSubscriber() {
+        $model = new Contact();
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        $status = 1;
+        if (!empty($_POST)) {
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            
+        }
+
+        $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND type = "subscribe"' ), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        $this->render('subscriber', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+    
+     public function actionFeedback() {
+        $model = new Feedback();
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        $status = 1;
+        if (!empty($_POST)) {
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            
+        }
+
+        $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        $this->render('feedbackreport', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+    
+    
+    public function actionBugReport() {
+        $model = new BugForm();
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        $status = 1;
+        if (!empty($_POST)) {
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            
+        }
+
+        $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        $this->render('bugreport', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+    
+    
     protected function gridAddressImagePopup($data, $row) {
         $bigImagefolder = Yii::app()->params->imagePath['verificationDoc']; // folder with uploaded files
         echo "<a data-toggle='modal' href='#zoom_$data->id'>$data->address_proff</a>" . '<div class="modal fade" id="zoom_' . $data->id . '" tabindex="-1" role="basic" aria-hidden="true">
