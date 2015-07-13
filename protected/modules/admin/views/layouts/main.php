@@ -592,8 +592,26 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection10 = array();
                                             
                                 }
+                                
+                                if (in_array('reportfeedback', $accessArr)) { 
+                                    $reservation_subsection11 = array(
+                                      "report/feedback" => "Feedback",  
+                                   );
+                                }else{
+                                    $reservation_subsection11 = array();
+                                            
+                                }
+                                
+                                if (in_array('reportbug', $accessArr)) { 
+                                    $reservation_subsection12 = array(
+                                      "report/bugreport" => "Bug Report",  
+                                   );
+                                }else{
+                                    $reservation_subsection12 = array();
+                                            
+                                }
                                  
-                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection6,$reservation_subsection7,$reservation_subsection8,$reservation_subsection9,$reservation_subsection10);
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection6,$reservation_subsection7,$reservation_subsection8,$reservation_subsection9,$reservation_subsection10,$reservation_subsection11,$reservation_subsection12);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
