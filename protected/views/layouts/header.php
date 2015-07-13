@@ -101,9 +101,9 @@
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                <select class="form-control" placeholder="Feedback category" id="feedback_category">
-                                   <option>1</option>
-                                    <option>1</option>
-                                     <option>1</option>
+                                   <option>Select Category</option>
+                                   <option value="Design">Design</option>
+                                   <option value="Functionality">Functionality</option>
                                </select>
                             
                            </div>
