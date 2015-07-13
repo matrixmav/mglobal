@@ -624,7 +624,7 @@ class UserController extends Controller {
                 }else{
                    $error = "<p class='error'>User Name is already Exits.</p>";
                 }
-            //}
+            }
         }
        
         $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'social' => $social));
