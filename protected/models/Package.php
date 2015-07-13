@@ -112,8 +112,7 @@ class Package extends CActiveRecord
 	}
         
 public function createInvoice($invoiceArr){
-
- $body = ' <table align="center" width="600" cellspacing="0" cellpadding="0" border="0">
+ $body = '<table>
             <tbody>
                 <tr>
                     <td height="20"  style=""></td>
@@ -132,18 +131,18 @@ public function createInvoice($invoiceArr){
                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                             <tbody>
                                                 <tr>
-                                                    <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="livechat.png"> &nbsp;</td>
+                                                    <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="livechat.png"> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; font-family:Nunito"><strong> Customer Support:</strong> 1800 909 302 &nbsp; </td>
+                                                    <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; font-family:Nunito"><strong> Customer Support:</strong> 1800 909 302  </td>
                                                 </tr>
                                             </tbody>
                                         </table></td>
                                 </tr>
                             </tbody>
                         </table></td>
-                </tr>';   
- $body .=  '<tr>
+                </tr>
+               <tr>
                     <td valign="" bgcolor="#efed6a" height="55" align="left" style="line-height:0px; font-size:16px">
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tbody>
@@ -187,14 +186,12 @@ public function createInvoice($invoiceArr){
                                                                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                                                             <tbody>
                                                                                                 <tr>
-                                                                                                    <td>T0 : '; 
-                                                                                                    $body .= ucwords($invoiceArr['full_name']);
-                                                                                                    $body .= '</td>
+                                                                                                    <td>T0 : Mr Sandeep Kumar</td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <td>';
-                                                                                                    $body .= ucwords($invoiceArr['address']);
-                                                                                                    $body .= '</td>
+                                                                                                    <td>#109, JC Road,
+                                                                                                        <br>
+                                                                                                        Bangalore,<br> India</td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
@@ -210,19 +207,15 @@ public function createInvoice($invoiceArr){
                                                                                                                 <tr>
                                                                                                                     <td width="2%" bgcolor="#e4f4e3" height="30"></td>
                                                                                                                     <td width="48%" bgcolor="#e4f4e3" valign="middle" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Customer ID :</td>
-                                                                                                                    <td width="50%" bgcolor="#e4f4e3" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">';
-                                                                                                                   $body .= $invoiceArr['name'];
-                                                                                                                   $body .= '</td>
+                                                                                                                    <td width="50%" bgcolor="#e4f4e3" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">APRL2456</td>
                                                                                                                 </tr>
                                                                                                                 <tr>
                                                                                                                     <td height="2" bgcolor="" style=""></td>
                                                                                                                 </tr>
                                                                                                                 <tr>
                                                                                                                     <td width="1%" bgcolor="#e0eec4" height="30"></td>
-                                                                                                                    <td width="49%" bgcolor="#e0eec4" valign="middle" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Invoice No : &nbsp;</td>
-                                                                                                                    <td width="50%" bgcolor="#e0eec4" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">#';
-                                                                                                                    $body .= $invoiceArr['transaction_id'];
-                                                                                                                    $body .= '</td>
+                                                                                                                    <td width="49%" bgcolor="#e0eec4" valign="middle" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Invoice No : </td>
+                                                                                                                    <td width="50%" bgcolor="#e0eec4" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">#74857487</td>
                                                                                                                 </tr>
                                                                                                                  <tr>
                                                                                                                     <td height="5" bgcolor="" style=""></td>
@@ -233,14 +226,12 @@ public function createInvoice($invoiceArr){
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Date : ';
-                                                                                                     $body .= $invoiceArr['created_at'];
-                                                                                                    $body .= '</td>
+                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Date : 10/ 05 /2015
+                                                                                                    </td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"> Email : ';
-                                                                                                    $body .= $invoiceArr['email'];
-                                                                                                    $body .= '</td>
+                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"> Email : kumar@gmail.com
+                                                                                                    </td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
@@ -264,8 +255,7 @@ public function createInvoice($invoiceArr){
                                     </tr>
                             </tbody>
                         </table>
-<!-- text description -->
-
+  
                                                 <tr>
                                                     <td height="20" bgcolor="" style=""></td>
                                                 </tr>
@@ -310,16 +300,13 @@ public function createInvoice($invoiceArr){
                                                                                 <tr>     
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito"></td>
                                                                                     <td valign="middle" align="left" width="10%" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito">1</td>
-                                                                                    <td valign="middle" align="left" width="19%" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito">';
-                                                                                    $body .= $invoiceArr['package_name'];
-                                                                                    $body .= '</td>
-                                                                                    <td valign="middle" align="left" width="30%" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito">';
-                                                                                    $body .= $invoiceArr['Description'];
-                                                                                    $body .= '</td>
+                                                                                    <td valign="middle" align="left" width="19%" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito">Advance Pro</td>
+                                                                                    <td valign="middle" align="left" width="30%" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito">Domain, 550 Bandwith,
+6 Static Pages, 1
+<br>Contact
+form, 2 Gallery</td>
                                                                                     <td valign="middle" align="middle" width="15%" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito">1 year</td>
-                                                                                    <td valign="middle" align="center" width="22%" style="line-height:22px; color:#f15c2b;; font-size:14px; font-family:Nunito">';
-                                                                                    $body .= $invoiceArr['package_price'];
-                                                                                    $body .= '</td>
+                                                                                    <td valign="middle" align="center" width="22%" style="line-height:22px; color:#f15c2b;; font-size:14px; font-family:Nunito"> $355</td>
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:Nunito"></td>
                                                                                 </tr>
                                                                             </tbody>
@@ -346,13 +333,9 @@ public function createInvoice($invoiceArr){
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"></td>
                                                                                    <td valign="middle" align="left" width="10%" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">1</td>
                                                                                     <td valign="middle" align="left" width="19%" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Domain</td>
-                                                                                    <td valign="middle"  width="30%"  align="left" style="line-height:22px; color: #477dc0; font-size:16px; font-family:Nunito">';
-                                                                                            $body .= $invoiceArr['domain'];
-                                                                                     $body .= '</td>
+                                                                                    <td valign="middle"  width="30%"  align="left" style="line-height:22px; color: #477dc0; font-size:16px; font-family:Nunito">kumar.com</td>
                                                                                      <td valign="middle" align="middle" width="15%" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">1 year</td>
-                                                                                    <td valign="middle"  width="22%"  align="center" style="line-height:22px; color: #6dbb5b; font-size:16px; font-family:Nunito">';
-                                                                                    $body .=  (!empty($invoiceArr['domain_price'])) ? $invoiceArr['domain_price'] : "Free";
-                                                                                    $body .= '</td>
+                                                                                    <td valign="middle"  width="22%"  align="center" style="line-height:22px; color: #6dbb5b; font-size:16px; font-family:Nunito"> Free</td>
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"></td>
                                                                                 </tr>
                                                                             </tbody>
@@ -373,27 +356,25 @@ public function createInvoice($invoiceArr){
                                                                     <td align="center" height="50" style="line-height:0px; border-top:1px dashed #dfdfdf; border-bottom:1px dashed #dfdfdf;"> 
                                                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                                             <tbody>
-                                                                                
                                                                                 <tr>     
                                                                                   
-                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Coupon Discount : &nbsp;</td>
-                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">';
-                                                                                    $body .= (!empty($invoiceArr['Couponbody'])) ? $invoiceArr['Couponbody'] : "N/A";
-                                                                                    $body .= '</td>
+                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Sub Total : </td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"> $355</td>
                                                                                 </tr>
                                                                                 <tr>     
                                                                                   
-                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Used RP/cash : &nbsp;</td>
-                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">';
-                                                                                    $body .= (!empty($invoiceArr['RPBody'])) ? $invoiceArr['RPBody'] : "N/A";
-                                                                                    $body .= '</td>
+                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Total Amount : </td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"> Free</td>
                                                                                 </tr>
                                                                                 <tr>     
                                                                                   
-                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Total Amount Paid : &nbsp;</td>
-                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">';
-                                                                                    $body .=  (!empty($invoiceArr['paid_amount'])) ? $invoiceArr['paid_amount'] : "Free";
-                                                                                    $body .= '</td>
+                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Used RP/cash : </td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"> Free</td>
+                                                                                </tr>
+                                                                                <tr>     
+                                                                                  
+                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito">Total Amount Paid : </td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:Nunito"> Free</td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -448,6 +429,7 @@ public function createInvoice($invoiceArr){
                                                 <tr>
                                                     <td height="20" bgcolor="" style=""></td>
                                                 </tr>
+                                                </td>
                                                 </tr>
                                             
 
@@ -505,16 +487,16 @@ public function createInvoice($invoiceArr){
                             <tbody>
                                 <tr>
                                     <td width="5%"></td>
-                                    <td width="8%"><a href=""> <img width="" border="0" src="/email-images/skype.png"></a></td>
+                                    <td width="8%"><a href=""> <img width="" border="0" src="skype.png"></a></td>
                                     <td width="37%" valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px; font-family:Nunito"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">91 80 4664 7799</a> </td>
                                     <td width="50%" valign="middle" style="line-height:0px;color: #828282;font-size:16px; font-family:Nunito">
                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                             <tbody>
                                                 <tr>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="/email-images/facebook-icon.png"></a></td>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="/email-images/googleplus.png"></a></td>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="/email-images/pinterest-icon.png"></a></td>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="/email-images/twitter-icon.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="facebook-icon.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="googleplus.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="pinterest-icon.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="twitter-icon.png"></a></td>
                                                     <td width="40%" valign="middle" align="left"></td>
 
                                                 </tr>
@@ -556,8 +538,8 @@ public function createInvoice($invoiceArr){
                 </tr>
             </tbody>
         </table>';
- 
-return $body;                                                                                   
+
+return  $body;                                                                           
 }
 
 
