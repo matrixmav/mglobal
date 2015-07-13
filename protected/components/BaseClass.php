@@ -72,6 +72,14 @@ class BaseClass extends Controller {
         }
         return $accessArr;
     }
+    
+    public static function getNewsUpdates()
+    {
+        $newsObject = News::model()->find(array('condition'=>'status=1','order' => 'created_at DESC','limit' => '1'));
+        $news = (!empty($newsObject)) ? $newsObject->news : "";
+                
+        return $news;
+     }
 
     public static function getUserName() {
         $userId = Yii::app()->session['userid']; // die; 
