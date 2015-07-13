@@ -1255,7 +1255,7 @@ class BaseClass extends Controller {
                 }
                 
             }
-            echo $userCountIncrement;
+            return $userCountIncrement;
         } 
     }    
 
@@ -1273,7 +1273,6 @@ class BaseClass extends Controller {
         if($userObject->status == 1 ){
             $color = "sm-user-active";
         }        
-        
         $orderArray = array();
         if (count($orderListObject) > 0) {
             $myAmount = 0;
@@ -1281,7 +1280,7 @@ class BaseClass extends Controller {
                 $orderAmount = $orderObject->package(array('order' => 'amount DESC'));
                 if ($myAmount < $orderAmount->amount) {
                     $myAmount = $orderAmount->amount;
-                    $type = $orderAmount->id;
+                    $type = $orderObject->status == 1 ? $orderAmount->id : 0;
                     
                     if ($type == 4) {
                         $color = "sm-basicp1"; //Basic Packages 2
@@ -1301,17 +1300,25 @@ class BaseClass extends Controller {
                         $color = "sm-pro2"; //Advance Pro Packages 2
                     } else if ($type == 10) {
                         $color = "sm-pro3"; //Advance Pro Packages 3
-                    } else {
-                        //$color = "sm-zzz"; //No Purchase 
+                    } else if ($type == 0){
+                        $color = "sm-zzz"; //No Purchase 
+                    }else{
+                        
                     }
                     
-                    if($orderObject->status == 0){
-                       $color = "sm-zzz"; //No Purchase  
-                    }
+//                    echo $orderObject->status ; die;
+//                    if($orderObject->status == 0){
+//                       $color = "sm-zzz"; //No Purchase  
+//                    }
                     
                 }
             }
         }
+//        else{
+//                       $color = "sm-grey"; //No Purchase  
+//                    
+//        }
+        
         return $color;
     }
 
