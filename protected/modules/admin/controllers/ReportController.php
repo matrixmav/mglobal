@@ -32,7 +32,7 @@ class ReportController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view', 'address', 'wallet',
                     'creditwallet', 'package', 'adminsponsor', 'verification',
-                    'socialaccount', 'contact', 'transaction','refferal','deposit','trackrefferal','subscriber'),
+                    'socialaccount', 'contact', 'transaction','refferal','deposit','trackrefferal','subscriber','bugreport','feedback'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
