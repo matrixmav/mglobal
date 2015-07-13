@@ -28,7 +28,7 @@ class ContactController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','contact'),
+				'actions'=>array('index','view','contact','feedback'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -147,7 +147,28 @@ class ContactController extends Controller
             echo 0;
           }
         }
-
+        
+        
+      
+        /*contact form subbmission*/
+        public function actionFeedback() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $feedbackObject = new Feedback;
+             $feedbackObject->email = $_REQUEST['email'];
+             $feedbackObject->name = $_REQUEST['name'];
+             $feedbackObject->category = $_REQUEST['feedback_category'];
+             $feedbackObject->message = $_REQUEST['message'];
+             $feedbackObject->created_at = date('Y-m-d');
+              if($feedbackObject->save(false)){
+                 echo 1;
+              }
+           }else{
+            echo 0;
+          }
+        }
+        
 	/**
 	 * Manages all models.
 	 */
