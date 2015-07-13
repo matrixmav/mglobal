@@ -375,12 +375,13 @@ $(document).ready(function(){
             cache: false,
             success: function(html){
                     if(html == 1){
-                        $('#show_worningS').show();
-                        $("#show_worningS").html("Thanks! Your query has been submitted with us.");
                         $("#name").val('');
                         $("#email").val('');
                         $("#subject").val('');
                         $("#message").val('');
+                        $('#show_worningS').show();
+                        $("#show_worningS").html("Thanks! Your query has been submitted with us.");
+                        
                         $("#show_worningS").fadeOut(10000);
                     }else{
                         document.getElementById('show_worningS').style.display = "none";
