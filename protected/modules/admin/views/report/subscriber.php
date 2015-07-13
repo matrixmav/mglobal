@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Contacts Report'
+    'Subscriber Report'
 );
 ?>
 <style>
@@ -20,7 +20,7 @@ $this->breadcrumbs = array(
     
         <div class="expiration margin-topDefault confirmMenu">
                     
-    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report/contact" class="form-inline">
+    <form id="regervation_filter_frm" name="regervation_filter_frm" method="post" action="/admin/report/subscriber" class="form-inline">
         <div class="input-group input-large date-picker input-daterange">
         <input type="text" name="from" placeholder="To Date" class="datepicker form-control" value="<?php echo (!empty($_POST) && $_POST['from'] !='') ?  $_POST['from'] :  DATE('Y-m-d');?>">
         <span class="input-group-addon">
@@ -60,27 +60,13 @@ $this->breadcrumbs = array(
                     'header'=>'No.',
                     'value'=>'$row+1',
                 ),
-                array(
-                    'name' => 'name',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '($data->name) ? $data->name : "N/A"',
-                ),
-                
+                 
                 array(
                     'name' => 'email',
                     'header' => '<span style="white-space: nowrap;">Email &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->email',
                 ),
-                array(
-                    'name' => 'subject',
-                    'header' => '<span style="white-space: nowrap;">Subject  &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '($data->subject) ? $data->subject : "N/A"',
-                ),
-                array(
-                    'name' => 'message',
-                    'header' => '<span style="white-space: nowrap;">Message &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '($data->message) ? $data->message : "N/A"',
-                ),
+                 
                 
             ),
         ));

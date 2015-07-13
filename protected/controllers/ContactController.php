@@ -28,7 +28,7 @@ class ContactController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','contact','feedback','bug'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -127,7 +127,68 @@ class ContactController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
-
+        
+        /*contact form subbmission*/
+        public function actionContact() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $contactObject = new Contact;
+             $contactObject->email = $_REQUEST['email'];
+             $contactObject->name = $_REQUEST['name'];
+             $contactObject->subject = $_REQUEST['subject'];
+             $contactObject->message = $_REQUEST['message'];
+             $contactObject->type = "contact";
+             $contactObject->created_at = date('Y-m-d');
+             $contactObject->status = 1;
+             if($contactObject->save(false)){
+                 echo 1;
+              }
+           }else{
+            echo 0;
+          }
+        }
+        
+        
+      
+        /*feedback form subbmission*/
+        public function actionFeedback() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $feedbackObject = new Feedback;
+             $feedbackObject->email = $_REQUEST['email'];
+             $feedbackObject->name = $_REQUEST['name'];
+             $feedbackObject->feedback_for = $_REQUEST['feedback_category'];
+             $feedbackObject->comment = $_REQUEST['message'];
+             $feedbackObject->created_at = date('Y-m-d');
+              if($feedbackObject->save(false)){
+                 echo 1;
+              }
+           }else{
+            echo 0;
+          }
+        }
+        
+         /*feedback form subbmission*/
+        public function actionBug() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $bugObject = new BugForm;
+             $bugObject->email = $_REQUEST['email'];
+             $bugObject->name = $_REQUEST['name'];
+             $bugObject->phone = $_REQUEST['phone'];
+             $bugObject->description = $_REQUEST['message'];
+             $bugObject->created_at = date('Y-m-d');
+              if($bugObject->save(false)){
+                 echo 1;
+              }
+           }else{
+            echo 0;
+          }
+        }
+        
 	/**
 	 * Manages all models.
 	 */

@@ -335,7 +335,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $activecls = '';
                                 }
                                 ?>
-                                <li class="<?php echo $activecls; ?>"><a href="/admin/default/dashboard"><i class="fa fa-home"></i>  <span class="title">Dashboard</span>
+                                <li class="<?php echo $activecls; ?>"><a href="/admin/user/dashboard"><i class="fa fa-home"></i>  <span class="title">Dashboard</span>
                                         <span class="selected"></span> 
                                         <?php /*<span
                                             class="arrow <?php echo ($curAction == 'dashboard') ? "open" : ''; ?>">
@@ -583,8 +583,35 @@ License: You must have a valid license purchased only from themeforest(the above
                                     $reservation_subsection9 = array();
                                             
                                 }
+                                
+                                if (in_array('reportsubscriber', $accessArr)) { 
+                                    $reservation_subsection10 = array(
+                                      "report/subscriber" => "Subscriber",  
+                                   );
+                                }else{
+                                    $reservation_subsection10 = array();
+                                            
+                                }
+                                
+                                if (in_array('reportfeedback', $accessArr)) { 
+                                    $reservation_subsection11 = array(
+                                      "report/feedback" => "Feedback",  
+                                   );
+                                }else{
+                                    $reservation_subsection11 = array();
+                                            
+                                }
+                                
+                                if (in_array('reportbug', $accessArr)) { 
+                                    $reservation_subsection12 = array(
+                                      "report/bugreport" => "Bug Report",  
+                                   );
+                                }else{
+                                    $reservation_subsection12 = array();
+                                            
+                                }
                                  
-                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection6,$reservation_subsection7,$reservation_subsection8,$reservation_subsection9);
+                                $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2, $reservation_subsection3, $reservation_subsection4, $reservation_subsection5,$reservation_subsection6,$reservation_subsection7,$reservation_subsection8,$reservation_subsection9,$reservation_subsection10,$reservation_subsection11,$reservation_subsection12);
                                 ?>
                                 <li
                                     class="<?php echo (($curControllerLower == 'report') || ($curControllerLower == 'report')) ? "active" : ''; ?>">
@@ -883,6 +910,71 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <?php
                             }
+                            /* code for news module*/
+                            
+                           if (in_array('news', $accessArr)) { 
+                            $reservation_pmenu = 9;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                if (in_array('newsadd', $accessArr)) { 
+                                $reservation_subsection1 = array(
+                                    
+                                    "news/add" => "Add News",
+                                );
+                                
+                                }else{
+                                    $reservation_subsection1 = array();
+                                }
+                                
+                                if (in_array('newslist', $accessArr)) { 
+                                $reservation_subsection2 = array(
+                                    
+                                     "news/list" => "News List",
+                                );
+                                
+                                }else{
+                                    $reservation_subsection2 = array();
+                                }
+                                   
+                                   
+                               $reservation_subsection = array_merge($reservation_subsection1, $reservation_subsection2);  
+                                ?>
+                               
+                                <li
+                                    class="<?php echo (($curAction == 'add') || ($curAction == 'edit') || ($curAction == 'list')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <i class="fa fa-user"></i>
+                                        <span class="title">News</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo ($curAction == 'resetpassword') ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($curAction == "resetpassword" && $curControllerLower == "user")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                            }
+                           }
+                            
                              if (in_array('summary', $accessArr)) {
                              $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {

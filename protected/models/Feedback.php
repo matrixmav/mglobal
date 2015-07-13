@@ -1,29 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "contact".
+ * This is the model class for table "feedback".
  *
- * The followings are the available columns in table 'contact':
+ * The followings are the available columns in table 'feedback':
  * @property integer $id
  * @property string $name
  * @property string $email
- * @property string $subject
- * @property string $message
- * @property string $type
- * @property integer $country_id
- * @property integer $phone
- * @property integer $status
+ * @property string $feedback_for
+ * @property string $comment
  * @property string $created_at
- * @property string $updated_at
  */
-class Contact extends CActiveRecord
+class Feedback extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'contact';
+		return 'feedback';
 	}
 
 	/**
@@ -34,15 +29,11 @@ class Contact extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, email, subject, message, type, country_id, phone, status, created_at, updated_at', 'required'),
-			array('country_id, phone, status', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>30),
-			array('email', 'length', 'max'=>100),
-			array('subject', 'length', 'max'=>255),
-			array('type', 'length', 'max'=>10),
+			array('name, email, feedback_for, comment, created_at', 'required'),
+			array('name, email, feedback_for', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, email, subject, message, type, country_id, phone, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, name, email, feedback_for, comment, created_at', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,14 +57,9 @@ class Contact extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Name',
 			'email' => 'Email',
-			'subject' => 'Subject',
-			'message' => 'Message',
-			'type' => 'Type',
-			'country_id' => 'Country',
-			'phone' => 'Phone',
-			'status' => 'Status',
+			'feedback_for' => 'Feedback For',
+			'comment' => 'Comment',
 			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
 		);
 	}
 
@@ -98,14 +84,9 @@ class Contact extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('email',$this->email,true);
-		$criteria->compare('subject',$this->subject,true);
-		$criteria->compare('message',$this->message,true);
-		$criteria->compare('type',$this->type,true);
-		$criteria->compare('country_id',$this->country_id);
-		$criteria->compare('phone',$this->phone);
-		$criteria->compare('status',$this->status);
+		$criteria->compare('feedback_for',$this->feedback_for,true);
+		$criteria->compare('comment',$this->comment,true);
 		$criteria->compare('created_at',$this->created_at,true);
-		$criteria->compare('updated_at',$this->updated_at,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -116,7 +97,7 @@ class Contact extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Contact the static model class
+	 * @return Feedback the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -75,7 +75,7 @@ $this->breadcrumbs=array(
 		array(
                     'name'=>'full_name',
                     'header'=>'<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value'=>'isset($data->full_name)?$data->full_name:""',
+                    'value'=>'isset($data->name)?$data->name:""',
 		),
                 array(
                     'name'=>'id',

@@ -103,6 +103,7 @@ class SiteController extends Controller
            $proPackageObject = Package::model()->findAll(array('condition'=>'type=3 AND status=1','order' => 'name ASC','limit' => '3'));
            
            $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
+           
            $membership_type = "";
            if(!empty(Yii::app()->session['userid'])){
            $userObject = User::model()->findByPk(Yii::app()->session['userid']);
@@ -111,6 +112,10 @@ class SiteController extends Controller
            if(!empty(Yii::app()->session['domain'])){
                unset(Yii::app()->session['domain']);
            }
+           
+          /*function to show news feeds*/
+           
+           
           $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
@@ -121,6 +126,7 @@ class SiteController extends Controller
           {
              $contactObject = new Contact;
              $contactObject->email = $_REQUEST['email'];
+             $contactObject->type = "subscribe";
              $contactObject->created_at = date('Y-m-d');
              $contactObject->status = 1;
              $contactObject->save(false);
@@ -135,7 +141,7 @@ class SiteController extends Controller
               /*mail to user*/
              $config['to'] = 'nehanidhi.2008@gmail.com';
              $config['subject'] = 'mGlobally Subscription Confirmed';
-             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMailAdmin', array('userObjectArr'=>$userObjectArr),true);
               //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
              CommonHelper::sendMail($config);
              echo 1;

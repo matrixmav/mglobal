@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Contacts Report'
+    'Feedback Report'
 );
 ?>
 <style>
@@ -72,14 +72,14 @@ $this->breadcrumbs = array(
                     'value' => '$data->email',
                 ),
                 array(
-                    'name' => 'subject',
-                    'header' => '<span style="white-space: nowrap;">Subject  &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '($data->subject) ? $data->subject : "N/A"',
+                    'name' => 'feedback_for',
+                    'header' => '<span style="white-space: nowrap;">Feedback Category  &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '($data->feedback_for) ? $data->feedback_for : "N/A"',
                 ),
                 array(
-                    'name' => 'message',
-                    'header' => '<span style="white-space: nowrap;">Message &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '($data->message) ? $data->message : "N/A"',
+                    'name' => 'comment',
+                    'header' => '<span style="white-space: nowrap;">Comment &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '($data->comment) ? $data->comment : "N/A"',
                 ),
                 
             ),

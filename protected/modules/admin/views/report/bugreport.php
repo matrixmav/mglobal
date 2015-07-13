@@ -3,7 +3,7 @@
 /* @var $model User */
 
 $this->breadcrumbs = array(
-    'Contacts Report'
+    'Bug Report'
 );
 ?>
 <style>
@@ -62,7 +62,7 @@ $this->breadcrumbs = array(
                 ),
                 array(
                     'name' => 'name',
-                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '($data->name) ? $data->name : "N/A"',
                 ),
                 
@@ -72,14 +72,14 @@ $this->breadcrumbs = array(
                     'value' => '$data->email',
                 ),
                 array(
-                    'name' => 'subject',
-                    'header' => '<span style="white-space: nowrap;">Subject  &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '($data->subject) ? $data->subject : "N/A"',
+                    'name' => 'phone',
+                    'header' => '<span style="white-space: nowrap;">Phone  &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '($data->phone) ? $data->phone : "N/A"',
                 ),
                 array(
-                    'name' => 'message',
-                    'header' => '<span style="white-space: nowrap;">Message &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '($data->message) ? $data->message : "N/A"',
+                    'name' => 'description',
+                    'header' => '<span style="white-space: nowrap;">Description &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '($data->description) ? $data->description : "N/A"',
                 ),
                 
             ),
