@@ -174,10 +174,10 @@ class ContactController extends Controller
                     
           if(!empty($_REQUEST))  
           {
-             $bugObject = new BugReport;
+             $bugObject = new BugForm;
              $bugObject->email = $_REQUEST['email'];
              $bugObject->name = $_REQUEST['name'];
-             $bugObject->phone = $_REQUEST['feedback_category'];
+             $bugObject->phone = $_REQUEST['phone'];
              $bugObject->description = $_REQUEST['message'];
              $bugObject->created_at = date('Y-m-d');
               if($bugObject->save(false)){
