@@ -749,7 +749,7 @@ class PackageController extends Controller {
                 $invoiceArr['Couponbody'] = $transactionObject->coupon_discount;
                 $invoiceArr['created_at'] = $transactionObject->created_at;
                 
-                /*$body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
+                $body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
                 $body .='<tr>
                      <td>';
                 $body .= $packageObject->name;
@@ -787,7 +787,7 @@ class PackageController extends Controller {
             </tr>
         </table>
     </td>
-  </tr></table>';*/
+  </tr></table>';
                 
                 //$body = Package::model()->createInvoice($invoiceArr);
                 
@@ -795,7 +795,7 @@ class PackageController extends Controller {
                 $orderObject = Order::model()->findByPK($orderObject->id);
                 $userObjectArr1 = array();
                 $userObjectArr1['full_name'] = $userObject->name;
-                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
+                //$body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
                 $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
                 $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
