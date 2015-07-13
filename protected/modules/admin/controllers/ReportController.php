@@ -347,7 +347,50 @@ class ReportController extends Controller {
             'criteria' => array(
                 'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND type = "subscribe"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
-        $this->render('contact', array(
+        $this->render('subscriber', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+    
+     public function actionFeedback() {
+        $model = new Feedback();
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        $status = 1;
+        if (!empty($_POST)) {
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            
+        }
+
+        $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        $this->render('subscriber', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+    
+    
+    public function actionBugReport() {
+        $model = new BugForm();
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        $status = 1;
+        if (!empty($_POST)) {
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            
+        }
+
+        $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        $this->render('subscriber', array(
             'dataProvider' => $dataProvider,
         ));
     }
