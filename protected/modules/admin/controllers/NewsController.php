@@ -130,19 +130,18 @@ class NewsController extends Controller
     public function actionedit() {
          $error = "";
          $success = "";
-       if(!empty($_GET['id']))  
+         $newsObject = "";
+       if($_GET['id'] != '')  
        {
        $newsObject = News::model()->findByPK($_GET['id']);
-        
         if(!empty($_POST))
         {
           if(!empty($_POST['news']))
           {
-              $newsObject = new News();
-              $newsObject->news = $_POST['news'];
-              $newsObject->created_at = date('Y-m-d');
-              $newsObject->status = 1;
-              if($newsObject->save(false)){
+               $newsObject->news = $_POST['news'];
+               $newsObject->created_at = date('Y-m-d');
+               $newsObject->status = 1;
+               if($newsObject->save(false)){
                $this->redirect(array('/admin/news/list', 'msg' => 3));   
               }
           }else{
@@ -152,7 +151,7 @@ class NewsController extends Controller
        }else{
            $error .= "Invalid Request";
        }
-        $this->render('news_edit', array('error' => $error,'success'=>$success,'newsObject'=>$newsObject));    
+       $this->render('news_edit', array('error' => $error,'success'=>$success,'newsObject'=>$newsObject));    
         }
 
 
