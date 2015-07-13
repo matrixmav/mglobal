@@ -34,10 +34,12 @@
           <p class="f-cnt"><a href="mailto:info@xyz.com">Info@xyz.com</a><br/> 
          91-8500425185</p>   
         </div>
+        
          <div class="col-md-5 col-sm-6 pre-footer-col">
+             <?php if(!empty($newsObject)){?>
             <p class="f-font">News Update</p>
-           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam sit nonummy nibh euismod tincidunt ut laoreet dolore magna aliquarm erat sit volutpat. Nostrud exerci tation ullamcorper suscipit lobortis nisl aliquip  commodo consequat. </p>
-          <p>Duis autem vel eum iriure dolor vulputate velit esse molestie at dolore.</p>
+           <p><?php echo $newsObject->news;?></p>
+        <?php }?>
           <p class="f-font">News Letter</p>
           <form class="form-inline">
               <div class="form-group">
