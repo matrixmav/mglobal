@@ -30,7 +30,8 @@ class OrderController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment', 'refferalincome','pendingpayment'),
+                'actions' => array('index', 'view', 'list', 'redirect', 'invoice', 'checkinvestment', 
+                    'refferalincome','pendingpayment','dashboard'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -46,6 +47,18 @@ class OrderController extends Controller {
             ),
         );
     }
+    
+     public function actionDashboard() {
+        if(!empty(Yii::app()->session['domain'])){
+               unset(Yii::app()->session['domain']);
+           }
+        $loggedInUserId = Yii::app()->session['userid'];
+        $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId. ' And  status = 1 '));
+        $this->render('/user/dashboard', array(
+            'orderObject' => $orderObject,
+        ));
+    }
+
 
     public function actionList() {
         $userId = Yii::app()->session['userid'];
