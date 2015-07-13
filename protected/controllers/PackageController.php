@@ -728,7 +728,19 @@ class PackageController extends Controller {
                 }
                 $Samount = number_format($packageObject->amount + $orderObject->domain_price, 2);
                 $paid_amount = number_format($transactionObject->paid_amount, 2);
-                $body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
+                $invoiceArr = array();
+                $invoiceArr['package_name'] = $packageObject->name;
+                $invoiceArr['name'] = $userObject->name;
+                $invoiceArr['transaction_id'] = $transactionObject->transaction_id;
+                $invoiceArr['full_name'] = $userObject->full_name;
+                $invoiceArr['address'] = $userObject->address;
+                $invoiceArr['domain'] = $orderObject->domain;
+                $invoiceArr['domain_price'] = $domain_price;
+                $invoiceArr['Samount'] = $Samount;
+                $invoiceArr['paid_amount'] = $paid_amount;
+                $invoiceArr['RPBody'] = $RPBody;
+                $invoiceArr['Couponbody'] = $Couponbody;
+                /*$body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
                 $body .='<tr>
                      <td>';
                 $body .= $packageObject->name;
@@ -766,10 +778,11 @@ class PackageController extends Controller {
             </tr>
         </table>
     </td>
-  </tr></table>';
-                  
-                $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
+  </tr></table>';*/
                 
+                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
+                
+                $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
                 $orderObject = Order::model()->findByPK($orderObject->id);
                 $userObjectArr1 = array();
                 $userObjectArr1['full_name'] = $userObject->name;
