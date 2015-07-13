@@ -45,7 +45,7 @@
           <form class="form-inline">
               <div class="form-group">
                   <input type="email" class="form-control mailTxt" id="email1" placeholder="Email">
-                  <input type="button" class="btn  signBtn" onclick="subscription();" value="Sign in">
+                  <input type="button" class="btn  signBtn" onclick="subscription();" value="Subscribe">
                   <div id="show_wornings" class="error1"></div>
                   <div id="show_worningS" class="success1"></div>
                    
