@@ -7,15 +7,15 @@
         <!-- BEGIN BOTTOM ABOUT BLOCK -->
         <div class="col-md-2 col-sm-6 pre-footer-col">
           <p class="f-font">Legal</p>
-          <p class="f-cnt"><a href="mailto:legal@xyz.com">legal@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:billing@mglobally.com">billing@mglobally.com</a><br/> 
           91-8500425185</p>
            
           <p class="f-font">Billing</p>
-          <p class="f-cnt"><a href="mailto:billing@xyz.com">Billing@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:legal@mglobally.com">legal@mglobally.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Support</p>
-          <p class="f-cnt"><a href="mailto:support@xyz.com">support@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:support@mglobally.com">support@mglobally.com</a><br/> 
           91-8500425185</p>
         </div>
         <!-- END BOTTOM ABOUT BLOCK -->
@@ -24,15 +24,15 @@
         <div class="col-md-2 col-sm-6 pre-footer-col">
        
           <p class="f-font">Member Enquiry</p>
-          <p class="f-cnt"><a href="mailto:memberenquiry@xyz.com">memberenquiry@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:memberenquiry@mglobally.com">memberenquiry@mglobally.com</a><br/> 
           91-8500425185 </p>
           
           <p class="f-font">Sales</p>
-          <p class="f-cnt"><a href="mailto:sales@xyz.com">sales@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:sales@mglobally.com">sales@mglobally.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Info</p>
-          <p class="f-cnt"><a href="mailto:info@xyz.com">Info@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:info@mglobally.com">info@mglobally.com</a><br/> 
          91-8500425185</p>   
         </div>
         
