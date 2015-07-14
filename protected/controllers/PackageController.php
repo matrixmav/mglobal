@@ -825,7 +825,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-	     if ($transactionObject->status == 1) {
+	    if($transactionObject->status == 0) {
             $transactionObject->status = 1;
              $transactionObject->created_at = date('Y-m-d');
             $transactionObject->update();
@@ -876,7 +876,7 @@ class PackageController extends Controller {
                 $config['body'] =  $this->renderPartial('../mailTemp/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
         }
-        $successMsg = "Your cash has been added to your wallet. Please check";
+            $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
 
             }else{
