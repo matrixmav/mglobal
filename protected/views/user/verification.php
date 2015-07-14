@@ -24,7 +24,9 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="firstname">Upload / Update ID Proof <span class="require">*</span></label>
                 <div class="col-lg-6 col-xs-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
-                       <span class="fileupload-new"><input type="file" id="id_proof" class="form-control11" name="id_proof"></span></div>
+                       <span class="fileupload-new"><input type="file" id="id_proof" class="form-control11" name="id_proof"></span>
+                     <div class="form_error" id="id_error"></div>
+                     </div>
                     <p class="help-block">(Upload jpg ,png files only)</p>
                 </div>
                 <div class="col-lg-2 col-xs-4">
@@ -41,14 +43,14 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Upload / Update Address Proof <span class="require">*</span></label>
                 <div class="col-lg-6 col-xs-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
-                        <span class="fileupload-new"><input type="file" id="address_proof" class="form-control11" name="address_proof"></span></div>
+                        <span class="fileupload-new"><input type="file" id="address_proof" class="form-control11" name="address_proof"></span><div id="address_error" class="form_error"></div></div>
                     <p class="help-block">(Upload jpg ,png files only)</p>
                 </div>
                    <div class="col-lg-2 col-xs-4">
                              <?php if(!empty($userObject) && $userObject->address_proff!=''){?>
                     <span class="example"><a href="/upload/verification-document/<?php echo $userObject->address_proff;?>" target="_blank"><img src="/upload/verification-document/<?php echo $userObject->address_proff;?>" width="50" height="50"></a></span>
                     <?php }?>
-                     <div id="address_error" class="form_error"></div>
+                     
                 </div>
             </div>
             
@@ -73,8 +75,8 @@ $this->breadcrumbs = array(
 </div>
 
 <script>
-     function validation()
-    {
+      function validation()
+     {
         document.getElementById("id_error").innerHTML = "";
         if(document.getElementById("id_proof").value == ''){             
             document.getElementById("id_error").innerHTML = "Please choose ID proof from your computer.";

@@ -130,7 +130,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                 <div class="row">
                                     <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
                                         <button type="submit" class="btn btn-primary">Create an account</button>
-                                        <a href="/" type="button" class="btn btn-default">Cancel</a>
+                                        <!--<a href="/" type="button" class="btn btn-default">Cancel</a>-->
                                     </div>
                                 </div>
                             </form>

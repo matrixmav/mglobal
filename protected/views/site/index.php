@@ -1132,6 +1132,7 @@
        alert('Sorry you are not allowed to pick this package. To pick this package register with different account');return false;
     }
           //$(".myfancyTxtBox").fancybox();
+
         
 </script>
  <script type="text/javascript">
@@ -1141,4 +1142,6 @@ $('.jcarousel').jcarousel({
 }).jcarouselAutoscroll({
   interval: 10000
 });
+
 </script>
+

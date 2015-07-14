@@ -49,7 +49,7 @@ class ProfileController extends Controller {
      */
 
     public function actionAddress() {
-        $model = new UserProfile;
+        //$model = new UserProfile;
         $errorMsg = "";
         $successMsg = "";
         $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
@@ -130,9 +130,9 @@ class ProfileController extends Controller {
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
         $transactionObject = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
-        $edit = "no";
+        $edit = "yes";
         if (!empty($transactionObject) && $transactionObject->status == '1') {
-            $edit = "yes";
+            $edit = "no";
         }
         //print_r($_POST['UserProfile']);exit;
         if (isset($_POST['UserProfile'])) {  
@@ -179,7 +179,7 @@ class ProfileController extends Controller {
         $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
 
-        if ($_POST) {
+        if ($_POST && $_FILES['id_proof']['name']!='' && $_FILES['address_proof']['name'] !='') {
             $profileObject->id_proof = time() . $_FILES['id_proof']['name'];
             $profileObject->address_proff = time() . $_FILES['address_proof']['name'];
             if ($_FILES) {

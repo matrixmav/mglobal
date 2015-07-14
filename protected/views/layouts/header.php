@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/registration.js"></script> 
   <div class="color-panel">
     <div class="color-mode-icons icon-color"><i class="fa fa-share-alt"></i></div>
     <div class="color-mode-icons icon-color-close"><i class="fa fa-share-alt"></i></div>
@@ -8,11 +8,11 @@
 
       <ul class="inline">
          
-          <li><a class="fb-icon" href=""><i class="fa fa-facebook-square"></i></a></li>
-          <li><a class="tw-icon" href=""><i class="fa fa-twitter-square"></i></a></li>
-          <li><a class="skype-icon"href=""><i class="fa fa-skype"></i></a></li>
-          <li><a  class="link-icon "href=""><i class="fa fa-linkedin-square"></i></a></li>
-          <li><a class="utube-icon"href=""><i class="fa fa-youtube-square"></i></a></li>
+          <li><a class="fb-icon" href="https://www.facebook.com/pages/MGlobally/516594005156691?ref=hl" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+          <li><a class="tw-icon" href="https://twitter.com/MGlobally" target="_blank"><i class="fa fa-twitter-square"></i></a></li>
+          <li><a class="skype-icon" href="callto://MGlobally" target="_blank"><i class="fa fa-skype"></i></a></li>
+          <li><a  class="link-icon " href="" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+          <li><a class="utube-icon" href="https://www.youtube.com/channel/UCQUJDa-Mvxee80MMrhK-_S" target="_blank"><i class="fa fa-youtube-square"></i></a></li>
           <li><a class="whatsap-icon" href=""><i class="fa fa-whatsapp"></i></a></li>
       </ul>
       
@@ -186,7 +186,7 @@
                         <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
 
                         <li style="border: none;"><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
-                        <li style="border: none;"><a href="callto://ramhemareddy"><button id="checkout" class="btn  topBtn">Call Us</button><a/></li>
+                        <li style="border: none;"><a href="callto://MGlobally"><button id="checkout" class="btn  topBtn">Call Us</button><a/></li>
 
                     </ul>
               </div>
@@ -314,224 +314,4 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
    
-         function isEmail(aStr)
-             {
-
-            var reEmail=/^[0-9a-zA-Z_\.-]+\@[0-9a-zA-Z_\.-]+\.[0-9a-zA-Z_\.-]+$/;
-            if(!reEmail.test(aStr))
-            {
-            return false;
-
-            }
-            return true;
-
-            }/*End of isEmail function*/
-
-            function submitForm()
-            {
-            var email = $('#email').val();
-            var name  = $('#name').val();
-            var subject = $('#subject').val();
-            var message = $('#message').val();
-          
-            $('#show_wornings_name').hide();
-            if(name ==''){
-            $('#show_wornings_name').show();
-            $("#show_wornings_name").html("Please enter name.");
-            $('#name').focus();
-            return false;
-            }
-            $('#show_wornings_email').hide();
-            if(email ==''){
-            $('#show_wornings_email').show();
-            $("#show_wornings_email").html("Please enter email.");
-            $('#email').focus();
-            return false;
-            }
-             $('#show_wornings_email').hide();
-             if(!isEmail(email)){
-            $('#show_wornings_email').show();
-            $("#show_wornings_email").html("Please enter valid email.");
-            $('#email').focus();
-            return false;
-            }
-             $('#show_wornings_subject').hide();
-            if(subject ==''){
-            $('#show_wornings_subject').show();
-            $("#show_wornings_subject").html("Please enter subject.");
-            $('#subject').focus();
-            return false;
-            }
-             $('#show_wornings_message').hide();
-            if(message ==''){
-            $('#show_wornings_message').show();
-            $("#show_wornings_message").html("Please enter your message.");
-            $('#message').focus();
-            return false;
-            }
-        
-        
-        
-        else{
-            var dataString = 'email='+email+'&name='+name+'&subject='+subject+'&message='+message;
-            $.ajax({
-            type: "GET",
-            url: "contact/contact",
-            data: dataString,
-            cache: false,
-            success: function(html){
-                    if(html == 1){
-                        $("#name").val('');
-                        $("#email").val('');
-                        $("#subject").val('');
-                        $("#message").val('');
-                        $('#show_worning').show();
-                        $("#show_worning").html("Thanks! Your query has been submitted with us.");
-                        
-                        $("#show_worning").fadeOut(20000);
-                    }else{
-                        document.getElementById('show_worning').style.display = "none";
-                        document.getElementById("show_worning").innerHTML = "There might be something wrong.";
-                    }
-                    
-                    
-              } 
-            });
-            }    
-}
- 
- 
- /* code to submit feedback form */
-      function submitFeddbackForm()
-            {
-            var email = $('#emailF').val();
-            var name  = $('#nameF').val();
-            var feedback_category  = $('#feedback_category').val();
-             var message = $('#comment').val();
-          
-            $('#show_wornings_nameF').hide();
-            if(name ==''){
-            $('#show_wornings_nameF').show();
-            $("#show_wornings_nameF").html("Please enter name.");
-            $('#nameF').focus();
-            return false;
-            }
-            $('#show_wornings_emailF').hide();
-            if(email ==''){
-            $('#show_wornings_emailF').show();
-            $("#show_wornings_emailF").html("Please enter email.");
-            $('#emailF').focus();
-            return false;
-            }
-             $('#show_wornings_emailF').hide();
-             if(!isEmail(email)){
-            $('#show_wornings_emailF').show();
-            $("#show_wornings_emailF").html("Please enter valid email.");
-            $('#emailF').focus();
-            return false;
-            }
-             
-             $('#show_wornings_messageF').hide();
-            if(message ==''){
-            $('#show_wornings_messageF').show();
-            $("#show_wornings_messageF").html("Please enter your comment.");
-            $('#comment').focus();
-            return false;
-            }
-        
-        
-        
-        else{
-            var dataString = 'email='+email+'&name='+name+'&feedback_category='+feedback_category+'&message='+message;
-            $.ajax({
-            type: "GET",
-            url: "contact/feedback",
-            data: dataString,
-            cache: false,
-            success: function(html){
-                    if(html == 1){
-                        $('#show_worningF').show();
-                        $("#show_worningF").html("Thanks! Your query has been submitted with us.");
-                        $("#nameF").val('');
-                        $("#emailF").val('');
-                        $("#feedback_category").val('');
-                        $("#comment").val('');
-                        $("#show_worningF").fadeOut(10000);
-                    }else{
-                        document.getElementById('show_worningF').style.display = "none";
-                        document.getElementById("show_worningf").innerHTML = "There might be something wrong.";
-                    }
-                    
-                    
-              } 
-            });
-            }    
-}
-
-         /* code to submit bug form */
-      function bugFormSubmit()
-            {
-            var email = $('#emailB').val();
-            var name  = $('#nameB').val();
-            var phone  = $('#phone').val();
-            var description = $('#description').val();
-          
-            $('#show_wornings_nameB').hide();
-            if(name ==''){
-            $('#show_wornings_nameB').show();
-            $("#show_wornings_nameB").html("Please enter name.");
-            $('#nameB').focus();
-            return false;
-            }
-            $('#show_wornings_emailB').hide();
-            if(email ==''){
-            $('#show_wornings_emailB').show();
-            $("#show_wornings_emailB").html("Please enter email.");
-            $('#emailB').focus();
-            return false;
-            }
-             $('#show_wornings_emailB').hide();
-             if(!isEmail(email)){
-            $('#show_wornings_emailB').show();
-            $("#show_wornings_emailB").html("Please enter valid email.");
-            $('#emailB').focus();
-            return false;
-            }
-             
-             $('#show_wornings_messageB').hide();
-            if(description ==''){
-            $('#show_wornings_messageB').show();
-            $("#show_wornings_messageB").html("Please enter your bug description.");
-            $('#description').focus();
-            return false;
-            }
-        
-        
-        
-        else{
-            var dataString = 'email='+email+'&name='+name+'&phone='+phone+'&message='+description;
-            $.ajax({
-            type: "GET",
-            url: "contact/bug",
-            data: dataString,
-            cache: false,
-            success: function(html){
-                    if(html == 1){
-                        $('#show_worningR').show();
-                        $("#show_worningR").html("Thanks! Your query has been submitted with us.");
-                        $("#nameB").val('');
-                        $("#emailB").val('');
-                        $("#phone").val('');
-                        $("#description").val('');
-                        $("#show_worningR").fadeOut(10000);
-                    }else{
-                        document.getElementById('show_worningR').style.display = "none";
-                        document.getElementById("show_worningr").innerHTML = "There might be something wrong.";
-                    }
-                    
-                    
-              } 
-            });
-            }    
-}
 </script>

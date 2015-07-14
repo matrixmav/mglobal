@@ -59,27 +59,35 @@
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation pull-right font-transform-inherit">
             <ul>
-                <li class="dropdown">
+                <li>
                     <a class="dropdown-toggle" href="/">Home </a>
                 </li>
-                <li class="dropdown dropdown-megamenu">
+                <li>
                     <a class="dropdown-toggle" href="/#about">About </a>
                 </li>
-                <li class="dropdown">
+                <li>
                     <a class="dropdown-toggle" href="/#services"> Services  </a>
 
                 </li>
-                <li class="dropdown">
+                <li>
                     <a class="dropdown-toggle" href="/#team">Media centre </a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" href="/#portfolio"> Templates </a>
+                <li>
+                    <a class="dropdown-toggle" href="/#prices">Pricing</a>
                 </li>
-                <li class="dropdown">
+               
+                <li>
                     <a href="/#benefits" class="dropdown-toggle" >Benefits</a>
                 </li>
-                <!--<li><a href="#" target="_blank">Packages</a></li>-->
-                <li><a href="/#contact" target="_blank">support centre</a></li>
+                
+                 <li >
+                    <a class="dropdown-toggle" href="/#portfolio"> Portfolio</a>
+                </li>
+                  <li>
+                    <a class="dropdown-toggle" href="/#contact"> Contact </a>
+                </li>
+                <!--<li><a href="#" target="_blank">Packages</a></li>
+                <li><a href="/#contact" target="_blank">FAQ</a></li>-->
                
 
                 <!-- BEGIN TOP SEARCH 
