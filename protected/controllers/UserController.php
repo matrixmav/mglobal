@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname'),
+                    'callback', 'getfullname','searchtemplate'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -934,4 +934,27 @@ class UserController extends Controller {
         }
     }
 
+    public function actionSearchTemplate(){
+        
+        if((!empty($_GET))){
+           // print_r($_GET); die;            
+            $criteria = new CDbCriteria;
+            $mode = "BuildTemp";            
+            $criteria->with = array('build_temp_header');
+            $criteria->condition = 't.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" '  ;
+            
+            $dataProvider = new CActiveDataProvider($mode, array(
+            'criteria' => $criteria, 'pagination' => array('pageSize' => 10),));           
+        }
+        echo "<pre>";
+        print_r($dataProvider); die;
+        
+        $buildTempObject = BuildTemp::model()->findAll();
+        
+        $categoryObject = BuildCategory::model()->findall();
+        $packageObject = Package::model()->findall();
+        //print_R($packageObject); die;
+        $this->render('searchtemplate',array('buildTempObject' => $buildTempObject , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
+        
+    }
 }
