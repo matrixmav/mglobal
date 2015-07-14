@@ -16,7 +16,7 @@ $this->breadcrumbs = array(
 							</div>
     </div>
         <div class="portlet-body form">
-    <form action="/profile/documentverification" method="post" class="form-horizontal" <?php if(empty($userObject->address_proff)){?>onsubmit="return validation();" <?php }?> enctype = "multipart/form-data">
+    <form action="/profile/documentverification" method="post" class="form-horizontal" enctype = "multipart/form-data">
      
         <fieldset>
             <div class="form-body">
