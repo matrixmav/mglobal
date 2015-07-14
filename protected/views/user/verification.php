@@ -16,7 +16,7 @@ $this->breadcrumbs = array(
 							</div>
     </div>
         <div class="portlet-body form">
-    <form action="/profile/documentverification" method="post" class="form-horizontal" onsubmit="return validation();" enctype = "multipart/form-data">
+    <form action="/profile/documentverification" method="post" class="form-horizontal" <?php if(empty($userObject->address_proff)){?>onsubmit="return validation();" <?php }?> enctype = "multipart/form-data">
      
         <fieldset>
             <div class="form-body">
@@ -75,8 +75,8 @@ $this->breadcrumbs = array(
 </div>
 
 <script>
-     function validation()
-    {
+      function validation()
+     {
         document.getElementById("id_error").innerHTML = "";
         if(document.getElementById("id_proof").value == ''){             
             document.getElementById("id_error").innerHTML = "Please choose ID proof from your computer.";
