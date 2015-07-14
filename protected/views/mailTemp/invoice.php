@@ -57,10 +57,9 @@
                     </td>
                 </tr>
 
-                <!-- text description -->
-                <tr>
-                    <td valign="" bgcolor="#fafafa" height="" align="left" style="line-height:0px; font-size:16px">
-                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+          <td valign="" bgcolor="#fafafa" height="" align="left" style="line-height:0px; font-size:16px">
+              <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tbody>
                                 <tr>
                                     <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; "> </td>
@@ -87,12 +86,10 @@
                                                                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                                                             <tbody>
                                                                                                 <tr>
-                                                                                                    <td>T0 : Mr Sandeep Kumar</td>
+                                                                                                    <td>T0 : <?php echo ucwords($invoiceArr['full_name']);?></td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <td>#109, JC Road,
-                                                                                                        <br>
-                                                                                                        Bangalore,<br> India</td>
+                                                                                                    <td><?php echo $invoiceArr['address'];?></td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
@@ -108,7 +105,7 @@
                                                                                                                 <tr>
                                                                                                                     <td width="2%" bgcolor="#e4f4e3" height="30"></td>
                                                                                                                     <td width="48%" bgcolor="#e4f4e3" valign="middle" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Customer ID :</td>
-                                                                                                                    <td width="50%" bgcolor="#e4f4e3" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; ">APRL2456</td>
+                                                                                                                    <td width="50%" bgcolor="#e4f4e3" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "><?php echo $invoiceArr['name'];?></td>
                                                                                                                 </tr>
                                                                                                                 <tr>
                                                                                                                     <td height="2" bgcolor="" style=""></td>
@@ -116,7 +113,7 @@
                                                                                                                 <tr>
                                                                                                                     <td width="1%" bgcolor="#e0eec4" height="30"></td>
                                                                                                                     <td width="49%" bgcolor="#e0eec4" valign="middle" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Invoice No : &nbsp;</td>
-                                                                                                                    <td width="50%" bgcolor="#e0eec4" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; ">#74857487</td>
+                                                                                                                    <td width="50%" bgcolor="#e0eec4" valign="middle" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; ">#<?php echo $invoiceArr['transaction_id'];?></td>
                                                                                                                 </tr>
                                                                                                                  <tr>
                                                                                                                     <td height="5" bgcolor="" style=""></td>
@@ -127,11 +124,11 @@
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; ">Date : 10/ 05 /2015
+                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; ">Date : <?php echo $invoiceArr['created_at'];?>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "> Email : kumar@gmail.com
+                                                                                                    <td valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "> Email : <?php echo $invoiceArr['email'];?>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
@@ -151,17 +148,17 @@
                                             </tbody>
                                         </table>
                                     </td>
-                                                                        <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; "> </td>
-
-                                    </tr>
+                                    <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; "> </td>
+                                  </tr>
                             </tbody>
-                        </table>
-<!-- text description -->
-
-                                                <tr>
-                                                    <td height="20" bgcolor="" style=""></td>
-                                                </tr>
-                                                <tr>
+                         </table>
+                      
+                       </td>
+                    </tr>
+                       <tr>
+                        <td height="20" bgcolor="" style=""></td>
+                        </tr>  
+                        <tr>
                                                     <td valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; "> 
                                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                             <tbody>
@@ -170,13 +167,13 @@
                                                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                                                             <tbody>
                                                                                 <tr> 
-                                                                                    <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "></td>
-                                                                                    <td valign="middle" width="10%" align="left" style="line-height:22px; color: #828282; font-size:16px; ">Sl no.</td>
-                                                                                    <td valign="middle" width="19%" align="left" style="line-height:22px; color: #828282; font-size:16px; ">Package</td>
-                                                                                    <td valign="middle" width="30%" align="left" style="line-height:22px; color: #828282; font-size:16px; ">Description</td>
-                                                                                    <td valign="middle" width="15%" align="middle" style="line-height:22px; color: #828282; font-size:16px; ">Duration</td>
-                                                                                    <td valign="middle" width="22%" align="middle" style="line-height:22px; color: #828282; font-size:16px; ">Price</td>
-                                                                                    <td  width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "> </td>
+                                                                                    <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px;"></td>
+                                                                                    <td valign="middle" width="10%" align="left" style="line-height:22px; color: #828282; font-size:16px;">Sl no.</td>
+                                                                                    <td valign="middle" width="19%" align="left" style="line-height:22px; color: #828282; font-size:16px;">Package</td>
+                                                                                    <td valign="middle" width="30%" align="left" style="line-height:22px; color: #828282; font-size:16px;">Description</td>
+                                                                                    <td valign="middle" width="15%" align="middle" style="line-height:22px; color: #828282; font-size:16px;">Duration</td>
+                                                                                    <td valign="middle" width="22%" align="middle" style="line-height:22px; color: #828282; font-size:16px;">Price</td>
+                                                                                    <td  width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px;"> </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -202,13 +199,13 @@
                                                                                 <tr>     
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; "></td>
                                                                                     <td valign="middle" align="left" width="10%" style="line-height:22px; color: #828282; font-size:14px; ">1</td>
-                                                                                    <td valign="middle" align="left" width="19%" style="line-height:22px; color: #828282; font-size:14px; ">Advance Pro</td>
-                                                                                    <td valign="middle" align="left" width="30%" style="line-height:22px; color: #828282; font-size:14px; ">Domain, 550 Bandwith,
+                                                                                    <td valign="middle" align="left" width="19%" style="line-height:22px; color: #828282; font-size:14px; "><?php echo $invoiceArr['package_name'];?></td>
+                                                                                    <td valign="middle" align="left" width="30%" style="line-height:22px; color: #828282; font-size:14px; "><?php echo $invoiceArr['Description'];?>
 6 Static Pages, 1
 <br>Contact
 form, 2 Gallery</td>
                                                                                     <td valign="middle" align="middle" width="15%" style="line-height:22px; color: #828282; font-size:14px; ">1 year</td>
-                                                                                    <td valign="middle" align="center" width="22%" style="line-height:22px; color:#f15c2b;; font-size:14px; "> $355</td>
+                                                                                    <td valign="middle" align="center" width="22%" style="line-height:22px; color:#f15c2b;; font-size:14px; ">$<?php echo $invoiceArr['package_price'];?></td>
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; "></td>
                                                                                 </tr>
                                                                             </tbody>
@@ -235,9 +232,9 @@ form, 2 Gallery</td>
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "></td>
                                                                                    <td valign="middle" align="left" width="10%" style="line-height:22px; color: #828282; font-size:16px; ">1</td>
                                                                                     <td valign="middle" align="left" width="19%" style="line-height:22px; color: #828282; font-size:16px; ">Domain</td>
-                                                                                    <td valign="middle"  width="30%"  align="left" style="line-height:22px; color: #477dc0; font-size:16px; ">kumar.com</td>
+                                                                                    <td valign="middle"  width="30%"  align="left" style="line-height:22px; color: #477dc0; font-size:16px; "><?php echo $invoiceArr['domain'];?></td>
                                                                                      <td valign="middle" align="middle" width="15%" style="line-height:22px; color: #828282; font-size:16px; ">1 year</td>
-                                                                                    <td valign="middle"  width="22%"  align="center" style="line-height:22px; color: #6dbb5b; font-size:16px; "> Free</td>
+                                                                                    <td valign="middle"  width="22%"  align="center" style="line-height:22px; color: #6dbb5b; font-size:16px; "> <?php echo(!empty($invoiceArr['domain_price'])) ? $invoiceArr['domain_price'] : "Free";?></td>
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "></td>
                                                                                 </tr>
                                                                             </tbody>
@@ -260,23 +257,23 @@ form, 2 Gallery</td>
                                                                             <tbody>
                                                                                 <tr>     
                                                                                   
-                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Sub Total : &nbsp;</td>
-                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> $355</td>
+                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Total : &nbsp;</td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> $<?php echo(!empty($invoiceArr['Samount'])) ? $invoiceArr['Samount'] : "Free";?></td>
                                                                                 </tr>
                                                                                 <tr>     
                                                                                   
-                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Total Amount : &nbsp;</td>
-                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> Free</td>
+                                                                                    <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Coupon Discount : &nbsp;</td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> <?php echo(!empty($invoiceArr['Couponbody'])) ? $invoiceArr['Couponbody'] : "N/A";?></td>
                                                                                 </tr>
                                                                                 <tr>     
                                                                                   
                                                                                     <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Used RP/cash : &nbsp;</td>
-                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> Free</td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> <?php echo(!empty($invoiceArr['RPBody'])) ? $invoiceArr['RPBody'] : "N/A";?></td>
                                                                                 </tr>
                                                                                 <tr>     
                                                                                   
                                                                                     <td valign="middle"  width="85%" height="30" align="right" style="line-height:22px; color: #828282; font-size:16px; ">Total Amount Paid : &nbsp;</td>
-                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> Free</td>
+                                                                                    <td valign="middle"  width="15%" height="30" align="left" style="line-height:22px; color: #828282; font-size:16px; "> <?php echo(!empty($invoiceArr['paid_amount'])) ? $invoiceArr['paid_amount'] : "N/A";?></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -331,9 +328,7 @@ form, 2 Gallery</td>
                                                 <tr>
                                                     <td height="20" bgcolor="" style=""></td>
                                                 </tr>
-                                               </td> 
-											   </tr>
-                                            
+                                               
 
 
 
@@ -389,16 +384,16 @@ form, 2 Gallery</td>
                             <tbody>
                                 <tr>
                                     <td width="5%"></td>
-                                    <td width="8%"><a href=""> <img width="" border="0" src="skype.png"></a></td>
+                                    <td width="8%"><a href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/skype.png"></a></td>
                                     <td width="37%" valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px; "><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">91 80 4664 7799</a> </td>
                                     <td width="50%" valign="middle" style="line-height:0px;color: #828282;font-size:16px; ">
                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                             <tbody>
                                                 <tr>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="facebook-icon.png"></a></td>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="googleplus.png"></a></td>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="pinterest-icon.png"></a></td>
-                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="twitter-icon.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/facebook-icon.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/googleplus.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/pinterest-icon.png"></a></td>
+                                                    <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/twitter-icon.png"></a></td>
                                                     <td width="40%" valign="middle" align="left"></td>
 
                                                 </tr>
@@ -407,7 +402,9 @@ form, 2 Gallery</td>
                                     </td>
                                 </tr>
                             </tbody>
-                        </table></td>
+                        </table>
+                            
+                    </td>
                 </tr>
                 
                 <tr>
