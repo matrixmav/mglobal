@@ -819,6 +819,9 @@ class PackageController extends Controller {
         
      if (!empty($_GET)) {
              
+        if($_GET['status']=='success')
+            {    
+            
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
@@ -876,6 +879,12 @@ class PackageController extends Controller {
         $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
 
+            }else{
+             $successMsg = "Your transaction has been cancelled.";
+            echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
+   
+            }
+        
       $this->render('wallethankyou', array('successMsg' => $successMsg
         ));
       }
