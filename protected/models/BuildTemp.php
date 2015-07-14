@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'build_temp':
  * @property integer $id
  * @property integer $category_id
+ * @property integer $package
  * @property integer $temp_header_id
  * @property integer $temp_body_id
  * @property integer $temp_footer_id
@@ -31,7 +32,7 @@ class BuildTemp extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, temp_header_id, temp_body_id, temp_footer_id, created_at, updated_at', 'required','folderpath','screenshot','template_id'),
+			array('category_id, package , temp_header_id, temp_body_id, temp_footer_id, created_at, updated_at', 'required','folderpath','screenshot','template_id'),
 			array('category_id, temp_header_id, temp_body_id, temp_footer_id, status', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -52,6 +53,7 @@ class BuildTemp extends CActiveRecord
                     'header' => array(self::BELONGS_TO, 'BuildTempHeader', 'temp_header_id'),
                     'footer' => array(self::BELONGS_TO, 'BuildTempFooter', 'temp_footer_id'),
                     'body' => array(self::BELONGS_TO, 'BuildTempBody', 'temp_body_id'),
+                    'package' => array(self::BELONGS_TO, 'Package', 'package'),
 		     
                     
 		);
@@ -65,6 +67,7 @@ class BuildTemp extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'category_id' => 'Category',
+			'package' => 'Package',
 			'temp_header_id' => 'Temp Header',
 			'temp_body_id' => 'Temp Body',
 			'temp_footer_id' => 'Temp Footer',
@@ -97,6 +100,7 @@ class BuildTemp extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('category_id',$this->package);
 		$criteria->compare('temp_header_id',$this->temp_header_id);
 		$criteria->compare('temp_body_id',$this->temp_body_id);
 		$criteria->compare('temp_footer_id',$this->temp_footer_id);
