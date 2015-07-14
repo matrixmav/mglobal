@@ -179,7 +179,7 @@ class ProfileController extends Controller {
         $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
 
-        if ($_POST) {
+        if ($_POST && $_FILES['id_proof']['name']!='' && $_FILES['address_proof']['name'] !='') {
             $profileObject->id_proof = time() . $_FILES['id_proof']['name'];
             $profileObject->address_proff = time() . $_FILES['address_proof']['name'];
             if ($_FILES) {
