@@ -37,6 +37,7 @@ Buttons & Dropdown Buttons
      -moz-border-radius: 0 !important;
           border-radius: 0 !important;
           text-shadow: none;
+		  border-radius:3px !important;
 }
 
 /* fix jumping group buttons */
@@ -112,7 +113,7 @@ Buttons & Dropdown Buttons
 .btn.red.active,
 .btn.red[disabled], 
 .btn.red.disabled {    
-  background-color: #bb2413 !important;
+  background-color: #cb5a5e !important;
   color: #fff !important;
   outline: none !important;
 }
@@ -161,7 +162,7 @@ Buttons & Dropdown Buttons
 .btn.green.active,
 .btn.green.disabled, 
 .btn.green[disabled]{ 
-  background-color: #1d943b !important;
+  background-color: #26a69a !important;
   color: #fff !important;
   outline: none !important;
 }

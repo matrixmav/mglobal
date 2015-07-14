@@ -69,7 +69,7 @@ $this->breadcrumbs = array(
                     
             <div class="form-group form-horizontal">
                 <label class="col-sm-2 control-label" for="lastname">Site Title</label>
-                <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="fileupload fileupload-new col-sm-10" data-provides="fileupload">
                     <input type="text" value="<?php echo $userhasObject->site_title ? stripcslashes($userhasObject->site_title) : ''; ?>" name="site_title"  class="form-control" id="copyright">  
                 </div>
             </div> 
