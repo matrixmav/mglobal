@@ -680,25 +680,25 @@
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>39</strong>
-            Projects Completed
+            Total Registration 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>14</strong>
-            Team Members
+            total packages bought 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>29k+</strong>
-            Products Sold
+           to commission given 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>500</strong>
-            Weekly Sales
+            total projects complete 
           </div>
         </div>
       </div>
