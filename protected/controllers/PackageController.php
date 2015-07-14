@@ -749,45 +749,7 @@ class PackageController extends Controller {
                 $invoiceArr['Couponbody'] = $transactionObject->coupon_discount;
                 $invoiceArr['created_at'] = $transactionObject->created_at;
                 
-                /*$body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
-                $body .='<tr>
-                     <td>';
-                $body .= $packageObject->name;
-                $body .='</td><td>';
-                $body .= $description;
-                $body .='</td><td>1 Year</td><td>';
-                $body .= "$" . $packageObject->amount;
-                $body .='</td></tr>';
-                $body .='<tr><td>';
-                $body .= 'Premium domain purchased';
-                $body .= '</td><td>';
-                $body .= $orderObject->domain;
-                $body .= '</td><td>';
-                $body .= '1 Year';
-                $body .='</td><td>';
-                $body .= $domain_price;
-                $body .= '</td></tr>
-                <tr>
-  	     <td colspan="2"></td>
-             <td colspan="2">
-    	     <table>
-        	<tr>
-            <td width="200">Subtotal</td>
-              <td width="200">';
-                $body .= "$" . $Samount;
-                $body .= '</td>';
-                $body .= '</tr>';
-                $body .= $Couponbody;
-                $body .= $RPBody;
-                $body .='<tr>
-            <td width="200">Total Paid Amount:</td>
-              <td width="200">';
-                $body .= "$" . $paid_amount;
-                $body .= '</td>
-            </tr>
-        </table>
-    </td>
-  </tr></table>';*/
+               
                 
                 //$body = Package::model()->createInvoice($invoiceArr);
                 
@@ -796,8 +758,8 @@ class PackageController extends Controller {
                 $userObjectArr1 = array();
                 $userObjectArr1['full_name'] = $userObject->name;
                 //$fp = fopen("/mailTemp/invoice.php","r");
-                //$body = fread($fp, filesize('//mailTemp/invoice.php'));//$this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
-                $html2pdf->WriteHTML($this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true));
+                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
+                $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
                 $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
                 $config['to'] = $userObject->email;
