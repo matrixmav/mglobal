@@ -580,11 +580,11 @@ class UserController extends Controller {
                         exit;
                     }
 
-                    $modelUserProfile = new UserProfile();
+                    /*$modelUserProfile = new UserProfile();
                     $modelUserProfile->user_id = $model->id;
                     $modelUserProfile->created_at = date('Y-m-d');
                     $modelUserProfile->referral_banner_id = 1;
-                    $modelUserProfile->save(false);
+                    $modelUserProfile->save(false);*/
 
                     /* Geneology */
                     $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id']));
