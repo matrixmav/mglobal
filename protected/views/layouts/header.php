@@ -8,12 +8,12 @@
 
       <ul class="inline">
          
-          <li><a href="https://www.facebook.com/pages/MGlobally/516594005156691?ref=hl" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
-        <li><a href="https://twitter.com/MGlobally" target="_blank"><i class="fa fa-twitter-square"></i></a></li>
-        <li><a href="callto://MGlobally" target="_blank"><i class="fa fa-skype"></i></a></li>
-        <li><a href="" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
-        <li><a href="https://www.youtube.com/channel/UCQUJDa-Mvxee80MMrhK-_Sg" target="_blank"><i class="fa fa-youtube-square"></i></a></li>
-         <li><a href="" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
+          <li><a class="fb-icon" href=""><i class="fa fa-facebook-square"></i></a></li>
+          <li><a class="tw-icon" href=""><i class="fa fa-twitter-square"></i></a></li>
+          <li><a class="skype-icon"href=""><i class="fa fa-skype"></i></a></li>
+          <li><a  class="link-icon "href=""><i class="fa fa-linkedin-square"></i></a></li>
+          <li><a class="utube-icon"href=""><i class="fa fa-youtube-square"></i></a></li>
+          <li><a class="whatsap-icon" href=""><i class="fa fa-whatsapp"></i></a></li>
       </ul>
       
     </div>
@@ -21,7 +21,7 @@
 
  <!-- SIDEBAR FORMS -->
  <div class="sideForm">
-    <div class="color-mode-icons icon-list"><i class="fa fa-list"></i></div>
+    <div class="color-mode-icons icon-list" ><i class="fa fa-list"></i></div>
     
     <div class="color-mode-list" style="display:none;">
      
@@ -29,7 +29,7 @@
       <ul class="inline">
          
           <li>
-              <a href="#inline11" class="fancybox"><i class="fa fa-file-text"></i></a>
+              <a href="#inline11" class="fancybox" data-toggle="tooltip" data-placement="top" title="Contact Us"><i class="fa fa-file-text"></i></a>
             
               <div id="inline11" style="display:none" class="readMoreBox content" style="width: 100%">
                 <div class="">
@@ -75,7 +75,7 @@
             </div>
       </div>
         </li>
-        <li> <a href="#inline12" class="fancybox"><i class="fa fa-envelope-o"></i></a>
+        <li> <a href="#inline12" class="fancybox"  data-toggle="tooltip" data-placement="top" title="Feedback Form"><i class="fa fa-envelope-o"></i></a>
             <div id="inline12" style="display:none" class="readMoreBox content">
                <h2>feedback<strong> form </strong></h2>
                <div id="show_worningF" style="display:none;"></div>
@@ -121,7 +121,7 @@
                    
                </div>
         </li>
-        <li><a href="#inline13" class="fancybox"><i class="fa fa-bug"></i></a>
+        <li><a href="#inline13" class="fancybox"  data-toggle="tooltip" data-placement="top" title="Bug Form"><i class="fa fa-bug"></i></a>
             <div id="inline13" style="display:none" class="readMoreBox content">
                <h2>web<strong> bug </strong></h2>
           <div id="show_worningR" style="display:none;"></div>
@@ -229,10 +229,11 @@ if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#team">Media Center</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#prices">Pricing</a></li>
            
             <li><a href="#benefits">Benefits</a></li>
-            <li><a href="#prices">Pricing</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            
             <li><a href="#contact">Contact</a></li>
              <li>   <a href="#inline14" class="fancybox">FAQ</a>
                   <div id="inline14" style="display:none" class="readMoreBox content">
@@ -307,6 +308,11 @@ $(document).ready(function(){
 		});
                
 		});
+</script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
    
          function isEmail(aStr)
              {

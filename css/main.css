@@ -133,14 +133,48 @@ right connector from last child*/
 	width: 50%; height: 20px;
 }
 .mytree ul ul::before{
-	content: '';
-	position: absolute; top: 0; left: 50%;
 	border-left: 1px dashed #ccc;
-	width: 0; height: 90px;
+    content: "";
+    height: 90px;
+    left: 35%;
+    position: absolute;
+    top: -24px;
+    transform: rotate(45deg);
+    width: 0;
+}
+.mytree ul ul::after{
+	border-left: 1px dashed #ccc;
+    content: "";
+    height: 90px;
+    position: absolute;
+    right: 36%;
+    top: -28px;
+    transform: rotate(135deg);
+    width: 0;
+}
+.mytree ul ul ul::before{
+	border-left: 1px dashed #ccc;
+    content: "";
+    height: 96px;
+    left: 30%;
+    position: absolute;
+    top: -20px;
+    transform: rotate(30deg);
+    width: 0;
+}
+.mytree ul ul ul::after{
+	border-left: 1px dashed #ccc;
+    content: "";
+    height: 96px;
+    position: absolute;
+    right: 30%;
+    top: -16px;
+    transform: rotate(150deg);
+    width: 0;
 }
 /* .mytree ul li a:hover{background:#F00;}
 .mytree ul li a:hover + ul li a{background:#F00;}  */
-
+.mytree ul ul ul{padding-top: 50px;}
 .mytree ul ul.newdiv:before{border-left: 1px dashed #ccc;
     content: "";
     height: 225px;
@@ -169,6 +203,46 @@ right connector from last child*/
 
 @media (max-device-width: 480px) and (min-device-width: 320px)
 {
+    .mytree ul ul::after {
+    border-left: 1px dashed #ccc;
+    content: "";
+    height: 50px;
+    position: absolute;
+    right: 33%;
+    top: -20px;
+    transform: rotate(146deg);
+    width: 0;
+}
+.mytree ul ul::before {
+    border-left: 1px dashed #ccc;
+    content: "";
+    height: 50px;
+    left: 38%;
+    position: absolute;
+    top: -29px;
+    transform: rotate(34deg);
+    width: 0;
+}
+.mytree ul ul ul::before{
+	border-left: 1px dashed #ccc;
+    content: "";
+    height: 76px;
+    left: 30%;
+    position: absolute;
+    top: -7px;
+    transform: rotate(16deg);
+    width: 0;
+}
+.mytree ul ul ul::after{
+	border-left: 1px dashed #ccc;
+    content: "";
+    height: 70px;
+    position: absolute;
+    right: 31%;
+    top: -9px;
+    transform: rotate(161deg);
+    width: 0;
+}
 .mytree li::before, .mytree li::after{content: "";
     height: 20px;
     position: absolute;
@@ -200,6 +274,8 @@ right connector from last child*/
     position: relative;
     text-align: center;}
     .sm-blank span{font-size:30px !important;}
+    
+    
 }
 @media (max-device-width: 1024px) and (min-device-width: 768px)
 {
