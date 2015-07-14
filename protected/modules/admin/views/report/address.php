@@ -76,14 +76,10 @@ $this->breadcrumbs = array(
                 
                 array(
                     'name' => 'address',
-                    'header' => '<span style="white-space: nowrap;">Address 1 &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => '$data->street',
-                ),
-                array(
-                    'name' => 'street',
-                    'header' => '<span style="white-space: nowrap;">Address 2 &nbsp; &nbsp; &nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->address',
                 ),
+                 
                 array(
                     'name' => 'city_name',
                     'header' => '<span style="white-space: nowrap;">City &nbsp; &nbsp; &nbsp;</span>',
@@ -97,7 +93,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'country_id',
                     'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->country->name)?$data->country->name:""',
+                    'value' => 'isset($data->country->name)? $data->country->name: ""',
                 ),
                 array(
                     'name' => 'id',
