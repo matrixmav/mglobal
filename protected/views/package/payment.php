@@ -106,7 +106,7 @@
                             <input type="hidden" name="no_shipping" value="1">
                             <input type="hidden" name="currency_code" value="USD">
                             <input type="hidden" name="handling" value="0">
-                            <input type="hidden" name="cancel_return" value="<?php echo Yii::app()->params['returnurl']; ?>?transaction_id=<?php echo $_GET['tId']; ?>&payment_status=cancel">
+                            <input type="hidden" name="cancel_return" value="<?php echo Yii::app()->params['returnurl']; ?>?transaction_id=<?php echo $_GET['tId']; ?>&payment_status=cancelled">
                             <input type="hidden" id="return" name="return" value="<?php echo Yii::app()->params['returnurl']; ?>?transaction_id=<?php echo $_GET['tId']; ?>&payment_status=success">
                         </form>
                     </div>
