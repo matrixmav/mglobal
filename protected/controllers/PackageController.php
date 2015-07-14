@@ -761,7 +761,7 @@ class PackageController extends Controller {
                 $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
                 $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
-                $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
+                $html2pdf->output($path . $userObject->name .'_'.time(). 'invoice.pdf', 'F');
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Payment Confirmation';
                 $config['body'] = $this->renderPartial('../mailTemp/paymentsuccess', array('userObjectArr'=>$userObjectArr1),true);
