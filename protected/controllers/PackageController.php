@@ -546,7 +546,7 @@ class PackageController extends Controller {
     public function actionThankYou() {
      
         if (!(empty($_GET))) {
-            if($_GET['status']=='success')
+            if($_GET['payment_status']=='success')
             {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
