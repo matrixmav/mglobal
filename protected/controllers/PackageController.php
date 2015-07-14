@@ -882,12 +882,11 @@ class PackageController extends Controller {
             }else{
              $successMsg = "Your transaction has been cancelled.";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
-   
-            }
-        
+        }
+        }
       $this->render('wallethankyou', array('successMsg' => $successMsg
         ));
-      }
+      
     }
 
     /*
