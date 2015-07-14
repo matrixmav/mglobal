@@ -546,7 +546,8 @@ class PackageController extends Controller {
     public function actionThankYou() {
      
         if (!(empty($_GET))) {
-             
+            if($_GET['status']=='success')
+            {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             if(!empty($transactionObject)){
@@ -787,7 +788,10 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['domain']);
             } 
             }
-            }else{
+            }
+            $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
+            echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
+              } else{
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->full_name;
@@ -801,13 +805,11 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['transaction_id']);
                 unset(Yii::app()->session['coupon_code']);
                 unset(Yii::app()->session['domain']);
-            }
-            
-            $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
+                
+                $successMsg = "Your Transaction hase been cancelled.";
             echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
-
-
-        }
+            }
+          }
 
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
