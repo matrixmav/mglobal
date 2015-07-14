@@ -68,9 +68,14 @@ $this->breadcrumbs = array(
                     'value'=>'$row+1',
                 ),
                 array(
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->name',
+                ),
+                array(
+                    'name' => 'full_name',
+                    'header' => '<span style="white-space: nowrap;">Full Name &nbsp; &nbsp; &nbsp;</span>',
+                    'value' => '$data->full_name',
                 ),
                 array(
                     'name' => 'phone',
@@ -87,11 +92,11 @@ $this->breadcrumbs = array(
                     'header' => '<span style="white-space: nowrap;">Sponser Id &nbsp; &nbsp; &nbsp;</span>',
                     'value' => '$data->sponsor_id',
                 ),
-                array(
+                /*array(
                     'name' => 'sponsor_id',
                     'header' => '<span style="white-space: nowrap;">Address &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->userprofile->address)?$data->userprofile->address:""',
-                ),
+                    'value' => 'isset($data->userprofile->address)? $data->userprofile->address: ""',
+                ),*/
                 array(
                     'name' => 'status',
                     'value' => '($data->status == 1) ? Yii::t(\'translation\', \'Active\') : Yii::t(\'translation\', \'Inactive\')',
