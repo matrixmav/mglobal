@@ -544,9 +544,10 @@ class PackageController extends Controller {
      */
 
     public function actionThankYou() {
-
+     
         if (!(empty($_GET))) {
-             
+            if($_GET['payment_status']=='success')
+            {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             if(!empty($transactionObject)){
@@ -728,56 +729,45 @@ class PackageController extends Controller {
                 }
                 $Samount = number_format($packageObject->amount + $orderObject->domain_price, 2);
                 $paid_amount = number_format($transactionObject->paid_amount, 2);
-                $body = '<table width="100%" border="1" align="center"><tr><td colspan="4">Invoice</td></tr><tr><td width="200">Package</td><td width="200">Description</td><td width="200">Duration</td><td width="200">Price</td></tr>';
-                $body .='<tr>
-                     <td>';
-                $body .= $packageObject->name;
-                $body .='</td><td>';
-                $body .= $description;
-                $body .='</td><td>1 Year</td><td>';
-                $body .= "$" . $packageObject->amount;
-                $body .='</td></tr>';
-                $body .='<tr><td>';
-                $body .= 'Premium domain purchased';
-                $body .= '</td><td>';
-                $body .= $orderObject->domain;
-                $body .= '</td><td>';
-                $body .= '1 Year';
-                $body .='</td><td>';
-                $body .= $domain_price;
-                $body .= '</td></tr>
-                <tr>
-  	     <td colspan="2"></td>
-             <td colspan="2">
-    	     <table>
-        	<tr>
-            <td width="200">Subtotal</td>
-              <td width="200">';
-                $body .= "$" . $Samount;
-                $body .= '</td>';
-                $body .= '</tr>';
-                $body .= $Couponbody;
-                $body .= $RPBody;
-                $body .='<tr>
-            <td width="200">Total Paid Amount:</td>
-              <td width="200">';
-                $body .= "$" . $paid_amount;
-                $body .= '</td>
-            </tr>
-        </table>
-    </td>
-  </tr></table>';
-                  
-                $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
                 
+                /*code to fetch profile */
+                $userProfileObject = UserProfile::model()->findByAttributes(array('user_id' => $userObject->id));
+                
+                $invoiceArr = array();
+                $invoiceArr['package_name'] = $packageObject->name;
+                $invoiceArr['package_price'] = $packageObject->amount;
+                $invoiceArr['Description'] = $packageObject->Description;
+                $invoiceArr['name'] = $userObject->name;
+                $invoiceArr['transaction_id'] = $transactionObject->transaction_id;
+                $invoiceArr['full_name'] = $userObject->full_name;
+                $invoiceArr['address'] = $userProfileObject->address;
+                $invoiceArr['email'] = $userObject->email;
+                $invoiceArr['domain'] = $orderObject->domain;
+                $invoiceArr['domain_price'] = $domain_price;
+                $invoiceArr['Samount'] = $Samount;
+                $invoiceArr['paid_amount'] = $paid_amount;
+                $invoiceArr['RPBody'] = $transactionObject->used_rp;
+                $invoiceArr['Couponbody'] = $transactionObject->coupon_discount;
+                $invoiceArr['created_at'] = $transactionObject->created_at;
+                
+               
+                
+                //$body = Package::model()->createInvoice($invoiceArr);
+                
+                $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
                 $orderObject = Order::model()->findByPK($orderObject->id);
+                $userObjectArr1 = array();
+                $userObjectArr1['full_name'] = $userObject->name;
+                //$fp = fopen("/mailTemp/invoice.php","r");
+                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
                 $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
-                $html2pdf->output($path . $userObject->name . 'invoice.pdf', 'F');
+                $fileName = $userObject->name .'_'.time(). 'invoice.pdf';
+                $html2pdf->output($path . $fileName, 'F');
                 $config['to'] = $userObject->email;
                 $config['subject'] = 'Payment Confirmation';
-                $config['body'] = 'Thank you for your order! Your invoice has been attached in this email. Please find' .
-                $config['file_path'] = $path . $userObject->name . 'invoice.pdf';
+                $config['body'] = $this->renderPartial('../mailTemp/paymentsuccess', array('userObjectArr'=>$userObjectArr1),true);
+                $config['file_path'] = $path . $fileName;
                 CommonHelper::sendMail($config);
                 
                 
@@ -798,7 +788,10 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['domain']);
             } 
             }
-            }else{
+            }
+            $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
+            echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
+              } else{
                 $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                 $userObjectArr = array();
                 $userObjectArr['to_name'] = $userObject->full_name;
@@ -812,13 +805,11 @@ class PackageController extends Controller {
                 unset(Yii::app()->session['transaction_id']);
                 unset(Yii::app()->session['coupon_code']);
                 unset(Yii::app()->session['domain']);
-            }
-            
-            $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
+                
+                $successMsg = "Your Transaction hase been cancelled.";
             echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
-
-
-        }
+            }
+          }
 
         $this->render('thankyou', array('successMsg' => $successMsg
         ));
@@ -828,10 +819,13 @@ class PackageController extends Controller {
         
      if (!empty($_GET)) {
              
+        if($_GET['status']=='success')
+            {    
+            
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-	     if ($transactionObject->status == 1) {
+	    if($transactionObject->status == 1) {
             $transactionObject->status = 1;
              $transactionObject->created_at = date('Y-m-d');
             $transactionObject->update();
@@ -882,12 +876,24 @@ class PackageController extends Controller {
                 $config['body'] =  $this->renderPartial('../mailTemp/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
         }
-        $successMsg = "Your cash has been added to your wallet. Please check";
+            $successMsg = "Your cash has been added to your wallet. Please check";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
 
+            }else{
+                $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $config1['to'] = $userObject->email;
+                $config1['subject'] = 'Mglobally Transaction Falied';
+                $config1['body'] =  $this->renderPartial('../mailTemp/failed_wallet_transaction', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config1); 
+             $successMsg = "Your transaction has been cancelled.";
+            echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
+        }
+        }
       $this->render('wallethankyou', array('successMsg' => $successMsg
         ));
-      }
+      
     }
 
     /*

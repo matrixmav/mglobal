@@ -29,7 +29,7 @@
                                 </div>
                               </form>   
                         <form action="<?php echo Yii::app()->params['paypalurl']; ?>" method="post" id="frmPayPal">
-                            <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
+                            <input type="hidden" name="business" value="nehanidhi.2008@gmail.com">
                             <input type="hidden" name="cmd" value="_xclick">
                             <input type="hidden" name="item_name" value="cashwallet">
                             <input type="hidden" name="item_number" value="1">
@@ -39,8 +39,9 @@
                             <input type="hidden" name="no_shipping" value="1">
                             <input type="hidden" name="currency_code" value="USD">
                             <input type="hidden" name="handling" value="0">
-                            <input type="hidden" name="cancel_return" value="">
-                            <input type="hidden" id="return" name="return" value="<?php echo Yii::app()->params['walletReturnUrl']; ?>?transaction_id=<?php echo $transactionId; ?>&type=cashtransfer">
+                            <input type="hidden" name="cancel_return" value="<?php echo Yii::app()->params['walletReturnUrl']; ?>?transaction_id=<?php echo $transactionId; ?>&status=cancelled">
+                            <input name="notify_url" value="<?php echo Yii::app()->params['walletReturnUrl']; ?>/PayPal/ipn.php" type="hidden">
+                            <input type="hidden" id="return" name="return" value="<?php echo Yii::app()->params['walletReturnUrl']; ?>?transaction_id=<?php echo $transactionId; ?>&status=success">
                         </form>
                     </div>
                        <span id="email_error" style="color:red"></span>

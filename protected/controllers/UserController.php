@@ -524,8 +524,13 @@ class UserController extends Controller {
                 $social = $_POST['social'];
                 //echo $uName = $_POST['name']; 
                 $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
+                $userObjectEmail = User::model()->findByAttributes(array('email' => $_POST['email']));
 
-                if (count($userObject) == 0) {
+                if (count($userObject) > 0) {
+                    $error .= "<p class='error'>User Name is already Exits.</p>";  
+                }else if(count($userObjectEmail) > 0){
+                   $error .= "<p class='error'>Email is already Exits.</p><br/>";
+                }else{
 
                     $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
                     $masterPin = BaseClass::getUniqInt(5);
@@ -534,6 +539,7 @@ class UserController extends Controller {
                     $password = BaseClass::getPassword();
                     $model->role_id = 1;
                     $model->password = BaseClass::md5Encryption($password);
+                    $model->name = strtolower($_POST['name']);
                     $model->social = $social;
                     $model->sponsor_id = $_POST['sponsor_id'];
                     $model->master_pin = BaseClass::md5Encryption($masterPin);
@@ -580,11 +586,11 @@ class UserController extends Controller {
                         exit;
                     }
 
-                    $modelUserProfile = new UserProfile();
+                    /*$modelUserProfile = new UserProfile();
                     $modelUserProfile->user_id = $model->id;
                     $modelUserProfile->created_at = date('Y-m-d');
                     $modelUserProfile->referral_banner_id = 1;
-                    $modelUserProfile->save(false);
+                    $modelUserProfile->save(false);*/
 
                     /* Geneology */
                     $userObjectId = User::model()->findByAttributes(array('sponsor_id' => $_POST['sponsor_id']));
@@ -621,9 +627,9 @@ class UserController extends Controller {
                     }else{
                         $this->redirect(array('login', 'successMsg' => $successMsg));
                     }
-                }else{
-                   $error = "<p class='error'>User Name is already Exits.</p>";
                 }
+                  
+                 
             }
         }
        

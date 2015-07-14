@@ -7,15 +7,15 @@
         <!-- BEGIN BOTTOM ABOUT BLOCK -->
         <div class="col-md-2 col-sm-6 pre-footer-col">
           <p class="f-font">Legal</p>
-          <p class="f-cnt"><a href="mailto:legal@xyz.com">legal@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:billing@mglobally.com">billing@mglobally.com</a><br/> 
           91-8500425185</p>
            
           <p class="f-font">Billing</p>
-          <p class="f-cnt"><a href="mailto:billing@xyz.com">Billing@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:legal@mglobally.com">legal@mglobally.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Support</p>
-          <p class="f-cnt"><a href="mailto:support@xyz.com">support@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:support@mglobally.com">support@mglobally.com</a><br/> 
           91-8500425185</p>
         </div>
         <!-- END BOTTOM ABOUT BLOCK -->
@@ -23,17 +23,19 @@
         <!-- BEGIN TWITTER BLOCK --> 
         <div class="col-md-2 col-sm-6 pre-footer-col">
        
-          <p class="f-font">Member Enquiry</p>
-          <p class="f-cnt"><a href="mailto:memberenquiry@xyz.com">memberenquiry@xyz.com</a><br/> 
-          91-8500425185 </p>
+          
           
           <p class="f-font">Sales</p>
-          <p class="f-cnt"><a href="mailto:sales@xyz.com">sales@xyz.com</a><br/> 
+          <p class="f-cnt"><a href="mailto:sales@mglobally.com">sales@mglobally.com</a><br/> 
           91-8500425185</p>
           
           <p class="f-font">Info</p>
-          <p class="f-cnt"><a href="mailto:info@xyz.com">Info@xyz.com</a><br/> 
-         91-8500425185</p>   
+          <p class="f-cnt"><a href="mailto:info@mglobally.com">info@mglobally.com</a><br/> 
+         91-8500425185</p>  
+          
+          <p class="f-font">Member Enquiry</p>
+          <p class="f-cnt"><a href="mailto:memberenquiry@mglobally.com">memberenquiry@mglobally.com</a><br/> 
+          91-8500425185 </p>
         </div>
         
          <div class="col-md-5 col-sm-6 pre-footer-col">
@@ -91,11 +93,11 @@
         <!-- BEGIN SOCIAL ICONS -->
         <div class="col-md-6 col-sm-6 pull-right">
           <ul class="social-icons">
-               <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/g-footer-icon.png"></a></li>  
-                <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/ln-footer-icon.png"></a></li> 
-                <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/tw-footer-icon.png"></a></li> 
-                  <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/pinterest-footer-icon.png"></a></li>
-              <li><a class="rss" data-original-title="rss" href="javascript:void(0);"> <img src="/images/fb-footer-icon.png"></a></li>
+               <li><a class="rss" data-original-title="rss" href="https://plus.google.com/b/114439069888125758419/114439069888125758419/about" target="_blank"> <img src="/images/g-footer-icon.png"></a></li>  
+                <li><a class="rss" data-original-title="rss" href="javascript:void(0);" target="_blank"> <img src="/images/ln-footer-icon.png"></a></li> 
+                <li><a class="rss" data-original-title="rss" href="https://twitter.com/MGlobally" target="_blank"> <img src="/images/tw-footer-icon.png"></a></li> 
+                  <li><a class="rss" data-original-title="rss" href="https://www.pinterest.com/mglobally/" target="_blank"> <img src="/images/pinterest-footer-icon.png"></a></li>
+              <li><a class="rss" data-original-title="rss" href="https://www.facebook.com/pages/MGlobally/516594005156691?ref=hl" target="_blank"> <img src="/images/fb-footer-icon.png"></a></li>
             
               
              
