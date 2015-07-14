@@ -29,7 +29,7 @@
                                 </div>
                               </form>   
                         <form action="<?php echo Yii::app()->params['paypalurl']; ?>" method="post" id="frmPayPal">
-                            <input type="hidden" name="business" value="pnirbhaylal@maverickinfosoft.com">
+                            <input type="hidden" name="business" value="nehanidhi.2008@gmail.com">
                             <input type="hidden" name="cmd" value="_xclick">
                             <input type="hidden" name="item_name" value="cashwallet">
                             <input type="hidden" name="item_number" value="1">
