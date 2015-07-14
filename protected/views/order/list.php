@@ -14,7 +14,7 @@ $this->menu=array(
 ?>
     <?php //echo "<pre>"; print_r($orderObject);?>
        <div class="main">
-      <div class="container">
+      <!--<div class="container">-->
 
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
@@ -107,6 +107,7 @@ $this->menu=array(
 
       </div>
     </div>
+       </div>
  
         <!-- Add jQuery library -->
 	 
