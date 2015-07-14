@@ -524,6 +524,7 @@ class UserController extends Controller {
                 $social = $_POST['social'];
                 //echo $uName = $_POST['name']; 
                 $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
+                $userObjectEmail = User::model()->findByAttributes(array('email' => $_POST['email']));
 
                 if (count($userObject) == 0) {
 
@@ -534,6 +535,7 @@ class UserController extends Controller {
                     $password = BaseClass::getPassword();
                     $model->role_id = 1;
                     $model->password = BaseClass::md5Encryption($password);
+                    $model->name = strtolower($_POST['name']);
                     $model->social = $social;
                     $model->sponsor_id = $_POST['sponsor_id'];
                     $model->master_pin = BaseClass::md5Encryption($masterPin);
@@ -621,8 +623,10 @@ class UserController extends Controller {
                     }else{
                         $this->redirect(array('login', 'successMsg' => $successMsg));
                     }
+                }else if(count($userObjectEmail) > 0){
+                   $error .= "<p class='error'>User Name is already Exits.</p><br/>";
                 }else{
-                   $error = "<p class='error'>User Name is already Exits.</p>";
+                  $error .= "<p class='error'>User Name is already Exits.</p>";  
                 }
             }
         }
