@@ -201,9 +201,7 @@
                                                                                     <td valign="middle" align="left" width="10%" style="line-height:22px; color: #828282; font-size:14px; ">1</td>
                                                                                     <td valign="middle" align="left" width="19%" style="line-height:22px; color: #828282; font-size:14px; "><?php echo $invoiceArr['package_name'];?></td>
                                                                                     <td valign="middle" align="left" width="30%" style="line-height:22px; color: #828282; font-size:14px; "><?php echo $invoiceArr['Description'];?>
-6 Static Pages, 1
-<br>Contact
-form, 2 Gallery</td>
+</td>
                                                                                     <td valign="middle" align="middle" width="15%" style="line-height:22px; color: #828282; font-size:14px; ">1 year</td>
                                                                                     <td valign="middle" align="center" width="22%" style="line-height:22px; color:#f15c2b;; font-size:14px; ">$<?php echo $invoiceArr['package_price'];?></td>
                                                                                     <td width="2%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; "></td>
