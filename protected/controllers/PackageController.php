@@ -880,6 +880,13 @@ class PackageController extends Controller {
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
 
             }else{
+                $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+                $userObjectArr = array();
+                $userObjectArr['to_name'] = $userObject->full_name;
+                $config1['to'] = $userObject->email;
+                $config1['subject'] = 'Mglobally Transaction Falied';
+                $config1['body'] =  $this->renderPartial('../mailTemp/failed_transaction', array('userObjectArr'=>$userObjectArr),true);
+                CommonHelper::sendMail($config1); 
              $successMsg = "Your transaction has been cancelled.";
             echo "<script>setTimeout(function(){window.location.href='/wallet/fundwallet'},5000);</script>";
         }
