@@ -526,7 +526,11 @@ class UserController extends Controller {
                 $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
                 $userObjectEmail = User::model()->findByAttributes(array('email' => $_POST['email']));
 
-                if (count($userObject) == 0) {
+                if (count($userObject) > 0) {
+                    $error .= "<p class='error'>User Name is already Exits.</p>";  
+                }else if(count($userObjectEmail) > 0){
+                   $error .= "<p class='error'>Email is already Exits.</p><br/>";
+                }else{
 
                     $userObject = User::model()->findByAttributes(array('name' => $_POST['sponsor_id']));
                     $masterPin = BaseClass::getUniqInt(5);
@@ -623,11 +627,9 @@ class UserController extends Controller {
                     }else{
                         $this->redirect(array('login', 'successMsg' => $successMsg));
                     }
-                }else if(count($userObjectEmail) > 0){
-                   $error .= "<p class='error'>User Name is already Exits.</p><br/>";
-                }else{
-                  $error .= "<p class='error'>User Name is already Exits.</p>";  
                 }
+                  
+                 
             }
         }
        
