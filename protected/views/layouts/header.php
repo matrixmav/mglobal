@@ -8,11 +8,11 @@
 
       <ul class="inline">
          
-          <li><a class="fb-icon" href=""><i class="fa fa-facebook-square"></i></a></li>
-          <li><a class="tw-icon" href=""><i class="fa fa-twitter-square"></i></a></li>
-          <li><a class="skype-icon"href=""><i class="fa fa-skype"></i></a></li>
-          <li><a  class="link-icon "href=""><i class="fa fa-linkedin-square"></i></a></li>
-          <li><a class="utube-icon"href=""><i class="fa fa-youtube-square"></i></a></li>
+          <li><a class="fb-icon" href="https://www.facebook.com/pages/MGlobally/516594005156691?ref=hl" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+          <li><a class="tw-icon" href="https://twitter.com/MGlobally" target="_blank"><i class="fa fa-twitter-square"></i></a></li>
+          <li><a class="skype-icon" href="callto://MGlobally" target="_blank"><i class="fa fa-skype"></i></a></li>
+          <li><a  class="link-icon " href="" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+          <li><a class="utube-icon" href="https://www.youtube.com/channel/UCQUJDa-Mvxee80MMrhK-_S" target="_blank"><i class="fa fa-youtube-square"></i></a></li>
           <li><a class="whatsap-icon" href=""><i class="fa fa-whatsapp"></i></a></li>
       </ul>
       
