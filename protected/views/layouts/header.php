@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/registration.js"></script> 
   <div class="color-panel">
     <div class="color-mode-icons icon-color"><i class="fa fa-share-alt"></i></div>
     <div class="color-mode-icons icon-color-close"><i class="fa fa-share-alt"></i></div>
