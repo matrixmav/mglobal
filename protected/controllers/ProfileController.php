@@ -49,7 +49,7 @@ class ProfileController extends Controller {
      */
 
     public function actionAddress() {
-        $model = new UserProfile;
+        //$model = new UserProfile;
         $errorMsg = "";
         $successMsg = "";
         $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
