@@ -38,8 +38,9 @@
 
 </div>
   
-  
-  
+  <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.jcarousel.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.jcarousel-autoscroll.min.js"></script>
+   <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jcarousel.responsive.js"></script>
   <!-- Promo block BEGIN -->
   <?php Yii::app()->session['username'] = "nidhi";?>
   <div class="promo-block" id="promo-block">
@@ -679,25 +680,25 @@
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>39</strong>
-            Projects Completed
+            Total Registration 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>14</strong>
-            Team Members
+            total packages bought 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>29k+</strong>
-            Products Sold
+           to commission given 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
             <strong>500</strong>
-            Weekly Sales
+            total projects complete 
           </div>
         </div>
       </div>
@@ -970,60 +971,90 @@
            <?php $i++;} }?>
         </div>
         <!-- Indicators -->
-        <div id="thumblist">
-      <ol class="carousel-indicators ">
-          <li class="col-sm-4 clearfix" data-slide-to="0" data-target="#testimonials-block">
-              <div class="testimonialBox clearfix">
-                  <div class="customerImg pull-left">
-                      <span class="customerImgWrap">
-                      <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                      </span>
-                  </div>
-                  <div class="customerTxt ">
-                      <span>Name</span>
-                      <p>tesstimonials text</p>
-                  </div>
-              </div>
-          </li>
-          <li data-slide-to="1" data-target="#testimonials-block" class="active col-sm-4">
-              <div class="testimonialBox clearfix">
-                  <div class="customerImg pull-left">
-                      <span class="customerImgWrap">
-                      <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                      </span>
-                  </div>
-                  <div class="customerTxt ">
-                      <span>Name</span>
-                      <p>tesstimonials text</p>
-                  </div>
-              </div>
-          </li>
-          <li data-slide-to="2" data-target="#testimonials-block" class="col-sm-4">
-              <div class="testimonialBox clearfix">
-                  <div class="customerImg pull-left">
-                      <span class="customerImgWrap">
-                      <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                      </span>
-                  </div>
-                  <div class="customerTxt ">
-                      <span>Name</span>
-                      <p>tesstimonials text</p>
-                  </div>
-              </div>
-          </li>
-        </ol>
+        
+        
+        <div class="jcarousel-wrapper">
+            <p class="userComent">some text</p>
+            <div class="jcarousel">
+                <ul>
+                    <li><div class="testimonialBox clearfix active">
+                            <div class="customerImg pull-left">
+                                <span class="customerImgWrap">
+                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                                </span>
+                            </div>
+                            <div class="customerTxt ">
+                                <span>Name</span>
+                                <p>tesstimonials text</p>
+                            </div>
+                        </div></li>
+                    <li><div class="testimonialBox clearfix">
+                            <div class="customerImg pull-left">
+                                <span class="customerImgWrap">
+                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                                </span>
+                            </div>
+                            <div class="customerTxt ">
+                                <span>Name</span>
+                                <p>tesstimonials text</p>
+                            </div>
+                        </div></li>
+                    <li><div class="testimonialBox clearfix">
+                            <div class="customerImg pull-left">
+                                <span class="customerImgWrap">
+                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                                </span>
+                            </div>
+                            <div class="customerTxt ">
+                                <span>Name</span>
+                                <p>tesstimonials text</p>
+                            </div>
+                        </div></li>
+                    <li><div class="testimonialBox clearfix">
+                            <div class="customerImg pull-left">
+                                <span class="customerImgWrap">
+                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                                </span>
+                            </div>
+                            <div class="customerTxt ">
+                                <span>Name</span>
+                                <p>tesstimonials text</p>
+                            </div>
+                        </div></li>
+                    <li><div class="testimonialBox clearfix">
+                            <div class="customerImg pull-left">
+                                <span class="customerImgWrap">
+                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                                </span>
+                            </div>
+                            <div class="customerTxt ">
+                                <span>Name</span>
+                                <p>tesstimonials text</p>
+                            </div>
+                        </div></li>
+                    <li><div class="testimonialBox clearfix">
+                            <div class="customerImg pull-left">
+                                <span class="customerImgWrap">
+                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
+                                </span>
+                            </div>
+                            <div class="customerTxt ">
+                                <span>Name</span>
+                                <p>tesstimonials text</p>
+                            </div>
+                        </div></li>
+                </ul>
+            </div>
+
+            <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+            <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+
+        </div>
       </div>
+
         <!-- Controls -->
-        <div class="clearfix">
-  <a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#testimonials-block" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-      </div>
+        
       </div>
     </div>
   </div>
@@ -1044,22 +1075,22 @@
     <marquee>
         
           <div class="row">
-        <div class="col-md-2 col-sm-3 col-xs-6">
+        <div class="marqBox">
           <img src="images/cisco.png" alt="cisco">
         </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
+        <div class="marqBox">
           <img src="images/walmart.png" alt="walmart">
         </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
+        <div class="marqBox">
           <img src="images/gamescast.png" alt="gamescast">
         </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
+        <div class="marqBox">
           <img src="images/spinwokrx.png" alt="spinwokrx">
         </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
+        <div class="marqBox">
           <img src="images/ngreen.png" alt="ngreen">
         </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
+        <div class="marqBox">
           <img src="images/gamescast.png" alt="gamescast">
         </div>
       </div>
@@ -1101,4 +1132,16 @@
        alert('Sorry you are not allowed to pick this package. To pick this package register with different account');return false;
     }
           //$(".myfancyTxtBox").fancybox();
+
+        
 </script>
+ <script type="text/javascript">
+
+$('.jcarousel').jcarousel({ 
+  wrap: 'circular'
+}).jcarouselAutoscroll({
+  interval: 10000
+});
+
+</script>
+
