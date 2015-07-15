@@ -139,26 +139,7 @@
         </table></td>
 </tr>
 
-<!-- content 
-<tr>
-  <td valign="" bgcolor="#f5f5f5" height="40" align="center" style="line-height:0px; border-top:1px solid #dfdfdf;"><table width="100%" cellspacing="0" cellpadding="0" border="0">
-      <tbody>
-        <tr>
-          <td width="100%" valign="middle" align="center" style="line-height:0px; color: #828282; font-size:14px; font-family:'Nunito'"><strong>Off:</strong> SOLUS, 3rd Floor, #2, 1st Cross, J. C. Road, Bangalore - 560027, Karnataka, India </td>
-        </tr>
-      </tbody>
-    </table></td>
-</tr>
-<tr>
-  <td valign="" bgcolor="#f5f5f5" height="40" style="line-height:0px;"><table width="100%" cellspacing="0" cellpadding="0" border="0">
-      <tbody>
-        <tr>
-          <td width="50%" valign="middle" align="center" style="line-height:0px;color: #828282;font-size:16px; font-family:'Nunito'"><strong>Mail us:</strong> info@mglobal.com </td>
-          <td width="50%" valign="middle" style="line-height:0px;color: #828282;font-size:16px; font-family:'Nunito'"><strong>Call Us:</strong> +91 80 4664 7799</td>
-        </tr>
-      </tbody>
-    </table></td>
-</tr>-->
+ 
 <tr>
     <td valign="" bgcolor="#fafafa" height="30" style="line-height:0px; border-top:1px solid #dfdfdf;font-size: 14px;color: #cccccc"><table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tbody>
