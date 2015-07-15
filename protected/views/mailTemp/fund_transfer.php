@@ -36,7 +36,7 @@
                                 </tr>
                                 <tr>
                                     <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                                        Your email address <a href="" style="color:#f15c2b; display:inline"><?php echo $model->email; ?></a>, has been set as the Registrant contact on <p style="color:#f15c2b; display:inline">mglobally </p>.com for UserName :<strong> <?php echo $model->name; ?> </strong> . To verify your email address, please click on the following link.
+                                        Your email address <a href="" style="color:#f15c2b; display:inline"><?php //echo $model->email; ?></a>, has been set as the Registrant contact on <p style="color:#f15c2b; display:inline">mglobally </p>.com for UserName :<strong> <?php echo $model->name; ?> </strong> . To verify your email address, please click on the following link.
                                     </td>
                                 </tr>
                                
