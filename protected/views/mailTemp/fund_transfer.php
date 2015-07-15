@@ -96,8 +96,8 @@
             </tr>
             <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer From(Username) : </th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['from_name']; ?></td>
-            </th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['from_name']; ?></th>
+            </tr>
              <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer To(Username) : </th>
                 <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['to_name']; ?></th>
