@@ -264,7 +264,13 @@ class BuildTempController extends Controller {
             }
             $success = "Update Successfully.";
         }        
+//        echo Yii::app()->session['userid'] ;
+//        echo Yii::app()->session['orderID'] ;
+        
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND parent = 0 ' ));       
+        
+        //print_r($userpagesObject); die;
+        
         $this->render('menusetting', array('success' => $success, 'error' => $error, 'userhasObject' => $userhasObject,'userpagesObject'=> $userpagesObject));
    
     }
