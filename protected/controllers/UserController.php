@@ -952,8 +952,8 @@ class UserController extends Controller {
             $dataProvider = new CActiveDataProvider($mode, array(
             'criteria' => $criteria, 'pagination' => array('pageSize' => 10),));           
         }
-        echo "<pre>";
-        print_r($dataProvider); die;
+//        echo "<pre>";
+//        print_r($dataProvider); die;
         
         $buildTempObject = BuildTemp::model()->findAll();
         
