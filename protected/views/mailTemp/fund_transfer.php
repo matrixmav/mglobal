@@ -21,12 +21,12 @@
           <tbody>
             <tr>
               <td width="5%" valign="middle" style="line-height:0px"></td>
-              <td width="40%" valign="middle" style="line-height:0px"><a target="_blank" href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/logo.png"> </a></td>
+              <td width="40%" valign="middle" style="line-height:0px"><a target="_blank" href=""> <img width="" border="0" src="logo.png"> </a></td>
               <td width="55%" valign="middle" style="line-height:0px; color:#f15c2b; font-family:'Nunito';">
               <table width="100%" cellspacing="0" cellpadding="0" border="0">
                   <tbody>
                   	<tr>
-                    <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/livechat.png"> &nbsp;</td>
+                    <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="livechat.png"> &nbsp;</td>
                     </tr>
                     <tr>
                  <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; font-family:'Nunito'"><strong> Customer Support:</strong> 1800 909 302 &nbsp; </td>
@@ -49,7 +49,7 @@
           <tbody>
             <tr>
             	<td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
-                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello <?php echo ucfirst($userObjectArr['full_name']); ?></td>
+                <td width="90%" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> Hello Sandeep</td>
                 <td width="5%" valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"> </td>
             </tr>
             </tbody>
@@ -88,23 +88,23 @@
           <tbody>
             <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transaction id :</th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['transactionId']; ?></th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">111111</th>
             </tr>
             <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer Date :</th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['date']; ?></th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">12 May 2015</th>
             </tr>
             <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer From(Username) : </th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['from_name']; ?></th>
-            </tr>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">abcd</td>
+            </th>
              <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer To(Username) : </th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'"><?php echo $userObjectArr['to_name']; ?></th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">abcd</th>
             </tr>
              <tr>
             	<th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">Transfer value: </th>
-                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">$<?php echo $userObjectArr['fund']; ?></th>
+                <th width="50%" align="center" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">100 Rs</th>
             </tr>
             </tbody>
             </table>
@@ -180,7 +180,7 @@
 
             </tr>
             <tr>
-            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"><strong>Visit Us On:</strong> www.<p style="color:#f15c2b; display:inline">mglobally</p>.com</td>
+            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"><strong>Visit Us On:</strong> www.<p style="color:#f15c2b; display:inline">mglobally </p>.com</td>
                 
 
             </tr>
@@ -199,16 +199,16 @@
           <tbody>
             <tr>
             <td width="5%"></td>
-             <td width="8%"><a href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/skype.png"></a></td>
+             <td width="8%"><a href=""> <img width="" border="0" src="skype.png"></a></td>
               <td width="37%" valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px; font-family:'Nunito'"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">91 80 4664 7799</a> </td>
               <td width="50%" valign="middle" style="line-height:0px;color: #828282;font-size:16px; font-family:'Nunito'">
               	<table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tbody>
             <tr>
-            	<td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/facebook-icon.png"></a></td>
-                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/googleplus.png"></a></td>
-                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/pinterest-icon.png"></a></td>
-                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/twitter-icon.png"></a></td>
+            	<td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="facebook-icon.png"></a></td>
+                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="googleplus.png"></a></td>
+                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="pinterest-icon.png"></a></td>
+                <td width="15%" valign="middle" align="left"><a href=""><img width="" border="0" src="twitter-icon.png"></a></td>
                 <td width="40%" valign="middle" align="left"></td>
                 
             </tr>
