@@ -1,6 +1,5 @@
-<?php $this->renderPartial('/mailTemp/header'); ?>
-
- <tr>
+ <?php $this->renderPartial('/mailTemp/header'); ?>
+<tr>
     	   <td valign="" bgcolor="#efed6a" height="55" align="left" style="line-height:0px; font-size:16px">
         	<table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tbody>
@@ -31,9 +30,7 @@
             	 
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                 We are pleased to inform you that your direct referral income of user <?php echo $userObjectArr['user_name']; ?> has been credited your wallet.
-                  
-                  </td>
+                 We are pleased to inform you that your direct referral income of user <?php echo ucfirst($userObjectArr['username']);?> has been credited your wallet</td>
                   </tr>
                   
                   
@@ -41,20 +38,13 @@
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
             
-             </tbody>
-                </table>
-                 </td>
-            </tr>
-            
            
+            
+            
             <tr>
-            	  <td height="20" bgcolor="" style=""></td>
-            </tr>
-            <tr>
-            	
+            	  
                   <tr>
                   <tr>
             	  <td height="20" bgcolor="" style=""></td>
             </tr>
-
-<?php $this->renderPartial('/mailTemp/footer'); ?>
+             <?php $this->renderPartial('/mailTemp/footer'); ?>
