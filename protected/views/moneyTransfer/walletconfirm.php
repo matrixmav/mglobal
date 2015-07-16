@@ -22,7 +22,7 @@
            <div class="form-body">  
             <form name="walletform" id="walletform">
                
-               <div class="form-group">
+               <div class="form-group row">
                     <label for="paid_amount" class="col-lg-4 control-label">Make Payment Using</label>
                     <div class="col-lg-8">
                           <div class="payChoose col-sm-6">
