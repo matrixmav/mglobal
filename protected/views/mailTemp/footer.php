@@ -62,6 +62,8 @@
                                      <td width="1%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'">www.</td>
                                       <td width="1%" height="35" valign="middle" align="left" style="line-height:22px; color: #f15c2b; font-size:14px; font-family:'Nunito'">mglobally</td>
                                        <td width="18%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'">.com</td>
+                                <td width="1%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'">&nbsp;</td>
+                               
                                 </tr>
                             </tbody>
                                         </table>
