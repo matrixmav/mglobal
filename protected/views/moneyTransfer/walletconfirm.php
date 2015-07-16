@@ -8,22 +8,27 @@
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2-metronic.css"/>
 
-<div class="col-md-7 col-sm-7">
+<div class="col-md-6 col-sm-6">
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-
-    
+  <div class="portlet box orange ">
+    <div class="portlet-title">
+							<div class="caption">
+								Confirm Payment
+							</div>
+    </div>
+ <div class="portlet-body form">
         <fieldset> 
-            <legend>Confirm</legend>
-            <form name="walletform" id="walletform">
+           <div class="form-body">  
+            <form name="walletform" >
+               
                <div class="form-group">
                     <label for="paid_amount" class="col-lg-4 control-label">Make Payment Using</label>
                     <div class="col-lg-8">
                           <div class="payChoose col-sm-6">
-                                <div class="payOption clearfix">
+                              <div class="payOption clearfix">
                                     <div class="col-sm-12 col-xs-12 tleft">
-                                        <input type="radio" id="myRadio" name="myRadio" value="paypal">
-                                        <label for="myRadio">Paypal</label>
+                                        <input type="radio" id="myRadio" name="myRadio" value="paypal" class="" style="margin-left:0px!important;"><label for="myRadio">Paypal</label>
 
                                     </div>
                                 </div>
@@ -48,16 +53,18 @@
                     </div>
                     
                 </div>
+                </div>
             </fieldset>
-            <div class="row">
-                <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">  
-                    <input type="button"  name="transfer" id="transfer" class="btn red" value="Confirm" onClick="validationfrom();"/>                     
+             
+        <div class="form-actions right">                     
+           <input type="button"  name="transfer" id="transfer" class="btn orange" value="Confirm" onClick="validationfrom();"/>                     
  
                 </div>
             </div>
+      
  
     
-</div>
+</div></div>
 <script type="text/javascript" src="/metronic/assets/plugins/select2/select2.min.js"></script>
 <style>
         #s2id_search_username{ width: 100% !important;}
