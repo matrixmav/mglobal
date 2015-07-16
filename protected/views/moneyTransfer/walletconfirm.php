@@ -20,15 +20,16 @@
  <div class="portlet-body form">
         <fieldset> 
            <div class="form-body">  
-            <form name="walletform" >
+            <form name="walletform" id="walletform">
                
                <div class="form-group">
                     <label for="paid_amount" class="col-lg-4 control-label">Make Payment Using</label>
                     <div class="col-lg-8">
                           <div class="payChoose col-sm-6">
                               <div class="payOption clearfix">
-                                    <div class="col-sm-12 col-xs-12 tleft">
-                                        <input type="radio" id="myRadio" name="myRadio" value="paypal" class="" style="margin-left:0px!important;"><label for="myRadio">Paypal</label>
+                                    <div class="col-sm-12 col-xs-12 tleft" id="cashpaypal">
+                                        <input type="radio" id="myRadio" name="myRadio" value="paypal" class="" style="margin-left:0px!important;">
+                                        <label for="myRadio">Paypal</label>
 
                                     </div>
                                 </div>
