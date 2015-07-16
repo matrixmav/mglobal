@@ -4610,9 +4610,11 @@ td.itemAmount {
 }
 .payOption input[type='radio'] + label{font-size: 20px;}
 
-
-
-
+#cashpaypal input[type=radio]{color:#000; font-size: 20px;}
+#cashpaypal input[type=radio] ~ label:before {
+ content: "\f10c"; font-size: 20px; letter-spacing: 15px; color: #a1a1a1;  }
+#cashpaypal input[type=radio]:checked ~ label:before {
+  content: "\f192"; font-size: 20px; letter-spacing: 15px; color: #3fb148;}
    
 
 
