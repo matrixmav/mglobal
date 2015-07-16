@@ -30,7 +30,7 @@
             	 
             <tr>
             	  <td height=""  valign="middle" align="left" style="line-height:22px; color: #6b6b6b; font-size:16px; font-family:'Nunito'">
-                 We are pleased to inform you that your direct referral income of user <?php echo ucfirst($userObjectArr['username']);?> has been credited your wallet</td>
+                 We are pleased to inform you that your direct referral income of user <?php echo ucfirst($userObjectArr['user_name']);?> has been credited your wallet</td>
                   </tr>
                   
                   
