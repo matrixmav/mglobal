@@ -101,7 +101,40 @@ class UserController extends Controller {
     }
     
     public function actionDashboard() {
-        $this->render('/user/dashboard');
+       
+      $transactionActiveObject = Transaction::model()->findAll(array('condition' => 'status= 1 AND mode = "paypal"'));
+      $activeCount = count($transactionActiveObject);
+      
+      $transactionInactiveObject = Transaction::model()->findAll(array('condition' => 'status= 0 AND mode = "paypal"'));
+      $InactiveCount = count($transactionInactiveObject);
+      
+      $total =  $activeCount +  $InactiveCount;
+      
+      $userObject = User::model()->findAll(array('condition' => 'sponsor_id= "admin"'));
+      $userCount = count($userObject);
+      $userDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d") - 7, date("Y")));
+      $userObject1 = User::model()->findAll(array('condition' => 'created_at BETWEEN "'.date('Y-m-d').'" AND '.$userDate));
+      
+      $str=  '';
+      for($i = 1; $i < 7; $i++)
+      {
+       $j =  $i*7;   
+       
+       $date = date('Y-m-d', mktime(0, 0, 0, date("m") , date("d") - $j, date("Y")));
+       
+       $date2 = date('Y-m-d', mktime(0, 0, 0, date("m") , date("d") - 14, date("Y")));
+       
+       $date1 = date('d/m/y', mktime(0, 0, 0, date("m") , date("d") - $j, date("Y")));
+       
+       $userObject = User::model()->findAll(array('condition' => 'created_at BETWEEN "'.$date.'" AND "'.$date2.'"'));
+       
+         $str .= "['".$date1."', ".count($userObject)."],";
+              
+      }
+      $strFinal = rtrim("['".$date = date('d-m-y')."', ".count($userObject1)."],".$str,',');
+      
+      
+        $this->render('/user/dashboard',array('activeCount'=>$activeCount,'InactiveCount'=> $InactiveCount,'total'=>$total,'userCount'=>$userCount,'str'=>$strFinal));
     }
 
     
