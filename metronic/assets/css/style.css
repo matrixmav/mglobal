@@ -4570,3 +4570,10 @@ td.itemAmount {
 #TotalAmount {
     color: #669933;
 }
+
+
+.pageBox a{margin:5px; display: inline-block; float: left;}
+.setingBox a{margin:5px; display: inline-block; float: left;}
+.btn.orange {
+    background-color: #f15c2a;
+    color: #fff;}
