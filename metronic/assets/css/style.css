@@ -4570,6 +4570,15 @@ td.itemAmount {
 #TotalAmount {
     color: #669933;
 }
+    
+
+
+.pageBox a{margin:5px; display: inline-block; float: left;}
+.setingBox a{margin:5px; display: inline-block; float: left;}
+.btn.orange {
+    background-color: #f15c2a;
+    color: #fff;}
+
 /*wallet radio button*/
 #walletOption input[type=radio],
  {
@@ -4622,3 +4631,4 @@ td.itemAmount {
 
 
 
+>>>>>>> 7a14f57174784e4db9110dac39bd29ef6b7745c8
