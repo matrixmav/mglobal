@@ -544,9 +544,10 @@ class PackageController extends Controller {
      */
 
     public function actionThankYou() {
-     
+        
+             
         if (!(empty($_GET))) {
-            if($_GET['payment_status']=='success')
+         if($_GET['payment_status']=='success')
             {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
@@ -754,12 +755,12 @@ class PackageController extends Controller {
                 
                 //$body = Package::model()->createInvoice($invoiceArr);
                 
-                $html2pdf = Yii::app()->ePdf->HTML2PDF('L', "A4", "en", array(10, 10, 10, 10));
+                $html2pdf = Yii::app()->ePdf->HTML2PDF('P', "A4", "en", array(10, 10, 10, 10));
                 $orderObject = Order::model()->findByPK($orderObject->id);
                 $userObjectArr1 = array();
                 $userObjectArr1['full_name'] = $userObject->name;
                 //$fp = fopen("/mailTemp/invoice.php","r");
-                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
+                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true); exit;
                 $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
                 $fileName = $userObject->name .'_'.time(). 'invoice.pdf';
