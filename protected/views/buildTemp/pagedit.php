@@ -14,7 +14,8 @@ $this->breadcrumbs = array(
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
       
     <?php foreach($userpagesObjectF as $page){?><a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a><?php }?>   
-    <div style="float:right;"><a href="/BuildTemp/managewebsite/<?php echo $_GET['id'];?>" class="btn green" target="_blank">Preview</a></div> 
+    <!--<div style="float:right;"><a href="/BuildTemp/managewebsite/<?php //echo $_GET['id'];?>" class="btn green" target="_blank">Preview</a></div> -->
+    <div style="float:right;"><a href="/BuildTemp/managewebsite/<?php echo Yii::app()->session['orderID']; ?>/<?php echo $userpagesObject->page_slug ; ?>" class="btn green" target="_blank">Preview</a></div> 
    
     <?php echo BaseClass::buildWebsiteHeader(); ?> 
     
@@ -44,12 +45,19 @@ $this->breadcrumbs = array(
                      
                 </div>
                 
-                <label class="col-sm-2 control-label" for="lastname">Status</label>                
+                <label class="col-sm-2 control-label" for="lastname">Page Status :</label>                
                 <div class="col-sm-2">
                     <label><input type="radio" name="pages[status]" value="1" <?php if(!empty($userpagesObject) && $userpagesObject->status=='1'){ echo "checked=checked"; } ?> >Active</label>
                     <label><input type="radio" name="pages[status]" value="0" <?php if(!empty($userpagesObject) && $userpagesObject->status=='0'){ echo "checked=checked"; } ?> >Pending</label>
                     
                 </div>
+                
+                <label class="col-sm-2 control-label" for="lastname">Inner Page :</label>                
+                <div class="col-sm-2">
+                    <label><input type="radio" name="pages[inner]" value="1" <?php if(!empty($userpagesObject) && $userpagesObject->page_inner=='1'){ echo "checked=checked"; } ?> >Yes</label>
+                    <label><input type="radio" name="pages[inner]" value="0" <?php if(!empty($userpagesObject) && $userpagesObject->page_inner=='0'){ echo "checked=checked"; } ?> >No</label>
+                    
+                </div>               
                 
             </div>
              
@@ -63,7 +71,7 @@ $this->breadcrumbs = array(
             
           </fieldset>
 
-    <div class="row">
+        <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
                 <input type="submit" name="submit" value="Submit" class="btn red">
                  
