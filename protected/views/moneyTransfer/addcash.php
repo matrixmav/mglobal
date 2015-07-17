@@ -40,7 +40,9 @@
         <div class="form-actions right">                     
                 
                  <input type="submit"  name="transfer" id="transfer" class="btn orange" value="Add" onClick="return validationfrom();"/>                     
-            </div>
+                <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
+               
+        </div>
             
     </form>
  </div>
@@ -71,6 +73,9 @@
        $('#master_pin_error').html("Please enter master pin."); 
        return false;
     }
+    
+    document.getElementById('transfer').style.display="none";
+    document.getElementById('loading2').style.display="block";
     
    
  }
