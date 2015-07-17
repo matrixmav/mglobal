@@ -118,8 +118,8 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
         <script src="/metronic/assets/plugins/jquery.cokie.min.js"
         type="text/javascript"></script>
-        <script src="/metronic/assets/plugins/uniform/jquery.uniform.min.js"
-        type="text/javascript"></script>
+        <!--<script src="/metronic/assets/plugins/uniform/jquery.uniform.min.js"
+        type="text/javascript"></script>-->
         <!-- END CORE PLUGINS -->
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/additional-methods.min.js"></script>
