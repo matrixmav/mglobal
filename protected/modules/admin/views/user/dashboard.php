@@ -36,7 +36,7 @@ $this->breadcrumbs = array(
 <link href="/metronic/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="/metronic/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="/metronic/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link href="/metronic/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
+<!--<link href="/metronic/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>-->
 <link href="/metronic/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
@@ -98,7 +98,7 @@ $this->breadcrumbs = array(
 	background: #364150;
 	position: relative;
 	margin-top:90px;
-	margin-left:10%;
+	margin-left:20%;
 }
 #hexagon:before {
 	content: "";
@@ -292,7 +292,7 @@ margin-top:10%;
 	background: #364150;
 	position: relative;
 	margin-top:90px;
-	margin-left:0%;
+	margin-left:29%;
 }
 #hexagon:before {
 	content: "";
@@ -584,7 +584,7 @@ margin-left:0;
 			
 
 
-<script src="/metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<script src="/metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
 <script src="/metronic/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
 <script src="/metronic/assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
 <script src="/metronic/assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
