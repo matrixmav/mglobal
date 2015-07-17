@@ -15,8 +15,8 @@ $this->breadcrumbs = array(
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
       
-    <?php foreach($userpagesObjectF as $page){?><a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a><?php }?>   
-    <div style="float:right;"><a href="/BuildTemp/managewebsite/<?php echo $_GET['id'];?>" class="btn green" target="_blank">Preview</a></div> 
+    <div class="row pageBox"><?php foreach($userpagesObjectF as $page){?><a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn orange"><?php echo $page->page_name; ?></a><?php }?> </div>  
+    <div class="row"><div class="col-sm-12"><a href="/BuildTemp/managewebsite/<?php echo $_GET['id'];?>" class="btn green pull-right" target="_blank">Preview</a></div> </div>
    
     <?php echo BaseClass::buildWebsiteHeader(); ?> 
     <div class="row">
