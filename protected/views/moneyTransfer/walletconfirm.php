@@ -59,7 +59,8 @@
              
         <div class="form-actions right">                     
            <input type="button"  name="transfer" id="transfer" class="btn orange" value="Confirm" onClick="validationfrom();"/>                     
- 
+ <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
+               
                 </div>
             </div>
       
@@ -82,6 +83,8 @@
       }else{
         $("#frmPayPal").submit();
     }
+        document.getElementById('transfer').style.display="none";
+    document.getElementById('loading2').style.display="block";
     }
   
 </script>
