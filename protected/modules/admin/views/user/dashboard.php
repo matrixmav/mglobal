@@ -459,7 +459,7 @@ margin-left:0;
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="icon-bar-chart font-green-sharp hide"></i>
-								<h2>New Visitors</h2>
+								<h2>New Registrants</h2>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -540,10 +540,10 @@ margin-left:0;
 			<div class="info">
 			<div class="col-sm-8">
 			<div id="hexagon">
-			<p><span>22</span><br>people reffered</p>
+			<p><span><?php echo $userCount;?></span><br>people reffered</p>
 			</div>
 			</div>
-			<div class="col-sm-4 det">
+			<!--<div class="col-sm-4 det">
 			<h3>Details of last Interaction</h3>
 			<h4 class="date-info"><span class="fa fa-calendar"></span>  Date</h4>
 			<p class="values">16 10 2014</p>
@@ -551,7 +551,7 @@ margin-left:0;
 			<p class="values">20 : 10 PM</p>
 			<h4 class="place-info"><span class="fa fa-map-marker"></span>  Place</h4>
 			<p class="values">Bengaluru, India</p>
-			</div>
+			</div>-->
 			</div>
 			</div>
 			</div>
@@ -564,15 +564,15 @@ margin-left:0;
 			</div>
 			
 			<div class="col-xs-12 total">
-			<h1><span>55</span>TOTAL</h1>
+			<h1><span><?php echo $total;?></span>TOTAL</h1>
 			</div>
 			<div class="col-xs-12 det res-det">
 			<div class="col-sm-6 act-domain">
-			<h1><span>36</span></h1>
+			<h1><span><?php echo $activeCount;?></span></h1>
 			<h5>ACTIVE DOMAINS</h5>
 			</div>
 			<div class="col-sm-6 in-domain">
-			<h1><span>19</span></h1>
+			<h1><span><?php echo $InactiveCount;?></span></h1>
 			<h5>INACTIVE DOMAINS </h5>
 			</div>
 			</div>
@@ -646,6 +646,92 @@ Demo.init(); // init demo features
 				var ctx = document.getElementById("chart-area").getContext("2d");
 				window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
 			};
+                        
+                var visitors = [
+                <?php echo $str;?>
+            ];
+
+
+            if ($('#site_statistics').size() != 0) {
+
+                $('#site_statistics_loading').hide();
+                $('#site_statistics_content').show();
+
+                var plot_statistics = $.plot($("#site_statistics"),
+                    [{
+                        data: visitors,
+                        lines: {
+                            fill: 0.6,
+                            lineWidth: 0
+                        },
+                        color: ['#f89f9f']
+                    }, {
+                        data: visitors,
+                        points: {
+                            show: true,
+                            fill: true,
+                            radius: 5,
+                            fillColor: "#f89f9f",
+                            lineWidth: 3
+                        },
+                        color: '#fff',
+                        shadowSize: 0
+                    }],
+
+                    {
+                        xaxis: {
+                            tickLength: 0,
+                            tickDecimals: 0,
+                            mode: "categories",
+                            min: 0,
+                            font: {
+                                lineHeight: 14,
+                                style: "normal",
+                                variant: "small-caps",
+                                color: "#6F7B8A"
+                            }
+                        },
+                        yaxis: {
+                            ticks: 5,
+                            tickDecimals: 0,
+                            tickColor: "#eee",
+                            font: {
+                                lineHeight: 14,
+                                style: "normal",
+                                variant: "small-caps",
+                                color: "#6F7B8A"
+                            }
+                        },
+                        grid: {
+                            hoverable: true,
+                            clickable: true,
+                            tickColor: "#eee",
+                            borderColor: "#eee",
+                            borderWidth: 1
+                        }
+                    });
+
+                var previousPoint = null;
+                $("#site_statistics").bind("plothover", function (event, pos, item) {
+                    $("#x").text(pos.x.toFixed(2));
+                    $("#y").text(pos.y.toFixed(2));
+                    if (item) {
+                        if (previousPoint != item.dataIndex) {
+                            previousPoint = item.dataIndex;
+
+                            $("#tooltip").remove();
+                            var x = item.datapoint[0].toFixed(2),
+                                y = item.datapoint[1].toFixed(2);
+
+                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' visits');
+                        }
+                    } else {
+                        $("#tooltip").remove();
+                        previousPoint = null;
+                    }
+                });
+            }
+
 
 
 
