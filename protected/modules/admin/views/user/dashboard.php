@@ -560,7 +560,7 @@ margin-left:0;
 			<div class="col-md-4">
 			<div class="ref-history">
 			<div class="head">
-			NO.OF DOMIANS REGISTERED
+			NO.OF PACKAGE PURCHASED
 			</div>
 			
 			<div class="col-xs-12 total">
