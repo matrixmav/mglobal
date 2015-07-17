@@ -14,11 +14,13 @@ $this->breadcrumbs = array(
         foreach ($userpagesObject as $page) { ?>
             <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
     <?php } }  ?>   
-            
+            <div class="row">
     <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
     <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
     <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
-    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a>           
+    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a>   
+            </row>
+    <div class="row">
     <form action="/BuildTemp/pageadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
@@ -47,6 +49,7 @@ $this->breadcrumbs = array(
             </div>
         </div>
     </form>
+    </div>
 </div>
 
 
