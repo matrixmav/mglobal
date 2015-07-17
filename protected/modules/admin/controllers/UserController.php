@@ -102,10 +102,10 @@ class UserController extends Controller {
     
     public function actionDashboard() {
        
-      $transactionActiveObject = Transaction::model()->findAll(array('condition' => 'status= 1 AND mode = "paypal"'));
+      $transactionActiveObject = Order::model()->findAll(array('condition' => 'status= 1'));
       $activeCount = count($transactionActiveObject);
       
-      $transactionInactiveObject = Transaction::model()->findAll(array('condition' => 'status= 0 AND mode = "paypal"'));
+      $transactionInactiveObject = Order::model()->findAll(array('condition' => 'status= 0 '));
       $InactiveCount = count($transactionInactiveObject);
       
       $total =  $activeCount +  $InactiveCount;
