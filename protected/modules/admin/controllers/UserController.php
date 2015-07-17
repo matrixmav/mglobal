@@ -133,8 +133,28 @@ class UserController extends Controller {
       }
       $strFinal = rtrim("['".$date = date('d-m-y')."', ".count($userObject1)."],".$str,',');
       
+      /*code to fetch package code*/
+       $strMonth = '';
+       for($i = 1; $i < 10; $i++)
+       {
+           
+        $dateP = date('m', mktime(0, 0, 0, date("m")-$i , date("d"), date("Y")));
+        
+        $datePStr = date('M', mktime(0, 0, 0, date("m")-$i , date("d"), date("Y")));
+        
+        $dateCureent = date('m', mktime(0, 0, 0, date("m") , date("d"), date("Y")));
+        
+        $packageObject1 = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "'.$dateP.'"'));
+        
+        $packageObjectCurrent = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "'.$dateCureent.'"'));
+        
+        $strMonth .= "['".$datePStr."', ".count($packageObject1)."],";
+                   
+       } 
+       
+        $packageStr = rtrim("['".$date = date('M')."', ".count($packageObjectCurrent)."],".$strMonth,',');
       
-        $this->render('/user/dashboard',array('activeCount'=>$activeCount,'InactiveCount'=> $InactiveCount,'total'=>$total,'userCount'=>$userCount,'str'=>$strFinal));
+        $this->render('/user/dashboard',array('activeCount'=>$activeCount,'InactiveCount'=> $InactiveCount,'total'=>$total,'userCount'=>$userCount,'str'=>$strFinal,'packageStr'=>$packageStr));
     }
 
     
