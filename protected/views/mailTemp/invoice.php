@@ -367,7 +367,7 @@
 
                                                 </tr>
                                                 <tr>
-                                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "><strong>Like Us:</strong> www.<span style="color:#f15c2b; display:inline;width:100px;">facebook.com.com/mglobally?ref=hl</span></td>
+                                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "><strong>Like Us:</strong><span style="color:#f15c2b; display:inline;width:100px;">  <a href="https://www.facebook.com/mglobally" style="text-decoration:none;"><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/facebook-icon.png" style="vertical-align:middle;"> <span style="color:#f15c2b;"> /mGlobally</span></a></span></td>
 
 
                                                 </tr>
@@ -386,17 +386,14 @@
                             <tbody>
                                 <tr>
                                     <td valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px;width:50px;"> </td>
-                                    <td style="width:33px;text-align:left;"><a href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/skype.png"></a></td>
+                                    <td style="width:33px;text-align:left;"><a href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/skype.png" style="vertical-align:middle;"></a></td>
                                     <td valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px;width:267px;text-align:left;"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">91 80 4664 7799</a> </td>
-                                    <td valign="middle" style="line-height:0px;color: #828282;font-size:16px;width:300px;">
+                                    <td valign="middle" style="line-height:0px;color: #828282;font-size:16px;width:250px;">
                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                             <tbody>
                                                 <tr>
-                                                    <td valign="middle" align="left" style="width:40px;text-align:center;"><a href="http://facebook.com"><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/facebook-icon.png"></a></td>
-                                                    <td  valign="middle" align="left" style="width:40px;text-align:center;"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/googleplus.png"></a></td>
-                                                    <td valign="middle" align="left" style="width:40px;text-align:center;"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/pinterest-icon.png"></a></td>
-                                                    <td  valign="middle" align="left" style="width:40px;text-align:center;"><a href=""><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/twitter-icon.png"></a></td>
-                                                    
+                                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; "><strong>Follow Us On:</strong><span style="color:#f15c2b; display:inline;width:250px;"> <a href="https://twitter.com/MGlobally" style="text-decoration:none;"><img  style="vertical-align:middle" width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/twitter-icon.png"> <span style="color:#f15c2b;">@mGlobally</span></a></span></td>
+
 
                                                 </tr>
                                             </tbody>
