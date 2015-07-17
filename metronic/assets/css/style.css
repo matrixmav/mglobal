@@ -4570,3 +4570,65 @@ td.itemAmount {
 #TotalAmount {
     color: #669933;
 }
+    
+
+
+.pageBox a{margin:5px; display: inline-block; float: left;}
+.setingBox a{margin:5px; display: inline-block; float: left;}
+.btn.orange {
+    background-color: #f15c2a;
+    color: #fff;}
+
+/*wallet radio button*/
+#walletOption input[type=radio],
+ {
+  display: none; 
+}
+#walletOption input[type="radio"]{opacity:0;}
+#walletOption input[type='radio'] + label:before {
+  display: inline-block;
+  font-family: FontAwesome;
+  
+}
+#walletOption input[type=radio] + label:before {
+ content: "\f10c"; font-size: 20px; letter-spacing: 15px; color: #a1a1a1;  /* Radio Unchecked */
+}
+#walletOption input[type=radio]:checked + label:before {
+  content: "\f192"; font-size: 20px; letter-spacing: 15px; color: #3fb148;/* Radio Checked */
+}
+#walletOption input[type='radio'] + label{font-size: 20px;}
+
+#master_pin_error{color:#dd0808;}
+
+/* custom radio buttons */
+.payOption input[type=radio],
+ {
+  display: none; 
+}
+ .payOption input[type="radio"]{opacity:0;}
+.payOption input[type='radio'] + label:before {
+  display: inline-block;
+  font-family: FontAwesome;
+  
+}
+.payOption input[type=radio] + label:before {
+ content: "\f10c"; font-size: 20px; letter-spacing: 15px; color: #a1a1a1;  /* Radio Unchecked */
+}
+.payOption input[type=radio]:checked + label:before {
+  content: "\f192"; font-size: 20px; letter-spacing: 15px; color: #3fb148;/* Radio Checked */
+}
+.payOption input[type='radio'] + label{font-size: 20px;}
+
+#cashpaypal input[type=radio]{color:#000; font-size: 20px;}
+#cashpaypal input[type=radio] #cashpaypal> label:before {
+ content: "\f10c"; font-size: 20px; letter-spacing: 15px; color: #a1a1a1;  }
+#cashpaypal input[type=radio]:checked ~ label:before {
+  content: "\f192"; font-size: 20px; letter-spacing: 15px; color: #3fb148;}
+   
+
+
+
+
+
+
+>>>>>>> 7a14f57174784e4db9110dac39bd29ef6b7745c8

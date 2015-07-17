@@ -69,7 +69,7 @@
                             </tbody></table>
                         
                         <div class="cartfooter clearfix">
-                            <div class="col-sm-4 col-xs-12 ">
+                            <div class="col-sm-6 col-xs-12 ">
                                 <form method="post" class="couponWrp form-inline" id="couponCodeContainer">
                                     <div class="form-group"> <input type="text" placeholder=" Enter Coupon Code" id="coupon_code" name="coupon_code" class="form-control">
                                     </div>
@@ -88,7 +88,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-sm-4 col-xs-12">
+                            <div class="col-sm-2 col-xs-12">
 
                             </div>
                             <div class="col-sm-4 col-xs-12">
@@ -144,7 +144,7 @@
                     <div id="paymentOption" class="clearfix">
                         <form id="walletform" name="walletform">  
                             <?php if ($walletObject) { ?>
-                                <div id="walletOption" class="col-sm-4">
+                                <div id="walletOption" class="col-sm-5">
 
                                     <?php
                                     $i = 1;
@@ -175,7 +175,7 @@
                                 </div>
 <?php } ?>
 
-                            <div class="payChoose col-sm-4">
+                            <div class="payChoose col-sm-3">
                                 <div class="payOption clearfix">
                                     <div class="col-sm-12 col-xs-12 tleft">
                                         <input type="radio" id="myRadio" name="myRadio" value="paypal" class="paymentradio" style="margin-left:0px!important;">
@@ -219,8 +219,8 @@
                               <div class="col-sm-12 col-xs-12 makeBtn">
                         <div class="col-sm-8 col-xs-8 makeBtn" id="blankDiv"> </div>
                        <div class="col-sm-4 col-xs-4 makeBtn" style="display:none;" id="masterpinDiv"> 
-                        <div class="form-group"><input type="password" name="master_pin" id="master_pin" placeholder="Enter master pin" class="form-control"></div>
-                        <div id="master_pin_error"> </div></div>
+                        <div class="form-group"><input type="password" name="master_pin" id="master_pin" placeholder="Enter master pin" class="form-control"><div id="master_pin_error"> </div></div>
+                        </div>
                         <div class="col-sm-4 col-xs-4 makeBtn" id="submitDiv" style="padding-bottom:10px;"> 
                         <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
                         </div>

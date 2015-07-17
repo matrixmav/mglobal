@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 ?>
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2.css"/>
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2-metronic.css"/>
-<div class="col-md-6 col-sm-7">
+<div class="col-md-7 col-sm-8">
     <div class="error" id="error_msg" style="display: none;"></div>
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
 <div class="portlet box orange   ">
@@ -25,7 +25,7 @@ $this->breadcrumbs = array(
                     <label for="transactiontype" class="col-lg-4 control-label">Choose Type of Transaction<span class="require">*</span></label>
                     <div class="col-lg-7">
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-7">
                                 <select id="transactiontype" name="walletId" class="form-control" onchange="getExistingFund(<?php echo $userId; ?>,this.value);">
                                     <option value="">Select Wallet</option>
                                     <option value="1">Cash</option>
@@ -34,7 +34,7 @@ $this->breadcrumbs = array(
                                 </select>
                                 <span id="transaction_error" style="color:red"></span>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-5">
                                 <input type="hidden" class="form-control" id="transaction_data_amt" name="transaction_data" value=""/>
                                 <div id="transaction_data" name="transaction_data" class="form-control">0</div>
                                 <span id="amount_error" style="color:red"></span>
