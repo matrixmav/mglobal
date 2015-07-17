@@ -739,7 +739,7 @@ if ($('#site_activities').size() != 0) {
                 $('#site_activities_content').show();
 
                 var data1 = [
-                    <?php echo $packageStr;?>
+                    <?php echo $packageStr ;?>
                 ];
 
 
