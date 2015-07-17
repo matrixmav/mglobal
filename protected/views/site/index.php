@@ -603,7 +603,7 @@
             </div>
           </div>-->
           <!-- benefit slider -->
-            <div id="carousel-example-generic" class="carousel slide benefitCarousel" data-ride="carousel">
+            <div id="benefit-carousel" class="carousel slide benefitCarousel" data-ride="carousel">
   <!-- Indicators 
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -641,13 +641,13 @@
   </div>
 
   <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#benefit-carousel" role="button" data-slide="prev">
     <span class="" aria-hidden="true">
     <img src="images/steps/arrow-left-active.png" alt="Why to choose us" class="img-responsive"></span>
 
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+  <a class="right carousel-control" href="#benefit-carousel" role="button" data-slide="next">
     <span class="" aria-hidden="true">
   <img src="images/steps/arrow-right-normal.png" alt="Why to choose us" class="img-responsive"></span>
   </a>
@@ -974,7 +974,9 @@
         
         
         <div class="jcarousel-wrapper">
-            <p class="userComent">some text</p>
+            <p class="userComent">I found the packages provided by MGlobally worth the price quoted by them. Till the time my website went live, their representatives were in touch with me and helped me every now and then. Another major factor for which I would recommend MGlobally is its network marketing model. One can earn well by bringing in references.
+                <br>MGlobally is a platform that does a lot more than just offering web development services. It lets you earn reward points by bringing in the references for the company’s services. I have earned a good amount of reward points by bringing references for MGlobally. 
+           </p>
             <div class="jcarousel">
                 <ul>
                     <li><div class="testimonialBox clearfix active">
