@@ -8,7 +8,9 @@ $this->breadcrumbs = array(
 </div>
 
 <div class="col-md-12 col-sm-12" id="test">
-    
+    <div class="row">
+        
+    </div>
    
     <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
@@ -17,7 +19,7 @@ $this->breadcrumbs = array(
     <div style="float:right;"><a href="/BuildTemp/managewebsite/<?php echo $_GET['id'];?>" class="btn green" target="_blank">Preview</a></div> 
    
     <?php echo BaseClass::buildWebsiteHeader(); ?> 
-    
+    <div class="row">
     <form action="/BuildTemp/pagedit?id=<?php echo $_GET['id']; ?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
@@ -69,6 +71,7 @@ $this->breadcrumbs = array(
                  
             </div>
         </div>
+    </row>
     </form>
 </div>
 
