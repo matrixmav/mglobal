@@ -760,7 +760,7 @@ class PackageController extends Controller {
                 $userObjectArr1 = array();
                 $userObjectArr1['full_name'] = $userObject->name;
                 //$fp = fopen("/mailTemp/invoice.php","r");
-                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true); exit;
+                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
                 $html2pdf->WriteHTML($body);
                 $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
                 $fileName = $userObject->name .'_'.time(). 'invoice.pdf';
