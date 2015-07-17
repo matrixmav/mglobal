@@ -113,9 +113,13 @@ class UserPages extends CActiveRecord
                 $userpagesObject1 = new UserPages;
                 $userpagesObject1->order_id = $orderId;
                 $userpagesObject1->user_id = $userId;
-                $userpagesObject1->page_name = 'Page'.$i;
+                
                 if($i == 1){
                     $userpagesObject1->page_name = 'Home';
+                    $userpagesObject1->page_slug = 'home.html';
+                }else{
+                    $userpagesObject1->page_name = 'Page'.$i;
+                    $userpagesObject1->page_slug = 'page'.$i.'.html';
                 }
                 
                 $baseURL = Yii::app()->getBaseUrl(true)."/";
