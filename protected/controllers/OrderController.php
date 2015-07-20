@@ -340,15 +340,17 @@ class OrderController extends Controller {
     
     protected function GetButtonTitle($data, $row) {
         $userId = Yii::app()->session['userid'];
+        
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
         
         if($orderObject->status==1) {
         if (!empty($userhasObject) && $userhasObject->publish == 1) {
-//            $title = '<a href="' . $data['domain'] . '" title="Visit Website" target="_blank" class="btn green fa fa-edit margin-right15">Visit Website</a>';
             $title = '<a href= "/builder_images/'.$userId.'/build'.$data['id'].'" title="Visit Website" target="_blank" class="btn green margin-right15"><span class="fa fa-edit"></span>Visit Website</a>';
         } else {
-            $title = '<a href="/BuildTemp/templates/?id=' . $data->id . '" title="Build Website" target="_blank" class="btn red  margin-right15"><span class="fa fa-edit"></span>Build Website</a>';
+
+            $title = '<a href=/BuildTemp/templates/?id='.$data->id.'&p='.base64_encode($data->package_id).' title="Build Website" target="_blank" class="btn red  margin-right15"><span class="fa fa-edit"></span>Build Website</a>';
+
         }
         }else{
         $title = '<a class="btn red margin-right15" href="#"><span class="fa fa-edit"></span>N/A</a>';
@@ -365,9 +367,9 @@ class OrderController extends Controller {
         $id = $data['id'];
         if($orderObject->status==1)
         {
-        $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn red  margin-right15"><span class="fa fa-edit"></span>Invoice</a>';
+        $title = '<a href="/order/invoice?id='.$id.'" title="Visit Website" target="_blank" class="btn orange  margin-right15"><span class="fa fa-edit"></span>Invoice</a>';
         }else{
-        $title = '<a class="btn red margin-right15" href="#"><span class="fa fa-edit"></span>N/A</a>';
+        $title = '<a class="btn orange margin-right15" href="#"><span class="fa fa-edit"></span>N/A</a>';
          }
         echo $title;
     }

@@ -44,7 +44,7 @@ if(!empty($_GET['successmsg']) && $_GET['successmsg']=='2'){
         <?php } ?>
     </select>
         </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+    <input type="submit" class="btn btn-success confirmOk" value="OK" name="submit" id="submit"/>
     </form><br/>
 <a class="btn  green margin-right-20" href="/admin/user/creditwallet">Create Wallet+</a>
 </div>
@@ -101,7 +101,7 @@ if(!empty($_GET['successmsg']) && $_GET['successmsg']=='2'){
                     'buttons' => array(
                         'Recharge' => array(
                             'label' => 'Recharge',
-                            'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
+                            'options' => array('class' => 'btn orange fa fa-edit margin-right15'),
                             'url' => 'Yii::app()->createUrl("admin/user/creditwallet", array("id"=>$data->user_id))',
                         ),
                         'Deduct' => array(

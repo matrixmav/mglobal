@@ -30,7 +30,7 @@ $this->breadcrumbs = array(
      
     
     </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit" style="left:351px;"/>
+    <input type="submit" class="btn btn-success confirmOk" value="OK" name="submit" id="submit" style="left:351px;"/>
     </form>
 
 </div>

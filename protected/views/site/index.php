@@ -1117,17 +1117,22 @@
   <!-- Prices block END -->
   <!-- Testimonials block BEGIN -->
   <!-- Testimonials block BEGIN -->
+  
   <div class="testimonials-block content content-center margin-bottom-65 testi-bg">
     <div class="container">
       <h2>Customer <strong>testimonials</strong></h2>
-      <h4><i class="fa fa-quote-left"></i></h4>
+     <h4><i class="fa fa-quote-left"></i></h4>
       <div class="carousel slide" data-ride="carousel" id="testimonials-block">
-          
-
+           <!-- Indicators 
+  <ol class="carousel-indicators">
+    <li data-target="#testimonials-block" data-slide-to="0" class="active"></li>
+    <li data-target="#testimonials-block" data-slide-to="1"></li>
+    <li data-target="#testimonials-block" data-slide-to="2"></li>
+  </ol> 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <!-- Carousel items -->
-
+            
         
  
            <?php $i=1;if(!empty($profileObject)) { 
@@ -1139,99 +1144,44 @@
               <p><?php echo $testimonial->testimonials;?></p>
             </blockquote>
             <span class="testimonials-name"><?php echo $testimonial->user()->full_name;?></span>
+            <div class="testimonialBoxMain">
+            <div class="testimonialBox clearfix ">
+                            <div class="customerImg pull-left">
+                                <span class="customerImgWrap">
+                                    <i class="fa fa-user"></i>
+                                <!--    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png"> -->
+                                </span>
+                            </div>
+                            <div class="customerTxt ">
+                                <span>Name</span>
+                                <p>tesstimonials text</p>
+                            </div>
+                        </div>
+            </div>
           </div>
            <?php $i++;} }?>
         </div>
-        <!-- Indicators -->
         
-        
-        <div class="jcarousel-wrapper">
-            <p class="userComent">I found the packages provided by MGlobally worth the price quoted by them. Till the time my website went live, their representatives were in touch with me and helped me every now and then. Another major factor for which I would recommend MGlobally is its network marketing model. One can earn well by bringing in references.
-                <br>MGlobally is a platform that does a lot more than just offering web development services. It lets you earn reward points by bringing in the references for the company’s services. I have earned a good amount of reward points by bringing references for MGlobally. 
-           </p>
-            <div class="jcarousel">
-                <ul>
-                    <li><div class="testimonialBox clearfix active">
-                            <div class="customerImg pull-left">
-                                <span class="customerImgWrap">
-                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                                </span>
-                            </div>
-                            <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
-                            </div>
-                        </div></li>
-                    <li><div class="testimonialBox clearfix">
-                            <div class="customerImg pull-left">
-                                <span class="customerImgWrap">
-                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                                </span>
-                            </div>
-                            <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
-                            </div>
-                        </div></li>
-                    <li><div class="testimonialBox clearfix">
-                            <div class="customerImg pull-left">
-                                <span class="customerImgWrap">
-                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                                </span>
-                            </div>
-                            <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
-                            </div>
-                        </div></li>
-                    <li><div class="testimonialBox clearfix">
-                            <div class="customerImg pull-left">
-                                <span class="customerImgWrap">
-                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                                </span>
-                            </div>
-                            <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
-                            </div>
-                        </div></li>
-                    <li><div class="testimonialBox clearfix">
-                            <div class="customerImg pull-left">
-                                <span class="customerImgWrap">
-                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                                </span>
-                            </div>
-                            <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
-                            </div>
-                        </div></li>
-                    <li><div class="testimonialBox clearfix">
-                            <div class="customerImg pull-left">
-                                <span class="customerImgWrap">
-                                    <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
-                                </span>
-                            </div>
-                            <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
-                            </div>
-                        </div></li>
-                </ul>
-            </div>
-
-            <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
-            <a href="#" class="jcarousel-control-next">&rsaquo;</a>
-
-
-        </div>
-      </div>
-
-        <!-- Controls -->
-        
+        <a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#testimonials-block" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+      
+       
       </div>
     </div>
   </div>
+  
+  
+  
+  
+  
+  
+ 
   <!-- Testimonials block END -->
   <!-- Testimonials block END -->
   <!-- Partners block BEGIN -->
