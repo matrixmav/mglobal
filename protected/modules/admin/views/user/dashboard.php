@@ -614,6 +614,18 @@ Demo.init(); // init demo features
 
 
 	<script>
+            
+             function showChartTooltip(x, y, xValue, yValue) {
+                $('<div id="tooltip" class="chart-tooltip">' + yValue + '<\/div>').css({
+                    position: 'absolute',
+                    display: 'none',
+                    top: y - 40,
+                    left: x - 40,
+                    border: '0px solid #ccc',
+                    padding: '2px 6px',
+                    'background-color': '#fff'
+                }).appendTo("body").fadeIn(200);
+            }
 
 		var doughnutData = [
 				{
@@ -723,7 +735,7 @@ Demo.init(); // init demo features
                             var x = item.datapoint[0].toFixed(2),
                                 y = item.datapoint[1].toFixed(2);
 
-                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' visits');
+                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' Users');
                         }
                     } else {
                         $("#tooltip").remove();
@@ -817,7 +829,7 @@ if ($('#site_activities').size() != 0) {
                             $("#tooltip").remove();
                             var x = item.datapoint[0].toFixed(2),
                                 y = item.datapoint[1].toFixed(2);
-                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + 'M$');
+                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + '');
                         }
                     }
                 });
