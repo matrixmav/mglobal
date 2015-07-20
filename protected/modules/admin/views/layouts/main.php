@@ -128,6 +128,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="/metronic/assets/scripts/core/app.js"></script>
        <script type="text/javascript" src="/chat-admin/js/chat.js"></script>
        <script type="text/javascript" src="/js/registration.js?ver=1432543968"></script>
+       <script src="/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
               App.init();
