@@ -844,31 +844,32 @@
   </div>-->
   <!-- Checkout block END -->
   <!-- Facts block BEGIN -->
+  <?php foreach($siteObject as $siteObject1){} ?>
   <div class="facts-block content content-center" id="facts-block">
     <h2>Some facts about us</h2>
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>39</strong>
+            <strong><?php echo $siteObject1->total_registration;?></strong>
             Total Registration 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>14</strong>
+            <strong><?php echo $siteObject1->package_bought;?></strong>
             total packages bought 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>29k+</strong>
+            <strong><?php echo $siteObject1->commission_given;?></strong>
            to commission given 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>500</strong>
+            <strong><?php echo $siteObject1->total_project;?></strong>
             total projects complete 
           </div>
         </div>
