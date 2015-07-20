@@ -637,51 +637,13 @@
             {
             var email = $('#emailP').val();
             var name  = $('#nameP').val();
+          
             $('#show_wornings_nameP').hide();
             if(name ==''){
-            $('#show_wornings_nameP').show();
             $("#show_wornings_nameP").html("Please enter name.");
             $('#nameP').focus();
             return false;
             }
-            $('#show_wornings_emailP').hide();
-            if(email ==''){
-            $('#show_wornings_emailP').show();
-            $("#show_wornings_emailP").html("Please enter email.");
-            $('#emailP').focus();
-            return false;
-            }
-             $('#show_wornings_emailP').hide();
-             if(!isEmail(email)){
-            $('#show_wornings_emailP').show();
-            $("#show_wornings_emailP").html("Please enter valid email.");
-            $('#emailP').focus();
-            return false;
-            }
-             
            
-        else{
-            var dataString = 'email='+email+'&name='+name;
-            $.ajax({
-            type: "GET",
-            url: "site/profileform",
-            data: dataString,
-            cache: false,
-            success: function(html){
-                    if(html == 1){
-                        $('#show_worningP').show();
-                        $("#show_worningP").html("Thanks! ");
-                        $("#nameP").val('');
-                        $("#emailP").val('');
-                        $("#show_worningP").fadeOut(10000);
-                    }else{
-                        document.getElementById('show_worningP').style.display = "none";
-                        document.getElementById("show_worningp").innerHTML = "There might be something wrong.";
-                    }
-                    
-                    
-              } 
-            });
-            }    
 }
  
