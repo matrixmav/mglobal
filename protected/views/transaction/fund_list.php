@@ -41,7 +41,7 @@ $this->breadcrumbs = array(
         <option value="3" <?php if($statusId == 3){ echo "selected"; } ?> >Commission</option>
     </select>
     </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+    <input type="submit" class="btn btn-success confirmOk" value="OK" name="submit" id="submit"/>
     </form>
 
 </div>
