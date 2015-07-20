@@ -614,6 +614,18 @@ Demo.init(); // init demo features
 
 
 	<script>
+            
+             function showChartTooltip(x, y, xValue, yValue) {
+                $('<div id="tooltip" class="chart-tooltip">' + yValue + '<\/div>').css({
+                    position: 'absolute',
+                    display: 'none',
+                    top: y - 40,
+                    left: x - 40,
+                    border: '0px solid #ccc',
+                    padding: '2px 6px',
+                    'background-color': '#fff'
+                }).appendTo("body").fadeIn(200);
+            }
 
 		var doughnutData = [
 				{
