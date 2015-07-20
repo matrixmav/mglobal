@@ -2055,8 +2055,8 @@ color:#FFF; background: #c9c9c9;}
 .marqBox{display:inline-block; margin: auto 20px;}
 /*--------------testimonials-------------*/
 
-.testimonialBox {opacity:.5;}
-.testimonialBox.active{opacity:1;}
+.testimonialBox {opacity:1;}
+
 .userComent{color: #66717c;
     font: italic 300 18px/1.3 "Open Sans",Arial,sans-serif; margin: 10px;}
 .jcarousel-wrapper {
