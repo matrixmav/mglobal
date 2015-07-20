@@ -1036,7 +1036,7 @@
             </blockquote>
             <span class="testimonials-name"><?php echo $testimonial->user()->full_name;?></span>
             <div class="testimonialBoxMain">
-            <div class="testimonialBox clearfix active">
+            <div class="testimonialBox clearfix ">
                             <div class="customerImg pull-left">
                                 <span class="customerImgWrap">
                                     <img class="img-responsive" alt="Marcus Doe" src="images/design-icon.png">
