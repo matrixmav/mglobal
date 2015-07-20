@@ -2,6 +2,8 @@
 
 class SiteStatiticsController extends Controller
 {
+	 
+ 
     
      public $layout = 'main';
 
@@ -51,7 +53,9 @@ class SiteStatiticsController extends Controller
     }
         
  
-    public function actionGetfacts() {echo "dsd";exit;
+    public function actionGetfacts() {
+        $success ="";
+        $error = "";
         
         $siteObject = SiteStatitics::model()->findAll();
         $model = new SiteStatitics;
