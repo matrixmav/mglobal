@@ -423,7 +423,7 @@
             </tbody>
         </table>
         
-        <a onClick="window.print();" class="btn-flat-green">Print Invoice</a>
+        <div> <a onClick="window.print();" class="btn-flat-green">Print Invoice</a></div>
     </body>
 </html>
 
