@@ -8,6 +8,12 @@
 
     <body>
         <table align="center" width="700" cellspacing="0" cellpadding="0" border="0" style="width:700px;">
+       <tr>
+       <td style="text-align:center;float:right;"><a class="btn-flat-green" onclick="window.print();">Print Invoice</a>
+       </td>
+       </tr>
+        </table>
+        <table align="center" width="700" cellspacing="0" cellpadding="0" border="0" style="width:700px;">
             <tbody>
                 <tr>
                     <td height="20"  style=""></td>
@@ -423,7 +429,7 @@
             </tbody>
         </table>
         
-        <div> <a onClick="window.print();" class="btn-flat-green">Print Invoice</a></div>
+      
     </body>
 </html>
 
