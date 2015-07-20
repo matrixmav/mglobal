@@ -8,24 +8,13 @@ $this->breadcrumbs = array(
     <a class="btn red publish" href="builder?o=<?php echo base64_encode(Yii::app()->session['orderID']);?>&u=<?php echo base64_encode(Yii::app()->session['userid']);?>&t=<?php echo base64_encode(Yii::app()->session['templateID']);?>">Publish Your Website</a>
 </div>
 
-<div class="col-md-12 col-sm-12" id="test">
-    <?php if (count($userpagesObject) < 4) { ?>
-        <a href="/BuildTemp/userinput" class="btn green">Add page</a>
-    <?php
-    }
-    if (count($userpagesObject) > 0) {
-        foreach ($userpagesObject as $page) {
-            ?>
-            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
-    <?php }
-} ?> 
+<div class="row pageBox"><?php foreach($userpagesObject as $page){?><a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn orange"><?php echo $page->page_name; ?></a><?php }?> </div>  
 
-  <?php echo BaseClass::buildWebsiteHeader(); ?> 
+<?php echo BaseClass::buildWebsiteHeader(); ?> 
 
 <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
 <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
 
-</div>
 <div class="col-md-7 col-sm-7">
     
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
