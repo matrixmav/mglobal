@@ -14,7 +14,7 @@ $this->breadcrumbs = array(
     <div class="col-md-3">
         <input type="text" name="search" id="search" class="form-control" placeholder="Enter search keyword.." value="" />
     </div>
-    <input type="submit" class="btn btn-primary" value="OK" name="submit" id="submit"/>
+    <input type="submit" class="btn btn-success" value="OK" name="submit" id="submit"/>
 </form>
 
 </div>
