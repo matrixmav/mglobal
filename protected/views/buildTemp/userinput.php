@@ -2,23 +2,19 @@
 $this->breadcrumbs = array(
     'Page Add',
 );
+//print_r($userpagesObject); die;
 ?>
 <div class="col-md-12 col-sm-12" id="test">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
     <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
-    <?php
-    if (count($userpagesObject) < 4) { ?>
-        <a href="/BuildTemp/userinput" class="btn green">Add page</a>
-    <?php }
-    if(count($userpagesObject) > 0){
-        foreach ($userpagesObject as $page) { ?>
-            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
-    <?php } }  ?>   
+    <div class="row pageBox">
+        <?php foreach ($userpagesObject as $page) { ?>
+            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn orange">
+                <?php echo $page->page_name; ?>
+        </a><?php } ?> </div>   
+    <?php echo BaseClass::buildWebsiteHeader(); ?> 
             
-    <a href="/BuildTemp/addlogo" class="btn green">Logo Setting</a>    
-    <a href="/BuildTemp/addheader" class="btn green">Header Setting</a>    
-    <a href="/BuildTemp/contactsetting" class="btn green">Contact Settings</a> 
-    <a href="/BuildTemp/addfooter" class="btn green">Footer Setting</a>           
+    <div class="row">
     <form action="/BuildTemp/pageadd" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
@@ -47,6 +43,7 @@ $this->breadcrumbs = array(
             </div>
         </div>
     </form>
+    </div>
 </div>
 
 

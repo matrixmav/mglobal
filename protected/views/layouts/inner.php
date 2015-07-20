@@ -37,6 +37,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 <html lang="en" class="no-js">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
@@ -52,9 +54,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <!--<link
             href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"
             rel="stylesheet" type="text/css" />-->
-        <link
+<!--        <link
             href="/metronic/assets/plugins/font-awesome/css/font-awesome.min.css"
-            rel="stylesheet" type="text/css" />
+            rel="stylesheet" type="text/css" />-->
         <link href="/metronic/assets/plugins/bootstrap/css/bootstrap.min.css"
               rel="stylesheet" type="text/css" />
         <link href="/metronic/assets/plugins/uniform/css/uniform.default.css"
@@ -116,8 +118,8 @@ License: You must have a valid license purchased only from themeforest(the above
         type="text/javascript"></script>
         <script src="/metronic/assets/plugins/jquery.cokie.min.js"
         type="text/javascript"></script>
-        <script src="/metronic/assets/plugins/uniform/jquery.uniform.min.js"
-        type="text/javascript"></script>
+        <!--<script src="/metronic/assets/plugins/uniform/jquery.uniform.min.js"
+        type="text/javascript"></script>-->
         <!-- END CORE PLUGINS -->
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/metronic/assets/plugins/jquery-validation/dist/additional-methods.min.js"></script>
@@ -771,7 +773,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     ?>
                                     <li class="<?php echo (($curControllerLower == 'BuildTemp') && ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
 
-                                        <a href="javascript:;"> <span class="leftmenu-reservations"></span>
+                                        <a href="javascript:;"> <i class="fa fa-building-o"></i>
                                             <span class="title">Builder Pages</span>
                                             <span class="selected"></span> <span
                                                 class="arrow <?php echo ($curControllerLower == 'BuildTemp' || $curControllerLower == 'BuildTemp') ? "open" : ''; ?>">

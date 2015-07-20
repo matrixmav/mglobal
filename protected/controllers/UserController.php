@@ -959,7 +959,7 @@ class UserController extends Controller {
         $buildTempObject = BuildTemp::model()->findAll();
         
         $categoryObject = BuildCategory::model()->findall();
-        $packageObject = Package::model()->findall();
+        $packageObject = Package::model()->findall  ();
         //print_R($packageObject); die;
         $this->render('searchtemplate',array('buildTempObject' => $buildTempObject , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
         

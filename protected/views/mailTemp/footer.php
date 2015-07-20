@@ -54,7 +54,20 @@
                                     <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'"><strong>Mail us:</strong> info@mglobal.com</td>
                                 </tr>
                                 <tr>
-                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'"><strong>Visit Us On:</strong> www.<p style="color:#f15c2b; display:inline">mglobally</p>.com</td>
+                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:16px; font-family:'Nunito'">
+                                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr> 
+                                    <td width="18%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'"><strong>Visit Us On:</strong></td>
+                                     <td width="1%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'">www.</td>
+                                      <td width="1%" height="35" valign="middle" align="left" style="line-height:22px; color: #f15c2b; font-size:14px; font-family:'Nunito'">mglobally</td>
+                                       <td width="18%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'">.com</td>
+                                <td width="1%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'">&nbsp;</td>
+                               
+                                </tr>
+                            </tbody>
+                                        </table>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>  

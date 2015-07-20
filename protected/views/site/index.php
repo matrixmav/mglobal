@@ -229,7 +229,7 @@
       <div class="carousel-caption">
         
           <h2>who<strong> we are </strong></h2>
-          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible  ... <a href="#inline7" class="fancybox pinkSm">read more</a></p>
+          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline7" style="display:none" class="readMoreBox content">
                <h2>who<strong> we are </strong></h2>
                <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too? If not, then we surely have something new in store for you to discover. We are evolving as one such organization indulged in offering web development, designing, and digital marketing solutions. MGlobally was founded with the idea of creating a business model, wherein the customers are added to our network by bringing us the references. Abiding by the idea of creating an extended network of brand representatives, we aim to be the one of top most companies in direct selling IT network.</p>
@@ -245,7 +245,7 @@
       <div class="carousel-caption">
        
            <h2>what<strong> we do </strong></h2>
-         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services.... <a href="#inline8" class="fancybox pinkSm">read more</a></p>
+         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline8" style="display:none" class="readMoreBox content">
                <h2>what<strong> we do </strong></h2>
                <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief.</p>
@@ -281,7 +281,7 @@
   <div class="services-block content content-center" id="services">
     <div class="container">
       <h2>Our <strong>services</strong></h2>
-      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers ...<a href="#inline" class="fancybox pinkSm">read more</a></h4>
+      <h4>Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers... <a href="#inline" class="fancybox pinkSm">  Read more</a></h4>
       <div id="inline" style="display:none" class="readMoreBox content">
           <h2>Our <strong>services</strong></h2>
           <p >Bringing businesses online and promoting their presence across the web is what we are committed towards. To achieve the same, we got into the industry as a web development company. In our years of infancy, our expert web developers worked as our strengths and since then they are serving as the cherished resources of the company. Later, to keep pace with the evolving digital space, we did all that was needed to earn us the tag of a digital marketing agency.</p>
@@ -293,17 +293,17 @@
         <div class="col-md-3 col-sm-3 col-xs-12 item">
             <img src="images/design-icon.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Website Designing</h3>
-          <p>A website’s design is as crucial as the quality of the services delivered by it. How a customer ...<a href="#inline3" class="fancybox pinkSm">read more</a> </p>
+          <p>A website’s design is as crucial as the quality of the services delivered by it. How a customer... <a href="#inline3" class="fancybox pinkSm">  Read more</a> </p>
           <div id="inline3" style="display:none" class="readMoreBox content">
                <h2>website<strong> designing </strong></h2>
           <p>A website’s design is as crucial as the quality of the services delivered by it. How a customer perceives an organization through its web design is a relevant question that has to be taken into consideration. Data says that the layout, color schemes, and visual value decide how influential is the website going to be for the viewers. Every element that may be crucial for a user’s point of view has to be included while designing a website. Our designers are known to every element that a reader’s eye locate quickly.  </p>
-          <p>Besides, we understand the value of a responsive and a visually appealing web design, which we recommend to each of our clients. MGlobally welcomes companies from varied domains to get suitable web designs for their businesses to further create an impact on the online audiences</p>
+          <p>Besides, we understand the value of a responsive and a visually appealing web design, which we recommend to each of our clients. MGlobally welcomes companies from varied domains to get suitable web designs for their businesses to further create an impact on the online audiences .</p>
       </div>
         </div>
             <div class="col-md-3 col-sm-3 col-xs-12 item">
          <img src="images/it-services.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Web Development</h3>
-          <p>The idea of developing websites that deliver the right message to the potential customers in the right ...<a href="#inline4" class="fancybox pinkSm">read more</a> </p>
+          <p>The idea of developing websites that deliver the right message to the potential customers in the right... <a href="#inline4" class="fancybox pinkSm">  Read more</a> </p>
           <div id="inline4" style="display:none" class="readMoreBox content">
                <h2>web<strong> development </strong></h2>
           <p>The idea of developing websites that deliver the right message to the potential customers in the right manner is what we stand by. We are powered by technology and tech enthusiasts, who help us stick to the pledge that we have taken to deliver the best web services. We are supported by a team of web developers, who are specialized in varied technologies used for web development.  </p>
@@ -323,7 +323,7 @@
         <div class="col-md-3 col-sm-3 col-xs-12 item">
           <img src="images/mobile-application.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Mobile Application</h3>
-          <p>Beyond our web development and digital marketing services, we extend high end solutions ...<a href="#inline5" class="fancybox pinkSm">read more</a></p>
+          <p>Beyond our web development and digital marketing services, we extend high end solutions... <a href="#inline5" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline5" style="display:none" class="readMoreBox content">
                <h2>Mobile<strong> Application </strong></h2>
           <p >Beyond our web development and digital marketing services, we extend high end solutions for mobile application development. With the continuous support of our team of highly experienced technology professionals, we deliver mobile applications that comply with our clients’ specific requirements. We create applications for Android, Windows, iOS and other operating systems. Our development team employs latest technologies and also ensures to keep pace with the newest technologies and programming languages. We understand the significance of mobile application for a business. Thus, we ensure to deliver the best in terms of user experience with every mobile application we develop.</p>
@@ -334,7 +334,7 @@
         <div class="col-md-3 col-sm-3 col-xs-12 item">
          <img src="images/digital-marketing.png" alt="Marcus Doe" class="img-responsive service_icon">
           <h3>Digital Marketing</h3>
-          <p>Digital marketing is known to be the process of promoting a website, a business, or a product ...<a href="#inline2" class="fancybox pinkSm">read more</a></p>
+          <p>Digital marketing is known to be the process of promoting a website, a business, or a product... <a href="#inline2" class="fancybox pinkSm">  Read more</a></p>
            <div id="inline2" style="display:none" class="readMoreBox content">
                <h2>Digital<strong> Marketing </strong></h2>
           <p >Digital marketing is known to be the process of promoting a website, a business, or a product through the online mediums. The concept of digital marketing has become the buzz of the town in the recent years. It seems to have held the attention of every small or large business entity, which aims to reach out to the audiences that have moved online. </p>
@@ -512,7 +512,7 @@
   <div class="choose-us-block content text-center margin-bottom-40" id="benefits">
     <div class="container">
       <h2>Why to <strong>Choose us</strong></h2>
-      <h4>MGlobally is an IT company introduced with the concept of multi-level marketing. It’s a platform with extended benefits for all those associated with it. We bring ideal opportunities for those, who wish to get websites for their businesses and can ...<a class="pinkSm fancybox" href="#inline16">read more</a></h4>
+      <h4>MGlobally is an IT company introduced with the concept of multi-level marketing. It’s a platform with extended benefits for all those associated with it. We bring ideal opportunities for those, who wish to get websites for their businesses and can... <a class="pinkSm fancybox" href="#inline16">  Read more</a></h4>
       <div id="inline16" style="display:none" class="readMoreBox content">
              <h2>Why to <strong>Choose us</strong></h2>
                <p>MGlobally is an IT company introduced with the concept of multi-level marketing. It’s a platform with extended benefits for all those associated with it. We bring ideal opportunities for those, who wish to get websites for their businesses and can further bring in references. For all the references brought to us, we provide reward points that can be redeemed later. </p>
@@ -603,7 +603,7 @@
             </div>
           </div>-->
           <!-- benefit slider -->
-            <div id="carousel-example-generic" class="carousel slide benefitCarousel" data-ride="carousel">
+            <div id="benefit-carousel" class="carousel slide benefitCarousel" data-ride="carousel">
   <!-- Indicators 
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -641,13 +641,13 @@
   </div>
 
   <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#benefit-carousel" role="button" data-slide="prev">
     <span class="" aria-hidden="true">
     <img src="images/steps/arrow-left-active.png" alt="Why to choose us" class="img-responsive"></span>
 
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+  <a class="right carousel-control" href="#benefit-carousel" role="button" data-slide="next">
     <span class="" aria-hidden="true">
   <img src="images/steps/arrow-right-normal.png" alt="Why to choose us" class="img-responsive"></span>
   </a>
@@ -974,7 +974,9 @@
         
         
         <div class="jcarousel-wrapper">
-            <p class="userComent">some text</p>
+            <p class="userComent">I found the packages provided by MGlobally worth the price quoted by them. Till the time my website went live, their representatives were in touch with me and helped me every now and then. Another major factor for which I would recommend MGlobally is its network marketing model. One can earn well by bringing in references.
+                <br>MGlobally is a platform that does a lot more than just offering web development services. It lets you earn reward points by bringing in the references for the company’s services. I have earned a good amount of reward points by bringing references for MGlobally. 
+           </p>
             <div class="jcarousel">
                 <ul>
                     <li><div class="testimonialBox clearfix active">

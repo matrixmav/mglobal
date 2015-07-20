@@ -63,9 +63,9 @@
          <p class="f-font">Our Contacts</p>
           <address class="margin-bottom-20">
               <strong> MaverickGlobal InfoSoft Services Pvt Ltd,</strong><br/>
-                Solus, 3rd Floor, # 2,1st Cross, JC Road<br/>
-                Opp.Jain University,<br/>
-                Bangalore 560 027, India<br/>
+                Solus, 3rd Floor, # 2, <br>1st Cross, JC Road, <br/>
+                Opp. Jain University,<br/>
+                Bangalore 560 027, India.<br/>
             
             
             

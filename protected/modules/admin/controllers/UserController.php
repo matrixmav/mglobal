@@ -101,7 +101,60 @@ class UserController extends Controller {
     }
     
     public function actionDashboard() {
-        $this->render('/user/dashboard');
+       
+      $transactionActiveObject = Order::model()->findAll(array('condition' => 'status= 1'));
+      $activeCount = count($transactionActiveObject);
+      
+      $transactionInactiveObject = Order::model()->findAll(array('condition' => 'status= 0 '));
+      $InactiveCount = count($transactionInactiveObject);
+      
+      $total =  $activeCount +  $InactiveCount;
+      
+      $userObject = User::model()->findAll(array('condition' => 'sponsor_id= "admin"'));
+      $userCount = count($userObject);
+      $userDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d") - 7, date("Y")));
+      $userObject1 = User::model()->findAll(array('condition' => 'created_at BETWEEN "'.date('Y-m-d').'" AND '.$userDate));
+      
+      $str=  '';
+      for($i = 1; $i < 7; $i++)
+      {
+       $j =  $i*7;   
+       
+       $date = date('Y-m-d', mktime(0, 0, 0, date("m") , date("d") - $j, date("Y")));
+       
+       $date2 = date('Y-m-d', mktime(0, 0, 0, date("m") , date("d") - 14, date("Y")));
+       
+       $date1 = date('d/m/y', mktime(0, 0, 0, date("m") , date("d") - $j, date("Y")));
+       
+       $userObject = User::model()->findAll(array('condition' => 'created_at BETWEEN "'.$date.'" AND "'.$date2.'"'));
+       
+         $str .= "['".$date1."', ".count($userObject)."],";
+              
+      }
+      $strFinal = rtrim("['".$date = date('d-m-y')."', ".count($userObject1)."],".$str,',');
+      
+      /*code to fetch package code*/
+       $strMonth = '';
+       for($i = 1; $i < 10; $i++)
+       {
+           
+        $dateP = date('m', mktime(0, 0, 0, date("m")-$i , date("d"), date("Y")));
+        
+        $datePStr = date('M', mktime(0, 0, 0, date("m")-$i , date("d"), date("Y")));
+        
+        $dateCureent = date('m', mktime(0, 0, 0, date("m") , date("d"), date("Y")));
+        
+        $packageObject1 = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "'.$dateP.'"'));
+        
+        $packageObjectCurrent = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "'.$dateCureent.'"'));
+        
+        $strMonth .= "['".$datePStr."', ".count($packageObject1)."],";
+                   
+       } 
+       
+        $packageStr = rtrim("['".$date = date('M')."', ".count($packageObjectCurrent)."],".$strMonth,',');
+      
+        $this->render('/user/dashboard',array('activeCount'=>$activeCount,'InactiveCount'=> $InactiveCount,'total'=>$total,'userCount'=>$userCount,'str'=>$strFinal,'packageStr'=>$packageStr));
     }
 
     
