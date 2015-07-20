@@ -113,10 +113,16 @@ class SiteController extends Controller
                unset(Yii::app()->session['domain']);
            }
            
+           /* function to get stats*/
+           
+           $siteObject =  SiteStatitics::model()->findAll();
+           
+           
+           
           /*function to show news feeds*/
            
            
-          $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
+          $this->render('index',array('siteObject'=> $siteObject , 'membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
                     
