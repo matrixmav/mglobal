@@ -1,465 +1,162 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<!-- Only required for this file -->
+<link rel="stylesheet" href="/user_dashboard/slide/owl-carousel/owl.carousel.css" />
+<link rel="stylesheet" href="/user_dashboard/slide/owl-carousel/owl.theme.css" />
+<link rel="stylesheet" href="/user_dashboard/slide/owl-carousel/owl.carousel.css" />
+<link rel="stylesheet" href="/user_dashboard/chart/css/normalize.css" />
+<link rel="stylesheet" href="/user_dashboard/chart/css/style.css" />
+<link rel="stylesheet" href="/user_dashboard/css/style.css" />
+<link rel="stylesheet" href="/user_dashboard/css/responsive.css" />
+<!-- End -->
+
 <?php
 $this->breadcrumbs = array(
     'Dashboard',
 );
 
- //print_r($orderObject->builder); die;
+//print_r($orderObject->builder); die;
 ?>
-<?php if(!empty($_GET['successMsg'])){ ?><div class="success"><?php echo $_GET['successMsg']; ?></div><?php } ?>
-<div class="row">
-    <?php if(empty($orderObject)){?>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-         <a href="/#prices">
-        <div class="dashboard-stat blue-madison">
-         
-            <div class="visual">
-                <i class="fa fa-comments"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                </div>
-                <div class="desc label label-sm label-danger">
-                Pick a Package
-                   
+<?php if (!empty($_GET['successMsg'])) { ?><div class="success"><?php echo $_GET['successMsg']; ?></div><?php } ?>
+<div class="user-dash ">
+    <div class="col-md-9 dashboard-left-content">
+        <div class="row row-start">
+            <div class="col-sm-6 col-md-6">
+                <div class="top-view-wrapper">
+                    <div class="top-view-inner">
+                        <i class="fa fa-eye view-eye"></i>
+                        <h3>View<br><p>Website</p></h3>
+                    </div>
+                    <div class="down-view">
+                        <a href="/order/list"><p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p></a>
+
+                    </div>
                 </div>
             </div>
-            
-            <a class="more" href="javascript:;">
-                Pick a package <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-        </a>
-    </div>
-    <?php }else{
-     foreach($orderObject as $order){  ?>
-      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <a class="more" href="/BuildTemp/templates?id=<?php echo $order->id; ?>" target="_blank"><div class="dashboard-stat blue-madison">
-            <div class="visual">
-               
-                <i class="fa fa-comments"></i>
-            </div>
-            <div class="details">
-              <div class="number">
-                 <?php echo $order->domain;?> 
-                </div>
-                <div class="desc">
-                    Visit Website
-                </div> 
-            </div>
-                  <span class="txtDescription">view more  <i class="m-icon-swapright m-icon-white"></i></span>
-                
-           
-            
-          </div></a>
-    </div>    
-     <?php }  ?>
-    
-    <?php }?>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <a href="/cropper/live/index.html" target="_blank"><div class="dashboard-stat red-intense">
-            <div class="visual">
-               
-                <i class="fa fa-bar-chart-o"></i>
-            </div>
-            <div class="details">
-              <div class="number">
-                   Crop Images
-                </div>
-                <div class="desc">
-                    Crop your Images
-                </div> 
-            </div>
-                  <span class="txtDescription">view more  <i class="m-icon-swapright m-icon-white"></i></span>
-          </div></a>
-    </div>
-    <!--div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat green-haze">
-            <div class="visual">
-                <i class="fa fa-shopping-cart"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    549
-                </div>
-                <div class="desc">
-                    New Orders
-                </div>
-            </div>
-            <a class="more" href="javascript:;">
-                View more <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat purple-plum">
-            <div class="visual">
-                <i class="fa fa-globe"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    +89%
-                </div>
-                <div class="desc">
-                    Brand Popularity
-                </div>
-            </div>
-            <a class="more" href="javascript:;">
-                View more <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-    </div>-->
-</div>
-<!--<div class="row">
-    <div class="col-md-6 col-sm-6">
-        <div class="portlet light ">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="icon-share font-blue-steel hide"></i>
-                    <span class="caption-subject font-blue-steel bold uppercase">Recent Activities</span>
-                </div>
-                <div class="actions">
-                    <div class="btn-group">
-                        <a data-close-others="true" data-hover="dropdown" data-toggle="dropdown" href="javascript:;" class="btn btn-sm btn-default btn-circle">
-                            Filter By <i class="fa fa-angle-down"></i>
+
+            <div class="col-sm-6 col-md-6  ">
+                <div class="top-edit-wrapper">
+                    <div class="top-edit-inner">
+                        <i class="fa fa-pencil-square-o edit-icon"></i>
+
+                        <h3>Edit<br><p>Website</p></h3>
+                    </div>
+                    <div class="down-edit">
+                        <a href="/order/list"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
                         </a>
-                        <div class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-                            <label><div class="checker"><span><input type="checkbox"></span></div> Finance</label>
-                            <label><div class="checker"><span class="checked"><input type="checkbox" checked=""></span></div> Membership</label>
-                            <label><div class="checker"><span><input type="checkbox"></span></div> Customer Support</label>
-                            <label><div class="checker"><span class="checked"><input type="checkbox" checked=""></span></div> HR</label>
-                            <label><div class="checker"><span><input type="checkbox"></span></div> System</label>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="portlet-body">
-                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 300px;"><div data-rail-visible="0" data-always-visible="1" style="height: 300px; overflow: hidden; width: auto;" class="scroller" data-initialized="1">
-                        <ul class="feeds">
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-info">
-                                                <i class="fa fa-check"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                You have 4 pending tasks. <span class="label label-sm label-warning ">
-                                                    Take action <i class="fa fa-share"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        Just now
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <div class="col1">
-                                        <div class="cont">
-                                            <div class="cont-col1">
-                                                <div class="label label-sm label-success">
-                                                    <i class="fa fa-bar-chart-o"></i>
-                                                </div>
-                                            </div>
-                                            <div class="cont-col2">
-                                                <div class="desc">
-                                                    Finance Report for year 2013 has been released.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col2">
-                                        <div class="date">
-                                            20 mins
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-danger">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                You have 5 pending membership that requires a quick review.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        24 mins
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-info">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                New order received with <span class="label label-sm label-success">
-                                                    Reference Number: DR23923 </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        30 mins
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-success">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                You have 5 pending membership that requires a quick review.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        24 mins
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-default">
-                                                <i class="fa fa-bell-o"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                Web server hardware needs to be upgraded. <span class="label label-sm label-default ">
-                                                    Overdue </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        2 hours
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <div class="col1">
-                                        <div class="cont">
-                                            <div class="cont-col1">
-                                                <div class="label label-sm label-default">
-                                                    <i class="fa fa-briefcase"></i>
-                                                </div>
-                                            </div>
-                                            <div class="cont-col2">
-                                                <div class="desc">
-                                                    IPO Report for year 2013 has been released.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col2">
-                                        <div class="date">
-                                            20 mins
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-info">
-                                                <i class="fa fa-check"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                You have 4 pending tasks. <span class="label label-sm label-warning ">
-                                                    Take action <i class="fa fa-share"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        Just now
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <div class="col1">
-                                        <div class="cont">
-                                            <div class="cont-col1">
-                                                <div class="label label-sm label-danger">
-                                                    <i class="fa fa-bar-chart-o"></i>
-                                                </div>
-                                            </div>
-                                            <div class="cont-col2">
-                                                <div class="desc">
-                                                    Finance Report for year 2013 has been released.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col2">
-                                        <div class="date">
-                                            20 mins
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-default">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                You have 5 pending membership that requires a quick review.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        24 mins
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-info">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                New order received with <span class="label label-sm label-success">
-                                                    Reference Number: DR23923 </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        30 mins
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-success">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                You have 5 pending membership that requires a quick review.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        24 mins
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-warning">
-                                                <i class="fa fa-bell-o"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">
-                                                Web server hardware needs to be upgraded. <span class="label label-sm label-default ">
-                                                    Overdue </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">
-                                        2 hours
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <div class="col1">
-                                        <div class="cont">
-                                            <div class="cont-col1">
-                                                <div class="label label-sm label-info">
-                                                    <i class="fa fa-briefcase"></i>
-                                                </div>
-                                            </div>
-                                            <div class="cont-col2">
-                                                <div class="desc">
-                                                    IPO Report for year 2013 has been released.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col2">
-                                        <div class="date">
-                                            20 mins
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div><div class="slimScrollBar" style="background: rgb(187, 187, 187) none repeat scroll 0% 0%; width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 188.679px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234) none repeat scroll 0% 0%; opacity: 0.2; z-index: 90; right: 1px;"></div></div>
-                <div class="scroller-footer">
-                    <div class="btn-arrow-link pull-right">
-                        <a href="javascript:;">See All Records</a>
-                        <i class="icon-arrow-right"></i>
+
+        </div>
+        <div class="row row-start">
+
+            <div class="col-sm-3 col-md-3 ">
+                <div class="top-user-wrapper">
+                    <div class="top-user-inner">
+                        <i class="fa fa-users user"></i>
+
+                        <h3 class="pull-right"><?php echo isset($userDetails['refferal_count']) ? sprintf("%02d", $userDetails['refferal_count']) : 0; ?><br></h3>
+                    </div><p class="small-p">Refferal Under Me</p>
+                    <div class="down-user">
+                        <a href="#"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3 col-md-3 ">
+                <div class="top-cart-wrapper">
+                    <div class="top-cart-inner">
+                        <i class="fa fa-shopping-cart cart"></i>
+
+                        <h3 class="pull-right"><?php echo isset($userDetails['package_purchased']) ? sprintf("%02d", $userDetails['package_purchased']) : 0; ?><br></h3>
+                    </div><p class="small-p">Packages Purchased</p>
+                    <div class="down-cart">
+                        <a href="#"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 ">
+                <div class="top-cartplus-wrapper">
+                    <div class="top-cartplus-inner">
+                        <i class="fa fa-cart-plus cartplus"></i>
+
+                        <h3 class="pull-right"><?php echo isset($userDetails['transaction_order']) ? sprintf("%02d", $userDetails['transaction_order']) : 0; ?><br></h3>
+                    </div><p class="small-p">Transaction Order</p>
+                    <div class="down-cartplus">
+                        <a href="#">    <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3 ">
+                <div class="top-money-wrapper">
+                    <div class="top-money-inner">
+                        <img src="/user_dashboard/images/money.png" class="money">
+
+                        <h3 class="pull-right"><?php echo isset($userDetails['transaction_fund']) ? sprintf("%02d", $userDetails['transaction_fund']) : 0; ?><br></h3>
+                    </div><p class="small-p">Transaction Fund</p>
+                    <div class="down-money">
+                        <a href="#"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row row-start">
+            <div class="col-sm-6 col-md-6  ">
+                <div class="top-ref-wrapper">
+                    <div class="top-ref-inner">
+
+
+                        <h4>Referral Under Me</h4>
+                    </div>
+                    <div class="down-edit">
+
+                        <div id="bar-chart"></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <div class="top-fb-wrapper">
+                    <div class="top-fb-inner">
+                        <i class="fa fa-facebook-official fb"></i>
+                        <h3 class="pull-right"><?php echo isset($userDetails['addshare_count']) ? sprintf("%02d", $userDetails['addshare_count']) : 0; ?><br></h3>
+
+                    </div>  <p class="small-p">Social Sharing(Earned)</p>
+                    <div class="down-fb">
+                        <h4>Lapsed <?php echo isset($userDetails['addlapsed_count']) ? sprintf("%02d", $userDetails['addlapsed_count']) : 0; ?></h4>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-                
+    <div class="col-md-3 panel-row">
+        <div class="panel panel-default">
+            <div class="panel-heading dashboard-panel"><i class="fa fa-bell bell"></i><span class="notification">Notification Panel</span></div>
+            <div class="panel-body">
+                <ul class="list-group panel-list dash-list">
+                    <li class="list-group-item"><i class="fa fa-envelope list-icon"></i>Message Sent:<span class="inside-li-1"><?php echo isset($userNotifications['lastsentmsg']) ? $userNotifications['lastsentmsg'] : "Never sent"; ?></span></li>
+                    <li class="list-group-item"><i class="fa fa-shopping-cart list-icon"></i>Transaction Order :<span class="inside-li-3"><?php echo isset($userNotifications['transaction_order']) ? $userNotifications['transaction_order'] : "Never Sent"; ?></span></li>
+                    <li class="list-group-item"><i class="fa fa-money list-icon"></i>Transaction Fund :<span class="inside-li-3"><?php echo isset($userNotifications['transaction_fund']) ? $userNotifications['transaction_fund'] : "Never"; ?></span></li>
+                    <li class="list-group-item"><i class="fa fa-shopping-cart list-icon"></i>Packaged Purchased :<span class="inside-li-3"><?php echo isset($userNotifications['package_purchased']) ? $userNotifications['package_purchased'] : "Never"; ?></span></li>
+                    <ul class="list-unstyled">
+                        <li> <div class="last-btn"><p>View All Alerts</p></div></li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- END DASHBOARD STATS -->
-<div class="clearfix">
-</div>
+<!-- Required only by this file. -->
+<script src='https://www.google.com/jsapi'></script>
+<script src="/user_dashboard/chart/js/index.js"></script>
 
