@@ -434,8 +434,8 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                  <ul>
-                                      
+                                  <ul><li>
+                                  <?php echo $basicPackage->Description;?> </li>     
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
@@ -473,7 +473,7 @@
               <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image']; ?>" alt="<?php echo $advancePackage['name']; ?>" class="img-responsive">
-                  <a href="" class=" valign-center">
+                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>
                       <div class="packageInfo"> 
                           <div> <span class="packName">Basic Web Packages</span></div>
                           <div> <span class="packPrice"><p>$</p><?php echo $advancePackage->amount; ?></span></div>
@@ -483,8 +483,8 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                  <ul>
-                                      
+                                  <ul><li>
+                                   <?php echo $advancePackage->Description;?> </li>  
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
@@ -499,7 +499,7 @@
                           </ul>-->
                               </div>
                               <div class="col-sm-4 col-xs-4">
-                                  <span class="packPick"><?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>pick now</a></span>
+                                  <span class="packPick">pick now</span>
                                </div>
                       </div>
                  </div>
@@ -512,7 +512,7 @@
         </div>
     </div>
 </div>
-
+    </div>
 <div role="tabpanel" class="tab-pane" id="messages">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
@@ -522,7 +522,7 @@
              <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image']; ?>" alt="<?php echo $proPackage['name']; ?>" class="img-responsive">
-                  <a href="" class=" valign-center">
+                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a onclick="return showError();"><?php }else{?> <a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>
                       <div class="packageInfo"> 
                           <div> <span class="packName">Basic Web Packages</span></div>
                           <div> <span class="packPrice"><p>$</p><?php echo $proPackage->amount; ?></span></div>
@@ -532,8 +532,8 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                  <ul>
-                                      
+                                  <ul><li>
+                                  <?php echo $basicPackage->Description;?> </li>     
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
@@ -548,11 +548,11 @@
                           </ul>-->
                               </div>
                               <div class="col-sm-4 col-xs-4">
-                                  <span class="packPick"><?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>pick now</a></span>
+                                  <span class="packPick">pick now</span>
                                </div>
                       </div>
                  </div>
-        </a>
+                </a>
                  </div>
                 
             </div>
@@ -566,8 +566,11 @@
   </div>
 
 </div>
+  
+  
+  
   </div>
-  </div>
+  </div></div>
   <!-- -->
  
   
