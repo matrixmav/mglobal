@@ -102,7 +102,7 @@ class SiteController extends Controller
            
            $proPackageObject = Package::model()->findAll(array('condition'=>'type=3 AND status=1','order' => 'name ASC','limit' => '3'));
            
-           $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
+           $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1 AND testimonials != ""')));
            
            $membership_type = "";
            if(!empty(Yii::app()->session['userid'])){
