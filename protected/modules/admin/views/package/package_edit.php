@@ -33,7 +33,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Description<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="description" class="form-control" name="Package[description]"><?php echo (!empty($packageObject))?$packageObject->Description : "";?></textarea>
+                    <textarea id="editor1" class="form-control" name="Package[description]"><?php echo (!empty($packageObject))?$packageObject->Description : "";?></textarea>
                     <span id="description_error"></span>
                 </div>
             </div>
@@ -141,9 +141,9 @@ $this->breadcrumbs = array(
     }
     
     $("#description_error").html("");
-     if ($("#description").val() == "") {
+     if ($("#editor1").val() == "") {
       $("#description_error").html("Enter Package Description");
-      $("#description").focus();            
+      $("#editor1").focus();            
       return false;
     }
     $("#type_error").html("");
@@ -155,5 +155,17 @@ $this->breadcrumbs = array(
         
     }
     </script>
+     <script type="text/javascript">
+    CKEDITOR.replace( 'editor1' , {
+    filebrowserBrowseUrl : '/ckfinder/ckfinder.html',
+    filebrowserImageBrowseUrl : '/ckfinder/ckfinder.html?type=Images',
+    filebrowserFlashBrowseUrl : '/ckfinder/ckfinder.html?type=Flash',
+    filebrowserUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+    filebrowserImageUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+    filebrowserFlashUploadUrl : '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+});
+CKFinder.setupCKEditor( editor, '../' );
+</script>
+     
      
      

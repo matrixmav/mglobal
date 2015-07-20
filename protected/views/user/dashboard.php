@@ -59,7 +59,7 @@ $this->breadcrumbs = array(
                         <h3 class="pull-right"><?php echo isset($userDetails['refferal_count']) ? sprintf("%02d", $userDetails['refferal_count']) : 0; ?><br></h3>
                     </div><p class="small-p">Refferal Under Me</p>
                     <div class="down-user">
-                        <a href="#"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        <a href="/profile/trackrefferal"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
                         </a>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ $this->breadcrumbs = array(
                         <h3 class="pull-right"><?php echo isset($userDetails['package_purchased']) ? sprintf("%02d", $userDetails['package_purchased']) : 0; ?><br></h3>
                     </div><p class="small-p">Packages Purchased</p>
                     <div class="down-cart">
-                        <a href="#"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        <a href="/order/list"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
                         </a>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ $this->breadcrumbs = array(
                         <h3 class="pull-right"><?php echo isset($userDetails['transaction_order']) ? sprintf("%02d", $userDetails['transaction_order']) : 0; ?><br></h3>
                     </div><p class="small-p">Transaction Order</p>
                     <div class="down-cartplus">
-                        <a href="#">    <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        <a href="/transaction/list">    <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
                         </a>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ $this->breadcrumbs = array(
                         <h3 class="pull-right"><?php echo isset($userDetails['transaction_fund']) ? sprintf("%02d", $userDetails['transaction_fund']) : 0; ?><br></h3>
                     </div><p class="small-p">Transaction Fund</p>
                     <div class="down-money">
-                        <a href="#"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
+                        <a href="/transaction/fund"> <p>View Details<span><i class="fa fa-arrow-circle-o-right nav-icon"></i></span></p>
                         </a>
                     </div>
                 </div>

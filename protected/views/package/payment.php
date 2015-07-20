@@ -189,7 +189,7 @@ if (!empty($_GET['pp'])) {
                         {
                             if (ppamount == 0)
                             {
-                                location.href = "/package/thankyou?transaction_id=" + transID;
+                                location.href = "/package/thankyou?transaction_id=" + transID+'&payment_status=success';
                             } else {
 
                                 if (group.checked == false)
@@ -213,7 +213,7 @@ if (!empty($_GET['pp'])) {
 
             if (ppamount == 0)
             {
-                location.href = "/package/thankyou?transaction_id=" + transID;
+                location.href = "/package/thankyou?transaction_id=" + transID+'&payment_status=success';
             } else {
 
                 if (group.checked == false)
