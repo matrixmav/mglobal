@@ -543,7 +543,7 @@ class MoneyTransferController extends Controller {
           {
               $error .= "Incorrect master pin";
           }else{
-              $type = 1;
+            $type = 1;
             $_POST['walletId'] = '1';  
             $postDataArray = $_POST; 
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
