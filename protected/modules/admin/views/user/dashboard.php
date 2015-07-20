@@ -735,7 +735,7 @@ Demo.init(); // init demo features
                             var x = item.datapoint[0].toFixed(2),
                                 y = item.datapoint[1].toFixed(2);
 
-                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' visits');
+                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' Users');
                         }
                     } else {
                         $("#tooltip").remove();
@@ -829,7 +829,7 @@ if ($('#site_activities').size() != 0) {
                             $("#tooltip").remove();
                             var x = item.datapoint[0].toFixed(2),
                                 y = item.datapoint[1].toFixed(2);
-                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + 'M$');
+                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + '');
                         }
                     }
                 });
