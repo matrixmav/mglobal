@@ -22,7 +22,7 @@ $this->menu=array(
          <!-- BEGIN SIDEBAR -->
           <!-- END SIDEBAR -->
           <!-- BEGIN CONTENT -->
-          <div class="col-md-10 col-sm-9">
+          <div class="col-md-12 col-sm-12">
        
         <?php 
           
