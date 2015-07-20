@@ -427,14 +427,17 @@
                   <a href="" class=" valign-center">
                       <div class="packageInfo"> 
                           <div> <span class="packName">Basic Web Packages</span></div>
-                          <div> <span class="packPrice"><p>$</p>49</span></div>
+                          <div> <span class="packPrice"><p>$</p><?php echo $basicPackage->amount;?></span></div>
                         
                           <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
                       </div>
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                          <ul>
+                                  <ul>
+                                      
+                                  </ul>
+                          <!--<ul>
                               <li>Domain for 1 Year</li>
                               <li>100 MB Storage Space/Year</li>
                               <li>100 MB Bandwidth</li>
@@ -444,7 +447,7 @@
                               <li>5 Static Pages</li>
                               <li>Drag & Drop Builder</li>
                               
-                          </ul>
+                          </ul>-->
                               </div>
                               <div class="col-sm-4 col-xs-4">
                                    <span class="packPick">pick now</span>
@@ -467,38 +470,98 @@
   <div class="carousel-inner" role="listbox">
       <div class="item active">
           <?php foreach($advancePackageObject as $advancePackage){?>
-            <div class="col-sm-4 col-xs-12">
-                <?php if (Yii::app()->session['userid'] != '') { ?> <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php } else { ?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php } ?>
-                  <div class="pricing-item">
-                      <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image'];?>" alt="<?php echo $advancePackage['name'];?>" class="img-responsive">
-                  </div>
-                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>Pick Now</a>
+              <div class="col-sm-4 col-xs-12">
+                 <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image']; ?>" alt="<?php echo $advancePackage['name']; ?>" class="img-responsive">
+                  <a href="" class=" valign-center">
+                      <div class="packageInfo"> 
+                          <div> <span class="packName">Basic Web Packages</span></div>
+                          <div> <span class="packPrice"><p>$</p><?php echo $advancePackage->amount; ?></span></div>
+                        
+                          <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
+                      </div>
+                      <div class="packageDescription"> 
+                          <div class="row">
+                              <div class="col-sm-8 col-xs-8">
+                                  <ul>
+                                      
+                                  </ul>
+                          <!--<ul>
+                              <li>Domain for 1 Year</li>
+                              <li>100 MB Storage Space/Year</li>
+                              <li>100 MB Bandwidth</li>
+                              <li>Advertisements</li>
+                              <li>Free Hosting</li>
+                              <li>1 Email A/C</li>
+                              <li>5 Static Pages</li>
+                              <li>Drag & Drop Builder</li>
+                              
+                          </ul>-->
+                              </div>
+                              <div class="col-sm-4 col-xs-4">
+                                  <span class="packPick"><?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="btn btn-default" onclick="return showError();"> <?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>pick now</a></span>
+                               </div>
+                      </div>
+                 </div>
+        </a>
+                 </div>
+                
             </div>
             <?php } ?>
 
         </div>
     </div>
 </div>
-    </div>
+
 <div role="tabpanel" class="tab-pane" id="messages">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
           <?php foreach($proPackageObject as $proPackage){?>
-            <div class="col-sm-4 col-xs-12">
-                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a onclick="return showError();"><?php }else{?><a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php } ?>
-                  <div class="pricing-item">
-                      <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image'];?>" alt="<?php echo $proPackage['name'];?>" class="img-responsive">
-                  </div>
-                <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>Pick Now</a>
+             <div class="col-sm-4 col-xs-12">
+                 <div class="pricing-item">
+                      <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image']; ?>" alt="<?php echo $proPackage['name']; ?>" class="img-responsive">
+                  <a href="" class=" valign-center">
+                      <div class="packageInfo"> 
+                          <div> <span class="packName">Basic Web Packages</span></div>
+                          <div> <span class="packPrice"><p>$</p><?php echo $proPackage->amount; ?></span></div>
+                        
+                          <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
+                      </div>
+                      <div class="packageDescription"> 
+                          <div class="row">
+                              <div class="col-sm-8 col-xs-8">
+                                  <ul>
+                                      
+                                  </ul>
+                          <!--<ul>
+                              <li>Domain for 1 Year</li>
+                              <li>100 MB Storage Space/Year</li>
+                              <li>100 MB Bandwidth</li>
+                              <li>Advertisements</li>
+                              <li>Free Hosting</li>
+                              <li>1 Email A/C</li>
+                              <li>5 Static Pages</li>
+                              <li>Drag & Drop Builder</li>
+                              
+                          </ul>-->
+                              </div>
+                              <div class="col-sm-4 col-xs-4">
+                                  <span class="packPick"><?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a class="btn btn-default" onclick="return showError();"><?php }else{?> <a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="btn btn-default" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>pick now</a></span>
+                               </div>
+                      </div>
+                 </div>
+        </a>
+                 </div>
+                
             </div>
             <?php } ?>
 
         </div>
     </div>
 </div>
-    </div>
+   
     
   </div>
 
