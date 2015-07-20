@@ -26,7 +26,7 @@ if (!empty($_GET['id'])) {
                 <form action="" class="form-inline">
                     <input type="text" class="form-control dvalid" name="name"  onchange="getFullName(this.value);" id="search_username"  value="<?php echo $userObject->full_name; ?>" />
                     <span id="search_fullname">&nbsp;</span>
-                    <input type="button" name="submit" value="Search" onclick="submitform();" class="btn btn-primary confirmOk">
+                    <input type="button" name="submit" value="Search" onclick="submitform();" class="btn btn-success confirmOk">
                 </form>
             </div>
         </div>
@@ -42,7 +42,7 @@ if (!empty($_GET['id'])) {
         <div class="col-md-3">
 
             <form action="binarycalculation" method="post" class="form-inline">                
-                <input type="submit" name="submit" class="btn red btn-primary confirmOk" value="Generate Binary Commission">
+                <input type="submit" name="submit" class="btn orange btn-primary confirmOk" value="Generate Binary Commission">
             </form>
             
             <!--<a href="" id="generateCommission" class="btn red" onclick="generateBinary()">Generate Binary Commission</a>-->
