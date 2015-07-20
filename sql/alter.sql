@@ -188,3 +188,5 @@ ALTER TABLE `user_pages` ADD `parent` INT(11) NULL AFTER `page_content`;
     
 /* 07/07/2015 */
 ALTER TABLE `build_temp` ADD `package` INT(11) NOT NULL AFTER `category_id`;
+
+ALTER TABLE `user_pages` ADD `page_slug` VARCHAR(255) NOT NULL AFTER `page_name`;

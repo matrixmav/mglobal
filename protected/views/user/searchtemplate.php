@@ -1,7 +1,7 @@
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style_search.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/responsive.css" rel="stylesheet">
-
+<?php //echo "<pre>"; print_r($packageObject);  die;  ?>
 <div class="container-fluid fluid-top">
     <div class="container ">
         <nav class="navbar " role="navigation">
@@ -18,7 +18,6 @@
                 <ul class="nav navbar-nav top-ul">
                     <li><a href="?type=1">Basic Web Packages</a></li>
                     <li><a href="?type=2">Advance Web Packages</a></li>
-                    <li><a href="?type=3">Pro Web Packages</a></li>
                 </ul>
                 <div class="col-sm-4 col-md-4 pull-right nav-search">
                     <form action="" class="navbar-form" role="search" method="get">

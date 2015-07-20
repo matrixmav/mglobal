@@ -10,14 +10,13 @@ class ProfileController extends Controller {
     }
 
     public function actionIndex() {
-      
+
         $dataProvider = new CActiveDataProvider('User');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
     }
 
-   
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -26,7 +25,11 @@ class ProfileController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'address', 'fetchstate', 'fetchcity', 'testimonial', 'updateprofile', 'documentverification', 'summery', 'dashboard', 'changepassword', 'changepin', 'inviterefferal', 'trackrefferal'),
+                'actions' => array('index', 'address', 'fetchstate', 
+                    'fetchcity', 'testimonial', 'updateprofile', 
+                    'documentverification', 'summery', 'dashboard', 
+                    'changepassword', 'changepin', 'inviterefferal', 
+                    'trackrefferal','getrefferalchartdata'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -65,14 +68,14 @@ class ProfileController extends Controller {
                     $profileObject->updated_at = new CDbExpression('NOW()');
                     $profileObject->update();
                     $successMsg .= "Address Updated Successfully";
-                    $this->redirect('/profile/updateprofile?successMsg='.$successMsg);
+                    $this->redirect('/profile/updateprofile?successMsg=' . $successMsg);
                 } else {
                     $errorMsg .= "Incorrect master pin.";
-                    $this->redirect('/profile/updateprofile?errorMsg='.$errorMsg);
+                    $this->redirect('/profile/updateprofile?errorMsg=' . $errorMsg);
                 }
             } else {
                 $errorMsg .= "Please fill required(*) marked fields.";
-                $this->redirect('/profile/updateprofile?errorMsg='.$errorMsg);
+                $this->redirect('/profile/updateprofile?errorMsg=' . $errorMsg);
             }
         }
 
@@ -135,7 +138,7 @@ class ProfileController extends Controller {
             $edit = "no";
         }
         //print_r($_POST['UserProfile']);exit;
-        if (isset($_POST['UserProfile'])) {  
+        if (isset($_POST['UserProfile'])) {
             if ($_POST['UserProfile'] == '') {
                 $error .= "Please fill required(*) marked fields.";
             } else {
@@ -164,7 +167,7 @@ class ProfileController extends Controller {
         $this->render('/user/updateprofile', array('userObject' => $userObject,
             'countryObject' => $countryObject,
             'success' => $success,
-            'profileAddressObject' =>$profileAddressObject,
+            'profileAddressObject' => $profileAddressObject,
             'error' => $error, 'edit' => $edit));
     }
 
@@ -179,7 +182,7 @@ class ProfileController extends Controller {
         $profileObject = UserProfile::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
 
-        if ($_POST && $_FILES['id_proof']['name']!='' && $_FILES['address_proof']['name'] !='') {
+        if ($_POST && $_FILES['id_proof']['name'] != '' && $_FILES['address_proof']['name'] != '') {
             $profileObject->id_proof = time() . $_FILES['id_proof']['name'];
             $profileObject->address_proff = time() . $_FILES['address_proof']['name'];
             if ($_FILES) {
@@ -210,18 +213,37 @@ class ProfileController extends Controller {
         $this->render('/user/verification', array('success' => $success, 'error' => $error, 'userObject' => $profileObject));
     }
 
-      /*
+    /*
      * This will load user dashboard
      */
 
     public function actionDashboard() {
-        if(!empty(Yii::app()->session['domain'])){
-               unset(Yii::app()->session['domain']);
-           }
+
+        if (!empty(Yii::app()->session['domain'])) {
+            unset(Yii::app()->session['domain']);
+        }
         $loggedInUserId = Yii::app()->session['userid'];
-        $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId. ' And  status = 1 '));
+        $orderObject = Order::model()->findAll(array('condition' => 'user_id = ' . $loggedInUserId . ' And  status = 1 '));
+
+        // Get all Dashboard Counts.
+        $userDashInfo = $this->getUserCountDetails($loggedInUserId);
+
+        // Get all user Dashboard(Sidebar) Notifications.       
+        $userNotifications['lastsentmsg'] = $this->getDashboardNotifications('Mail', 'from_user_id', $loggedInUserId);
+        $userNotifications['transaction_order'] = $this->getDashboardNotifications('Transaction', 'user_id', $loggedInUserId);
+        $userNotifications['transaction_fund'] = $this->getDashboardNotifications('Transaction', 'user_id', $loggedInUserId);
+        $userNotifications['package_purchased'] = $this->getDashboardNotifications('Order', 'user_id', $loggedInUserId);
+
+        //Get referral chart Data.
+        //$monthVal = date('n');
+
+        
+//            echo "<pre>"; print_r($userRefferalCharData);exit;
+
         $this->render('/user/dashboard', array(
             'orderObject' => $orderObject,
+            'userDetails' => $userDashInfo,
+            'userNotifications' => $userNotifications,
         ));
     }
 
@@ -245,8 +267,8 @@ class ProfileController extends Controller {
                             $success .= "Your password changed successfully";
                             $config['to'] = $userObject->email;
                             $config['subject'] = 'mGlobally Password Changed';
-                            $config['body'] =  $this->renderPartial('//mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
-                        
+                            $config['body'] = $this->renderPartial('//mailTemp/change_password', array('userObjectArr' => $userObjectArr), true);
+
                             //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
                             CommonHelper::sendMail($config);
                         }
@@ -278,7 +300,7 @@ class ProfileController extends Controller {
 
                 if ($userObject->master_pin != md5($_POST['UserProfile']['old_master_pin'])) {
                     $errorMsg .= "Incorrect old master pin";
-                    $this->redirect('/profile/changepassword?errorMsg='.$errorMsg);
+                    $this->redirect('/profile/changepassword?errorMsg=' . $errorMsg);
                 } else {
                     $userObject->master_pin = md5($_POST['UserProfile']['new_master_pin']);
 
@@ -291,15 +313,15 @@ class ProfileController extends Controller {
                         $successMsg .= "Your pin changed successfully";
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
-                        $config['body'] =  $this->renderPartial('//mailTemp/change_pin', array('userObjectArr'=>$userObjectArr),true);
+                        $config['body'] = $this->renderPartial('//mailTemp/change_pin', array('userObjectArr' => $userObjectArr), true);
                         //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your master pin. As a security precaution, this notification has been sent to your email addresses.';
                         CommonHelper::sendMail($config);
-                        $this->redirect('/profile/changepassword?successMsg='.$successMsg);
+                        $this->redirect('/profile/changepassword?successMsg=' . $successMsg);
                     }
                 }
             } else {
                 $errorMsg .="Please fill all required(*) marked fields.";
-                $this->redirect('/profile/changepassword?errorMsg='.$errorMsg);
+                $this->redirect('/profile/changepassword?errorMsg=' . $errorMsg);
             }
         }
 
@@ -330,7 +352,7 @@ class ProfileController extends Controller {
                     $userObjectArr['link'] = $linkToSend;
                     $config['to'] = $email;
                     $config['subject'] = 'mGlobally Invitation From ' . $userObject->name;
-                    $config['body'] =  $this->renderPartial('//mailTemp/invitereffral', array('userObjectArr'=>$userObjectArr),true); 
+                    $config['body'] = $this->renderPartial('//mailTemp/invitereffral', array('userObjectArr' => $userObjectArr), true);
                     CommonHelper::sendMail($config);
                 }
                 $success .= "Email sent successfully.";
@@ -347,7 +369,7 @@ class ProfileController extends Controller {
     public function actionTrackRefferal() {
         $error = "";
         $success = "";
-        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y")));
+        $todayDate = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 1, date("Y")));
         $fromDate = date('Y-m-d');
         $loggedInUserId = Yii::app()->session['userid'];
         $userObject = User::model()->findByPK($loggedInUserId);
@@ -396,4 +418,94 @@ class ProfileController extends Controller {
       );
       }
      */
+
+    /**
+     * Function to get all user dashboard(Sidebar) Notifications.
+     */
+    public function getDashboardNotifications($model, $colName, $loggedInUserId) {
+        $lastUpdatedTime = NULL;
+
+        $modelObject = $model::model()->findAll(array('order' => 'updated_at DESC', 'limit' => 1, 'condition' => "$colName = :userId", 'params' => array(':userId' => $loggedInUserId)));
+        if (isset($modelObject) && !empty($modelObject)) {
+            $modelObject = $modelObject[0]; // Single array : LIMIT 1.
+            $lastUpdatedTime = CommonHelper::getTimeAgo(strtotime($modelObject['updated_at']));
+        }
+        return $lastUpdatedTime;
+    }
+
+    /**
+     * Get Current User Dashboard Count details. Eg: Refferal Under Me.
+     */
+    public function getUserCountDetails($loggedInUserId) {
+        $userDetails = array();
+        $userObject = User::model()->findByPK(array('id' => $loggedInUserId));
+        $userDetails['refferal_count'] = User::model()->count('sponsor_id = :spon_id', array(':spon_id' => $userObject->name));
+        $userDetails['addshare_count'] = UserSharedAd::model()->count('user_id = :userId AND social_id = :socId AND date < :cur_date', array(':userId' => $loggedInUserId, ':cur_date' => date('Y-m-d'), ':socId' => 1));
+        $userDetails['addlapsed_count'] = UserSharedAd::model()->count('user_id = :userId AND social_id = :socId AND date < :cur_date', array(':userId' => $loggedInUserId, ':cur_date' => date('Y-m-d'), ':socId' => 0));
+        $userDetails['transaction_order'] = Transaction::model()->count('user_id = :userId', array(':userId' => $loggedInUserId));
+        $userDetails['transaction_fund'] = MoneyTransfer::model()->count('from_user_id = :userId', array(':userId' => $loggedInUserId));
+        $userDetails['package_purchased'] = Order::model()->count('user_id = :userId', array(':userId' => $loggedInUserId));
+
+        return $userDetails;
+    }
+
+    /**
+     * Function to get user chart refferal data.
+     */
+    public function actionGetRefferalChartData() {
+        $loggedInUserId = Yii::app()->session['userid'];
+        $monthArray = array(1,2,3,4,5);
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $toDay = date('01');
+        $fromDay = date('31');
+        
+            $userObject = User::model()->findByPK(array('id' => $loggedInUserId));
+            $userRefferalDetails = User::model()->findAllByAttributes(array('sponsor_id' => $userObject->name));
+            $refferalIds = array();
+            $type['base'] = 0;
+            $type['advance'] = 0;
+            $type['pro'] = 0;
+            $myResultArray = array();
+            if (isset($userRefferalDetails) && !empty($userRefferalDetails)) {
+                $basePackageArray = array(1,2,3);
+                $advPackageArray = array(4,5,6);
+                $proPackageArray = array(7,8,9);
+                foreach ($userRefferalDetails as $Object) {  
+                    for ($x = 1; $x <= 6; $x++) { 
+                        $myDate = strtotime(date("d/m/Y", strtotime($currentMonth)) . "+".$x." months");
+                        $myMonth = date("m",$myDate); 
+                        $toDate = $currentYear."-".$myMonth."-".$toDay;
+                        $fromDate = $currentYear."-".$myMonth."-".$fromDay;
+
+                        $attribs = array('user_id'=>$Object->id ,'status'=>'1');
+                        $criteria = new CDbCriteria(array('order'=>'start_date DESC','limit'=>1));
+                        $criteria->addBetweenCondition('start_date', $toDate, $fromDate);
+                        $orderObject = Order::model()->findAllByAttributes($attribs, $criteria);
+
+                       if(count($orderObject)>0) {  
+                           $orderObject = $orderObject[0];
+                           if(in_array($orderObject->package()->type, $basePackageArray)){
+                                $type['base']++;
+                           }
+                           if(in_array($orderObject->package()->type, $advPackageArray)){
+                                $type['advance']++;
+                           }
+                           if(in_array($orderObject->package()->type, $proPackageArray)){
+                                $type['pro']++;
+                           }
+                        } else {
+                           continue;
+                       }
+                       $myDataArray['month'] = $myMonth;
+                       $myDataArray['type'] = $type;
+                       array_push($myResultArray, $myDataArray);
+                    }
+                     
+            }
+
+        }
+//        echo 1;exit;
+        echo CJSON::encode($myResultArray);exit;
+    }
 }
