@@ -162,9 +162,11 @@ class OrderController extends Controller {
             $order_id = $_GET['id'];
         }
         $orderObject = Order::model()->findByPK($order_id);
+        
+        $userObject = User::model()->findByPK(Yii::app()->session['userid']);
 
         $this->renderPartial('invoice', array(
-            'orderObject' => $orderObject
+            'orderObject' => $orderObject,'userObject'=> $$userObject
         ));
         /* $dataProvider =  "";   
           $html2pdf = Yii::app()->ePdf->HTML2PDF();
