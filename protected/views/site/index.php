@@ -435,9 +435,9 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                   
+                                  <ul>
                                   <?php echo $basicPackage->Description;?> 
-                                  
+                                  </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
                               <li>100 MB Storage Space/Year</li>
@@ -484,9 +484,9 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                   
+                                  <ul>
                                    <?php echo $advancePackage->Description;?>   
-                                 
+                                  </ul>
                           
                               </div>
                               <div class="col-sm-4 col-xs-4">
