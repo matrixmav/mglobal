@@ -434,8 +434,8 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                  <ul><li>
-                                  <?php echo $basicPackage->Description;?> </li>     
+                                  <ul>
+                                  <?php echo $basicPackage->Description;?> 
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
@@ -483,8 +483,8 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                  <ul><li>
-                                   <?php echo $advancePackage->Description;?> </li>  
+                                  <ul>
+                                   <?php echo $advancePackage->Description;?>   
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
@@ -532,8 +532,8 @@
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
-                                  <ul><li>
-                                  <?php echo $proPackage->Description;?> </li>     
+                                  <ul>
+                                  <?php echo $proPackage->Description;?>   
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
