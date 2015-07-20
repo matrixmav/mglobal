@@ -87,7 +87,7 @@ class BuildTempController extends Controller {
                         if($p == 1){
                             $pageLink = "index.html";
                         }else{
-                            $pageLink = strtolower($data->page_name).".html" ;
+                            $pageLink = $data->page_slug ;
                         }                                   
                         $menuHtml .= '<a href='.$pageLink.'>'.$data->page_name.'</a>' ;
                         $userpagesObjectAll = UserPages::model()->findAll('parent ='. $data->id);
@@ -95,7 +95,7 @@ class BuildTempController extends Controller {
                             $menuHtml .= '<ul>';
                                 foreach ($userpagesObjectAll as $dataSecond){
                                     $menuHtml .= '<li>'
-                                    . '<a href='.strtolower($dataSecond->page_name).".html".'>'.$dataSecond->page_name.'</a>'
+                                    . '<a href='.$dataSecond->page_slug.'>'.$dataSecond->page_name.'</a>'
                                     .'</li>';
                                 }    
                             $menuHtml .= '</ul>';
@@ -133,7 +133,7 @@ class BuildTempController extends Controller {
                         if($pageName == 1 ){
                             $my_file = $path."/builder_images/".$userId.'/build'.$orderId."/index.html";
                         }else{
-                            $my_file = $path."/builder_images/".$userId.'/build'.$orderId.'/'.strtolower($userPagesObjectList->page_name).".html";
+                            $my_file = $path."/builder_images/".$userId.'/build'.$orderId.'/'.$userPagesObjectList->page_slug;
                         }    
                         $handle = fopen($my_file, 'a') or die('Cannot open file:  '.$my_file);	
                         
@@ -264,10 +264,9 @@ class BuildTempController extends Controller {
             }
             $success = "Update Successfully.";
         }        
-//        echo Yii::app()->session['userid'] ;
-//        echo Yii::app()->session['orderID'] ;
+
         
-        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND parent = 0 ' ));       
+        $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID'] . ' AND parent = 0 AND page_inner = 0 ' ));       
         
         //print_r($userpagesObject); die;
         
@@ -287,10 +286,11 @@ class BuildTempController extends Controller {
     }
 
     public function actionManageWebsite() {
-        $id = array_keys($_GET);
-        if($id){
-            $pageId = $id[0] ;
-        }
+        $_SERVER['REQUEST_URI_PATH'] = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $segments = explode('/', $_SERVER['REQUEST_URI_PATH']);
+        
+        $pageOrderId = $segments['3']; 
+        $pageSlug = $segments['4'];  
         
         $templateObject = new UserHasTemplate;
         $buildTempObject = new BuildTemp;
@@ -324,13 +324,13 @@ class BuildTempController extends Controller {
         $menuHtml .= '<ul '.$ul.' >';
         foreach ($userpagesObject as $data){            
             $menuHtml .= '<li '.$li.' >
-                    <a href='.$data->id.'>'.$data->page_name.'</a>' ;
+                    <a href='.$data->page_slug.'>'.$data->page_name.'</a>' ;
                         $userpagesObjectAll = UserPages::model()->findAll('parent ='. $data->id);
                         if(count($userpagesObjectAll) > 0){
                             $menuHtml .= '<ul>';
                                 foreach ($userpagesObjectAll as $dataSecond){
                                     $menuHtml .= '<li>'
-                                    . '<a href='.$dataSecond->id.'>'.$dataSecond->page_name.'</a>'
+                                    . '<a href='.$dataSecond->page_slug.'>'.$dataSecond->page_name.'</a>'
                                     .'</li>';
                                 }    
                             $menuHtml .= '</ul>';
@@ -344,7 +344,7 @@ class BuildTempController extends Controller {
         /* For Getting Page Content */
         $response = "";        
         $responseForm = "";        
-        $userpageObject = UserPages::model()->findBYPK($pageId);
+        $userpageObject = UserPages::model()->findByAttributes(array('order_id'=> $pageOrderId , 'page_slug'=>$pageSlug ));
         
         if($userpageObject->page_form == 1){            
             $userhasObject = UserHasTemplate::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'] , 'order_id' => Yii::app()->session['orderID']));    
@@ -421,9 +421,7 @@ class BuildTempController extends Controller {
                 $templateObject = UserHasTemplate::model()->addAndEdit($templateObject, $buildertempObject,$orderId,$userID);
                 /* Add Home page of website */
                 UserPages::model()->createNewPages($userID, $orderId, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
-           }
-
-           
+           }           
             
         }
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
@@ -461,9 +459,11 @@ class BuildTempController extends Controller {
         if ($_POST) {
             if ($_POST['pages']['page_name'] != '' && $_POST['pages']['page_content'] != '') {
                 $userpagesObject->page_name = $_POST['pages']['page_name'];
+                $userpagesObject->page_slug = strtolower(str_replace(" ", "", $_POST['pages']['page_name'])).".html";
                 $userpagesObject->page_content = addslashes($_POST['pages']['page_content']);
                 $userpagesObject->page_form = $_POST['pages']['form_allowed'];
                 $userpagesObject->status = $_POST['pages']['status'];
+                $userpagesObject->page_inner = $_POST['pages']['inner'];
                 $userpagesObject->update(false);
                 $success .= "Page updated successfully";
             } else {

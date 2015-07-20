@@ -52,6 +52,4 @@ echo $tempHead = str_replace('src="js/','src="'.$jsURL , $tempHeader);
 Logo class="mav_logo"
 Menu class="mav_menu"
 contact form class="mav_contact_form"
-Content Area class="mav_content"
-Footer class="mav_footer"
 -->
