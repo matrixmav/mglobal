@@ -37,6 +37,120 @@
 </div> -->
 
 </div>
+    
+   <div id="inline114" style="display:none" class="readMoreBox content">
+               <h2>Company<strong>Profile</strong></h2>
+          <div id="show_successp" style="display:none;"></div>
+          <div id="show_successp" style="display:none;"></div>
+               
+         <div class="col-sm-12">
+             <form method="post">
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                               <input type="text" class="form-control" id="nameP" placeholder="Name">
+                              
+                           </div>
+                            <div id="show_wornings_nameP"></div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                               <input type="text" class="form-control" id="emailP" placeholder="Email">
+                               
+                           </div>
+                           <div id="show_wornings_emailP"></div>
+                        </div>
+                       
+                        
+                       <div class="form-group">
+                        
+                           <button type="button" class="btn btn-success" onclick="return profileFormSubmit();">Submit</button>
+    
+  </div>
+                   </form>
+                   
+               </div>
+        
+      
+     
+  </div>
+  
+    <div id="inline116" style="display:none" class="readMoreBox content">
+               <h2>Business <strong>Plan</strong></h2>
+          <div id="show_successBu" style="display:none;"></div>
+          <div id="show_successBu" style="display:none;"></div>
+               
+         <div class="col-sm-12">
+             <form method="post">
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                               <input type="text" class="form-control" id="nameBu" placeholder="Name">
+                              
+                           </div>
+                            <div id="show_wornings_nameBu"></div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                               <input type="text" class="form-control" id="emailBu" placeholder="Email">
+                               
+                           </div>
+                           <div id="show_wornings_emailBu"></div>
+                        </div>
+                       
+                        
+                       <div class="form-group">
+                        
+                           <button type="button" class="btn btn-success" onclick="return BusinessFormSubmit();">Submit</button>
+    
+  </div>
+                   </form>
+                   
+               </div>
+        
+      
+     
+  </div>
+  
+<div id="inline115" style="display:none" class="readMoreBox content">
+               <h2>Company <strong> Brochure</strong></h2>
+          <div id="show_successCo" style="display:none;"></div>
+          <div id="show_worninCo" style="display:none;"></div>
+               
+         <div class="col-sm-12">
+             <form method="post">
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                               <input type="text" class="form-control" id="nameCo" placeholder="Name">
+                              
+                           </div>
+                            <div id="show_wornings_nameCo"></div>
+                        </div>
+                       <div class="form-group">
+                           <div class="input-group">
+                               <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                               <input type="text" class="form-control" id="emailCo" placeholder="Email">
+                               
+                           </div>
+                           <div id="show_wornings_emailCo"></div>
+                        </div>
+                       
+                        
+                       <div class="form-group">
+                        
+                           <button type="button" class="btn btn-success" onclick="return BrochureFormSubmit();">Submit</button>
+    
+  </div>
+                   </form>
+                   
+               </div>
+        
+      
+     
+  </div>
   
   <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.jcarousel.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.jcarousel-autoscroll.min.js"></script>
@@ -353,7 +467,7 @@
     <!--   <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>-->
       <div class="row">
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href=""> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
+            <a href="#inline114" class="fancybox"> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
          <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3> -->
             <h3><em>Our Profile</em></h3></a>
          <!-- <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
@@ -364,7 +478,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href=""> <img src="images/business-plan.png" alt="Elena Taylor" class="img-responsive">
+            <a href="#inline116" class="fancybox"> <img src="images/business-plan.png" alt="Elena Taylor" class="img-responsive">
             <h3><em>business plan</em></h3></a>
          <!-- <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
@@ -376,7 +490,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
+            <a href="#inline115" class="fancybox">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
             <h3><em>promo brochure</em></h3></a>
         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
@@ -730,31 +844,32 @@
   </div>-->
   <!-- Checkout block END -->
   <!-- Facts block BEGIN -->
+  <?php foreach($siteObject as $siteObject1){} ?>
   <div class="facts-block content content-center" id="facts-block">
     <h2>Some facts about us</h2>
     <div class="container">
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>39</strong>
+            <strong><?php echo $siteObject1->total_registration;?></strong>
             Total Registration 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>14</strong>
+            <strong><?php echo $siteObject1->package_bought;?></strong>
             total packages bought 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>29k+</strong>
+            <strong><?php echo $siteObject1->commission_given;?></strong>
            to commission given 
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-6">
           <div class="item">
-            <strong>500</strong>
+            <strong><?php echo $siteObject1->total_project;?></strong>
             total projects complete 
           </div>
         </div>
@@ -1006,7 +1121,7 @@
   <div class="testimonials-block content content-center margin-bottom-65 testi-bg">
     <div class="container">
       <h2>Customer <strong>testimonials</strong></h2>
-     <h4><i class="fa fa-quote-left"></i></h4>
+     <!--<h4><i class="fa fa-quote-left"></i></h4>-->
       <div class="carousel slide" data-ride="carousel" id="testimonials-block">
            <!-- Indicators 
   <ol class="carousel-indicators">
@@ -1025,10 +1140,10 @@
  
           <!-- Carousel items -->
           <div class="item <?php if($i=='1'){ echo "active"; }else{ echo "";}?>">
-            <blockquote>
-              <p><?php echo $testimonial->testimonials;?></p>
-            </blockquote>
-            <span class="testimonials-name"><?php echo $testimonial->user()->full_name;?></span>
+            <!--<blockquote>
+              <p></p>
+            </blockquote>-->
+           <!-- <span class="testimonials-name"><?php //echo $testimonial->user()->full_name;?></span>-->
             <div class="testimonialBoxMain">
             <div class="testimonialBox clearfix ">
                             <div class="customerImg pull-left">
@@ -1038,8 +1153,8 @@
                                 </span>
                             </div>
                             <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
+                                <span><?php echo $testimonial->user()->full_name;?></span>
+                                <p><?php echo $testimonial->testimonials;?></p>
                             </div>
                         </div>
             </div>
@@ -1047,14 +1162,14 @@
            <?php $i++;} }?>
         </div>
         
-        <a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
+        <!--<a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
   <a class="right carousel-control" href="#testimonials-block" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
-  </a>
+  </a>-->
       
        
       </div>

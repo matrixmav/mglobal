@@ -86,6 +86,9 @@
                   <li>
                     <a class="dropdown-toggle" href="/#contact"> Contact </a>
                 </li>
+                 <li>
+                    <a class="dropdown-toggle" href="/user/faq"> FAQ </a>
+                </li>
                 <!--<li><a href="#" target="_blank">Packages</a></li>
                 <li><a href="/#contact" target="_blank">FAQ</a></li>-->
                

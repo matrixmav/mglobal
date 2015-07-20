@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate'),
+                    'callback', 'getfullname','searchtemplate','faq'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -50,6 +50,13 @@ class UserController extends Controller {
             ),
         );
     }
+    
+    public function actionFaq() {
+        
+     $this->render('faq'); 
+     
+     }
+        
 
     public function actionConfirm() {
          
