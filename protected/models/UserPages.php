@@ -109,7 +109,9 @@ class UserPages extends CActiveRecord
 		return parent::model($className);
 	}
         public function createNewPages($userId, $orderId, $nbPage,$pageContent,$buildertempObject){
-            for($i=1; $i<$nbPage; $i++){
+            
+            
+            for($i=1; $i<= $nbPage; $i++){
                 $userpagesObject1 = new UserPages;
                 $userpagesObject1->order_id = $orderId;
                 $userpagesObject1->user_id = $userId;
@@ -121,11 +123,14 @@ class UserPages extends CActiveRecord
                 $baseURL = Yii::app()->getBaseUrl(true)."/";
                 $pageContent = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject.'/' , stripcslashes($pageContent));  
                 
+                
+                
                 $userpagesObject1->page_content = addslashes($pageContent);
                 $userpagesObject1->created_at = date("Y-m-d");
                 $userpagesObject1->page_form = 0;
                 $userpagesObject1->status = 1;
                 $userpagesObject1->save(false);
+                
                 
             }
         }
