@@ -239,7 +239,7 @@ if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
             <li><a href="#portfolio">Portfolio</a></li>
             
             <li><a href="#contact">Contact</a></li>
-             <li>   <a href="#inline14" class="fancybox">FAQ</a>
+             <li>   <a href="/user/faq" class="fancybox">FAQ</a>
                   <div id="inline14" style="display:none" class="readMoreBox content">
                <h2><strong> faq</strong></h2>
                <div class="faqsection">
