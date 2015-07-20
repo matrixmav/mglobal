@@ -979,57 +979,6 @@ License: You must have a valid license purchased only from themeforest(the above
                            }
                            
                            
-                             
-                             $reservation_pmenu = 9;
-                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
-                                
-                                
-                                    $reservation_subsection1 = array(
-                                      "wallet/commisionwallet" => "Commission Wallet",  
-                                   );
-                                 
-                                 
-                                $reservation_subsection = array_merge($reservation_subsection1);
-                                 
-                                ?>
-                                
-                                <li
-                                    class="<?php echo (($curAction == 'getfacts')) ? "active" : ''; ?>">
-                                    <a href="javascript:;"> <i class="fa fa-user"></i>
-                                        <span class="title">Summary</span>
-                                        <span class="selected"></span> <span
-                                            class="arrow <?php echo (($curAction == 'getfacts')) ? "open" : ''; ?>">
-                                        </span>
-                                    </a>
-
-                                    <?php
-                                    echo '<ul class="sub-menu">';
-                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
-//                                        if (in_array($ctTitle, $menusections ['sections'])) {
-                                            if ($ctName == "search/create") {
-                                                $ctName = "search/create/type/details";
-                                            }
-                                        if ($curAction == "resetpassword" && $curControllerLower == "user")
-                                                $class_content = 'class="active"';
-                                            else
-                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
-
-                                            echo '<li ' . $class_content . '>';
-                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
-                                            echo '</li>';
-                                            if ($ctName == "search/create/type/details") {
-                                                $ctName = "search/create";
-                                            }
-//                                        }
-                                    }
-                                    echo '</ul>';
-                                    ?>			
-                                </li>
-                                <?php
-                             }
-                             
-                            
-                            
                              if (in_array('summary', $accessArr)) {
                              $reservation_pmenu = 9;
                             if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
@@ -1100,6 +1049,56 @@ License: You must have a valid license purchased only from themeforest(the above
                              }
                              
                             }
+                            
+                             
+                             $reservation_pmenu = 9;
+                            if ((in_array($reservation_pmenu, $menusections ['psections'])) || (in_array($reservation_pmenu, $menusections ['section_ids']))) {
+                                
+                                 
+                                    $reservation_subsection1 = array(
+                                      "SiteStatitics/getfacts" => "Statistics",  
+                                   );
+                                 
+                                $reservation_subsection = array_merge($reservation_subsection1);
+                                 
+                                ?>
+                                
+                                <li
+                                    class="<?php echo (($curAction == 'getfacts')) ? "active" : ''; ?>">
+                                    <a href="javascript:;"> <i class="fa fa-user"></i>
+                                        <span class="title">Home Statistics</span>
+                                        <span class="selected"></span> <span
+                                            class="arrow <?php echo (($curAction == 'getfacts')) ? "open" : ''; ?>">
+                                        </span>
+                                    </a>
+
+                                    <?php
+                                    echo '<ul class="sub-menu">';
+                                    foreach ($reservation_subsection as $ctName => $ctTitle) {
+//                                        if (in_array($ctTitle, $menusections ['sections'])) {
+                                            if ($ctName == "search/create") {
+                                                $ctName = "search/create/type/details";
+                                            }
+                                        if ($curAction == "resetpassword" && $curControllerLower == "user")
+                                                $class_content = 'class="active"';
+                                            else
+                                                $class_content = ($curControllerLower . "/" . $curActionLower == $ctName) ? 'class="active"' : '';
+
+                                            echo '<li ' . $class_content . '>';
+                                        echo '<a href="/admin/' . $ctName . '">' . Yii::t('translation', $ctTitle) . '</a>';
+                                            echo '</li>';
+                                            if ($ctName == "search/create/type/details") {
+                                                $ctName = "search/create";
+                                            }
+//                                        }
+                                    }
+                                    echo '</ul>';
+                                    ?>			
+                                </li>
+                                <?php
+                             }
+                             
+                            
                              
                             $bases_pmenu = 4; ?>
                             
