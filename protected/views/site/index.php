@@ -1121,7 +1121,7 @@
   <div class="testimonials-block content content-center margin-bottom-65 testi-bg">
     <div class="container">
       <h2>Customer <strong>testimonials</strong></h2>
-     <h4><i class="fa fa-quote-left"></i></h4>
+     <!--<h4><i class="fa fa-quote-left"></i></h4>-->
       <div class="carousel slide" data-ride="carousel" id="testimonials-block">
            <!-- Indicators 
   <ol class="carousel-indicators">
@@ -1140,10 +1140,10 @@
  
           <!-- Carousel items -->
           <div class="item <?php if($i=='1'){ echo "active"; }else{ echo "";}?>">
-            <blockquote>
-              <p><?php echo $testimonial->testimonials;?></p>
-            </blockquote>
-            <span class="testimonials-name"><?php echo $testimonial->user()->full_name;?></span>
+            <!--<blockquote>
+              <p></p>
+            </blockquote>-->
+           <!-- <span class="testimonials-name"><?php //echo $testimonial->user()->full_name;?></span>-->
             <div class="testimonialBoxMain">
             <div class="testimonialBox clearfix ">
                             <div class="customerImg pull-left">
@@ -1153,8 +1153,8 @@
                                 </span>
                             </div>
                             <div class="customerTxt ">
-                                <span>Name</span>
-                                <p>tesstimonials text</p>
+                                <span><?php echo $testimonial->user()->full_name;?></span>
+                                <p><?php echo $testimonial->testimonials;?></p>
                             </div>
                         </div>
             </div>
@@ -1162,14 +1162,14 @@
            <?php $i++;} }?>
         </div>
         
-        <a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
+        <!--<a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
   <a class="right carousel-control" href="#testimonials-block" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
-  </a>
+  </a>-->
       
        
       </div>
