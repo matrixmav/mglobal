@@ -1,6 +1,6 @@
 <?php
 
-class SiteStatiticsControllerController extends Controller
+class SiteStatiticsController extends Controller
 {
     
      public $layout = 'main';
@@ -51,10 +51,43 @@ class SiteStatiticsControllerController extends Controller
     }
         
  
-    public function actionGetfacts() {
+    public function actionGetfacts() {echo "dsd";exit;
         
-          $this->render('/user/getfacts', array(
+        $siteObject = SiteStatitics::model()->findAll();
+        $model = new SiteStatitics;
+        
+        if(!empty($_POST) && $_POST['total_registration']!='' && $_POST['package_bought']!='' && $_POST['commission_given']!='' && $_POST['project_completed']!='')
+        { 
+           if(count($siteObject) > 0)
+           {
+               $siteObject->total_registration = $_POST['total_registration'];
+               $siteObject->package_bought = $_POST['package_bought'];
+               $siteObject->commission_given = $_POST['commission_given'];
+               $siteObject->total_project = $_POST['project_completed'];
+               $siteObject->add_date = date('Y-m-d');
+               $siteObject->save(false);
+               $success = "Information Updated Successfully.";
+               
+           }else{
+               
+               $model->total_registration = $_POST['total_registration'];
+               $model->package_bought = $_POST['package_bought'];
+               $model->commission_given = $_POST['commission_given'];
+               $model->total_project = $_POST['project_completed'];
+               $model->add_date = date('Y-m-d');
+               $model->save(false);
+               $success = "Information Added Successfully.";
+           }
+            
+        }else{
+            $error = "Please fill all required (*) marked fields.";
+            
+        }   
+        
+          $this->render('/user/statitics', array(
             'error' => $error,
+            'siteObject'=>$siteObject,
+              'success'=>$success,
         ));
         
     }
