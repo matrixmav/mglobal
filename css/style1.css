@@ -2017,11 +2017,13 @@ color:#FFF; background: #c9c9c9;}
     text-align: center;}
 .customerImgWrap{  max-width: 120px;
   height: 120px;
+  width: 120px;
   max-height: 120px;
   margin-right: 5px;
   display: table-cell;
   text-align: center;
-  vertical-align: middle;}
+  vertical-align: middle; border-radius: 50%; border: 1px solid #c9c9c9;}
+.customerImgWrap >.fa{font-size: 100px;}
 .customerTxt {  display: table-cell;
   vertical-align: middle;
   height: 100px;
