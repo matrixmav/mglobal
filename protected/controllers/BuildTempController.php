@@ -421,9 +421,7 @@ class BuildTempController extends Controller {
                 $templateObject = UserHasTemplate::model()->addAndEdit($templateObject, $buildertempObject,$orderId,$userID);
                 /* Add Home page of website */
                 UserPages::model()->createNewPages($userID, $orderId, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
-           }
-
-           
+           }           
             
         }
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));
