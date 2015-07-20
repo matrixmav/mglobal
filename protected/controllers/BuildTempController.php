@@ -275,9 +275,19 @@ class BuildTempController extends Controller {
     }
     
     public function actionTemplates() {  
-        $builderObject = BuildTemp::model()->findAll(array('condition' => 'screenshot != ""'));
+        $builderObjectTemplate ="";
+        $builderObject ="";
+        $userHastemplateObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $_GET['id'] ));
+        
+        if(count($userHastemplateObject)){
+            $builderObjectTemplate = BuildTemp::model()->findByAttributes(array('template_id'=>$userHastemplateObject->template_id));
+        }
+        
+        $builderObject = BuildTemp::model()->findAll(array('condition' => 'package ='.base64_decode($_GET['p']) ));       
+        
         Yii::app()->session['orderID'] = $_GET['id'];
-        $this->render('templates', array('builderObject' => $builderObject));
+        $this->render('templates', array('builderObject' => $builderObject,'builderObjectTemplate' => $builderObjectTemplate));
+           
     }
 
     public function actionUserTemplates() {
@@ -540,6 +550,9 @@ class BuildTempController extends Controller {
         
         if (!empty($_FILES) || !empty($_POST) ) {
             $userhasObject->site_title = addslashes($_POST['site_title']);
+            $userhasObject->logo_height = $_POST['height'];
+            $userhasObject->logo_width = $_POST['width'];
+             $success = "Update Successfully";
             if ($_FILES['logo']['name']) {
                 $ext1 = end((explode(".", $_FILES['logo']['name'])));
                 if ($ext1 != "jpg" && $ext1 != "png" && $ext1 != "jpeg") {
@@ -547,15 +560,14 @@ class BuildTempController extends Controller {
                 } else {
                     $fname = time() . $_FILES['logo']['name'];
                     $userhasObject->logo = $fname;
-                    $userhasObject->logo_height = $_POST['height'];
-                    $userhasObject->logo_width = $_POST['width'];
-                    $userhasObject->update();
+                    
                     $path = Yii::getPathOfAlias('webroot') . "/user/template/".$builderObjectmeta->folderpath."/";
                     BaseClass::uploadFile($_FILES['logo']['tmp_name'], $path, $fname);
-                    $success .= "Logo added successfully";
+                    $success = "Logo added successfully";
                 }
             } 
-             $userhasObject->update();
+                       
+            $userhasObject->update();
         }
         $userpagesObject = UserPages::model()->findAll(array('condition' => 'user_id=' . Yii::app()->session['userid'] . ' AND order_id=' . Yii::app()->session['orderID']));       
         $this->render('addlogo', array('success' => $success, 'error' => $error, 'userpagesObject' => $userpagesObject,'userhasObject'=>$userhasObject,'builderObjectmeta'=>$builderObjectmeta));
