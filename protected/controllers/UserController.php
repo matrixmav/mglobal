@@ -454,10 +454,10 @@ class UserController extends Controller {
                              if(!empty($userObject)){
                              $packageObject = Package::model()->findByPk(Yii::app()->session['package_id']);   
                              if($userObject->membership_type=='1' && $packageObject->type=='2' || $packageObject->type=='3'){
-                             echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#accordion'});</script>";   
+                             echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#prices'});</script>";   
                             }
                              else if($userObject->membership_type=='2' && $packageObject->type=='3'){
-                              echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#accordion'});</script>";      
+                              echo "<script>alert('Sorry you are not allowed to pick this package. To pick this package register with different account');setTimeout(function(){window.location.href='/#prices'});</script>";      
                              }else{   
                               $this->redirect("/package/domainsearch");
                              }
