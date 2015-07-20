@@ -58,14 +58,16 @@ class SiteStatiticsController extends Controller
         $error = "";
         
         $siteObject = SiteStatitics::model()->findAll();
+        foreach($siteObject as $siteObject){}
         $model = new SiteStatitics;
         
         if(!empty($_POST) )
         { 
             if($_POST['total_registration']!='' && $_POST['package_bought']!='' && $_POST['commission_given']!='' && $_POST['project_completed']!='')
             {
+                
                 if(count($siteObject) > 0)
-           {
+            {
                $siteObject->total_registration = $_POST['total_registration'];
                $siteObject->package_bought = $_POST['package_bought'];
                $siteObject->commission_given = $_POST['commission_given'];
@@ -93,7 +95,7 @@ class SiteStatiticsController extends Controller
         
           $this->render('/user/getfacts', array(
             'error' => $error,
-            'siteObject'=> $siteObject,
+            'siteObject1'=> $siteObject,
             'success'=>$success,
         ));
         
