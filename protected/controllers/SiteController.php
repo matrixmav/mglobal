@@ -125,6 +125,8 @@ class SiteController extends Controller
           $this->render('index',array('siteObject'=> $siteObject , 'membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
+        
+        
                     
         public function actionSubscription() {
                     
