@@ -39,9 +39,9 @@
 </div>
     
    <div id="inline114" style="display:none" class="readMoreBox content">
-               <h2>Download <strong> Company Profile</strong></h2>
-          <div id="show_worningP" style="display:none;"></div>
-          <div id="show_worningp" style="display:none;"></div>
+               <h2>Company<strong>Profile</strong></h2>
+          <div id="show_successp" style="display:none;"></div>
+          <div id="show_successp" style="display:none;"></div>
                
          <div class="col-sm-12">
              <form method="post">
@@ -76,34 +76,34 @@
      
   </div>
   
-  <div id="inline116" style="display:none" class="readMoreBox content">
+    <div id="inline116" style="display:none" class="readMoreBox content">
                <h2>Business <strong>Plan</strong></h2>
-          <div id="show_worningP" style="display:none;"></div>
-          <div id="show_worningp" style="display:none;"></div>
+          <div id="show_successBu" style="display:none;"></div>
+          <div id="show_successBu" style="display:none;"></div>
                
          <div class="col-sm-12">
              <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="nameP" placeholder="Name">
+                               <input type="text" class="form-control" id="nameBu" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameP"></div>
+                            <div id="show_wornings_nameBu"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="emailP" placeholder="Email">
+                               <input type="text" class="form-control" id="emailBu" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailP"></div>
+                           <div id="show_wornings_emailBu"></div>
                         </div>
                        
                         
                        <div class="form-group">
                         
-                           <button type="button" class="btn btn-success" onclick="return profileFormSubmit();">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return BusinessFormSubmit();">Submit</button>
     
   </div>
                    </form>
@@ -114,34 +114,34 @@
      
   </div>
   
-  <div id="inline115" style="display:none" class="readMoreBox content">
+<div id="inline115" style="display:none" class="readMoreBox content">
                <h2>Company <strong> Brochure</strong></h2>
-          <div id="show_worningP" style="display:none;"></div>
-          <div id="show_worningp" style="display:none;"></div>
+          <div id="show_successCo" style="display:none;"></div>
+          <div id="show_worninCo" style="display:none;"></div>
                
          <div class="col-sm-12">
              <form method="post">
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                               <input type="text" class="form-control" id="nameP" placeholder="Name">
+                               <input type="text" class="form-control" id="nameCo" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameP"></div>
+                            <div id="show_wornings_nameCo"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                               <input type="text" class="form-control" id="emailP" placeholder="Email">
+                               <input type="text" class="form-control" id="emailCo" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailP"></div>
+                           <div id="show_wornings_emailCo"></div>
                         </div>
                        
                         
                        <div class="form-group">
                         
-                           <button type="button" class="btn btn-success" onclick="return profileFormSubmit();">Submit</button>
+                           <button type="button" class="btn btn-success" onclick="return BrochureFormSubmit();">Submit</button>
     
   </div>
                    </form>
