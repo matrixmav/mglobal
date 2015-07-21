@@ -92,6 +92,7 @@ foreach($builderObject as $buildertemp){?>
 echo "</div>";
 ?>
 <div class='col-md-4'>
+  <div class= "categorySec">
 <h3>More Categories</h3>
 
 <!-- test categories -->
@@ -99,7 +100,8 @@ echo "</div>";
         <ul class="categoryListItems">
                     <li> <a href="javascript:void(0)" onclick='show(1);'>category1</a></li>
                   
-                    <li > <a href="javascript:void(0)" onclick='show(2);'>category2</a></li>
+                    <li > <a href="javascript:void(0)" onclick='show(2);'>Automobiles</a></li>
+                      <li > <a href="javascript:void(0)" onclick='show(2);'>online services</a></li>
                    </ul>
 </div>
 <div id="categoryListBox1" style="display:none;">
@@ -114,7 +116,7 @@ echo "</div>";
 <!------->
 
 </div>
-
+</div>
 </div>
  <?php } ?>
 
