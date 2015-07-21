@@ -190,3 +190,5 @@ ALTER TABLE `user_pages` ADD `parent` INT(11) NULL AFTER `page_content`;
 ALTER TABLE `build_temp` ADD `package` INT(11) NOT NULL AFTER `category_id`;
 
 ALTER TABLE `user_pages` ADD `page_slug` VARCHAR(255) NOT NULL AFTER `page_name`;
+
+ALTER TABLE `build_temp` ADD `rating` INT( 11 ) NOT NULL AFTER `main_div` ;
