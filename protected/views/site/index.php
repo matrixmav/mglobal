@@ -931,18 +931,22 @@
           </div>
     </div>
     <div class="row deskTemplete">
-        
+      <?php foreach($templateObject as $template){?>  
       <div class="item col-md-2 col-sm-4 col-xs-12">
-        <img src="images/templates/automobile.png" alt="NAME" class="img-responsive">
-        <a href="images/2.jpg" class="">
+          <div class="imageTag" style="width:384px!important;height:196px!important;">
+          <img src="/user/template/<?php echo $template['folderpath'];?>/screenshot/<?php echo $template['screenshot'];?>" alt="<?php echo $template['catname'];?>" class="img-responsive">
+          </div>
+          <a href="/user/searchtemplate?key=<?php echo strtolower($template['catname']);?>" class="">
           <div class="valign-center-elem">
-            <strong>Automobile</strong>
+            <strong><?php echo $template['catname'];?></strong>
             <em></em>
             <b>View</b>
           </div>
         </a>
       </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
+        
+      <?php }?>
+      <!--<div class="item col-md-2 col-sm-4 col-xs-12">
         <img src="images/templates/lawyers.png" alt="NAME" class="img-responsive">
         <a href="images/6.jpg" class="zoom valign-center">
           <div class="valign-center-elem">
@@ -1111,7 +1115,7 @@
             <b>View</b>
           </div>
         </a>
-      </div>
+      </div>-->
     </div>
   </div>
   <!-- Portfolio block END -->
