@@ -1,0 +1,134 @@
+@media (max-width: 320px) {
+
+.img-footer {
+	z-index: 999;
+margin-bottom: 10px;
+}
+.nav-search{
+ width: 100%!important;
+ float:left!important;
+}
+.row-start{
+	margin-bottom:0%;
+}
+svg{
+	overflow: hidden;
+padding: -4px;
+margin: -3px;
+}
+.money {
+    width: 35px;
+    padding-top: 22px;
+    margin-left: 22px;
+}
+.top-view-wrapper, 
+.top-edit-wrapper, 
+.top-user-wrapper, 
+.top-cart-wrapper, 
+.top-cartplus-wrapper, 
+.top-money-wrapper,.top-ref-wrapper,.top-fb-wrapper, .top-note-wrapper{
+	margin-bottom: 7%;
+}
+}
+@media (max-width: 360px) {
+
+.img-footer {
+	z-index: 999;
+margin-bottom: 10px;
+}
+.nav-search{
+ width: 100%!important;
+ float:left!important;
+}
+.money {
+    width: 35px;
+    padding-top: 22px;
+    margin-left: 22px;
+}
+.row-start{
+	margin-bottom:0%;
+}
+svg{
+	overflow: hidden;
+padding: -4px;
+margin: -3px;
+}
+.top-view-wrapper, 
+.top-edit-wrapper, 
+.top-user-wrapper, 
+.top-cart-wrapper, 
+.top-cartplus-wrapper, 
+.top-money-wrapper,.top-ref-wrapper,.top-fb-wrapper, .top-note-wrapper{
+	margin-bottom: 7%;
+}
+}
+}
+@media (max-width: 768px) {
+
+.img-footer {
+	z-index: 999;
+margin-bottom: 10px;
+width:100%;
+}
+.nav-search{
+ width: 31.333%;
+}
+.row-start{
+	margin-bottom:0%;
+}
+.top-view-wrapper, 
+.top-edit-wrapper, 
+.top-user-wrapper, 
+.top-cart-wrapper, 
+.top-cartplus-wrapper, 
+.top-money-wrapper,.top-ref-wrapper,.top-fb-wrapper, .top-note-wrapper{
+	margin-bottom: 7%;
+}
+}
+}
+@media (max-width: 800px) {
+
+.img-footer {
+	z-index: 999;
+margin-bottom: 10px;
+width:100%;
+}
+.nav-search{
+ width: 31.333%;
+}
+.row-start{
+	margin-bottom:0%;
+}
+.top-view-wrapper, 
+.top-edit-wrapper, 
+.top-user-wrapper, 
+.top-cart-wrapper, 
+.top-cartplus-wrapper, 
+.top-money-wrapper,.top-ref-wrapper,.top-fb-wrapper, .top-note-wrapper{
+	margin-bottom: 7%;
+}
+}
+}
+@media (max-width: 980px) {
+
+.img-footer {
+	z-index: 999;
+margin-bottom: 10px;
+width:100%;
+}
+.nav-search{
+ width: 31.333%;
+}
+.row-start{
+	margin-bottom:0%;
+}
+.top-view-wrapper, 
+.top-edit-wrapper, 
+.top-user-wrapper, 
+.top-cart-wrapper, 
+.top-cartplus-wrapper, 
+.top-money-wrapper,.top-ref-wrapper,.top-fb-wrapper, .top-note-wrapper{
+	margin-bottom: 7%;
+}
+}
+}
