@@ -1010,14 +1010,25 @@ public function actionfilterData() {
 if(!empty($_GET))
 {
    
-     $connection = Yii::app()->db;
-     $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.category_id = "'.$_GET["category"].'" AND build_temp.package = "'.$_GET["price"].'"');
+    $connection = Yii::app()->db;
+    
+    $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id,build_category.name as catname FROM `build_category`,`package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id AND  build_temp.category_id = "'.$_GET["category"].'" AND build_temp.package = "'.$_GET["price"].'"');
     $row = $command->queryAll();
+    
+    $command1 = $connection->createCommand('SELECT name FROM `build_category` where id =  "'.$_GET["category"].'"');
+    $row1 = $command1->queryAll();
+    foreach($row1 as $namerow){}
+     
     $buildStr = "";
+    $buildStr .= '<div class="top-content-head ">
+                <p class="mix-text">We found <span class="text-orange">'.count($row).'</span>result for &nbsp;"<span class="text-orange-2">'.ucwords($namerow['name']).'</span>"</p>
+            </div>
+            <div class="row"> '; 
     if(count($row) > 0)
     {
-        
+      
     foreach($row as $row1){
+        
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
                         <a href="/package/domainsearch?package_id='. $row1["package_id"].'&templateID='.$row1['id'].'"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
