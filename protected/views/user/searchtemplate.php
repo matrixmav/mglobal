@@ -108,9 +108,9 @@
         </div>
 
         <div class="col-md-9 right-content" id='content'>
-            <?php if(!empty($_GET['key'])){?>
+            <?php if(!empty($_GET['key']) || !empty($_GET['searchstring'])){?>
             <div class="top-content-head ">
-                <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key'])){?>result for &nbsp;" <span class="text-orange-2"><?php echo ucwords($_GET['key']); ?></span>"<?php }?></p>
+                <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key']) || !empty($_GET['searchstring'])){?>result for &nbsp;" <span class="text-orange-2"><?php if(empty($_GET['key']) && !empty($_GET['searchstring'])) { echo ucwords($_GET['searchstring']);}else{ echo ucwords($_GET['key']);} ?></span>"<?php }?></p>
             </div><?php }?>
             <div class="row">
             <?php  
@@ -146,7 +146,7 @@
                 </div>                
             <?php 
                 }
-            } ?>
+            } ?>  
              </div>
         </div>
     </div>
