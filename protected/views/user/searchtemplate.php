@@ -16,8 +16,8 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav top-ul">
-                    <li><a href="?type=1">Basic Web Packages</a></li>
-                    <li><a href="?type=2">Advance Web Packages</a></li>
+                    <li><a href="/user/searchtemplate?type=1<?php if(!empty($_GET['key'])) { ?>&key=<?php echo $_GET['key']; ?><?php }?>">Basic Web Packages</a></li>
+                    <li><a href="/user/searchtemplate?type=2<?php if(!empty($_GET['key'])) { ?>&key=<?php echo $_GET['key']; ?><?php }?>">Advance Web Packages</a></li>
                 </ul>
                 <div class="col-sm-4 col-md-4 pull-right nav-search">
                     <form action="" class="navbar-form" role="search" method="get">
@@ -60,21 +60,21 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $categoryObjectList->id;?>" aria-expanded="false">
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $categoryObjectList->name;?>" aria-expanded="false">
                                 <?php echo $categoryObjectList->name ; ?>
-                                <i class="indicator  pull-right accordin-icon glyphicon glyphicon-plus"></i>  </a>
+                                <i class="indicator  pull-right accordin-icon glyphicon <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){?>glyphicon-minus <?php }else{?>glyphicon-plus<?php }?>"></i>  </a>
                         </h4>
                     </div>
-                    <div id="collapse<?php echo $categoryObjectList->id; ?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div id="collapse<?php echo $categoryObjectList->name; ?>" class="panel-collapse collapse <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){ echo "in";?><?php }?>" aria-expanded="<?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){ echo "true";}else{ echo "false";} ?>" <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) != $_GET['key']){ ?>style="height: 0px;" <?php }?>>
                         <div class="panel-body">
                             <ul class="list-unstyled">
                                 <?php
                                     if(!empty($_GET['key'])){
-                                        echo $key = "key=".$_SERVER['PHP_SELF'];
+                                        $key = "key=".$_SERVER['PHP_SELF'];
                                     }
                                     ?>
                                 <?php foreach($packageObject as $packageObjectList){ ?>
-                                <li><a href="<?php echo $packageObjectList->id ; ?>"><?php echo $packageObjectList->amount ; ?></a></li>                                
+                                <li><a onclick="showFilterData('<?php echo $packageObjectList->id ; ?>','<?php echo $categoryObjectList->id ; ?>');">$ <?php echo $packageObjectList->amount ; ?></a></li>                                
                                 <?php } ?>
                             </ul>
                         </div>
@@ -110,9 +110,9 @@
         <div class="col-md-9 right-content">
             <?php if(!empty($_GET['key'])){?>
             <div class="top-content-head ">
-                <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key'])){?>result for &nbsp;"<span class="text-orange-2"> <?php echo $_GET['key']; ?></span>"<?php }?></p>
+                <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key'])){?>result for &nbsp;"<span class="text-orange-2"><?php echo ucwords($_GET['key']); ?></span>"<?php }?></p>
             </div><?php }?>
-            <div class="row">
+            <div class="row" id='content'>
             <?php  
              if($buildTempObject){ 
                 foreach($buildTempObject as $buildTempObjectList){
@@ -185,4 +185,26 @@
     }
     $('#accordion').on('hidden.bs.collapse', toggleChevron);
     $('#accordion').on('shown.bs.collapse', toggleChevron);
+    
+  function showFilterData(price,category)
+  {
+      var dataString = 'price=' + price + '&category=' + category;
+       
+            $.ajax({
+                type: "GET",
+                url: "/user/filterData",
+                data: dataString,
+                cache: false,
+                success: function (html) {
+                    if (html != "") {
+                        $('#content').html(html);
+                        
+                    } else {
+                         $('#content').html('Oops something wrong here.');
+                    }
+
+
+                }
+            });
+  }
 </script>
