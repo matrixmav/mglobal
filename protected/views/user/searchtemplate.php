@@ -124,7 +124,7 @@
                     </div>
 
                     <div class="img-footer">
-                        <h4><a href="/package/domainsearch?package_id=<?php echo base64_encode($buildTempObjectList['package_id']);  ?>&templateID=<?php echo base64_encode($buildTempObjectList['id']);?>" target="_"><?php echo $buildTempObjectList['template_title'] ;?></a></h4>
+                        <h4><a href="/package/domainsearch?package_id=<?php echo $buildTempObjectList['package_id'];  ?>&templateID=<?php echo $buildTempObjectList['id'];?>" target="_"><?php echo $buildTempObjectList['template_title'] ;?></a></h4>
                         <div class="box-relative">
                             <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
                         </div>  
