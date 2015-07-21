@@ -965,6 +965,7 @@ class UserController extends Controller {
         $packageStr = "";
         $cond2 ="";
         $cond1 ="";
+        $cond3 ="";
         $connection = Yii::app()->db;
         if(!empty($_GET['type'])){
         $command1 = $connection->createCommand('SELECT id FROM package WHERE type = '.$_GET['type']);
@@ -978,9 +979,13 @@ class UserController extends Controller {
         if(!empty($_GET['key'])!=''){
          $cond2 = 'AND build_temp_header.template_title like "%'.$_GET["key"].'%"';
         }
-         
+        if(!empty($_GET['searchstring'])!=''){
+         $cond3 = 'AND build_temp_header.template_title like "%'.$_GET["searchstring"].'%"';
+        }
+        
+        
         if((!empty($_GET))){
-        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id '.$cond1.' '.$cond2.' AND build_temp.status =1');
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id FROM `package`,`build_temp`,`build_temp_header`,`build_category` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id'.$cond1.' '.$cond2.' '.$cond3.' AND build_temp.status =1');
         }
        else{
         $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount ,package.id as package_id FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
@@ -991,10 +996,10 @@ class UserController extends Controller {
         $categoryObject = BuildCategory::model()->findall();
         
         if((!empty($_GET['type']))){
-        $command = $connection->createCommand('SELECT amount,id FROM `package` WHERE id IN('.$str.') AND status="1"');
+        $command = $connection->createCommand('SELECT amount,id FROM `package` WHERE id IN('.$str.') AND status="1" AND type !=3 ORDER BY amount ASC');
         }
        else{
-        $command = $connection->createCommand('SELECT amount,id  FROM `package` WHERE status = 1');
+        $command = $connection->createCommand('SELECT amount,id  FROM `package` WHERE status = 1 AND type !=3 ORDER BY amount ASC' );
         }
         $packageObject = $command->queryAll();
         //print_R($packageObject); die;
