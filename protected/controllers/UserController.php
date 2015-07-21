@@ -974,7 +974,7 @@ class UserController extends Controller {
             $packageStr .= '"'.$rowPackage['id'].'",';
         }
         $str = rtrim($packageStr,',');
-        $cond1 = 'AND build_temp.package IN ('.$str.')';
+        $cond1 = ' AND build_temp.package IN ('.$str.')';
         }
         if(!empty($_GET['key'])!=''){
          $cond2 = 'AND build_temp_header.template_title like "%'.$_GET["key"].'%"';
