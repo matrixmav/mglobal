@@ -121,7 +121,7 @@ class SiteController extends Controller
            
           /* Builder Category */
            
-           $categoryObject =  BuildCategory::model()->findByAttributes(array('status' => 1)); 
+           $categoryObject =  BuildCategory::model()->findAll(array('condition'=>'status=1','order' => 'name ASC')); 
            
           /*function to show news feeds*/
            
