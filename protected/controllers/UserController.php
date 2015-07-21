@@ -980,10 +980,10 @@ class UserController extends Controller {
         }
          
         if((!empty($_GET))){
-        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id '.$cond1.' '.$cond2.' AND build_temp.status =1');
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id '.$cond1.' '.$cond2.' AND build_temp.status =1');
         }
        else{
-        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount  FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount ,package.id as package_id FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
         }
         $row = $command->queryAll();
          
