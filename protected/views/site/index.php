@@ -882,13 +882,13 @@
     <div class="container">
       <h2 class="margin-bottom-50"><strong> Templates </strong></h2>
       <div class="row tempSearch">
-          <form class="form-inline">
+          <form class="form-inline" method="Get" action="/user/searchtemplate">
               <div class="searchWrap">
               <div class="form-group">
-                 <select id="state" name="state_id" class="form-control select-style">
+                 <select id="key" name="key" class="form-control select-style">
                  <option value="1">All categories</option>
                  <?php foreach($categoryObject as $category){?>
-                 <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
+                 <option value="<?php echo $category->name; ?>"><?php echo $category->name; ?></option>
                  <?php }?>
                  </select>
               </div>
