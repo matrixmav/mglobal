@@ -1,11 +1,8 @@
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style_search.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/responsive.css" rel="stylesheet">
-<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/slide/css/responsive.css" rel="stylesheet">
-    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/slide/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/js/slide/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/js/slide/owl-carousel/owl.theme.css">
+ 
+
 <?php //echo "<pre>"; print_r($packageObject);  die;  ?>
 <div class="container-fluid fluid-top">
     <div class="container ">
@@ -181,58 +178,6 @@
 </div>
 
  
-     <script src="/js/owl.carousel.min.js"></script>
-    <script>
-      function toggleChevron(e) {
-    $(e.target)
-        .prev('.panel-heading')
-        .find("i.indicator")
-        .toggleClass('glyphicon glyphicon-minus glyphicon glyphicon-plus');
-}
-$('#accordion').on('hidden.bs.collapse', toggleChevron);
-$('#accordion').on('shown.bs.collapse', toggleChevron);
-    </script>
-    <script>
-        $(document).ready(function(){
-            $("#owl-demo").owlCarousel({
- 
-      navigation : true, // Show next and prev buttons
-      slideSpeed : 400,
-      paginationSpeed : 1000,
-      singleItem:true,
-      navigation:false,
-      autoPlay:true
- 
-      // "singleItem:true" is a shortcut for:
-      // items : 1, 
-      // itemsDesktop : false,
-      // itemsDesktopSmall : false,
-      // itemsTablet: false,
-      // itemsMobile : false
- 
-  });
-                        $("#owl-demo-2").owlCarousel({
- 
-      navigation : true, // Show next and prev buttons
-      
-      paginationSpeed : 1000,
-      singleItem:true,
-      navigation:false,
-      autoPlay:true
-      /*autoPlay:4000*/
-  
-  
-      // "singleItem:true" is a shortcut for:
-      // items : 1, 
-      // itemsDesktop : false,
-      // itemsDesktopSmall : false,
-      // itemsTablet: false,
-      // itemsMobile : false
- 
-  });
-        });
-    </script>
- 
 <script>
     function toggleChevron(e) {
         $(e.target)
@@ -268,10 +213,15 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
   {
       
                  $.fancybox({
-                    width: 1190, 
+                    width: 1150, 
                     autoSize: true,
                     href: "/user/templateSpecification?id="+valz,
                     type: 'ajax'
                 });
   }
-</script>
+</script><script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="/js/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+           <script type="text/javascript" src="/js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
