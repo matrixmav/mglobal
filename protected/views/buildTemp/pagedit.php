@@ -51,6 +51,13 @@ $this->breadcrumbs = array(
                     
                 </div>
                 
+                <label class="col-sm-2 control-label" for="lastname">Inner Page :</label>                
+                <div class="col-sm-2">
+                    <label><input type="radio" name="pages[inner]" value="1" <?php if(!empty($userpagesObject) && $userpagesObject->page_inner=='1'){ echo "checked=checked"; } ?> >Yes</label>
+                    <label><input type="radio" name="pages[inner]" value="0" <?php if(!empty($userpagesObject) && $userpagesObject->page_inner=='0'){ echo "checked=checked"; } ?> >No</label>
+                    
+                 </div>
+                
             </div>
              
             <div class="form-group">
