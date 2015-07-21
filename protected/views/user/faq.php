@@ -9,8 +9,8 @@
     }
 
     .panel-heading [data-toggle="collapse"]:after {
-        font-family: 'Glyphicons Halflings';
-        content: "\e072"; /* "play" icon */
+        font-family: 'FontAwesome';
+        content: "\f101"; /* "play" icon */
         float: right;
         color: #F58723;
         font-size: 18px;
@@ -57,6 +57,7 @@
 	padding:10px 5px;
 	border-bottom:1px solid #d7d7d7;
 	text-align:center;
+        color : #5f6f7e;
 	}
 	.categories ul
 	{
@@ -82,6 +83,7 @@
   padding: 10px 5px;
   border-bottom: 1px solid #d7d7d7;
   text-align: left;
+  color : #5f6f7e;
 }
 .bread_crum
 {
@@ -90,6 +92,9 @@ padding:20px 0;
 .bread_crum a
 {
 color:#434343
+}
+.panel-heading a{
+    color : #5f6f7e;
 }
 </style>
 
