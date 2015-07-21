@@ -49,6 +49,7 @@ if($builderObjectTemplate){ ?>
  </div>
 <?php }
 echo "<div class='row'>
+    <div class='col-md-8'>
 <h3>More Templates</h3>";
 
 if($builderObject){
@@ -89,7 +90,37 @@ foreach($builderObject as $buildertemp){?>
  </form>
 <?php $i++; } 
 echo "</div>";
-} ?>
+?>
+<div class='col-md-4'>
+<h3>More Categories</h3>
+
+<!-- test categories -->
+<div class="categoryList">
+        <ul class="categoryListItems">
+                    <li> <a href="javascript:void(0)" onclick='show(1);'>category1</a></li>
+                    <br />
+                    <li > <a href="#" onclick='show(2);'>category2</a></li>
+                    <br />
+                    <li   class="active"> <a href="#" onclick='show(3);'>category3</a></li>
+                    <br />
+
+                  </ul>
+</div>
+<div id="categoryListBox1" style="display:none;">
+    
+    sandeep
+</div>
+
+<div id="categoryListBox2" style="display:none;">
+    
+    sandeepmvfkjmvk
+</div>
+<!------->
+
+</div>
+
+</div>
+ <?php } ?>
 
 <style>
    .myModalImg .modal-dialog{max-width:800px !important;}
@@ -97,3 +128,11 @@ echo "</div>";
    .myModalImg .close:hover{opacity: 1;}
    .myModalImg .modal-content{border-radius: 8px !important;}
 </style>
+
+<script type="text/javascript">
+   
+    function show(categoryBoxNum) {
+        $("#categoryListBox"+categoryBoxNum).show();
+    }
+
+    </script>
