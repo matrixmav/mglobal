@@ -886,8 +886,11 @@
               <div class="searchWrap">
               <div class="form-group">
                  <select id="state" name="state_id" class="form-control select-style">
-                                                                                <option value="1">All categories</option>
-                                                                            </select>
+                 <option value="1">All categories</option>
+                 <?php foreach($categoryObject as $category){?>
+                 <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
+                 <?php }?>
+                 </select>
               </div>
               <div class="form-group">
                   <input type="search" placeholder="search something" class="search-style">
