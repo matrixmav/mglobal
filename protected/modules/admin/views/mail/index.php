@@ -30,7 +30,7 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
                             <?php } ?>
 
                         </select>
-                        <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+                        <input type="submit" class="btn btn-success confirmOk" value="OK" name="submit" id="submit"/>
                     </form>
                 </div>
             </div>
@@ -76,12 +76,12 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
                 ),
                 array(
                     'name' => 'subject',
-                    'header' => '<span style=" color:#1F92FF;white-space: nowrap;">Subject&nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Subject&nbsp;</span>',
                     'value' => '$data->subject',
                 ),
                 array(
                     'name' => 'updated_at',
-                    'header' => '<span style=" color:#1F92FF;white-space: nowrap;">Date & Time&nbsp;</span>',
+                    'header' => '<span style="white-space: nowrap;">Date & Time&nbsp;</span>',
                     'value' => array($this, 'convertDate'),
                 ),
                 array(
@@ -95,7 +95,7 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
                     'buttons' => array(
                         'Reply' => array(
                             'label' => 'Reply',
-                            'options' => array('class' => 'btn purple fa fa-edit margin-right15'),
+                            'options' => array('class' => 'btn orange fa fa-edit margin-right15'),
                             'url' => 'Yii::app()->createUrl("admin/mail/reply", array("id"=>$data->id))',
                         ),
                         'View' => array(

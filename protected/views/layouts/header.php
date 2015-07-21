@@ -42,28 +42,27 @@
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                <input type="text" class="form-control" id="name" placeholder="Name" name="name">
-                               <div id="show_wornings_name"></div>
-                           </div>
+                            </div>
+                           <div id="show_wornings_name"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
                                <input type="text" class="form-control" placeholder="Email" name="email" id="email">
-                               <div id="show_wornings_email"></div>  
                            </div>
+                           <div id="show_wornings_email"></div>  
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-pencil"></i></div>
                                <input class="form-control" id="subject" placeholder="Subject" name="subject">
-                               <div id="show_wornings_subject"></div>   
-
-                           </div>
+                             </div>
+                           <div id="show_wornings_subject"></div>   
                         </div>
                        <div class="form-group">
                        <textarea class="form-control" rows="3" placeholder="message" id="message"></textarea>
-                       <div id="show_wornings_message"></div>
                        </div>
+                       <div id="show_wornings_message"></div>
                        <div class="form-group">
    
                            <button type="button" class="btn btn-success" onclick="return submitForm();">Submit</button>
@@ -94,8 +93,8 @@
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
                                <input type="text" class="form-control"  placeholder="Email" id="emailF">
-                               <div id="show_wornings_emailF"></div>
-                           </div>
+                            </div>
+                           <div id="show_wornings_emailF"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -105,13 +104,13 @@
                                    <option value="Design">Design</option>
                                    <option value="Functionality">Functionality</option>
                                </select>
-                            
-                           </div>
+                            </div>
                         </div>
                        <div class="form-group">
-                       <textarea class="form-control" rows="3" placeholder="comment" id="comment"></textarea>
-                       <div id="show_wornings_messageF"></div>
-                       </div>
+                         <textarea class="form-control" rows="3" placeholder="comment" id="comment"></textarea>
+                         </div>
+                           <div id="show_wornings_messageF"></div>
+                       
                        <div class="form-group">
    
                            <button type="button" class="btn btn-success" onclick="return submitFeddbackForm();">Submit</button>
@@ -133,15 +132,17 @@
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                <input type="text" class="form-control" id="nameB" placeholder="Name">
-                               <div id="show_wornings_nameB"></div>
+                              
                            </div>
+                            <div id="show_wornings_nameB"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
                                <input type="text" class="form-control" id="emailB" placeholder="Email">
-                               <div id="show_wornings_emailB"></div>
+                               
                            </div>
+                           <div id="show_wornings_emailB"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -153,9 +154,12 @@
                        
                       
                        <div class="form-group">
+                          
                        <textarea class="form-control" rows="3" placeholder="Description" id="description"></textarea>
-                       <div id="show_wornings_messageB"></div>
-                       </div>
+                        </div>
+                       
+                 <div id="show_wornings_messageB"></div>
+                        
                        <div class="form-group">
                         
                            <button type="button" class="btn btn-success" onclick="return bugFormSubmit();">Submit</button>
@@ -232,10 +236,10 @@ if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
             <li><a href="#prices">Pricing</a></li>
            
             <li><a href="#benefits">Benefits</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#portfolio">Templates </a></li>
             
             <li><a href="#contact">Contact</a></li>
-             <li>   <a href="#inline14" class="fancybox">FAQ</a>
+             <li>   <a href="/user/faq" class="fancybox">FAQ</a>
                   <div id="inline14" style="display:none" class="readMoreBox content">
                <h2><strong> faq</strong></h2>
                <div class="faqsection">

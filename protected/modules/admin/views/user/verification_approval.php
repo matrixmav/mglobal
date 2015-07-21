@@ -42,7 +42,7 @@ $this->breadcrumbs = array(
                 <option value="0" <?php if($statusId=='0'){?> selected="selected"<?php }?>>Pending</option>
             </select>
     </div>
-    <input type="submit" class="btn btn-primary confirmOk" value="OK" name="submit" id="submit"/>
+    <input type="submit" class="btn btn-success confirmOk" value="OK" name="submit" id="submit"/>
     </form>
 
 </div>

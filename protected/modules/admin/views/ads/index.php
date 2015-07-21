@@ -56,12 +56,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'created_at',
-            'header' => '<span style=" color:#1F92FF;white-space: nowrap;">Created Date</span>',
+            'header' => '<span style="white-space: nowrap;">Created Date</span>',
             'value' => '$data->created_at',
         ),
         array(
             'name' => 'updated_at',
-            'header' => '<span style=" color:#1F92FF;white-space: nowrap;">Update Date</span>',
+            'header' => '<span style="white-space: nowrap;">Update Date</span>',
             'value' => '$data->updated_at',
         ), 
         

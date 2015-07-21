@@ -11,12 +11,17 @@ $this->breadcrumbs = array(
 <div class="col-md-7 col-sm-7">
     <?php if ($error) { ?><div class="error"><?php echo $error; ?></div><?php } ?>
     <?php if ($success) { ?><div class="success"><?php echo $success; ?></div><?php } ?>
-
-
+<div class="portlet box orange ">
+<div class="portlet-title">
+							<div class="caption">
+								Edit News
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form action="" method="post" class="form-horizontal" onsubmit="return validateFrm();">
 
         <fieldset>
-            <legend>Edit News</legend>
+            <div class="form-body">
             <input type="hidden" id="admin" name="admin" value="1">
             <input type="hidden" id="social" name="social" value="">
             <div class="form-group">
@@ -26,18 +31,17 @@ $this->breadcrumbs = array(
                      <span id="news_error" class="clrred"></span>
                 </div>
             </div>
-            
-        </fieldset>
-        <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn red">
-
             </div>
-        </div>
+        </fieldset>
+        <div class="form-actions right">                     
+               <input type="submit" name="submit" value="Submit" class="btn orange">
+                 
+            </div>
+        
     </form>
 </div>
-
-
+</div>
+</div>
 
 
 <script type="text/javascript">

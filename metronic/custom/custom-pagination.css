@@ -40,3 +40,13 @@ ul.yiiPager .hidden a { border: 1px solid #DEDEDE;    color: #888888;}
 .grid-view .summary {
 text-align: left;
 }
+table.table.table-striped.table-hover.table-bordered tr th {
+    color: #f15c2b;
+}
+table.table.table-striped.table-hover.table-bordered tr th a {
+    color: #f15c2b;
+}
+.btn.orange {
+    background-color: #f15c2a !important;
+    color: #fff;
+}

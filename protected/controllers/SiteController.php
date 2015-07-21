@@ -102,7 +102,7 @@ class SiteController extends Controller
            
            $proPackageObject = Package::model()->findAll(array('condition'=>'type=3 AND status=1','order' => 'name ASC','limit' => '3'));
            
-           $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1')));
+           $userProfileObject =  UserProfile::model()->findAll((array('condition'=>'testimonial_status=1 AND testimonials != ""')));
            
            $membership_type = "";
            if(!empty(Yii::app()->session['userid'])){
@@ -113,11 +113,19 @@ class SiteController extends Controller
                unset(Yii::app()->session['domain']);
            }
            
+           /* function to get stats*/
+           
+           $siteObject =  SiteStatitics::model()->findAll();
+           
+           
+           
           /*function to show news feeds*/
            
            
-          $this->render('index',array('membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
+          $this->render('index',array('siteObject'=> $siteObject , 'membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
+        
+        
         
                     
         public function actionSubscription() {

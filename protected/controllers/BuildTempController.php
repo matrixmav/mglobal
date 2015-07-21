@@ -282,9 +282,10 @@ class BuildTempController extends Controller {
         if(count($userHastemplateObject)){
             $builderObjectTemplate = BuildTemp::model()->findByAttributes(array('template_id'=>$userHastemplateObject->template_id));
             $builderObject = BuildTemp::model()->findAll(array('condition' => 'package ='. base64_decode($_GET["p"]).' AND template_id != '.$userHastemplateObject->template_id )); 
-            //. 'AND template_id != '.$userHastemplateObject->template_id 
+           
         }else{
-            $builderObject = BuildTemp::model()->findAll(array('condition' => 'package ='.base64_decode($_GET['p']) ));               }
+            $builderObject = BuildTemp::model()->findAll(array('condition' => 'package ='.base64_decode($_GET['p']) ));     
+        }
         
         
         
@@ -378,7 +379,7 @@ class BuildTempController extends Controller {
 
         if (!empty($_POST['Header'])) {
 
-            $builderObject->temp_header = $_POST['Header']['header_content'];
+            $bteuilderObject->temp_header = $_POST['Header']['header_content'];
             $builderObject->update();
         }
         $this->render('editheader', array('builderObject' => $builderObject));

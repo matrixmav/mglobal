@@ -39,7 +39,7 @@ $this->breadcrumbs = array(
                 echo "selected";
             } ?> >In Active</option>
             </select>
-                <input type="submit" class="btn btn-primary " value="OK" name="submit" id="submit"/>
+                <input type="submit" class="btn btn-success " value="OK" name="submit" id="submit"/>
             </div>
           
         </form>
@@ -111,7 +111,7 @@ $this->breadcrumbs = array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Change}{Edit}{Delete}',
-                    'htmlOptions' => array('width' => '30%'),
+                    'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),

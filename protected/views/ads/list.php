@@ -69,7 +69,7 @@ $this->menu = array(
                         array(
                             'name' => 'created_at',
                             'header' => '<span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>',
-                            'htmlOptions' => array('width' => '25%'),
+                            'htmlOptions' => array('width' => '20%'),
                             'value' => array($this, 'getSocialButton')
                         ),
                         //                       
