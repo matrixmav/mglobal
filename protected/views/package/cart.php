@@ -256,7 +256,7 @@
                 if (htmlArr[0] == 1)
                 {
                     $("#transID").val(htmlArr[1]);
-                    location.href = "/package/payment?tId="+ btoa(htmlArr[1]) +'&pp='+btoa(totalAmount);
+                    location.href = "/package/payment?tId="+ htmlArr[1]+'&pp='+totalAmount;
                     
                 }
             }
