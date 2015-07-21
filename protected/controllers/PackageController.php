@@ -194,8 +194,8 @@ class PackageController extends Controller {
         
         $error = "";    
         if (!empty($_GET) && $_GET['package_id']!='') {
-
-            Yii::app()->session['package_id'] = $_GET['package_id'];
+           $pakage = base64_decode($_GET['package_id']);
+            Yii::app()->session['package_id'] = $pakage;
         }
 
          
