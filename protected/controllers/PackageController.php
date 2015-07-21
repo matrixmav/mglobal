@@ -679,7 +679,7 @@ class PackageController extends Controller {
                 $next_year = strtotime('+299 day'); //For next 300 day
                 $current_time = time();
                 $i = 1 ;
-                $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId));
+                $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId , 'order_id' => $orderObject->id ));
 
                 if(count($userAdsObject) == 0 ){
                     while($current_time < $next_year){  
@@ -690,13 +690,14 @@ class PackageController extends Controller {
                         }else{
                             $current_time = strtotime('+1 day', $current_time);
                         }
-                            $modelUserShareAd = new UserSharedAd();
-                            $modelUserShareAd->user_id = Yii::app()->session['userid'];
-                            $modelUserShareAd->date = date('Y-m-d', $current_time);
-                            $modelUserShareAd->ad_id = $randAds->id;
-                            $modelUserShareAd->status = 0;
-                            $modelUserShareAd->created_at = date('Y-m-d');
-                            $modelUserShareAd->save(false);               
+                        $modelUserShareAd = new UserSharedAd();
+                        $modelUserShareAd->user_id = Yii::app()->session['userid'];
+                        $modelUserShareAd->order_id = $orderObject->id;
+                        $modelUserShareAd->date = date('Y-m-d', $current_time);
+                        $modelUserShareAd->ad_id = $randAds->id;
+                        $modelUserShareAd->status = 0;
+                        $modelUserShareAd->created_at = date('Y-m-d');
+                        $modelUserShareAd->save(false);               
                         $i++;
                     }
                 }
