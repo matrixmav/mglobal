@@ -1036,7 +1036,7 @@ if(!empty($_GET))
         
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                        <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
+                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
                     </div>
 
                     <div class="img-footer">
