@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -962,11 +962,22 @@ class UserController extends Controller {
         }*/
 //        echo "<pre>";
 //        print_r($dataProvider); die;
-        
+        $packageStr = "";
         $connection = Yii::app()->db;
-        if((!empty($_GET))){
+        if((!empty($_GET)) && $_GET['type']==''){
         $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" AND build_temp.status =1');
-        }else{
+        }
+        else if(!empty($_GET) && $_GET['type']!=''){
+        $command1 = $connection->createCommand('SELECT id FROM package WHERE type = '.$_GET['type']);
+        $row1 = $command1->queryAll();
+        foreach($row1 as $rowPackage){
+            $packageStr .= '"'.$rowPackage['id'].','.'"';
+        }
+        $str = rtrim($packageStr,',');
+        
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" AND build_temp.package IN ('.$str.') AND build_temp.status =1');
+        }
+        else{
           $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount  FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
           
         }
@@ -980,4 +991,54 @@ class UserController extends Controller {
         $this->render('searchtemplate',array('buildTempObject' => $row , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
         
     }
+
+
+
+public function actionfilterData() {
+ 
+ 
+if(!empty($_GET))
+{
+   
+     $connection = Yii::app()->db;
+     $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.category_id = "'.$_GET["category"].'" AND build_temp.package = "'.$_GET["price"].'"');
+    $row = $command->queryAll();
+    $buildStr = "";
+    if(count($row) > 0)
+    {
+        
+    foreach($row as $row1){
+       $buildStr .= '<div class="col-md-4 col-sm-4">
+                    <div class="left-img-1">
+                        <img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200">
+                    </div>
+
+                    <div class="img-footer">
+                        <h4>'.$row1["template_title"].'</h4>
+                        <div class="box-relative">
+                            <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
+                        </div>  
+                        <ul class="list-unstyled list-inline rating">
+                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
+                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
+                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
+                            <li><i class="glyphicon glyphicon-star-empty"></i></li>
+                            <li><i class="glyphicon glyphicon-star-empty"></i></li>
+                          </ul>
+                  <div class="thumbnail-arrow"></div>
+                    </div></div>'; 
+    }
+    }else{
+        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>
+                    
+                    
+                    
+                </div>'; 
+    }
+    echo $buildStr;
+ }
+    
+    
+}
+    
 }
