@@ -26,7 +26,7 @@ $this->menu = array(
 
                 <?php
                 $this->widget('zii.widgets.grid.CGridView', array(
-                    'id' => 'city-grid',
+                    'id' => 'ads',
                     'htmlOptions' => array('class' => 'table-responsive '),
                     'dataProvider' => $dataProvider,
                     'enableSorting' => 'true',
@@ -86,6 +86,9 @@ $this->menu = array(
         <script type="text/javascript" 
                 src="<?php echo Yii::app()->request->baseUrl; ?>/js/fbhelper.js">
         </script>
-
-
-
+ <script type="text/javascript">
+ $('#ads').slimScroll({
+      color: '#00f'
+      position:'right'
+  });
+</script>
