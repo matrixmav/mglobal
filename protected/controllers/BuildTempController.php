@@ -28,7 +28,7 @@ class BuildTempController extends Controller {
                 'actions' => array('index', 'templates', 'usertemplates', 'managewebsite', 'editheader', 
                                     'userinput', 'pagedit', 'fetchmenu', 'addlogo', 'pageadd', 'fetchlogo', 'pagecontent',
                                     'contactsetting', 'submitform','addcopyright','addfooter','addheader','pagefooter',
-                                    'builder','buildercreate','menusetting'),
+                                    'builder','buildercreate','menusetting','categorytemplate'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -275,8 +275,9 @@ class BuildTempController extends Controller {
     }
     
     public function actionTemplates() {  
-        $builderObjectTemplate ="";
-        $builderObject ="";
+        $builderObjectTemplate = "";
+        $builderObject = "";
+        $packageType = base64_decode($_GET["p"]) ;
         $userHastemplateObject = UserHasTemplate::model()->findByAttributes(array('order_id' => $_GET['id'] ));
         
         if(count($userHastemplateObject)){
@@ -287,10 +288,10 @@ class BuildTempController extends Controller {
             $builderObject = BuildTemp::model()->findAll(array('condition' => 'package ='.base64_decode($_GET['p']) ));     
         }
         
-        
+        $buildCategory = BuildCategory::model()->findAll(array('condition' => 'status = 1'));
         
         Yii::app()->session['orderID'] = $_GET['id'];
-        $this->render('templates', array('builderObject' => $builderObject,'builderObjectTemplate' => $builderObjectTemplate));
+        $this->render('templates', array('builderObject' => $builderObject,'builderObjectTemplate' => $builderObjectTemplate, 'buildCategory' => $buildCategory, 'packageType' => $packageType));
            
     }
 
@@ -641,9 +642,7 @@ class BuildTempController extends Controller {
                   '<strong>Name:</strong>'.$_POST['name'].'<br/><br/>'.
                   '<strong>Email:</strong>'.$_POST['email'].'<br/><br/>'.
                   '<strong>Message:</strong>'.$_POST['message'].'<br/><br/>';
-
                   CommonHelper::sendMail($config); */
-
                 echo 1;
             }
         }
@@ -676,4 +675,49 @@ class BuildTempController extends Controller {
       );
       }
      */
+    
+    public function actionCategoryTemplate(){   
+        if($_POST){
+            $temp = "";
+            $builderObject = BuildTemp::model()->findAll(array('condition' => 'category_id ='.$_POST['cat'].' AND package = '.$_POST['template']));     
+            if($builderObject){
+            foreach($builderObject as $buildertemp){?>
+                <form action="/BuildTemp/userinput" method="post">
+                    <div class="col-md-4">
+                        <img src="/user/template/<?php echo $buildertemp->folderpath; ?>/screenshot/<?php echo $buildertemp->screenshot; ?>" height="200" width="200" style="display: block; cursor: pointer" data-toggle="modal" data-target="#myModalImg<?php echo $temp; ?>"><br/>
+                        <div class="form-group">
+
+                            <input type="hidden" name="user_id" id="user_id" value="<?php echo Yii::app()->session['userid']; ?>">
+                            <input type="hidden" name="template_id" id="template_id" value="<?php echo $buildertemp->template_id; ?>">
+                            <input type="submit" name="submitInput" id="submit" class="btn red" value="Get Started">
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade myModalImg"  id="myModalImg<?php echo $temp; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <img class="img-responsive" src="/user/template/<?php echo $buildertemp->folderpath; ?>/screenshot/<?php echo $buildertemp->screenshot; ?>">
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" name="submitInput" id="submit" class="btn btn-default red" value="Get Started">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <a href="/user/template/<?php echo $buildertemp->folderpath; ?>" class="btn btn-default" target="_blank">Demo</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <?php
+                $temp++;
+            }
+            }else{
+                echo "<h3>Not Found</h3>" ;
+            }
+                        
+        }        
+    }
 }
