@@ -78,24 +78,27 @@ foreach($builderObject as $buildertemp){?>
 echo "</div>";
 echo "</div>";
 ?>
-<div class='col-md-4'>
-<h3>More Categories</h3>
+    <div class='col-md-4'>
+        <div class= "categorySec">
+            <h3>More Categories</h3>
 
-<!-- test categories -->
-    <div class="categoryList">
-        <ul class="categoryListItems">
-            <?php 
-            foreach ($buildCategory as $buildCategoryList) {
-                echo '<li><a href="javascript:void(0)"  onclick="templateList('.$buildCategoryList->id.','.$packageType.')" data-toggle="tab">' . $buildCategoryList->name . '</a></li>';
-            }
-            ?>           
-        </ul>
+            <!-- test categories -->
+            <div class="categoryList">
+                <ul class="categoryListItems">
+                    <?php
+                    foreach ($buildCategory as $buildCategoryList) {
+                        echo '<li><a href="javascript:void(0)"  onclick="templateList(' . $buildCategoryList->id . ',' . $packageType . ')" data-toggle="tab">' . $buildCategoryList->name . '</a></li>';
+                    }
+                    ?> 
+                </ul>
+            </div>
+
+
+            </ul>
+        </div>
     </div>
-</div>
 
  <?php } ?>
-
-
 
 <script type="text/javascript">
     function show(categoryBoxNum) {
