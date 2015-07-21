@@ -23,7 +23,7 @@
                     <form action="" class="navbar-form" role="search" method="get">
                         <div class="form-group col-md-12">
                             <div class="input-group col-md-12">
-                                <input type="text" class="form-control navbar-input" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status" name="key">
+                                <input type="text" class="form-control navbar-input" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status" name="key" value="<?php if(!empty($_GET['key'])){ echo ucwords($_GET['key']); }?>">
                                 <span class="input-group-addon navbar-addon">
                                     <button type="submit" name="search"><i class="glyphicon glyphicon-search navbar-glyph"></i></button></span>
                             </div>
@@ -39,7 +39,7 @@
 
     <div class="bread_crum ">
         <ul class="list-unstyled list-inline">
-            <li><a href="#"><u>Home</u></a></li>
+            <li><a href="/"><u>Home</u></a></li>
             <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i></a></li>
             <li><a href=""><u>All Templates</u></a></li>
             <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i></a></li>
@@ -56,29 +56,32 @@
 
             </div>
             <div class="panel-group" id="accordion">
+                <?php foreach($categoryObject as $categoryObjectList){ ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false">
-                                Categories
+                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $categoryObjectList->id;?>" aria-expanded="false">
+                                <?php echo $categoryObjectList->name ; ?>
                                 <i class="indicator  pull-right accordin-icon glyphicon glyphicon-plus"></i>  </a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div id="collapse<?php echo $categoryObjectList->id; ?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                         <div class="panel-body">
-                            
-                            <?php foreach($categoryObject as $categoryObjectList){ ?>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="<?php echo $categoryObjectList->id ; ?>" >
-                                    <?php echo $categoryObjectList->name ; ?>
-                                </label>
-                            </div>
-                            <?php } ?>
+                            <ul class="list-unstyled">
+                                <?php
+                                    if(!empty($_GET['key'])){
+                                        echo $key = "key=".$_SERVER['PHP_SELF'];
+                                    }
+                                    ?>
+                                <?php foreach($packageObject as $packageObjectList){ ?>
+                                <li><a href="<?php echo $packageObjectList->id ; ?>"><?php echo $packageObjectList->amount ; ?></a></li>                                
+                                <?php } ?>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <?php } ?>
+                <?php /*<div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
@@ -100,30 +103,30 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div><?php */?>
             </div>
         </div>
 
         <div class="col-md-9 right-content">
+            <?php if(!empty($_GET['key'])){?>
             <div class="top-content-head ">
-                <p class="mix-text">We found <span class="text-orange">724</span>result for &nbsp;"<span class="text-orange-2"> car</span>"</p>
-            </div>
+                <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key'])){?>result for &nbsp;"<span class="text-orange-2"> <?php echo $_GET['key']; ?></span>"<?php }?></p>
+            </div><?php }?>
             <div class="row">
             <?php  
-            
-            if($buildTempObject){ 
+             if($buildTempObject){ 
                 foreach($buildTempObject as $buildTempObjectList){
                     //echo "<pre>"; print_r($buildTempObjectList->header()->template_title); die;
             ?>
                 <div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                        <img src="/user/template/<?php echo $buildTempObjectList->folderpath;?>/screenshot/<?php echo $buildTempObjectList->screenshot;?>" class="img-left" width="200" height="200">
+                        <img src="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/screenshot/<?php echo $buildTempObjectList['screenshot'];?>" class="img-left" width="200" height="200">
                     </div>
 
                     <div class="img-footer">
-                        <h4><?php echo $buildTempObjectList->header()->template_title ;?></h4>
+                        <h4><?php echo $buildTempObjectList['template_title'] ;?></h4>
                         <div class="box-relative">
-                            <div class="arrow_box"><span>$ <?php echo $buildTempObjectList->package()->amount ;?></span></div>
+                            <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
                         </div>  
                         <ul class="list-unstyled list-inline rating">
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
