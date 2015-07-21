@@ -965,9 +965,9 @@ class UserController extends Controller {
         
         $connection = Yii::app()->db;
         if((!empty($_GET))){
-        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.* FROM `build_temp`,`build_temp_header` where build_temp.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" AND build_temp.status =1');
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" AND build_temp.status =1');
         }else{
-          $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.* FROM `build_temp`,`build_temp_header` where build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
+          $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount  FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
           
         }
         $row = $command->queryAll();
