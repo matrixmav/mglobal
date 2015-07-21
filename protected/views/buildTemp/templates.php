@@ -98,13 +98,9 @@ echo "</div>";
 <div class="categoryList">
         <ul class="categoryListItems">
                     <li> <a href="javascript:void(0)" onclick='show(1);'>category1</a></li>
-                    <br />
-                    <li > <a href="#" onclick='show(2);'>category2</a></li>
-                    <br />
-                    <li   class="active"> <a href="#" onclick='show(3);'>category3</a></li>
-                    <br />
-
-                  </ul>
+                  
+                    <li > <a href="javascript:void(0)" onclick='show(2);'>category2</a></li>
+                   </ul>
 </div>
 <div id="categoryListBox1" style="display:none;">
     
@@ -113,7 +109,7 @@ echo "</div>";
 
 <div id="categoryListBox2" style="display:none;">
     
-    sandeepmvfkjmvk
+    sandeep Kumar
 </div>
 <!------->
 
