@@ -23,7 +23,7 @@
                     <form action="" class="navbar-form" role="search" method="get">
                         <div class="form-group col-md-12">
                             <div class="input-group col-md-12">
-                                <input type="text" class="form-control navbar-input" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status" name="key" value="<?php if(!empty($_GET['key'])){ echo ucwords($_GET['key']); }?>">
+                                <input type="text" class="form-control navbar-input" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status" name="key" value="<?php if(empty($_GET['key']) && !empty($_GET['searchstring'])) { echo ucwords($_GET['searchstring']);}else{ echo ucwords($_GET['key']);} ?>">
                                 <span class="input-group-addon navbar-addon">
                                     <button type="submit" name="search"><i class="glyphicon glyphicon-search navbar-glyph"></i></button></span>
                             </div>
