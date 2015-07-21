@@ -339,6 +339,7 @@ class OrderController extends Controller {
     
     
     protected function GetButtonTitle($data, $row) {
+        
         $userId = Yii::app()->session['userid'];
         
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
