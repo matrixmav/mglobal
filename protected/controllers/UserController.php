@@ -963,21 +963,26 @@ class UserController extends Controller {
 //        echo "<pre>";
 //        print_r($dataProvider); die;
         $packageStr = "";
+        $cond2 ="";
+        $cond1 ="";
         $connection = Yii::app()->db;
-        if((!empty($_GET)) && $_GET['type']==''){
-        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" AND build_temp.status =1');
-        }
-        else if(!empty($_GET) && $_GET['type']!=''){
+        if(!empty($_GET['type'])){
         $command1 = $connection->createCommand('SELECT id FROM package WHERE type = '.$_GET['type']);
         $row1 = $command1->queryAll();
         foreach($row1 as $rowPackage){
-            $packageStr .= '"'.$rowPackage['id'].','.'"';
+            $packageStr .= '"'.$rowPackage['id'].'",';
         }
         $str = rtrim($packageStr,',');
-        
-        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" AND build_temp.package IN ('.$str.') AND build_temp.status =1');
+        $cond1 = 'AND build_temp.package IN ('.$str.')';
         }
-        else{
+        if(!empty($_GET['key'])!=''){
+         $cond2 = 'AND build_temp_header.template_title like "%'.$_GET["key"].'%"';
+        }
+         
+        if((!empty($_GET))){
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id '.$cond1.' '.$cond2.' AND build_temp.status =1');
+        }
+       else{
           $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount  FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
           
         }
