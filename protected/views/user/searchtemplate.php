@@ -1,6 +1,11 @@
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style_search.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/responsive.css" rel="stylesheet">
+<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/slide/css/responsive.css" rel="stylesheet">
+    <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/slide/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/js/slide/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/js/slide/owl-carousel/owl.theme.css">
 <?php //echo "<pre>"; print_r($packageObject);  die;  ?>
 <div class="container-fluid fluid-top">
     <div class="container ">
@@ -117,14 +122,14 @@
              if($buildTempObject){ 
                 foreach($buildTempObject as $buildTempObjectList){
                     //echo "<pre>"; print_r($buildTempObjectList->header()->template_title); die;
-            ?>
+            ?><a class="fancybox" onclick="showSpecification(<?php echo $buildTempObjectList['id']; ?>);"> 
                 <div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
                         <img src="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/screenshot/<?php echo $buildTempObjectList['screenshot'];?>" class="img-left" width="200" height="200">
                     </div>
 
                     <div class="img-footer">
-                        <h4><a href="/package/domainsearch?package_id=<?php echo $buildTempObjectList['package_id'];  ?>&templateID=<?php echo $buildTempObjectList['id'];?>" target="_"><?php echo $buildTempObjectList['template_title'] ;?></a></h4>
+                        <h4><?php echo $buildTempObjectList['template_title'] ;?></h4>
                         <div class="box-relative">
                             <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
                         </div>  
@@ -140,10 +145,10 @@
                   <div class="thumbnail-arrow"></div>
                    </div>
                     
-                 <a href="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/index.html" target="_">View Demo</a>
+                 
                       
                     
-                </div>                
+                </div> </a>               
             <?php 
                 }
             } ?>  
@@ -175,10 +180,59 @@
 
 </div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+ 
+     <script src="/js/owl.carousel.min.js"></script>
+    <script>
+      function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon glyphicon-minus glyphicon glyphicon-plus');
+}
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#owl-demo").owlCarousel({
+ 
+      navigation : true, // Show next and prev buttons
+      slideSpeed : 400,
+      paginationSpeed : 1000,
+      singleItem:true,
+      navigation:false,
+      autoPlay:true
+ 
+      // "singleItem:true" is a shortcut for:
+      // items : 1, 
+      // itemsDesktop : false,
+      // itemsDesktopSmall : false,
+      // itemsTablet: false,
+      // itemsMobile : false
+ 
+  });
+                        $("#owl-demo-2").owlCarousel({
+ 
+      navigation : true, // Show next and prev buttons
+      
+      paginationSpeed : 1000,
+      singleItem:true,
+      navigation:false,
+      autoPlay:true
+      /*autoPlay:4000*/
+  
+  
+      // "singleItem:true" is a shortcut for:
+      // items : 1, 
+      // itemsDesktop : false,
+      // itemsDesktopSmall : false,
+      // itemsTablet: false,
+      // itemsMobile : false
+ 
+  });
+        });
+    </script>
+ 
 <script>
     function toggleChevron(e) {
         $(e.target)
@@ -209,5 +263,15 @@
 
                 }
             });
+  }
+  function showSpecification(valz)
+  {
+      
+                 $.fancybox({
+                    width: 1190, 
+                    autoSize: true,
+                    href: "/user/templateSpecification?id="+valz,
+                    type: 'ajax'
+                });
   }
 </script>
