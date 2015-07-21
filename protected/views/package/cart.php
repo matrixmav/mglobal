@@ -185,7 +185,7 @@
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
 <input type="hidden" id="transID" value="<?php if(!empty($_GET)) { echo $_GET['tId'];} ?>" name="tId">
-<input type="hidden" id="templateId" value="<?php if(!empty($_GET)) { echo $_GET['templateId'];} ?>" name="templateId">
+<input type="hidden" id="templateId" value="<?php if(!empty($_GET['templateId'])) { echo $_GET['templateId'];} ?>" name="templateId">
 <?php }else{?>
      <div class="container">
     <div class="row"> 
