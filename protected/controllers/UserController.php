@@ -983,15 +983,20 @@ class UserController extends Controller {
         $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id '.$cond1.' '.$cond2.' AND build_temp.status =1');
         }
        else{
-          $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount  FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
-          
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount  FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
         }
         $row = $command->queryAll();
          
         
         $categoryObject = BuildCategory::model()->findall();
         
-        $packageObject = Package::model()->findall  ();
+        if((!empty($_GET['type']))){
+        $command = $connection->createCommand('SELECT amount,id FROM `package` WHERE id IN('.$str.') AND status="1"');
+        }
+       else{
+        $command = $connection->createCommand('SELECT amount,id  FROM `package` WHERE status = 1');
+        }
+        $packageObject = $command->queryAll();
         //print_R($packageObject); die;
         $this->render('searchtemplate',array('buildTempObject' => $row , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
         
