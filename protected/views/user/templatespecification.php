@@ -74,59 +74,10 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
             <div class="top-content-head-accordin slider-heading-2">
                  <p class="mix-text"> Service</p>
             </div>
-                  <div id="owl-demo-2" class=" owl-carousel owl-theme">
-         
-                      <div class="item slider-item"><p>Recommonded Service<p>
-                          <ul class="list-unstyled banner-li">
-                              <li><i class="fa fa-circle-thin banner-i"></i>Domain for 1 Year</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>100 MB Storage Space/Yes</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>100 MB Bandwidth</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Adverstisements</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Free Hosting</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>1 Email A/C</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>5 Static Pages</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Drag & Drop Builder</li>
-                          </ul>
-                           <div class="box-relative-2" >
-                    <div class="arrow_box-2"><span>$ 499</span></div>
-                  </div>
-                      </div>
-                       <div class="item slider-item">
-                          <ul class="list-unstyled banner-li"><p>Recommonded Service<p>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Domain for 1 Year</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>100 MB Storage Space/Yes</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>100 MB Bandwidth</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Adverstisements</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Free Hosting</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>1 Email A/C</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>5 Static Pages</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Drag & Drop Builder</li>
-                          </ul>
-                           <div class="box-relative-2" >
-                    <div class="arrow_box-2"><span>$ 499</span></div>
-                  </div>
-                      </div>
-                       <div class="item slider-item">
-                          <ul class="list-unstyled banner-li"><p>Recommonded Service<p>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Domain for 1 Year</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>100 MB Storage Space/Yes</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>100 MB Bandwidth</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Adverstisements</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Free Hosting</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>1 Email A/C</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>5 Static Pages</li>
-                              <li><i class="fa fa-circle-thin banner-i"></i>Drag & Drop Builder</li>
-                          </ul>
-                           <div class="box-relative-2" >
-                    <div class="arrow_box-2"><span>$ 499</span></div>
-                  </div>
-                      </div>
-                      
-                        
-                    </div>
-            <div id="owl-demo-2" class="owl-carousel owl-theme">
-             <?php $arra = explode(',',  strip_tags($tempObject['Description'],'<p>'));?>
-                <div class="item slider-item" style="width:270px;"><p>Recommonded Service<p>
+                  
+                  <div id="owl-demo-2" class="owl-carousel owl-theme">
+             <?php $arra = explode(',', $tempObject['Description']);?>
+                <div class="item slider-item"><p>Recommonded Service</p>
                           <ul class="list-unstyled banner-li">
                               <?php for($i=0;$i < 8;$i++){?>
                               <li><i class="fa fa-circle-thin banner-i"></i><?php echo $arra[$i];?></li>
@@ -138,10 +89,11 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
                       </div>
                 <?php if(count($arra > 7)){?>
                        <div class="item slider-item">
-                          <ul class="list-unstyled banner-li"><p>Recommonded Service<p>
+                          <ul class="list-unstyled banner-li"><p>Recommonded Service</p>
                              <?php for($i=8;$i < sizeof($arra);$i++){?>
                               <li><i class="fa fa-circle-thin banner-i"></i><?php echo $arra[$i];?></li>
                               <?php }?> 
+                              
                           </ul>
                            <div class="box-relative-2" >
                     <div class="arrow_box-2"><span>$ <?php echo $tempObject['amount'];?></span></div>
@@ -165,7 +117,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
                       </div>-->
                       
                         
-                    </div>
+                    </div> 
                     
                      <div class="top-content-head-accordin slider-heading-3 text-center">
                         <a href="/package/domainsearch?package_id=<?php  echo $tempObject['package_id']; ?>&templateId=<?php  echo $tempObject['template_id'];?>"> <button class="btn btn-defalut button-select">SELECT</button></a>
