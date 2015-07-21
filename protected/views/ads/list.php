@@ -24,57 +24,15 @@ $this->menu = array(
             <div class="col-md-10 col-sm-9">
 
 
-                <?php
-                $this->widget('zii.widgets.grid.CGridView', array(
-                    'id' => 'city-grid',
-                    'htmlOptions' => array('class' => 'table-responsive '),
-                    'dataProvider' => $dataProvider,
-                    'enableSorting' => 'true',
-                    'ajaxUpdate' => true,
-                    'summaryText' => 'Showing {start} to {end} of {count} entries',
-                    'template' => '{items} {summary} {pager}',
-                    'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width ',
-                    'rowCssClassExpression' => '($data->date == date("Y-m-d")) ? "odd" : "rowFade"',
-                    'pager' => array(
-                        'header' => false,
-                        'firstPageLabel' => "<<",
-                        'prevPageLabel' => "<",
-                        'nextPageLabel' => ">",
-                        'lastPageLabel' => ">>",
-                    ),
-                    
-                   'columns'=>array(
-                        //'idJob',
-
-                        array(
-                            'name' => 'id',
-                            'header' => '<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => '$row+1',
-                        ),
-                        array(
-                            'name' => 'date',
-                            'header' => '<span style="white-space: nowrap;">Date &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->date)?$data->date:""',
-                        ),
-                        array(
-                            'name' => 'ad_id',
-                            'header' => '<span style="white-space: nowrap;">Ad Name &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->ads->name)?$data->ads->name:""',
-                        ),
-                        array(
-                            'name' => 'Earn',
-                            'header' => '<span style="white-space: nowrap;">Earned &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => '$data->status == 1 ?"Earn":"Not Earn"',
-                        ),
-                        array(
-                            'name' => 'created_at',
-                            'header' => '<span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>',
-                            'htmlOptions' => array('width' => '20%'),
-                            'value' => array($this, 'getSocialButton')
-                        ),
-                        //                       
-                    ),
-                ));
+                <?php echo count($dataProviderArray);
+                foreach($dataProviderArray as $dataProvider){
+                    foreach ($dataProvider as $dataProviderList){
+                        echo $dataProviderList->id;
+                        echo "<br/>";
+                    // echo $dataProvider[0]->id;
+                    //echo "<pre>"; print_r($dataProvider);
+                    }   
+                }
                 ?>
             </div>
         </div>

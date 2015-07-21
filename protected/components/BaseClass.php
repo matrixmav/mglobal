@@ -1319,7 +1319,7 @@ class BaseClass extends Controller {
                     } else if ($type == 10) {
                         $color = "sm-pro3"; //Advance Pro Packages 3
                     } else {
-                        $color = "sm-zzz"; //No Purchase 
+                       // $color = "sm-zzz"; //No Purchase 
                     }
                     
                 }
