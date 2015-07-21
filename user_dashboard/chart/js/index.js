@@ -7,6 +7,9 @@ function drawCharts() {
         data: "",
         dataType: 'json',
         success: function (data) {
+		if (data == '') {
+		 $("#graph_view").html('No Referal found');
+		} else {
             charData = JSON.stringify(data);
             $.each(JSON.parse(charData), function (idx, obj) {
 
@@ -43,11 +46,11 @@ function drawCharts() {
                     },
                     vAxis: {
                         minValue: 0,
-                        maxValue: 100,
+                        maxValue: 35,
                         baselineColor: '#DDD',
                         gridlines: {
                             color: '#DDD',
-                            count: 5
+                            count: 8
                         },
                         textStyle: {
                             fontSize: 11
@@ -72,6 +75,7 @@ function drawCharts() {
                 // BEGIN LINE GRAPH
 
             });
+	}
         }
     });
 
