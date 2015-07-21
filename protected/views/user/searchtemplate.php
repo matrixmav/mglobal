@@ -74,7 +74,7 @@
                                     }
                                     ?>
                                 <?php foreach($packageObject as $packageObjectList){ ?>
-                                <li><a onclick="showFilterData('<?php echo $packageObjectList->id ; ?>','<?php echo $categoryObjectList->id ; ?>');">$ <?php echo $packageObjectList->amount ; ?></a></li>                                
+                                <li><a onclick="showFilterData('<?php echo $packageObjectList['id'] ; ?>','<?php echo $categoryObjectList->id ; ?>');">$ <?php echo $packageObjectList['amount'] ; ?></a></li>                                
                                 <?php } ?>
                             </ul>
                         </div>
@@ -124,7 +124,7 @@
                     </div>
 
                     <div class="img-footer">
-                        <h4><?php echo $buildTempObjectList['template_title'] ;?></h4>
+                        <h4><a href="/package/domainsearch?package_id=<?php echo $buildTempObjectList['package_id'];  ?>&templateID=<?php echo $buildTempObjectList['id'];?>" target="_"><?php echo $buildTempObjectList['template_title'] ;?></a></h4>
                         <div class="box-relative">
                             <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
                         </div>  
@@ -136,9 +136,10 @@
                             <li><i class="glyphicon glyphicon-star-empty"></i></li>
                           </ul>
                   <div class="thumbnail-arrow"></div>
-                    </div>
+                   </div>
                     
-                    
+                 <a href="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/index.html" target="_">View Demo</a>
+                      
                     
                 </div>                
             <?php 
