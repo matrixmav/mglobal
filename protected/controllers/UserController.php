@@ -1036,11 +1036,11 @@ if(!empty($_GET))
         
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                        <a href="/package/domainsearch?package_id='. $row1["package_id"].'&templateID='.$row1['id'].'"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
+                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
                     </div>
 
                     <div class="img-footer">
-                        <h4><a href="">'.$row1["template_title"].'</a></h4>
+                        <h4>'.$row1["template_title"].'</h4>
                         <div class="box-relative">
                             <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
                         </div>  
