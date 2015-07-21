@@ -213,7 +213,7 @@
   {
       
                  $.fancybox({
-                    width: 1150, 
+                    width: 950, 
                     autoSize: true,
                     href: "/user/templateSpecification?id="+valz,
                     type: 'ajax'
