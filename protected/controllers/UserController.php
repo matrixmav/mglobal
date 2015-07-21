@@ -950,25 +950,34 @@ class UserController extends Controller {
 
     public function actionSearchTemplate(){
         
-        if((!empty($_GET))){
+        
            // print_r($_GET); die;            
-            $criteria = new CDbCriteria;
+            /*$criteria = new CDbCriteria;
             $mode = "BuildTemp";            
             $criteria->with = array('build_temp_header');
             $criteria->condition = 't.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" '  ;
             
             $dataProvider = new CActiveDataProvider($mode, array(
             'criteria' => $criteria, 'pagination' => array('pageSize' => 10),));           
-        }
+        }*/
 //        echo "<pre>";
 //        print_r($dataProvider); die;
         
-        $buildTempObject = BuildTemp::model()->findAll();
+        $connection = Yii::app()->db;
+        if((!empty($_GET))){
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.* FROM `build_temp`,`build_temp_header` where build_temp.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" AND build_temp.status =1');
+        }else{
+          $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.* FROM `build_temp`,`build_temp_header` where build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
+          
+        }
+        $row = $command->queryAll();
+         
         
         $categoryObject = BuildCategory::model()->findall();
+        
         $packageObject = Package::model()->findall  ();
         //print_R($packageObject); die;
-        $this->render('searchtemplate',array('buildTempObject' => $buildTempObject , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
+        $this->render('searchtemplate',array('buildTempObject' => $row , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
         
     }
 }
