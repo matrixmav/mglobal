@@ -60,6 +60,21 @@ $this->breadcrumbs = array(
                 </div>
             </div>
             
+            
+            <div class="form-group">
+                 <label class="col-lg-4 control-label" for="rating">Rating<span class="require">*</span></label>
+                <div class="col-lg-8">
+                    <select name="rating" id="rating" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>                        
+                    </select>
+                    <span id="package_error" class="clrred"></span>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Template Title<span class="require">*</span></label>
                 <div class="col-lg-8">

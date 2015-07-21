@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -951,25 +951,135 @@ class UserController extends Controller {
 
     public function actionSearchTemplate(){
         
-        if((!empty($_GET))){
+        
            // print_r($_GET); die;            
-            $criteria = new CDbCriteria;
+            /*$criteria = new CDbCriteria;
             $mode = "BuildTemp";            
             $criteria->with = array('build_temp_header');
             $criteria->condition = 't.temp_header_id = build_temp_header.id AND build_temp_header.template_title like "%'.$_GET["key"].'%" '  ;
             
             $dataProvider = new CActiveDataProvider($mode, array(
             'criteria' => $criteria, 'pagination' => array('pageSize' => 10),));           
-        }
+        }*/
 //        echo "<pre>";
 //        print_r($dataProvider); die;
+        $packageStr = "";
+        $cond2 ="";
+        $cond1 ="";
+        $cond3 ="";
+        $connection = Yii::app()->db;
+        if(!empty($_GET['type'])){
+        $command1 = $connection->createCommand('SELECT id FROM package WHERE type = '.$_GET['type']);
+        $row1 = $command1->queryAll();
+        foreach($row1 as $rowPackage){
+            $packageStr .= '"'.$rowPackage['id'].'",';
+        }
+        $str = rtrim($packageStr,',');
+        $cond1 = ' AND build_temp.package IN ('.$str.')';
+        }
+        if(!empty($_GET['key'])!=''){
+         $cond2 = 'AND build_temp_header.template_title like "%'.$_GET["key"].'%"';
+        }
+        if(!empty($_GET['searchstring'])!=''){
+         $cond3 = 'AND build_temp_header.template_title like "%'.$_GET["searchstring"].'%"';
+        }
         
-        $buildTempObject = BuildTemp::model()->findAll();
+        
+        if((!empty($_GET))){
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id FROM `package`,`build_temp`,`build_temp_header`,`build_category` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id'.$cond1.' '.$cond2.' '.$cond3.' AND build_temp.status =1');
+        }
+       else{
+        $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount ,package.id as package_id FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.status =1');
+        }
+        $row = $command->queryAll();
+         
         
         $categoryObject = BuildCategory::model()->findall();
-        $packageObject = Package::model()->findall  ();
+        
+        if((!empty($_GET['type']))){
+        $command = $connection->createCommand('SELECT amount,id FROM `package` WHERE id IN('.$str.') AND status="1" AND type !=3 ORDER BY amount ASC');
+        }
+       else{
+        $command = $connection->createCommand('SELECT amount,id  FROM `package` WHERE status = 1 AND type !=3 ORDER BY amount ASC' );
+        }
+        $packageObject = $command->queryAll();
         //print_R($packageObject); die;
-        $this->render('searchtemplate',array('buildTempObject' => $buildTempObject , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
+        $this->render('searchtemplate',array('buildTempObject' => $row , 'categoryObject' => $categoryObject , 'packageObject' => $packageObject));
         
     }
+
+
+
+public function actionfilterData() {
+ 
+ 
+if(!empty($_GET))
+{
+   
+    $connection = Yii::app()->db;
+    
+    $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id,build_category.name as catname FROM `build_category`,`package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id AND  build_temp.category_id = "'.$_GET["category"].'" AND build_temp.package = "'.$_GET["price"].'"');
+    $row = $command->queryAll();
+    
+    $command1 = $connection->createCommand('SELECT name FROM `build_category` where id =  "'.$_GET["category"].'"');
+    $row1 = $command1->queryAll();
+    foreach($row1 as $namerow){}
+     
+    $buildStr = "";
+    $buildStr .= '<div class="top-content-head ">
+                <p class="mix-text">We found <span class="text-orange">'.count($row).'</span>result for &nbsp;"<span class="text-orange-2">'.ucwords($namerow['name']).'</span>"</p>
+            </div>
+            <div class="row"> '; 
+    if(count($row) > 0)
+    {
+      
+    foreach($row as $row1){
+        
+       $buildStr .= '<div class="col-md-4 col-sm-4">
+                    <div class="left-img-1">
+                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
+                    </div>
+
+                    <div class="img-footer">
+                        <h4>'.$row1["template_title"].'</h4>
+                        <div class="box-relative">
+                            <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
+                        </div>  
+                        <ul class="list-unstyled list-inline rating">
+                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
+                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
+                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
+                            <li><i class="glyphicon glyphicon-star-empty"></i></li>
+                            <li><i class="glyphicon glyphicon-star-empty"></i></li>
+                          </ul>
+                  <div class="thumbnail-arrow"></div>
+                    </div>
+                   <a href="/user/template/'.$row1['folderpath'].'/index.html" target="_">View Demo</a> 
+</div>'; 
+    }
+    }else{
+        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>
+                    
+                    
+                    
+                </div>'; 
+    }
+    echo $buildStr;
+ }
+    
+    
+}
+public function actiontemplateSpecification() {
+   if(!empty($_GET['id']))
+{
+    $connection = Yii::app()->db;
+    $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.name as package_name,package.Description,package.id as package_id,build_category.name as catname FROM `build_category`,`package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id AND  build_temp.template_id = "'.$_GET["id"].'"');
+    $row = $command->queryAll();
+    
+}
+       $this->renderPartial('templatespecification', array(
+            'tempObject' => $row,
+        ));   
+}
+    
 }

@@ -161,6 +161,7 @@ if (!empty($_GET['pp'])) {
 }
 ?>">
 <input type="hidden" id="transID" value="<?php echo $_GET['tId']; ?>">
+<input type="hidden" id="transID" value="<?php echo isset($_GET['templateId']) ? $_GET['templateId'] : "";?>">
 <script type="text/javascript">
     function makepayment()
     {
