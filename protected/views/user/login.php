@@ -1,5 +1,8 @@
+
+
 <?php $curAction = @Yii::app()->getController()->getAction()->controller->action->id; 
  if($curAction != 'loginregistration'){ ?>
+ <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <div class="main">
   <div class="container">
     <!-- BEGIN SIDEBAR & CONTENT -->
@@ -13,18 +16,16 @@
             
         
       <!-- BEGIN CONTENT -->
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-6 col-sm- col-md-offset-3 col-sm-offset-3">
         <?php 
         if(!empty($_GET['successMsg'])){
-            echo "<p class='success'>".$_GET['successMsg']."</p>";
+            echo "<p class='success success-new'>"."<i class='fa fa-check-circle icon-success'></i>"."<span class='span-sucess'>".$_GET['successMsg']."<span class='second-line'><br>User Name and Passsword has been sent to your mail ID</span>"."</span>"."</p>";
         }
         if(!empty($_GET['errorMsg'])){
-            echo "<p class='error'>".$_GET['errorMsg']."</p>";
+            echo "<p class='error error-new'>".$_GET['errorMsg']."</p>";
         }
         
         if(!empty($msg)){ echo $msg; }
-        
-        
         
         if (array_key_exists("login", $_GET)) {
             $oauth_provider = $_GET['oauth_provider'];
@@ -38,6 +39,8 @@
         
         
         ?>
+      </div>
+                 <div class="col-md-6 col-sm-6">
         <h1>Login</h1>
         <div class="content-form-page">
           <div class="row">

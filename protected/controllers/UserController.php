@@ -478,7 +478,8 @@ class UserController extends Controller {
                             $error = "<p class='error'>Invalid Login Credientials</p>";
                         }
                     } else {
-                        $error = "<p class='error'>Invalid User Name</p>";
+                        $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
+
                     }
                 }
             }
