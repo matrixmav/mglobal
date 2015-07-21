@@ -64,7 +64,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
                        
                         
                     </div>
-                  <a target="_blank" href="/user/template/<?php echo $tempObject['folderpath'];?>/index.html"><button class="btn btn-default col-md-offset-5 banner-button">LIVE DEMO</button</a>
+                  <a target="_blank" href="/user/template/<?php echo $tempObject['folderpath'];?>/index.html"><button class="btn btn-default col-md-offset-5 banner-button">LIVE DEMO</button></a>
    
               </div>
               <div class="col-md-4">
@@ -87,7 +87,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
                     <div class="arrow_box-2"><span>$ <?php echo $tempObject['amount'];?></span></div>
                   </div>
                       </div>
-                <?php if(count($arra > 7)){?>
+                <?php if(count($arra > 8)){?>
                        <div class="item slider-item">
                           <ul class="list-unstyled banner-li"><p>Recommonded Service</p>
                              <?php for($i=8;$i < sizeof($arra);$i++){?>
