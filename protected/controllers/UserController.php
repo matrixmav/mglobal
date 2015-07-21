@@ -1011,7 +1011,7 @@ if(!empty($_GET))
 {
    
      $connection = Yii::app()->db;
-     $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.category_id = "'.$_GET["category"].'" AND build_temp.package = "'.$_GET["price"].'"');
+     $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.id as package_id FROM `package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_temp.category_id = "'.$_GET["category"].'" AND build_temp.package = "'.$_GET["price"].'"');
     $row = $command->queryAll();
     $buildStr = "";
     if(count($row) > 0)
@@ -1020,11 +1020,11 @@ if(!empty($_GET))
     foreach($row as $row1){
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                        <img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200">
+                        <a href="/package/domainsearch?package_id='. $row1["package_id"].'&templateID='.$row1['id'].'"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
                     </div>
 
                     <div class="img-footer">
-                        <h4>'.$row1["template_title"].'</h4>
+                        <h4><a href="">'.$row1["template_title"].'</a></h4>
                         <div class="box-relative">
                             <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
                         </div>  
@@ -1036,7 +1036,9 @@ if(!empty($_GET))
                             <li><i class="glyphicon glyphicon-star-empty"></i></li>
                           </ul>
                   <div class="thumbnail-arrow"></div>
-                    </div></div>'; 
+                    </div>
+                   <a href="/user/template/'.$row1['folderpath'].'/index.html" target="_">View Demo</a> 
+</div>'; 
     }
     }else{
         $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>
