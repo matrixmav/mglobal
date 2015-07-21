@@ -550,7 +550,11 @@
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
                                   <ul>
-                                  <?php echo $basicPackage->Description;?> 
+                                  <?php 
+                                    $descriptionArr = explode(',',$basicPackage->Description);
+                                    foreach($descriptionArr as $description){?>
+                                  <li><?php echo $description;?></li>
+                                    <?php }?>  
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
@@ -599,7 +603,11 @@
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
                                   <ul>
-                                   <?php echo $advancePackage->Description;?>   
+                                    <?php 
+                                    $descriptionArr = explode(',',$advancePackage->Description);
+                                    foreach($descriptionArr as $description){?>
+                                  <li><?php echo $description;?></li>
+                                    <?php }?>   
                                   </ul>
                           
                               </div>
@@ -638,7 +646,11 @@
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
                                   <ul>
-                                  <?php echo $proPackage->Description;?>   
+                                    <?php 
+                                    $descriptionArr = explode(',',$proPackage->Description);
+                                    foreach($descriptionArr as $description){?>
+                                  <li><?php echo $description;?></li>
+                                    <?php }?>
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
