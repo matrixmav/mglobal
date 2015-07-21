@@ -53,6 +53,18 @@ class BaseClass extends Controller {
             die;
         }
     }
+    
+    public static function getTempStars($starCount){
+        $star = "";
+        if($starCount > 0)
+        {
+        for($i=1; $i<=$starCount; $i++){
+            $star .= '<li><i class="glyphicon glyphicon-star star-full"></i></li>';
+        }
+        }
+                
+        return $star;
+    }
 
     /* function to fetch access /*
      * 
