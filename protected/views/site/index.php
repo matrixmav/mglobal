@@ -552,9 +552,11 @@
                                   <ul>
                                   <?php 
                                     $descriptionArr = explode(',',$basicPackage->Description);
+                                    if(!empty($descriptionArr) && count($descriptionArr) > 0)
+                                    {
                                     foreach($descriptionArr as $description){?>
                                   <li><?php echo $description;?></li>
-                                    <?php }?>  
+                                    <?php } } ?>  
                                   </ul>
                           <!--<ul>
                               <li>Domain for 1 Year</li>
