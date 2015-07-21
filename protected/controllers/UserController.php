@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -1067,6 +1067,18 @@ if(!empty($_GET))
  }
     
     
+}
+public function actiontemplateSpecification() {
+   if(!empty($_GET['id']))
+{
+    $connection = Yii::app()->db;
+    $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.name as package_name,package.Description,package.id as package_id,build_category.name as catname FROM `build_category`,`package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id AND  build_temp.template_id = "'.$_GET["id"].'"');
+    $row = $command->queryAll();
+    
+}
+       $this->renderPartial('templatespecification', array(
+            'tempObject' => $row,
+        ));   
 }
     
 }

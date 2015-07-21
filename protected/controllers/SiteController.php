@@ -124,9 +124,12 @@ class SiteController extends Controller
            $categoryObject =  BuildCategory::model()->findAll(array('condition'=>'status=1','order' => 'name ASC')); 
            
           /*function to show news feeds*/
+          $connection = Yii::app()->db; 
+          $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.* , build_category.name as catname FROM `build_temp`,`build_temp_header`,`build_category` where build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id AND build_temp.status =1 ORDER BY build_temp.id DESC LIMIT 0,18');
+          $templateObject = $command->queryAll();          
            
            
-          $this->render('index',array('categoryObject'=> $categoryObject,'siteObject'=> $siteObject , 'membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
+          $this->render('index',array('templateObject'=>$templateObject,'categoryObject'=> $categoryObject,'siteObject'=> $siteObject , 'membership_type'=>$membership_type,'basicPackageObject'=>$basicPackageObject,'advancePackageObject'=>$advancePackageObject,'proPackageObject'=>$proPackageObject,'profileObject'=>$userProfileObject,)); 
 	}
         
         
