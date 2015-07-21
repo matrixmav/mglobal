@@ -192,3 +192,4 @@ ALTER TABLE `build_temp` ADD `package` INT(11) NOT NULL AFTER `category_id`;
 ALTER TABLE `user_pages` ADD `page_slug` VARCHAR(255) NOT NULL AFTER `page_name`;
 
 ALTER TABLE `user_shared_ad` ADD `order_id` INT( 11 ) NOT NULL AFTER `user_id` ;
+ALTER TABLE `build_temp` ADD `rating` INT( 11 ) NOT NULL AFTER `main_div` ;

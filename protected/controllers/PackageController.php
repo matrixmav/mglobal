@@ -156,11 +156,13 @@ class PackageController extends Controller {
             $orderArray['domain_price'] = $_REQUEST['domain_price'];
             $orderArray['domain'] = $_REQUEST['domain'];
             $orderArray['package_id'] = $_REQUEST['package_id'];
+            
         }else{
              
             $orderArray['domain_price'] = Yii::app()->session['amount'];
             $orderArray['domain'] = Yii::app()->session['domain'];
             $orderArray['package_id'] = Yii::app()->session['package_id'];
+            $orderArray['templateId'] = $_REQUEST['templateId'];
         }
         
         
@@ -192,8 +194,7 @@ class PackageController extends Controller {
         
         $error = "";    
         if (!empty($_GET) && $_GET['package_id']!='') {
-
-            Yii::app()->session['package_id'] = $_GET['package_id'];
+           Yii::app()->session['package_id'] = $_GET['package_id'];
         }
 
          
