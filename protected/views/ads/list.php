@@ -24,6 +24,7 @@ $this->menu = array(
             <div class="col-md-10 col-sm-9">
 
 
+<<<<<<< HEAD
                 <?php
                 $this->widget('zii.widgets.grid.CGridView', array(
                     'id' => 'ads',
@@ -75,6 +76,16 @@ $this->menu = array(
                         //                       
                     ),
                 ));
+                <?php echo count($dataProviderArray);
+                foreach($dataProviderArray as $dataProvider){
+                    foreach ($dataProvider as $dataProviderList){
+                        echo $dataProviderList->id;
+                        echo "<br/>";
+                    // echo $dataProvider[0]->id;
+                    //echo "<pre>"; print_r($dataProvider);
+                    }   
+                }
+
                 ?>
             </div>
         </div>
