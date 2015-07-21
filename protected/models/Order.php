@@ -154,6 +154,10 @@ class Order extends CActiveRecord
                 if($orderArray['package_id']){
                     $packageId = $orderArray['package_id'];
                 }
+                $templateId = "";
+                if($orderArray['$templateId']){
+                    $templateId = $orderArray['$templateId'];
+                }
             
                 $orderObject->user_id = $userId;
                 $orderObject->package_id = $packageId;
@@ -161,6 +165,7 @@ class Order extends CActiveRecord
                 $orderObject->domain_price = $domainPrice;
                 $orderObject->transaction_id = $transactionId;
                 $orderObject->status = 0;
+                $orderObject->$templateId = $templateId;
                 $orderObject->start_date = new CDbExpression('NOW()');
                 $orderObject->end_date = new CDbExpression('NOW()');
                 $orderObject->created_at = new CDbExpression('NOW()');
