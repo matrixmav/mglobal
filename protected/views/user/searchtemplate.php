@@ -110,7 +110,7 @@
         <div class="col-md-9 right-content" id='content'>
             <?php if(!empty($_GET['key'])){?>
             <div class="top-content-head ">
-                <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key'])){?>result for &nbsp;"<span class="text-orange-2"><?php echo ucwords($_GET['key']); ?></span>"<?php }?></p>
+                <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key'])){?>result for &nbsp;" <span class="text-orange-2"><?php echo ucwords($_GET['key']); ?></span>"<?php }?></p>
             </div><?php }?>
             <div class="row">
             <?php  
@@ -129,11 +129,13 @@
                             <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
                         </div>  
                         <ul class="list-unstyled list-inline rating">
-                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
-                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
-                            <li><i class="glyphicon glyphicon-star star-full"></i></li>
+                            <?php $stars = BaseClass::getTempStars($buildTempObjectList['rating']);
+                                  $remaining = 5 - $buildTempObjectList['rating'];
+                            ?>
+                            <?php echo $stars;?>
+                            <?php for($i=1; $i<=$remaining; $i++){?>
                             <li><i class="glyphicon glyphicon-star-empty"></i></li>
-                            <li><i class="glyphicon glyphicon-star-empty"></i></li>
+                            <?php }?>
                           </ul>
                   <div class="thumbnail-arrow"></div>
                    </div>
