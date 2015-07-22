@@ -1360,6 +1360,7 @@ class BaseClass extends Controller {
             if($todayDate==$binaryCommissionObjectLeft->order_date){
                 $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
                 $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
+                $parentObject->left_user = $binaryCommissionObjectLeft->left_user + 1;
                 $parentObject->save(false);
             } else {
                 $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
@@ -1376,6 +1377,7 @@ class BaseClass extends Controller {
             if($todayDate==$binaryCommissionObjectRight->order_date){
                 $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
                 $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
+                $parentObject->right_user = $binaryCommissionObjectLeft->right_user + 1;
                 $parentObject->save(false);
             } else {
                 $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
@@ -1545,24 +1547,26 @@ class BaseClass extends Controller {
     }
     
     public static function getNode($parentObject) {
-        $nodeId = $parentObject->user_id;
+        $nodeId = $parentObject;
         $todayDate = date('Y-m-d');
-        //$date = date('Y-m-d');
         //find left present | not
-        //$totalLeftPurchase = 0;
        
         $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
-         $j = 1;
+        $j = 0;
+        $k = 0;   
         if($binaryCommissionObjectLeft){
-                $j = $j+1;
+            $j = $j+1;
+            $binaryCommissionObjectLeft = self::getNode($binaryCommissionObjectLeft->user_id);
          }
         //echo $totalLeftPurchase;
         // exit;
         //find right present | not
-          $k = 1;      
+            
         $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
         if($binaryCommissionObjectRight){
-          $k = $k+1;
+            $k = $k+1;
+            echo $binaryCommissionObjectRight->user_id;
+            $binaryCommissionObjectRight = self::getNode($binaryCommissionObjectRight->user_id);
           }
 //        exit;
         // Total Purchase amount
@@ -1574,6 +1578,24 @@ class BaseClass extends Controller {
           echo $j;
           echo $k;exit;
         return $j.'_'.$k;
+    }
+    
+    public static function mySelfCount(){
+        $userId = 262;
+        $leftGenealogyCount = self::getLeftRightMember($userId, 'left');
+        $rightGenealogyCount = self::getLeftRightMember($userId, 'right');
+        
+        echo "<pre>"; print_r($leftGenealogyCount);
+        echo "<pre>"; print_r($rightGenealogyCount);
+        
+        
+        
+        
+        
+        
+        
+        
+        exit;
     }
             
     
