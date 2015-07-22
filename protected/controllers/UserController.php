@@ -477,6 +477,8 @@ class UserController extends Controller {
                              else {
                                 $this->redirect("/profile/dashboard");
                             }
+                        }else{
+                            $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>"; 
                         } 
                     } else {
                         $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
