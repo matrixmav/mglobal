@@ -1458,7 +1458,7 @@ Pre-Footer and pre-footer elements
 @-moz-document url-prefix() { 
   .copyright {
     padding-top: 6px;
-    color:#4d4d4d;
+    color:#fff;
   }
 }
 .footer ul.social-icons li a {
@@ -1882,14 +1882,28 @@ Pre-Header and pre-header elements
 .benefitCarousel{}
 .benefitCarousel .carousel-control{opacity: 1;}
 .benefitCarousel .carousel-control.left{ background-image: none;}
-.benefitCarousel .carousel-control.left span img{display: inline-block;
-    position: absolute;
-    top: 13%;
-    z-index: 5; left: 50%; margin-top: -15px; }
-.benefitCarousel .carousel-control.right span img{display: inline-block;
-    position: absolute;
-    top: 13%;
-    z-index: 5; right:50%; margin-top: -15px;  }
+.benefitCarousel .carousel-control.left span img{
+  display: inline-block;
+  position: absolute;
+  /* top: 13%; */
+  z-index: 5;
+  /* left: 0; */
+  /* margin-top: -15px; */
+  bottom: -25px;
+  margin-left: 13em;
+ 
+
+  }
+.benefitCarousel .carousel-control.right span img{
+ display: inline-block;
+  position: absolute;
+  /* top: 13%; */
+  z-index: 5;
+  /* right: 50%; */
+    right: 9%;
+  margin-top: -15px;
+  bottom: -25px;
+     }
 .benefitCarousel .carousel-control.right{ background-image: none;}
 
 .benefitCarousel .carousel-control { visibility: hidden; }
@@ -2207,4 +2221,17 @@ color:#FFF; background: #c9c9c9;}
     -webkit-box-shadow: 0 0 2px #F0EFE7;
     -moz-box-shadow: 0 0 2px #F0EFE7;
     box-shadow: 0 0 2px #F0EFE7;
+}
+
+/*CHANDAN STYLESHEET*/
+.sucess-new{
+    background: none repeat scroll 0 0 #EAFFEA;
+  border: 1px solid #88AA88;
+  color: #333333;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.2em !important;
+  margin: 10px 0;
+  padding: 10px 0 8px 10px;
+  text-align: left;
 }

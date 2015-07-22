@@ -17,7 +17,7 @@ $this->breadcrumbs = array(
 
 //print_r($orderObject->builder); die;
 ?>
-<?php if (!empty($_GET['successMsg'])) { ?><div class="success"><?php echo $_GET['successMsg']; ?></div><?php } ?>
+<?php if (!empty($_GET['successMsg'])) { ?><p class="success-2"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $_GET['successMsg']; ?></span></p><?php } ?>
 <div class="user-dash ">
     <div class="col-md-9 dashboard-left-content">
         <div class="row row-start">

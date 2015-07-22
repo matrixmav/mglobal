@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 ?>
 <?php 
 if(!empty($error)){
-    echo "<p class='error'>".$error."</p>";
+   // echo "<p class='error'>".$error."</p>";
 }
  
 ?>
