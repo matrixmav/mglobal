@@ -5,7 +5,7 @@
         <div class="row margin-bottom-40">
             <!-- BEGIN CONTENT -->
             <div class="col-md-9 col-sm-9">
-                <?php if(!empty($msg)){ echo $msg;} ?>
+                <?php if(!empty($msg)){?><p class="error-2" ><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"> <?php echo $msg;?> </span></p><?php } ?>
                 <h1>Forget Password</h1>
                 <div class="content-form-page">
                     <div class="row">
