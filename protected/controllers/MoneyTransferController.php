@@ -232,7 +232,7 @@ class MoneyTransferController extends Controller {
                     $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->from_user_id, 'type' => $walletObject->type));
                     if($fromUserWalletObject){
                         if($fromUserWalletObject->fund > 0 && $fromUserWalletObject->fund > $transactionObject->paid_amount){
-                            $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->actual_amount);
+                            $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->paid_amount);
                         }else{
                             $error = "Incorrect master pin";
                         }
@@ -263,9 +263,10 @@ class MoneyTransferController extends Controller {
                 $moneyTransferDataArray['walletId'] = $toUserWalletObject->id;
                 $moneyTransferDataArray['toWalletId'] =$adminWalletObject->id;
                 $moneyTransferDataArray['fundType'] = $walletObject->type;
-                $adminPercentage = BaseClass::getPercentage($transactionObject->actual_amount,1);
+                //$adminPercentage = BaseClass::getPercentage($transactionObject->actual_amount,1);
+                $adminPercentage = $transactionObject->actual_amount * 1/100;
                 
-                $adminWalletObject->fund = ($adminWalletObject->fund+$adminPercentage);
+                $adminWalletObject->fund = ($adminWalletObject->fund+ $adminPercentage);
                 $adminWalletObject->save(false);
                 //create money transfer record entry
                 $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount,1);
