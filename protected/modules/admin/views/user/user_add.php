@@ -4,8 +4,11 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-7 col-sm-7">
-    <?php if ($error) { ?><div class="error"><?php echo $error; ?></div><?php } ?>
-    <?php if ($success) { ?><div class="success"><?php echo $success; ?></div><?php } ?>
+    <?php if ($error) { ?><p class="error-2" ><i class="fa fa-check-circle icon-error"></i><span class="span-error-2"><?php echo $error; ?></spa></p><?php } ?>
+    
+    
+    <?php if ($success) { ?><p class="success-2" ><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo $success; ?></span></p><?php } ?>
 
 
     <form action="" method="post" class="form-horizontal" onsubmit="return validateFrm();">

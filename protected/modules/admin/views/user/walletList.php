@@ -19,12 +19,12 @@ $this->breadcrumbs = array(
 </style>
 <?php 
 if(!empty($_GET['successmsg']) && $_GET['successmsg']=='1'){
-    echo "<div class='success'>Wallet amount transferred successfully.</div>";
+    echo "<p class='success-2'><i class='fa fa-check-circle icon-success'></i><span class='span-success-2'>Wallet amount transferred successfully.</span></p>";
 }
 ?>
 <?php 
 if(!empty($_GET['successmsg']) && $_GET['successmsg']=='2'){
-    echo "<div class='success'>Wallet amount deducted successfully.</div>";
+    echo "<p class='success-2'><i class='fa fa-check-circle icon-success'></i><span class='span-success-2'>Wallet amount deducted successfully.</span></p>";
 }
 ?>
 
