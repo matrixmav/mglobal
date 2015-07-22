@@ -1062,12 +1062,12 @@ if(!empty($_GET))
 </div>'; 
     }
     }else{
-        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>
+        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>';
                     
+      }              
                     
-                    
-                </div>'; 
-    }
+                $buildStr .= '</div>'; 
+    
     echo $buildStr;
  }
     
