@@ -148,9 +148,6 @@ $this->breadcrumbs = array(
                     <li class="list-group-item"><i class="fa fa-shopping-cart list-icon"></i>Transaction Order :<span class="inside-li-3"><?php echo isset($userNotifications['transaction_order']) ? $userNotifications['transaction_order'] : "Never Sent"; ?></span></li>
                     <li class="list-group-item"><i class="fa fa-money list-icon"></i>Transaction Fund :<span class="inside-li-3"><?php echo isset($userNotifications['transaction_fund']) ? $userNotifications['transaction_fund'] : "Never"; ?></span></li>
                     <li class="list-group-item"><i class="fa fa-shopping-cart list-icon"></i>Packaged Purchased :<span class="inside-li-3"><?php echo isset($userNotifications['package_purchased']) ? $userNotifications['package_purchased'] : "Never"; ?></span></li>
-                    <ul class="list-unstyled">
-                        <li> <div class="last-btn"><p>View All Alerts</p></div></li>
-                    </ul>
                 </ul>
             </div>
         </div>
