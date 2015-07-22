@@ -52,49 +52,49 @@
 		</div>
 		<div class="col-sm-4">
 			<div class="legal">
-				<a href="" data-toggle="modal" data-target="#legal1"><img src="legal1.png"></a>
+				<a href="" data-toggle="modal" data-target="#legal1"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
 		<div class="col-sm-4">
 			<div class="legal">
-				<a href="" data-toggle="modal" data-target="#legal2"><img src="legal1.png"></a>
+				<a href="" data-toggle="modal" data-target="#legal2"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
 		<div class="col-sm-4">
 			<div class="legal">
-				<a href="" data-toggle="modal" data-target="#legal1"><img src="legal1.png"></a>
+				<a href="" data-toggle="modal" data-target="#legal1"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
 		<div class="col-sm-4">
 			<div class="legal">
-				<a href="" data-toggle="modal" data-target="#legal2"><img src="legal1.png"></a>
+				<a href="" data-toggle="modal" data-target="#legal2"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
 		<div class="col-sm-4">
 			<div class="legal">
-				<a href="" data-toggle="modal" data-target="#legal1"><img src="legal1.png"></a>
+				<a href="" data-toggle="modal" data-target="#legal1"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
 		<div class="col-sm-4">
 			<div class="legal">
-				<a href="" data-toggle="modal" data-target="#legal2"><img src="legal1.png"></a>
+				<a href="" data-toggle="modal" data-target="#legal2"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 
@@ -111,7 +111,7 @@
           <h4 class="modal-title">Legal 1</h4>
         </div>
         <div class="modal-body">
-         <img src="legal1.png">
+         <img src="../../../images/legal1.png">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -130,7 +130,7 @@
          <h4 class="modal-title">Legal 2</h4>
         </div>
         <div class="modal-body">
-           <img src="legal1.png">
+           <img src="../../../images/legal1.png">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
