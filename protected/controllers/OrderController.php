@@ -345,27 +345,15 @@ class OrderController extends Controller {
         $userhasObject = UserHasTemplate::model()->find(array('condition' => 'order_id=' . $data['id']));
         $orderObject = Order::model()->find(array('condition' => 'id=' . $data['id']));
         
-        if($orderObject->templateId != 0){
-            $builderObjectTemplate = BuildTemp::model()->findByAttributes(array('template_id'=>$orderObject->templateId));
-//            $builderObject = BuildTemp::model()->findAll(array('condition' => 'package ='. base64_decode($_GET["p"]).' AND template_id != '.$userHastemplateObject->template_id ));   
-            
-//            <form method="post" action="/BuildTemp/userinput">
-//                    <input type="hidden" value="298" id="user_id" name="user_id">
-//                    <input type="hidden" value="68" id="template_id" name="template_id">
-//                    <input type="submit" value="Get Started" class="btn red" id="submit" name="submitInput">
-//            
-//        </form>
-        }else{
-            if ($orderObject->status == 1) {
-                if (!empty($userhasObject) && $userhasObject->publish == 1) {
-                    $title = '<a href= "/builder_images/' . $userId . '/build' . $data['id'] . '" title="Visit Website" target="_blank" class="btn orange margin-right15"><span class="fa fa-edit"></span>Visit Website</a>';
-                } else {
-                    $title = '<a href=/BuildTemp/templates/?id=' . $data->id . '&p=' . base64_encode($data->package_id) . ' title="Build Website" target="_blank" class="btn orange  margin-right15"><span class="fa fa-edit"></span>Build Website</a>';
-                }
+        if ($orderObject->status == 1) {
+            if (!empty($userhasObject) && $userhasObject->publish == 1) {
+                $title = '<a href= "/builder_images/' . $userId . '/build' . $data['id'] . '" title="Visit Website" target="_blank" class="btn orange margin-right15"><span class="fa fa-edit"></span>Visit Website</a>';
             } else {
-                $title = '<a class="btn red margin-right15" href="#"><span class="fa fa-edit"></span>N/A</a>';
+                $title = '<a href=/BuildTemp/templates/?id=' . $data->id . '&p=' . base64_encode($data->package_id) . ' title="Build Website" target="_blank" class="btn orange  margin-right15"><span class="fa fa-edit"></span>Build Website</a>';
             }
-        }    
+        } else {
+            $title = '<a class="btn red margin-right15" href="#"><span class="fa fa-edit"></span>N/A</a>';
+        }
         echo $title;
     }
     
