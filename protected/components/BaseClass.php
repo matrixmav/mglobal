@@ -1291,7 +1291,7 @@ class BaseClass extends Controller {
         if($userObject->status == 1 ){
             $color = "sm-user-active";
         }        
-        $orderArray = array();                
+        $orderArray = array();                 
         
         if (count($orderListObject) > 0) {
             $myAmount = 0;
@@ -1438,6 +1438,11 @@ class BaseClass extends Controller {
             } else {
                 $parentObject->commission_amount = $binaryAmount;    
             }
+            if($binaryAmount > $limit) {
+            $binaryAmount = $limit;
+            }else{
+            $binaryAmount = $binaryAmount;  
+            }
            
             $parentObject->save(false);
             if($binaryAmount !=0) {
@@ -1542,6 +1547,38 @@ class BaseClass extends Controller {
                 $pages = 2 ;
             }
             return $pages ;
+    }
+    
+    public static function getNode($parentObject) {
+        $nodeId = $parentObject->user_id;
+        $todayDate = date('Y-m-d');
+        //$date = date('Y-m-d');
+        //find left present | not
+        //$totalLeftPurchase = 0;
+       
+        $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
+         $j = 1;
+        if($binaryCommissionObjectLeft){
+                $j = $j+1;
+         }
+        //echo $totalLeftPurchase;
+        // exit;
+        //find right present | not
+          $k = 1;      
+        $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
+        if($binaryCommissionObjectRight){
+          $k = $k+1;
+          }
+//        exit;
+        // Total Purchase amount
+        //$totalPurchase = ($parentObject->right_purchase + $parentObject->left_purchase+ $parentObject->order_amount);
+        //$parentObject->total_purchase_amount = $totalPurchase;
+        //$parentObject->save(false);
+        //binary calculation
+        //$parentObject = self::setBinary($parentObject);
+          echo $j;
+          echo $k;exit;
+        return $j.'_'.$k;
     }
             
     

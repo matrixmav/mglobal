@@ -62,6 +62,7 @@ $this->breadcrumbs = array(
                                             $adObject = Ads::model()->findByPk($dataProvider->ad_id);
                                             $img =  '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$adObject->banner . '"'; 
                                             $link = '"' . $adObject->description . '"';
+                                            $desc = '"' . $adObject->description . '"';
                                             $name = '"' . $adObject->name . '"';
                                             $caption = '""';
                                             $adId = '"' . $adObject->id . '"';

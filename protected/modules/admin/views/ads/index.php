@@ -6,7 +6,7 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
-     <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><div class="success" id="error_msg"><?php echo "Banner Update Successfully";?></div><?php }?>    
+     <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "Banner Update Successfully";?></span></p><?php }?>    
     </div>
 </div>
 <div class="row">

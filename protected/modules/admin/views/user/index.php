@@ -21,13 +21,13 @@ $this->breadcrumbs = array(
 
 <div class="row">
     <div class="col-md-12">
-        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '1') { ?><div class="success" id="error_msg"><?php echo "User Added Successfully"; ?></div><?php } ?>
-        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '2') { ?><div class="success" id="error_msg"><?php echo "Record Deleted Successfully"; ?></div><?php } ?>
-        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '3') { ?><div class="success" id="error_msg"><?php echo "User Details Updated Successfully"; ?></div><?php } ?>
+        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '1') { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "User Added Successfully"; ?></span><p><?php } ?>
+        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '2') { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "Record Deleted Successfully"; ?></span><p><?php } ?>
+        <?php if (isset($_GET['successMsg']) && $_GET['successMsg'] == '3') { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "User Details Updated Successfully"; ?></span><p><?php } ?>
         <?php if (Yii::app()->user->hasFlash('success')): ?>
-            <div class="success" id="error_msg">
+           <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
                 <?php echo Yii::app()->user->getFlash('success'); ?>
-            </div>
+               </span></p>
         <?php endif; ?>
 
         <?php
