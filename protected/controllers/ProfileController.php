@@ -132,9 +132,9 @@ class ProfileController extends Controller {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(array('id' => Yii::app()->session['userid']));
-        $transactionObject = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
+        $transactionObject = Transaction::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'],'status'=>1));
         $edit = "yes";
-        if (!empty($transactionObject) && $transactionObject->status == '1') {
+        if (!empty($transactionObject)) {
             $edit = "no";
         }
         //print_r($_POST['UserProfile']);exit;

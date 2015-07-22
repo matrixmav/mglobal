@@ -497,6 +497,8 @@ class UserController extends Controller {
                              else {
                                 $this->redirect("/profile/dashboard");
                             }
+                        }else{
+                            $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>"; 
                         } 
                     } else {
                         $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
@@ -704,7 +706,7 @@ class UserController extends Controller {
 
                 $this->redirect(array('login', 'successMsg' => $msg));
             } else {
-                $msg = "<p class='error'>Please Enter Your Valid Email Address.</p>";
+                $msg = "Please Enter Your Valid Email Address.";
             }
         }
         $this->render('forgetpassword', array('msg' => $msg));

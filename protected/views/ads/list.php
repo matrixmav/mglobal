@@ -13,7 +13,7 @@ $this->breadcrumbs = array(
     if($dataProviderArray){
         foreach($dataProviderArray as $key=>$dataProviderList){ 
             $i = 1; ?>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-12 col-sm-12">
 
         <div class="col-md-12">
             <div class="row">

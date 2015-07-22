@@ -352,7 +352,7 @@ class OrderController extends Controller {
                 $title = '<a href=/BuildTemp/templates/?id=' . $data->id . '&p=' . base64_encode($data->package_id) . ' title="Build Website" target="_blank" class="btn orange  margin-right15"><span class="fa fa-edit"></span>Build Website</a>';
             }
         } else {
-            $title = '<a class="btn red margin-right15" href="#"><span class="fa fa-edit"></span>N/A</a>';
+            $title = '<a class="btn orange margin-right15" href="#"><span class="fa fa-edit"></span>N/A</a>';
         }
         echo $title;
     }
