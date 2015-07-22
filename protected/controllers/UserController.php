@@ -30,7 +30,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted',
+                'actions' => array('index', 'getnodes','view', 'registration', 'isuserexisted',
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
@@ -979,7 +979,7 @@ class UserController extends Controller {
         $cond1 = ' AND build_temp.package IN ('.$str.')';
         }
         if(!empty($_GET['key'])!=''){
-         $cond2 = 'AND build_category.name like "%'.$_GET["key"].'%" OR build_temp_header.template_title like "'.$_GET["key"].'%"';
+         $cond2 = 'AND build_category.name like "%'.$_GET["key"].'%"';
         }
         if(!empty($_GET['searchstring'])!=''){
          $cond3 = 'AND build_temp_header.template_title like "%'.$_GET["searchstring"].'%"';
@@ -1044,8 +1044,10 @@ if(!empty($_GET))
                     <div class="img-footer">
                         <h4>'.$row1["template_title"].'</h4>
                         <div class="box-relative">
+                        
                             <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
                         </div>  
+                        <p>&nbsp;</p>
                         <ul class="list-unstyled list-inline rating">
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
@@ -1119,7 +1121,12 @@ public function actionLegal() {
       
 }
 
-
+static function actiongetNodes() {
+        $adminId = 1;
+        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
+        $parentObject = BaseClass::getNode($parentObject);  
+       
+}
     
 
 }

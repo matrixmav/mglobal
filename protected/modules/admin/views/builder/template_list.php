@@ -21,10 +21,14 @@ $this->breadcrumbs = array(
  <a href="/admin/BuildTemp/templateheaderadd" style="float:left" class="btn  green margin-right-20">New Template +</a>
 <div class="row">
     <div class="col-md-12">
-         <?php if(isset($_GET['msg'])&& $_GET['msg']=='1'){ ?> <div class="success"><?php echo "Category Added Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='2'){ ?> <div class="success"><?php echo "Category Updated Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='3'){ ?> <div class="success"><?php echo "Record Deleted Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='4'){ ?> <div class="success"><?php echo "Status Changed Succesfully."?></div> <?php } ?>
+         <?php if(isset($_GET['msg'])&& $_GET['msg']=='1'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo "Category Added Succesfully."?></span></p> <?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='2'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo "Category Updated Succesfully."?></span></p> <?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='3'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo "Record Deleted Succesfully."?></span></p><?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='4'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+            <?php echo "Status Changed Succesfully."?></span></p> <?php } ?>
       
        
         <?php
