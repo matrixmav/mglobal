@@ -2,6 +2,7 @@
 	body
 	{
 	background:#f3f3f3;
+	 
 	}
     .faqHeader {
         font-size: 27px;
@@ -49,7 +50,7 @@
 	{
 	background:#fff;
 	border:1px solid #d7d7d7;
-	
+	font-family: PT Sans Narrow;
 	}
 	.categories h2
 	{
@@ -72,7 +73,8 @@
 	}
 	.categories li a
 	{
-	color:#434343
+	color:#434343;
+	font-size:16px;
 	}
 	.categories li a:hover
 	{
@@ -95,6 +97,12 @@ color:#434343
 }
 .panel-heading a{
     color : #5f6f7e;
+}
+.panel-body
+{
+	
+	font-size:15px;
+	
 }
 </style>
 
