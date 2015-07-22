@@ -72,6 +72,23 @@ $this->breadcrumbs = array(
     </form>
 </div>
    </div>
+    
+ <p><strong>Mglobally will match your name against the name entered in your account profile. 
+
+Any changes of name fields in your profile information will cause 'Name Validation' to be resetted.
+
+Required: scanned copy of your Identification Document (passport or driver's license)</br>
+
+Current status: <span style="color:#dd0808;"><?php  if($userObject->document_status==1){ echo "Verified"; }else{ echo "Not Verified";}?></span></strong></p>
+
+ <p><strong>Mglobally will match your address against the address entered in your account profile. 
+
+Any changes of address fields in your profile information will cause 'Address Validation' to be resetted.
+
+Required: scanned copy of your utility bill with your name and address printed on it. A utility bill is water, gas or electricity bill sent to your residential address by your local utility company.</br>
+
+Current status: <span style="color:#dd0808;"><?php  if($userObject->document_status==1){ echo "Verified"; }else{ echo "Not Verified";}?></span></strong></p>
+
 </div>
 
 <script>
