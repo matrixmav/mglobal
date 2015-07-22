@@ -13,7 +13,7 @@
                 <div class="col-xs-4 bs-wizard-step complete">
                   <div class="text-center bs-wizard-stepnum">Step 1</div>
                   <div class="progress"><div class="progress-bar"></div></div>
-                  <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>&tId=<?php if(!empty($_GET)) { echo $_GET['tId']; }?> " class="bs-wizard-dot"></a>
+                  <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id'];?>&tId=<?php if(!empty($_GET['tId'])) { echo $_GET['tId']; }?><?php if(!empty($_GET['templateId'])){?>&templateId=<?php echo $_GET['templateId'];} ?> " class="bs-wizard-dot"></a>
                   <div class="bs-wizard-info text-center">Domain Search.</div>
                 </div>
                 
@@ -185,6 +185,7 @@
 <input type="hidden" id="totalusedrp" value="">
 <input type="hidden" id="packageId" value="<?php echo Yii::app()->session['package_id']; ?>">
 <input type="hidden" id="transID" value="<?php if(!empty($_GET)) { echo $_GET['tId'];} ?>" name="tId">
+<input type="hidden" id="templateId" value="<?php if(!empty($_GET['templateId'])) { echo $_GET['templateId'];} ?>" name="templateId">
 <?php }else{?>
      <div class="container">
     <div class="row"> 
@@ -240,8 +241,9 @@
         var walletVal = $('#wallet').val();
         var totalAmount = $('#totalAmount').val();
         var transID = $("#transID").val();
+        var templateId = $("#templateId").val();
         
-        var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID;
+        var dataString = 'datasave=yes&totalAmount=' + totalAmount + '&couponDiscount=' + coupon_discount+'&transactionId='+transID+'&templateId='+templateId;
         
         $.ajax({
             type: "POST",
@@ -254,7 +256,7 @@
                 if (htmlArr[0] == 1)
                 {
                     $("#transID").val(htmlArr[1]);
-                    location.href = "/package/payment?tId="+htmlArr[1]+'&pp='+totalAmount;
+                    location.href = "/package/payment?tId="+ htmlArr[1]+'&pp='+totalAmount;
                     
                 }
             }

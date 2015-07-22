@@ -2,6 +2,7 @@
 $this->breadcrumbs = array(
     'Page Edit',
 );
+
 ?>
 <div class="col-md-12 col-sm-12">
     <a class="btn red publish" href="builder?o=<?php echo base64_encode(Yii::app()->session['orderID']);?>&u=<?php echo base64_encode(Yii::app()->session['userid']);?>&t=<?php echo base64_encode(Yii::app()->session['templateID']);?>">Publish Your Website</a>
@@ -50,6 +51,13 @@ $this->breadcrumbs = array(
                     <label><input type="radio" name="pages[status]" value="0" <?php if(!empty($userpagesObject) && $userpagesObject->status=='0'){ echo "checked=checked"; } ?> >Pending</label>
                     
                 </div>
+                
+                <label class="col-sm-2 control-label" for="lastname">Inner Page :</label>                
+                <div class="col-sm-2">
+                    <label><input type="radio" name="pages[inner]" value="1" <?php if(!empty($userpagesObject) && $userpagesObject->page_inner=='1'){ echo "checked=checked"; } ?> >Yes</label>
+                    <label><input type="radio" name="pages[inner]" value="0" <?php if(!empty($userpagesObject) && $userpagesObject->page_inner=='0'){ echo "checked=checked"; } ?> >No</label>
+                    
+                 </div>
                 
             </div>
              

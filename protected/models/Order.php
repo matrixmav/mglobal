@@ -34,11 +34,11 @@ class Order extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('user_id, package_id, transaction_id, web_builder_url,domain,domain_price, start_date, end_date, created_at, updated_at', 'required'),
-			array('user_id, package_id, transaction_id, status', 'numerical', 'integerOnly'=>true),
+			array('user_id, package_id, transaction_id, status,templateId', 'numerical', 'integerOnly'=>true),
 			array('web_builder_url', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, package_id, transaction_id, web_builder_url,domain,domain_price, start_date, end_date, status, created_at, updated_at', 'safe', 'on'=>'search'),
+			array('id, user_id, package_id, transaction_id, web_builder_url,domain,domain_price, start_date, end_date, status, created_at, updated_at,templateId', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +71,7 @@ class Order extends CActiveRecord
 			'web_builder_url' => 'Web Builder Url',
                         'domain' => 'Domain',
                         'domain_price' => 'Domain Price',
+                        'templateId'=>'templateId',
 			'start_date' => 'Start Date',
 			'end_date' => 'End Date',
 			'status' => 'Status',
@@ -104,7 +105,8 @@ class Order extends CActiveRecord
 		$criteria->compare('web_builder_url',$this->web_builder_url,true);
                 $criteria->compare('domain',$this->domain,true);
                 $criteria->compare('domain_price',$this->domain_price,true);
-		$criteria->compare('start_date',$this->start_date,true);
+                $criteria->compare('templateId',$this->templateId,true);
+                $criteria->compare('start_date',$this->start_date,true);
 		$criteria->compare('end_date',$this->end_date,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('created_at',$this->created_at,true);
@@ -154,6 +156,10 @@ class Order extends CActiveRecord
                 if($orderArray['package_id']){
                     $packageId = $orderArray['package_id'];
                 }
+                $templateId = "";
+                if($orderArray['templateId']){
+                    $templateId = $orderArray['templateId'];
+                }
             
                 $orderObject->user_id = $userId;
                 $orderObject->package_id = $packageId;
@@ -161,6 +167,7 @@ class Order extends CActiveRecord
                 $orderObject->domain_price = $domainPrice;
                 $orderObject->transaction_id = $transactionId;
                 $orderObject->status = 0;
+                $orderObject->templateId = $templateId;
                 $orderObject->start_date = new CDbExpression('NOW()');
                 $orderObject->end_date = new CDbExpression('NOW()');
                 $orderObject->created_at = new CDbExpression('NOW()');

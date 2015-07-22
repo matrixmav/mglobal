@@ -2049,7 +2049,7 @@ color:#FFF; background: #c9c9c9;}
 .packPick:hover{background: #f15d2a; color:#FFF;}
 
 #testimonials-block ol li{width:auto !important; text-indent:0; background: none;}
-.testimonialBox{width:300px; display: inline-block;}
+.testimonialBox{width:100%; display: inline-block;}
 .customerImg{width: 120px; height: 120px;  float: left;
     margin: 0 6px 0 0;
     text-align: center;}
@@ -2065,7 +2065,7 @@ color:#FFF; background: #c9c9c9;}
 .customerTxt {  display: table-cell;
   vertical-align: middle;
   height: 100px;
-  width: 180px;
+  width: auto;
   text-align: left;}
 .customerTxt span{font-size: 20px; font-weight: bold;} 
 .testimonials-block h4 i{color:#78828c; font-size: 50px; padding:20px;}

@@ -53,6 +53,18 @@ class BaseClass extends Controller {
             die;
         }
     }
+    
+    public static function getTempStars($starCount){
+        $star = "";
+        if($starCount > 0)
+        {
+        for($i=1; $i<=$starCount; $i++){
+            $star .= '<li><i class="glyphicon glyphicon-star star-full"></i></li>';
+        }
+        }
+                
+        return $star;
+    }
 
     /* function to fetch access /*
      * 
@@ -1317,11 +1329,19 @@ class BaseClass extends Controller {
     }
     
     public static function buildWebsiteHeader() {
-        $link = '<div class="row setingBox"><a href="/BuildTemp/addlogo" class="btn orange">Logo Setting</a>    
+       
+        $orderObject = Order::model()->findByAttributes(array('id' =>  $_SESSION['orderID'] ));
+        
+        $packgeId = $orderObject->package_id ;
+        
+       $link = '<div class="row setingBox"><a href="/BuildTemp/addlogo" class="btn orange">Logo Setting</a>    
         <!--<a href="/BuildTemp/addheader" class="btn orange">Header Setting</a>-->    
         <a href="/BuildTemp/contactsetting" class="btn orange">Contact Settings</a> 
-        <a href="/BuildTemp/addfooter" class="btn orange">Footer Setting</a> 
-        <a href="/BuildTemp/menusetting" class="btn orange">Menus Setting</a> </div>';
+        <a href="/BuildTemp/addfooter" class="btn orange">Footer Setting</a>'; 
+       if($packgeId == '4' || $packgeId == '5' || $packgeId == '6' ){
+           $link .='<a href="/BuildTemp/menusetting" class="btn orange">Menus Setting</a>';
+       }
+        $link .= '</div>';
         return $link;
     }
     
@@ -1408,7 +1428,31 @@ class BaseClass extends Controller {
                 $parentObject->right_carry = 0;
                 $parentObject->left_carry = ($leftNodeAmount-$rightNodeAmount);
             }
-            $parentObject->commission_amount = $binaryAmount;
+            $orderObject = Order::model()->findAll(array('condition'=>'user_id= "'.$parentObject->id.'"','order' => 'package_id DESC','limit' => '1'));
+            
+            /* packageObject*/
+            
+            $packageObject = Package::model()->findByPk($orderObject->package_id);
+            if($packageObject->type==1)
+            {
+                $limit = 1000;
+            }
+            if($packageObject->type==2)
+            {
+                $limit = 1500;
+            }
+            if($packageObject->type==3)
+            {
+                $limit = 2500;
+            }
+            if($binaryAmount > $limit)
+            {
+            $parentObject->commission_amount = $limit;
+            $parentObject->right_carry = 0;
+            $parentObject->left_carry = 0;
+            }else{
+             $parentObject->commission_amount = $binaryAmount;   
+            }
             $parentObject->save(false);
             if($binaryAmount !=0) {
             self::createCommissionTransaction($binaryAmount,$parentObject);

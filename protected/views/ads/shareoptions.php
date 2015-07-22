@@ -1,5 +1,5 @@
 <?php
-$img = '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$data->ads->banner . '"'; 
+$img =  '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$data->ads->banner . '"'; 
 $link = '"' . $data->ads->description . '"';
 $name = '"' . $data->ads->name . '"';
 $desc = '"' . $data->ads->description . '"';
@@ -8,14 +8,10 @@ $adId = '"' . $data->ads->id . '"';
 ?>
 
 <a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?>); return false;' ></a>
-
-<a class="btn tw fa fa-twitter  margin-right15" href="https://twitter.com/intent/tweet?url=<?php echo $data->ads->description; ?>" target="_blank"></a>
-
-<a class="btn gplus fa fa-google-plus  margin-right15" href="http://plus.google.com/share?url=<?php echo $data->ads->description; ?>&text=test" target="_blank"></a>
-
+<!--<a class="btn tw fa fa-twitter  margin-right15" href="https://twitter.com/intent/tweet?url=<?php //echo $data->ads->description; ?>" target="_blank"></a>
+<a class="btn gplus fa fa-google-plus  margin-right15" href="http://plus.google.com/share?url=<?php //echo $data->ads->description; ?>&text=test" target="_blank"></a>-->
 <!--<a class="btn insta fa fa-instagram  margin-right15" href="https://instagram.com/accounts/login/?next=%2Faccounts%2Fbadges%2F?url=<?php echo $data->ads->description; ?>" target="_blank">
 </a>-->
-
 <!--<a target ='_blank' class='btn red fa fa-twitter margin-right15' href='<?php echo Yii::app()->params['twitterLink'] . $data->ads->description; ?>'></a>-->
 
 <?php /*<button type='button' class='btn red fa fa-code margin-right15' data-toggle='modal' data-target='<?php echo '#' . $data->id; ?>'>Get Code</button>

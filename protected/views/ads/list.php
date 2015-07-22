@@ -1,4 +1,3 @@
- <script type="text/javascript" src="/metronic/assets/plugins/jquery-slimscrolljquery.slimscroll.min.js"></script>
 <?php
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
@@ -12,80 +11,112 @@ $this->menu = array(
     array('label' => 'Manage Add', 'url' => array('admin')),
 );
 ?>
-<?php //echo "<pre>"; print_r($orderObject);           ?>
 <div class="main">
-    <div class="">
+    <div class="row margin-bottom-40">        
+    <?php   
+    if($dataProviderArray){
+        foreach($dataProviderArray as $key=>$dataProviderList){ 
+            $i = 1; ?>
+        <div class="col-md-6 col-sm-6">
 
-        <!-- BEGIN SIDEBAR & CONTENT -->
-        <div class="row margin-bottom-40">
-            <!-- BEGIN SIDEBAR -->
-            <!-- END SIDEBAR -->
-            <!-- BEGIN CONTENT -->
-            <div class="col-md-10 col-sm-9">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="grid-view" id="city-grid">
+                        <div id="testDiv<?php echo $key; ?>">
+                            <table class="table table-striped table-bordered table-hover table-full-width">
+                                <thead>
+                                    <tr>
+                                        <th id="city-grid_c0">
+                                            <a href="#" class="sort-link">
+                                                <span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>
+                                            </a>
+                                        </th>
+                                        <th id="city-grid_c1">
+                                            <a href="#" class="sort-link">
+                                                <span style="white-space: nowrap;">Date &nbsp; &nbsp; &nbsp;</span>
+                                            </a>
+                                        </th>
+                                        <th id="city-grid_c2">
+                                            <a href="#" class="sort-link">
+                                                <span style="white-space: nowrap;">Ad Date &nbsp; &nbsp; &nbsp;</span>
+                                            </a>
+                                        </th>
+                                        <th id="city-grid_c3">
+                                            <a href="#" class="sort-link">
+                                                <span style="white-space: nowrap;">Earn &nbsp; &nbsp; &nbsp;</span>
+                                            </a>
+                                        </th>
+                                        <th id="city-grid_c4">
+                                            <a href="#" class="sort-link">
+                                                <span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>
+                                            </a>
+                                        </th>                        
+                                    </tr>
+                                </thead>
 
+                                <tbody>
+                                    <?php foreach ($dataProviderList  as $dataProvider){ ?>
+                                    <tr <?php if($dataProvider->date != date('Y-m-d')){ echo "class='rowFade'" ; } ?> >
+                                       <td><?php echo $i; ?></td>
+                                       <td><?php echo $dataProvider->date ; ?></td>
+                                       <td><?php echo $dataProvider->created_at ; ?></td>
+                                       <td><?php echo $dataProvider->status == 1 ?"Earn":"Not Earn" ?></td>
+                                       <?php
+                                            $adObject = Ads::model()->findByPk($dataProvider->ad_id);
+                                            $img =  '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$adObject->banner . '"'; 
+                                            $link = '"' . $adObject->description . '"';
+                                            $name = '"' . $adObject->name . '"';
+                                            $desc = '"' . $adObject->description . '"';
+                                            $caption = '""';
+                                            $adId = '"' . $adObject->id . '"';
+                                        ?>
+                                       
+                                       <td><a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?>); return false;' ></a></td>                                     
+                                   </tr>   
+                                    <?php $i++ ; } ?>
 
-                <?php
-                $this->widget('zii.widgets.grid.CGridView', array(
-                    'id' => 'city-grid',
-                    'htmlOptions' => array('class' => 'table-responsive '),
-                    'dataProvider' => $dataProvider,
-                    'enableSorting' => 'true',
-                    'ajaxUpdate' => true,
-                    'summaryText' => 'Showing {start} to {end} of {count} entries',
-                    'template' => '{items} {summary} {pager}',
-                    'itemsCssClass' => 'table table-striped table-bordered table-hover table-full-width ',
-                    'rowCssClassExpression' => '($data->date == date("Y-m-d")) ? "odd" : "rowFade"',
-                    'pager' => array(
-                        'header' => false,
-                        'firstPageLabel' => "<<",
-                        'prevPageLabel' => "<",
-                        'nextPageLabel' => ">",
-                        'lastPageLabel' => ">>",
-                    ),
-                    
-                   'columns'=>array(
-                        //'idJob',
-
-                        array(
-                            'name' => 'id',
-                            'header' => '<span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => '$row+1',
-                        ),
-                        array(
-                            'name' => 'date',
-                            'header' => '<span style="white-space: nowrap;">Date &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->date)?$data->date:""',
-                        ),
-                        array(
-                            'name' => 'ad_id',
-                            'header' => '<span style="white-space: nowrap;">Ad Name &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => 'isset($data->ads->name)?$data->ads->name:""',
-                        ),
-                        array(
-                            'name' => 'Earn',
-                            'header' => '<span style="white-space: nowrap;">Earned &nbsp; &nbsp; &nbsp;</span>',
-                            'value' => '$data->status == 1 ?"Earn":"Not Earn"',
-                        ),
-                        array(
-                            'name' => 'created_at',
-                            'header' => '<span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>',
-                            'htmlOptions' => array('width' => '20%'),
-                            'value' => array($this, 'getSocialButton')
-                        ),
-                        //                       
-                    ),
-                ));
-                ?>
+                                </tbody>                                    
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <script type="text/javascript" 
-                src="<?php echo Yii::app()->request->baseUrl; ?>/js/all.js">
-        </script> 
-
-        <script type="text/javascript" 
-                src="<?php echo Yii::app()->request->baseUrl; ?>/js/fbhelper.js">
-        </script>
-
-
-
+    </div>
+<?php   } 
+    }
+?>
+    </div>
+</div>    
+<?php // 'value' => array($this, 'getSocialButton') ?>            
+ <script type="text/javascript" src="/metronic/assets/plugins/jquery-slimscrolljquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/all.js"></script> 
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/fbhelper.js"></script>
+ <script type="text/javascript">
+    $( document ).ready(function() { 
+        $('#testDiv1').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv2').slimScroll({
+              color: '#f15c2b',
+              position:'right',
+              height: '400px'
+        });
+        $('#testDiv3').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv0').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+    });  
+</script>
+<style>
+    .slimScrollBar{opacity:1 !important; border-radius: 7px !important;}
+    </style>

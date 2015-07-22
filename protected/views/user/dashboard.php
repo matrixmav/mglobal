@@ -113,7 +113,7 @@ $this->breadcrumbs = array(
 
                         <h4>Referral Under Me</h4>
                     </div>
-                    <div class="down-edit">
+                    <div class="down-edit" id="graph_view" style="color: #808080;padding: 5px;">
 
                         <div id="bar-chart"></div>
 

@@ -56,7 +56,7 @@ class AdsController extends Controller {
         ));
     }
 
-    public function getSocialButton($data, $row) {        
+    public function getSocialButton($data) {        
         $this->renderPartial('shareoptions', array('data' => $data), false, true);
        
     }
@@ -88,13 +88,13 @@ class AdsController extends Controller {
                 }else{
                     $current_time = strtotime('+1 day', $current_time);
                 }
-                    $modelUserShareAd = new UserSharedAd();
-                    $modelUserShareAd->user_id = Yii::app()->session['userid'];
-                    $modelUserShareAd->date = date('Y-m-d', $current_time);
-                    $modelUserShareAd->ad_id = $randAds->id;
-                    $modelUserShareAd->status = 0;
-                    $modelUserShareAd->created_at = date('Y-m-d');
-                    $modelUserShareAd->save(false);               
+                $modelUserShareAd = new UserSharedAd();
+                $modelUserShareAd->user_id = Yii::app()->session['userid'];
+                $modelUserShareAd->date = date('Y-m-d', $current_time);
+                $modelUserShareAd->ad_id = $randAds->id;
+                $modelUserShareAd->status = 0;
+                $modelUserShareAd->created_at = date('Y-m-d');
+                $modelUserShareAd->save(false);               
                 $i++;
             }
         }
@@ -162,21 +162,18 @@ class AdsController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-
-        $model = new UserSharedAd;
-        $pageSize = 400;
+        $dataProviderArray ="";
         $successMsg = "";
-
-        $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' => array(
-                'condition' => (' user_id = "'.Yii::app()->session['userid'].'"'),
-            ), 'pagination' => array('pageSize' => $pageSize),
-        ));
-        if (!empty($_POST['search'])) {
-            $dataProvider = CommonHelper::search(isset($_REQUEST['search']) ? $_REQUEST['search'] : "", $model, array('name', 'description'), array(), isset($_REQUEST['selected']) ? $_REQUEST['selected'] : "");
+        $dataProviderArray = "";
+        $orderObject = Order::model()->findAll(array('condition' => 'user_id = '. Yii::app()->session['userid']));
+        foreach($orderObject as $orderObjectList){           
+            $userSharedAdObject = UserSharedAd::model()->findAll(array('condition' => ' order_id = '.$orderObjectList->id ));
+            if(count($userSharedAdObject)){
+                $dataProviderArray[] = $userSharedAdObject;
+            }
         }
         $this->render('list', array(
-            'dataProvider' => $dataProvider, 'successMsg' => $successMsg
+            'dataProviderArray' => $dataProviderArray, 'successMsg' => $successMsg
         ));
     }
 
