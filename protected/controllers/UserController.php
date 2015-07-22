@@ -30,7 +30,7 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted',
+                'actions' => array('index', 'getnodes','view', 'registration', 'isuserexisted',
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
@@ -1121,7 +1121,12 @@ public function actionLegal() {
       
 }
 
-
+static function actiongetNodes() {
+        $adminId = 1;
+        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
+        $parentObject = BaseClass::getNode($parentObject);  
+       
+}
     
 
 }
