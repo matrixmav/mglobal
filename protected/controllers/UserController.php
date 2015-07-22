@@ -979,7 +979,7 @@ class UserController extends Controller {
         $cond1 = ' AND build_temp.package IN ('.$str.')';
         }
         if(!empty($_GET['key'])!=''){
-         $cond2 = 'AND build_temp_header.template_title like "%'.$_GET["key"].'%"';
+         $cond2 = 'AND build_category.name like "%'.$_GET["key"].'%" OR build_temp_header.template_title like "'.$_GET["key"].'%"';
         }
         if(!empty($_GET['searchstring'])!=''){
          $cond3 = 'AND build_temp_header.template_title like "%'.$_GET["searchstring"].'%"';
@@ -1038,7 +1038,7 @@ if(!empty($_GET))
         
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
+                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200">
                     </div>
 
                     <div class="img-footer">
@@ -1054,17 +1054,17 @@ if(!empty($_GET))
                             <li><i class="glyphicon glyphicon-star-empty"></i></li>
                           </ul>
                   <div class="thumbnail-arrow"></div>
-                    </div>
-                   <a href="/user/template/'.$row1['folderpath'].'/index.html" target="_">View Demo</a> 
+      </a>              </div>
+                     
 </div>'; 
     }
     }else{
-        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>
+        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>';
                     
+      }              
                     
-                    
-                </div>'; 
-    }
+                $buildStr .= '</div>'; 
+    
     echo $buildStr;
  }
     
@@ -1108,6 +1108,7 @@ public function actionPolicy4() {
    
     $this->render('policy4');
     
+
       
 }
 
@@ -1120,4 +1121,5 @@ public function actionLegal() {
 
 
     
+
 }
