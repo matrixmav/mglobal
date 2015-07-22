@@ -86,8 +86,9 @@
                            <div class="input-group">
                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                <input type="text" class="form-control"  placeholder="Name" id="nameF">
-                               <div id="show_wornings_nameF"></div>
+                               
                            </div>
+                           <div id="show_wornings_nameF"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">

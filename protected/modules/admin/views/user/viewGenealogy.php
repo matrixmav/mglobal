@@ -69,10 +69,10 @@ if (!empty($_GET['id'])) {
                             echo "Right Purchase ". $getUserPurchase->left_purchase ; 
                             echo "<br/>";
                             echo "Left Purchase ".$getUserPurchase->right_purchase ;                          
-                          
+                          $getColor =  BaseClass::getPackageName($currentUserId);
                           
                         ?>
-                        <a class="sm-red"><div><span><?php echo $userObject->name; ?></span></div></a>
+                        <a class="<?php echo $getColor ; ?>"><div><span><?php echo $userObject->name; ?></span></div></a>
                         <ul>
                             <li>
                                 <?php

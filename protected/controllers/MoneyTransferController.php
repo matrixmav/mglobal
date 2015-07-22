@@ -592,7 +592,7 @@ class MoneyTransferController extends Controller {
         $userid = Yii::app()->session['userid'];
 
         if($_POST){
-            $existingShareObject = UserSharedAd::model()->findByAttributes(array('user_id'=>$userid, 'date'=>date('Y-m-d')));
+            $existingShareObject = UserSharedAd::model()->findByAttributes(array('user_id'=>$userid, 'date'=>date('Y-m-d') ,'order_id' => $_POST['orderId'] ));
             //echo $existingShareObject->status ; die;
             if((!empty($existingShareObject->status) && $existingShareObject->status == 1)){
                 return 1;
@@ -603,6 +603,7 @@ class MoneyTransferController extends Controller {
             $existingShareObject->user_id = $userid;
             $existingShareObject->ad_id = $_POST['adId'];
             $existingShareObject->social_id = $_POST['socialId'];
+            $existingShareObject->order_id = $_POST['orderId'];
             $existingShareObject->status = 1;
             $existingShareObject->created_at = new CDbExpression('NOW()');
             $existingShareObject->updated_at = new CDbExpression('NOW()');
