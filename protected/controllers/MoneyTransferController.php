@@ -256,8 +256,29 @@ class MoneyTransferController extends Controller {
                 $adminObject = User::model()->findByPk($adminId);
                 $adminWalletObject = Wallet::model()->findByAttributes(array('type' => $walletObject->type, 'user_id'=> $adminId));
                 
+                $adminPer = $transactionObject->actual_amount * 1/100;
                 //Create transaction for Admin
-                $adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
+                //
+                $createdTime = new CDbExpression('NOW()');
+                $tarnsactionID = BaseClass::gettransactionID();
+                $transactionObjuser = new Transaction;
+                $transactionObjuser->user_id = $adminObject->id;
+                $transactionObjuser->transaction_id = $tarnsactionID;
+                $transactionObjuser->mode = "transfer";
+                $transactionObjuser->gateway_id = 0;
+                $transactionObjuser->coupon_discount = 0;
+                $transactionObjuser->actual_amount = $adminPer;
+                $transactionObjuser->paid_amount = $adminPer;
+                $transactionObjuser->used_rp = 0; //change this to current Used RPs
+                $transactionObjuser->status = 1;//pending
+                $transactionObjuser->created_at = $createdTime;
+                $transactionObjuser->updated_at = $createdTime;
+                if (!$transactionObjuser->save()) {
+                echo "<pre>";
+                print_r($transactionObjuser->getErrors());
+                exit;
+                }
+                //$adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
                 $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->actual_amount,1);
                 $moneyTransferDataArray['comment'] = $message;
                 $moneyTransferDataArray['walletId'] = $toUserWalletObject->id;
@@ -266,10 +287,10 @@ class MoneyTransferController extends Controller {
                 //$adminPercentage = BaseClass::getPercentage($transactionObject->actual_amount,1);
                 $adminPercentage = $transactionObject->actual_amount * 1/100;
                 
-                $adminWalletObject->fund = ($adminWalletObject->fund+ $adminPercentage);
+                $adminWalletObject->fund = ($adminWalletObject->fund + $adminPercentage);
                 $adminWalletObject->save(false);
                 //create money transfer record entry
-                $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount,1);
+                $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminPercentage,1);
                 
                 //user money transfer change status
                 $moneyTransferObject->status = 1; //setting success
