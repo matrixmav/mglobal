@@ -232,7 +232,7 @@ class MoneyTransferController extends Controller {
                     $fromUserWalletObject = Wallet::model()->findByAttributes(array('user_id' => $moneyTransferObject->from_user_id, 'type' => $walletObject->type));
                     if($fromUserWalletObject){
                         if($fromUserWalletObject->fund > 0 && $fromUserWalletObject->fund > $transactionObject->paid_amount){
-                            $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->actual_amount);
+                            $fromAmount = ($fromUserWalletObject->fund) - ($transactionObject->paid_amount);
                         }else{
                             $error = "Incorrect master pin";
                         }
@@ -256,19 +256,41 @@ class MoneyTransferController extends Controller {
                 $adminObject = User::model()->findByPk($adminId);
                 $adminWalletObject = Wallet::model()->findByAttributes(array('type' => $walletObject->type, 'user_id'=> $adminId));
                 
+                $adminPer = $transactionObject->actual_amount * 1/100;
                 //Create transaction for Admin
-                $adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
+                //
+                $createdTime = new CDbExpression('NOW()');
+                $tarnsactionID = BaseClass::gettransactionID();
+                $adminTransactionObject = new Transaction;
+                $adminTransactionObject->user_id = $adminObject->id;
+                $adminTransactionObject->transaction_id = $tarnsactionID;
+                $adminTransactionObject->mode = "transfer";
+                $adminTransactionObject->gateway_id = 1;
+                $adminTransactionObject->coupon_discount = 0;
+                $adminTransactionObject->actual_amount = $adminPer;
+                $adminTransactionObject->paid_amount = $adminPer;
+                $adminTransactionObject->used_rp = 0; //change this to current Used RPs
+                $adminTransactionObject->status = 1;//pending
+                $adminTransactionObject->created_at = $createdTime;
+                $adminTransactionObject->updated_at = $createdTime;
+                if (!$adminTransactionObject->save()) {
+                echo "<pre>";
+                print_r($adminTransactionObject->getErrors());
+                exit;
+                }
+                //$adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
                 $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->actual_amount,1);
                 $moneyTransferDataArray['comment'] = $message;
                 $moneyTransferDataArray['walletId'] = $toUserWalletObject->id;
                 $moneyTransferDataArray['toWalletId'] =$adminWalletObject->id;
                 $moneyTransferDataArray['fundType'] = $walletObject->type;
-                $adminPercentage = BaseClass::getPercentage($transactionObject->actual_amount,1);
+                //$adminPercentage = BaseClass::getPercentage($transactionObject->actual_amount,1);
+                $adminPercentage = $transactionObject->actual_amount * 1/100;
                 
-                $adminWalletObject->fund = ($adminWalletObject->fund+$adminPercentage);
+                $adminWalletObject->fund = ($adminWalletObject->fund + $adminPercentage);
                 $adminWalletObject->save(false);
                 //create money transfer record entry
-                $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminTransactionObject->paid_amount,1);
+                $adminMoneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($moneyTransferDataArray, $adminObject, $adminTransactionObject->id, $adminPercentage,1);
                 
                 //user money transfer change status
                 $moneyTransferObject->status = 1; //setting success
@@ -544,9 +566,11 @@ class MoneyTransferController extends Controller {
               $error .= "Incorrect master pin";
           }else{
             $type = 1;
-            $_POST['walletId'] = '1';  
+            $_POST['walletId'] = 1;  
             $postDataArray = $_POST; 
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $transactionObject->status=0;
+            $transactionObject->save(false);
             $this->redirect(array('MoneyTransfer/walletconfirm', 'tId' => base64_encode($transactionObject->transaction_id),'am' => base64_encode($transactionObject->paid_amount)));
             }
         }

@@ -7,75 +7,89 @@ function drawCharts() {
         data: "",
         dataType: 'json',
         success: function (data) {
-		if (data == '') {
-		 $("#graph_view").html('No Referal found');
-		} else {
-            charData = JSON.stringify(data);
-            $.each(JSON.parse(charData), function (idx, obj) {
+            // set bar chart options
+            var barOptions = {
+                focusTarget: 'category',
+                backgroundColor: 'transparent',
+                colors: ['#f05c2b', '#79c446', '#66c2ee'],
+                fontName: 'Open Sans',
+                chartArea: {
+                    left: 50,
+                    top: 10,
+                    width: '80%',
+                    height: '70%'
+                },
+                bar: {
+                    groupWidth: '80%'
+                },
+                hAxis: {
+                    textStyle: {
+                        fontSize: 11
+                    }
+                },
+                vAxis: {
+                    minValue: 0,
+                    maxValue: 35,
+                    baselineColor: '#DDD',
+                    gridlines: {
+                        color: '#DDD',
+                        count: 8
+                    },
+                    textStyle: {
+                        fontSize: 11
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    textStyle: {
+                        fontSize: 12
+                    }
+                },
+                animation: {
+                    duration: 1200,
+                    easing: 'out'
+                }
+            };
 
-                // BEGIN BAR CHART
+            if (data == '') {
+                //$("#graph_view").html('No Referal found');
+
                 // create zero data so the bars will 'grow'
                 var barZeroData = google.visualization.arrayToDataTable([
                     ['Month', 'Basic', 'Advance', 'Pro'],
-                    [obj.month, obj.type.base, obj.type.advance, obj.type.pro, ],
+                    ['No results found', 0, 0, 0, ],
                 ]);
                 // actual bar chart data
                 var barData = google.visualization.arrayToDataTable([
                     ['Month', 'Basic', 'Advance', 'Pro'],
-                    [obj.month, obj.type.base, obj.type.advance, obj.type.pro, ],
+                    ['No results found', 0, 0, 0, ],
                 ]);
-                // set bar chart options
-                var barOptions = {
-                    focusTarget: 'category',
-                    backgroundColor: 'transparent',
-                    colors: ['#f05c2b', '#79c446', '#66c2ee'],
-                    fontName: 'Open Sans',
-                    chartArea: {
-                        left: 50,
-                        top: 10,
-                        width: '80%',
-                        height: '70%'
-                    },
-                    bar: {
-                        groupWidth: '80%'
-                    },
-                    hAxis: {
-                        textStyle: {
-                            fontSize: 11
-                        }
-                    },
-                    vAxis: {
-                        minValue: 0,
-                        maxValue: 35,
-                        baselineColor: '#DDD',
-                        gridlines: {
-                            color: '#DDD',
-                            count: 8
-                        },
-                        textStyle: {
-                            fontSize: 11
-                        }
-                    },
-                    legend: {
-                        position: 'bottom',
-                        textStyle: {
-                            fontSize: 12
-                        }
-                    },
-                    animation: {
-                        duration: 1200,
-                        easing: 'out'
-                    }
-                };
+
                 // draw bar chart twice so it animates
                 var barChart = new google.visualization.ColumnChart(document.getElementById('bar-chart'));
                 barChart.draw(barZeroData, barOptions);
                 barChart.draw(barData, barOptions);
 
-                // BEGIN LINE GRAPH
+            } else {
+                charData = JSON.stringify(data);
+                $.each(JSON.parse(charData), function (idx, obj) {
+                    // create zero data so the bars will 'grow'
+                    var barZeroData = google.visualization.arrayToDataTable([
+                        ['Month', 'Basic', 'Advance', 'Pro'],
+                        [obj.month, obj.type.base, obj.type.advance, obj.type.pro, ],
+                    ]);
+                    // actual bar chart data
+                    var barData = google.visualization.arrayToDataTable([
+                        ['Month', 'Basic', 'Advance', 'Pro'],
+                        [obj.month, obj.type.base, obj.type.advance, obj.type.pro, ],
+                    ]);
 
-            });
-	}
+                    // draw bar chart twice so it animates
+                    var barChart = new google.visualization.ColumnChart(document.getElementById('bar-chart'));
+                    barChart.draw(barZeroData, barOptions);
+                    barChart.draw(barData, barOptions);                    
+                });
+            }
         }
     });
 

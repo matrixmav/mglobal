@@ -84,22 +84,27 @@
   <!-- BEGIN FOOTER -->
   <div class="footer">
     <div class="container">
+		<div class="policy-section">
+		<ul>
+		<li><a href="#">Policy 1</a></li>
+		<li><a href="#">Policy 2</a></li>
+		<li><a href="#">Policy 3</a></li>
+		<li><a href="#">Policy 4</a></li>
+		</ul>
+		</div>
       <div class="row bg-f2">
-        <!-- BEGIN COPYRIGHT -->
-        <div class="col-md-6 col-sm-6 ">
-          <div class="copyright">@ COPYRIGHT 2015, ALL RIGHTS RESERVED, MGlobally</div>
-        </div>
-        <!-- END COPYRIGHT -->
+        
         <!-- BEGIN SOCIAL ICONS -->
-        <div class="col-md-6 col-sm-6 pull-right">
+        <div class="col-md-5 col-sm-6">
           <ul class="social-icons">
+		 
                <li><a class="rss" data-original-title="rss" href="https://plus.google.com/b/114439069888125758419/114439069888125758419/about" target="_blank"> <img src="/images/g-footer-icon.png"></a></li>  
                 <li><a class="rss" data-original-title="rss" href="javascript:void(0);" target="_blank"> <img src="/images/ln-footer-icon.png"></a></li> 
                 <li><a class="rss" data-original-title="rss" href="https://twitter.com/MGlobally" target="_blank"> <img src="/images/tw-footer-icon.png"></a></li> 
                   <li><a class="rss" data-original-title="rss" href="https://www.pinterest.com/mglobally/" target="_blank"> <img src="/images/pinterest-footer-icon.png"></a></li>
               <li><a class="rss" data-original-title="rss" href="https://www.facebook.com/pages/MGlobally/516594005156691?ref=hl" target="_blank"> <img src="/images/fb-footer-icon.png"></a></li>
             
-              
+
              
              
               
@@ -107,6 +112,13 @@
           </ul>
         </div>
         <!-- END SOCIAL ICONS -->
+		
+		<!-- BEGIN COPYRIGHT -->
+        <div class="col-md-6 col-sm-6 ">
+          <div class="copyright">@ COPYRIGHT 2015, ALL RIGHTS RESERVED, MGlobally</div>
+        </div>
+        <!-- END COPYRIGHT -->
+		
       </div>
     </div>
   </div>

@@ -1453,11 +1453,12 @@ Pre-Footer and pre-footer elements
 }
 .copyright {
   padding-top: 7px;
+    margin-left: -5%;
 }
 @-moz-document url-prefix() { 
   .copyright {
     padding-top: 6px;
-    color:#4d4d4d;
+    color:#fff;
   }
 }
 .footer ul.social-icons li a {
@@ -1466,7 +1467,42 @@ Pre-Footer and pre-footer elements
 .footer ul.social-icons li:hover a {
   opacity: 1 !important;
 }
-
+.policy-section
+{
+width:100%;
+border-bottom:1px solid #fff;
+float:left;
+padding:10px 0;
+}
+.policy-section ul
+{
+  display: inline-block;
+  margin: auto;
+  padding: 0;
+  margin-left:40%;
+}
+.policy-section ul  li
+{
+float:left;
+margin:0 10px;
+list-style:none;
+border-right:1px solid #fff;
+padding-right:15px;
+}
+.policy-section ul  li:last-child
+{
+border-right:none;
+}
+.policy-section ul  li a
+{
+text-decoration:none;
+}
+.bg-f2
+{
+float:left;
+width:100%;
+padding-top:10px;
+}
 /* go2top */
 .go2top,
 .go2top:focus {
@@ -1486,6 +1522,7 @@ Pre-Footer and pre-footer elements
 
   font-size: 18px;
   line-height: 1;
+    margin-bottom: 60px;
 }
 .go2top:hover {
   border: solid 2px #e6400c;
@@ -1845,14 +1882,28 @@ Pre-Header and pre-header elements
 .benefitCarousel{}
 .benefitCarousel .carousel-control{opacity: 1;}
 .benefitCarousel .carousel-control.left{ background-image: none;}
-.benefitCarousel .carousel-control.left span img{display: inline-block;
-    position: absolute;
-    top: 13%;
-    z-index: 5; left: 50%; margin-top: -15px; }
-.benefitCarousel .carousel-control.right span img{display: inline-block;
-    position: absolute;
-    top: 13%;
-    z-index: 5; right:50%; margin-top: -15px;  }
+.benefitCarousel .carousel-control.left span img{
+  display: inline-block;
+  position: absolute;
+  /* top: 13%; */
+  z-index: 5;
+  /* left: 0; */
+  /* margin-top: -15px; */
+  bottom: -25px;
+  margin-left: 13em;
+ 
+
+  }
+.benefitCarousel .carousel-control.right span img{
+ display: inline-block;
+  position: absolute;
+  /* top: 13%; */
+  z-index: 5;
+  /* right: 50%; */
+    right: 9%;
+  margin-top: -15px;
+  bottom: -25px;
+     }
 .benefitCarousel .carousel-control.right{ background-image: none;}
 
 .benefitCarousel .carousel-control { visibility: hidden; }
@@ -1914,6 +1965,7 @@ Pre-Header and pre-header elements
 .signBtn{color: #f15d2a; font-size: 14px; background: #fdd922; border: none; border-radius: 4px; padding: 6px 20px; box-shadow: 0px 2px 1px 0px #424242;}
 .signBtn:hover{padding: 6px 20px;}
 .mailTxt{margin: 10px 0; min-width: 280px; margin-right: 10px;}
+.social-icons{float:left;}
 .social-icons li{ list-style: none;}
 
 /*--------------pre footer-------------*/
@@ -2169,4 +2221,17 @@ color:#FFF; background: #c9c9c9;}
     -webkit-box-shadow: 0 0 2px #F0EFE7;
     -moz-box-shadow: 0 0 2px #F0EFE7;
     box-shadow: 0 0 2px #F0EFE7;
+}
+
+/*CHANDAN STYLESHEET*/
+.sucess-new{
+    background: none repeat scroll 0 0 #EAFFEA;
+  border: 1px solid #88AA88;
+  color: #333333;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.2em !important;
+  margin: 10px 0;
+  padding: 10px 0 8px 10px;
+  text-align: left;
 }

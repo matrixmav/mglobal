@@ -554,243 +554,258 @@ class PackageController extends Controller {
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             if(!empty($transactionObject)){
             //$userObject = User::model()->findByPK(Yii::app()->session['userid']);
-            if ($transactionObject->status == 0) {
-                $transactionObject->status = 1;
-                $transactionObject->paid_amount = ($transactionObject->actual_amount) - ($transactionObject->used_rp);
-                $transactionObject->created_at = date('Y-m-d');
-                $transactionObject->update();
-                $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-                $orderObject->status = 1;
-                $orderObject->start_date = date('Y-m-d');
-                $orderObject->end_date = (date('Y') + 1) . date('-m-d');
-                $orderObject->update();
-                
-                
-                 
-                $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
-                foreach($MTObject as $mObject){}
-                if(!empty($MTObject))
-                {
-                    $mObject->status = 1;
-                    $mObject->update();
-                    $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mObject->wallet_id));
-                    $MTObject1->fund = $MTObject1->fund - $transactionObject->used_rp;    
-                    $MTObject1->update();
-                }
-                
-                ob_start();
-                $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
-                $userObject = User::model()->findByPk(Yii::app()->session['userid']);
-                
-                /*to get sponsor email*/
-                $packageObject = Package::model()->findByPK($orderObject->package_id);
-                
-                /*code to update coupon*/
-                $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$transactionObject->coupon_code));
-                if(!empty($couponObject)){
-                $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
-                
-                if(!empty($couponCodeObject)){
-                $couponCodeObject->status = 1;
-                $couponCodeObject->save(false);
-                }
-                
-                }
-                /*code to update membership type*/
-                
-                if($userObject->membership_type =='0'){
-                    $userObject->membership_type = $packageObject->type;
-                    $userObject->save(false);
-                }       
-                $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
-               
-                 /*sponsor wallet*/
-                try {
-                    //deduct from from user wallet
-                    $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
-                     
-                    if($sponsorWalletObject){
-                        $fromAmountpercent = $packageObject->amount*5/100;
-                        $fromAmount = ($sponsorWalletObject->fund) + $fromAmountpercent;
-                        $sponsorWalletObject->fund = $fromAmount;
-                        $sponsorWalletObject->update();
-                    } else {
-                        $fromAmountpercent = $packageObject->amount*5/100;
-                        $sponsorWalletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmountpercent,'3');
-                    }
-                    
-                    /* For Binary Commision */
-                    $genealogyObject = Genealogy::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
-                    
-                    if(!empty($genealogyObject)){                        
-                      $genealogyObject->order_amount = $packageObject->amount;
-                      $genealogyObject->order_date = date('Y-m-d');
-                      $genealogyObject->save(false);  
-                    }
-                    
-                    
-                    /* code to deduct amount from admin commission wallet*/
-                    
-                    $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 3));
-                    /*if($adminWalletObject)
+                if ($transactionObject->status == 0) {
+                    $transactionObject->status = 1;
+                    $transactionObject->paid_amount = ($transactionObject->actual_amount) - ($transactionObject->used_rp);
+                    $transactionObject->created_at = date('Y-m-d');
+                    $transactionObject->update();
+                    $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
+                    $orderObject->status = 1;
+                    $orderObject->start_date = date('Y-m-d');
+                    $orderObject->end_date = (date('Y') + 1) . date('-m-d');
+                    $orderObject->update();
+
+
+
+                    $MTObject = MoneyTransfer::model()->findAll(array('condition' => 'transaction_id=' . $transactionObject->id));
+                    foreach($MTObject as $mObject){}
+                    if(!empty($MTObject))
                     {
-                        $fromAmountpercent = $packageObject->amount*5/100;
-                        $adminWalletObject->fund = ($adminWalletObject->fund) - $fromAmountpercent;
-                        $adminWalletObject->update();
+                        $mObject->status = 1;
+                        $mObject->update();
+                        $MTObject1 = Wallet::model()->findByAttributes(array('id' => $mObject->wallet_id));
+                        $MTObject1->fund = $MTObject1->fund - $transactionObject->used_rp;    
+                        $MTObject1->update();
                     }
-                    */
-                    
-                    /* code to add sponsor transaction*/
-                    $postDataArray['transactionId'] = BaseClass::gettransactionID();
-                    $postDataArray['userId'] = $sponsorUserObject->id;
-                    $postDataArray['mode'] = 'transfer';
-                    $postDataArray['actualAmount'] = $packageObject->amount;
-                    $postDataArray['paid_amount'] = $fromAmountpercent;
-                    $userSposorObject = User::model()->findByPk($sponsorUserObject->id);
-                    $transactionObjectSponsor = Transaction::model()->createTransaction($postDataArray, $userSposorObject,1);
-                    
-                    /* code to add moneytransfer */
-                    
-                    $createdTime = new CDbExpression('NOW()');
-                    $moneyTransfertoObj = new MoneyTransfer;
-                    $moneyTransfertoObj->from_user_id = 1;
-                    $moneyTransfertoObj->to_user_id = $sponsorUserObject->id;
-                    $moneyTransfertoObj->transaction_id = $transactionObjectSponsor->id;
-                    $moneyTransfertoObj->fund_type = 2;//1:RP,2:Cash
-                    $moneyTransfertoObj->fund = $fromAmountpercent;//1:RP,2:Cash
-                    $moneyTransfertoObj->comment = "Direct Commision Transfered";
-                    $moneyTransfertoObj->status = 1;
-                    $moneyTransfertoObj->wallet_id = $adminWalletObject->id;
-                    $moneyTransfertoObj->to_wallet_id = $sponsorWalletObject->id;
-                    $moneyTransfertoObj->created_at = $createdTime;
-                    $moneyTransfertoObj->updated_at = $createdTime;
-                    if(!$moneyTransfertoObj->save()){
-                        echo "<pre>";
-                        print_r($moneyTransfertoObj->getErrors());
-                    exit;
+
+                    ob_start();
+                    $orderObject = Order::model()->findByAttributes(array('transaction_id' => $transactionObject->id));
+                    $userObject = User::model()->findByPk(Yii::app()->session['userid']);
+
+                    /*to get sponsor email*/
+                    $packageObject = Package::model()->findByPK($orderObject->package_id);
+
+                    /*code to update coupon*/
+                    $couponObject = Coupon::model()->findByAttributes(array('coupon_code'=>$transactionObject->coupon_code));
+                    if(!empty($couponObject)){
+                    $couponCodeObject = UserHasCoupon::model()->findByAttributes(array('coupon_id' =>$couponObject->id ,'user_id'=> Yii::app()->session['userid']));
+
+                    if(!empty($couponCodeObject)){
+                        $couponCodeObject->status = 1;
+                        $couponCodeObject->save(false);
                     }
-                } catch (Exception $ex) {
-                    $ex->getMessage();
-                    exit;
-                }
-                
-                /* Insert Ads */
 
-                $userId = Yii::app()->session['userid'];
-                $next_year = strtotime('+299 day'); //For next 300 day
-                $current_time = time();
-                $i = 1 ;
-                $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId , 'order_id' => $orderObject->id ));
+                    }
+                    /*code to update membership type*/
+                    if($userObject->membership_type =='0'){
+                        $userObject->membership_type = $packageObject->type;
+                        $userObject->save(false);
+                    }       
+                    $sponsorUserObject = User::model()->findByAttributes(array('name' => $userObject->sponsor_id));
 
-                if(count($userAdsObject) == 0 ){
-                    while($current_time < $next_year){  
+                     /*sponsor wallet*/
+                    try {
+                        //deduct from from user wallet
+                        $sponsorWalletObject = Wallet::model()->findByAttributes(array('user_id' => $sponsorUserObject->id, 'type' => 3));
 
-                        $randAds = Ads::model()->find(array('select'=>'*', 'limit'=>'1', 'order'=>'rand()'));        
-                        if($i == 1){
-                            $current_time = strtotime('+0 day', $current_time);                        
-                        }else{
-                            $current_time = strtotime('+1 day', $current_time);
+                        if($sponsorWalletObject){
+                            $fromAmountpercent = $packageObject->amount*5/100;
+                            $fromAmount = ($sponsorWalletObject->fund) + $fromAmountpercent;
+                            $sponsorWalletObject->fund = $fromAmount;
+                            $sponsorWalletObject->update();
+                        } else {
+                            $fromAmountpercent = $packageObject->amount*5/100;
+                            $sponsorWalletObject = Wallet::model()->create($sponsorUserObject->id,$fromAmountpercent,'3');
                         }
-                        $modelUserShareAd = new UserSharedAd();
-                        $modelUserShareAd->user_id = Yii::app()->session['userid'];
-                        $modelUserShareAd->order_id = $orderObject->id;
-                        $modelUserShareAd->date = date('Y-m-d', $current_time);
-                        $modelUserShareAd->ad_id = $randAds->id;
-                        $modelUserShareAd->status = 0;
-                        $modelUserShareAd->created_at = date('Y-m-d');
-                        $modelUserShareAd->save(false);               
-                        $i++;
+
+                        /* For Binary Commision */
+                        $genealogyObject = Genealogy::model()->findByAttributes(array('user_id' => Yii::app()->session['userid']));
+
+                        if(!empty($genealogyObject)){                        
+                          $genealogyObject->order_amount = $packageObject->amount;
+                          $genealogyObject->order_date = date('Y-m-d');
+                          $genealogyObject->save(false);  
+                        }
+
+
+                        /* code to deduct amount from admin commission wallet*/
+                        $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => 3));
+                        /*if($adminWalletObject)
+                        {
+                            $fromAmountpercent = $packageObject->amount*5/100;
+                            $adminWalletObject->fund = ($adminWalletObject->fund) - $fromAmountpercent;
+                            $adminWalletObject->update();
+                        }
+                        */
+
+                        /* code to add sponsor transaction*/
+                        $postDataArray['transactionId'] = BaseClass::gettransactionID();
+                        $postDataArray['userId'] = $sponsorUserObject->id;
+                        $postDataArray['mode'] = 'transfer';
+                        $postDataArray['actualAmount'] = $packageObject->amount;
+                        $postDataArray['paid_amount'] = $fromAmountpercent;
+                        $userSposorObject = User::model()->findByPk($sponsorUserObject->id);
+                        $transactionObjectSponsor = Transaction::model()->createTransaction($postDataArray, $userSposorObject,1);
+
+                        /* code to add moneytransfer */
+
+                        $createdTime = new CDbExpression('NOW()');
+                        $moneyTransfertoObj = new MoneyTransfer;
+                        $moneyTransfertoObj->from_user_id = 1;
+                        $moneyTransfertoObj->to_user_id = $sponsorUserObject->id;
+                        $moneyTransfertoObj->transaction_id = $transactionObjectSponsor->id;
+                        $moneyTransfertoObj->fund_type = 2;//1:RP,2:Cash
+                        $moneyTransfertoObj->fund = $fromAmountpercent;//1:RP,2:Cash
+                        $moneyTransfertoObj->comment = "Direct Commision Transfered";
+                        $moneyTransfertoObj->status = 1;
+                        $moneyTransfertoObj->wallet_id = $adminWalletObject->id;
+                        $moneyTransfertoObj->to_wallet_id = $sponsorWalletObject->id;
+                        $moneyTransfertoObj->created_at = $createdTime;
+                        $moneyTransfertoObj->updated_at = $createdTime;
+                        if(!$moneyTransfertoObj->save()){
+                            echo "<pre>";
+                            print_r($moneyTransfertoObj->getErrors());
+                        exit;
+                        }
+                    } catch (Exception $ex) {
+                        $ex->getMessage();
+                        exit;
                     }
+                    
+                    /* Create template code start here */
+                    $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $orderObject->templateId));
+                    /* Copy Image folder to another location */
+                    $path = Yii::getPathOfAlias('webroot');  
+                    $userID = Yii::app()->session['userid'] ;
+                    $tempID = $orderObject->templateId ;
+                    /*Create Folder And Permission */
+                    if(!file_exists($path."/builder_images/".$userID)){
+                        !mkdir($path."/builder_images/".$userID.'/', 0777, true);
+                    }
+                    if(!file_exists($path."/builder_images/".$userID.'/'.$tempID)){
+                        !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
+                    }
+                    BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
+                        
+                    /* Number of pages creation*/
+                    $pageCount = BaseClass::pagesCount($orderObject->id);
+                    $orderId = Yii::app()->session['orderID'];
+                    $hasbuilderObject = UserHasTemplate::model()->addTemplate( $buildertempObject,$orderObject->id,$userID);
+                    UserPages::model()->createNewPages($userID, $orderObject->id, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
+                
+
+                    /* Insert Ads */
+                    $userId = Yii::app()->session['userid'];
+                    $next_year = strtotime('+299 day'); //For next 300 day
+                    $current_time = time();
+                    $i = 1 ;
+                    $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId , 'order_id' => $orderObject->id ));
+
+                    if(count($userAdsObject) == 0 ){
+                        while($current_time < $next_year){  
+
+                            $randAds = Ads::model()->find(array('select'=>'*', 'limit'=>'1', 'order'=>'rand()'));        
+                            if($i == 1){
+                                $current_time = strtotime('+0 day', $current_time);                        
+                            }else{
+                                $current_time = strtotime('+1 day', $current_time);
+                            }
+                            $modelUserShareAd = new UserSharedAd();
+                            $modelUserShareAd->user_id = Yii::app()->session['userid'];
+                            $modelUserShareAd->order_id = $orderObject->id;
+                            $modelUserShareAd->date = date('Y-m-d', $current_time);
+                            $modelUserShareAd->ad_id = $randAds->id;
+                            $modelUserShareAd->status = 0;
+                            $modelUserShareAd->created_at = date('Y-m-d');
+                            $modelUserShareAd->save(false);               
+                            $i++;
+                        }
+                    }
+
+                    $description = substr($packageObject->Description, 20);
+                    $Couponbody = "";
+                    if ($transactionObject->coupon_discount != '0') {
+                        $Couponbody .= '<tr>
+                <td width="200">Coupon Discount</td>
+                  <td width="200">';
+                        $Couponbody .= $transactionObject->coupon_discount;
+                        $Couponbody .='</td>
+                </tr>';
+                    }
+                    $RPBody = "";
+                    if ($transactionObject->used_rp != 0) {
+                        $RPBody .= '<tr>
+                <td width="200">Used RP /Cash</td>
+                  <td width="200">';
+                        $RPBody .= number_format($transactionObject->used_rp, 2);
+                        $RPBody .= '</td>
+                </tr>';
+                    }
+                    if ($orderObject->domain_price != '0') {
+                        $domain_price = "$" . number_format($orderObject->domain_price, 2);
+                    } else {
+                        $domain_price = "N/A";
+                    }
+                    $Samount = number_format($packageObject->amount + $orderObject->domain_price, 2);
+                    $paid_amount = number_format($transactionObject->paid_amount, 2);
+
+                    /*code to fetch profile */
+                    $userProfileObject = UserProfile::model()->findByAttributes(array('user_id' => $userObject->id));
+
+                    $invoiceArr = array();
+                    $invoiceArr['package_name'] = $packageObject->name;
+                    $invoiceArr['package_price'] = number_format($packageObject->amount,2);
+                    $invoiceArr['Description'] = $packageObject->Description;
+                    $invoiceArr['name'] = $userObject->name;
+                    $invoiceArr['transaction_id'] = $transactionObject->transaction_id;
+                    $invoiceArr['full_name'] = $userObject->full_name;
+                    $invoiceArr['address'] = $userProfileObject->address;
+                    $invoiceArr['email'] = $userObject->email;
+                    $invoiceArr['domain'] = $orderObject->domain;
+                    $invoiceArr['domain_price'] = $domain_price;
+                    $invoiceArr['Samount'] = $Samount;
+                    $invoiceArr['paid_amount'] = $paid_amount;
+                    $invoiceArr['RPBody'] = $transactionObject->used_rp;
+                    $invoiceArr['Couponbody'] = $transactionObject->coupon_discount;
+                    $invoiceArr['created_at'] = $transactionObject->created_at;
+
+
+                    //$body = Package::model()->createInvoice($invoiceArr);
+
+                    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', "A4", "en", array(10, 10, 10, 10));
+                    $orderObject = Order::model()->findByPK($orderObject->id);
+                    $userObjectArr1 = array();
+                    $userObjectArr1['full_name'] = $userObject->name;
+                    //$fp = fopen("/mailTemp/invoice.php","r");
+                    $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
+                    $html2pdf->WriteHTML($body);
+                    $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
+                    $fileName = $userObject->name .'_'.time(). 'invoice.pdf';
+                    $html2pdf->output($path . $fileName, 'F');
+                    $config['to'] = $userObject->email;
+                    $config['subject'] = 'Payment Confirmation';
+                    $config['body'] = $this->renderPartial('../mailTemp/paymentsuccess', array('userObjectArr'=>$userObjectArr1),true);
+                    $config['file_path'] = $path . $fileName;
+                    CommonHelper::sendMail($config);
+
+
+                    $userObjectArr = array();
+                    $userObjectArr['to_name'] = $sponsorUserObject->full_name;
+                    $userObjectArr['user_name'] = $userObject->name;
+                    $config1['to'] = $sponsorUserObject->email;
+                    $config1['subject'] = 'Direct Referral Income Credited';
+                    $config1['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
+                    CommonHelper::sendMail($config1);
+
+                    if ($transactionObject->status == 1) {
+                        unset(Yii::app()->session['transactionid']);
+                        unset(Yii::app()->session['amount']);
+                        unset(Yii::app()->session['package_id']);
+                        unset(Yii::app()->session['transaction_id']);
+                        unset(Yii::app()->session['coupon_code']);
+                        unset(Yii::app()->session['domain']);
+                    } 
                 }
-                
-                
-                
-                
-                $description = substr($packageObject->Description, 20);
-                $Couponbody = "";
-                if ($transactionObject->coupon_discount != '0') {
-                    $Couponbody .= '<tr>
-            <td width="200">Coupon Discount</td>
-              <td width="200">';
-                    $Couponbody .= $transactionObject->coupon_discount;
-                    $Couponbody .='</td>
-            </tr>';
-                }
-                $RPBody = "";
-                if ($transactionObject->used_rp != 0) {
-                    $RPBody .= '<tr>
-            <td width="200">Used RP /Cash</td>
-              <td width="200">';
-                    $RPBody .= number_format($transactionObject->used_rp, 2);
-                    $RPBody .= '</td>
-            </tr>';
-                }
-                if ($orderObject->domain_price != '0') {
-                    $domain_price = "$" . number_format($orderObject->domain_price, 2);
-                } else {
-                    $domain_price = "N/A";
-                }
-                $Samount = number_format($packageObject->amount + $orderObject->domain_price, 2);
-                $paid_amount = number_format($transactionObject->paid_amount, 2);
-                
-                /*code to fetch profile */
-                $userProfileObject = UserProfile::model()->findByAttributes(array('user_id' => $userObject->id));
-                
-                $invoiceArr = array();
-                $invoiceArr['package_name'] = $packageObject->name;
-                $invoiceArr['package_price'] = number_format($packageObject->amount,2);
-                $invoiceArr['Description'] = $packageObject->Description;
-                $invoiceArr['name'] = $userObject->name;
-                $invoiceArr['transaction_id'] = $transactionObject->transaction_id;
-                $invoiceArr['full_name'] = $userObject->full_name;
-                $invoiceArr['address'] = $userProfileObject->address;
-                $invoiceArr['email'] = $userObject->email;
-                $invoiceArr['domain'] = $orderObject->domain;
-                $invoiceArr['domain_price'] = $domain_price;
-                $invoiceArr['Samount'] = $Samount;
-                $invoiceArr['paid_amount'] = $paid_amount;
-                $invoiceArr['RPBody'] = $transactionObject->used_rp;
-                $invoiceArr['Couponbody'] = $transactionObject->coupon_discount;
-                $invoiceArr['created_at'] = $transactionObject->created_at;
-                
-               
-                
-                //$body = Package::model()->createInvoice($invoiceArr);
-                
-                $html2pdf = Yii::app()->ePdf->HTML2PDF('P', "A4", "en", array(10, 10, 10, 10));
-                $orderObject = Order::model()->findByPK($orderObject->id);
-                $userObjectArr1 = array();
-                $userObjectArr1['full_name'] = $userObject->name;
-                //$fp = fopen("/mailTemp/invoice.php","r");
-                $body = $this->renderPartial('../mailTemp/invoice', array('invoiceArr'=>$invoiceArr),true);
-                $html2pdf->WriteHTML($body);
-                $path = Yii::getPathOfAlias('webroot') . "/upload/invoice-pdf/";
-                $fileName = $userObject->name .'_'.time(). 'invoice.pdf';
-                $html2pdf->output($path . $fileName, 'F');
-                $config['to'] = $userObject->email;
-                $config['subject'] = 'Payment Confirmation';
-                $config['body'] = $this->renderPartial('../mailTemp/paymentsuccess', array('userObjectArr'=>$userObjectArr1),true);
-                $config['file_path'] = $path . $fileName;
-                CommonHelper::sendMail($config);
-                
-                
-                $userObjectArr = array();
-                $userObjectArr['to_name'] = $sponsorUserObject->full_name;
-                $userObjectArr['user_name'] = $userObject->name;
-                $config1['to'] = $sponsorUserObject->email;
-                $config1['subject'] = 'Direct Referral Income Credited';
-                $config1['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config1);
-                
-              if ($transactionObject->status == 1) {
-                unset(Yii::app()->session['transactionid']);
-                unset(Yii::app()->session['amount']);
-                unset(Yii::app()->session['package_id']);
-                unset(Yii::app()->session['transaction_id']);
-                unset(Yii::app()->session['coupon_code']);
-                unset(Yii::app()->session['domain']);
-            } 
-            }
             }
             $successMsg = "Thank you for your order! Your invoice has been sent to you by email, you should receive it soon.";
             echo "<script>setTimeout(function(){window.location.href='/order/list'},5000);</script>";
@@ -828,7 +843,7 @@ class PackageController extends Controller {
             $transactionId = $_GET['transaction_id'];
             $transactionObject = Transaction::model()->findByAttributes(array('transaction_id' => $transactionId));
             $userObject = User::model()->findByPK(Yii::app()->session['userid']);
-	    if($transactionObject->status == 1) {
+	    if($transactionObject->status == 0) {
             $transactionObject->status = 1;
              $transactionObject->created_at = date('Y-m-d');
             $transactionObject->update();

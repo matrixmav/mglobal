@@ -166,4 +166,35 @@ class UserHasTemplate extends CActiveRecord
             $hasbuilderObject->save(false);
             return $hasbuilderObject;
         }
+        
+        
+        public function addTemplate($buildertempObject,$orderId,$userId){
+
+            $model = new UserHasTemplate;
+            $model->category_id = $buildertempObject->category_id;
+            $model->user_id = $userId;
+            $model->template_id = $buildertempObject->template_id;
+            $model->custom_css = $buildertempObject->custom_css;
+            $model->custom_js = $buildertempObject->custom_js;
+            $model->contact_form = $buildertempObject->contact_form;
+            $model->head_content = $buildertempObject->header->head_content;
+           
+            //echo $hasbuilderObject->head_content ; die;
+            $baseURL = Yii::app()->getBaseUrl(true)."/";
+            $tempHeader = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->header->header_content)); 
+            $tempFooter = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->footer->footer_content)); 
+            $bb = str_replace('src="images/','src="'.$baseURL.'builder_images/'.$userId.'/'.$buildertempObject->template_id.'/' , stripcslashes($buildertempObject->body->body_content)); 
+            
+            $model->temp_header = addslashes($tempHeader);
+            $model->user_menu = $buildertempObject->header->menu;
+            $model->temp_body = addslashes($bb);
+            $model->temp_footer = addslashes($tempFooter);
+            
+            $model->order_id = $orderId;
+            $model->publish = 0;
+            $model->created_at = date('Y-m-d');
+            $model->save(false);
+            return $model;
+        }
+        
 }

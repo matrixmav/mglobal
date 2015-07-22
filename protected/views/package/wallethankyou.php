@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-lg-12">    
         <div id="maincontent" class="pageWrp checkout abtest">
-            <div class="success"><?php echo $successMsg;?></div>
+            <p class='success success-new'><i class='fa fa-check-circle icon-success'></i><span class='span-sucess'><?php echo $successMsg;?></span></p>
        </div>
     </div>
 </div>

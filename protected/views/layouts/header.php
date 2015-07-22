@@ -237,7 +237,7 @@ if(isset(Yii::app()->session) && Yii::app()->session['userid']!=''){ ?>
            
             <li><a href="#benefits">Benefits</a></li>
             <li><a href="#portfolio">Templates </a></li>
-            
+            <li><a href="/user/legal">Legal </a></li>
             <li><a href="#contact">Contact</a></li>
              <li>   <a href="/user/faq" class="fancybox">FAQ</a>
                   <div id="inline14" style="display:none" class="readMoreBox content">
