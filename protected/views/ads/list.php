@@ -63,7 +63,6 @@ $this->breadcrumbs = array(
                                             $img =  '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$adObject->banner . '"'; 
                                             $link = '"' . $adObject->description . '"';
                                             $name = '"' . $adObject->name . '"';
-                                            $desc = '"' . $adObject->description . '"';
                                             $caption = '""';
                                             $adId = '"' . $adObject->id . '"';
                                         ?>
