@@ -2,7 +2,7 @@
 $this->breadcrumbs = array(
     'Page Add',
 );
-//print_r($userpagesObject); die;
+//print_r($_SESSION); die;
 ?>
 <div class="col-md-12 col-sm-12" id="test">
     <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>

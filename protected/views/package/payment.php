@@ -11,7 +11,7 @@
                     <div class="col-xs-4 bs-wizard-step complete">
                         <div class="text-center bs-wizard-stepnum">Step 1</div>
                         <div class="progress"><div class="progress-bar"></div></div>
-                        <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id']; ?>&tId=<?php echo $_GET['tId']; ?>" class="bs-wizard-dot"></a>
+                        <a href="/package/domainsearch?package_id=<?php echo Yii::app()->session['package_id']; ?>&tId=<?php echo $_GET['tId']; ?><?php if(!empty($_GET['templateId'])){?>&templateId=<?php echo $_GET['templateId'];} ?> " class="bs-wizard-dot"></a>
                         <div class="bs-wizard-info text-center">Domain Search.</div>
                     </div>
 

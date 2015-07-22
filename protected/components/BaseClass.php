@@ -1329,11 +1329,19 @@ class BaseClass extends Controller {
     }
     
     public static function buildWebsiteHeader() {
-        $link = '<div class="row setingBox"><a href="/BuildTemp/addlogo" class="btn orange">Logo Setting</a>    
+       
+        $orderObject = Order::model()->findByAttributes(array('id' =>  $_SESSION['orderID'] ));
+        
+        $packgeId = $orderObject->package_id ;
+        
+       $link = '<div class="row setingBox"><a href="/BuildTemp/addlogo" class="btn orange">Logo Setting</a>    
         <!--<a href="/BuildTemp/addheader" class="btn orange">Header Setting</a>-->    
         <a href="/BuildTemp/contactsetting" class="btn orange">Contact Settings</a> 
-        <a href="/BuildTemp/addfooter" class="btn orange">Footer Setting</a> 
-        <a href="/BuildTemp/menusetting" class="btn orange">Menus Setting</a> </div>';
+        <a href="/BuildTemp/addfooter" class="btn orange">Footer Setting</a>'; 
+       if($packgeId == '4' || $packgeId == '5' || $packgeId == '6' ){
+           $link .='<a href="/BuildTemp/menusetting" class="btn orange">Menus Setting</a>';
+       }
+        $link .= '</div>';
         return $link;
     }
     
@@ -1420,7 +1428,19 @@ class BaseClass extends Controller {
                 $parentObject->right_carry = 0;
                 $parentObject->left_carry = ($leftNodeAmount-$rightNodeAmount);
             }
-            $parentObject->commission_amount = $binaryAmount;
+            if($parentObject->id !='1') {
+                $limit = self::cappingLimit($parentObject);
+                if($binaryAmount > $limit) {
+                    $parentObject->commission_amount = $limit;
+                    $parentObject->right_carry = 0;
+                    $parentObject->left_carry = 0;
+                } else{
+                    $parentObject->commission_amount = $binaryAmount;   
+                } 
+            } else {
+                $parentObject->commission_amount = $binaryAmount;    
+            }
+           
             $parentObject->save(false);
             if($binaryAmount !=0) {
             self::createCommissionTransaction($binaryAmount,$parentObject);
@@ -1430,6 +1450,29 @@ class BaseClass extends Controller {
         }
         return $parentObject;
         
+    }
+    public static function cappingLimit($parentObject)
+    {
+        
+        $orderObject = Order::model()->findByAttributes(array('user_id '=> $parentObject->user_id),array('order' => 'package_id DESC'));
+            
+            /* packageObject*/
+            
+            //$packageObject = Package::model()->findByPk($orderObject->package_id);
+            $orderObject->package()->type;
+            if($orderObject->package()->type==1)
+            {
+                $limit = 1000;
+            }
+            if($orderObject->package()->type==2)
+            {
+                $limit = 1500;
+            }
+            if($orderObject->package()->type==3)
+            {
+                $limit = 2500;
+            }
+            return $limit;
     }
     
     public static function createCommissionTransaction($binaryAmount,$parentObject) {

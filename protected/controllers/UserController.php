@@ -456,7 +456,7 @@ class UserController extends Controller {
                             Yii::app()->session['username'] = $getUserObject->name;
                             Yii::app()->session['frontloggedIN'] = "1";
                             
-                            if (!empty(Yii::app()->session['package_id'])) {
+                            if (!empty(Yii::app()->session['package_id']) && empty(Yii::app()->session['template_id'])) {
                              $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                              if(!empty($userObject)){
                              $packageObject = Package::model()->findByPk(Yii::app()->session['package_id']);   
@@ -470,7 +470,11 @@ class UserController extends Controller {
                              }
                             }
                             
-                             } else {
+                             } 
+                             elseif(!empty(Yii::app()->session['template_id']) && !empty(Yii::app()->session['package_id'])) {
+                             $this->redirect("/package/domainsearch?templateId=".Yii::app()->session['template_id']."&package_id=".Yii::app()->session['package_id']);
+                             }
+                             else {
                                 $this->redirect("/profile/dashboard");
                             }
                         } else {
@@ -812,7 +816,7 @@ class UserController extends Controller {
         require(__DIR__ . '/../vendor/recaptch/recaptchalib.php');
         $spnId = Yii::app()->params['adminSpnId'];
         Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
-
+        Yii::app()->session['template_id'] = (!empty($_GET['templateId'])) ? $_GET['templateId'] : "";
         $countryObject = Country::model()->findAll();
 //            echo "<pre>";print_r($countryObject);exit;
         $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId));

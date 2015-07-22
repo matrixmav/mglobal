@@ -56,7 +56,7 @@ class AdsController extends Controller {
         ));
     }
 
-    public function getSocialButton($data, $row) {        
+    public function getSocialButton($data) {        
         $this->renderPartial('shareoptions', array('data' => $data), false, true);
        
     }
@@ -162,8 +162,9 @@ class AdsController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-
+        $dataProviderArray ="";
         $successMsg = "";
+        $dataProviderArray = "";
         $orderObject = Order::model()->findAll(array('condition' => 'user_id = '. Yii::app()->session['userid']));
         foreach($orderObject as $orderObjectList){           
             $userSharedAdObject = UserSharedAd::model()->findAll(array('condition' => ' order_id = '.$orderObjectList->id ));

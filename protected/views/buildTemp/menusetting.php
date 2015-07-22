@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
     if (count($userpagesObject) > 0) {
         foreach ($userpagesObject as $page) {
             ?>
-            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
+            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn orange"><?php echo $page->page_name; ?></a>
         <?php }
     }
     ?> 

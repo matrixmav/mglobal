@@ -4,12 +4,25 @@
         <meta charset="utf-8">
         <title>Untitled Document</title>
         <link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+		<style>
+		.print-invoice
+		{
+			background:#E54A1A;
+			padding:10px 15px;
+			color:#fff;
+			font-family:"PT Sans Narrow";
+			cursor:pointer;
+			margin-top:10px;
+			float:left;
+		}
+		</style>
     </head>
 
     <body>
         <table align="center" width="700" cellspacing="0" cellpadding="0" border="0" style="width:700px;">
        <tr>
-       <td style="text-align:center;float:right;"><a class="btn-flat-green" onclick="window.print();">Print Invoice</a>
+       <td style="text-align:center;float:right;"><a class="btn-flat-green print-invoice" onclick="window.print();">Print Invoice</a>
        </td>
        </tr>
         </table>

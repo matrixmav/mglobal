@@ -1453,6 +1453,7 @@ Pre-Footer and pre-footer elements
 }
 .copyright {
   padding-top: 7px;
+    margin-left: -5%;
 }
 @-moz-document url-prefix() { 
   .copyright {
@@ -1466,7 +1467,42 @@ Pre-Footer and pre-footer elements
 .footer ul.social-icons li:hover a {
   opacity: 1 !important;
 }
-
+.policy-section
+{
+width:100%;
+border-bottom:1px solid #fff;
+float:left;
+padding:10px 0;
+}
+.policy-section ul
+{
+  display: inline-block;
+  margin: auto;
+  padding: 0;
+  margin-left:40%;
+}
+.policy-section ul  li
+{
+float:left;
+margin:0 10px;
+list-style:none;
+border-right:1px solid #fff;
+padding-right:15px;
+}
+.policy-section ul  li:last-child
+{
+border-right:none;
+}
+.policy-section ul  li a
+{
+text-decoration:none;
+}
+.bg-f2
+{
+float:left;
+width:100%;
+padding-top:10px;
+}
 /* go2top */
 .go2top,
 .go2top:focus {
@@ -1486,6 +1522,7 @@ Pre-Footer and pre-footer elements
 
   font-size: 18px;
   line-height: 1;
+    margin-bottom: 60px;
 }
 .go2top:hover {
   border: solid 2px #e6400c;
@@ -1928,6 +1965,7 @@ Pre-Header and pre-header elements
 .signBtn{color: #f15d2a; font-size: 14px; background: #fdd922; border: none; border-radius: 4px; padding: 6px 20px; box-shadow: 0px 2px 1px 0px #424242;}
 .signBtn:hover{padding: 6px 20px;}
 .mailTxt{margin: 10px 0; min-width: 280px; margin-right: 10px;}
+.social-icons{float:left;}
 .social-icons li{ list-style: none;}
 
 /*--------------pre footer-------------*/
@@ -2025,7 +2063,7 @@ color:#FFF; background: #c9c9c9;}
 .packPick:hover{background: #f15d2a; color:#FFF;}
 
 #testimonials-block ol li{width:auto !important; text-indent:0; background: none;}
-.testimonialBox{width:300px; display: inline-block;}
+.testimonialBox{width:100%; display: inline-block;}
 .customerImg{width: 120px; height: 120px;  float: left;
     margin: 0 6px 0 0;
     text-align: center;}
@@ -2041,7 +2079,7 @@ color:#FFF; background: #c9c9c9;}
 .customerTxt {  display: table-cell;
   vertical-align: middle;
   height: 100px;
-  width: 180px;
+  width: auto;
   text-align: left;}
 .customerTxt span{font-size: 20px; font-weight: bold;} 
 .testimonials-block h4 i{color:#78828c; font-size: 50px; padding:20px;}
