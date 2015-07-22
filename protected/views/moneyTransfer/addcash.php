@@ -7,7 +7,9 @@
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2-metronic.css"/>
 <div class="col-md-6 col-sm-6">
     <div class="error" id="error_msg" style="display: none;"></div>
-    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
+    
+    
+    <?php if ($error) { ?><p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"><?php echo $error; ?></span></p><?php } ?>
        <div class="portlet box orange ">
     <div class="portlet-title">
 							<div class="caption">

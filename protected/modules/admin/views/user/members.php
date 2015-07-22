@@ -51,7 +51,7 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
-        <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><div class="success" id="error_msg"><?php echo "Status Changed Successfully";?></div><?php }?>
+        <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "Status Changed Successfully";?></span></p><?php }?>
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
