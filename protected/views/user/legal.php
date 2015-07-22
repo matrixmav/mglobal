@@ -54,7 +54,7 @@
 			<div class="legal">
 				<a href="" data-toggle="modal" data-target="#legal1"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="../../../images/legal1.png" download="legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
@@ -62,7 +62,7 @@
 			<div class="legal">
 				<a href="" data-toggle="modal" data-target="#legal2"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="../../../images/legal1.png" download="legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
@@ -70,7 +70,7 @@
 			<div class="legal">
 				<a href="" data-toggle="modal" data-target="#legal1"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="../../../images/legal1.png" download="legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
@@ -78,7 +78,7 @@
 			<div class="legal">
 				<a href="" data-toggle="modal" data-target="#legal2"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="../../../images/legal1.png" download="legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
@@ -86,7 +86,7 @@
 			<div class="legal">
 				<a href="" data-toggle="modal" data-target="#legal1"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="../../../images/legal1.png" download="legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 		
@@ -94,7 +94,7 @@
 			<div class="legal">
 				<a href="" data-toggle="modal" data-target="#legal2"><img src="../../../images/legal1.png"></a>
 				<span class="legal-name">abcd
-				<a href="#" download="../../../images/legal1.png"><i class="fa fa-download"></i></a></span>
+				<a href="../../../images/legal1.png" download="legal1.png"><i class="fa fa-download"></i></a></span>
 			</div>
 		</div>
 
