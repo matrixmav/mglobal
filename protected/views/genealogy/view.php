@@ -20,7 +20,7 @@ $empty = "sm-blank" ; //no Package
         <span><?php if (!empty($_GET) && $_GET['id'] != '') { ?><a onclick="window.history.back(-1);" style="float:right;font-size:16px;color:#f15c2b;cursor:pointer;text-decoration:none;">Go Back >></a><?php } ?></span>
     </div>
 </div>
-
+<div class="row">
     <div class="col-sm-8 col-xs-12">
         <div class="row mytree">
             <ul>
@@ -31,7 +31,7 @@ $empty = "sm-blank" ; //no Package
                     $getUserInfoRight = BaseClass::getLeftRightMember($currentUserId ,'right');
                     $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');                          
                     ?>
-                    <a href="" class="<?php echo $getColor ; ?>"><div><span><?php echo $userObject->name; ?></span></div></a>
+                    <a href="" class="<?php echo $getColor ; ?>"><div><span data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"><?php echo $userObject->name; ?></span></div></a>
                     <ul>
                         <li>
                             <?php
@@ -108,7 +108,7 @@ $empty = "sm-blank" ; //no Package
             </ul>
         </div> 
     </div>    
-        
+</div>
         
 <!--             <div class="col-sm-4 col-xs-12">
                  <ul class="packageDetail">
@@ -285,3 +285,11 @@ $empty = "sm-blank" ; //no Package
     </div>
    
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true) ;?>/css/main.css">
+ <script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+</script>
+<style>
+    .tooltip.fade.bottom.in{left:45% !important; display: block !important;}
+</style>

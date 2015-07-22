@@ -265,7 +265,15 @@ right connector from last child*/
 .mytree ul ul::before{height: 65px;}
 .sm-blank span{font-size:20px !important;}
 }
-
+ .mytree .tooltip-arrow{width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	
+	border-bottom: 5px solid black; left:7% !important;;}
+  .mytree .tooltip-inner{width:auto !important; height: auto !important; border-radius: 3px !important;}
+  .mytree .tooltip.fade.bottom.in{left:44% !important;}
+  .mytree .tooltip.fade.bottom{left:44% !important;}
 @media (max-device-width: 767px) and (min-device-width: 481px)
 {
     .mytree ul li{float: left;
@@ -329,6 +337,6 @@ right connector from last child*/
 /* custom-fonts */
 @font-face {
    font-family:'DejaVuSans';
-	src: url('/font/DejaVuSans.ttf');
+	src: url('/fonts/DejaVuSans.ttf');
 	
 	}

@@ -12259,7 +12259,7 @@ div#sidebar.lfloat
     color: #a0a0a0;
 }
 .cart-btn-wrapper .btn-orange{
-    background: #ff6b00; /* Old browsers */
+    background: #ff6b00 !important; /* Old browsers */
     background: -moz-linear-gradient(top,  #ff6b00 0%, #ff3d00 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff6b00), color-stop(100%,#ff3d00)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #ff6b00 0%,#ff3d00 100%); /* Chrome10+,Safari5.1+ */
@@ -12275,6 +12275,7 @@ div#sidebar.lfloat
     font-size: 24px;
     font-weight: bold;
     padding: 10px 34px;
+    color:#fff !important;
 }
 .cart-btn-wrapper .btn-orange.disabled{
     background: #dddddd; /* Old browsers */

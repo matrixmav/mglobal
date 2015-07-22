@@ -30,11 +30,11 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted',
+                'actions' => array('index', 'getnodes','view', 'registration', 'isuserexisted',
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification','policy1','policy2','policy3','policy4','legal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -477,10 +477,7 @@ class UserController extends Controller {
                              else {
                                 $this->redirect("/profile/dashboard");
                             }
-                        } else {
-                            // echo "0"; 
-                            $error = "<p class='error error-2'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error-2'>Invalid Login Credientials</span></p>";
-                        }
+                        } 
                     } else {
                         $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
 
@@ -982,7 +979,7 @@ class UserController extends Controller {
         $cond1 = ' AND build_temp.package IN ('.$str.')';
         }
         if(!empty($_GET['key'])!=''){
-         $cond2 = 'AND build_temp_header.template_title like "%'.$_GET["key"].'%"';
+         $cond2 = 'AND build_category.name like "%'.$_GET["key"].'%"';
         }
         if(!empty($_GET['searchstring'])!=''){
          $cond3 = 'AND build_temp_header.template_title like "%'.$_GET["searchstring"].'%"';
@@ -1041,14 +1038,16 @@ if(!empty($_GET))
         
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
+                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200">
                     </div>
 
                     <div class="img-footer">
                         <h4>'.$row1["template_title"].'</h4>
                         <div class="box-relative">
+                        
                             <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
                         </div>  
+                        <p>&nbsp;</p>
                         <ul class="list-unstyled list-inline rating">
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
@@ -1057,17 +1056,17 @@ if(!empty($_GET))
                             <li><i class="glyphicon glyphicon-star-empty"></i></li>
                           </ul>
                   <div class="thumbnail-arrow"></div>
-                    </div>
-                   <a href="/user/template/'.$row1['folderpath'].'/index.html" target="_">View Demo</a> 
+      </a>              </div>
+                     
 </div>'; 
     }
     }else{
-        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>
+        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>';
                     
+      }              
                     
-                    
-                </div>'; 
-    }
+                $buildStr .= '</div>'; 
+    
     echo $buildStr;
  }
     
@@ -1085,5 +1084,49 @@ public function actiontemplateSpecification() {
             'tempObject' => $row,
         ));   
 }
+
+public function actionPolicy1() {
+   
+    $this->render('policy1');
     
+      
+}
+
+public function actionPolicy2() {
+   
+    $this->render('policy2');
+    
+      
+}
+
+public function actionPolicy3() {
+   
+    $this->render('policy3');
+    
+      
+}
+
+public function actionPolicy4() {
+   
+    $this->render('policy4');
+    
+
+      
+}
+
+public function actionLegal() {
+   
+    $this->render('legal');
+    
+      
+}
+
+static function actiongetNodes() {
+        $adminId = 1;
+        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
+        $parentObject = BaseClass::getNode($parentObject);  
+       
+}
+    
+
 }
