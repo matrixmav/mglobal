@@ -684,7 +684,7 @@ class UserController extends Controller {
 
                 $this->redirect(array('login', 'successMsg' => $msg));
             } else {
-                $msg = "<p class='error'>Please Enter Your Valid Email Address.</p>";
+                $msg = "Please Enter Your Valid Email Address.";
             }
         }
         $this->render('forgetpassword', array('msg' => $msg));
