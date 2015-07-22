@@ -1280,9 +1280,9 @@ class BaseClass extends Controller {
     /* For the package info */
     public static function getPackageName($getPackageName) {
         
-        $orderListObject = Order::model()->findAll(array('condition' => 'status = 1 AND user_id = ' . $getPackageName.' Limit 1'));
+        $orderListObject = Order::model()->findByAttributes(array('status' => 1 , 'user_id' => $getPackageName),array('order' => 'package_id DESC'));
         $userObject = User::model()->findByPk($getPackageName);
-        //print_r($userObject) ;
+       
         $color = "sm-nothing";
         
         if($userObject->status == 0 ){
@@ -1291,40 +1291,33 @@ class BaseClass extends Controller {
         if($userObject->status == 1 ){
             $color = "sm-user-active";
         }        
-        $orderArray = array();
+        $orderArray = array();                
         
         if (count($orderListObject) > 0) {
             $myAmount = 0;
-            foreach ($orderListObject as $orderObject) {
-                $orderAmount = $orderObject->package(array('order' => 'amount DESC'));
-                if ($myAmount < $orderAmount->amount) {
-                    $myAmount = $orderAmount->amount;
-                    $type = $orderAmount->id; 
-                    
-                    if ($type == 1) {
-                        $color = "sm-basicp1"; //Basic Packages 2
-                    } else if ($type == 2) {
-                        $color = "sm-basicp2"; //Basic Packages 3
-                    } else if ($type == 3) {
-                        $color = "sm-basicp3"; //Advance Packages 1
-                    } else if ($type == 4) {
-                        $color = "sm-advancep1"; //Advance Packages 1
-                    } else if ($type == 5) {
-                        $color = "sm-advancep2"; //Advance Packages 2
-                    } else if ($type == 6) {
-                        $color = "sm-advancep3"; //Advance Packages 3
-                    } else if ($type == 7) {
-                        $color = "sm-pro1"; //Advance Pro Packages 1
-                    } else if ($type == 8) {
-                        $color = "sm-pro2"; //Advance Pro Packages 2
-                    } else if ($type == 9) {
-                        $color = "sm-pro3"; //Advance Pro Packages 3
-                    } else {
-                       // $color = "sm-zzz"; //No Purchase 
-                    }
-                    
-                }
-            }
+            $type = $orderListObject->package_id; 
+            if ($type == 1) {
+                $color = "sm-basicp1"; //Basic Packages 2
+            } else if ($type == 2) {
+                $color = "sm-basicp2"; //Basic Packages 3
+            } else if ($type == 3) {
+                $color = "sm-basicp3"; //Advance Packages 1
+            } else if ($type == 4) {
+                $color = "sm-advancep1"; //Advance Packages 1
+            } else if ($type == 5) {
+                $color = "sm-advancep2"; //Advance Packages 2
+            } else if ($type == 6) {
+                $color = "sm-advancep3"; //Advance Packages 3
+            } else if ($type == 7) {
+                $color = "sm-pro1"; //Advance Pro Packages 1
+            } else if ($type == 8) {
+                $color = "sm-pro2"; //Advance Pro Packages 2
+            } else if ($type == 9) {
+                $color = "sm-pro3"; //Advance Pro Packages 3
+            } else {
+               // $color = "sm-zzz"; //No Purchase 
+            }             
+            
         }
         return $color;
     }
