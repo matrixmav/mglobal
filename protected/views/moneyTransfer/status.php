@@ -13,7 +13,8 @@ $this->breadcrumbs = array(
             <div class="col-lg-10">
                 <?php
                 if($transactionObject->status == 1){ ?>
-                <div class="success"><?php echo "Your Transaction is Success";?></div>
+                
+                <p class="success-2"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "Your Transaction is Successful";?></span></p>
                 <h1><b>Thank you.</b></h1>
 
                 <h3>Your Transaction is successful</h3>

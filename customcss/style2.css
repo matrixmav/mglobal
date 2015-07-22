@@ -13894,3 +13894,29 @@ span.second-line{
   color: #000;
   font-weight:normal;
 }
+
+
+.error-2 {
+    background:#FAE1E1;
+    border:1px solid #FF8080;
+    color:#E85C5C;
+    font-size:12px;
+    font-weight:bold;
+    line-height:1.2em !important;
+    margin:10px 0;
+ padding: 12px 0 42px 13px;
+    text-align:left;
+    box-shadow: 5px 6px 3px #888888;
+    border-radius: 5px!important;
+}
+.span-error-2{
+
+     margin-top: 7px;
+  /* margin-bottom: 11px; */
+  float: left;
+  font-size: 14px;
+  padding-left: 11px;
+   color: #E85C5C;
+  font-weight:bold;
+    
+}

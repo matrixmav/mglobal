@@ -475,7 +475,7 @@ class UserController extends Controller {
                             }
                         } else {
                             // echo "0"; 
-                            $error = "<p class='error'>Invalid Login Credientials</p>";
+                            $error = "<p class='error error-2'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error-2'>Invalid Login Credientials</span></p>";
                         }
                     } else {
                         $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
@@ -524,7 +524,7 @@ class UserController extends Controller {
             $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
 
             if ($resp->is_valid != 1) {
-                $error = "<p class='error'>Please Enter Valid Captcha.</p>";
+                $error = "Please Enter Valid Captcha.";
                 $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'social' => $social));
             } else {
 
