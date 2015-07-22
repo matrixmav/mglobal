@@ -109,7 +109,6 @@ class PackageController extends Controller {
         if(!empty($_POST) && $_POST['transactionId']){
            $tarnsactionId = $_POST['transactionId'];
         }
-        
         $transactionObject = Transaction::model()->find(array('condition' => 'user_id =' . Yii::app()->session['userid'] . ' AND transaction_id = ' . $tarnsactionId));
 
         $total = $_POST['totalAmount'] - $_POST['couponDiscount'];
