@@ -13,9 +13,9 @@
             <!-- BEGIN TOP BAR LEFT PART -->
             <div class="col-md-6 col-sm-6 additional-shop-info">
                 <ul class="list-unstyled list-inline">
-                    <li><i class="fa fa-phone"></i><span>+91 1234567890</span></li>
-                    <li><i class="fa fa-envelope-o"></i><span>maverickinfosoft@gmail.com</span></li>
-                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">Click Here</button></a></li>
+                    <li><i class="fa fa-phone"></i><span>+1 1234567890</span></li>
+                    <li><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
+                    <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">CALL US</button></a></li>
                 </ul>
             </div>
             <!-- END TOP BAR LEFT PART -->
@@ -81,7 +81,10 @@
                 </li>
                 
                  <li >
-                    <a class="dropdown-toggle" href="/#portfolio"> Portfolio</a>
+                    <a class="dropdown-toggle" href="/#portfolio"> Templates</a>
+                </li>
+				 <li >
+                    <a class="dropdown-toggle" href="#"> Legal</a>
                 </li>
                   <li>
                     <a class="dropdown-toggle" href="/#contact"> Contact </a>
