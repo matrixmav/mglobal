@@ -1,6 +1,6 @@
 <style>
-    .portlet.box.orange{float:left;}
-    .portlet.box > .portlet-title{margin-bottom: 20px;max-width:1000px;}
+    .portlet.box.orange{float:left; max-width:1000px;}
+    .portlet.box > .portlet-title{margin-bottom: 20px;}
     </style>
 <?php
 $this->breadcrumbs = array(
