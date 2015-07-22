@@ -70,7 +70,7 @@ $this->breadcrumbs = array(
     <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
-								Change Password
+								Change Master Pin
 							</div>
     </div>
         <div class="portlet-body form">
