@@ -676,12 +676,19 @@ p.small-p {
 {
   border-top:1px solid;
 }
-.down-view, .down-edit, .down-user ,.down-cart, .down-cartplus, .down-money ,.down-fb{
+.down-view, .down-edit, .down-user ,.down-cart, .down-cartplus, .down-money {
   width:100%;
   float:left;
   background:#f5f5f5;
 
 }
+.down-fb{
+    width:100%;
+  float:left;
+  background:#f5f5f5;
+  padding-bottom: 11px
+}
+
 .down-view a, .down-edit a, .down-user a ,.down-cart a, .down-cartplus a, .down-money a ,.down-fb a{
 text-decoration:none;
 }
@@ -794,6 +801,9 @@ span.notification{
   border-radius: 0px!important;
   padding: 0px!important;
   padding-left: 11px!important;
+}
+ul.dash-list{
+    margin-bottom:0px!important;
 }
 ul.dash-list li{
     font-size:11px;
