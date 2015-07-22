@@ -6,10 +6,6 @@ $this->breadcrumbs = array(
     'Ad List',
 );
  
-$this->menu = array(
-    array('label' => 'Create Add', 'url' => array('create')),
-    array('label' => 'Manage Add', 'url' => array('admin')),
-);
 ?>
 <div class="main">
     <div class="row margin-bottom-40">        
@@ -72,7 +68,7 @@ $this->menu = array(
                                             $adId = '"' . $adObject->id . '"';
                                         ?>
                                        
-                                       <td><a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?>); return false;' ></a></td>                                     
+                                       <td><a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?> ,<?= $dataProvider->order_id; ?>); return false;' ></a></td>                                     
                                    </tr>   
                                     <?php $i++ ; } ?>
 
@@ -115,6 +111,32 @@ $this->menu = array(
             position:'right',
             height: '400px'
         });
+        $('#testDiv4').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv5').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv6').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv7').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv8').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        
     });  
 </script>
 <style>
