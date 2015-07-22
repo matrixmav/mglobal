@@ -472,7 +472,7 @@ class UserController extends Controller {
                             
                              } 
                              elseif(!empty(Yii::app()->session['template_id']) && !empty(Yii::app()->session['package_id'])) {
-                             $this->redirect("/package/domainsearch?templateId=".Yii::app()->session['template_id']);
+                             $this->redirect("/package/domainsearch?templateId=".Yii::app()->session['template_id']."&package_id=".Yii::app()->session['package_id']);
                              }
                              else {
                                 $this->redirect("/profile/dashboard");
