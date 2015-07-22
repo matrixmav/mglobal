@@ -271,9 +271,7 @@ right connector from last child*/
 	border-right: 5px solid transparent;
 	
 	border-bottom: 5px solid black; left:7% !important;;}
-  .mytree .tooltip-inner{width:auto !important; height: auto !important; border-radius: 3px !important;}
-  .mytree .tooltip.fade.bottom.in{left:44% !important;}
-  .mytree .tooltip.fade.bottom{left:44% !important;}
+.packageDetail .popover.fade.bottom.in{left:7% !important;}
 @media (max-device-width: 767px) and (min-device-width: 481px)
 {
     .mytree ul li{float: left;
@@ -309,7 +307,7 @@ right connector from last child*/
 .detailPackage tr{}
 .detailPackage th{ color: #aeaeae; font-size: 15px;}
 .packageDetail{ width: 300px;}
-.packageDetail li{ border-bottom: 1px dashed #c1c1c1; margin-top: 5px; background: url(/images/bullets-icon.png) left 30% no-repeat; list-style: none; font-size: 15px;}
+.packageDetail li{ border-bottom: 1px dashed #c1c1c1; margin-top: 5px; background: url(/images/bullets-icon.png) left 30% no-repeat; list-style: none; font-size: 15px;width: 85%;}
 .packageDetail p{display: inline-block; width: 200px; padding-left: 20px;} 
 
 .detailPackage .col-sm-3.col-xs-12{ border: 1px dashed #c1c1c1;}
