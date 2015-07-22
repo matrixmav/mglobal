@@ -1543,6 +1543,56 @@ class BaseClass extends Controller {
             }
             return $pages ;
     }
+    
+    public static function getLeftRightNode($parentObject) {
+        $nodeId = $parentObject->user_id;
+        $todayDate = date('Y-m-d');
+        //$date = date('Y-m-d');
+        //find left present | not
+        //$totalLeftPurchase = 0;
+       
+        $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
+         $j = 1;
+        if($binaryCommissionObjectLeft){
+            //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
+            //  $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
+           //echo "Left Id: ".$binaryCommissionObjectLeft->user_id;
+           //echo "Left :".$binaryCommissionObjectLeft->order_amount;
+            if($todayDate==$binaryCommissionObjectLeft->order_date){
+                $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+                echo $j = $j+1;
+                $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
+                $parentObject->save(false);
+            } else {
+                $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+            }
+        }
+        //echo $totalLeftPurchase;
+        // exit;
+        //find right present | not
+          $k = 1;      
+        $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
+        if($binaryCommissionObjectRight){
+            //echo "Left Id: ".$binaryCommissionObjectRight->user_id;
+           //echo "Left :".$binaryCommissionObjectRight->order_amount;
+            if($todayDate==$binaryCommissionObjectRight->order_date){
+                $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+                $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
+                echo $k = $k+1;
+                $parentObject->save(false);
+            } else {
+                $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+            }
+        }
+//        exit;
+        // Total Purchase amount
+        $totalPurchase = ($parentObject->right_purchase + $parentObject->left_purchase+ $parentObject->order_amount);
+        $parentObject->total_purchase_amount = $totalPurchase;
+        $parentObject->save(false);
+        //binary calculation
+        $parentObject = self::setBinary($parentObject);
+        return $parentObject;
+    }
             
     
 }
