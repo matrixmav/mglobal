@@ -1453,7 +1453,7 @@ class BaseClass extends Controller {
     }
     public static function cappingLimit($parentObject)
     {
-        echo $parentObject->user_id;exit;
+        
         $orderObject = Order::model()->findByAttributes(array('user_id '=> $parentObject->user_id),array('order' => 'package_id DESC'));
             
             /* packageObject*/
