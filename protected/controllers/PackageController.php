@@ -163,7 +163,7 @@ class PackageController extends Controller {
             $orderArray['domain_price'] = Yii::app()->session['amount'];
             $orderArray['domain'] = Yii::app()->session['domain'];
             $orderArray['package_id'] = Yii::app()->session['package_id'];
-            $orderArray['templateId'] = $_REQUEST['templateId'];
+            $orderArray['templateId'] = $_POST['templateId'];
         }
         
         
