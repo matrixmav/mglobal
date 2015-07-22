@@ -566,9 +566,11 @@ class MoneyTransferController extends Controller {
               $error .= "Incorrect master pin";
           }else{
             $type = 1;
-            $_POST['walletId'] = '1';  
+            $_POST['walletId'] = 1;  
             $postDataArray = $_POST; 
             $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+            $transactionObject->status=0;
+            $transactionObject->save(false);
             $this->redirect(array('MoneyTransfer/walletconfirm', 'tId' => base64_encode($transactionObject->transaction_id),'am' => base64_encode($transactionObject->paid_amount)));
             }
         }
