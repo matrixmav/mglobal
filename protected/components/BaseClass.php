@@ -1366,7 +1366,7 @@ class BaseClass extends Controller {
             }
         }
         //echo $totalLeftPurchase;
-       // exit;
+        // exit;
         //find right present | not
                 
         $binaryCommissionObjectRight = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'right')); 
@@ -1423,14 +1423,18 @@ class BaseClass extends Controller {
                 $parentObject->left_carry = ($leftNodeAmount-$rightNodeAmount);
             }
             if($parentObject->id !='1') {
-                $limit = self::cappingLimit($parentObject);
+                $limit = self::cappingLimit($parentObject->user_id);
+                if($limit !=''){
                 if($binaryAmount > $limit) {
                     $parentObject->commission_amount = $limit;
                     $parentObject->right_carry = 0;
                     $parentObject->left_carry = 0;
                 } else{
                     $parentObject->commission_amount = $binaryAmount;   
-                } 
+                }
+                }else{
+                 $parentObject->commission_amount = $binaryAmount;    
+                }
             } else {
                 $parentObject->commission_amount = $binaryAmount;    
             }
@@ -1447,13 +1451,14 @@ class BaseClass extends Controller {
     }
     public static function cappingLimit($parentObject)
     {
-        
-        $orderObject = Order::model()->findByAttributes(array('user_id '=> $parentObject->user_id),array('order' => 'package_id DESC'));
-            
+        $limit = "";
+        $orderObject = Order::model()->findByAttributes(array('user_id'=> $parentObject),array('order' => 'id DESC'));
+          if(!empty($orderObject)) 
+          {
             /* packageObject*/
             
             //$packageObject = Package::model()->findByPk($orderObject->package_id);
-            $orderObject->package()->type;
+            //$orderObject->package()->type;
             if($orderObject->package()->type==1)
             {
                 $limit = 1000;
@@ -1466,6 +1471,8 @@ class BaseClass extends Controller {
             {
                 $limit = 2500;
             }
+          }
+            
             return $limit;
     }
     
