@@ -423,25 +423,6 @@ class UserController extends Controller {
 
     public function actionLogin() {
         
-        
-        $countObject = BaseClass::mySelfCount();
-        echo "<pre>"; print_r($countObject);        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        exit;
         $error = "";
         if (Yii::app()->session['userid'] != '') {
             $this->redirect('/profile/dashboard/');
