@@ -43,7 +43,7 @@
         <div class="col-lg-12">    
             <div id="maincontent" class="pageWrp checkout abtest">
                 <div class="sectionWrp summary open">
-                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">$ <?php
+                    <p class="title"><span class="check"></span> <span class="txt">Make Payment</span> <span id="tatalPackageAmount">Payable Amount : $ <?php
                             if (!empty($_GET) && $_GET['pp'] != '') {
                                 echo $_GET['pp'];
                             }
@@ -131,8 +131,8 @@
                        <div class="col-sm-4 col-xs-4 makeBtn" style="display:none;" id="masterpinDiv"> 
                         <div class="form-group"><input type="password" name="master_pin" id="master_pin" placeholder="Enter master pin" class="form-control"><div id="master_pin_error"> </div></div>
                         </div>
-                        <div class="col-sm-6 col-xs-6 makeBtn" id="submitDiv"> 
-                        <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="clearInput();">Clear Input</a></div>
+                        <div class="col-sm-6 col-xs-12 makeBtn" id="submitDiv"> 
+                        <input type="button" value="Make Payment" onclick="makepayment();" class="btn btn-success btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;<a class="clear-input btn" onclick="clearInput();">Clear Input</a></div>
                         </div>
                 </div>
             </div>

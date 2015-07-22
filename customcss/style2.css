@@ -12259,7 +12259,7 @@ div#sidebar.lfloat
     color: #a0a0a0;
 }
 .cart-btn-wrapper .btn-orange{
-    background: #ff6b00; /* Old browsers */
+    background: #ff6b00 !important; /* Old browsers */
     background: -moz-linear-gradient(top,  #ff6b00 0%, #ff3d00 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff6b00), color-stop(100%,#ff3d00)); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top,  #ff6b00 0%,#ff3d00 100%); /* Chrome10+,Safari5.1+ */
@@ -12275,6 +12275,7 @@ div#sidebar.lfloat
     font-size: 24px;
     font-weight: bold;
     padding: 10px 34px;
+    color:#fff !important;
 }
 .cart-btn-wrapper .btn-orange.disabled{
     background: #dddddd; /* Old browsers */
@@ -13888,4 +13889,30 @@ span.second-line{
   margin-top:10px!important;
   color: #000;
   font-weight:normal;
+}
+
+
+.error-2 {
+    background:#FAE1E1;
+    border:1px solid #FF8080;
+    color:#E85C5C;
+    font-size:12px;
+    font-weight:bold;
+    line-height:1.2em !important;
+    margin:10px 0;
+ padding: 12px 0 42px 13px;
+    text-align:left;
+    box-shadow: 5px 6px 3px #888888;
+    border-radius: 5px!important;
+}
+.span-error-2{
+
+     margin-top: 7px;
+  /* margin-bottom: 11px; */
+  float: left;
+  font-size: 14px;
+  padding-left: 11px;
+   color: #E85C5C;
+  font-weight:bold;
+    
 }

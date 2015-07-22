@@ -11,7 +11,9 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
         <!-- BEGIN CONTENT -->
             <div class="col-md-6 col-sm-6">
                 <h1>Create an account</h1>
+                <p class='error error-2'><i class='fa fa-times-circle icon-error'></i><span class='span-error-2'>
                 <?php if(isset($error)){ echo $error; }  ?>
+                </span></p>
                 <div class="content-form-page">
                     <div class="row">
                        <div class="col-md-12 col-sm-12">

@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification','policy1','policy2','policy3','policy4','legal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -477,10 +477,7 @@ class UserController extends Controller {
                              else {
                                 $this->redirect("/profile/dashboard");
                             }
-                        } else {
-                            // echo "0"; 
-                            $error = "<p class='error'>Invalid Login Credientials</p>";
-                        }
+                        } 
                     } else {
                         $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
 
@@ -528,7 +525,7 @@ class UserController extends Controller {
             $resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
 
             if ($resp->is_valid != 1) {
-                $error = "<p class='error'>Please Enter Valid Captcha.</p>";
+                $error = "Please Enter Valid Captcha.";
                 $this->render('registration', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'social' => $social));
             } else {
 
@@ -1085,5 +1082,44 @@ public function actiontemplateSpecification() {
             'tempObject' => $row,
         ));   
 }
+
+public function actionPolicy1() {
+   
+    $this->render('policy1');
     
+      
+}
+
+public function actionPolicy2() {
+   
+    $this->render('policy2');
+    
+      
+}
+
+public function actionPolicy3() {
+   
+    $this->render('policy3');
+    
+      
+}
+
+public function actionPolicy4() {
+   
+    $this->render('policy4');
+    
+
+      
+}
+
+public function actionLegal() {
+   
+    $this->render('legal');
+    
+      
+}
+
+
+    
+
 }

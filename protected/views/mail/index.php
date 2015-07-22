@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 <?php
 
 if(!empty($_GET) && $_GET['successMsg']=='1'){
-    echo "<div class='success'>Your message sent successfully.</div>";
+    echo "<p class='success-2'><i class='fa fa-check-circle icon-success'></i><span class='span-success-2'>Your message sent successfully</span></p>";
 }else{
  $_GET['successMsg'] = $successMsg;   
 }
