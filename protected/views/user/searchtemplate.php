@@ -128,8 +128,10 @@
                     <div class="img-footer">
                         <h4><?php echo $buildTempObjectList['template_title'] ;?></h4>
                         <div class="box-relative">
+                            
                             <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
-                        </div>  
+                        </div> 
+                        <p>&nbsp;</p>
                         <ul class="list-unstyled list-inline rating">
                             <?php $stars = BaseClass::getTempStars($buildTempObjectList['rating']);
                                   $remaining = 5 - $buildTempObjectList['rating'];
