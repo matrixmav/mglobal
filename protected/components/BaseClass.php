@@ -1438,6 +1438,11 @@ class BaseClass extends Controller {
             } else {
                 $parentObject->commission_amount = $binaryAmount;    
             }
+            if($binaryAmount > $limit) {
+            $binaryAmount = $limit;
+            }else{
+            $binaryAmount = $binaryAmount;  
+            }
            
             $parentObject->save(false);
             if($binaryAmount !=0) {
