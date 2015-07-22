@@ -1291,7 +1291,7 @@ class BaseClass extends Controller {
         if($userObject->status == 1 ){
             $color = "sm-user-active";
         }        
-        $orderArray = array();                
+        $orderArray = array();                 
         
         if (count($orderListObject) > 0) {
             $myAmount = 0;
