@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification','policy1','policy2','policy3','policy4','legal'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -1085,5 +1085,42 @@ public function actiontemplateSpecification() {
             'tempObject' => $row,
         ));   
 }
+
+public function actionPolicy1() {
+   
+    $this->render('policy1');
+    
+      
+}
+
+public function actionPolicy2() {
+   
+    $this->render('policy2');
+    
+      
+}
+
+public function actionPolicy3() {
+   
+    $this->render('policy3');
+    
+      
+}
+
+public function actionPolicy4() {
+   
+    $this->render('policy4');
+    
+      
+}
+
+public function actionLegal() {
+   
+    $this->render('legal');
+    
+      
+}
+
+
     
 }
