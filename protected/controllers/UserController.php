@@ -979,7 +979,7 @@ class UserController extends Controller {
         $cond1 = ' AND build_temp.package IN ('.$str.')';
         }
         if(!empty($_GET['key'])!=''){
-         $cond2 = 'AND build_category.name like "%'.$_GET["key"].'%" OR build_temp_header.template_title like "'.$_GET["key"].'%"';
+         $cond2 = 'AND build_category.name like "%'.$_GET["key"].'%"';
         }
         if(!empty($_GET['searchstring'])!=''){
          $cond3 = 'AND build_temp_header.template_title like "%'.$_GET["searchstring"].'%"';
