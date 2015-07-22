@@ -1044,9 +1044,10 @@ if(!empty($_GET))
                     <div class="img-footer">
                         <h4>'.$row1["template_title"].'</h4>
                         <div class="box-relative">
-                        <p>&nbsp;</p>
+                        
                             <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
                         </div>  
+                        <p>&nbsp;</p>
                         <ul class="list-unstyled list-inline rating">
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
