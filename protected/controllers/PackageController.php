@@ -673,26 +673,27 @@ class PackageController extends Controller {
                     }
                     
                     /* Create template code start here */
-                    $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $orderObject->templateId));
-                    /* Copy Image folder to another location */
-                    $path = Yii::getPathOfAlias('webroot');  
-                    $userID = Yii::app()->session['userid'] ;
-                    $tempID = $orderObject->templateId ;
-                    /*Create Folder And Permission */
-                    if(!file_exists($path."/builder_images/".$userID)){
-                        !mkdir($path."/builder_images/".$userID.'/', 0777, true);
+                    if($orderObject->templateId != 0){
+                        $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $orderObject->templateId));
+                        /* Copy Image folder to another location */
+                        $path = Yii::getPathOfAlias('webroot');  
+                        $userID = Yii::app()->session['userid'] ;
+                        $tempID = $orderObject->templateId ;
+                        /*Create Folder And Permission */
+                        if(!file_exists($path."/builder_images/".$userID)){
+                            !mkdir($path."/builder_images/".$userID.'/', 0777, true);
+                        }
+                        if(!file_exists($path."/builder_images/".$userID.'/'.$tempID)){
+                            !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
+                        }
+                        BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
+
+                        /* Number of pages creation*/
+                        $pageCount = BaseClass::pagesCount($orderObject->id);
+                        $orderId = Yii::app()->session['orderID'];
+                        $hasbuilderObject = UserHasTemplate::model()->addTemplate( $buildertempObject,$orderObject->id,$userID);
+                        UserPages::model()->createNewPages($userID, $orderObject->id, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
                     }
-                    if(!file_exists($path."/builder_images/".$userID.'/'.$tempID)){
-                        !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
-                    }
-                    BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
-                        
-                    /* Number of pages creation*/
-                    $pageCount = BaseClass::pagesCount($orderObject->id);
-                    $orderId = Yii::app()->session['orderID'];
-                    $hasbuilderObject = UserHasTemplate::model()->addTemplate( $buildertempObject,$orderObject->id,$userID);
-                    UserPages::model()->createNewPages($userID, $orderObject->id, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
-                
 
                     /* Insert Ads */
                     $userId = Yii::app()->session['userid'];
