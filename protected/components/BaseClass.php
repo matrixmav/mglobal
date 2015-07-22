@@ -1329,11 +1329,19 @@ class BaseClass extends Controller {
     }
     
     public static function buildWebsiteHeader() {
-        $link = '<div class="row setingBox"><a href="/BuildTemp/addlogo" class="btn orange">Logo Setting</a>    
+       
+        $orderObject = Order::model()->findByAttributes(array('id' =>  $_SESSION['orderID'] ));
+        
+        $packgeId = $orderObject->package_id ;
+        
+       $link = '<div class="row setingBox"><a href="/BuildTemp/addlogo" class="btn orange">Logo Setting</a>    
         <!--<a href="/BuildTemp/addheader" class="btn orange">Header Setting</a>-->    
         <a href="/BuildTemp/contactsetting" class="btn orange">Contact Settings</a> 
-        <a href="/BuildTemp/addfooter" class="btn orange">Footer Setting</a> 
-        <a href="/BuildTemp/menusetting" class="btn orange">Menus Setting</a> </div>';
+        <a href="/BuildTemp/addfooter" class="btn orange">Footer Setting</a>'; 
+       if($packgeId == '4' || $packgeId == '5' || $packgeId == '6' ){
+           $link .='<a href="/BuildTemp/menusetting" class="btn orange">Menus Setting</a>';
+       }
+        $link .= '</div>';
         return $link;
     }
     
