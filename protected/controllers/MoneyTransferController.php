@@ -261,21 +261,21 @@ class MoneyTransferController extends Controller {
                 //
                 $createdTime = new CDbExpression('NOW()');
                 $tarnsactionID = BaseClass::gettransactionID();
-                $transactionObjuser = new Transaction;
-                $transactionObjuser->user_id = $adminObject->id;
-                $transactionObjuser->transaction_id = $tarnsactionID;
-                $transactionObjuser->mode = "transfer";
-                $transactionObjuser->gateway_id = 0;
-                $transactionObjuser->coupon_discount = 0;
-                $transactionObjuser->actual_amount = $adminPer;
-                $transactionObjuser->paid_amount = $adminPer;
-                $transactionObjuser->used_rp = 0; //change this to current Used RPs
-                $transactionObjuser->status = 1;//pending
-                $transactionObjuser->created_at = $createdTime;
-                $transactionObjuser->updated_at = $createdTime;
-                if (!$transactionObjuser->save()) {
+                $adminTransactionObject = new Transaction;
+                $adminTransactionObject->user_id = $adminObject->id;
+                $adminTransactionObject->transaction_id = $tarnsactionID;
+                $adminTransactionObject->mode = "transfer";
+                $adminTransactionObject->gateway_id = 1;
+                $adminTransactionObject->coupon_discount = 0;
+                $adminTransactionObject->actual_amount = $adminPer;
+                $adminTransactionObject->paid_amount = $adminPer;
+                $adminTransactionObject->used_rp = 0; //change this to current Used RPs
+                $adminTransactionObject->status = 1;//pending
+                $adminTransactionObject->created_at = $createdTime;
+                $adminTransactionObject->updated_at = $createdTime;
+                if (!$adminTransactionObject->save()) {
                 echo "<pre>";
-                print_r($transactionObjuser->getErrors());
+                print_r($adminTransactionObject->getErrors());
                 exit;
                 }
                 //$adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
