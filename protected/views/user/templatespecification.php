@@ -136,7 +136,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
               </div>-->
                     
                      <div class="top-content-head-accordin slider-heading-3 text-center">
-                        <a href="/package/domainsearch?package_id=<?php  echo $tempObject['package_id']; ?>&templateId=<?php  echo $tempObject['template_id'];?>"> <button class="btn btn-defalut button-select">SELECT</button></a>
+                        <a href="<?php if(isset(Yii::app()->session['userid'])) { ?>/package/domainsearch?package_id=<?php  echo $tempObject['package_id']; ?>&templateId=<?php  echo $tempObject['template_id'];} else{?> /user/loginregistration?package_id=<?php  echo $tempObject['package_id']; ?>&templateId=<?php  echo $tempObject['template_id'];?><?php }?>"> <button class="btn btn-defalut button-select">SELECT</button></a>
                        </div>
 
 
