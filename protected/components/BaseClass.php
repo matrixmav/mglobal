@@ -1428,31 +1428,19 @@ class BaseClass extends Controller {
                 $parentObject->right_carry = 0;
                 $parentObject->left_carry = ($leftNodeAmount-$rightNodeAmount);
             }
-            $orderObject = Order::model()->findAll(array('condition'=>'user_id= "'.$parentObject->id.'"','order' => 'package_id DESC','limit' => '1'));
-            
-            /* packageObject*/
-            
-            $packageObject = Package::model()->findByPk($orderObject->package_id);
-            if($packageObject->type==1)
-            {
-                $limit = 1000;
+            if($parentObject->id !='1') {
+                $limit = self::cappingLimit($parentObject);
+                if($binaryAmount > $limit) {
+                    $parentObject->commission_amount = $limit;
+                    $parentObject->right_carry = 0;
+                    $parentObject->left_carry = 0;
+                } else{
+                    $parentObject->commission_amount = $binaryAmount;   
+                } 
+            } else {
+                $parentObject->commission_amount = $binaryAmount;    
             }
-            if($packageObject->type==2)
-            {
-                $limit = 1500;
-            }
-            if($packageObject->type==3)
-            {
-                $limit = 2500;
-            }
-            if($binaryAmount > $limit)
-            {
-            $parentObject->commission_amount = $limit;
-            $parentObject->right_carry = 0;
-            $parentObject->left_carry = 0;
-            }else{
-             $parentObject->commission_amount = $binaryAmount;   
-            }
+           
             $parentObject->save(false);
             if($binaryAmount !=0) {
             self::createCommissionTransaction($binaryAmount,$parentObject);
@@ -1462,6 +1450,29 @@ class BaseClass extends Controller {
         }
         return $parentObject;
         
+    }
+    public static function cappingLimit($parentObject)
+    {
+        
+        $orderObject = Order::model()->findByAttributes(array('user_id '=> $parentObject->user_id),array('order' => 'package_id DESC'));
+            
+            /* packageObject*/
+            
+            //$packageObject = Package::model()->findByPk($orderObject->package_id);
+            $orderObject->package()->type;
+            if($orderObject->package()->type==1)
+            {
+                $limit = 1000;
+            }
+            if($orderObject->package()->type==2)
+            {
+                $limit = 1500;
+            }
+            if($orderObject->package()->type==3)
+            {
+                $limit = 2500;
+            }
+            return $limit;
     }
     
     public static function createCommissionTransaction($binaryAmount,$parentObject) {
