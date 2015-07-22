@@ -569,7 +569,7 @@ class MoneyTransferController extends Controller {
 
         if($_POST){
             $existingShareObject = UserSharedAd::model()->findByAttributes(array('user_id'=>$userid, 'date'=>date('Y-m-d')));
-            echo $existingShareObject->status ; die;
+            //echo $existingShareObject->status ; die;
             if((!empty($existingShareObject->status) && $existingShareObject->status == 1)){
                 return 1;
             }
