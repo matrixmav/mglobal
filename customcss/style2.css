@@ -13916,3 +13916,27 @@ span.second-line{
   font-weight:bold;
     
 }
+.success-2 {
+    background:#EAFFEA;
+     border: 1px solid #88AA88;
+    color: #333333
+    font-size:12px;
+    font-weight:bold;
+    line-height:1.2em !important;
+    margin:10px 0;
+ padding: 12px 0 42px 13px;
+    text-align:left;
+    
+    border-radius: 5px!important;
+}
+.span-success-2{
+
+     margin-top: 7px;
+  /* margin-bottom: 11px; */
+  float: left;
+  font-size: 14px;
+  padding-left: 11px;
+  color: #198319;
+  font-weight:bold;
+    
+}
