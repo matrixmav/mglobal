@@ -31,7 +31,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="firstname">Upload Banner </label>
                 <div class="col-lg-8 fileupload fileupload-new">
                      <div data-provides="fileupload" class="fileupload fileupload-new">
-                         <span class="btn btn-primary btn-file btn-1"><span class="fileupload-new"><input type="file" id="ads_banner" class="form-control11" name="ads_banner"></span></div>
+                         <span class=""><span class="fileupload-new"><input type="file" id="ads_banner" class="form-control11" name="ads_banner"></span></div>
                     <span class="example1">(Upload jpg ,jpeg ,png files only)</span> 
                     <?php 
                     if(!empty($adsObject) && $adsObject->banner!=''){?>

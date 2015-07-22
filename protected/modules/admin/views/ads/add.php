@@ -5,7 +5,11 @@ $this->breadcrumbs = array(
 );
 
 ?>
+
 <div class="col-md-6 col-sm-6">
+    <?php if(!empty($success)){?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo $success ;?> </span></p><?php }  ?>
+        <?php if(!empty($error)){ ?><p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"> <?php echo $error; ?></span></p> <?php  }  ?>
     <div class="error" id="error_msg" style="display: none;"></div>    
     <div class="portlet box orange   ">
     <div class="portlet-title">
@@ -13,11 +17,11 @@ $this->breadcrumbs = array(
 								Add Ads
 							</div>
     </div>
+        
         <div class="portlet-body form">
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype = "multipart/form-data">
      
-        <?php if(!empty($success)){ echo $success ; }  ?>
-        <?php if(!empty($error)){ echo $error; }  ?>
+        
         <fieldset>
             <div class="form-body">
             
