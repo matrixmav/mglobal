@@ -152,5 +152,4 @@ $this->menu = array(
 </script>
 <style>
     .slimScrollBar{opacity:1 !important; border-radius: 7px !important;}
-    
     </style>
