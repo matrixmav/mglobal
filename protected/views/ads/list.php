@@ -13,8 +13,10 @@ $this->menu = array(
 ?>
 <div class="main">
     <div class="row margin-bottom-40">        
-    <?php       
-        foreach($dataProviderArray as $key=>$dataProviderList){ $i = 1; ?>
+    <?php   
+    if($dataProviderArray){
+        foreach($dataProviderArray as $key=>$dataProviderList){ 
+            $i = 1; ?>
         <div class="col-md-6 col-sm-6">
 
         <div class="col-md-12">
@@ -82,7 +84,9 @@ $this->menu = array(
             </div>
         </div>
     </div>
-<?php   }   ?>
+<?php   } 
+    }
+?>
     </div>
 </div>    
 <?php // 'value' => array($this, 'getSocialButton') ?>            
