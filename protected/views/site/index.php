@@ -1174,8 +1174,9 @@
                                 </span>
                             </div>
                             <div class="customerTxt ">
-                                <span><?php echo $testimonial->user()->full_name;?></span>
+                                
                                 <p><?php echo $testimonial->testimonials;?></p>
+                                <span class="pull-right"><?php echo $testimonial->user()->full_name;?></span>
                             </div>
                         </div>
             </div>
