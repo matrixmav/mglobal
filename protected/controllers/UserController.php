@@ -456,7 +456,7 @@ class UserController extends Controller {
                             Yii::app()->session['username'] = $getUserObject->name;
                             Yii::app()->session['frontloggedIN'] = "1";
                             
-                            if (!empty(Yii::app()->session['package_id'])) {
+                            if (!empty(Yii::app()->session['package_id'])&& empty($_GET['template_id'])) {
                              $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                              if(!empty($userObject)){
                              $packageObject = Package::model()->findByPk(Yii::app()->session['package_id']);   
@@ -470,7 +470,11 @@ class UserController extends Controller {
                              }
                             }
                             
-                             } else {
+                             } 
+                             elseif(!empty($_GET['template_id']) && !empty(Yii::app()->session['package_id'])) {
+                             $this->redirect("/package/domainsearch?templateId=".$_GET['templateId']);
+                             }
+                             else {
                                 $this->redirect("/profile/dashboard");
                             }
                         } else {
