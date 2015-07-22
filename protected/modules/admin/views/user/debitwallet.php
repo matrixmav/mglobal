@@ -1,3 +1,7 @@
+<style>
+    .portlet.box.orange{float:left; max-width:1000px;}
+    .portlet.box > .portlet-title{margin-bottom: 20px;}
+    </style>
 <?php
 $this->breadcrumbs = array(
     'Wallet' => array('/admin/user/wallet'),
@@ -12,6 +16,12 @@ if (!empty($error)) {
 ?>
 
 <form class="form-horizontal" role="form" id="form_admin_reservation" enctype="multipart/form-data" action="/admin/user/debitwallet" method="post">
+    <div class="portlet box orange">
+         <div class="portlet-title">
+							<div class="caption">
+								Recharge
+							</div>
+    </div>
     <input type="hidden" name="userId" id="userId" value="<?php echo (!empty($userObject)) ? $userObject->id : ""; ?>"/>
     <div class="col-md-12 form-group">
         <label class="col-md-2">User Name: </label>
@@ -58,10 +68,11 @@ if (!empty($error)) {
     <div class="col-md-12 form-group">
         <label class="col-md-2"></label>
         <div class="col-md-6">
-            <input type="submit" class="btn green" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
+            <input type="submit" class="btn orange" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
             <div id="loading2" style="display:none;" class="loader">Don't click back button or refresh page...your transaction is in process</div>
         </div>
     </div> 
+    </div>
     <input type="hidden" id="fundval" value="">
 </form>
 <script language = "Javascript">

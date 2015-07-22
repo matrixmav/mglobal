@@ -107,9 +107,9 @@ border: solid 1px #d7d7d7;
 .accordin-icon{
 	  border-left: solid 1px #d7d7d7;
   /* padding-left: 20px; */
- padding: 11px;
-  margin-top: -11px;
-  padding-left: 18px;
+  padding: 11px;
+  margin-top: -13px;
+  padding: 18px 10px 17px 17px;
 }
 .panel-body ul li a{
 	padding:15px;
