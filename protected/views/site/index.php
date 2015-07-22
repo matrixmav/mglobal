@@ -1176,7 +1176,7 @@
                             <div class="customerTxt ">
                                 
                                 <p><?php echo $testimonial->testimonials;?></p>
-                                <span class="pull-right"><?php echo $testimonial->user()->full_name;?></span>
+                                <span class="pull-right">- <?php echo $testimonial->user()->full_name;?></span>
                             </div>
                         </div>
             </div>
@@ -1283,11 +1283,8 @@
 </script>
  <script type="text/javascript">
 
-$('.jcarousel').jcarousel({ 
-  wrap: 'circular'
-}).jcarouselAutoscroll({
-  interval: 10000
+$('.carousel').carousel({
+  interval: 200000
 });
-
 </script>
 
