@@ -61,14 +61,20 @@ if (!empty($_GET['id'])) {
                         <?php 
                             $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
                             $getColor =  BaseClass::getPackageName($currentUserId);
-                            echo "Right ". $getUserInfoRight = BaseClass::getLeftRightMember($currentUserId ,'right');
+                            echo "Right ". $getUserInfoRight = BaseClass::getNode($currentUserId ,'right');
                             echo "<br/>";
                             echo "Left ".$getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');
                             echo "<br/>";
                             $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
-                            echo "Right Purchase ". $getUserPurchase->left_purchase ; 
+                            ;
+                            if(!empty($getUserPurchase->left_purchase)){ 
+                                echo "Left Purchase ". $getUserPurchase->left_purchase ;
+                            }    
                             echo "<br/>";
-                            echo "Left Purchase ".$getUserPurchase->right_purchase ;                          
+                            
+                            if(!empty($getUserPurchase->right_purchase)){
+                                echo "Right Purchase ".$getUserPurchase->right_purchase;                          
+                            }
                           $getColor =  BaseClass::getPackageName($currentUserId);
                           
                         ?>
