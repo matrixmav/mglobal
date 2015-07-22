@@ -1545,14 +1545,14 @@ class BaseClass extends Controller {
     }
     
     public static function getLeftRightNode($parentObject) {
-        $nodeId = $parentObject->user_id;
+        echo $nodeId = $parentObject->user_id;exit;
         $todayDate = date('Y-m-d');
         //$date = date('Y-m-d');
         //find left present | not
         //$totalLeftPurchase = 0;
        
         $binaryCommissionObjectLeft = Genealogy::model()->findByAttributes(array('parent' => $nodeId,'position'=>'left')); 
-         $j = 1;
+         echo $j = 1;exit;
         if($binaryCommissionObjectLeft){
             //echo "<pre>"; print_r($binaryCommissionObjectLeft);//exit;
             //  $totalLeftPurchase = $binaryCommissionObjectLeft->order_amount;
@@ -1564,7 +1564,7 @@ class BaseClass extends Controller {
                 $parentObject->left_purchase = $binaryCommissionObjectLeft->total_purchase_amount;
                 $parentObject->save(false);
             } else {
-                $binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
+                //$binaryCommissionObjectLeft = self::setPurchaseNode($binaryCommissionObjectLeft);
             }
         }
         //echo $totalLeftPurchase;
@@ -1581,7 +1581,7 @@ class BaseClass extends Controller {
                 echo $k = $k+1;
                 $parentObject->save(false);
             } else {
-                $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
+                //$binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
             }
         }
 //        exit;
@@ -1590,7 +1590,7 @@ class BaseClass extends Controller {
         $parentObject->total_purchase_amount = $totalPurchase;
         $parentObject->save(false);
         //binary calculation
-        $parentObject = self::setBinary($parentObject);
+        //$parentObject = self::setBinary($parentObject);
         return $parentObject;
     }
             
