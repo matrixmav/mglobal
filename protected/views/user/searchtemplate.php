@@ -1,6 +1,8 @@
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/style_search.css" rel="stylesheet">
 <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/responsive.css" rel="stylesheet">
+ 
+
 <?php //echo "<pre>"; print_r($packageObject);  die;  ?>
 <div class="container-fluid fluid-top">
     <div class="container ">
@@ -23,7 +25,7 @@
                     <form action="" class="navbar-form" role="search" method="get">
                         <div class="form-group col-md-12">
                             <div class="input-group col-md-12">
-                                <input type="text" class="form-control navbar-input" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status" name="key" value="<?php if(!empty($_GET['key'])){ echo ucwords($_GET['key']); }?>">
+                                <input type="text" class="form-control navbar-input" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status" name="key" value="<?php if(empty($_GET['key']) && !empty($_GET['searchstring'])) { echo ucwords($_GET['searchstring']);}else{ echo ucwords($_GET['key']);} ?>">
                                 <span class="input-group-addon navbar-addon">
                                     <button type="submit" name="search"><i class="glyphicon glyphicon-search navbar-glyph"></i></button></span>
                             </div>
@@ -117,14 +119,14 @@
              if($buildTempObject){ 
                 foreach($buildTempObject as $buildTempObjectList){
                     //echo "<pre>"; print_r($buildTempObjectList->header()->template_title); die;
-            ?>
+            ?><a class="fancybox" onclick="showSpecification(<?php echo $buildTempObjectList['id']; ?>);"> 
                 <div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
                         <img src="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/screenshot/<?php echo $buildTempObjectList['screenshot'];?>" class="img-left" width="200" height="200">
                     </div>
 
                     <div class="img-footer">
-                        <h4><a href="/package/domainsearch?package_id=<?php echo $buildTempObjectList['package_id'];  ?>&templateID=<?php echo $buildTempObjectList['id'];?>" target="_"><?php echo $buildTempObjectList['template_title'] ;?></a></h4>
+                        <h4><?php echo $buildTempObjectList['template_title'] ;?></h4>
                         <div class="box-relative">
                             <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
                         </div>  
@@ -140,10 +142,10 @@
                   <div class="thumbnail-arrow"></div>
                    </div>
                     
-                 <a href="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/index.html" target="_">View Demo</a>
+                 
                       
                     
-                </div>                
+                </div> </a>               
             <?php 
                 }
             } ?>  
@@ -175,10 +177,7 @@
 
 </div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+ 
 <script>
     function toggleChevron(e) {
         $(e.target)
@@ -210,4 +209,19 @@
                 }
             });
   }
-</script>
+  function showSpecification(valz)
+  {
+      
+                 $.fancybox({
+                    width: 950, 
+                    autoSize: true,
+                    href: "/user/templateSpecification?id="+valz,
+                    type: 'ajax'
+                });
+  }
+</script><script type="text/javascript" src="/js/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+
+	<!-- Add fancyBox main JS and CSS files -->
+	<script type="text/javascript" src="/js/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+           <script type="text/javascript" src="/js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>

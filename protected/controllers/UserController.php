@@ -34,7 +34,7 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -456,7 +456,7 @@ class UserController extends Controller {
                             Yii::app()->session['username'] = $getUserObject->name;
                             Yii::app()->session['frontloggedIN'] = "1";
                             
-                            if (!empty(Yii::app()->session['package_id'])) {
+                            if (!empty(Yii::app()->session['package_id']) && empty(Yii::app()->session['template_id'])) {
                              $userObject = User::model()->findByPk(Yii::app()->session['userid']);
                              if(!empty($userObject)){
                              $packageObject = Package::model()->findByPk(Yii::app()->session['package_id']);   
@@ -470,7 +470,11 @@ class UserController extends Controller {
                              }
                             }
                             
-                             } else {
+                             } 
+                             elseif(!empty(Yii::app()->session['template_id']) && !empty(Yii::app()->session['package_id'])) {
+                             $this->redirect("/package/domainsearch?templateId=".Yii::app()->session['template_id']."&package_id=".Yii::app()->session['package_id']);
+                             }
+                             else {
                                 $this->redirect("/profile/dashboard");
                             }
                         } else {
@@ -478,7 +482,8 @@ class UserController extends Controller {
                             $error = "<p class='error'>Invalid Login Credientials</p>";
                         }
                     } else {
-                        $error = "<p class='error'>Invalid User Name</p>";
+                        $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
+
                     }
                 }
             }
@@ -811,7 +816,7 @@ class UserController extends Controller {
         require(__DIR__ . '/../vendor/recaptch/recaptchalib.php');
         $spnId = Yii::app()->params['adminSpnId'];
         Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
-
+        Yii::app()->session['template_id'] = (!empty($_GET['templateId'])) ? $_GET['templateId'] : "";
         $countryObject = Country::model()->findAll();
 //            echo "<pre>";print_r($countryObject);exit;
         $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId));
@@ -1036,11 +1041,11 @@ if(!empty($_GET))
         
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                        <a href="/package/domainsearch?package_id='. $row1["package_id"].'&templateID='.$row1['id'].'"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
+                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
                     </div>
 
                     <div class="img-footer">
-                        <h4><a href="">'.$row1["template_title"].'</a></h4>
+                        <h4>'.$row1["template_title"].'</h4>
                         <div class="box-relative">
                             <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
                         </div>  
@@ -1067,6 +1072,18 @@ if(!empty($_GET))
  }
     
     
+}
+public function actiontemplateSpecification() {
+   if(!empty($_GET['id']))
+{
+    $connection = Yii::app()->db;
+    $command = $connection->createCommand('SELECT build_temp.*,build_temp_header.*,package.amount,package.name as package_name,package.Description,package.id as package_id,build_category.name as catname FROM `build_category`,`package`,`build_temp`,`build_temp_header` where build_temp.package = package.id AND build_temp.temp_header_id = build_temp_header.id AND build_category.id = build_temp.category_id AND  build_temp.template_id = "'.$_GET["id"].'"');
+    $row = $command->queryAll();
+    
+}
+       $this->renderPartial('templatespecification', array(
+            'tempObject' => $row,
+        ));   
 }
     
 }

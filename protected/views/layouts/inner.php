@@ -771,7 +771,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         "BuildTemp/userinput" => "Add / Edit Pages",
                                     );
                                     ?>
-                                    <li class="<?php echo (($curControllerLower == 'BuildTemp') && ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
+<!--                                    <li class="<?php echo (($curControllerLower == 'BuildTemp') && ($curControllerLower == 'BuildTemp')) ? "active" : ''; ?>">
 
                                         <a href="javascript:;"> <i class="fa fa-building-o"></i>
                                             <span class="title">Builder Pages</span>
@@ -799,7 +799,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         }
                                         echo '</ul>';
                                         ?>			
-                                    </li>
+                                    </li>-->
                                     <?php
                                 }
                             }
