@@ -815,7 +815,7 @@ class UserController extends Controller {
         require(__DIR__ . '/../vendor/recaptch/recaptchalib.php');
         $spnId = Yii::app()->params['adminSpnId'];
         Yii::app()->session['package_id'] = (!empty($_GET)) ? $_GET['package_id'] : "";
-        Yii::app()->session['template_id'] = (!empty($_GET)) ? $_GET['templateId'] : "";
+        Yii::app()->session['template_id'] = (!empty($_GET['templateId'])) ? $_GET['templateId'] : "";
         $countryObject = Country::model()->findAll();
 //            echo "<pre>";print_r($countryObject);exit;
         $this->render('login-registration', array('countryObject' => $countryObject, 'spnId' => $spnId));
