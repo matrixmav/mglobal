@@ -387,7 +387,7 @@
                                 <tr>
                                     <td valign="middle" align="center" style="line-height:22px; color: #828282; font-size:16px;width:50px;"> </td>
                                     <td style="width:33px;text-align:left;"><a href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/skype.png" style="vertical-align:middle;"></a></td>
-                                    <td valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px;width:267px;text-align:left;"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">91 80 4664 7799</a> </td>
+                                    <td valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px;width:267px;text-align:left;"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">+525527895477</a> </td>
                                     <td valign="middle" style="line-height:0px;color: #828282;font-size:16px;width:250px;">
                                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                                             <tbody>
