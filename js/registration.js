@@ -678,7 +678,7 @@ function profileFormSubmit()
             success: function (html) {
                 if (html == 1) {
                     $('#show_successp').show();
-                    $("#show_successp").html("Thanks! Your request has been submitted successfully.");
+                    $("#show_successp").html("Thanks! Your request has been submitted.");
                     $("#nameP").val('');
                     $("#emailP").val('');
                     $("#show_successp").fadeOut(10000);
@@ -732,7 +732,7 @@ function profileFormSubmit()
                 success: function (html) {
                     if (html == 1) {
                         $('#show_successCo').show();
-                        $("#show_successCo").html("Thanks! Your request has been submitted successfully.");
+                        $("#show_successCo").html("Thanks! Your request has been submitted.");
                         $("#nameCo").val('');
                         $("#emailCo").val('');
                         $("#show_successCo").fadeOut(10000);
@@ -787,7 +787,7 @@ function profileFormSubmit()
                 success: function (html) {
                     if (html == 1) {
                         $('#show_successBu').show();
-                        $("#show_successBu").html("Thanks! Your request has been submitted successfully.");
+                        $("#show_successBu").html("Thanks! Your request has been submitted.");
                         $("#nameBu").val('');
                         $("#emailBu").val('');
                         $("#show_successp").fadeOut(10000);
