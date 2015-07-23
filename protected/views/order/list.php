@@ -92,6 +92,7 @@ $this->menu=array(
 		 
 		  array(
 			'name'=>'action',
+                      'header' => '<span style="white-space: nowrap;">Invoice &nbsp; &nbsp; &nbsp;</span>',
                         'header'=>'<span style="white-space: nowrap;"> &nbsp; &nbsp; &nbsp;</span>',
 			'value'=>array($this,'GetInvoiceButtonTitle'),
 		),
