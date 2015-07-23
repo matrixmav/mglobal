@@ -29,7 +29,7 @@
                                                     <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/livechat.png"> &nbsp;</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; "><strong> Customer Support:</strong> 1800 909 302 &nbsp; </td>
+                                                    <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; "><strong> Customer Support:</strong> +525527895477 &nbsp; </td>
                                                 </tr>
                                             </tbody>
                                         </table></td>
@@ -348,10 +348,10 @@
                                             <tbody>
 
                                                 <tr>
-                                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; "><strong>Off:</strong> SOLUS, 3rd Floor,</td>
+                                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; "><strong>Off:</strong> Mglobally solutions ltd<br/>21 Regent Street, <br/>Belize City, Belize,<br/>Central America.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; "><strong>Call Us:</strong> +91 80 4664 7799</td>
+                                                    <td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; "><strong>Call Us:</strong> +525527895477</td>
 
 
                                                 </tr>
