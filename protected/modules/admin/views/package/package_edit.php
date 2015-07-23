@@ -1,3 +1,7 @@
+<style>
+    .portlet.box.orange{float:left; max-width:1300px;padding-bottom:20px !important;}
+    .portlet.box > .portlet-title{margin-bottom: 20px;}
+    </style>
 <?php
 $this->breadcrumbs = array(
     'Package' => array('package/list'),
@@ -11,9 +15,14 @@ $this->breadcrumbs = array(
     <?php if($success){?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $success;?></span></p><?php }?>
    
     <form action="/admin/package/edit?id=<?php echo $packageObject->id;?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
-     
+       <div class="portlet box orange">
+         <div class="portlet-title">
+							<div class="caption">
+								Edit Package
+							</div>
+    </div>
         <fieldset>
-            <legend>Edit Package </legend>
+            
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Package Name<span class="require">*</span></label>
@@ -106,10 +115,11 @@ $this->breadcrumbs = array(
 
     <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Update" class="btn red">
+                <input type="submit" name="submit" value="Update" class="btn orange">
                  
             </div>
         </div>
+           </div>
     </form>
 </div>
 

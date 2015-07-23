@@ -1,4 +1,10 @@
-<?php
+<style>
+    .portlet.box.orange{ max-width:1200px;padding-bottom:20px !important;}
+    .portlet.box > .portlet-title{margin-bottom: 20px;}
+    .form-group{padding-right:10px;}
+    
+    </style>
+        <?php
 $this->breadcrumbs = array(
     'Ads' => array('Add'),
     'Edit',
@@ -8,10 +14,16 @@ $this->breadcrumbs = array(
 <div class="col-md-7 col-sm-7">
     <div class="error" id="error_msg" style="display: none;"></div>    
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype = "multipart/form-data">
-     
+          <div class="portlet box orange">
+         <div class="portlet-title">
+							<div class="caption">
+								Edit Ads
+							</div>
+    </div>
         <?php if(!empty($success)){ echo $success ; }  ?>
         <fieldset>
-            <legend>Edit Ads</legend>
+            
+
             
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Name</label>
@@ -45,10 +57,11 @@ $this->breadcrumbs = array(
 
     <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Update" class="btn red">
+                <input type="submit" name="submit" value="Update" class="btn orange">
                 <input type="hidden" name="banner_id" value="<?php echo $adsObject->id ; ?>" >
             </div>
         </div>
+     </div>
     </form>
 </div>
 

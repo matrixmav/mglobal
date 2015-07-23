@@ -16,6 +16,7 @@ $this->breadcrumbs = array(
                position: absolute;
                top: 8px;}
     .confirmMenu{position: relative;}
+    .orange{margin-left: 5px;}
 </style>
 <div class="col-md-12">
 
@@ -103,12 +104,12 @@ $this->breadcrumbs = array(
                     'buttons' => array(
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/news/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
-                            'options' => array('class' => 'fa fa-success btn default black delete blue'),
+                            'options' => array('class' => 'fa fa-success btn orange delete'),
                             'url' => 'Yii::app()->createUrl("admin/news/edit", array("id"=>$data->id))',
                         ),
                          
