@@ -3324,7 +3324,6 @@ Styler Panel
 .policy-section
 {
 width:100%;
-border-bottom:1px solid #fff;
 float:left;
 padding:10px 0;
 }
@@ -3333,6 +3332,7 @@ padding:10px 0;
   display: inline-block;
   margin: auto;
   padding: 0;
+    margin-left: 36%;
 }
 .policy-section ul  li
 {
@@ -3349,6 +3349,7 @@ border-right:none;
 .policy-section ul  li a
 {
 text-decoration:none;
+color:#fff;
 }
 .bg-f2
 {

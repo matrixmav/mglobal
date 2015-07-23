@@ -77,7 +77,7 @@ $caption = '';
             </fieldset>
             <div class="row" id="button" style="display:none;">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="button" value="Share" class="btn red">
+                <input type="submit" name="button" value="Share" class="btn orange">
                  
             </div>
             </div>
