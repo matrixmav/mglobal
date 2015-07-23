@@ -86,6 +86,7 @@ function getFullNameAdmin(userName, loggedInUserName, adminUserObject) {
     $("#userExistedErrorFlag").val("0");
     if (userName == loggedInUserName)
     {
+        $("#userExistedErrorFlag").val("1");
         $("#search_user_error").html("Sorry! you can not transfer fund to this account!!!");
         return false;
     }
