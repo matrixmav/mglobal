@@ -91,6 +91,7 @@ function getFullNameAdmin(userName, loggedInUserName, adminUserObject) {
     for (var x = 0; x < boxex.length; x++) {
         if (userName == boxex[x])
         {
+           $("#search_user_error")
             $("#search_user_error").html("Sorry! you can not transfer fund to this account!!!");
             return false;
         }
@@ -102,13 +103,17 @@ function getFullNameAdmin(userName, loggedInUserName, adminUserObject) {
         success: function (data) {
             var userData = jQuery.parseJSON(data);
             $("#search_user_error").html("");
+            $("#userExistedErrorFlag").val("0");
             if (userData) {
+                $("#search_user_error").html('');
                 $("#search_username").val(userData.name);
                 $("#search_fullname").html(userData.fullName);
                 $("#search_user_id").val(userData.id);
+                $("#userExistedErrorFlag").val("1");
             } else {
                 $("#search_user_id").val(0);
                 $("#search_user_error").html("User not existed!!!");
+                $("#userExistedErrorFlag").val("0");
             }
         }
     });
