@@ -32,7 +32,7 @@ class ReportController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view', 'address', 'wallet',
                     'creditwallet', 'package', 'adminsponsor', 'verification',
-                    'socialaccount', 'contact', 'transaction','refferal','deposit','trackrefferal','subscriber','bugreport','feedback'),
+                    'socialaccount', 'contact', 'transaction','refferal','deposit','trackrefferal','subscriber','bugreport','feedback','mediacenter'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -391,6 +391,28 @@ class ReportController extends Controller {
                 'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
         $this->render('bugreport', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+    
+    public function actionmediaCenter() {
+        
+        $model = new MediaCenter;
+        $pageSize = Yii::app()->params['defaultPageSize'];
+        $todayDate = Yii::app()->params['startDate'];
+        $fromDate = date('Y-m-d');
+        $status = 1;
+        if (!empty($_POST)) {
+            $todayDate = $_POST['from'];
+            $fromDate = $_POST['to'];
+            
+        }
+
+        $dataProvider = new CActiveDataProvider($model, array(
+            'criteria' => array(
+                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+            ), 'pagination' => array('pageSize' => $pageSize),));
+        $this->render('media_center_query', array(
             'dataProvider' => $dataProvider,
         ));
     }
