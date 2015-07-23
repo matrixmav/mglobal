@@ -82,9 +82,16 @@ class MoneyTransferController extends Controller {
         $error = "";
         $loggedInUserId = Yii::app()->session['userid'];
         $frontUserObject = User::model()->findByPk($loggedInUserId);
+        
+        $adminUserObject = User::model()->findAll(array('condition'=>'role_id=2'));
+        $adminUserObjectstrF = "";
+        foreach($adminUserObject as $adminUserObject1)
+        {
+            $adminUserObjectstrF .= $adminUserObject1->name.',';
+        }
+        $adminUserObjectstr = rtrim($adminUserObjectstrF,',');
         if(!empty($frontUserObject)){
         $frontName = $frontUserObject->name;
-        
         }
         if (isset($_POST['transfer'])) { //echo "cool";exit;
             if ($_POST['paid_amount'] < 10) {
@@ -129,7 +136,7 @@ class MoneyTransferController extends Controller {
         $this->render('transfer', 
                 array('userObject'=>$userObject,
                     'error' => $error,
-                    'userId'=>$loggedInUserId,'frontName'=>$frontName));
+                    'userId'=>$loggedInUserId,'frontName'=>$frontName ,'adminUserObject'=> $adminUserObjectstr));
     }
 
     /* autocomplete of username for user view excluding logged in user and admin */

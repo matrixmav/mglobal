@@ -1,3 +1,9 @@
+<style>
+    .portlet.box.orange{ max-width:1200px;margin-top:10px;padding-bottom:20px !important;}
+    .portlet.box > .portlet-title{margin-bottom: 20px;}
+    .form-group{padding-right:10px;}
+    
+    </style>
 <?php
 $this->breadcrumbs = array(
     'Template' => array('BuildTemp/templatelist'),
@@ -10,9 +16,14 @@ $this->breadcrumbs = array(
     <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
    
     <form action="/admin/BuildTemp/templateheaderedit?h_id=<?php echo $headerObject->temp_header_id;?>&id=<?php echo $_GET['id'];?>" method="post" class="form-horizontal" onsubmit="return validation();">
-     
+     <div class="portlet box orange">
+         <div class="portlet-title">
+							<div class="caption">
+								Edit Template Header
+							</div>
+    </div>
         <fieldset>
-            <legend>Edit Template Header</legend>
+           
             
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Category<span class="require">*</span></label>
@@ -61,10 +72,11 @@ $this->breadcrumbs = array(
 
     <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn red">
+                <input type="submit" name="submit" value="Submit" class="btn orange">
                  
             </div>
         </div>
+         </div>
     </form>
 </div>
 

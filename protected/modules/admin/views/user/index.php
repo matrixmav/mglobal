@@ -1,3 +1,6 @@
+<style>
+    .orange{margin-left: 5px;}
+    </style>
 <?php
 /* @var $this UserController */
 /* @var $model User */
@@ -90,17 +93,18 @@ $this->breadcrumbs = array(
 
                 array(
                     'class' => 'CButtonColumn',
+                    'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Change}{Edit}',
                     'htmlOptions' => array('width' => '20%'),
                     'buttons' => array(
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => Yii::t('translation', 'Edit'),
-                            'options' => array('class' => 'fa fa-success btn default green delete'),
+                            'options' => array('class' => 'fa fa-success btn orange delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/edit", array("id"=>$data->id))',
                         ),
                         /*'Delete' => array(

@@ -16,6 +16,8 @@ $this->breadcrumbs = array(
                position: absolute;
                top: 8px;}
     .confirmMenu{position: relative;}
+    .orange{margin-left: 5px;}
+    .red{margin-left: 5px;}
 </style>
 <div class="col-md-12">
 
@@ -110,24 +112,24 @@ $this->breadcrumbs = array(
                 array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
-                    'template' => '{Change}{Edit}{Delete}',
+                    'template' => '{Change}{Edit}',
                     'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/package/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
-                            'options' => array('class' => 'fa fa-success btn default black delete blue'),
+                            'options' => array('class' => 'fa fa-success btn orange'),
                             'url' => 'Yii::app()->createUrl("admin/package/edit", array("id"=>$data->id))',
                         ),
-                        'Delete' => array(
+                        /*'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
                             'options' => array('class' => 'fa fa-success btn default black delete red', 'onclick' => "js:alert('Do u want to delete this package?')"),
                             'url' => 'Yii::app()->createUrl("admin/package/deletepackage", array("id"=>$data->id))',
-                        ),
+                        ),*/
                     ),
                 ),
             ),

@@ -1969,7 +1969,10 @@ Pre-Header and pre-header elements
 .social-icons li{ list-style: none;}
 
 /*--------------pre footer-------------*/
-#myCarousel .carousel-caption{background: rgba(0, 0, 0, 0.6); padding: 10px 20px 0 20px;}
+#myCarousel .carousel-caption{background: rgba(0, 0, 0, 0.6); padding: 10px 20px 0 20px;   right: 20%;
+  left: 2%;
+  width: 30%;
+  top: 25%;}
 #myCarousel .carousel-caption >p{ font-size: 18px;}
 @media (max-device-width: 480px) and (min-device-width: 320px)
 {

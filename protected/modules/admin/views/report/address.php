@@ -101,7 +101,7 @@ float:left;
                 array(
                     'name' => 'country_id',
                     'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->country->name)? $data->country->name : ""',
+                    'value' => 'isset($data->country->name)? $data->country->name : "N/A"',
                 ),
                 array(
                     'name' => 'id',

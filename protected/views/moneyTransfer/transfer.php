@@ -47,7 +47,7 @@ $this->breadcrumbs = array(
                 <div class="form-group">
                     <label for="lastname" class="col-lg-4 control-label">Select To User <span class="require">*</span></label>
                      <div class="col-lg-7">
-                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value,'<?php echo $frontName;?>');" />
+                        <input type="text" class="form-control" id="search_username" name="username" onchange="getFullNameAdmin(this.value,'<?php echo $frontName;?>','<?php echo $adminUserObject; ?>');" />
                         <span id="search_fullname">&nbsp;</span>
                         <span id="search_user_error" style="color:red"></span>
                     </div>     
@@ -74,6 +74,7 @@ $this->breadcrumbs = array(
 </div>
 </div>
 </div>
+<input type="hidden" id="userExistedErrorFlag">
 <script type="text/javascript" src="/metronic/assets/plugins/select2/select2.min.js"></script>
 <style>
         #s2id_search_username{ width: 100% !important;}
@@ -91,6 +92,13 @@ $this->breadcrumbs = array(
     {
        $('#search_user_error').html("Please choose user to transfer amount."); 
        return false;
+    }
+    $("#search_user_error").html("");
+    if ($("#userExistedErrorFlag").val() == 1) {
+        //alert('ada');
+        $("#search_user_error").html("Sorry! you can not transfer fund to this account!!!.");
+        $("#search_username").focus();
+        return false;
     }
     $('#amount_error').html("");
      if($('#transaction_data_amt').val()== '0.00')
