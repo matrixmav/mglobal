@@ -84,7 +84,7 @@ class MoneyTransferController extends Controller {
         $frontUserObject = User::model()->findByPk($loggedInUserId);
         
         $adminUserObject = User::model()->findAll(array('condition'=>'role_id=2'));
-        $adminUserObjectstr = "";
+        $adminUserObjectstrF = "";
         foreach($adminUserObject as $adminUserObject1)
         {
             $adminUserObjectstrF .= $adminUserObject1->name.',';
