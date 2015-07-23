@@ -343,7 +343,7 @@
       <div class="carousel-caption">
         
           <h2>who<strong> we are </strong></h2>
-          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too? If not, then we surely have something new in store for you to discover. We are evolving as one such organization indulged in offering web development, designing, and digital marketing solutions. MGlobally was founded with the idea of creating a business model, wherein the customers are added to our network by bringing us the references. Abiding by the idea of creating an extended network of brand representatives, we aim to be the one of top most companies in direct selling IT network.... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
+          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too?.... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline7" style="display:none" class="readMoreBox content">
                <h2>who<strong> we are </strong></h2>
                <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too? If not, then we surely have something new in store for you to discover. We are evolving as one such organization indulged in offering web development, designing, and digital marketing solutions. MGlobally was founded with the idea of creating a business model, wherein the customers are added to our network by bringing us the references. Abiding by the idea of creating an extended network of brand representatives, we aim to be the one of top most companies in direct selling IT network.</p>
@@ -359,7 +359,7 @@
       <div class="carousel-caption">
        
            <h2>what<strong> we do </strong></h2>
-         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief. <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
+         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline8" style="display:none" class="readMoreBox content">
                <h2>what<strong> we do </strong></h2>
                <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief.</p>
