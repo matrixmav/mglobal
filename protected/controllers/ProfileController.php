@@ -268,7 +268,7 @@ class ProfileController extends Controller {
                             $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
                             $success .= "Your password changed successfully";
                             $configMsg['to'] = $userObject->country_code.$userObject->phone; 
-                            $configMsg['text'] = "Your master Pin Changed";
+                            $configMsg['text'] = "The password for your account with Mglobally has been changed. If you didn't request a password change, login and reset your password if necessary";
                             $responce = BaseClass::sendMail($configMsg);
                             $config['to'] = $userObject->email;
                             $config['subject'] = 'mGlobally Password Changed';
