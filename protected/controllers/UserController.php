@@ -423,25 +423,6 @@ class UserController extends Controller {
 
     public function actionLogin() {
         
-        
-        $countObject = BaseClass::mySelfCount();
-        echo "<pre>"; print_r($countObject);        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        exit;
         $error = "";
         if (Yii::app()->session['userid'] != '') {
             $this->redirect('/profile/dashboard/');
@@ -763,7 +744,7 @@ class UserController extends Controller {
         if (count($genealogyLeftListObject) > 0 && count($genealogyRightListObject) > 0) {
             echo $genealogyLeftListObject[0]->order_amount;
             echo $genealogyRightListObject[0]->user_id;
-            if ($genealogyLeftListObject[0]->order_amount > $genealogyRightListObject[0]->order_amount) {
+            if ($genealogyLeftListObject[0]->order_amount > $genealogyRightListObjelct[0]->order_amount) {
                 $totalCommission = BaseClass::getPercentage($genealogyRightListObject[0]->order_amount, $percent, 1);
             } else {
                 $totalCommission = BaseClass::getPercentage($genealogyLeftListObject[0]->order_amount, $percent, 1);
