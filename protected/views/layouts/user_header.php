@@ -11,7 +11,7 @@
 
  
             <!-- BEGIN TOP BAR LEFT PART -->
-            <div class="col-md-6 col-sm-6 additional-shop-info">
+            <div class="col-md-6 col-sm-6 col-xs-12 additional-shop-info">
                 <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+1 1234567890</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
@@ -20,7 +20,7 @@
             </div>
             <!-- END TOP BAR LEFT PART -->
             <!-- BEGIN TOP BAR MENU -->
-            <div class="col-md-6 col-sm-6 additional-nav">
+            <div class="col-md-6 col-sm-6 col-xs-12 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
                     <?php 
                      if(Yii::app()->session['adminID'] != '1'){ 
@@ -52,7 +52,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="/"><img class="img-responsive "src="../../../images/logo/logo.png" width="170px" ></a>
+        <a class="site-logo" href="/"><img class="img-responsive "src="../../../images/logo/logo.png" width="140px" ></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
