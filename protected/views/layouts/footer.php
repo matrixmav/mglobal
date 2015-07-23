@@ -62,19 +62,19 @@
           <!-- BEGIN BOTTOM CONTACTS -->
          <p class="f-font">Our Contacts</p>
           <address class="margin-bottom-20">
-              <strong> MaverickGlobal InfoSoft Services Pvt Ltd,</strong><br/>
-                Solus, 3rd Floor, # 2, <br>1st Cross, JC Road, <br/>
-                Opp. Jain University,<br/>
-                Bangalore 560 027, India.<br/>
+           <strong> Mglobally solutions ltd,</strong><br/>
+                21 Regent Street,<br>Belize City, Belize, <br/>
+                Central America.<br/>
+                 
             
             
             
           </address>
           <!-- END BOTTOM CONTACTS -->
           <div class="pre-footer-subscribe-box">
-              <a href=""><img src="/images/mail-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
-                <a href=""><img src="/images/whatsapp-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
-                <a href=""><img src="/images/skype-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
+              <!--<a href=""><img src="/images/mail-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>-->
+                <a href=""><img src="/images/whatsapp-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +525527895477</span></a><br/><br/>
+                <a href=""><img src="/images/skype-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +525527895477</span></a><br/><br/>
           </div>
         </div>
       </div>
