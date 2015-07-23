@@ -66,7 +66,7 @@ float:left;
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Name &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->name)? $data->name:""',
+                    'value' => 'isset($data->name) ? $data->name: "N/A"',
                 ),
                 
                 array(
