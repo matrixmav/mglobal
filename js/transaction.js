@@ -89,7 +89,7 @@ function getFullNameAdmin(userName, loggedInUserName, adminUserObject) {
         $("#search_user_error").html("Sorry! you can not transfer fund to this account!!!");
         return false;
     }
-    for (var x = 0; x < boxex.length; x++) {alert($("#userExistedErrorFlag").val());
+    for (var x = 0; x < boxex.length; x++) {
         if (userName == boxex[x])
         { 
             $("#userExistedErrorFlag").val("1");
