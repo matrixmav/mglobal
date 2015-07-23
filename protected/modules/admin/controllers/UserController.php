@@ -642,7 +642,7 @@ class UserController extends Controller {
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ($cond), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 100),
+                ), 'pagination' => array('pageSize' => $pageSize),
             ));
         } else {
            
@@ -689,7 +689,7 @@ class UserController extends Controller {
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ('testimonials !="" AND updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate . '"  AND testimonial_status = "' . $status . '" ' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),
+                ), 'pagination' => array('pageSize' => $pageSize),
             ));
         } else {
 
