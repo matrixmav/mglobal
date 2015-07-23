@@ -685,7 +685,8 @@ function profileFormSubmit()
                     location.reload(12000);
                 } else {
                     document.getElementById('show_worningP').style.display = "none";
-                    document.getElementById("show_worningp").innerHTML = "There might be something wrong.";
+                    document.getElementById('show_worningPE').style.display = "bloack";
+                    document.getElementById("show_worningPE").innerHTML = "There might be something wrong.";
                 }
 
 
@@ -725,7 +726,7 @@ function profileFormSubmit()
             var dataString = 'email=' + email + '&name=' + name;
             $.ajax({
                 type: "GET",
-                url: "site/profileform",
+                url: "site/brochureform",
                 data: dataString,
                 cache: false,
                 success: function (html) {
@@ -738,7 +739,8 @@ function profileFormSubmit()
                         location.reload(12000);
                     } else {
                         document.getElementById('show_worningCo').style.display = "none";
-                        document.getElementById("show_worningCo").innerHTML = "There might be something wrong.";
+                        document.getElementById('show_worningCoE').style.display = "bloack";
+                        document.getElementById("show_worningCoE").innerHTML = "There might be something wrong.";
                     }
 
 
@@ -779,7 +781,7 @@ function profileFormSubmit()
             var dataString = 'email=' + email + '&name=' + name;
             $.ajax({
                 type: "GET",
-                url: "site/profileform",
+                url: "site/businessform",
                 data: dataString,
                 cache: false,
                 success: function (html) {
@@ -792,7 +794,8 @@ function profileFormSubmit()
                         location.reload(12000);
                     } else {
                         document.getElementById('show_worningBu').style.display = "none";
-                        document.getElementById("show_worningBu").innerHTML = "There might be something wrong.";
+                        document.getElementById('show_worningBuE').style.display = "bloack";
+                        document.getElementById("show_worningBuE").innerHTML = "There might be something wrong.";
                     }
 
 
