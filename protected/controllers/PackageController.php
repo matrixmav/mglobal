@@ -801,7 +801,7 @@ class PackageController extends Controller {
 Your package purchase is successful.  You can login into your account and start building your web site. Refer Friends and earn rewards.";
                     $responce = BaseClass::sendMail($configMsg);
                     
-                    $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                    $configMsg['to'] = $sponsorUserObject->country_code.$sponsorUserObject->phone; 
                     $configMsg['text'] = "Congratulation!!!  
 We are pleased to inform you that your direct referral commissions have credited to your wallet successfully.";
                     $responce = BaseClass::sendMail($configMsg);
