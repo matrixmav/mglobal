@@ -101,12 +101,12 @@ if(!empty($_GET['successmsg']) && $_GET['successmsg']=='2'){
                     'buttons' => array(
                         'Recharge' => array(
                             'label' => 'Recharge',
-                            'options' => array('class' => 'btn orange fa fa-edit margin-right15'),
+                            'options' => array('class' => 'btn green fa fa-edit margin-right15'),
                             'url' => 'Yii::app()->createUrl("admin/user/creditwallet", array("id"=>$data->user_id))',
                         ),
                         'Deduct' => array(
                             'label' => Yii::t('translation', 'Deduct'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn orange delete'),
                             'url' => 'Yii::app()->createUrl("admin/user/debitwallet", array("id"=>$data->user_id))',
                         ),
                     ),
