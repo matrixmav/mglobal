@@ -357,7 +357,7 @@ Pre-Header and pre-header elements
 ***/
 .pre-header {
 	color: #616b76;
-	border-bottom: 1px solid #eee;
+	
 	padding-top: 10px;
 	line-height: 1.2;
 	font-family: 'Open Sans', sans-serif;
@@ -383,7 +383,7 @@ Pre-Header and pre-header elements
 }
 .additional-shop-info
 {
-padding-bottom:25px;
+padding-bottom:0;
 }
 .additional-shop-info li:first-child {
 	padding-left: 0;
@@ -502,7 +502,7 @@ body.page-header-fixed {
   width: 32px;
   height: 32px;
   display: none;
-  margin: 25px 0 0 30px;
+  margin: 13px 0 0 30px;
   position: relative;
   background: #fff url(/images/icons/toggler.png) no-repeat 6px 8px;
 }
@@ -534,7 +534,7 @@ body.page-header-fixed {
 .header-navigation > ul > li > a {
 	color: #333;
 	display: block;	
-	padding: 29px 12px 30px;
+	padding: 20px 12px;
 	  font-family: PT Sans Narrow;
   font-size: 18px;
   color:#78828c;
@@ -3115,7 +3115,7 @@ Styler Panel
   z-index: 100001;
 }
 
-.site-logo{padding:10px !important;}
+.site-logo{padding:5px 10px !important;}
 .cartItemsWrp{display: table !important; margin-bottom: 0;}
 .cartfooter{padding: 15px 0;}
 .cartfooter .couponWrp{ width: auto; border: none; padding: 0; min-height: auto;}
@@ -3514,3 +3514,8 @@ padding-bottom:5px;
 
 #master_pin_error{color:#dd0808;}
 
+/*inner header*/
+.additional-shop-info li{padding-right: 10px !important; display: inline-block !important;}
+.additional-nav li{display: inline-block !important; padding: 0 10px !important;}
+.header .container{border-top: 1px solid #eee;}
+.top-ul li a{padding: 15px !important;}
