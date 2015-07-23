@@ -14,7 +14,7 @@ if($builderObjectTemplate){ ?>
 
                     <input type = "hidden" name = "user_id" id = "user_id" value = "<?php echo Yii::app()->session['userid']; ?>">
                     <input type = "hidden" name = "template_id" id = "template_id" value = "<?php echo $builderObjectTemplate->template_id; ?>">
-                    <input type = "submit" name = "submitInput" id = "submit" class = "btn red" value = "Get Started">
+                    <input type = "submit" name = "submitInput" id = "submit" class = "btn orange" value = "Get Started">
 
                 </div>
             </div>
@@ -52,7 +52,7 @@ foreach($builderObject as $buildertemp){?>
                 <div class="form-group">        
                     <input type="hidden" name="user_id" id="user_id" value="<?php echo Yii::app()->session['userid']; ?>">
                     <input type="hidden" name="template_id" id="template_id" value="<?php echo $buildertemp->template_id; ?>">
-                    <input type="submit" name="submitInput" id="submit" class="btn red" value="Get Started">
+                    <input type="submit" name="submitInput" id="submit" class="btn orange" value="Get Started">
                 </div>
             </div>
             <!-- Modal -->
