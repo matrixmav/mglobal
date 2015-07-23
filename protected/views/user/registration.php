@@ -90,7 +90,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                                 <option value="">Please Select Country</option>
                                                 <?php foreach ( $countryObject as  $country) { ?>
                                                     <option value="<?php echo $country->id; ?>" 
-                                                            <?php echo ($country->id == isset($_POST['country_id']))?"selected":''; ?>>
+                                                            <?php if(isset($_POST['country_id'])){ if ($country->id == $_POST['country_id']){ echo 'selected="selected"' ;} }?>>
                                                     <?php echo $country->name; ?></option>
                                                 <?php } ?>
                                             </select>
