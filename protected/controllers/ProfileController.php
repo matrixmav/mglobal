@@ -104,6 +104,7 @@ class ProfileController extends Controller {
                 if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
 
                     $profileObject->testimonials = $_POST['UserProfile']['testimonials'];
+                    $profileObject->testimonial_date = date('Y-m-d');
                     $profileObject->testimonial_status = '0';
 
                     if ($profileObject->update()) {
