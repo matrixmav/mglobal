@@ -316,6 +316,9 @@ class ProfileController extends Controller {
                         $userObjectArr['ip'] = Yii::app()->params['ip'];
                         $userObjectArr['new_master_pin'] = $_POST['UserProfile']['new_master_pin'];
                         $successMsg .= "Your pin changed successfully";
+                        $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                        $configMsg['text'] = "The master pin for your account with Mglobally has been changed. If you didn't request change of master pin, login and reset your password if necessary";
+                        $responce = BaseClass::sendMail($configMsg);
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
                         $config['body'] = $this->renderPartial('//mailTemp/change_pin', array('userObjectArr' => $userObjectArr), true);
