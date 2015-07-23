@@ -17,6 +17,9 @@
           <p class="f-font">Support</p>
           <p class="f-cnt"><a href="mailto:support@mglobally.com">support@mglobally.com</a><br/> 
           91-8500425185</p>
+          
+         
+          
         </div>
         <!-- END BOTTOM ABOUT BLOCK -->
         <!-- END BOTTOM ABOUT BLOCK -->
@@ -72,19 +75,13 @@
           </address>
           <!-- END BOTTOM CONTACTS -->
           <div class="pre-footer-subscribe-box">
-              <a href=""><img src="/images/mail-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
+              
                 <a href=""><img src="/images/whatsapp-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
                 <a href=""><img src="/images/skype-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- END PRE-FOOTER -->
-  <!-- BEGIN FOOTER -->
-  <div class="footer">
-    <div class="container">
-		<div class="policy-section">
+         <div class="policy-section">
 		<ul>
 		<li><a href="#">Policy 1</a></li>
 		<li><a href="#">Policy 2</a></li>
@@ -92,6 +89,13 @@
 		<li><a href="#">Policy 4</a></li>
 		</ul>
 		</div>
+    </div>
+  </div>
+  <!-- END PRE-FOOTER -->
+  <!-- BEGIN FOOTER -->
+  <div class="footer">
+    <div class="container">
+		
       <div class="row bg-f2">
         
         <!-- BEGIN SOCIAL ICONS -->
