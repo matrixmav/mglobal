@@ -34,7 +34,9 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification','policy1','policy2','policy3','policy4','legal'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata',
+                    'templatespecification','policy1','policy2','policy3','policy4','legal',
+                    'isemailexistedprofile'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -798,6 +800,22 @@ class UserController extends Controller {
             }
         }
     }
+    
+    /* For the profile user update mail id  */
+    public function actionisEmailExistedProfile() {
+        if ($_POST) {
+            $userObject = User::model()->findByAttributes(array('email' => $_POST['email'] ));
+            echo count($userObject) ; die;
+            if (count($userObject) > 0) {
+                echo "1";
+                exit;
+            } else {
+                echo "0";
+                exit;
+            }
+        }
+    }
+    
 
     public function actionIsSponsorExisted() {
         if ($_POST) {
