@@ -13,7 +13,7 @@
             <!-- BEGIN TOP BAR LEFT PART -->
             <div class="col-md-6 col-sm-6 additional-shop-info">
                 <ul class="list-unstyled list-inline">
-                    <li><i class="fa fa-phone"></i><span>+1 1234567890</span></li>
+                    <li><i class="fa fa-phone"></i><span>+525527895477</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
                     <li><a href="callto://ramhemareddy"><button id="checkout" class="btn-flat-green btn-orange btn-h">CALL US</button></a></li>
                 </ul>
