@@ -1377,7 +1377,7 @@ class BaseClass extends Controller {
             if($todayDate==$binaryCommissionObjectRight->order_date){
                 $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
                 $parentObject->right_purchase = $binaryCommissionObjectRight->total_purchase_amount;
-                $parentObject->right_user = $binaryCommissionObjectLeft->right_user + 1;
+                $parentObject->right_user = $binaryCommissionObjectRight->right_user + 1;
                 $parentObject->save(false);
             } else {
                 $binaryCommissionObjectRight = self::setPurchaseNode($binaryCommissionObjectRight);
@@ -1581,7 +1581,7 @@ class BaseClass extends Controller {
         //binary calculation
         //$parentObject = self::setBinary($parentObject);
           echo $j;
-          echo $k;exit;
+          echo $k;
         return $j.'_'.$k;
     }
     

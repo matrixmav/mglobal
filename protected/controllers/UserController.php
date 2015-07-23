@@ -34,7 +34,9 @@ class UserController extends Controller {
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification','policy1','policy2','policy3','policy4','legal'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata',
+                    'templatespecification','policy1','policy2','policy3','policy4','legal',
+                    'isemailexistedprofile'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -423,25 +425,6 @@ class UserController extends Controller {
 
     public function actionLogin() {
         
-        
-        $countObject = BaseClass::mySelfCount();
-        echo "<pre>"; print_r($countObject);        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        exit;
         $error = "";
         if (Yii::app()->session['userid'] != '') {
             $this->redirect('/profile/dashboard/');
@@ -763,7 +746,7 @@ class UserController extends Controller {
         if (count($genealogyLeftListObject) > 0 && count($genealogyRightListObject) > 0) {
             echo $genealogyLeftListObject[0]->order_amount;
             echo $genealogyRightListObject[0]->user_id;
-            if ($genealogyLeftListObject[0]->order_amount > $genealogyRightListObject[0]->order_amount) {
+            if ($genealogyLeftListObject[0]->order_amount > $genealogyRightListObjelct[0]->order_amount) {
                 $totalCommission = BaseClass::getPercentage($genealogyRightListObject[0]->order_amount, $percent, 1);
             } else {
                 $totalCommission = BaseClass::getPercentage($genealogyLeftListObject[0]->order_amount, $percent, 1);
@@ -817,6 +800,22 @@ class UserController extends Controller {
             }
         }
     }
+    
+    /* For the profile user update mail id  */
+    public function actionisEmailExistedProfile() {
+        if ($_POST) {
+            $userObject = User::model()->findByAttributes(array('email' => $_POST['email'] ));
+            echo count($userObject) ; die;
+            if (count($userObject) > 0) {
+                echo "1";
+                exit;
+            } else {
+                echo "0";
+                exit;
+            }
+        }
+    }
+    
 
     public function actionIsSponsorExisted() {
         if ($_POST) {

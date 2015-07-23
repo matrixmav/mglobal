@@ -6,7 +6,6 @@
 $regVar = '/user/registration/?spid=';
 $treeVar = '/admin/user/genealogy/';
 
-
 $this->breadcrumbs = array(
     'Genealogies'
 );
@@ -40,15 +39,10 @@ if (!empty($_GET['id'])) {
             <p id="loader"></p>
         </div>
         <div class="col-md-3">
-
             <form action="binarycalculation" method="post" class="form-inline">                
                 <input type="submit" name="submit" class="btn orange btn-primary confirmOk" value="Generate Binary Commission">
             </form>
-            
-            <!--<a href="" id="generateCommission" class="btn red" onclick="generateBinary()">Generate Binary Commission</a>-->
-
         </div>
-
 
     </div>
     <span>
@@ -61,21 +55,29 @@ if (!empty($_GET['id'])) {
                         <?php 
                             $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
                             $getColor =  BaseClass::getPackageName($currentUserId);
-                            echo "Right ". $getUserInfoRight = BaseClass::getNode($currentUserId ,'right');
-                            echo "<br/>";
-                            echo "Left ".$getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');
-                            echo "<br/>";
+//                            echo "Right ". $getUserInfoRight = BaseClass::getNode($currentUserId ,'right');
+//                            echo "<br/>";
+//                            echo "Left ".$getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');
+//                            echo "<br/>";
+//                            $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
+//                            
+//                             $getUserInfoRight = BaseClass::getNode($currentUserId ,'right');
+//                            
+//                            $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');
+                            
                             $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
-                            ;
-                            if(!empty($getUserPurchase->left_purchase)){ 
+                            
+                            
+                            
+                            if(isset($getUserPurchase->left_purchase)){ 
                                 echo "Left Purchase ". $getUserPurchase->left_purchase ;
                             }    
                             echo "<br/>";
                             
-                            if(!empty($getUserPurchase->right_purchase)){
+                            if(isset($getUserPurchase->right_purchase)){
                                 echo "Right Purchase ".$getUserPurchase->right_purchase;                          
                             }
-                          $getColor =  BaseClass::getPackageName($currentUserId);
+//                          $getColor =  BaseClass::getPackageName($currentUserId);
                           
                         ?>
                         <a class="<?php echo $getColor ; ?>"><div><span><?php echo $userObject->name; ?></span></div></a>
