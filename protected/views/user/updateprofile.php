@@ -50,8 +50,9 @@ $this->breadcrumbs = array(
                         <div class="form-group">
                             <label class="col-lg-4 control-label" for="lastname">Email<span class="require">*</span></label>
                             <div class="col-lg-7">
-                                <input type="text" onchange="isEmailExisted()" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject)) ? $userObject->email : ""; ?>" <?php if ($edit == 'no') { ?>readonly="readonly" <?php } ?> maxlength="30">
+                                <input type="text" onchange="return isEmailExistedProfile();" id="email" class="form-control" name="UserProfile[email]" value="<?php echo (!empty($userObject)) ? $userObject->email : ""; ?>" <?php /*if ($edit == 'no') { ?>readonly="readonly" <?php }*/ ?>>
                                 <div id="email_error" class="form_error"></div>
+                                <div id="email_error1" class="form_error"></div>
                             </div>
                         </div>
                         <div class="form-group">
