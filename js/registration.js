@@ -755,12 +755,13 @@ function profileFormSubmit()
         data: "email=" + $("#email").val(),
         success: function (msg) {
             $("#email_error").html("");
+            $("#emailExistedErrorFlag").val("0");
             if (msg == 1) {
                 $("#email_error").html("Existed!!!");
                 $("#emailExistedErrorFlag").val(1);
-                return false;
+                 
             }else{
-                return true;
+                $("#emailExistedErrorFlag").val("0");
             }
         }
     });
