@@ -467,7 +467,7 @@
     <!--   <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>-->
       <div class="row">
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/profile.ppsx" download="/images/mediacenter/profile.ppsx" class="fancybox"> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
+            <a  href= "#inline114" class="fancybox"> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
          <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3> -->
             <h3><em>Our Profile</em></h3></a>
          <!-- <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
@@ -478,7 +478,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/Business plans brochure.pdf" download="/images/mediacenter/Business plans brochure.pdf" class="fancybox"> <img src="images/business-plan.png" alt="business plan" class="img-responsive">
+            <a href= "#inline116" class="fancybox"> <img src="images/business-plan.png" alt="business plan" class="img-responsive">
             <h3><em>business plan</em></h3></a>
          <!-- <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
@@ -490,7 +490,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/e_brochure.pdf" download="/images/mediacenter/Business plans brochure.pdf" class="fancybox">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
+            <a  href= "#inline115" class="fancybox">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
             <h3><em>promo brochure</em></h3></a>
         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
