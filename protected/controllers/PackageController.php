@@ -795,6 +795,16 @@ class PackageController extends Controller {
                     $config1['subject'] = 'Direct Referral Income Credited';
                     $config1['body'] =  $this->renderPartial('../mailTemp/direct_referral', array('userObjectArr'=>$userObjectArr),true);
                     CommonHelper::sendMail($config1);
+                    
+                    $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                    $configMsg['text'] = "Congratulation!!  
+Your package purchase is successful.  You can login into your account and start building your web site. Refer Friends and earn rewards.";
+                    $responce = BaseClass::sendMail($configMsg);
+                    
+                    $configMsg['to'] = $sponsorUserObject->country_code.$sponsorUserObject->phone; 
+                    $configMsg['text'] = "Congratulation!!!  
+We are pleased to inform you that your direct referral commissions have credited to your wallet successfully.";
+                    $responce = BaseClass::sendMail($configMsg);
 
                     if ($transactionObject->status == 1) {
                         unset(Yii::app()->session['transactionid']);

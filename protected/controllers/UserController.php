@@ -97,7 +97,9 @@ class UserController extends Controller {
                         //'<br/><strong>Password : </strong>' . $password . '<br/>' .
                         //'<strong>Master Pin : </strong>' . $masterPin . '<br/><br/>';
                 CommonHelper::sendMail($config);
-
+                $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                $configMsg['text'] = "Thank you for signing up with us.
+Your account is successful activated .check email for credentials. Purchase package and start building you site.";
                 $this->redirect(array("login", 'successMsg' => $msg));
             } else {
                 $error = "Invalid Key.";

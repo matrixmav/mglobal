@@ -78,6 +78,7 @@ class MailController extends Controller {
      */
     public function actionSent() {
         $pageSize = 10;
+        $successMsg = "";
         if (Yii::app()->session['userid'] == '1') {
             $string = "1";
         } else {
@@ -87,7 +88,7 @@ class MailController extends Controller {
             'criteria' => array('condition' => 'from_user_id = ' . $string, 'order' => 'updated_at DESC'),
             'pagination' => array('pageSize' => $pageSize)));
         $this->render('sent', array(
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider,'successMsg' => $successMsg
         ));
     }
 
