@@ -181,7 +181,7 @@ class SiteController extends Controller
              $userObjectArr['type'] = "Our Profile";
              $config['to'] = $_REQUEST['email'];
              $config['subject'] = 'mGlobally Company Profile Download';
-             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+             $config['body'] =  $this->renderPartial('//mailTemp/media_center', array('userObjectArr'=>$userObjectArr),true);
              $config['file_path'] = $path . "profile.ppsx";
              CommonHelper::sendMail($config);
               echo 1;
@@ -206,7 +206,7 @@ class SiteController extends Controller
              $userObjectArr['type'] = "Business Plan";
              $config['to'] = $_REQUEST['email'];
              $config['subject'] = 'mGlobally Business Plans Brochure Download';
-             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+             $config['body'] =  $this->renderPartial('//mailTemp/media_center', array('userObjectArr'=>$userObjectArr),true);
              $config['file_path'] = $path . "Business plans brochure.pdf";
              CommonHelper::sendMail($config);
               echo 1;
@@ -232,7 +232,7 @@ class SiteController extends Controller
              $userObjectArr['type'] = "Company Brochure";
              $config['to'] = $_REQUEST['email'];
              $config['subject'] = 'mGlobally Corporate Brochure Download';
-             $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
+             $config['body'] =  $this->renderPartial('//mailTemp/media_center', array('userObjectArr'=>$userObjectArr),true);
              $config['file_path'] = $path . "e_brochure.pdf";
              CommonHelper::sendMail($config);
               echo 1;
