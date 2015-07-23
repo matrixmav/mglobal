@@ -173,7 +173,7 @@ class SiteController extends Controller
              $mediaObject->email = $_REQUEST['email'];
              $mediaObject->type = "Our Profile";
              $mediaObject->add_date = date('Y-m-d');
-             $contactObject->save(false);
+             $mediaObject->save(false);
              $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
              /*mail to user*/
              $userObjectArr['email'] = $_REQUEST['email'];
@@ -198,7 +198,7 @@ class SiteController extends Controller
              $mediaObject->email = $_REQUEST['email'];
              $mediaObject->type = "Business Plan";
              $mediaObject->add_date = date('Y-m-d');
-             $contactObject->save(false);
+             $mediaObject->save(false);
              $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
              /*mail to user*/
              $userObjectArr['email'] = $_REQUEST['email'];
@@ -224,7 +224,7 @@ class SiteController extends Controller
              $mediaObject->email = $_REQUEST['email'];
              $mediaObject->type = "Brochure";
              $mediaObject->add_date = date('Y-m-d');
-             $contactObject->save(false);
+             $mediaObject->save(false);
              $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
              /*mail to user*/
              $userObjectArr['email'] = $_REQUEST['email'];
