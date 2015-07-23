@@ -188,7 +188,7 @@
                 <!-- BEGIN TOP BAR LEFT PART -->
             <div class="col-md-6 col-sm-6 additional-shop-info col-xs-12">
                     <ul class="list-unstyled list-inline">
-                        <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
+                        <li><i class="fa fa-phone"></i><span>+525527895477</span></li>
 
                         <li style="border: none;"><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
                         <li style="border: none;"><a href="callto://MGlobally"><button id="checkout" class="btn  topBtn">Call Us</button><a/></li>

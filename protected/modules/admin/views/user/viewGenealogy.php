@@ -69,14 +69,14 @@ if (!empty($_GET['id'])) {
                             
                             
                             
-                            if(isset($getUserPurchase->left_purchase)){ 
-                                echo "Left Purchase ". $getUserPurchase->left_purchase ;
-                            }    
-                            echo "<br/>";
-                            
-                            if(isset($getUserPurchase->right_purchase)){
-                                echo "Right Purchase ".$getUserPurchase->right_purchase;                          
-                            }
+//                            if(isset($getUserPurchase->left_purchase)){ 
+//                                echo "Left Purchase ". $getUserPurchase->left_purchase ;
+//                            }    
+//                            echo "<br/>";
+//                            
+//                            if(isset($getUserPurchase->right_purchase)){
+//                                echo "Right Purchase ".$getUserPurchase->right_purchase;                          
+//                            }
 //                          $getColor =  BaseClass::getPackageName($currentUserId);
                           
                         ?>

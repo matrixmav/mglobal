@@ -97,12 +97,12 @@
           <tbody>
             
              <tr>
-            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'"><strong>Off:</strong> SOLUS, 3rd Floor,</td>
+            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'"><strong>Off:</strong> Mglobally solutions ltd<br/>21 Regent Street, <br/>Belize City, Belize,<br/>Central America.</td>
                 
 
             </tr>
             <tr>
-            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'"><strong>Call Us:</strong> +91 80 4664 7799</td>
+            	<td width="100%" height="35" valign="middle" align="left" style="line-height:22px; color: #828282; font-size:14px; font-family:'Nunito'"><strong>Call Us:</strong> +525527895477</td>
                 
 
             </tr>
@@ -138,7 +138,7 @@
             <tr>
             <td width="8%"></td>
              <td width="8%"><a href=""> <img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/skype.png"></a></td>
-              <td width="34%" valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px; font-family:'Nunito'"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">91 80 4664 7799</a> </td>
+              <td width="34%" valign="middle" align="left" style="line-height:0px;color: #19bcf1;font-size:16px; font-family:'Nunito'"><a style="line-height:0px;color: #19bcf1; text-decoration:none;" href="">+525527895477</a> </td>
               <td width="50%" valign="middle" style="line-height:0px;color: #828282;font-size:16px; font-family:'Nunito'">
               	<table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tbody>
