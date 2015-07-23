@@ -29,18 +29,25 @@ $empty = "sm-blank" ; //no Package
                     $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
                     $getColor =  BaseClass::getPackageName($currentUserId);
                     $getUserInfoRight = BaseClass::getLeftRightMember($currentUserId ,'right');
-                    $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');                          
+                    $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');  
+                    $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
+//                    print_r($getUserInfoLeft); 
+//                    print_r($getUserInfoLeft); 
                     ?>
-                    <a href="" class="<?php echo $getColor ; ?>"><div><span class="myPop" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content=""><?php echo $userObject->name; ?>
+                    <a href="" class="<?php echo $getColor; ?>">
+                        <div>
+                            <span class="myPop" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content=""><?php echo $userObject->name; ?>
                                 <div id="popover_content_wrapper" style="display: none; ">
                                     <ul class="packageDetail">
-                                                       <li><p>Total Packages</p><span> 122</span> </li>
-                                                       <li><p>Total Packages Today</p><span> 122</span> </li>
-                                                        <li><p>Total Registration</p><span> 122</span> </li>
-
-                                                   </ul>
-                                  </div>
-                            </span></div></a>
+                                        <li><p>Total Left Packages</p><span> <?php  print_r($getUserInfoLeft); ?></span> </li>
+                                        <li><p>Total Right Packages </p><span> <?php print_r($getUserInfoRight); ?></span> </li>
+                                        <li><p>Total Left Registration</p><span> <?php echo $getUserPurchase->left_purchase; ?></span> </li>
+                                        <li><p>Total Right Registration</p><span> <?php echo $getUserPurchase->right_purchase; ?></span> </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </div>
+                    </a>
                     <ul>
                         <li>
                             <?php
