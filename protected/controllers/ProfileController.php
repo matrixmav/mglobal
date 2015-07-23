@@ -265,7 +265,7 @@ class ProfileController extends Controller {
                             $userObjectArr['ip'] = Yii::app()->params['ip'];
                             $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
                             $success .= "Your password changed successfully";
-                            $configMsg['to'] = $userObject->phone; 
+                            $configMsg['to'] = $userObject->country_code.$userObject->phone; 
                             $configMsg['text'] = "Your master Pin Changed";
                             $responce = BaseClass::sendMail($configMsg);
                             $config['to'] = $userObject->email;
