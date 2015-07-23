@@ -162,10 +162,11 @@ class AdsController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProviderArray ="";
         $successMsg = "";
         $dataProviderArray = "";
         $orderObject = Order::model()->findAll(array('condition' => 'user_id = '. Yii::app()->session['userid']));
+//        echo "<pre>";
+//        print_r($orderObject); die;
         foreach($orderObject as $orderObjectList){           
             $userSharedAdObject = UserSharedAd::model()->findAll(array('condition' => ' order_id = '.$orderObjectList->id ));
             if(count($userSharedAdObject)){
