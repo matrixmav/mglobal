@@ -32,7 +32,7 @@ class SiteController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','subscription'),
+				'actions'=>array('index','subscription','profileform'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -141,6 +141,7 @@ class SiteController extends Controller
           {
              $contactObject = new Contact;
              $contactObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
              $contactObject->type = "subscribe";
              $contactObject->created_at = date('Y-m-d');
              $contactObject->status = 1;
@@ -164,6 +165,86 @@ class SiteController extends Controller
             echo 0;
           }
         }
+        
+        public function actionprofileForm() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $mediaObject = new MediaCenter;
+             $mediaObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
+             $mediaObject->type = "Our Profile";
+             $mediaObject->add_date = date('Y-m-d');
+             $mediaObject->save(false);
+             $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
+             /*mail to user*/
+             $userObjectArr['email'] = $_REQUEST['email'];
+             $userObjectArr['name'] = $_REQUEST['name'];
+             $userObjectArr['type'] = "Our Profile";
+             $config['to'] = $_REQUEST['email'];
+             $config['subject'] = 'mGlobally Company Profile Download';
+             $config['body'] =  $this->renderPartial('//mailTemp/media_center', array('userObjectArr'=>$userObjectArr),true);
+             $config['file_path'] = $path . "profile.ppsx";
+             CommonHelper::sendMail($config);
+              echo 1;
+          }else{
+            echo 0;
+          }
+        }
+        
+        public function actionbusinessForm() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $mediaObject = new MediaCenter;
+             $mediaObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
+             $mediaObject->type = "Business Plan";
+             $mediaObject->add_date = date('Y-m-d');
+             $mediaObject->save(false);
+             $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
+             /*mail to user*/
+             $userObjectArr['email'] = $_REQUEST['email'];
+             $userObjectArr['name'] = $_REQUEST['name'];
+             $userObjectArr['type'] = "Business Plan";
+             $config['to'] = $_REQUEST['email'];
+             $config['subject'] = 'mGlobally Business Plans Brochure Download';
+             $config['body'] =  $this->renderPartial('//mailTemp/media_center', array('userObjectArr'=>$userObjectArr),true);
+             $config['file_path'] = $path . "Business plans brochure.pdf";
+             CommonHelper::sendMail($config);
+              echo 1;
+          }else{
+            echo 0;
+          }
+        }
+        
+        
+        public function actionbrochureForm() {
+                    
+          if(!empty($_REQUEST))  
+          {
+             $mediaObject = new MediaCenter;
+             $mediaObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
+             $mediaObject->type = "Brochure";
+             $mediaObject->add_date = date('Y-m-d');
+             $mediaObject->save(false);
+             $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
+             /*mail to user*/
+             $userObjectArr['email'] = $_REQUEST['email'];
+             $userObjectArr['name'] = $_REQUEST['name'];
+             $userObjectArr['type'] = "Company Brochure";
+             $config['to'] = $_REQUEST['email'];
+             $config['subject'] = 'mGlobally Corporate Brochure Download';
+             $config['body'] =  $this->renderPartial('//mailTemp/media_center', array('userObjectArr'=>$userObjectArr),true);
+             $config['file_path'] = $path . "e_brochure.pdf";
+             CommonHelper::sendMail($config);
+              echo 1;
+          }else{
+            echo 0;
+          }
+        }
+        
        
         /**
 	 *This is action label

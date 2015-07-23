@@ -4,7 +4,7 @@
  
 
 <?php //echo "<pre>"; print_r($packageObject);  die;  ?>
-<div class="container-fluid fluid-top">
+<div class="container-fluid">
     <div class="container ">
         <nav class="navbar " role="navigation">
             <div class="navbar-header">
@@ -122,7 +122,9 @@
             ?><a class="fancybox" onclick="showSpecification(<?php echo $buildTempObjectList['id']; ?>);"> 
                 <div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                        <img src="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/screenshot/<?php echo $buildTempObjectList['screenshot'];?>" class="img-left" width="200" height="200">
+<!--                        <img src="/user/template/<?php// echo $buildTempObjectList['folderpath'];?>/screenshot/<?php //echo $buildTempObjectList['screenshot'];?>" class="img-left" width="200" height="200">
+                    -->
+                    <img src="http://mglobal.dev/user/template/images/left-1.png">
                     </div>
 
                     <div class="img-footer">

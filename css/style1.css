@@ -2254,3 +2254,11 @@ color:#FFF; background: #c9c9c9;}
   padding: 10px 0 8px 10px;
   text-align: left;
 }
+.errorMsgmedia{
+ color: #E6400C;
+ margin-bottom: -5px;
+ margin-top: 4px;
+}
+.successMsgmedia{
+    color: #398439;
+    text-align: center;}

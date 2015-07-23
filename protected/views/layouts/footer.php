@@ -8,18 +8,22 @@
         <div class="col-md-2 col-sm-6 pre-footer-col">
           <p class="f-font">Legal</p>
           <p class="f-cnt"><a href="mailto:billing@mglobally.com">billing@mglobally.com</a><br/> 
-          91-8500425185</p>
+          <!--91-8500425185--></p>
            
           <p class="f-font">Billing</p>
           <p class="f-cnt"><a href="mailto:legal@mglobally.com">legal@mglobally.com</a><br/> 
-          91-8500425185</p>
+          <!--91-8500425185--></p>
           
           <p class="f-font">Support</p>
           <p class="f-cnt"><a href="mailto:support@mglobally.com">support@mglobally.com</a><br/> 
+<<<<<<< HEAD
           91-8500425185</p>
           
          
           
+=======
+          <!--91-8500425185--></p>
+>>>>>>> 941a8e2233f6940cc508d6093d4b7f22649828c6
         </div>
         <!-- END BOTTOM ABOUT BLOCK -->
         <!-- END BOTTOM ABOUT BLOCK -->
@@ -30,15 +34,15 @@
           
           <p class="f-font">Sales</p>
           <p class="f-cnt"><a href="mailto:sales@mglobally.com">sales@mglobally.com</a><br/> 
-          91-8500425185</p>
+          <!--91-8500425185--></p>
           
           <p class="f-font">Info</p>
           <p class="f-cnt"><a href="mailto:info@mglobally.com">info@mglobally.com</a><br/> 
-         91-8500425185</p>  
+         <!--91-8500425185--></p>  
           
           <p class="f-font">Member Enquiry</p>
           <p class="f-cnt"><a href="mailto:memberenquiry@mglobally.com">memberenquiry@mglobally.com</a><br/> 
-          91-8500425185 </p>
+          <!--91-8500425185--> </p>
         </div>
         
          <div class="col-md-5 col-sm-6 pre-footer-col">
@@ -65,19 +69,18 @@
           <!-- BEGIN BOTTOM CONTACTS -->
          <p class="f-font">Our Contacts</p>
           <address class="margin-bottom-20">
-              <strong> MaverickGlobal InfoSoft Services Pvt Ltd,</strong><br/>
-                Solus, 3rd Floor, # 2, <br>1st Cross, JC Road, <br/>
-                Opp. Jain University,<br/>
-                Bangalore 560 027, India.<br/>
+           <strong> Mglobally solutions ltd,</strong><br/>
+                21 Regent Street,<br>Belize City, Belize, <br/>
+                Central America.<br/>
+                 
             
             
             
           </address>
           <!-- END BOTTOM CONTACTS -->
           <div class="pre-footer-subscribe-box">
-              
-                <a href=""><img src="/images/whatsapp-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
-                <a href=""><img src="/images/skype-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +91 1234567890</span></a><br/><br/>
+                <a href=""><img src="/images/whatsapp-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +525527895477</span></a><br/><br/>
+                <a href=""><img src="/images/skype-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +525527895477</span></a><br/><br/>
           </div>
         </div>
       </div>
