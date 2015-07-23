@@ -447,8 +447,8 @@ class ProfileController extends Controller {
         $userDetails['refferal_count'] = User::model()->count('sponsor_id = :spon_id', array(':spon_id' => $userObject->name));
         $userDetails['addshare_count'] = UserSharedAd::model()->count('user_id = :userId AND social_id = :socId AND date < :cur_date', array(':userId' => $loggedInUserId, ':cur_date' => date('Y-m-d'), ':socId' => 1));
         $userDetails['addlapsed_count'] = UserSharedAd::model()->count('user_id = :userId AND social_id = :socId AND date < :cur_date', array(':userId' => $loggedInUserId, ':cur_date' => date('Y-m-d'), ':socId' => 0));
-        $userDetails['transaction_order'] = Transaction::model()->count('user_id = :userId', array(':userId' => $loggedInUserId));
-        $userDetails['transaction_fund'] = MoneyTransfer::model()->count('from_user_id = :userId', array(':userId' => $loggedInUserId));
+        $userDetails['transaction_order'] = Transaction::model()->count('user_id = :userId AND mode <> :mode', array(':userId' => $loggedInUserId, ':mode' => 'transfer'));
+        $userDetails['transaction_fund'] = MoneyTransfer::model()->count('from_user_id = :userId OR to_user_id = :userId', array(':userId' => $loggedInUserId));
         $userDetails['package_purchased'] = Order::model()->count('user_id = :userId', array(':userId' => $loggedInUserId));
 
         return $userDetails;
