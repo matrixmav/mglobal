@@ -410,7 +410,7 @@ class ReportController extends Controller {
 
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"' ), 'order' => 'id DESC',
+                'condition' => ('add_date >= "' . $todayDate . '" AND add_date <= "' . $fromDate . '"' ), 'order' => 'id DESC',
             ), 'pagination' => array('pageSize' => $pageSize),));
         $this->render('media_center_query', array(
             'dataProvider' => $dataProvider,
