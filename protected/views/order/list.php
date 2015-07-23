@@ -2,6 +2,7 @@
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
 
+
 $this->breadcrumbs=array(
 	'Orders List',
 );
@@ -103,7 +104,7 @@ $this->menu=array(
             
 	),
 )); ?>
-                    
+                   
 
       </div>
     </div>
