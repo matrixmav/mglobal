@@ -177,6 +177,8 @@ class SiteController extends Controller
              $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
              /*mail to user*/
              $userObjectArr['email'] = $_REQUEST['email'];
+             $userObjectArr['name'] = $_REQUEST['name'];
+             $userObjectArr['type'] = "Our Profile";
              $config['to'] = $_REQUEST['email'];
              $config['subject'] = 'mGlobally Company Profile Download';
              $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
@@ -200,6 +202,8 @@ class SiteController extends Controller
              $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
              /*mail to user*/
              $userObjectArr['email'] = $_REQUEST['email'];
+             $userObjectArr['name'] = $_REQUEST['name'];
+             $userObjectArr['type'] = "Business Plan";
              $config['to'] = $_REQUEST['email'];
              $config['subject'] = 'mGlobally Business Plans Brochure Download';
              $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
@@ -224,6 +228,8 @@ class SiteController extends Controller
              $path = Yii::getPathOfAlias('webroot') . "/images/mediacenter/";
              /*mail to user*/
              $userObjectArr['email'] = $_REQUEST['email'];
+             $userObjectArr['name'] = $_REQUEST['name'];
+             $userObjectArr['type'] = "Company Brochure";
              $config['to'] = $_REQUEST['email'];
              $config['subject'] = 'mGlobally Corporate Brochure Download';
              $config['body'] =  $this->renderPartial('//mailTemp/newsletterMail', array('userObjectArr'=>$userObjectArr),true);
