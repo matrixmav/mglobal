@@ -281,41 +281,7 @@
     </div>
   </div>
   <!-- Promo block END -->
-  <!-- About block BEGIN -->
- 
-  
- <!-- Message block BEGIN 
-  <div class="message-block content content-center valign-center" id="message-block">
-    <div class="valign-center-elem">
-      <h2 class="h-pd">The details are not the details <strong>They make the design</strong></h2>
-      <em>KEEN THEMES</em>
-    </div>
-  </div>-->
-  <!-- Message block END -->
-  
-  
-  
-    <!----<div class="container">
-      <h2><strong>Metronic</strong> Inspires</h2>
-      <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>
-      <div class="ab-trio">
-        <img src="../../assets/frontend/onepage/img/trio.png" alt="" class="/images-responsive">
-        <div class="ab-cirlce ab-cirle-blue">
-          <i class="fa fa-code"></i>
-          <strong>Clean Code</strong>
-        </div>
-        <div class="ab-cirlce ab-cirle-red">
-          <i class="fa fa-gift"></i>
-          <strong>Huge Updates</strong>
-        </div>
-        <div class="ab-cirlce ab-cirle-green">
-          <i class="fa fa-mobile"></i>
-          <strong>Responsive</strong>
-        </div>
-      </div>
-    </div>----->
-  
-  <!-- About block END -->
+
   
    <div class="about-block content content-center" id="about">
   
@@ -339,7 +305,7 @@
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
-          <img src="/images/mediacenter/what_we_do.jpg" alt="what we do" width="100%">
+          <img src="/images/mediacenter/who_we_are.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
         
           <h2>who<strong> we are </strong></h2>
@@ -355,7 +321,7 @@
       </div>
 
       <div class="item">
-          <img src="/images/mediacenter/who_we_are.jpg" alt="what we do" width="100%">
+          <img src="/images/mediacenter/what_we_do.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
        
            <h2>what<strong> we do </strong></h2>
