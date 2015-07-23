@@ -27,9 +27,9 @@ $this->breadcrumbs = array(
             <input type="hidden" id="admin" name="admin" value="1">
             <input type="hidden" id="social" name="social" value="">
             <div class="form-group">
-                <label for="firstname" class="col-lg-4 control-label">News Description<span class="require">*</span></label>
+                <label for="firstname" class="col-lg-3  control-label">News Description<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea class="form-control" name="news" id="news" cols="30" rows="10" style="height: 234px; width: 494px;"><?php echo (!empty($newsObject)) ? $newsObject->news : "" ;?></textarea>
+                    <textarea class="form-control" name="news" id="news" cols="30" rows="10"><?php echo (!empty($newsObject)) ? $newsObject->news : "" ;?></textarea>
                      <span id="news_error" class="clrred"></span>
                 </div>
             </div>
