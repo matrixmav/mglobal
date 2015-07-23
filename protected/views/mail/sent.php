@@ -58,6 +58,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'class' => 'CButtonColumn',
+            'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
             'template' => '{Reply}{View}',
             'htmlOptions' => array('width' => '23%'),
             'buttons' => array(

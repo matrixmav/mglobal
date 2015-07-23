@@ -183,14 +183,15 @@ class SiteController extends Controller
 
 
         public function actionError() {
-        $layout = '';
-        $error = Yii::app()->errorHandler->error;
+            
+            $error = Yii::app()->errorHandler->error;
 
-        if( $error )
-        {
-            $this -> render( 'error', array( 'error' => $error ) );
+            if( $error )
+            {
+                $this->layout = 'user';
+                $this -> render( 'error', array( 'error' => $error ) );
+            }
         }
-    }
         
 	/**
 	 * Displays the contact page

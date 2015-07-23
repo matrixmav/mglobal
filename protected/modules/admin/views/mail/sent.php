@@ -85,6 +85,7 @@ if(!empty($_GET) && $_GET['successMsg']=='1'){
                  
                 array(
                     'class' => 'CButtonColumn',
+                    'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Reply}{View}',
                     'htmlOptions' => array('width' => '23%'),
                     'buttons' => array(
