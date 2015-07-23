@@ -83,7 +83,7 @@ float:left;
                 array(
                     'name' => 'id',
                     'header' => '<span style="white-space: nowrap;">Created At &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->add_date)?$data->add_date:""',
+                    'value' => 'isset($data->add_date)? $data->add_date:""',
                 ),
                
             ),
