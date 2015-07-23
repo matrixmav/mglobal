@@ -190,6 +190,10 @@ class UserController extends Controller {
                 $config['subject'] = 'Binary Income Credited';
                 $config['body'] =  Yii::app()->controller->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config); 
+                $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                $configMsg['text'] = "Congratulation!!!  
+We are pleased to inform you that your binary commissions have credited to your wallet successfully.";
+                    $responce = BaseClass::sendMail($configMsg);
                 return 1;
     }
         
