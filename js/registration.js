@@ -1,5 +1,4 @@
 function validateFrm() {
-//        $("#sponsor_id_error").html('');
     isSponsorExisted();
     if ($("#sponsorIdExistedErrorFlag").val() == 1) {
         return false;
@@ -97,6 +96,7 @@ function validateFrm() {
 
     $("#email_error").html("");
     if ($("#emailExistedErrorFlag").val() == 1) {
+        //alert('ada');
         $("#email_error").html("Existed.");
         $("#email").focus();
         return false;
@@ -238,6 +238,7 @@ function isEmailExisted() {
         success: function (msg) {
             $("#email_error").html("");
             $("#emailExistedErrorFlag").val("0");
+            
             if (msg == 1) {
                 $("#email_error").html("Existed!!!");
                 $("#emailExistedErrorFlag").val(1);
@@ -735,4 +736,21 @@ function profileFormSubmit()
             });
         }
 }
- 
+
+
+/* For the update profile */
+// function isEmailExistedProfile() {
+//
+//    $.ajax({
+//        type: "post",
+//        url: "/user/isemailexistedprofile",
+//        data: "email=" + $("#email").val(),
+//        success: function (msg) {
+//            $("#email_error").html("");
+//            if (msg == 1) {
+//                $("#email_error").html("Existed!!!");
+//                $("#emailExistedErrorFlag").val(1);
+//            }
+//        }
+//    });
+//}
