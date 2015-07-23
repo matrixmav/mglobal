@@ -141,6 +141,7 @@ class SiteController extends Controller
           {
              $contactObject = new Contact;
              $contactObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
              $contactObject->type = "subscribe";
              $contactObject->created_at = date('Y-m-d');
              $contactObject->status = 1;
@@ -171,6 +172,7 @@ class SiteController extends Controller
           {
              $mediaObject = new MediaCenter;
              $mediaObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
              $mediaObject->type = "Our Profile";
              $mediaObject->add_date = date('Y-m-d');
              $mediaObject->save(false);
@@ -196,6 +198,7 @@ class SiteController extends Controller
           {
              $mediaObject = new MediaCenter;
              $mediaObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
              $mediaObject->type = "Business Plan";
              $mediaObject->add_date = date('Y-m-d');
              $mediaObject->save(false);
