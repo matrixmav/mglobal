@@ -1016,7 +1016,7 @@ class UserController extends Controller {
         $row = $command->queryAll();
          
         
-        $categoryObject = BuildCategory::model()->findall();
+        $categoryObject = BuildCategory::model()->findall(array('condition'=>'status=1'));
         
         if((!empty($_GET['type']))){
         $command = $connection->createCommand('SELECT amount,id FROM `package` WHERE id IN('.$str.') AND status="1" AND type !=3 ORDER BY amount ASC');
