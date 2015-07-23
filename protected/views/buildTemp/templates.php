@@ -29,7 +29,7 @@ if($builderObjectTemplate){ ?>
                             <img class = "img-responsive" src = "/user/template/<?php echo $builderObjectTemplate->folderpath; ?>/screenshot/<?php echo $builderObjectTemplate->screenshot; ?>">
                         </div>
                         <div class = "modal-footer">
-                            <input type = "submit" name = "submitInput" id = "submit" class = "btn btn-default red" value = "Get Started">
+                            <input type = "submit" name = "submitInput" id = "submit" class = "btn btn-default orange" value = "Get Started">
                             <button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
                             <a href = "/user/template/<?php echo $builderObjectTemplate->folderpath; ?>" class = "btn btn-default" target = "_blank">Demo</a>
                         </div>
@@ -65,7 +65,7 @@ foreach($builderObject as $buildertemp){?>
                             <img class="img-responsive" src="/user/template/<?php echo $buildertemp->folderpath; ?>/screenshot/<?php echo $buildertemp->screenshot; ?>">
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" name="submitInput" id="submit" class="btn btn-default red" value="Get Started">
+                            <input type="submit" name="submitInput" id="submit" class="btn btn-default orange" value="Get Started">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <a href="/user/template/<?php echo $buildertemp->folderpath; ?>" class="btn btn-default" target="_blank">Demo</a>
                         </div>
