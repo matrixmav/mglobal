@@ -92,6 +92,13 @@ $this->breadcrumbs = array(
        $('#search_user_error').html("Please choose user to transfer amount."); 
        return false;
     }
+    $("#search_user_error").html("");
+    if ($("#userExistedErrorFlag").val() == 1) {
+        //alert('ada');
+        $("#search_user_error").html("Sorry! you can not transfer fund to this account!!!.");
+        $("#search_username").focus();
+        return false;
+    }
     $('#amount_error').html("");
      if($('#transaction_data_amt').val()== '0.00')
     {
