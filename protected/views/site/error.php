@@ -49,7 +49,7 @@
             <h2>OOPS! SOMETHING WENT WRONG!</h2>
             <h1><img src="../../../images/404.png"></h1>
             
-            <p>It looks like that page no longer exists. Would you like to go to <a href="#">homepage</a> instead?</p>
+            <p>It looks like that page no longer exists. Would you like to go to <a href="<?php echo Yii::app()->getBaseUrl(true); ?>">homepage</a> instead?</p>
         </div>
     </div>
 </div>
