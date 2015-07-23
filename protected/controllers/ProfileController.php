@@ -104,6 +104,7 @@ class ProfileController extends Controller {
                 if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
 
                     $profileObject->testimonials = $_POST['UserProfile']['testimonials'];
+                    $profileObject->updated_at = new CDbExpression('NOW()');
                     $profileObject->testimonial_status = '0';
 
                     if ($profileObject->update()) {
@@ -185,6 +186,7 @@ class ProfileController extends Controller {
         if ($_POST && $_FILES['id_proof']['name'] != '' && $_FILES['address_proof']['name'] != '') {
             $profileObject->id_proof = time() . $_FILES['id_proof']['name'];
             $profileObject->address_proff = time() . $_FILES['address_proof']['name'];
+            $profileObject->updated_at = new CDbExpression('NOW()');
             if ($_FILES) {
                 if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
                     $ext1 = end((explode(".", $profileObject->id_proof)));
@@ -265,6 +267,9 @@ class ProfileController extends Controller {
                             $userObjectArr['ip'] = Yii::app()->params['ip'];
                             $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
                             $success .= "Your password changed successfully";
+                            $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                            $configMsg['text'] = "Your master Pin Changed";
+                            $responce = BaseClass::sendMail($configMsg);
                             $config['to'] = $userObject->email;
                             $config['subject'] = 'mGlobally Password Changed';
                             $config['body'] = $this->renderPartial('//mailTemp/change_password', array('userObjectArr' => $userObjectArr), true);
