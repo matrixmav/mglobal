@@ -1969,7 +1969,10 @@ Pre-Header and pre-header elements
 .social-icons li{ list-style: none;}
 
 /*--------------pre footer-------------*/
-#myCarousel .carousel-caption{background: rgba(0, 0, 0, 0.6); padding: 10px 20px 0 20px;}
+#myCarousel .carousel-caption{background: rgba(0, 0, 0, 0.6); padding: 10px 20px 0 20px;   right: 20%;
+  left: 2%;
+  width: 30%;
+  top: 25%;}
 #myCarousel .carousel-caption >p{ font-size: 18px;}
 @media (max-device-width: 480px) and (min-device-width: 320px)
 {
@@ -2017,6 +2020,11 @@ color:#FFF; background: #c9c9c9;}
     top: 60px !important;
     width: auto !important; position: absolute;
 }
+#show_wornings_name ,#show_wornings_email, #show_wornings_subject, #show_wornings_nameF, #show_wornings_emailF , #show_wornings_nameB, #show_wornings_emailB{color:#e6400c; margin-top: 4px; margin-bottom: -5px;}
+#show_worning, #show_worningF ,#show_worningR{color:#398439; text-align: center;}
+
+#show_wornings_message , #show_wornings_messageF, #show_wornings_messageB{color:#e6400c; margin-top: -5px; margin-bottom: 5px;}
+
 
 .color-mode-list ul {padding:0 8px;}
 .color-mode-list ul li{ border:none; background: #FFF; display: table; vertical-align: middle; text-align: center; border-radius:50%; width: 28px; height: 28px; margin: 4px;
