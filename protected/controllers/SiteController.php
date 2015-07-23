@@ -225,6 +225,7 @@ class SiteController extends Controller
           {
              $mediaObject = new MediaCenter;
              $mediaObject->email = $_REQUEST['email'];
+             $mediaObject->name = $_REQUEST['name'];
              $mediaObject->type = "Brochure";
              $mediaObject->add_date = date('Y-m-d');
              $mediaObject->save(false);
