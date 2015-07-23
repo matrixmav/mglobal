@@ -74,6 +74,7 @@ $this->breadcrumbs = array(
 </div>
 </div>
 </div>
+<input type="hidden" id="userExistedErrorFlag">
 <script type="text/javascript" src="/metronic/assets/plugins/select2/select2.min.js"></script>
 <style>
         #s2id_search_username{ width: 100% !important;}
