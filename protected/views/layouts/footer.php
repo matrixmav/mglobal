@@ -16,14 +16,7 @@
           
           <p class="f-font">Support</p>
           <p class="f-cnt"><a href="mailto:support@mglobally.com">support@mglobally.com</a><br/> 
-<<<<<<< HEAD
-          91-8500425185</p>
-          
-         
-          
-=======
-          <!--91-8500425185--></p>
->>>>>>> 941a8e2233f6940cc508d6093d4b7f22649828c6
+
         </div>
         <!-- END BOTTOM ABOUT BLOCK -->
         <!-- END BOTTOM ABOUT BLOCK -->
