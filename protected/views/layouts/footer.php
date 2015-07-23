@@ -21,7 +21,7 @@
         <!-- END BOTTOM ABOUT BLOCK -->
         <!-- END BOTTOM ABOUT BLOCK -->
         <!-- BEGIN TWITTER BLOCK --> 
-        <div class="col-md-2 col-sm-6 pre-footer-col">
+        <div class="col-md-3 col-sm-6 pre-footer-col">
        
           
           
@@ -38,7 +38,7 @@
           <!--91-8500425185--> </p>
         </div>
         
-         <div class="col-md-5 col-sm-6 pre-footer-col">
+         <div class="col-md-4 col-sm-6 pre-footer-col">
              <?php if(!empty($newsObject)){?>
             <p class="f-font">News Update</p>
            <p><?php echo $newsObject;?></p>
@@ -62,8 +62,8 @@
           <!-- BEGIN BOTTOM CONTACTS -->
          <p class="f-font">Our Contacts</p>
           <address class="margin-bottom-20">
-           <strong> Mglobally solutions ltd,</strong><br/>
-                21 Regent Street,<br>Belize City, Belize, <br/>
+           <strong> Mglobally Solutions Ltd.</strong><br/>
+                #21, Regent Street,<br>Belize City, Belize, <br/>
                 Central America.<br/>
                  
             
