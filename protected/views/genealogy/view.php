@@ -27,11 +27,31 @@ $empty = "sm-blank" ; //no Package
                 <li>
                     <?php 
                     $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
+                    
                     $getColor =  BaseClass::getPackageName($currentUserId);
+                    
+                    /* Getting left and Registration Count */
                     $getUserInfoRight = BaseClass::getLeftRightMember($currentUserId ,'right');
-                    $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');                          
+                    $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');  
+                    
+                    /* Getiing left and right purchase */
+                    $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
+
                     ?>
-                    <a href="" class="<?php echo $getColor ; ?>"><div><span data-toggle="tooltip" data-placement="bottom" title="Cash Wallet"><?php echo $userObject->name; ?></span></div></a>
+                    <a href="" class="<?php echo $getColor; ?>">
+                        <div>
+                            <span class="myPop" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content=""><?php echo $userObject->name; ?>
+                                <div id="popover_content_wrapper" style="display: none; ">
+                                    <ul class="packageDetail">
+                                        <li><p>Total Left Registration</p><span> <?php  print_r($getUserInfoLeft); ?></span> </li>
+                                        <li><p>Total Right Registration</p><span> <?php print_r($getUserInfoRight); ?></span> </li>
+                                        <li><p>Total Left Purchase</p><span> <?php echo $getUserPurchase->left_purchase; ?></span> </li>
+                                        <li><p>Total Right Purchase</p><span> <?php echo $getUserPurchase->right_purchase; ?></span> </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </div>
+                    </a>
                     <ul>
                         <li>
                             <?php
@@ -110,15 +130,15 @@ $empty = "sm-blank" ; //no Package
     </div>    
 </div>
         
-<!--             <div class="col-sm-4 col-xs-12">
+<!--           <div class="col-sm-4 col-xs-12">
                  <ul class="packageDetail">
                      <li><p>Total Packages</p><span> 122</span> </li>
                      <li><p>Total Packages Today</p><span> 122</span> </li>
                       <li><p>Total Registration</p><span> 122</span> </li>
                      
                  </ul>
-             </div>-->
-    
+             </div>
+    -->
 
 <div class="row">
     
@@ -286,8 +306,13 @@ $empty = "sm-blank" ; //no Package
    
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true) ;?>/css/main.css">
  <script type="text/javascript">
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+$(document).ready(function(){
+  $('.myPop').popover({ 
+    html : true,
+    content: function() {
+      return $('#popover_content_wrapper').html();
+    }
+  });
 });
 </script>
 <style>

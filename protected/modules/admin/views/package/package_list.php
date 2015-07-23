@@ -16,6 +16,8 @@ $this->breadcrumbs = array(
                position: absolute;
                top: 8px;}
     .confirmMenu{position: relative;}
+    .orange{margin-left: 5px;}
+    .red{margin-left: 5px;}
 </style>
 <div class="col-md-12">
 
@@ -50,10 +52,10 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
-        <?php if (!empty($_GET['msg']) && $_GET['msg'] == '1') { ?> <div class="success"><?php echo "Record Deleted Succesfully." ?></div> <?php } ?>
-        <?php if (!empty($_GET['msg']) && $_GET['msg'] == '2') { ?> <div class="success"><?php echo "Status Changed Succesfully." ?></div> <?php } ?>
-        <?php if (!empty($_GET['success'])) { ?> <div class="success"><?php echo $_GET['success'];?></div> <?php } ?>
-         <?php if (!empty($_GET['error'])) { ?> <div class="error"><?php $_GET['error'];?></div> <?php } ?>
+        <?php if (!empty($_GET['msg']) && $_GET['msg'] == '1') { ?> <p class="success-2" ><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "Record Deleted Succesfully." ?></span></p> <?php } ?>
+        <?php if (!empty($_GET['msg']) && $_GET['msg'] == '2') { ?> <p class="success-2" ><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "Status Changed Succesfully." ?></span></p> <?php } ?>
+        <?php if (!empty($_GET['success'])) { ?> <p class="success-2" ><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $_GET['success'];?></span></p> <?php } ?>
+         <?php if (!empty($_GET['error'])) { ?> <p class="success-2" ><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php $_GET['error'];?></span></p> <?php } ?>
 
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
@@ -110,24 +112,24 @@ $this->breadcrumbs = array(
                 array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
-                    'template' => '{Change}{Edit}{Delete}',
+                    'template' => '{Change}{Edit}',
                     'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
                         'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/package/changestatus", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
-                            'options' => array('class' => 'fa fa-success btn default black delete blue'),
+                            'options' => array('class' => 'fa fa-success btn orange'),
                             'url' => 'Yii::app()->createUrl("admin/package/edit", array("id"=>$data->id))',
                         ),
-                        'Delete' => array(
+                        /*'Delete' => array(
                             'label' => Yii::t('translation', 'Delete'),
                             'options' => array('class' => 'fa fa-success btn default black delete red', 'onclick' => "js:alert('Do u want to delete this package?')"),
                             'url' => 'Yii::app()->createUrl("admin/package/deletepackage", array("id"=>$data->id))',
-                        ),
+                        ),*/
                     ),
                 ),
             ),

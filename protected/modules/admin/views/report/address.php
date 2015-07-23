@@ -12,10 +12,14 @@ $this->breadcrumbs = array(
     position: absolute;
     top: 0;}
     
-    .confirmOk{left: 610px;
-    position: absolute;
-    top: 8px;}
-    .confirmMenu{position: relative;}
+    .confirmOk{
+        margin-top: 7px;
+margin-left: 5px;
+float:left;
+    }
+    .confirmMenu{position: relative;float:left;}
+    
+
 </style>
 <div class="col-md-12">
     
@@ -97,7 +101,7 @@ $this->breadcrumbs = array(
                 array(
                     'name' => 'country_id',
                     'header' => '<span style="white-space: nowrap;">Country &nbsp; &nbsp; &nbsp;</span>',
-                    'value' => 'isset($data->country->name)? $data->country->name : ""',
+                    'value' => 'isset($data->country->name)? $data->country->name : "N/A"',
                 ),
                 array(
                     'name' => 'id',

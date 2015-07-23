@@ -30,11 +30,13 @@ class UserController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'registration', 'isuserexisted',
+                'actions' => array('index', 'getnodes','view', 'registration', 'isuserexisted',
                     'forgetpassword', 'login', 'changepassword', '404', 'success',
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
-                    'callback', 'getfullname','searchtemplate','faq','filterdata','templatespecification','policy1','policy2','policy3','policy4','legal'),
+                    'callback', 'getfullname','searchtemplate','faq','filterdata',
+                    'templatespecification','policy1','policy2','policy3','policy4','legal',
+                    'isemailexistedprofile'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -422,6 +424,7 @@ class UserController extends Controller {
     /* User Login Strat Here */
 
     public function actionLogin() {
+        
         $error = "";
         if (Yii::app()->session['userid'] != '') {
             $this->redirect('/profile/dashboard/');
@@ -477,6 +480,8 @@ class UserController extends Controller {
                              else {
                                 $this->redirect("/profile/dashboard");
                             }
+                        }else{
+                            $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>"; 
                         } 
                     } else {
                         $error = "<p class='error error-new'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error'>Invalid User Name<span class='second-line'><br>Please Check your credentials</span></span></p>";
@@ -684,7 +689,7 @@ class UserController extends Controller {
 
                 $this->redirect(array('login', 'successMsg' => $msg));
             } else {
-                $msg = "<p class='error'>Please Enter Your Valid Email Address.</p>";
+                $msg = "Please Enter Your Valid Email Address.";
             }
         }
         $this->render('forgetpassword', array('msg' => $msg));
@@ -741,7 +746,7 @@ class UserController extends Controller {
         if (count($genealogyLeftListObject) > 0 && count($genealogyRightListObject) > 0) {
             echo $genealogyLeftListObject[0]->order_amount;
             echo $genealogyRightListObject[0]->user_id;
-            if ($genealogyLeftListObject[0]->order_amount > $genealogyRightListObject[0]->order_amount) {
+            if ($genealogyLeftListObject[0]->order_amount > $genealogyRightListObjelct[0]->order_amount) {
                 $totalCommission = BaseClass::getPercentage($genealogyRightListObject[0]->order_amount, $percent, 1);
             } else {
                 $totalCommission = BaseClass::getPercentage($genealogyLeftListObject[0]->order_amount, $percent, 1);
@@ -795,6 +800,22 @@ class UserController extends Controller {
             }
         }
     }
+    
+    /* For the profile user update mail id  */
+    public function actionisEmailExistedProfile() {
+        if ($_POST) {
+            $userObject = User::model()->findByAttributes(array('email' => $_POST['email'] ));
+            echo count($userObject) ; die;
+            if (count($userObject) > 0) {
+                echo "1";
+                exit;
+            } else {
+                echo "0";
+                exit;
+            }
+        }
+    }
+    
 
     public function actionIsSponsorExisted() {
         if ($_POST) {
@@ -979,7 +1000,7 @@ class UserController extends Controller {
         $cond1 = ' AND build_temp.package IN ('.$str.')';
         }
         if(!empty($_GET['key'])!=''){
-         $cond2 = 'AND build_temp_header.template_title like "%'.$_GET["key"].'%"';
+         $cond2 = 'AND build_category.name like "%'.$_GET["key"].'%"';
         }
         if(!empty($_GET['searchstring'])!=''){
          $cond3 = 'AND build_temp_header.template_title like "%'.$_GET["searchstring"].'%"';
@@ -995,7 +1016,7 @@ class UserController extends Controller {
         $row = $command->queryAll();
          
         
-        $categoryObject = BuildCategory::model()->findall();
+        $categoryObject = BuildCategory::model()->findall(array('condition'=>'status=1'));
         
         if((!empty($_GET['type']))){
         $command = $connection->createCommand('SELECT amount,id FROM `package` WHERE id IN('.$str.') AND status="1" AND type !=3 ORDER BY amount ASC');
@@ -1038,14 +1059,16 @@ if(!empty($_GET))
         
        $buildStr .= '<div class="col-md-4 col-sm-4">
                     <div class="left-img-1">
-                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200"></a>
+                     <a class="fancybox" onclick="showSpecification('.$row1['id'].');"><img src="/user/template/'.$row1["folderpath"].'/screenshot/'.$row1["screenshot"].'" class="img-left" width="200" height="200">
                     </div>
 
                     <div class="img-footer">
                         <h4>'.$row1["template_title"].'</h4>
                         <div class="box-relative">
+                        
                             <div class="arrow_box"><span>$ '.$row1["amount"].'</span></div>
                         </div>  
+                        <p>&nbsp;</p>
                         <ul class="list-unstyled list-inline rating">
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
                             <li><i class="glyphicon glyphicon-star star-full"></i></li>
@@ -1054,17 +1077,17 @@ if(!empty($_GET))
                             <li><i class="glyphicon glyphicon-star-empty"></i></li>
                           </ul>
                   <div class="thumbnail-arrow"></div>
-                    </div>
-                   <a href="/user/template/'.$row1['folderpath'].'/index.html" target="_">View Demo</a> 
+      </a>              </div>
+                     
 </div>'; 
     }
     }else{
-        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>
+        $buildStr .=  '<div class="col-md-4 col-sm-4">No Result Found</div>';
                     
+      }              
                     
-                    
-                </div>'; 
-    }
+                $buildStr .= '</div>'; 
+    
     echo $buildStr;
  }
     
@@ -1108,6 +1131,7 @@ public function actionPolicy4() {
    
     $this->render('policy4');
     
+
       
 }
 
@@ -1118,6 +1142,12 @@ public function actionLegal() {
       
 }
 
-
+static function actiongetNodes() {
+        $adminId = 1;
+        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
+        $parentObject = BaseClass::getNode($parentObject);  
+       
+}
     
+
 }

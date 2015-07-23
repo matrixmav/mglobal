@@ -14,7 +14,7 @@ if($builderObjectTemplate){ ?>
 
                     <input type = "hidden" name = "user_id" id = "user_id" value = "<?php echo Yii::app()->session['userid']; ?>">
                     <input type = "hidden" name = "template_id" id = "template_id" value = "<?php echo $builderObjectTemplate->template_id; ?>">
-                    <input type = "submit" name = "submitInput" id = "submit" class = "btn red" value = "Get Started">
+                    <input type = "submit" name = "submitInput" id = "submit" class = "btn orange" value = "Get Started">
 
                 </div>
             </div>
@@ -29,7 +29,7 @@ if($builderObjectTemplate){ ?>
                             <img class = "img-responsive" src = "/user/template/<?php echo $builderObjectTemplate->folderpath; ?>/screenshot/<?php echo $builderObjectTemplate->screenshot; ?>">
                         </div>
                         <div class = "modal-footer">
-                            <input type = "submit" name = "submitInput" id = "submit" class = "btn btn-default red" value = "Get Started">
+                            <input type = "submit" name = "submitInput" id = "submit" class = "btn btn-default orange" value = "Get Started">
                             <button type = "button" class = "btn btn-default" data-dismiss = "modal">Close</button>
                             <a href = "/user/template/<?php echo $builderObjectTemplate->folderpath; ?>" class = "btn btn-default" target = "_blank">Demo</a>
                         </div>
@@ -52,7 +52,7 @@ foreach($builderObject as $buildertemp){?>
                 <div class="form-group">        
                     <input type="hidden" name="user_id" id="user_id" value="<?php echo Yii::app()->session['userid']; ?>">
                     <input type="hidden" name="template_id" id="template_id" value="<?php echo $buildertemp->template_id; ?>">
-                    <input type="submit" name="submitInput" id="submit" class="btn red" value="Get Started">
+                    <input type="submit" name="submitInput" id="submit" class="btn orange" value="Get Started">
                 </div>
             </div>
             <!-- Modal -->
@@ -65,7 +65,7 @@ foreach($builderObject as $buildertemp){?>
                             <img class="img-responsive" src="/user/template/<?php echo $buildertemp->folderpath; ?>/screenshot/<?php echo $buildertemp->screenshot; ?>">
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" name="submitInput" id="submit" class="btn btn-default red" value="Get Started">
+                            <input type="submit" name="submitInput" id="submit" class="btn btn-default orange" value="Get Started">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <a href="/user/template/<?php echo $buildertemp->folderpath; ?>" class="btn btn-default" target="_blank">Demo</a>
                         </div>

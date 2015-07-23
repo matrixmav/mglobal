@@ -6,10 +6,6 @@ $this->breadcrumbs = array(
     'Ad List',
 );
  
-$this->menu = array(
-    array('label' => 'Create Add', 'url' => array('create')),
-    array('label' => 'Manage Add', 'url' => array('admin')),
-);
 ?>
 <div class="main">
     <div class="row margin-bottom-40">        
@@ -17,7 +13,7 @@ $this->menu = array(
     if($dataProviderArray){
         foreach($dataProviderArray as $key=>$dataProviderList){ 
             $i = 1; ?>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-12 col-sm-12">
 
         <div class="col-md-12">
             <div class="row">
@@ -66,13 +62,13 @@ $this->menu = array(
                                             $adObject = Ads::model()->findByPk($dataProvider->ad_id);
                                             $img =  '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$adObject->banner . '"'; 
                                             $link = '"' . $adObject->description . '"';
-                                            $name = '"' . $adObject->name . '"';
                                             $desc = '"' . $adObject->description . '"';
+                                            $name = '"' . $adObject->name . '"';
                                             $caption = '""';
                                             $adId = '"' . $adObject->id . '"';
                                         ?>
                                        
-                                       <td><a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?>); return false;' ></a></td>                                     
+                                       <td><a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?> ,<?= $dataProvider->order_id; ?>); return false;' ></a></td>                                     
                                    </tr>   
                                     <?php $i++ ; } ?>
 
@@ -115,6 +111,32 @@ $this->menu = array(
             position:'right',
             height: '400px'
         });
+        $('#testDiv4').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv5').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv6').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv7').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        $('#testDiv8').slimScroll({
+            color: '#f15c2b',
+            position:'right',
+            height: '400px'
+        });
+        
     });  
 </script>
 <style>

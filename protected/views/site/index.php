@@ -40,8 +40,8 @@
     
    <div id="inline114" style="display:none" class="readMoreBox content">
                <h2>Company<strong>Profile</strong></h2>
-          <div id="show_successp" style="display:none;"></div>
-          <div id="show_successp" style="display:none;"></div>
+          <div id="show_successP" style="display:none;" class="successMsgmedia"></div>
+          <div id="show_successPE" style="display:none;" class="errorMsgmedia"></div>
                
          <div class="col-sm-12">
              <form method="post">
@@ -51,7 +51,7 @@
                                <input type="text" class="form-control" id="nameP" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameP"></div>
+                            <div id="show_wornings_nameP" class="errorMsgmedia"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -59,7 +59,7 @@
                                <input type="text" class="form-control" id="emailP" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailP"></div>
+                           <div id="show_wornings_emailP" class="errorMsgmedia"></div>
                         </div>
                        
                         
@@ -78,8 +78,8 @@
   
     <div id="inline116" style="display:none" class="readMoreBox content">
                <h2>Business <strong>Plan</strong></h2>
-          <div id="show_successBu" style="display:none;"></div>
-          <div id="show_successBu" style="display:none;"></div>
+          <div id="show_successBu" style="display:none;" class="successMsgmedia"></div>
+          <div id="show_successBuE" style="display:none;" class="errorMsgmedia"></div>
                
          <div class="col-sm-12">
              <form method="post">
@@ -89,7 +89,7 @@
                                <input type="text" class="form-control" id="nameBu" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameBu"></div>
+                            <div id="show_wornings_nameBu" class="errorMsgmedia"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -97,7 +97,7 @@
                                <input type="text" class="form-control" id="emailBu" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailBu"></div>
+                           <div id="show_wornings_emailBu" class="errorMsgmedia"></div>
                         </div>
                        
                         
@@ -116,8 +116,8 @@
   
 <div id="inline115" style="display:none" class="readMoreBox content">
                <h2>Company <strong> Brochure</strong></h2>
-          <div id="show_successCo" style="display:none;"></div>
-          <div id="show_worninCo" style="display:none;"></div>
+          <div id="show_successCo" style="display:none;" class="successMsgmedia"></div>
+          <div id="show_worninCoE" style="display:none;" class="errorMsgmedia"></div>
                
          <div class="col-sm-12">
              <form method="post">
@@ -127,7 +127,7 @@
                                <input type="text" class="form-control" id="nameCo" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameCo"></div>
+                            <div id="show_wornings_nameCo" class="errorMsgmedia"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -135,7 +135,7 @@
                                <input type="text" class="form-control" id="emailCo" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailCo"></div>
+                           <div id="show_wornings_emailCo" class="errorMsgmedia"></div>
                         </div>
                        
                         
@@ -343,7 +343,7 @@
       <div class="carousel-caption">
         
           <h2>who<strong> we are </strong></h2>
-          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
+          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too? If not, then we surely have something new in store for you to discover. We are evolving as one such organization indulged in offering web development, designing, and digital marketing solutions. MGlobally was founded with the idea of creating a business model, wherein the customers are added to our network by bringing us the references. Abiding by the idea of creating an extended network of brand representatives, we aim to be the one of top most companies in direct selling IT network.... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline7" style="display:none" class="readMoreBox content">
                <h2>who<strong> we are </strong></h2>
                <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too? If not, then we surely have something new in store for you to discover. We are evolving as one such organization indulged in offering web development, designing, and digital marketing solutions. MGlobally was founded with the idea of creating a business model, wherein the customers are added to our network by bringing us the references. Abiding by the idea of creating an extended network of brand representatives, we aim to be the one of top most companies in direct selling IT network.</p>
@@ -359,7 +359,7 @@
       <div class="carousel-caption">
        
            <h2>what<strong> we do </strong></h2>
-         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
+         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief. <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline8" style="display:none" class="readMoreBox content">
                <h2>what<strong> we do </strong></h2>
                <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief.</p>
@@ -467,7 +467,7 @@
     <!--   <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>-->
       <div class="row">
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/profile.ppsx" download="/images/mediacenter/profile.ppsx" class="fancybox"> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
+            <a  href= "#inline114" class="fancybox"> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
          <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3> -->
             <h3><em>Our Profile</em></h3></a>
          <!-- <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
@@ -478,7 +478,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/Business plans brochure.pdf" download="/images/mediacenter/Business plans brochure.pdf" class="fancybox"> <img src="images/business-plan.png" alt="business plan" class="img-responsive">
+            <a href= "#inline116" class="fancybox"> <img src="images/business-plan.png" alt="business plan" class="img-responsive">
             <h3><em>business plan</em></h3></a>
          <!-- <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
@@ -490,7 +490,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/e_brochure.pdf" download="/images/mediacenter/Business plans brochure.pdf" class="fancybox">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
+            <a  href= "#inline115" class="fancybox">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
             <h3><em>promo brochure</em></h3></a>
         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>

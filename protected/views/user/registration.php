@@ -11,9 +11,15 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
         <!-- BEGIN CONTENT -->
             <div class="col-md-6 col-sm-6">
                 <h1>Create an account</h1>
-                <p class='error error-2'><i class='fa fa-times-circle icon-error'></i><span class='span-error-2'>
-                <?php if(isset($error)){ echo $error; }  ?>
-                </span></p>
+                
+                <?php if(isset($error) && !empty($error)){ ?> 
+                <p class='error error-2'>
+                    <i class='fa fa-times-circle icon-error'></i>
+                    <span class='span-error-2'><?php echo $error; ?>
+                    </span>
+                </p>
+ <?php }  ?>
+                
                 <div class="content-form-page">
                     <div class="row">
                        <div class="col-md-12 col-sm-12">
@@ -83,7 +89,9 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                             <select name="country_id" id="country_id" onchange="getCountryCode(this.value)" class="form-control">
                                                 <option value="">Please Select Country</option>
                                                 <?php foreach ( $countryObject as  $country) { ?>
-                                                    <option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option>
+                                                    <option value="<?php echo $country->id; ?>" 
+                                                            <?php if(isset($_POST['country_id'])){ if ($country->id == $_POST['country_id']){ echo 'selected="selected"' ;} }?>>
+                                                    <?php echo $country->name; ?></option>
                                                 <?php } ?>
                                             </select>
                                         
@@ -95,7 +103,7 @@ $curAction = @Yii::app()->getController()->getAction()->controller->action->id;
                                         <div class="col-lg-8">
                                             <div class="row">
                                             <div class="col-lg-3 col-sm-3 col-xs-4">
-                                                <input  name="country_code" id="country_code" class="form-control" readonly="true"  >                                            </div>
+                                                <input  name="country_code" id="country_code" class="form-control" readonly="true" value="<?php echo isset($_POST['country_code'])?$_POST['country_code']:''; ?>" >                                            </div>
                                             <div class="col-lg-9 colo-sm-9 col-xs-8">
                                                 
                                             <input  name="phone" id="phone" maxlength="14" placeholder="phone number" class="form-control" value="<?php echo isset($_POST['phone'])?$_POST['phone']:''; ?>" > <br>

@@ -5,19 +5,23 @@ $this->breadcrumbs = array(
 );
 
 ?>
+
 <div class="col-md-6 col-sm-6">
-    <div class="error" id="error_msg" style="display: none;"></div>    
+    <?php if(!empty($success)){?> <p class="success-2"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo $success ;?> </span></p><?php }  ?>
+        <?php if(!empty($error)){ ?><p class="error-2"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"> <?php echo $error; ?></span></p> <?php  }  ?>
+        <p class="error-2" id="error_msg1" style="display: none;"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2" id="error_msg"></span></p> 
     <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
 								Add Ads
 							</div>
     </div>
+        
         <div class="portlet-body form">
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype = "multipart/form-data">
      
-        <?php if(!empty($success)){ echo $success ; }  ?>
-        <?php if(!empty($error)){ echo $error; }  ?>
+        
         <fieldset>
             <div class="form-body">
             
@@ -65,16 +69,17 @@ $this->breadcrumbs = array(
 <script>
      function validation(){        
         if(document.getElementById("ads_name").value==''){
-            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg1").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please Enter Ads Name.";
             document.getElementById("ads_name").focus();
             return false;
         }
         
         if(document.getElementById("ads_banner").value==''){
-            document.getElementById("error_msg").style.display="block";
+            document.getElementById("error_msg1").style.display="block";
             document.getElementById("error_msg").innerHTML = "Please choose Banner Image.";
             document.getElementById("ads_banner").focus();
+            
             return false;
         }
         

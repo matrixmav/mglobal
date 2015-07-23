@@ -48,7 +48,7 @@ $this->breadcrumbs = array(
 <div class="col-md-12">
     <label class="col-md-1">&nbsp; </label>
     <div class="col-md-6">
-<a href="/admin/mail/reply?id=<?php echo(!empty($_GET['id'])) ? $_GET['id'] : "";?>" class="green btn margin-right-20">Reply</a>
+<a href="/admin/mail/reply?id=<?php echo(!empty($_GET['id'])) ? $_GET['id'] : "";?>" class="orange btn margin-right-20">Reply</a>
   </div>
 </div>
 

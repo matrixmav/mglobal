@@ -673,55 +673,54 @@ class PackageController extends Controller {
                     }
                     
                     /* Create template code start here */
-                    $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $orderObject->templateId));
-                    /* Copy Image folder to another location */
-                    $path = Yii::getPathOfAlias('webroot');  
-                    $userID = Yii::app()->session['userid'] ;
-                    $tempID = $orderObject->templateId ;
-                    /*Create Folder And Permission */
-                    if(!file_exists($path."/builder_images/".$userID)){
-                        !mkdir($path."/builder_images/".$userID.'/', 0777, true);
-                    }
-                    if(!file_exists($path."/builder_images/".$userID.'/'.$tempID)){
-                        !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
-                    }
-                    BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
-                        
-                    /* Number of pages creation*/
-                    $pageCount = BaseClass::pagesCount($orderObject->id);
-                    $orderId = Yii::app()->session['orderID'];
-                    $hasbuilderObject = UserHasTemplate::model()->addTemplate( $buildertempObject,$orderObject->id,$userID);
-                    UserPages::model()->createNewPages($userID, $orderObject->id, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
-                
+                    if($orderObject->templateId != 0){
+                        $buildertempObject = BuildTemp::model()->findByAttributes(array('template_id' => $orderObject->templateId));
+                        /* Copy Image folder to another location */
+                        $path = Yii::getPathOfAlias('webroot');  
+                        $userID = Yii::app()->session['userid'] ;
+                        $tempID = $orderObject->templateId ;
+                        /*Create Folder And Permission */
+                        if(!file_exists($path."/builder_images/".$userID)){
+                            !mkdir($path."/builder_images/".$userID.'/', 0777, true);
+                        }
+                        if(!file_exists($path."/builder_images/".$userID.'/'.$tempID)){
+                            !mkdir($path."/builder_images/".$userID.'/'.$tempID, 0777, true);
+                        }
+                        BaseClass::recurse_copy($path."/user/template/".$buildertempObject->folderpath."/images/", $path.'/builder_images/'.$userID.'/'.$tempID);
 
-                    /* Insert Ads */
+                        /* Number of pages creation*/
+                        $pageCount = BaseClass::pagesCount($orderObject->id);
+                        $orderId = Yii::app()->session['orderID'];
+                        $hasbuilderObject = UserHasTemplate::model()->addTemplate( $buildertempObject,$orderObject->id,$userID);
+                        UserPages::model()->createNewPages($userID, $orderObject->id, $pageCount, $buildertempObject->body()->body_content,$buildertempObject->template_id);
+                    }
+
+                    
+                    /* Insert Ads */                                        
                     $userId = Yii::app()->session['userid'];
                     $next_year = strtotime('+299 day'); //For next 300 day
                     $current_time = time();
-                    $i = 1 ;
                     $userAdsObject = UserSharedAd::model()->findByAttributes(array('user_id' => $userId , 'order_id' => $orderObject->id ));
 
-                    if(count($userAdsObject) == 0 ){
-                        while($current_time < $next_year){  
 
-                            $randAds = Ads::model()->find(array('select'=>'*', 'limit'=>'1', 'order'=>'rand()'));        
-                            if($i == 1){
-                                $current_time = strtotime('+0 day', $current_time);                        
-                            }else{
-                                $current_time = strtotime('+1 day', $current_time);
-                            }
-                            $modelUserShareAd = new UserSharedAd();
-                            $modelUserShareAd->user_id = Yii::app()->session['userid'];
-                            $modelUserShareAd->order_id = $orderObject->id;
-                            $modelUserShareAd->date = date('Y-m-d', $current_time);
-                            $modelUserShareAd->ad_id = $randAds->id;
-                            $modelUserShareAd->status = 0;
-                            $modelUserShareAd->created_at = date('Y-m-d');
-                            $modelUserShareAd->save(false);               
-                            $i++;
+                    $values = array();
+                    for ($i = 0;$i < 300 ;$i++){
+                        if($i == 0){
+                            $current_time = strtotime('+0 day', $current_time);                        
+                        }else{
+                            $current_time = strtotime('+1 day', $current_time);
                         }
+                        
+                        $randAds = Ads::model()->find(array('select'=>'*', 'limit'=>'1', 'order'=>'rand()'));
+                        $valueArray[] = '("'.Yii::app()->session['userid'].'","'.$orderObject->id.'","'.date('Y-m-d', $current_time).'","'.$randAds->id.'","0","'.date('Y-m-d').'")' ;
                     }
-
+                     $values = implode(',', $valueArray);
+                    if(count($values)>0){
+                        $sql = 'INSERT INTO user_shared_ad (user_id , order_id , date ,ad_id ,status ,created_at) VALUES '. $values;
+                        $command = Yii::app()->db->createCommand($sql);
+                        echo $command->execute();
+                    }
+                    
                     $description = substr($packageObject->Description, 20);
                     $Couponbody = "";
                     if ($transactionObject->coupon_discount != '0') {

@@ -16,15 +16,20 @@ $this->breadcrumbs = array(
     position: absolute;
     top: 8px;}
     .confirmMenu{position: relative;}
+    .orange{margin-left: 5px;}
 </style>
 <div class="col-md-12">
  <a href="/admin/BuildTemp/templateheaderadd" style="float:left" class="btn  green margin-right-20">New Template +</a>
 <div class="row">
     <div class="col-md-12">
-         <?php if(isset($_GET['msg'])&& $_GET['msg']=='1'){ ?> <div class="success"><?php echo "Category Added Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='2'){ ?> <div class="success"><?php echo "Category Updated Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='3'){ ?> <div class="success"><?php echo "Record Deleted Succesfully."?></div> <?php } ?>
-        <?php if(isset($_GET['msg'])&& $_GET['msg']=='4'){ ?> <div class="success"><?php echo "Status Changed Succesfully."?></div> <?php } ?>
+         <?php if(isset($_GET['msg'])&& $_GET['msg']=='1'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo "Category Added Succesfully."?></span></p> <?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='2'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo "Category Updated Succesfully."?></span></p> <?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='3'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo "Record Deleted Succesfully."?></span></p><?php } ?>
+        <?php if(isset($_GET['msg'])&& $_GET['msg']=='4'){ ?> <p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+            <?php echo "Status Changed Succesfully."?></span></p> <?php } ?>
       
        
         <?php
@@ -81,12 +86,12 @@ $this->breadcrumbs = array(
                     'buttons' => array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/BuildTemp/changestatustemp", array("id"=>$data->id))',
                         ),
                         'Edit' => array(
                             'label' => 'Edit',
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn orange delete'),
                             'url' => 'Yii::app()->createUrl("admin/BuildTemp/templateheaderedit", array("id"=>$data->id))',
                         ),
 //                        'Delete' => array(

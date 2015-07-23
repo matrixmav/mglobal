@@ -634,15 +634,15 @@ class UserController extends Controller {
             $status = $_POST['res_filter'];
               if($status  != 'all')
             {
-              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
+              $cond = 'updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate .'" AND document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
             }else{
-              $cond = 'created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
+              $cond = 'updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate .'" AND document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
             }
              
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ($cond), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 100),
+                ), 'pagination' => array('pageSize' => $pageSize),
             ));
         } else {
            
@@ -688,14 +688,14 @@ class UserController extends Controller {
             $status = $_POST['res_filter'];
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '"  AND testimonial_status = "' . $status . '" ' ), 'order' => 'id DESC',
-                ), 'pagination' => array('pageSize' => 10),
+                    'condition' => ('testimonials !="" AND updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate . '"  AND testimonial_status = "' . $status . '" ' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),
             ));
         } else {
 
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('testimonials !="" AND created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND testimonial_status = "' . $status . '"'), 'order' => 'id DESC',
+                    'condition' => ('testimonials !="" AND updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate . '" AND testimonial_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));

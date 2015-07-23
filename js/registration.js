@@ -1,5 +1,4 @@
 function validateFrm() {
-//        $("#sponsor_id_error").html('');
     isSponsorExisted();
     if ($("#sponsorIdExistedErrorFlag").val() == 1) {
         return false;
@@ -97,6 +96,7 @@ function validateFrm() {
 
     $("#email_error").html("");
     if ($("#emailExistedErrorFlag").val() == 1) {
+        //alert('ada');
         $("#email_error").html("Existed.");
         $("#email").focus();
         return false;
@@ -238,6 +238,7 @@ function isEmailExisted() {
         success: function (msg) {
             $("#email_error").html("");
             $("#emailExistedErrorFlag").val("0");
+            
             if (msg == 1) {
                 $("#email_error").html("Existed!!!");
                 $("#emailExistedErrorFlag").val(1);
@@ -352,7 +353,15 @@ function profileValidation() {
     if (emailValid == false) {
         return false;
     }
-
+    
+     $("#email_error").html("");
+    if ($("#emailExistedErrorFlag").val() == 1) {
+        //alert('ada');
+        $("#email_error").html("Existed.");
+        $("#email").focus();
+        return false;
+    }
+    
     var phone = requiredField('phone', 'phone_error', 'Enter phone number');
     if (phone == false) {
         return false;
@@ -669,13 +678,15 @@ function profileFormSubmit()
             success: function (html) {
                 if (html == 1) {
                     $('#show_successp').show();
-                    $("#show_successp").html("Thanks! ");
+                    $("#show_successp").html("Thanks! Your request has been submitted.");
                     $("#nameP").val('');
                     $("#emailP").val('');
                     $("#show_successp").fadeOut(10000);
+                    location.reload(12000);
                 } else {
                     document.getElementById('show_worningP').style.display = "none";
-                    document.getElementById("show_worningp").innerHTML = "There might be something wrong.";
+                    document.getElementById('show_worningPE').style.display = "bloack";
+                    document.getElementById("show_worningPE").innerHTML = "There might be something wrong.";
                 }
 
 
@@ -685,49 +696,51 @@ function profileFormSubmit()
 }
 
     /* code to submit profile form */
-    function BusinessFormSubmit()
+    function BrochureFormSubmit()
     {
-        var email = $('#emailP').val();
-        var name = $('#nameP').val();
+        var email = $('#emailCo').val();
+        var name = $('#nameCo').val();
 
-        $('#show_wornings_nameP').hide();
+        $('#show_wornings_nameCo').hide();
         if (name == '') {
-            $('#show_wornings_nameP').show();
-            $("#show_wornings_nameP").html("Please enter name.");
-            $('#nameP').focus();
+            $('#show_wornings_nameCo').show();
+            $("#show_wornings_nameCo").html("Please enter name.");
+            $('#nameCo').focus();
             return false;
         }
-        $('#show_wornings_emailP').hide();
+        $('#show_wornings_emailCo').hide();
         if (email == '') {
-            $('#show_wornings_emailP').show();
-            $("#show_wornings_emailP").html("Please enter email.");
-            $('#emailP').focus();
+            $('#show_wornings_emailCo').show();
+            $("#show_wornings_emailCo").html("Please enter email.");
+            $('#emailCo').focus();
             return false;
         }
-        $('#show_wornings_emailP').hide();
+        $('#show_wornings_emailCo').hide();
         if (!isEmail(email)) {
-            $('#show_wornings_emailP').show();
-            $("#show_wornings_emailP").html("Please enter valid email.");
-            $('#emailP').focus();
+            $('#show_wornings_emailCo').show();
+            $("#show_wornings_emailCo").html("Please enter valid email.");
+            $('#emailCo').focus();
             return false;
         }
         else {
             var dataString = 'email=' + email + '&name=' + name;
             $.ajax({
                 type: "GET",
-                url: "site/profileform",
+                url: "site/brochureform",
                 data: dataString,
                 cache: false,
                 success: function (html) {
                     if (html == 1) {
-                        $('#show_successp').show();
-                        $("#show_successp").html("Thanks! ");
-                        $("#nameP").val('');
-                        $("#emailP").val('');
-                        $("#show_successp").fadeOut(10000);
+                        $('#show_successCo').show();
+                        $("#show_successCo").html("Thanks! Your request has been submitted.");
+                        $("#nameCo").val('');
+                        $("#emailCo").val('');
+                        $("#show_successCo").fadeOut(10000);
+                        location.reload(12000);
                     } else {
-                        document.getElementById('show_worningP').style.display = "none";
-                        document.getElementById("show_worningp").innerHTML = "There might be something wrong.";
+                        document.getElementById('show_worningCo').style.display = "none";
+                        document.getElementById('show_worningCoE').style.display = "bloack";
+                        document.getElementById("show_worningCoE").innerHTML = "There might be something wrong.";
                     }
 
 
@@ -735,4 +748,79 @@ function profileFormSubmit()
             });
         }
 }
- 
+
+
+/* code to submit profile form */
+    function BusinessFormSubmit()
+    {
+        var email = $('#emailBu').val();
+        var name = $('#nameBu').val();
+
+        $('#show_wornings_nameBu').hide();
+        if (name == '') {
+            $('#show_wornings_nameBu').show();
+            $("#show_wornings_nameBu").html("Please enter name.");
+            $('#nameBu').focus();
+            return false;
+        }
+        $('#show_wornings_emailBu').hide();
+        if (email == '') {
+            $('#show_wornings_emailBu').show();
+            $("#show_wornings_emailBu").html("Please enter email.");
+            $('#emailBu').focus();
+            return false;
+        }
+        $('#show_wornings_emailBu').hide();
+        if (!isEmail(email)) {
+            $('#show_wornings_emailBu').show();
+            $("#show_wornings_emailBu").html("Please enter valid email.");
+            $('#emailBu').focus();
+            return false;
+        }
+        else {
+            var dataString = 'email=' + email + '&name=' + name;
+            $.ajax({
+                type: "GET",
+                url: "site/businessform",
+                data: dataString,
+                cache: false,
+                success: function (html) {
+                    if (html == 1) {
+                        $('#show_successBu').show();
+                        $("#show_successBu").html("Thanks! Your request has been submitted.");
+                        $("#nameBu").val('');
+                        $("#emailBu").val('');
+                        $("#show_successp").fadeOut(10000);
+                        location.reload(12000);
+                    } else {
+                        document.getElementById('show_worningBu').style.display = "none";
+                        document.getElementById('show_worningBuE').style.display = "bloack";
+                        document.getElementById("show_worningBuE").innerHTML = "There might be something wrong.";
+                    }
+
+
+                }
+            });
+        }
+}
+
+/* For the update profile */
+ function isEmailExistedProfile() {
+
+    $.ajax({
+        type: "post",
+        url: "/user/isemailexistedprofile",
+        data: "email=" + $("#email").val(),
+        success: function (msg) {
+            $("#email_error").html("");
+            $("#emailExistedErrorFlag").val("0");
+            if (msg == 1) {
+                $("#email_error").html("Existed!!!");
+                $("#emailExistedErrorFlag").val(1);
+                 
+            }else{
+                $("#emailExistedErrorFlag").val("0");
+            }
+        }
+    });
+}

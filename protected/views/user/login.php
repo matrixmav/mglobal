@@ -19,7 +19,7 @@
                 <div class="col-md-6 col-sm-6">
         <?php 
         if(!empty($_GET['successMsg'])){
-            echo "<p class='success success-new'>"."<i class='fa fa-check-circle icon-success'></i>"."<span class='span-sucess'>".$_GET['successMsg']."<span class='second-line'><br>User Name and Passsword has been sent to your mail ID</span>"."</span>"."</p>";
+            echo "<p class='success success-new'>"."<i class='fa fa-check-circle icon-success'></i>"."<span class='span-success'>".$_GET['successMsg']."<span class='second-line'><br>User Name and Passsword has been sent to your mail ID</span>"."</span>"."</p>";
         }
         if(!empty($_GET['errorMsg'])){
             echo "<p class='error error-2'>"."<i class='fa fa-times-circle icon-error'></i>"."<span class='span-error-2'>".$_GET['errorMsg']."</span>"."</p>";

@@ -6,13 +6,13 @@ $this->breadcrumbs = array(
 ?>
 <?php 
 if(!empty($error)){
-    echo "<p class='error'>".$error."</p>";
+    echo "<p class=' error-2'><i class='fa fa-times-circle icon-error'></i><span class='span-error-2'>".$error."</span></p>";
 }
 
 ?>
 <?php 
 if(!empty($success)){
-    echo "<p class='success'>".$success."</p>";
+    echo "<p class=' success-2'><i class='fa fa-check-circle icon-success'></i><span class='span-success-2'>".$success."</span></p>";
 }
 
 ?>
@@ -80,7 +80,7 @@ if(!empty($success)){
 <div class="col-md-12 form-group">
     <label class="col-md-2"></label>
     <div class="col-md-6">
-        <input type="submit" class="btn green" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
+        <input type="submit" class="btn orange" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
     </div>
 </div> 
 </form>

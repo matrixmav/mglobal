@@ -9,8 +9,10 @@ $this->breadcrumbs = array(
  
     
 <div class="col-md-7 col-sm-7">
-    <?php if ($error) { ?><div class="error"><?php echo $error; ?></div><?php } ?>
-    <?php if ($success) { ?><div class="success"><?php echo $success; ?></div><?php } ?>
+    <?php if ($error) { ?>	<p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"><?php echo $error; ?></span></p><?php } ?>
+    
+    
+    <?php if ($success) { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $success; ?></span></p><?php } ?>
 <div class="portlet box orange ">
 <div class="portlet-title">
 							<div class="caption">
@@ -25,9 +27,9 @@ $this->breadcrumbs = array(
             <input type="hidden" id="admin" name="admin" value="1">
             <input type="hidden" id="social" name="social" value="">
             <div class="form-group">
-                <label for="firstname" class="col-lg-4 control-label">News Description<span class="require">*</span></label>
+                <label for="firstname" class="col-lg-3  control-label">News Description<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea class="form-control" name="news" id="news" cols="30" rows="10" style="height: 234px; width: 494px;"><?php echo (!empty($newsObject)) ? $newsObject->news : "" ;?></textarea>
+                    <textarea class="form-control" name="news" id="news" cols="30" rows="10"><?php echo (!empty($newsObject)) ? $newsObject->news : "" ;?></textarea>
                      <span id="news_error" class="clrred"></span>
                 </div>
             </div>

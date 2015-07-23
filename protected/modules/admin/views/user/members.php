@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
                 echo "selected";
             } ?> >In Active</option>
             </select>
-                <input type="submit" class="btn btn-primary " value="OK" name="submit" id="submit"/>
+                <input type="submit" class="btn btn-primary green" value="OK" name="submit" id="submit"/>
             </div>
           
         </form>
@@ -51,7 +51,7 @@ $this->breadcrumbs = array(
 </div>
 <div class="row">
     <div class="col-md-12">
-        <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><div class="success" id="error_msg"><?php echo "Status Changed Successfully";?></div><?php }?>
+        <?php if(isset($_GET['successMsg']) && $_GET['successMsg']=='1'){?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo "Status Changed Successfully";?></span></p><?php }?>
         <?php
         $this->widget('zii.widgets.grid.CGridView', array(
             'id' => 'state-grid',
@@ -110,12 +110,12 @@ $this->breadcrumbs = array(
                     'buttons' => array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
-                            'options' => array('class' => 'fa fa-success btn default black delete'),
+                            'options' => array('class' => 'fa fa-success btn default green delete'),
                             'url' => 'Yii::app()->createUrl("admin/UserHasAccess/changeapprovalstatus", array("id"=>$data->id))',
                         ),
                          'Access' => array(
                             'label' => Yii::t('translation', 'Member Access'),
-                            'options' => array('class' => 'fa fa-success btn default green delete'),
+                            'options' => array('class' => 'fa fa-success btn orange delete'),
                             'url' => 'Yii::app()->createUrl("admin/UserHasAccess/memberaccess", array("id"=>$data->id))',
                         ),
                          

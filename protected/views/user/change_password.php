@@ -69,8 +69,11 @@ $this->breadcrumbs = array(
 </div>
 <div class="col-md-6 col-sm-6">
     <div class="error" id="error_msg" style="display: none;"></div>
-    <?php if(!empty($_GET['errorMsg'])){?><div class="error" id="error_msg"><?php echo $_GET['errorMsg'];?></div><?php }?>
-    <?php if(!empty($_GET['successMsg'])) {?><div class="success" id="error_msg"><?php echo $_GET['successMsg'];?></div><?php }?>
+    <?php if(!empty($_GET['errorMsg'])){?><p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"><?php echo $_GET['errorMsg'];?></span><p><?php }?>
+    
+    
+    <?php if(!empty($_GET['successMsg'])) {?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2">
+<?php echo $_GET['successMsg'];?></span></p><?php }?>
     <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">
