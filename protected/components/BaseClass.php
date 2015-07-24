@@ -92,17 +92,17 @@ class BaseClass extends Controller {
 
     public static function sendMail($config) {
       try {
-            define("API_KEY", "914ff9da");
-            define("API_SECRET", "e91037e9");
-
-            $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
-                'api_key' => API_KEY,
-                'api_secret' => API_SECRET,
-                'to' => $config['to'],
-                'from' => 'Mglobally',
-                'text' => $config['text']
-            ]);
-
+//            define("API_KEY", "914ff9da");
+//            define("API_SECRET", "e91037e9");
+//
+//            $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
+//                'api_key' => API_KEY,
+//                'api_secret' => API_SECRET,
+//                'to' => $config['to'],
+//                'from' => 'Mglobally',
+//                'text' => $config['text']
+//            ]);
+            $url = "";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response = curl_exec($ch);
