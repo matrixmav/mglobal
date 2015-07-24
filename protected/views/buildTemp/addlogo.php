@@ -25,7 +25,7 @@ $this->breadcrumbs = array(
                 <label class="col-lg-4 control-label" for="lastname">Logo<span class="require">*</span></label>
                 <div class="col-lg-8 fileupload fileupload-new">
                     <div class="fileupload fileupload-new" data-provides="fileupload">
-                        <span class="btn btn-primary btn-file btn-1">
+                        <span class="">
                             <span class="fileupload-new">
                                 <input id="logo" type="file" class="" name="logo">
                             </span>
