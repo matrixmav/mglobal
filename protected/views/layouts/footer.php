@@ -83,7 +83,7 @@
                 <li><a href="../user/antispampolicy">Anti-Spam Policy</a></li>
                 <li><a href="../user/privacypolicy">Privacy Policy</a></li>
                 <li><a href="../user/policiesandprocedures">Policies And Procedures</a></li>
-                <li><a href="../user/terms-and-conditions.php">Terms And Conditions</a></li>
+                <li><a href="../user/termsandconditions">Terms And Conditions</a></li>
 		</ul>
 		</div>
     </div>
