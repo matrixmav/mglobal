@@ -325,7 +325,7 @@
       <div class="carousel-caption">
        
            <a href="#inline8" class="fancybox pinkSm"> <h2>what<strong> we do </strong></h2></a>
-         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
+         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline8" style="display:none" class="readMoreBox content">
                <h2>what<strong> we do </strong></h2>
                <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief.</p>
