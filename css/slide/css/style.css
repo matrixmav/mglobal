@@ -303,7 +303,7 @@ position: absolute;
 	margin-bottom:3%;
 }
 .slider-heading-2{
-	  
+border:1px solid #e0e0e0;
   padding: 0;
   background: #ffffff;
  
@@ -355,10 +355,12 @@ i.banner-i{
 }
 .slider-item{
 	  background: #fff;
-  border: solid 1px #e0e0e0;
+  border-right: solid 1px #e0e0e0;
+  border-left: solid 1px #e0e0e0;
   padding: 13px;
   margin-left:0.6px;
   max-height:230px;
+   min-height:230px;
 }
 .slider-item p{
 	color:#f15d2a;
@@ -383,7 +385,7 @@ ul.banner-li li{
   padding: 5px 0;
   background: #ffffff;
   margin-bottom: 1px;
-  border-top: none !important;
+  
 }
 .box-relative-banner {
   width: auto;
