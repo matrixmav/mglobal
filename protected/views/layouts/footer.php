@@ -79,10 +79,11 @@
       </div>
          <div class="policy-section">
 		<ul>
-		<li><a href="#">Policy 1</a></li>
-		<li><a href="#">Policy 2</a></li>
-		<li><a href="#">Policy 3</a></li>
-		<li><a href="#">Policy 4</a></li>
+                    <li><a href="../user/antimoneylaundering">Anti Money Laundering </a></li>
+                <li><a href="../user/antispampolicy">Anti-Spam Policy</a></li>
+                <li><a href="../user/privacypolicy">Privacy Policy</a></li>
+                <li><a href="../user/policiesandprocedures">Policies And Procedures</a></li>
+                <li><a href="../user/terms-and-conditions.php">Terms And Conditions</a></li>
 		</ul>
 		</div>
     </div>
@@ -184,3 +185,4 @@ $.src="//v2.zopim.com/?3BLH8Knm3PQkJynPQaaWpJwSzrIgBrSK";z.t=+new Date;$.
 type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 </script>
 <!--End of Zopim Live Chat Script-->
+
