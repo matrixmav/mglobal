@@ -308,7 +308,7 @@
           <img src="/images/mediacenter/who_we_are.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
         
-          <h2>who<strong> we are </strong></h2>
+          <a href="#inline7" class="fancybox pinkSm"><h2>who<strong> we are </strong></h2></a>
           <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too?.... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline7" style="display:none" class="readMoreBox content">
                <h2>who<strong> we are </strong></h2>
@@ -324,7 +324,7 @@
           <img src="/images/mediacenter/what_we_do.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
        
-           <h2>what<strong> we do </strong></h2>
+           <a href="#inline8" class="fancybox pinkSm"> <h2>what<strong> we do </strong></h2></a>
          <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline8" style="display:none" class="readMoreBox content">
                <h2>what<strong> we do </strong></h2>
