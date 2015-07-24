@@ -258,6 +258,12 @@ textarea.form-control {
 	font: 14px Arial, sans-serif;
 	border-radius: 0;
 	box-shadow: none;
+        
+}
+input#email1 {
+  margin: 10px 0 !important;
+  min-width: 280px;
+  margin-right: 10px;
 }
 input.form-control:focus,
 textarea.form-control:focus {
@@ -3249,7 +3255,7 @@ Styler Panel
 .pre-footer{ background: #f15d2a;padding-top:20px;}
 .pre-footer .container{  background: url(/images/footer-bg.png) center center no-repeat;}
 .pre-footer p.f-font{font-weight: bold; text-decoration: underline;}
-.pre-footer p,.pre-footer p.f-cnt{color: #FFF; font-weight: 400;}
+.pre-footer p,.pre-footer p.f-cnt{color: #FFF; font-weight: 400;font-size:14px;}
 .pre-footer p.f-cnt a{color: #FFF; font-weight: 400;font-size:14px;}
 .margin-bottom-20{color: #FFF; font-weight: 400; border-bottom: 1px dashed #FFF; padding-bottom: 10px;}
 .pre-footer-subscribe-box a{color: #FFF; font-weight: 400;}
@@ -3520,3 +3526,13 @@ padding-bottom:5px;
 .additional-nav li{display: inline-block !important; padding: 0 10px !important;}
 .header .container{border-top: 1px solid #eee;}
 .top-ul li a{padding: 15px !important;}
+@media (max-width: 500px) {
+    .policy-section ul
+{
+   margin-left: 0;
+}
+.policy-section ul li
+{
+    margin: 0 6px;
+}
+}
