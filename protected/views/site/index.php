@@ -526,7 +526,7 @@
                           </a>
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                   <?php 
                                     $descriptionArr = explode(',',$basicPackage->Description);
@@ -538,10 +538,11 @@
                                   </ul>
 
                               </div>
-                              <div class="col-sm-4 col-xs-4">
+                              <div class="col-sm-5 col-xs-5">
                                   
                                   <a href="<?php echo $pickNow.$basicPackage['id']; ?>"><span class="packPick"> pick now </span></a>
                                   <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
+
                                   
                                </div>
                       </div>
@@ -605,7 +606,7 @@
                                  
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                     <?php 
                                     $descriptionArr = explode(',',$advancePackage->Description);
@@ -617,6 +618,7 @@
                               </div>
                               <div class="col-sm-4 col-xs-4">
                                    <a href="<?php echo $pickNow.$advancePackage['id']; ?>"><span class="packPick"> pick now </span></a>
+
                             <span class="knowmore"><a href="#more<?php echo $advancePackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                </div>
                       </div>
@@ -678,7 +680,7 @@
                       </div></a>
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                     <?php 
                                     $descriptionArr = explode(',',$proPackage->Description);
@@ -690,6 +692,7 @@
                               </div>
                               <div class="col-sm-4 col-xs-4">
                                    <a href="<?php echo $pickNow.$proPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+
                             <span class="knowmore"><a href="#more<?php echo $proPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                   
                                </div>

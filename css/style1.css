@@ -456,6 +456,9 @@ a:hover {
 .header a:hover {
   text-decoration: none;
 }
+.additional-nav ul{
+    margin-top:10px;
+}
 
 /* Promo block */
 .promo-block {
@@ -1911,7 +1914,7 @@ Pre-Header and pre-header elements
 .benefitCarousel .carousel-control { visibility: hidden; }
 .benefitCarousel:hover .carousel-control { visibility: visible; }
 .choseOpt{}
-.choseOpt li{ list-style: none;  background: url(/images/arrow-circle.png) left center no-repeat; margin: 10px 0 10px 10px; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
+.choseOpt li{ list-style: none;  background: url(/images/arrow-circle.png) left 14px no-repeat; margin: 10px 0 10px 10px; border-bottom: 1px solid #e6e6e6; padding: 10px 0;}
 .choseOpt li a{ padding: 0 0 0 40px; font-family: "Open Sans"; font-size:18px; color: #757575;}
 .choseOpt{padding: 10px 0 0 0;}
 .benefitCarousel h3{font-size: 24px; text-align: center;}
@@ -2269,11 +2272,38 @@ color:#FFF; background: #c9c9c9;}
         min-width: 400px;
     }
 }
+@media (max-width: 1200px) {
+     .benefitCarousel .carousel-control.left span img
+ {
+    margin-left:9em;
+ }
+}
 @media (max-width: 991px) {
     #myCarousel .carousel-caption
     {
         top:28%;
         min-width: 400px;
+    }
+    .pricing-item
+    {
+        margin:0;
+    }
+    .packageInfo .packPrice
+    {
+          font-size: 30px;
+          padding: 25px 50px;
+    }
+    .packageInfo .packName
+    {
+        margin: 0;
+    }
+    .packageInfo .packPrice p
+    {
+        font-size: 20px;
+    }
+    .packPick
+    {
+        margin-top: 10%;
     }
 }
 @media (max-width: 767px) {
@@ -2286,6 +2316,10 @@ color:#FFF; background: #c9c9c9;}
  {
       top:15%;
  }
+ .packPick {
+  margin-top: 30%;
+}
+
 }
 @media (max-width: 600px) {
    #myCarousel .carousel-caption h2
@@ -2301,7 +2335,9 @@ color:#FFF; background: #c9c9c9;}
     {
         display:none;
     }   
-   
+    .packPick {
+  margin-top: 45%;
+}
     }
 @media (max-width: 500px) {
     .policy-section ul
@@ -2313,4 +2349,3 @@ color:#FFF; background: #c9c9c9;}
     margin: 0 6px;
 }
 }
-@
