@@ -35,8 +35,8 @@ class UserController extends Controller {
                     'loginregistration', 'dashboard', 'confirm', 'isemailexisted',
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
                     'callback', 'getfullname','searchtemplate','faq','filterdata',
-                    'templatespecification','policy1','policy2','policy3','policy4','legal',
-                    'isemailexistedprofile'),
+                    'templatespecification','antimoneylaundering','antispampolicy','privacypolicy','policiesandprocedures','legal',
+                    'isemailexistedprofile','terms-and-conditions'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -1108,30 +1108,38 @@ public function actiontemplateSpecification() {
         ));   
 }
 
-public function actionPolicy1() {
+public function actionAntiMoneyLaundering() {
    
-    $this->render('policy1');
+    $this->render('anti-money-laundering');
     
       
 }
 
-public function actionPolicy2() {
+public function actionAntiSpamPolicy() {
    
-    $this->render('policy2');
+    $this->render('anti-spam-policy');
     
       
 }
 
-public function actionPolicy3() {
+public function actionPrivacyPolicy() {
    
-    $this->render('policy3');
+    $this->render('privacy-policy');
     
       
 }
 
-public function actionPolicy4() {
+public function actionPoliciesAndProcedures() {
    
-    $this->render('policy4');
+    $this->render('policies-and-procedures');
+    
+
+      
+}
+
+public function actionTermsAndConditions() {
+   
+    $this->render('terms-and-conditions');
     
 
       
