@@ -2262,3 +2262,55 @@ color:#FFF; background: #c9c9c9;}
 .successMsgmedia{
     color: #398439;
     text-align: center;}
+@media (max-width: 1400px) {
+    #myCarousel .carousel-caption
+    {
+        top:33%;
+        min-width: 400px;
+    }
+}
+@media (max-width: 991px) {
+    #myCarousel .carousel-caption
+    {
+        top:28%;
+        min-width: 400px;
+    }
+}
+@media (max-width: 767px) {
+#myCarousel .carousel-caption >p
+{
+    font-size: 15px;
+    
+}
+ #myCarousel .carousel-caption
+ {
+      top:15%;
+ }
+}
+@media (max-width: 600px) {
+   #myCarousel .carousel-caption h2
+    {
+        font-size:25px !important;
+    }
+   #myCarousel .carousel-caption
+    {
+       
+        min-width: 250px;
+    }
+        #myCarousel .carousel-caption >p
+    {
+        display:none;
+    }   
+   
+    }
+@media (max-width: 500px) {
+    .policy-section ul
+{
+   margin-left: 0;
+}
+.policy-section ul li
+{
+    margin: 0 6px;
+}
+}
+@
