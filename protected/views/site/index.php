@@ -544,12 +544,9 @@
                                   </ul>
 
                               </div>
-                              <div class="col-sm-5 col-xs-5">
-                                  
+                              <div class="col-sm-5 col-xs-5">                                  
                                   <a href="<?php echo $pickNow.$basicPackage['id']; ?>"><span class="packPick"> pick now </span></a>
                                   <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
-
-                                  
                                </div>
                       </div>
                  </div>
@@ -1189,7 +1186,6 @@ $('.carousel').carousel({
 
     </div>
 
-
 </div>
 
 
@@ -1218,7 +1214,6 @@ $('.carousel').carousel({
 
     </div>
 
-
 </div>
 
 
@@ -1246,8 +1241,6 @@ $('.carousel').carousel({
         </div>
 
     </div>
-
-
 </div>
 
 

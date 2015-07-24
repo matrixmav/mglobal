@@ -109,7 +109,6 @@ $this->breadcrumbs = array(
                     'class' => 'CButtonColumn',
                     'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Change}',
-                    'htmlOptions' => array('width' => '25%'),
                     'buttons' => array(
                          'Change' => array(
                             'label' => Yii::t('translation', 'Change Status'),
