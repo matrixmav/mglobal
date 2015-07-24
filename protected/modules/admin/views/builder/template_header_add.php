@@ -1,3 +1,9 @@
+<style>
+    .portlet.box.orange{ max-width:1200px;margin-top:10px;padding-bottom:20px !important;}
+    .portlet.box > .portlet-title{margin-bottom: 20px;}
+    .form-group{padding-right:10px;}
+    
+    </style>
 <?php
 $this->breadcrumbs = array(
     'Template' => array('BuildTemp/templatelist'),
@@ -9,9 +15,14 @@ $this->breadcrumbs = array(
     <?php if($success){ ?><div class="success" id="error_msg"><?php echo $success;?></div><?php } ?>
    
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
-     
+     <div class="portlet box orange">
+         <div class="portlet-title">
+							<div class="caption">
+								Add Template
+							</div>
+    </div>
         <fieldset>
-            <legend>Add Template</legend>
+      
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Upload Zip Folder includes(css,images,js)<span class="require">*</span></label>
                 <div class="col-lg-8">
@@ -86,7 +97,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="headcode">Head Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="head_code" class="form-control" name="Template[head_code]" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="head_code" class="form-control" name="Template[head_code]" ></textarea>
                     <span id="head_code_error" class="clrred"></span>
                 </div>
             </div>            
@@ -102,7 +113,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="menucode">Menu Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="menu_code" class="form-control" name="Template[menu_code]" ></textarea>
                     <span id="menu_code_error" class="clrred"></span>
                 </div>
             </div>
@@ -110,14 +121,14 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Header Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="header_code" class="form-control" name="Template[header_code]" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="header_code" class="form-control" name="Template[header_code]" ></textarea>
                     <span id="header_code_error" class="clrred"></span>
                 </div>
             </div>
              <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Body Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="body_code" class="form-control" name="Template[body_code]" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="body_code" class="form-control" name="Template[body_code]" ></textarea>
                     <span id="body_code_error" class="clrred"></span>
                 </div>
             </div>
@@ -125,7 +136,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="formcode">Contact Form Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="form_code" class="form-control" name="Template[form_code]" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="form_code" class="form-control" name="Template[form_code]" ></textarea>
                     <span id="form_code_error" class="clrred"></span>
                 </div>
             </div>
@@ -133,7 +144,7 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Footer Code<span class="require">*</span></label>
                 <div class="col-lg-8">
-                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="footer_code" class="form-control" name="Template[footer_code]" ></textarea>
                     <span id="footer_code_error" class="clrred"></span>
                 </div>
             </div>
@@ -141,13 +152,13 @@ $this->breadcrumbs = array(
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Custom CSS</label>
                 <div class="col-lg-8">
-                    <textarea id="custom_css" class="form-control" name="custom_css" style="width: 482px; height: 150px;"></textarea>                    
+                    <textarea id="custom_css" class="form-control" name="custom_css" ></textarea>                    
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Custom JS</label>
                 <div class="col-lg-8">
-                    <textarea id="custom_js" class="form-control" name="custom_js" style="width: 482px; height: 150px;"></textarea>
+                    <textarea id="custom_js" class="form-control" name="custom_js" ></textarea>
                 </div>
             </div>
              
@@ -155,9 +166,10 @@ $this->breadcrumbs = array(
 
     <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn red">
+                <input type="submit" name="submit" value="Submit" class="btn orange">
                  
             </div>
+        </div>
         </div>
     </form>
 </div>

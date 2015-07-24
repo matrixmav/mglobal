@@ -258,6 +258,12 @@ textarea.form-control {
 	font: 14px Arial, sans-serif;
 	border-radius: 0;
 	box-shadow: none;
+        
+}
+input#email1 {
+  margin: 10px 0 !important;
+  min-width: 280px;
+  margin-right: 10px;
 }
 input.form-control:focus,
 textarea.form-control:focus {
@@ -357,7 +363,7 @@ Pre-Header and pre-header elements
 ***/
 .pre-header {
 	color: #616b76;
-	border-bottom: 1px solid #eee;
+	
 	padding-top: 10px;
 	line-height: 1.2;
 	font-family: 'Open Sans', sans-serif;
@@ -383,7 +389,7 @@ Pre-Header and pre-header elements
 }
 .additional-shop-info
 {
-padding-bottom:25px;
+padding-bottom:0;
 }
 .additional-shop-info li:first-child {
 	padding-left: 0;
@@ -502,7 +508,7 @@ body.page-header-fixed {
   width: 32px;
   height: 32px;
   display: none;
-  margin: 25px 0 0 30px;
+  margin: 13px 0 0 30px;
   position: relative;
   background: #fff url(/images/icons/toggler.png) no-repeat 6px 8px;
 }
@@ -534,7 +540,7 @@ body.page-header-fixed {
 .header-navigation > ul > li > a {
 	color: #333;
 	display: block;	
-	padding: 29px 12px 30px;
+	padding: 20px 12px;
 	  font-family: PT Sans Narrow;
   font-size: 18px;
   color:#78828c;
@@ -1486,7 +1492,7 @@ Pre-Footer and pre-footer elements
 	color: #b0b0b0;
 }
 .pre-footer .container {
-	padding-top: 45px;
+	
 }
 .pre-footer a {
 	color: #57c8eb;
@@ -3115,7 +3121,7 @@ Styler Panel
   z-index: 100001;
 }
 
-.site-logo{padding:10px !important;}
+.site-logo{padding:5px 10px !important;}
 .cartItemsWrp{display: table !important; margin-bottom: 0;}
 .cartfooter{padding: 15px 0;}
 .cartfooter .couponWrp{ width: auto; border: none; padding: 0; min-height: auto;}
@@ -3246,10 +3252,10 @@ Styler Panel
 /*END Form Wizard*/
 
 /*--------------pre footer-------------*/
-.pre-footer{ background: #f15d2a;}
+.pre-footer{ background: #f15d2a;padding-top:20px;}
 .pre-footer .container{  background: url(/images/footer-bg.png) center center no-repeat;}
 .pre-footer p.f-font{font-weight: bold; text-decoration: underline;}
-.pre-footer p,.pre-footer p.f-cnt{color: #FFF; font-weight: 400;}
+.pre-footer p,.pre-footer p.f-cnt{color: #FFF; font-weight: 400;font-size:14px;}
 .pre-footer p.f-cnt a{color: #FFF; font-weight: 400;font-size:14px;}
 .margin-bottom-20{color: #FFF; font-weight: 400; border-bottom: 1px dashed #FFF; padding-bottom: 10px;}
 .pre-footer-subscribe-box a{color: #FFF; font-weight: 400;}
@@ -3324,7 +3330,6 @@ Styler Panel
 .policy-section
 {
 width:100%;
-border-bottom:1px solid #fff;
 float:left;
 padding:10px 0;
 }
@@ -3333,6 +3338,7 @@ padding:10px 0;
   display: inline-block;
   margin: auto;
   padding: 0;
+    margin-left: 36%;
 }
 .policy-section ul  li
 {
@@ -3349,6 +3355,7 @@ border-right:none;
 .policy-section ul  li a
 {
 text-decoration:none;
+color:#fff;
 }
 .bg-f2
 {
@@ -3514,3 +3521,18 @@ padding-bottom:5px;
 
 #master_pin_error{color:#dd0808;}
 
+/*inner header*/
+.additional-shop-info li{padding-right: 10px !important; display: inline-block !important;}
+.additional-nav li{display: inline-block !important; padding: 0 10px !important;}
+.header .container{border-top: 1px solid #eee;}
+.top-ul li a{padding: 15px !important;}
+@media (max-width: 500px) {
+    .policy-section ul
+{
+   margin-left: 0;
+}
+.policy-section ul li
+{
+    margin: 0 6px;
+}
+}

@@ -19,8 +19,8 @@ $this->breadcrumbs = array(
             <div class="row">
                 <div class="col-md-12">
                     <div class="grid-view" id="city-grid">
-                        <div id="testDiv<?php echo $key; ?>">
-                            <table class="table table-striped table-bordered table-hover table-full-width">
+                       
+                            <table class="table table-striped table-bordered table-hover table-full-width"  style="table-layout:fixed;  padding: 0;margin: 0;">
                                 <thead>
                                     <tr>
                                         <th id="city-grid_c0">
@@ -50,7 +50,9 @@ $this->breadcrumbs = array(
                                         </th>                        
                                     </tr>
                                 </thead>
-
+                            </table>
+                         <div id="testDiv<?php echo $key; ?>">
+                            <table class="table table-striped table-bordered table-hover table-full-width">
                                 <tbody>
                                     <?php foreach ($dataProviderList  as $dataProvider){ ?>
                                     <tr <?php if($dataProvider->date != date('Y-m-d')){ echo "class='rowFade'" ; } ?> >

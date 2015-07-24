@@ -40,8 +40,8 @@
     
    <div id="inline114" style="display:none" class="readMoreBox content">
                <h2>Company<strong>Profile</strong></h2>
-          <div id="show_successp" style="display:none;"></div>
-          <div id="show_successp" style="display:none;"></div>
+          <div id="show_successP" style="display:none;" class="successMsgmedia"></div>
+          <div id="show_successPE" style="display:none;" class="errorMsgmedia"></div>
                
          <div class="col-sm-12">
              <form method="post">
@@ -51,7 +51,7 @@
                                <input type="text" class="form-control" id="nameP" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameP"></div>
+                            <div id="show_wornings_nameP" class="errorMsgmedia"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -59,7 +59,7 @@
                                <input type="text" class="form-control" id="emailP" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailP"></div>
+                           <div id="show_wornings_emailP" class="errorMsgmedia"></div>
                         </div>
                        
                         
@@ -78,8 +78,8 @@
   
     <div id="inline116" style="display:none" class="readMoreBox content">
                <h2>Business <strong>Plan</strong></h2>
-          <div id="show_successBu" style="display:none;"></div>
-          <div id="show_successBu" style="display:none;"></div>
+          <div id="show_successBu" style="display:none;" class="successMsgmedia"></div>
+          <div id="show_successBuE" style="display:none;" class="errorMsgmedia"></div>
                
          <div class="col-sm-12">
              <form method="post">
@@ -89,7 +89,7 @@
                                <input type="text" class="form-control" id="nameBu" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameBu"></div>
+                            <div id="show_wornings_nameBu" class="errorMsgmedia"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -97,7 +97,7 @@
                                <input type="text" class="form-control" id="emailBu" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailBu"></div>
+                           <div id="show_wornings_emailBu" class="errorMsgmedia"></div>
                         </div>
                        
                         
@@ -116,8 +116,8 @@
   
 <div id="inline115" style="display:none" class="readMoreBox content">
                <h2>Company <strong> Brochure</strong></h2>
-          <div id="show_successCo" style="display:none;"></div>
-          <div id="show_worninCo" style="display:none;"></div>
+          <div id="show_successCo" style="display:none;" class="successMsgmedia"></div>
+          <div id="show_worninCoE" style="display:none;" class="errorMsgmedia"></div>
                
          <div class="col-sm-12">
              <form method="post">
@@ -127,7 +127,7 @@
                                <input type="text" class="form-control" id="nameCo" placeholder="Name">
                               
                            </div>
-                            <div id="show_wornings_nameCo"></div>
+                            <div id="show_wornings_nameCo" class="errorMsgmedia"></div>
                         </div>
                        <div class="form-group">
                            <div class="input-group">
@@ -135,7 +135,7 @@
                                <input type="text" class="form-control" id="emailCo" placeholder="Email">
                                
                            </div>
-                           <div id="show_wornings_emailCo"></div>
+                           <div id="show_wornings_emailCo" class="errorMsgmedia"></div>
                         </div>
                        
                         
@@ -281,41 +281,7 @@
     </div>
   </div>
   <!-- Promo block END -->
-  <!-- About block BEGIN -->
- 
-  
- <!-- Message block BEGIN 
-  <div class="message-block content content-center valign-center" id="message-block">
-    <div class="valign-center-elem">
-      <h2 class="h-pd">The details are not the details <strong>They make the design</strong></h2>
-      <em>KEEN THEMES</em>
-    </div>
-  </div>-->
-  <!-- Message block END -->
-  
-  
-  
-    <!----<div class="container">
-      <h2><strong>Metronic</strong> Inspires</h2>
-      <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>
-      <div class="ab-trio">
-        <img src="../../assets/frontend/onepage/img/trio.png" alt="" class="/images-responsive">
-        <div class="ab-cirlce ab-cirle-blue">
-          <i class="fa fa-code"></i>
-          <strong>Clean Code</strong>
-        </div>
-        <div class="ab-cirlce ab-cirle-red">
-          <i class="fa fa-gift"></i>
-          <strong>Huge Updates</strong>
-        </div>
-        <div class="ab-cirlce ab-cirle-green">
-          <i class="fa fa-mobile"></i>
-          <strong>Responsive</strong>
-        </div>
-      </div>
-    </div>----->
-  
-  <!-- About block END -->
+
   
    <div class="about-block content content-center" id="about">
   
@@ -339,11 +305,11 @@
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
-          <img src="/images/mediacenter/what_we_do.jpg" alt="what we do" width="100%">
+          <img src="/images/mediacenter/who_we_are.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
         
-          <h2>who<strong> we are </strong></h2>
-          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
+          <a href="#inline7" class="fancybox pinkSm"><h2>who<strong> we are </strong></h2></a>
+          <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too?.... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline7" style="display:none" class="readMoreBox content">
                <h2>who<strong> we are </strong></h2>
                <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too? If not, then we surely have something new in store for you to discover. We are evolving as one such organization indulged in offering web development, designing, and digital marketing solutions. MGlobally was founded with the idea of creating a business model, wherein the customers are added to our network by bringing us the references. Abiding by the idea of creating an extended network of brand representatives, we aim to be the one of top most companies in direct selling IT network.</p>
@@ -355,11 +321,11 @@
       </div>
 
       <div class="item">
-          <img src="/images/mediacenter/who_we_are.jpg" alt="what we do" width="100%">
+          <img src="/images/mediacenter/what_we_do.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
        
-           <h2>what<strong> we do </strong></h2>
-         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
+           <a href="#inline8" class="fancybox pinkSm"> <h2>what<strong> we do </strong></h2></a>
+         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline8" style="display:none" class="readMoreBox content">
                <h2>what<strong> we do </strong></h2>
                <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief.</p>
@@ -467,7 +433,7 @@
     <!--   <h4>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h4>-->
       <div class="row">
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/profile.ppsx" download="/images/mediacenter/profile.ppsx" class="fancybox"> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
+            <a  href= "#inline114" class="fancybox"> <img src="images/our_profile.png" alt="Marcus Doe" class="img-responsive">
          <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3> -->
             <h3><em>Our Profile</em></h3></a>
          <!-- <p>Lorem ipsum dolor amet, tempor ut labore magna tempor dolore</p> 
@@ -478,7 +444,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/Business plans brochure.pdf" download="/images/mediacenter/Business plans brochure.pdf" class="fancybox"> <img src="images/business-plan.png" alt="business plan" class="img-responsive">
+            <a href= "#inline116" class="fancybox"> <img src="images/business-plan.png" alt="business plan" class="img-responsive">
             <h3><em>business plan</em></h3></a>
          <!-- <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
@@ -490,7 +456,7 @@
           </div>-->
         </div>
         <div class="col-md-4 item col-xs-12 col-sm-4">
-            <a href="/images/mediacenter/e_brochure.pdf" download="/images/mediacenter/Business plans brochure.pdf" class="fancybox">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
+            <a  href= "#inline115" class="fancybox">  <img src="images/promo_brochure.png" alt="Cris Nilson" class="img-responsive">
             <h3><em>promo brochure</em></h3></a>
         <!--  <h3 class="downloadTxt"><a href=""><span> <img src="images/download_icon.png"></span>Download</a></h3>
              <em></em>
@@ -538,7 +504,12 @@
             <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $basicPackage['image']; ?>" alt="<?php echo $basicPackage['name']; ?>" class="img-responsive">
-                  <?php if(Yii::app()->session['userid']!=''){ ?><a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php }else{?><a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php }?>
+                      <div class="valign-center">
+                  <?php if(Yii::app()->session['userid']!=''){ ?>
+                      <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>">
+                          <?php }else{?>
+                          <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>">
+                              <?php }?>
                       
                       <div class="packageInfo"> 
                           <div> <span class="packName">Basic Web Packages</span></div>
@@ -546,6 +517,7 @@
                         
                           <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
                       </div>
+                          </a>
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
@@ -558,27 +530,46 @@
                                   <li><?php echo $description;?></li>
                                     <?php } } ?>  
                                   </ul>
-                          <!--<ul>
-                              <li>Domain for 1 Year</li>
-                              <li>100 MB Storage Space/Year</li>
-                              <li>100 MB Bandwidth</li>
-                              <li>Advertisements</li>
-                              <li>Free Hosting</li>
-                              <li>1 Email A/C</li>
-                              <li>5 Static Pages</li>
-                              <li>Drag & Drop Builder</li>
-                              
-                          </ul>-->
+
                               </div>
                               <div class="col-sm-4 col-xs-4">
-                                   <span class="packPick">pick now</span>
+                                  
+                                  <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                            <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
+                                  
                                </div>
                       </div>
                  </div>
-        </a>
+        </div>
                  </div>
                 
             </div>
+          <div id="more<?php echo $basicPackage->id;?>" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1"><?php echo $basicPackage->name; ?></span></div>
+        <div> <span class="packPrice"><p>$</p><?php echo $basicPackage->amount;?></span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+
+            <ul>
+            <?php 
+              $descriptionArr = explode(',',$basicPackage->Description);
+              if(!empty($descriptionArr) && count($descriptionArr) > 0)
+              {
+              foreach($descriptionArr as $description){?>
+            <li><?php echo $description;?></li>
+              <?php } } ?>  
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
             <?php } ?>
 
         </div>
@@ -594,13 +585,18 @@
               <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image']; ?>" alt="<?php echo $advancePackage['name']; ?>" class="img-responsive">
-                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="valign-center" onclick="return showError();"> <?php }else{?> <a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>
-                      <div class="packageInfo"> 
+                      <div class="valign-center">
+                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?>
+                          <a href="#" onclick="return showError();"> <?php }else{?> 
+                          <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>">
+                              <?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>
+                     <div class="packageInfo"> 
                           <div> <span class="packName"><?php echo $advancePackage->name; ?></span></div>
                           <div> <span class="packPrice"><p>$</p><?php echo $advancePackage->amount; ?></span></div>
                         
                           <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
-                      </div>
+                      </div> </a> 
+                                 
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
@@ -614,14 +610,39 @@
                           
                               </div>
                               <div class="col-sm-4 col-xs-4">
-                                  <span class="packPick">pick now</span>
+                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                            <span class="knowmore"><a href="#more<?php echo $advancePackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                </div>
                       </div>
                  </div>
-        </a>
+        </div>
                  </div>
                 
             </div>
+          <div id="more<?php echo $advancePackage->id;?>" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1"><?php echo $advancePackage->name; ?></span></div>
+        <div> <span class="packPrice"><p>$</p><?php echo $advancePackage->amount; ?></span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+
+            <ul>
+                <?php 
+                $descriptionArr = explode(',',$advancePackage->Description);
+                foreach($descriptionArr as $description){?>
+              <li><?php echo $description;?></li>
+                <?php }?>   
+              </ul>
+        </div>
+
+    </div>
+
+
+</div>
             <?php } ?>
 
         </div>
@@ -637,13 +658,18 @@
              <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image']; ?>" alt="<?php echo $proPackage['name']; ?>" class="img-responsive">
-                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a  class="valign-center" onclick="return showError();"><?php }else{?> <a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>
+                      <div class="valign-center">
+                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?>
+                          <a   href="#" onclick="return showError();"><?php }else{?> 
+                          <a  href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>">
+                              <?php }}else{?>
+                              <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>
                       <div class="packageInfo"> 
                           <div> <span class="packName"><?php echo $proPackage->name; ?></span></div>
                           <div> <span class="packPrice"><p>$</p><?php echo $proPackage->amount; ?></span></div>
                         
                           <p>MGlobally releases its web packages for website design & development. Get details of the packages and choose the suitable ones.</p>
-                      </div>
+                      </div></a>
                       <div class="packageDescription"> 
                           <div class="row">
                               <div class="col-sm-8 col-xs-8">
@@ -654,27 +680,42 @@
                                   <li><?php echo $description;?></li>
                                     <?php }?>
                                   </ul>
-                          <!--<ul>
-                              <li>Domain for 1 Year</li>
-                              <li>100 MB Storage Space/Year</li>
-                              <li>100 MB Bandwidth</li>
-                              <li>Advertisements</li>
-                              <li>Free Hosting</li>
-                              <li>1 Email A/C</li>
-                              <li>5 Static Pages</li>
-                              <li>Drag & Drop Builder</li>
-                              
-                          </ul>-->
+           
                               </div>
                               <div class="col-sm-4 col-xs-4">
-                                  <span class="packPick">pick now</span>
+                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                            <span class="knowmore"><a href="#more<?php echo $proPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
+                                  
                                </div>
                       </div>
                  </div>
-                </a>
+                </div>
                  </div>
                 
             </div>
+          <div id="more<?php echo $proPackage->id;?>" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1"><?php echo $proPackage->name; ?></span></div>
+        <div> <span class="packPrice"><p>$</p><?php echo $proPackage->amount;?></span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+            <?php 
+            $descriptionArr = explode(',',$proPackage->Description);
+            foreach($descriptionArr as $description){?>
+          <li><?php echo $description;?></li>
+            <?php }?>
+          </ul>
+        </div>
+
+    </div>
+
+
+</div>
             <?php } ?>
 
         </div>
@@ -707,94 +748,9 @@
           <img src="images/matrix.png" alt="Why to choose us" class="img-responsive">
         </div>
         <div class="col-md-4 col-sm-5 col-xs-12 text-left">
-<!--          <div class="panel-group" id="accordion1">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_1">Lorem ipsum dolor sit amet</a>
-                </h5>
-              </div>
-              <div id="accordion1_1" class="panel-collapse collapse in">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_2">Consectetur adipisicing elit</a>
-                </h5>
-              </div>
-              <div id="accordion1_2" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_3">Augue assum anteposuerit dolore</a>
-                </h5>
-              </div>
-              <div id="accordion1_3" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_4">Sollemnes in futurum</a>
-                </h5>
-              </div>
-              <div id="accordion1_4" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_5">Nostrud Tempor veniam</a>
-                </h5>
-              </div>
-              <div id="accordion1_5" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h5 class="panel-title">
-                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#accordion1_6">Ut enem magana sed dolore</a>
-                </h5>
-              </div>
-              <div id="accordion1_6" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim minim veniam quis nostrud exercitation dolore magna ullamco.</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco sed eiusmod tempor ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>-->
+
           <!-- benefit slider -->
             <div id="benefit-carousel" class="carousel slide benefitCarousel" data-ride="carousel">
-  <!-- Indicators 
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>-->
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
@@ -843,19 +799,7 @@
     </div>
   </div>
   <!-- Choose us block END -->
-  <!-- Checkout block BEGIN 
-  <div class="checkout-block content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10">
-          <h2>CHECK OUT ADMIN THEME! <em>Most Full Featured &amp; Powerfull Admin Theme</em></h2>
-        </div>
-        <div class="col-md-2 text-right">
-          <a href="#" target="_blank" class="btn btn-primary">Live preview</a>
-        </div>
-      </div>
-    </div>
-  </div>-->
+
   <!-- Checkout block END -->
   <!-- Facts block BEGIN -->
   <?php foreach($siteObject as $siteObject1){} ?>
@@ -960,176 +904,7 @@
       </div>
         
       <?php }?>
-      <!--<div class="item col-md-2 col-sm-4 col-xs-12">
-        <img src="images/templates/lawyers.png" alt="NAME" class="img-responsive">
-        <a href="images/6.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Lawyers</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/architect.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Architect</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/food.png" alt="NAME" class="img-responsive">
-        <a href="images/3.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Food</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/education.png" alt="NAME" class="img-responsive">
-        <a href="images/5.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Education</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-      <img src="images/templates/consultant.png" alt="NAME" class="img-responsive">
-        <a href="images/4.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Consultant</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-        <img src="images/templates/finance.png" alt="NAME" class="img-responsive">
-        <a href="images/1.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Finance</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-      <img src="images/templates/healthcare.png" alt="NAME" class="img-responsive">
-        <a href="images/10.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Healthcare</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/corporate.png" alt="NAME" class="img-responsive">
-        <a href="images/9.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Corporate</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/travel.png" alt="NAME" class="img-responsive">
-        <a href="images/7.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Travel</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/jewellery.png" alt="NAME" class="img-responsive">
-        <a href="images/2.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Jewellery</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-      <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/hotesl-resorts.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Hotel & Resorts</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-        <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/real-estate.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Real Estate</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-        <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/online-store.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Online-Store</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-        <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/ca.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Chartered Accountants</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-        <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/fitness.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Fitness</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-        <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/textile.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Textile</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>
-        <div class="item col-md-2 col-sm-4 col-xs-12">
-       <img src="images/templates/furniture.png" alt="NAME" class="img-responsive">
-        <a href="images/8.jpg" class="zoom valign-center">
-          <div class="valign-center-elem">
-            <strong>Furniture</strong>
-            <em></em>
-            <b>View</b>
-          </div>
-        </a>
-      </div>-->
+      
     </div>
   </div>
   <!-- Portfolio block END -->
@@ -1144,27 +919,15 @@
       <h2>Customer <strong>testimonials</strong></h2>
      <!--<h4><i class="fa fa-quote-left"></i></h4>-->
       <div class="carousel slide" data-ride="carousel" id="testimonials-block">
-           <!-- Indicators 
-  <ol class="carousel-indicators">
-    <li data-target="#testimonials-block" data-slide-to="0" class="active"></li>
-    <li data-target="#testimonials-block" data-slide-to="1"></li>
-    <li data-target="#testimonials-block" data-slide-to="2"></li>
-  </ol> 
-        <!-- Wrapper for slides -->
+ 
         <div class="carousel-inner">
           <!-- Carousel items -->
-            
-        
- 
            <?php $i=1;if(!empty($profileObject)) { 
                foreach($profileObject as $testimonial){ ?>
  
           <!-- Carousel items -->
           <div class="item <?php if($i=='1'){ echo "active"; }else{ echo "";}?>">
-            <!--<blockquote>
-              <p></p>
-            </blockquote>-->
-           <!-- <span class="testimonials-name"><?php //echo $testimonial->user()->full_name;?></span>-->
+
             <div class="testimonialBoxMain">
             <div class="testimonialBox clearfix ">
                             <div class="customerImg pull-left">
@@ -1183,17 +946,6 @@
           </div>
            <?php $i++;} }?>
         </div>
-        
-        <!--<a class="left carousel-control" href="#testimonials-block" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#testimonials-block" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>-->
-      
-       
       </div>
     </div>
   </div>
@@ -1250,15 +1002,6 @@
   
     </div>
 
-    <!-- Left and right controls 
-    <a class="left carousel-control" href="#myCarouselaa" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarouselaa" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>-->
   </div>
       </div>
     </div>
@@ -1288,3 +1031,263 @@ $('.carousel').carousel({
 });
 </script>
 
+<div id="more1" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Basic Web Packages</span></div>
+        <div> <span class="packPrice"><p>$</p>49</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div id="more2" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Basic Web Packages</span></div>
+        <div> <span class="packPrice"><p>$</p>99</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div id="more3" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Basic Web Packages</span></div>
+        <div> <span class="packPrice"><p>$</p>499</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div id="more4" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Advance1</span></div>
+        <div> <span class="packPrice"><p>$</p>999</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div id="more5" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Advance2</span></div>
+        <div> <span class="packPrice"><p>$</p>2999</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div id="more6" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Advance3</span></div>
+        <div> <span class="packPrice"><p>$</p>4999</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div id="more7" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Advance pro1</span></div>
+        <div> <span class="packPrice"><p>$</p>9999</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div id="more8" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Advance pro2</span></div>
+        <div> <span class="packPrice"><p>$</p>14999</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div id="more9" style="display:none" class="content">
+
+    <div class="packageInfo1"> 
+        <div> <span class="basic1">Advance pro3</span></div>
+        <div> <span class="packPrice"><p>$</p>24999</span></div>
+
+        <p>MGlobally releases its web packages for website design &amp; development. Get details of the packages and choose the suitable ones.</p>
+    </div>
+    <div class="packageDescription1"> 
+        <div class="row">
+            <ul>
+                <li>Domain for 1 Year</li>
+                <li>100 MB Storage Space/Yes</li>
+                <li>100 MB Bandwidth</li>
+                <li>Adverstisements</li>
+                <li>Free Hosting</li>
+                <li>1 Email A/C</li>
+                <li>5 Static Pages</li>
+                <li>Drag &amp; Drop Builder</li>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+</div>

@@ -104,6 +104,7 @@ class ProfileController extends Controller {
                 if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
 
                     $profileObject->testimonials = $_POST['UserProfile']['testimonials'];
+                    $profileObject->updated_at = new CDbExpression('NOW()');
                     $profileObject->testimonial_status = '0';
 
                     if ($profileObject->update()) {
@@ -185,6 +186,7 @@ class ProfileController extends Controller {
         if ($_POST && $_FILES['id_proof']['name'] != '' && $_FILES['address_proof']['name'] != '') {
             $profileObject->id_proof = time() . $_FILES['id_proof']['name'];
             $profileObject->address_proff = time() . $_FILES['address_proof']['name'];
+            $profileObject->updated_at = new CDbExpression('NOW()');
             if ($_FILES) {
                 if (md5($_POST['UserProfile']['master_pin']) == $userObject->master_pin) {
                     $ext1 = end((explode(".", $profileObject->id_proof)));
@@ -265,6 +267,9 @@ class ProfileController extends Controller {
                             $userObjectArr['ip'] = Yii::app()->params['ip'];
                             $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
                             $success .= "Your password changed successfully";
+                            $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                            $configMsg['text'] = "The password for your account with Mglobally has been changed. If you didn't request a password change, login and reset your password if necessary";
+                            $responce = BaseClass::sendMail($configMsg);
                             $config['to'] = $userObject->email;
                             $config['subject'] = 'mGlobally Password Changed';
                             $config['body'] = $this->renderPartial('//mailTemp/change_password', array('userObjectArr' => $userObjectArr), true);
@@ -311,6 +316,9 @@ class ProfileController extends Controller {
                         $userObjectArr['ip'] = Yii::app()->params['ip'];
                         $userObjectArr['new_master_pin'] = $_POST['UserProfile']['new_master_pin'];
                         $successMsg .= "Your pin changed successfully";
+                        $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                        $configMsg['text'] = "The master pin for your account with Mglobally has been changed. If you didn't request change of master pin, login and reset your password if necessary";
+                        $responce = BaseClass::sendMail($configMsg);
                         $config['to'] = $userObject->email;
                         $config['subject'] = 'mGlobally Master Pin Changed';
                         $config['body'] = $this->renderPartial('//mailTemp/change_pin', array('userObjectArr' => $userObjectArr), true);
@@ -442,8 +450,8 @@ class ProfileController extends Controller {
         $userDetails['refferal_count'] = User::model()->count('sponsor_id = :spon_id', array(':spon_id' => $userObject->name));
         $userDetails['addshare_count'] = UserSharedAd::model()->count('user_id = :userId AND social_id = :socId AND date < :cur_date', array(':userId' => $loggedInUserId, ':cur_date' => date('Y-m-d'), ':socId' => 1));
         $userDetails['addlapsed_count'] = UserSharedAd::model()->count('user_id = :userId AND social_id = :socId AND date < :cur_date', array(':userId' => $loggedInUserId, ':cur_date' => date('Y-m-d'), ':socId' => 0));
-        $userDetails['transaction_order'] = Transaction::model()->count('user_id = :userId', array(':userId' => $loggedInUserId));
-        $userDetails['transaction_fund'] = MoneyTransfer::model()->count('from_user_id = :userId', array(':userId' => $loggedInUserId));
+        $userDetails['transaction_order'] = Transaction::model()->count('user_id = :userId AND mode <> :mode', array(':userId' => $loggedInUserId, ':mode' => 'transfer'));
+        $userDetails['transaction_fund'] = MoneyTransfer::model()->count('from_user_id = :userId OR to_user_id = :userId', array(':userId' => $loggedInUserId));
         $userDetails['package_purchased'] = Order::model()->count('user_id = :userId', array(':userId' => $loggedInUserId));
 
         return $userDetails;

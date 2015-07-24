@@ -97,7 +97,9 @@ class UserController extends Controller {
                         //'<br/><strong>Password : </strong>' . $password . '<br/>' .
                         //'<strong>Master Pin : </strong>' . $masterPin . '<br/><br/>';
                 CommonHelper::sendMail($config);
-
+                $configMsg['to'] = $userObject->country_code.$userObject->phone; 
+                $configMsg['text'] = "Thank you for signing up with us.
+Your account is successful activated .check email for credentials. Purchase package and start building you site.";
                 $this->redirect(array("login", 'successMsg' => $msg));
             } else {
                 $error = "Invalid Key.";
@@ -1016,7 +1018,7 @@ class UserController extends Controller {
         $row = $command->queryAll();
          
         
-        $categoryObject = BuildCategory::model()->findall();
+        $categoryObject = BuildCategory::model()->findall(array('condition'=>'status=1'));
         
         if((!empty($_GET['type']))){
         $command = $connection->createCommand('SELECT amount,id FROM `package` WHERE id IN('.$str.') AND status="1" AND type !=3 ORDER BY amount ASC');

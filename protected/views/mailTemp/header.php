@@ -28,7 +28,7 @@
                                                     <td width="80%" valign="middle" align="right" height="20" style=" color:#f15c2b;"><img width="" border="0" src="<?php echo Yii::app()->getBaseUrl(true); ?>/email-images/livechat.png"> &nbsp;</td>
                                                 </tr>
                                                 <tr>
-                                                    <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; font-family:'Nunito'"><strong> Customer Support:</strong> 1800 909 302 &nbsp; </td>
+                                                    <td width="100%" valign="middle" align="right" height="20" style=" color:#828282;font-size:14px; line-height:19px; font-family:'Nunito'"><strong> Customer Support:</strong> +525527895477 &nbsp; </td>
                                                 </tr>
                                             </tbody>
                                         </table></td>

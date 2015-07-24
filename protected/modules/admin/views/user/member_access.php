@@ -51,6 +51,7 @@ if(!empty($success)){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportsubscriber" <?php if(in_array('reportsubscriber',$accessArr)){?> checked="checked" <?php }?>>Subscriber Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportfeedback" <?php if(in_array('reportfeedback',$accessArr)){?> checked="checked" <?php }?>>Feedback Report<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportbug" <?php if(in_array('reportbug',$accessArr)){?> checked="checked" <?php }?>>Bug Report<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="access[]" value="reportmedia" <?php if(in_array('reportmedia',$accessArr)){?> checked="checked" <?php }?>>Media Center Report<br/>
          
         <br/>
        <input type="checkbox" name="access[]" value="mail" <?php if(in_array('mail',$accessArr)){?> checked="checked" <?php }?>>Mail<br/>
@@ -80,7 +81,7 @@ if(!empty($success)){
 <div class="col-md-12 form-group">
     <label class="col-md-2"></label>
     <div class="col-md-6">
-        <input type="submit" class="btn green" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
+        <input type="submit" class="btn orange" name="submit" id="submit" size="60" maxlength="75" class="textBox" value="Submit" />
     </div>
 </div> 
 </form>

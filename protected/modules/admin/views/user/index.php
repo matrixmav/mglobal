@@ -93,6 +93,7 @@ $this->breadcrumbs = array(
 
                 array(
                     'class' => 'CButtonColumn',
+                    'header' => '<span style="white-space: nowrap;">Action &nbsp; &nbsp; &nbsp;</span>',
                     'template' => '{Change}{Edit}',
                     'htmlOptions' => array('width' => '20%'),
                     'buttons' => array(

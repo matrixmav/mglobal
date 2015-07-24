@@ -1470,7 +1470,7 @@ Pre-Footer and pre-footer elements
 .policy-section
 {
 width:100%;
-border-bottom:1px solid #fff;
+
 float:left;
 padding:10px 0;
 }
@@ -1488,6 +1488,7 @@ margin:0 10px;
 list-style:none;
 border-right:1px solid #fff;
 padding-right:15px;
+color:#fff;
 }
 .policy-section ul  li:last-child
 {
@@ -1496,6 +1497,7 @@ border-right:none;
 .policy-section ul  li a
 {
 text-decoration:none;
+color:#fff;
 }
 .bg-f2
 {
@@ -1969,7 +1971,10 @@ Pre-Header and pre-header elements
 .social-icons li{ list-style: none;}
 
 /*--------------pre footer-------------*/
-#myCarousel .carousel-caption{background: rgba(0, 0, 0, 0.6); padding: 10px 20px 0 20px;}
+#myCarousel .carousel-caption{background: rgba(0, 0, 0, 0.6); padding: 10px 20px 0 20px;   right: 20%;
+  left: 2%;
+  width: 30%;
+  top: 40%;}
 #myCarousel .carousel-caption >p{ font-size: 18px;}
 @media (max-device-width: 480px) and (min-device-width: 320px)
 {
@@ -2017,6 +2022,11 @@ color:#FFF; background: #c9c9c9;}
     top: 60px !important;
     width: auto !important; position: absolute;
 }
+#show_wornings_name ,#show_wornings_email, #show_wornings_subject, #show_wornings_nameF, #show_wornings_emailF , #show_wornings_nameB, #show_wornings_emailB{color:#e6400c; margin-top: 4px; margin-bottom: -5px;}
+#show_worning, #show_worningF ,#show_worningR{color:#398439; text-align: center;}
+
+#show_wornings_message , #show_wornings_messageF, #show_wornings_messageB{color:#e6400c; margin-top: -5px; margin-bottom: 5px;}
+
 
 .color-mode-list ul {padding:0 8px;}
 .color-mode-list ul li{ border:none; background: #FFF; display: table; vertical-align: middle; text-align: center; border-radius:50%; width: 28px; height: 28px; margin: 4px;
@@ -2028,7 +2038,7 @@ color:#FFF; background: #c9c9c9;}
 #inline13 .btn, #inline12 .btn ,#inline11 .btn{ border-radius: 3px;}
 .faqsection p{margin: 0 0 5px 0;}
 .faqsection .panel-heading, .faqsection .panel-body{padding: 5px 15px;}
-.prices-block .pricing-item > a {
+.valign-center {
   background: rgba(229,74,26,0.85);
   position: absolute;
   left: 0;
@@ -2045,23 +2055,32 @@ color:#FFF; background: #c9c9c9;}
 
   color: #fff;
 }
-.prices-block .pricing-item:hover > a {
+.prices-block .pricing-item:hover .valign-center {
   bottom: 0;
 }
 .prices-block .pricing-item> a:hover {
   text-decoration: none;
 }
+.basic1{text-align:center;font-size: 20px;display:block;color:#fff;}
+.packageInfo1{background: #f15d2a; width:98%; overflow:hidden; padding:10px;}
+.packageInfo1 p{font-size: 11px;color:#fff; }
+.packageInfo1 .packPrice{font-size: 60px; padding:10px;color:#fff;display:block;text-align: center;}
+.packageInfo1 .packPrice p{display: inline; font-size: 40px;}
+.packageDescription1{ background: #f0f0f0;width:98%; overflow:hidden; padding:10px;}
 .packageInfo{height: 50%; margin: 15px 10px;}
 .packageDescription{ background: #f0f0f0; height: 50%;}
-.packageInfo .packName{font-size: 18px; padding: 5px; border: 1px solid #FFF; display: inline-block; margin:10px;}
-.packageInfo p{font-size: 11px; }
-.packageInfo .packPrice{font-size: 60px; padding:50px;}
+.packageInfo .packName{font-size: 18px; padding: 5px;color:#fff; border: 1px solid #FFF; display: inline-block; margin:10px;}
+.packageInfo p{font-size: 11px;color:#fff; }
+.packageInfo .packPrice{font-size: 60px; padding:50px;color:#fff;}
 .packageInfo .packPrice p{display: inline; font-size: 40px;}
 .packageDescription ul{ text-align: left; padding-top: 5px;}
 .packageDescription ul li{color:#6d6e71; font-size: 10px; line-height: 17px;}
-.packPick{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 115%;}
+.packPick{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 110%;}
 .packPick:hover{background: #f15d2a; color:#FFF;}
-
+.knowmore{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 5%;}
+.knowmore:hover{background: #f15d2a; color:#FFF;}
+.knowmore a:hover{color:#fff !important;}
+.knowmore:hover a{color:#fff !important;}
 #testimonials-block ol li{width:auto !important; text-indent:0; background: none;}
 .testimonialBox{width:100%; display: inline-block;}
 .customerImg{width: 120px; height: 120px;  float: left;
@@ -2235,3 +2254,63 @@ color:#FFF; background: #c9c9c9;}
   padding: 10px 0 8px 10px;
   text-align: left;
 }
+.errorMsgmedia{
+ color: #E6400C;
+ margin-bottom: -5px;
+ margin-top: 4px;
+}
+.successMsgmedia{
+    color: #398439;
+    text-align: center;}
+@media (max-width: 1400px) {
+    #myCarousel .carousel-caption
+    {
+        top:33%;
+        min-width: 400px;
+    }
+}
+@media (max-width: 991px) {
+    #myCarousel .carousel-caption
+    {
+        top:28%;
+        min-width: 400px;
+    }
+}
+@media (max-width: 767px) {
+#myCarousel .carousel-caption >p
+{
+    font-size: 15px;
+    
+}
+ #myCarousel .carousel-caption
+ {
+      top:15%;
+ }
+}
+@media (max-width: 600px) {
+   #myCarousel .carousel-caption h2
+    {
+        font-size:25px !important;
+    }
+   #myCarousel .carousel-caption
+    {
+       
+        min-width: 250px;
+    }
+        #myCarousel .carousel-caption >p
+    {
+        display:none;
+    }   
+   
+    }
+@media (max-width: 500px) {
+    .policy-section ul
+{
+   margin-left: 0;
+}
+.policy-section ul li
+{
+    margin: 0 6px;
+}
+}
+@
