@@ -38,7 +38,7 @@ body{
 	background:none;
 }
 .navbar-addon{
-	background:#929292;
+	background:#929292 !important;
 	border:none;
 	border-radius:0px;
 }
@@ -302,7 +302,18 @@ position: absolute;
 .img-footer h6{margin: 2px;}
 .img-footer p{font-size: 14px; padding: 0 5px;}
 .img-footer h6 a{font-size: 14px; color: #e54a1a !important;}
-.templateBox{margin:20px 0; min-height: 510px;}
+.templateBox{margin:10px 0; min-height: 450px;}
 .tempPopRight{width:25%;display: inline-block;}
 .tempPopLeft{width:75%;display: inline-block;}
 .owl-item { max-height: 500px;}
+
+.navbar-addon > button{ background: #929292 none repeat scroll 0 0;
+    border: medium none;}
+.navbar-toggle .icon-bar{background:#FFF;}
+#inputGroupSuccess3{color:#FFF;}
+@media (max-device-width: 480px) and (min-device-width: 320px)
+{
+    .top-ul{padding:0;}
+.top-ul li{width:100%; border-right: 0; border-bottom:1px solid #979797;}
+.navbar-form{border:none; box-shadow: none;}
+}
