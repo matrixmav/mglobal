@@ -505,11 +505,17 @@
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $basicPackage['image']; ?>" alt="<?php echo $basicPackage['name']; ?>" class="img-responsive">
                       <div class="valign-center">
-                  <?php if(Yii::app()->session['userid']!=''){ ?>
-                      <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>">
-                          <?php }else{?>
-                          <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>">
-                              <?php }?>
+                    <?php 
+                    $pickNow = "";
+                    if(Yii::app()->session['userid']!=''){ 
+                        $pickNow =Yii::app()->baseUrl."package/domainsearch?package_id="; 
+                        ?>
+                      <a href="<?php echo $pickNow.$basicPackage['id'] ; ?>">
+                    <?php }else{
+                       $pickNow =  Yii::app()->baseUrl."user/loginregistration?package_id=" ;
+                        ?>
+                    <a href="<?php echo $pickNow.$basicPackage['id'] ; ?>">
+                    <?php }?>
                       
                       <div class="packageInfo"> 
                           <div> <span class="packName">Basic Web Packages</span></div>
@@ -534,8 +540,9 @@
                               </div>
                               <div class="col-sm-5 col-xs-5">
                                   
-                                  <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><span class="packPick"> pick now </span></a><br>
-                            <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
+                                  <a href="<?php echo $pickNow.$basicPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                                  <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
+
                                   
                                </div>
                       </div>
@@ -609,8 +616,9 @@
                                   </ul>
                           
                               </div>
-                              <div class="col-sm-5 col-xs-5">
-                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><span class="packPick"> pick now </span></a><br>
+                              <div class="col-sm-4 col-xs-4">
+                                   <a href="<?php echo $pickNow.$advancePackage['id']; ?>"><span class="packPick"> pick now </span></a>
+
                             <span class="knowmore"><a href="#more<?php echo $advancePackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                </div>
                       </div>
@@ -682,8 +690,9 @@
                                   </ul>
            
                               </div>
-                              <div class="col-sm-5 col-xs-5">
-                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><span class="packPick"> pick now </span></a><br>
+                              <div class="col-sm-4 col-xs-4">
+                                   <a href="<?php echo $pickNow.$proPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+
                             <span class="knowmore"><a href="#more<?php echo $proPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                   
                                </div>
