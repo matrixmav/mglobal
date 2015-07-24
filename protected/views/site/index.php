@@ -520,7 +520,7 @@
                           </a>
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                   <?php 
                                     $descriptionArr = explode(',',$basicPackage->Description);
@@ -532,9 +532,9 @@
                                   </ul>
 
                               </div>
-                              <div class="col-sm-4 col-xs-4">
+                              <div class="col-sm-5 col-xs-5">
                                   
-                                  <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                                  <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><span class="packPick"> pick now </span></a><br>
                             <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                   
                                </div>
@@ -599,7 +599,7 @@
                                  
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                     <?php 
                                     $descriptionArr = explode(',',$advancePackage->Description);
@@ -609,8 +609,8 @@
                                   </ul>
                           
                               </div>
-                              <div class="col-sm-4 col-xs-4">
-                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                              <div class="col-sm-5 col-xs-5">
+                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><span class="packPick"> pick now </span></a><br>
                             <span class="knowmore"><a href="#more<?php echo $advancePackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                </div>
                       </div>
@@ -672,7 +672,7 @@
                       </div></a>
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                     <?php 
                                     $descriptionArr = explode(',',$proPackage->Description);
@@ -682,8 +682,8 @@
                                   </ul>
            
                               </div>
-                              <div class="col-sm-4 col-xs-4">
-                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                              <div class="col-sm-5 col-xs-5">
+                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><span class="packPick"> pick now </span></a><br>
                             <span class="knowmore"><a href="#more<?php echo $proPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                   
                                </div>
