@@ -59,7 +59,7 @@
 
 <p>The company reserves right to terminate distributor’s /user account if the company deems that you have violated any of the anti-spam policy. The company will also have right to suspend your account and participation pending review upon receipt of any complaint or other evidence that distributor/user is may be engaging in any spamming activity.  </p>
 <p>The company reserves right to amend policy anytime and the same will published on the company web site. </p>
-<p>If anyone come across spamming by our distributor or user regarding our products, services, website or anyother matters, please report the activity to __________________.Company will assure you that the company will take appropriate action if found guilty.
+<p>If anyone come across spamming by our distributor or user regarding our products, services, website or anyother matters, please report the activity to <a href="mailto:support@mglobally.com">support@mglobally.com</a>. Company will assure you that the company will take appropriate action if found guilty.
 </p>
 
 

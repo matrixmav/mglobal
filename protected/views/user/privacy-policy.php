@@ -64,8 +64,7 @@
 <p>Parents or guardians: Company will help you guard your children's privacy. Company encourage you to talk to your children about safe and responsible use of their Personal Information while using the Internet. </p>
 <p>The Company site does not publish content that is targeted to children and company will not knowingly collect Personally Information from them. If company discover personal information from a child through our Site, we will eliminate that information. You must be at least 18 years old to be a User or qualify as Distributor to be on our Site.</p>
 <h4>Contact </h4>
-<p>If you have any concerns about our use of your information or about this Privacy Statement, please send an e-mail to ___________________or call ______________. We will make every reasonable effort to address your concerns and remedy any problems you bring to our attention.</p>
-
+<p>If you have any concerns about our use of your information or about this Privacy Statement, please send an e-mail to <a href="mailto:support@mglobally.com">support@mglobally.com</a> or call  +525527895477. We will make every reasonable effort to address your concerns and remedy any problems you bring to our attention.</p>
 
 		</div>
             </div>
