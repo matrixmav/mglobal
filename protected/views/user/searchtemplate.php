@@ -123,7 +123,7 @@
                 <div class="col-md-4 col-sm-4 templateBox">
                     <a class="fancybox" onclick="showSpecification(<?php echo $buildTempObjectList['id']; ?>);"> 
                     <div class="left-img-1">
-                        <img class="img-responsive" src="/user/template/<?php// echo $buildTempObjectList['folderpath'];?>/screenshot/<?php //echo $buildTempObjectList['screenshot'];?>" class="img-left" width="200" height="200">
+                        <img class="img-left img-responsive" src="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/screenshot/<?php echo $buildTempObjectList['screenshot'];?>">
                     
                     
                     </div>
