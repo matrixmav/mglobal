@@ -2078,7 +2078,7 @@ color:#FFF; background: #c9c9c9;}
 .packageInfo .packPrice p{display: inline; font-size: 40px;}
 .packageDescription ul{ text-align: left; padding-top: 5px;}
 .packageDescription ul li{color:#6d6e71; font-size: 10px; line-height: 17px;}
-.packPick{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 110%;}
+.packPick{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 70%;}
 .packPick:hover{background: #f15d2a; color:#FFF;}
 .knowmore{font-size: 14px; color: #f15d2a; border: 1px solid #f15d2a; padding: 5px; display: inline-block; vertical-align: bottom; margin-top: 5%;}
 .knowmore:hover{background: #f15d2a; color:#FFF;}
