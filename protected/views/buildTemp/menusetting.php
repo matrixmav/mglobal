@@ -55,7 +55,7 @@ $this->breadcrumbs = array(
         <input type="hidden" id="nestable-output" name="nestable1" class="form_control" value="">
     </div>
     
-        <input type="submit" name="submit" value="submit" class="btn red">
+        <input type="submit" name="submit" value="submit" class="btn orange">
 </form>
     
 <script src="<?php echo Yii::app()->getBaseUrl(true); ?>/js/jquery.nestable.js"></script>

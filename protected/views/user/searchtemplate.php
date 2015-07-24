@@ -6,6 +6,7 @@
 <?php //echo "<pre>"; print_r($packageObject);  die;  ?>
 <div class="container-fluid">
     <div class="container ">
+        <div class="row ">
         <nav class="navbar " role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -37,6 +38,7 @@
 
     </div>
 </div>
+</div>
 <div class="container ">
 
     <div class="bread_crum ">
@@ -57,17 +59,17 @@
                 <p class="mix-text">Result</p>
 
             </div>
-            <div class="panel-group" id="accordion">
+            <div class="panel-group template-colapse" id="accordion">
                 <?php foreach($categoryObject as $categoryObjectList){ ?>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $categoryObjectList->name;?>" aria-expanded="false">
                                 <?php echo $categoryObjectList->name ; ?>
-                                <i class="indicator  pull-right accordin-icon glyphicon <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){?>glyphicon-minus <?php }else{?>glyphicon-plus<?php }?>"></i>  </a>
+                                <span class="colapse-icon"><i class="indicator  pull-right accordin-icon glyphicon <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){?>glyphicon-minus <?php }else{?>glyphicon-plus<?php }?>"></i></span>  </a>
                         </h4>
                     </div>
-                <div id="collapse<?php echo $categoryObjectList->name; ?>" class="panel-collapse collapse <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){ echo "in";?><?php }?>" aria-expanded="<?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){ echo "true";}else{ echo "false";} ?>" <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) != $_GET['key']){ ?>style="height: 0px;" <?php }?>>
+                <div id="collapse<?php echo $categoryObjectList->name; ?>" class="panel-collapse collapse colapse-items <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){ echo "in";?><?php }?>" aria-expanded="<?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){ echo "true";}else{ echo "false";} ?>" <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) != $_GET['key']){ ?>style="height: 0px;" <?php }?>>
                         <div class="panel-body">
                             <ul class="list-unstyled">
                                 <?php
@@ -108,8 +110,8 @@
                 </div><?php */?>
             </div>
         </div>
-
-        <div class="col-md-9 right-content" id='content'>
+        <div class="col-md-9">
+        <div class="right-content" id='content'>
             <?php if(!empty($_GET['key']) || !empty($_GET['searchstring'])){?>
             <div class="top-content-head ">
                 <p class="mix-text">We found <span class="text-orange"><?php echo count($buildTempObject); ?></span><?php if(!empty($_GET['key']) || !empty($_GET['searchstring'])){?>result for &nbsp;" <span class="text-orange-2"><?php if(empty($_GET['key']) && !empty($_GET['searchstring'])) { echo ucwords($_GET['searchstring']);}else{ echo ucwords($_GET['key']);} ?></span>"<?php }?></p>
@@ -119,16 +121,17 @@
              if($buildTempObject){ 
                 foreach($buildTempObject as $buildTempObjectList){
                     //echo "<pre>"; print_r($buildTempObjectList->header()->template_title); die;
-            ?><a class="fancybox" onclick="showSpecification(<?php echo $buildTempObjectList['id']; ?>);"> 
-                <div class="col-md-4 col-sm-4">
+            ?>
+                <div class="col-md-4 col-sm-4 templateBox">
+                    <a class="fancybox" onclick="showSpecification(<?php echo $buildTempObjectList['id']; ?>);"> 
                     <div class="left-img-1">
-<!--                        <img src="/user/template/<?php// echo $buildTempObjectList['folderpath'];?>/screenshot/<?php //echo $buildTempObjectList['screenshot'];?>" class="img-left" width="200" height="200">
-                    -->
-                    <img src="http://mglobal.dev/user/template/images/left-1.png">
+                        <img class="img-left img-responsive" src="/user/template/<?php echo $buildTempObjectList['folderpath'];?>/screenshot/<?php echo $buildTempObjectList['screenshot'];?>">
+                    
+                    
                     </div>
-
+                        </a>  
                     <div class="img-footer">
-                        <h4><?php echo $buildTempObjectList['template_title'] ;?></h4>
+                        <h6><a href=""><?php echo $buildTempObjectList['template_title'] ;?></a></h6>
                         <div class="box-relative">
                             
                             <div class="arrow_box"><span>$ <?php echo $buildTempObjectList['amount'] ;?></span></div>
@@ -148,13 +151,14 @@
                     
                  
                       
-                    
-                </div> </a>               
+                   
+                </div>               
             <?php 
                 }
             } ?>  
              </div>
         </div>
+    </div>
     </div>
 
 <!--    <div class="pagination pull-right">

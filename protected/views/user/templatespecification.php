@@ -56,11 +56,15 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
         });
     </script>
 
-            
+    <div class="container">
+        <div class="row">
               <div class="col-md-8">
                         <div id="owl-demo" class=" owl-carousel owl-theme">
          <?php foreach($tempObject as $tempObject){}?>
-                            <div class="item"><img src="<?php echo Yii::app()->homeUrl; ?>user/template/<?php echo $tempObject['folderpath'];?>/screenshot/<?php echo $tempObject['screenshot'];?>" alt="<?php echo $tempObject['template_title'];?>" style="width:738px!important;height:471px!important;"></div>
+                            <div class="item">
+                                <img class="img-responsive" src="<?php echo Yii::app()->homeUrl; ?>user/template/<?php echo $tempObject['folderpath'];?>/screenshot/<?php echo $tempObject['screenshot'];?>" alt="<?php echo $tempObject['template_title'];?>" style="width:">
+                            </div>
+                           
                        
                         
                     </div>
@@ -72,12 +76,12 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
                  <p class="mix-text-banner"><i class="fa fa-circle orange-circle"></i><?php echo $tempObject['package_name'];?></p>
             </div>
             <div class="top-content-head-accordin slider-heading-2">
-                 <p class="mix-text"> Service</p>
+                 <p class="mix-text">Recommonded Service</p>
             </div>
                   
                   <div id="owl-demo-2" class="owl-carousel owl-theme">
              <?php $arra = explode(',', $tempObject['Description']);?>
-                      <div class="item slider-item" style="width:270px!important;"><p>Recommonded Service</p>
+                      <div class="item slider-item" style="">
                           <ul class="list-unstyled banner-li">
                               <?php for($i=0;$i < 8;$i++){?>
                               <li><i class="fa fa-circle-thin banner-i"></i><?php echo $arra[$i];?></li>
@@ -89,7 +93,7 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
                       </div>
                 <?php if(count($arra) > 8){ ?>
                        <div class="item slider-item">
-                          <ul class="list-unstyled banner-li"><p>Recommonded Service</p>
+                          <ul class="list-unstyled banner-li">
                              <?php for($i=8;$i < sizeof($arra);$i++){?>
                               <li><i class="fa fa-circle-thin banner-i"></i><?php echo $arra[$i];?></li>
                               <?php }?> 
@@ -142,8 +146,5 @@ $('#accordion').on('shown.bs.collapse', toggleChevron);
 
               </div>
              
-       
-
-
-       
-     
+    </div>
+    </div>

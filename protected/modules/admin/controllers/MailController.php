@@ -77,7 +77,7 @@ class MailController extends Controller {
      * Lists all models.
      */
     public function actionSent() {
-        $pageSize = 10;
+        $pageSize = 1000;
         $successMsg = "";
         if (Yii::app()->session['userid'] == '1') {
             $string = "1";
