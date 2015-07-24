@@ -11,7 +11,7 @@
 
  
             <!-- BEGIN TOP BAR LEFT PART -->
-            <div class="col-md-6 col-sm-6 col-xs-12 additional-shop-info">
+            <div class="col-md-8 col-sm-8 col-xs-12 additional-shop-info">
                 <ul class="list-unstyled list-inline">
                     <li><i class="fa fa-phone"></i><span>+525527895477</span></li>
                     <li><i class="fa fa-envelope-o"></i><span>info@mglobally.com</span></li>
@@ -20,7 +20,7 @@
             </div>
             <!-- END TOP BAR LEFT PART -->
             <!-- BEGIN TOP BAR MENU -->
-            <div class="col-md-6 col-sm-6 col-xs-12 additional-nav">
+            <div class="col-md-4 col-sm-4 col-xs-12 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
                     <?php 
                      if(Yii::app()->session['adminID'] != '1'){ 

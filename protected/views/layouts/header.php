@@ -186,7 +186,7 @@
         <div class="container">
           <div class="row">
                 <!-- BEGIN TOP BAR LEFT PART -->
-            <div class="col-md-6 col-sm-6 additional-shop-info col-xs-12">
+            <div class="col-md-8 col-sm-8 additional-shop-info col-xs-12">
                     <ul class="list-unstyled list-inline">
                         <li><i class="fa fa-phone"></i><span>+525527895477</span></li>
 
@@ -195,7 +195,7 @@
 
                     </ul>
               </div>
-            <div class="col-md-6 col-sm-6 additional-nav col-xs-12">
+            <div class="col-md-4 col-sm-4 additional-nav col-xs-12">
                     <ul class="list-unstyled list-inline pull-right">
                        <?php 
 if(Yii::app()->session['adminID']!= '1'){ 

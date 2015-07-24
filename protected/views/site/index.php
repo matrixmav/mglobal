@@ -1,4 +1,10 @@
-  <!-- Header END -->
+<style>.marquee {
+  width: 100%;
+  overflow: hidden;
+
+
+}</style>  
+<!-- Header END -->
   <div id='content-wrapper'>
 <!--<div id='social-sidebar'>
 <ul>
@@ -308,7 +314,7 @@
           <img src="/images/mediacenter/who_we_are.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
         
-          <h2>who<strong> we are </strong></h2>
+          <a href="#inline7" class="fancybox pinkSm"><h2>who<strong> we are </strong></h2></a>
           <p>Have you ever heard of an IT company that not just serves its customers, but also makes them the incredible part of its business network too?.... <a href="#inline7" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline7" style="display:none" class="readMoreBox content">
                <h2>who<strong> we are </strong></h2>
@@ -324,8 +330,8 @@
           <img src="/images/mediacenter/what_we_do.jpg" alt="what we do" width="100%">
       <div class="carousel-caption">
        
-           <h2>what<strong> we do </strong></h2>
-         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
+           <a href="#inline8" class="fancybox pinkSm"> <h2>what<strong> we do </strong></h2></a>
+         <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that.... <a href="#inline8" class="fancybox pinkSm">  Read more</a></p>
           <div id="inline8" style="display:none" class="readMoreBox content">
                <h2>what<strong> we do </strong></h2>
                <p>We believe that quality is a major factor that lets a customer build faith in a brand and its products & services. Thus, our teammates ensure that every effort initiated by them drives the team to growth. To ensure the same, we employ the latest versions of web development technologies, proactive team players, and creative talent that are potent enough to serve as the USPs of MGlobally. Our Motto “Not just to be the best, but to deliver the best” reflects this belief.</p>
@@ -504,7 +510,18 @@
             <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $basicPackage['image']; ?>" alt="<?php echo $basicPackage['name']; ?>" class="img-responsive">
-                  <?php if(Yii::app()->session['userid']!=''){ ?><a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $basicPackage['id']; ?>"><?php }else{?><div class="valign-center"><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><?php }?>
+                      <div class="valign-center">
+                    <?php 
+                    $pickNow = "";
+                    if(Yii::app()->session['userid']!=''){ 
+                        $pickNow =Yii::app()->baseUrl."package/domainsearch?package_id="; 
+                        ?>
+                      <a href="<?php echo $pickNow.$basicPackage['id'] ; ?>">
+                    <?php }else{
+                       $pickNow =  Yii::app()->baseUrl."user/loginregistration?package_id=" ;
+                        ?>
+                    <a href="<?php echo $pickNow.$basicPackage['id'] ; ?>">
+                    <?php }?>
                       
                       <div class="packageInfo"> 
                           <div> <span class="packName">Basic Web Packages</span></div>
@@ -515,7 +532,7 @@
                           </a>
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                   <?php 
                                     $descriptionArr = explode(',',$basicPackage->Description);
@@ -527,11 +544,9 @@
                                   </ul>
 
                               </div>
-                              <div class="col-sm-4 col-xs-4">
-                                  
-                                  <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $basicPackage['id']; ?>"><span class="packPick"> pick now </span></a>
-                            <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
-                                  
+                              <div class="col-sm-5 col-xs-5">                                  
+                                  <a href="<?php echo $pickNow.$basicPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                                  <span class="knowmore"><a href="#more<?php echo $basicPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                </div>
                       </div>
                  </div>
@@ -580,7 +595,11 @@
               <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $advancePackage['image']; ?>" alt="<?php echo $advancePackage['name']; ?>" class="img-responsive">
-                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?><a class="valign-center" onclick="return showError();"> <?php }else{?> <a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>"><?php }}else{?><div class="valign-center"><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>
+                      <div class="valign-center">
+                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1') {?>
+                          <a href="#" onclick="return showError();"> <?php }else{?> 
+                          <a href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $advancePackage['id']; ?>">
+                              <?php }}else{?><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><?php }?>
                      <div class="packageInfo"> 
                           <div> <span class="packName"><?php echo $advancePackage->name; ?></span></div>
                           <div> <span class="packPrice"><p>$</p><?php echo $advancePackage->amount; ?></span></div>
@@ -590,7 +609,7 @@
                                  
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                     <?php 
                                     $descriptionArr = explode(',',$advancePackage->Description);
@@ -601,7 +620,8 @@
                           
                               </div>
                               <div class="col-sm-4 col-xs-4">
-                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $advancePackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                                   <a href="<?php echo $pickNow.$advancePackage['id']; ?>"><span class="packPick"> pick now </span></a>
+
                             <span class="knowmore"><a href="#more<?php echo $advancePackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                </div>
                       </div>
@@ -649,7 +669,12 @@
              <div class="col-sm-4 col-xs-12">
                  <div class="pricing-item">
                       <img class="img-responsive" src="/upload/package_image/<?php echo $proPackage['image']; ?>" alt="<?php echo $proPackage['name']; ?>" class="img-responsive">
-                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?><a  class="valign-center" onclick="return showError();"><?php }else{?> <a class="valign-center" href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>"><?php }}else{?><div class="valign-center"><a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>
+                      <div class="valign-center">
+                  <?php if(Yii::app()->session['userid']!=''){ if(!empty($membership_type)&& $membership_type=='1' || $membership_type=='2') {?>
+                          <a   href="#" onclick="return showError();"><?php }else{?> 
+                          <a  href="<?php echo Yii::app()->baseUrl; ?>package/domainsearch?package_id=<?php echo $proPackage['id']; ?>">
+                              <?php }}else{?>
+                              <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><?php }?>
                       <div class="packageInfo"> 
                           <div> <span class="packName"><?php echo $proPackage->name; ?></span></div>
                           <div> <span class="packPrice"><p>$</p><?php echo $proPackage->amount; ?></span></div>
@@ -658,7 +683,7 @@
                       </div></a>
                       <div class="packageDescription"> 
                           <div class="row">
-                              <div class="col-sm-8 col-xs-8">
+                              <div class="col-sm-7 col-xs-7">
                                   <ul>
                                     <?php 
                                     $descriptionArr = explode(',',$proPackage->Description);
@@ -669,7 +694,8 @@
            
                               </div>
                               <div class="col-sm-4 col-xs-4">
-                                   <a href="<?php echo Yii::app()->baseUrl; ?>user/loginregistration?package_id=<?php echo $proPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+                                   <a href="<?php echo $pickNow.$proPackage['id']; ?>"><span class="packPick"> pick now </span></a>
+
                             <span class="knowmore"><a href="#more<?php echo $proPackage->id;?>" class="fancybox pinkSm"> Know More</a></span>
                                   
                                </div>
@@ -956,7 +982,7 @@
     <div class="carousel-inner" role="listbox">
 
       <div class="item">-->
-    <marquee>
+    <div class="marquee">
         
           <div class="row">
         <div class="marqBox">
@@ -978,7 +1004,7 @@
           <img src="images/gamescast.png" alt="gamescast">
         </div>
       </div>
-    </marquee>
+    </div>
       </div>
 
       
@@ -1016,6 +1042,7 @@ $('.carousel').carousel({
   interval: 200000
 });
 </script>
+<script  type="text/javascript" src="../../../js/marquee.js"></script>
 
 <div id="more1" style="display:none" class="content">
 
@@ -1159,7 +1186,6 @@ $('.carousel').carousel({
 
     </div>
 
-
 </div>
 
 
@@ -1188,7 +1214,6 @@ $('.carousel').carousel({
 
     </div>
 
-
 </div>
 
 
@@ -1216,8 +1241,6 @@ $('.carousel').carousel({
         </div>
 
     </div>
-
-
 </div>
 
 
