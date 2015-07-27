@@ -20,30 +20,30 @@ $this->breadcrumbs = array(
                 <div class="col-md-12">
                     <div class="grid-view" id="city-grid">
                        
-                            <table class="table table-striped table-bordered table-hover table-full-width"  style="table-layout:fixed;  padding: 0;margin: 0;">
+                            <table class="table table-striped table-bordered table-hover table-full-width"  style="table-layout:fixed;  padding: 0;margin: 0;margin-top: 20px !important;">
                                 <thead>
                                     <tr>
-                                        <th id="city-grid_c0">
+                                        <th width="25%" id="city-grid_c0">
                                             <a href="#" class="sort-link">
                                                 <span style="white-space: nowrap;">Sl. No &nbsp; &nbsp; &nbsp;</span>
                                             </a>
                                         </th>
-                                        <th id="city-grid_c1">
+                                        <th width="25%" id="city-grid_c1">
                                             <a href="#" class="sort-link">
                                                 <span style="white-space: nowrap;">Date &nbsp; &nbsp; &nbsp;</span>
                                             </a>
                                         </th>
-                                        <th id="city-grid_c2">
+                                        <th width="25%" id="city-grid_c2">
                                             <a href="#" class="sort-link">
                                                 <span style="white-space: nowrap;">Ad Date &nbsp; &nbsp; &nbsp;</span>
                                             </a>
                                         </th>
-                                        <th id="city-grid_c3">
+                                        <th width="25%" id="city-grid_c3">
                                             <a href="#" class="sort-link">
                                                 <span style="white-space: nowrap;">Earn &nbsp; &nbsp; &nbsp;</span>
                                             </a>
                                         </th>
-                                        <th id="city-grid_c4">
+                                        <th width="25%" id="city-grid_c4">
                                             <a href="#" class="sort-link">
                                                 <span style="white-space: nowrap;">Share &nbsp; &nbsp; &nbsp;</span>
                                             </a>
@@ -52,14 +52,14 @@ $this->breadcrumbs = array(
                                 </thead>
                             </table>
                          <div id="testDiv<?php echo $key; ?>">
-                            <table class="table table-striped table-bordered table-hover table-full-width">
+                            <table class="table table-striped table-bordered table-hover table-full-width" style="margin-bottom: -3px !important;">
                                 <tbody>
                                     <?php foreach ($dataProviderList  as $dataProvider){ ?>
                                     <tr <?php if($dataProvider->date != date('Y-m-d')){ echo "class='rowFade'" ; } ?> >
-                                       <td><?php echo $i; ?></td>
-                                       <td><?php echo $dataProvider->date ; ?></td>
-                                       <td><?php echo $dataProvider->created_at ; ?></td>
-                                       <td><?php echo $dataProvider->status == 1 ?"Earn":"Not Earn" ?></td>
+                                       <td width="20%"><?php echo $i; ?></td>
+                                       <td width="20%"><?php echo $dataProvider->date ; ?></td>
+                                       <td width="20%"><?php echo $dataProvider->created_at ; ?></td>
+                                       <td width="20%"><?php echo $dataProvider->status == 1 ?"Earn":"Not Earn" ?></td>
                                        <?php
                                             $adObject = Ads::model()->findByPk($dataProvider->ad_id);
                                             $img =  '"' . Yii::app()->params['baseUrl'].'/upload/banner/'.$adObject->banner . '"'; 
@@ -70,7 +70,7 @@ $this->breadcrumbs = array(
                                             $adId = '"' . $adObject->id . '"';
                                         ?>
                                        
-                                       <td><a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?> ,<?= $dataProvider->order_id; ?>); return false;' ></a></td>                                     
+                                       <td width="20%"><a class='btn blue fa fa-facebook margin-right15' onclick = 'postToFeed(<?= $link; ?>, <?= $name; ?>, <?= $desc; ?>, <?= $caption; ?>,<?= $img; ?>,<?= $adId; ?> ,<?= $dataProvider->order_id; ?>); return false;' ></a></td>                                     
                                    </tr>   
                                     <?php $i++ ; } ?>
 

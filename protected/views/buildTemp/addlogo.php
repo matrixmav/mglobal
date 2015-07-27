@@ -12,8 +12,8 @@ $this->breadcrumbs = array(
 
 <?php echo BaseClass::buildWebsiteHeader(); ?> 
 
-<?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-<?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
+<?php if ($error) { ?><p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"><?php echo $error; ?></span></p><?php } ?>
+<?php if ($success) { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $success; ?></span></p><?php } ?>
 
 <div class="col-md-7 col-sm-7">
     

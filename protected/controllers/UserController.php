@@ -36,7 +36,7 @@ class UserController extends Controller {
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
                     'callback', 'getfullname','searchtemplate','faq','filterdata',
                     'templatespecification','antimoneylaundering','antispampolicy','privacypolicy','policiesandprocedures','legal',
-                    'isemailexistedprofile','terms-and-conditions'),
+                    'isemailexistedprofile','termsandconditions'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -635,6 +635,7 @@ Your account is successful activated .check email for credentials. Purchase pack
                     $modelUserProfile->user_id = $model->id;
                     $modelUserProfile->created_at = date('Y-m-d');
                     $modelUserProfile->referral_banner_id = 1;
+                    $modelUserProfile->country_id  = $_POST['country_id'];
                     $modelUserProfile->save(false);
                     if(isset(Yii::app()->session['frontloggedIN'])){
                         $this->redirect(array("profile/dashboard", 'successMsg' => $successMsg));

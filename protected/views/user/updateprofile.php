@@ -16,7 +16,6 @@ $this->breadcrumbs = array(
         </div>
         <div class="portlet-body form">
             <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return profileValidation();">
-                <input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="1"/>
                 <fieldset>
                     <div class="form-body">
                         <div class="form-group">
@@ -126,7 +125,8 @@ $this->breadcrumbs = array(
         </div>
     </div>
 </div>
-
+<input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="0"/>
+                
 <div class="col-sm-6 col-md-6">
 
     <div class="error" id="error_msg" style="display: none;"></div>

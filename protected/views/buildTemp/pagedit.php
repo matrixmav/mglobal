@@ -10,8 +10,8 @@ $this->breadcrumbs = array(
 
 <div class="col-md-12 col-sm-12" id="test">    
    
-    <?php if($error){?><div class="error" id="error_msg"><?php echo $error;?></div><?php }?>
-    <?php if($success){?><div class="success" id="error_msg"><?php echo $success;?></div><?php }?>
+    <?php if($error){?><p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"><?php echo $error;?></span></p><?php }?>
+    <?php if($success){?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $success;?></span></p><?php }?>
       
     <div class="row pageBox"><?php foreach($userpagesObjectF as $page){?><a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn orange"><?php echo $page->page_name; ?></a><?php }?> </div>  
     <div class="row"><div class="col-sm-12"><a href="/BuildTemp/managewebsite/<?php echo Yii::app()->session['orderID']; ?>/<?php echo $userpagesObject->page_slug ; ?>" class="btn green pull-right" target="_blank">Preview</a></div> </div>
