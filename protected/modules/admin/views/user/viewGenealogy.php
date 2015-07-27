@@ -65,25 +65,23 @@ if (!empty($_GET['id'])) {
                             $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);                            
                             $userObjectSponorLeft = User::model()->findAll(array('condition' => ' position = "left" AND  sponsor_id ="'.$userObject->name.'" '  )); 
                             $userObjectSponorRight = User::model()->findAll(array('condition' => ' position = "right" AND  sponsor_id ="'.$userObject->name.'" '  )); 
-                            
-                            
                         ?>
                         <a href="" class="<?php echo $getColor; ?>">
-                        <div>
-                            <span class="myPop" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content=""><?php echo $userObject->name; ?>
-                                <div id="popover_content_wrapper" style="display: none; ">
-                                    <ul class="packageDetail">
-                                        <li><p>Total Left Registration</p><span><?php  echo $getUserPurchase->left_user ; ?></span> </li>
-                                        <li><p>Total Right Registration</p><span><?php echo $getUserPurchase->right_user ; ?></span> </li>
-                                        <li><p>Total Left Purchase</p><span><?php echo $getUserPurchase->left_purchase; ?></span> </li>
-                                        <li><p>Total Right Purchase</p><span><?php echo $getUserPurchase->right_purchase; ?></span> </li>
-                                        <li><p>Total Left Sponsor</p><span><?php echo count($userObjectSponorLeft); ?></span> </li>
-                                        <li><p>Total Right Sponsor</p><span><?php echo count($userObjectSponorRight); ?></span> </li>
-                                    </ul>
-                                </div>
-                            </span>
-                        </div>
-                    </a>
+                            <div>
+                                <span class="myPop" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content=""><?php echo $userObject->name; ?>
+                                    <div id="popover_content_wrapper" style="display: none; ">
+                                        <ul class="packageDetail">
+                                            <li><p>Total Left Registration</p><span><?php  echo $getUserPurchase->left_user ; ?></span> </li>
+                                            <li><p>Total Right Registration</p><span><?php echo $getUserPurchase->right_user ; ?></span> </li>
+                                            <li><p>Total Left Purchase</p><span><?php echo $getUserPurchase->left_purchase; ?></span> </li>
+                                            <li><p>Total Right Purchase</p><span><?php echo $getUserPurchase->right_purchase; ?></span> </li>
+                                            <li><p>Total Left Sponsor</p><span><?php echo count($userObjectSponorLeft); ?></span> </li>
+                                            <li><p>Total Right Sponsor</p><span><?php echo count($userObjectSponorRight); ?></span> </li>
+                                        </ul>
+                                    </div>
+                                </span>
+                            </div>
+                        </a>
                         <ul>
                             <li>
                                 <?php   
