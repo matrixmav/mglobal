@@ -117,6 +117,33 @@ class BaseClass extends Controller {
         return $response;
     }
     
+    
+       public static function sendMail2($config) {
+        
+      try {
+          define("API_KEY", "914ff9da");
+          define("API_SECRET", "e91037e9");
+
+          $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
+                'api_key' => API_KEY,
+               'api_secret' => API_SECRET,
+              'to' => $config['to'],
+              'from' => 'Mglobally',
+                'text' => $config['text']
+           ]);
+            //$url = "";
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+         }
+       
+         catch (Exception $ex) {
+            echo $ex->message();
+            exit;
+        }
+          
+        return $response;
+    }
     public static function getNewsUpdates()
     {
         $newsObject = News::model()->find(array('condition'=>'status=1','order' => 'created_at DESC','limit' => '1'));
