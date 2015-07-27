@@ -149,24 +149,34 @@ class GenealogyController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        // print_r($_GET);
-        if (!empty($_GET['id'])) {
+        $error = "";
+        if (!empty($_GET['id'])) { 
             $currentUserId = $_GET['id'];
             $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");
             $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+            if($genealogyLeftListObject == "no" && $genealogyRightListObject == "no"){
+                $error = "Invalid request!!!";
+                $this->render('view', array(
+                    'error'=>$error
+                ));
+            }
+
             $this->render('view', array(
-                'genealogyLeftListObject' => $genealogyLeftListObject,
-                'genealogyRightListObject' => $genealogyRightListObject,
-                'currentUserId' => $currentUserId
-            ));
+                    'genealogyLeftListObject' => $genealogyLeftListObject,
+                    'genealogyRightListObject' => $genealogyRightListObject,
+                    'currentUserId' => $currentUserId,
+                    'error'=>$error
+                ));
+            
         } else {
-            $currentUserId = Yii::app()->session['userid'];
+            $currentUserId = base64_encode(Yii::app()->session['userid']);
             $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");
             $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
             $this->render('view', array(
                 'genealogyLeftListObject' => $genealogyLeftListObject,
                 'genealogyRightListObject' => $genealogyRightListObject,
-                'currentUserId' => $currentUserId
+                'currentUserId' => $currentUserId,
+                'error'=>$error
             ));
         }
     }
