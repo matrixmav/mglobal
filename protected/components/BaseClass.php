@@ -91,6 +91,7 @@ class BaseClass extends Controller {
      */
 
     public static function sendMail($config) {
+        
       try {
           define("API_KEY", "914ff9da");
           define("API_SECRET", "e91037e9");
@@ -102,15 +103,17 @@ class BaseClass extends Controller {
               'from' => 'Mglobally',
                 'text' => $config['text']
            ]);
-            $url = "";
+            //$url = "";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response = curl_exec($ch);
          }
+       
          catch (Exception $ex) {
             echo $ex->message();
             exit;
         }
+          
         return $response;
     }
     
