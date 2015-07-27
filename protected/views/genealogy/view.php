@@ -34,6 +34,10 @@ $empty = "sm-blank" ; //no Package
                     $getUserInfoRight = BaseClass::getLeftRightMember(base64_decode($currentUserId) ,'right');
                     $getUserInfoLeft = BaseClass::getLeftRightMember(base64_decode($currentUserId) ,'left');  
                     
+                    $userObjectSponorLeft = User::model()->findAll(array('condition' => ' position = "left" AND  sponsor_id ="'.$userObject->name.'" '  )); 
+                    $userObjectSponorRight = User::model()->findAll(array('condition' => ' position = "right" AND  sponsor_id ="'.$userObject->name.'" '  )); 
+                            
+                    
                     /* Getiing left and right purchase */
                     $getUserPurchase = BaseClass::getLeftRightPurchase(base64_decode($currentUserId));
                     $smBlack = '<a class="sm-blank" href="#"><div><span></span></div></a>';
@@ -48,6 +52,9 @@ $empty = "sm-blank" ; //no Package
                                         <li><p>Total Right Registration</p><span><?php echo $getUserPurchase->right_user ; ?></span> </li>
                                         <li><p>Total Left Purchase</p><span> <?php echo $getUserPurchase->left_purchase; ?></span> </li>
                                         <li><p>Total Right Purchase</p><span> <?php echo $getUserPurchase->right_purchase; ?></span> </li>
+                                        <li><p>Total Left Sponsor</p><span><?php echo count($userObjectSponorLeft); ?></span> </li>
+                                        <li><p>Total Right Sponsor</p><span><?php echo count($userObjectSponorRight); ?></span> </li>
+                                    
                                     </ul>
                                 </div>
                             </span>
