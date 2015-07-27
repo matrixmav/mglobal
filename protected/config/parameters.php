@@ -109,7 +109,7 @@ return array(
    'transactionIdPostfix'=> date('m'),
    'ip' => $_SERVER['REMOTE_ADDR'] ,        
    'paypalurl'=>'https://www.sandbox.paypal.com/cgi-bin/webscr',  
-   'returnurl'=>'http://mglobal.dev/package/thankyou', 
-   'walletReturnUrl'=>'http://mglobal.dev/package/walletthankyou',
+   'returnurl'=>'http://mglobally.dev/package/thankyou', 
+   'walletReturnUrl'=>'http://mglobally.dev/package/walletthankyou',
    'twitterLink' => 'https://twitter.com/intent/tweet?text='
 );
