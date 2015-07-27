@@ -1620,16 +1620,6 @@ class BaseClass extends Controller {
         return $j.'_'.$k;
     }
     
-    public static function mySelfCount(){
-        $userId = 262;
-        $leftGenealogyCount = self::getLeftRightMember($userId, 'left');
-        $rightGenealogyCount = self::getLeftRightMember($userId, 'right');
-        
-        echo "<pre>"; print_r($leftGenealogyCount);
-        echo "<pre>"; print_r($rightGenealogyCount);
-        exit;
-    }
-            
     public static function isNumber($numb){
         if(is_numeric(base64_decode($numb))){
             return base64_decode($numb);
