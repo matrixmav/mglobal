@@ -1492,7 +1492,7 @@ Pre-Footer and pre-footer elements
 	color: #b0b0b0;
 }
 .pre-footer .container {
-	
+padding-top: 45px;	
 }
 .pre-footer a {
 	color: #57c8eb;
@@ -1504,7 +1504,7 @@ Pre-Footer and pre-footer elements
 }
 .pre-footer p {
 	margin-bottom: 20px;
-	  margin-top: 19px;
+	  margin-top: 0px;
          font: 300 14px/1.4 "Open Sans", Arial, sans-serif;
 }
 
@@ -1539,6 +1539,7 @@ Pre-Footer and pre-footer elements
 }
 .pre-footer address {
 	line-height: 1.7;
+        font-size: 14px;
 }
 
 .pre-footer-col
@@ -3258,7 +3259,7 @@ Styler Panel
 /*END Form Wizard*/
 
 /*--------------pre footer-------------*/
-.pre-footer{ background: #f15d2a;padding-top:20px;}
+.pre-footer{ background: #f15d2a;padding-top:0px;}
 .pre-footer .container{  background: url(/images/footer-bg.png) center center no-repeat;}
 .pre-footer p.f-font{font-weight: bold; text-decoration: underline;}
 .pre-footer p,.pre-footer p.f-cnt{color: #FFF; font-weight: 400;font-size:14px;line-height:1.4;}
@@ -3268,7 +3269,7 @@ Styler Panel
 .pre-footer-subscribe-box a:hover{text-decoration: none; color: #FFF;}
 .pre-footer-subscribe-box a span:hover{text-decoration: underline;}
 .pre-footer-subscribe-box a img{ margin-right: 10px;}
-.signBtn{color: #f15d2a; font-size: 14px; background: #fdd922; border: none; border-radius: 4px; padding: 6px 20px; box-shadow: 0px 2px 1px 0px #424242;}
+.signBtn{color: #f15d2a; font-size: 14px; background: #fdd922; border: none; border-radius: 4px; padding: 6px 20px !important; box-shadow: 0px 2px 1px 0px #424242; text-transform: uppercase;}
 .signBtn:hover{padding: 6px 20px;}
 .mailTxt{margin: 10px 0; min-width: 280px; margin-right: 10px; border-radius: 4px !important;}
 .social-icons{float:left;}
@@ -3313,12 +3314,13 @@ Styler Panel
 }
 .footer .social-icons li {
   float: right;
-  margin: 0 5px;
+  margin: 0 7px;
 }
 .copyright {
   padding-top: 7px;
   float:left;
     margin-left: -15%;
+        font-family: Open Sans;
 }
 @-moz-document url-prefix() { 
   .copyright {
@@ -3352,6 +3354,7 @@ margin:0 10px;
 list-style:none;
 border-right:1px solid #fff;
 padding-right:15px;
+font-size:14px;
 }
 .policy-section ul  li:last-child
 {

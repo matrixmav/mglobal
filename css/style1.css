@@ -1457,6 +1457,10 @@ Pre-Footer and pre-footer elements
 .copyright {
   padding-top: 7px;
     margin-left: -5%;
+        font-size: 12px;
+    font-weight: 400;
+    font-family: Open Sans;
+
 }
 @-moz-document url-prefix() { 
   .copyright {
@@ -1491,6 +1495,7 @@ list-style:none;
 border-right:1px solid #fff;
 padding-right:15px;
 color:#fff;
+font-weight: 400;
 }
 .policy-section ul  li:last-child
 {
