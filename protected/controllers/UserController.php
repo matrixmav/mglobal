@@ -36,7 +36,7 @@ class UserController extends Controller {
                     'issponsorexisted', 'thankyou', 'binary', 'facebook', 'twitter',
                     'callback', 'getfullname','searchtemplate','faq','filterdata',
                     'templatespecification','antimoneylaundering','antispampolicy','privacypolicy','policiesandprocedures','legal',
-                    'isemailexistedprofile','terms-and-conditions'),
+                    'isemailexistedprofile','termsandconditions'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
