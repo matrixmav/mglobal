@@ -344,10 +344,10 @@ class MoneyTransferController extends Controller {
                  * msg for fund transfer to whome sending
                  */  
                     $configMsg['to'] = $fromUserObjectMail->country_code.$fromUserObjectMail->phone; 
-                    $configMsg['text'] = "Your transaction was successfully<br/>.
-                    User name: ".$fromUserObjectMail->name."<br/>
-                    Amount : ".$transactionObject->actual_amount."<br/>
-                    To : ".$toUserObjectMail->name."<br/>";
+                    $configMsg['text'] = "Your transaction was successfully.
+                    User name: ".$fromUserObjectMail->name."
+                    Amount : ".$transactionObject->actual_amount."
+                    To : ".$toUserObjectMail->name;
                     $responce = BaseClass::sendMail($configMsg);
                 
                 
