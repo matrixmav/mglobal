@@ -801,10 +801,10 @@ class PackageController extends Controller {
 Your package purchase is successful.  You can login into your account and start building your web site. Refer Friends and earn rewards.";
                     $responce = BaseClass::sendMail($configMsg);
                     
-                    $configMsg['to'] = $sponsorUserObject->country_code.$sponsorUserObject->phone; 
+                    /*$configMsg['to'] = $sponsorUserObject->country_code.$sponsorUserObject->phone; 
                     $configMsg['text'] = "Congratulation!!!  
 We are pleased to inform you that your direct referral commissions have credited to your wallet successfully.";
-                    $responce = BaseClass::sendMail($configMsg);
+                    $responce = BaseClass::sendMail($configMsg);*/
 
                     if ($transactionObject->status == 1) {
                         unset(Yii::app()->session['transactionid']);
@@ -999,7 +999,7 @@ We are pleased to inform you that your direct referral commissions have credited
 		$json_response = curl_exec($curl);
 
 		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-var_dump($status);exit;
+                var_dump($status);exit;
 			
 		curl_close($curl);
 
