@@ -635,6 +635,7 @@ Your account is successful activated .check email for credentials. Purchase pack
                     $modelUserProfile->user_id = $model->id;
                     $modelUserProfile->created_at = date('Y-m-d');
                     $modelUserProfile->referral_banner_id = 1;
+                    $modelUserProfile->country_id  = $_POST['country_id'];
                     $modelUserProfile->save(false);
                     if(isset(Yii::app()->session['frontloggedIN'])){
                         $this->redirect(array("profile/dashboard", 'successMsg' => $successMsg));
