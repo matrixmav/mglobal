@@ -329,6 +329,28 @@ class MoneyTransferController extends Controller {
                 $config['body'] =  $this->renderPartial('//mailTemp/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
                 CommonHelper::sendMail($config);
                 
+                
+                /**
+                 * msg for fund transfer to who is sending
+                 */
+                $configMsg['to'] = $toUserObjectMail->country_code.$toUserObjectMail->phone; 
+                $configMsg['text'] = "Your transaction was successfully<br/>.
+                  User name: ".$fromUserObjectMail->name."<br/>
+                  Amount : ".$transactionObject->actual_amount."<br/>
+                  To : ".$toUserObjectMail->name."<br/>";
+                  $responce = BaseClass::sendMail($configMsg);
+                  
+                /**
+                 * msg for fund transfer to whome sending
+                  
+                    $configMsg1['to'] = $fromUserObjectMail->country_code.$fromUserObjectMail->phone; 
+                    $configMsg1['text'] = "Your transaction was successfully.
+                    User name: ".$fromUserObjectMail->name."
+                    Amount : ".$transactionObject->actual_amount."
+                    To : ".$toUserObjectMail->name;
+                    $responce = BaseClass::sendMail($configMsg1);*/ 
+                
+                
                 $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObject->id));
             } else {
                 $error = "Incorrect master pin";

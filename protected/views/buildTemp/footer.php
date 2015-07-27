@@ -5,26 +5,21 @@ $this->breadcrumbs = array(
 );
 ?>
 <div class="col-md-12 col-sm-12">
-    <a class="btn red publish" href="builder?o=<?php echo base64_encode(Yii::app()->session['orderID']);?>&u=<?php echo base64_encode(Yii::app()->session['userid']);?>&t=<?php echo base64_encode(Yii::app()->session['templateID']);?>">Publish Your Website</a>
+    <a class="btn orange publish" href="builder?o=<?php echo base64_encode(Yii::app()->session['orderID']);?>&u=<?php echo base64_encode(Yii::app()->session['userid']);?>&t=<?php echo base64_encode(Yii::app()->session['templateID']);?>">Publish Your Website</a>
 </div>
 <div class="col-md-12 col-sm-12" id="test">
-    <?php if (count($userpagesObject) < 4) { ?>
-        <a href="/BuildTemp/userinput" class="btn green">Add page</a>
-        <?php
-    }
-    if (count($userpagesObject) > 0) {
+  <?php  if (count($userpagesObject) > 0) {
         foreach ($userpagesObject as $page) {
             ?>
-            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn green"><?php echo $page->page_name; ?></a>
+            <a href="/BuildTemp/pagedit?id=<?php echo $page->id; ?>" class="btn orange"><?php echo $page->page_name; ?></a>
         <?php }
     }
-    ?> 
-<?php echo BaseClass::buildWebsiteHeader(); ?> 
+ echo BaseClass::buildWebsiteHeader(); ?> 
 </div>
 <div class="col-md-12 col-sm-12">
 
-    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
-    <?php if ($success) { ?><div class="success" id="error_msg"><?php echo $success; ?></div><?php } ?>
+    <?php if ($error) { ?><p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"><?php echo $error; ?></span></p><?php } ?>
+    <?php if ($success) { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $success; ?></span></p><?php } ?>
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
@@ -40,7 +35,7 @@ $this->breadcrumbs = array(
 
         <div class="row">
             <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn red">
+                <input type="submit" name="submit" value="Submit" class="btn orange">
 
             </div>
         </div>

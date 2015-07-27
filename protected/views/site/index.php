@@ -1,4 +1,10 @@
-  <!-- Header END -->
+<style>.marquee {
+  width: 100%;
+  overflow: hidden;
+
+
+}</style>  
+<!-- Header END -->
   <div id='content-wrapper'>
 <!--<div id='social-sidebar'>
 <ul>
@@ -976,7 +982,7 @@
     <div class="carousel-inner" role="listbox">
 
       <div class="item">-->
-    <marquee>
+    <div class="marquee">
         
           <div class="row">
         <div class="marqBox">
@@ -998,7 +1004,7 @@
           <img src="images/gamescast.png" alt="gamescast">
         </div>
       </div>
-    </marquee>
+    </div>
       </div>
 
       
@@ -1036,6 +1042,7 @@ $('.carousel').carousel({
   interval: 200000
 });
 </script>
+<script  type="text/javascript" src="../../../js/marquee.js"></script>
 
 <div id="more1" style="display:none" class="content">
 

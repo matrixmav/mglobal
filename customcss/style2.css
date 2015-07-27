@@ -5431,7 +5431,7 @@ table.dataTable td .input-width-b {
 	
 }
 .btn-h{  background: linear-gradient(to bottom, #105E96 0%,#3F8EDB 100%)!important;}
-.con-f{ font-size:15px; color:#ff6b00!important; padding-top:20px!important; }
+.con-f{ font-size:14px; color:#ff6b00!important; padding-top:20px!important; }
 .img-mar{ margin-left:22px;}
 .bg-f2{  background: url(/images/footer-next-bg.png) left center repeat !important;}
 .bg-f1{background-color: transparent !important;}
@@ -13802,7 +13802,7 @@ ul.priceList li.first {
 .f-cnt{ line-height:25px; }
 .edit-icon{color:#fff;float:right;font-size:15px;}
 .edit-icon a :hover{color:#fff;float:right;font-size:15px;}
-.pre-footer-subscribe-box .con-f{color:#FFF !important;}
+.pre-footer-subscribe-box .con-f{color:#FFF !important;font-size:14px;}
 
 body { 
 	color: #3e4d5c; 

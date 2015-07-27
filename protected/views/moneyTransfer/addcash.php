@@ -69,6 +69,12 @@
        $('#email_error').html("Invalid amount."); 
        return false;
     }
+    
+    if (isNaN($('#paid_amount').val()))
+    {
+        $('#email_error').html("Invalid amount"); 
+       return false;
+    }
    $('#master_pin_error').html(""); 
     if($('#master_pin').val()== '')
     {
