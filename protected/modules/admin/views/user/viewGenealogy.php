@@ -62,8 +62,11 @@ if (!empty($_GET['id'])) {
                         <?php 
                             $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
                             $getColor =  BaseClass::getPackageName($currentUserId);
-                            $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
-                          
+                            $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);                            
+                            $userObjectSponorLeft = User::model()->findAll(array('condition' => ' position = "left" AND  sponsor_id ="'.$userObject->name.'" '  )); 
+                            $userObjectSponorRight = User::model()->findAll(array('condition' => ' position = "right" AND  sponsor_id ="'.$userObject->name.'" '  )); 
+                            
+                            
                         ?>
                         <a href="" class="<?php echo $getColor; ?>">
                         <div>
@@ -74,6 +77,8 @@ if (!empty($_GET['id'])) {
                                         <li><p>Total Right Registration</p><span><?php echo $getUserPurchase->right_user ; ?></span> </li>
                                         <li><p>Total Left Purchase</p><span><?php echo $getUserPurchase->left_purchase; ?></span> </li>
                                         <li><p>Total Right Purchase</p><span><?php echo $getUserPurchase->right_purchase; ?></span> </li>
+                                        <li><p>Total Left Sponsor</p><span><?php echo count($userObjectSponorLeft); ?></span> </li>
+                                        <li><p>Total Right Sponsor</p><span><?php echo count($userObjectSponorRight); ?></span> </li>
                                     </ul>
                                 </div>
                             </span>
