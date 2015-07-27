@@ -999,9 +999,7 @@ We are pleased to inform you that your direct referral commissions have credited
 		$json_response = curl_exec($curl);
 
 		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-                var_dump($status);exit;
-			
-		curl_close($curl);
+                curl_close($curl);
 
 			 $response = json_decode($json_response, true);
 			 echo '<pre>';
