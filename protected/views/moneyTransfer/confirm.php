@@ -7,7 +7,7 @@ $moneyTransferObject = MoneyTransfer::model()->findByPk($transactionId);
 ?>
  
 <div class="col-md-7 col-sm-7">
-    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
+    <?php if ($error) { ?><div class="error error-2 errorMsg clearfix" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2 "><?php echo $error; ?></span></div><?php } ?>
     <div class="portlet box orange ">
     <div class="portlet-title">
 							<div class="caption">

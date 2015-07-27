@@ -50,7 +50,7 @@ $caption = '';
    
         
     <?php if($success){?> <p class='success-2'><i class='fa fa-check-circle icon-success'></i><span class='span-success-2'><?php echo $success;?></span></p><?php }?>
-    <div class="error" id="error_msg_email" style="display:none;"></div>
+    <div class="error error-2 errorMsg clearfix" id="error_msg_email1" style="display:none;"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2 " id="error_msg_email"></span></div>
     <form action="/profile/inviterefferal" method="post" class="form-horizontal" onsubmit="return validation();">
      
         <fieldset id="emailDiv" style="display:none;">
@@ -101,6 +101,7 @@ $caption = '';
       {
      if( emails[i] == "" || ! regex.test(emails[i])){
          $("#error_msg_email").fadeIn(); 
+         $("#error_msg_email1").show(); 
          $("#error_msg_email").html("One of your entered email is not correct.Please check");
          $("#email").focus();
             return false;
