@@ -1028,7 +1028,7 @@ We are pleased to inform you that your direct referral commissions have credited
 
 			 $response = json_decode($json_response, true);
 			  echo '<pre>';
-			 print_r($response);exit; 
+			 print_r($json_response);exit; 
     }
     public function actionCheckMasterPin() {
         
