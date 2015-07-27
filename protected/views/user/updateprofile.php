@@ -201,7 +201,7 @@ $this->breadcrumbs = array(
         </div>
     </div>
 </div>
-
+<input type="hidden" name="emailExistedErrorFlag" id="emailExistedErrorFlag" value="0">
 <script type="text/javascript">
     $(document).ready(function () {
         $('.datepicker').datepicker({
