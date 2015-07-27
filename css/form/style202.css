@@ -1508,11 +1508,7 @@ Pre-Footer and pre-footer elements
          font: 300 14px/1.4 "Open Sans", Arial, sans-serif;
 }
 
-.pre-footer-col
-{
-        padding-bottom: 22px;
-    padding-right: 50px;
-}
+
 .pre-footer li {
 	margin-bottom: 6px;
 }
@@ -1544,8 +1540,10 @@ Pre-Footer and pre-footer elements
 .pre-footer address {
 	line-height: 1.7;
 }
-.pre-footer-col {
-	padding-bottom: 22px;
+.pre-footer-col
+{
+        padding-bottom: 22px;
+    padding-right: 50px;
 }
 .pre-footer .top-line {
 	border-top: solid 1px #535353;
