@@ -4539,6 +4539,7 @@ UI Loading
 .portlet.box.orange .form-actions.pad10{padding-right: 10px;}
 .portlet.box.orange .form-control{border-radius: 2px !important;}
 .portlet.box.orange .btn.orange{background-color:#f15c2a; color:#FFF;}
+.actionBtn{display: inline-block; margin: 5px;}
 .page-content .page-breadcrumb.breadcrumb > li .breadcrumbs > a{color: #f15c2a !important;}
 .page-content .page-breadcrumb.breadcrumb > li .breadcrumbs{color:#727272 !important;}
 
