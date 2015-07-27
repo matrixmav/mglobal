@@ -16,7 +16,7 @@ $this->breadcrumbs = array(
         </div>
         <div class="portlet-body form">
             <form action="/profile/updateprofile" method="post" class="form-horizontal" onsubmit="return profileValidation();">
-                <input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="1"/>
+                <input type="hidden" id="emailExistedErrorFlag" name="emailExistedErrorFlag" value="0"/>
                 <fieldset>
                     <div class="form-body">
                         <div class="form-group">
@@ -201,7 +201,7 @@ $this->breadcrumbs = array(
         </div>
     </div>
 </div>
-<input type="hidden" name="emailExistedErrorFlag" id="emailExistedErrorFlag" value="0">
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('.datepicker').datepicker({
