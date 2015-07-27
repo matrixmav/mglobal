@@ -1505,6 +1505,13 @@ Pre-Footer and pre-footer elements
 .pre-footer p {
 	margin-bottom: 20px;
 	  margin-top: 19px;
+         font: 300 14px/1.4 "Open Sans", Arial, sans-serif;
+}
+
+.pre-footer-col
+{
+        padding-bottom: 22px;
+    padding-right: 50px;
 }
 .pre-footer li {
 	margin-bottom: 6px;
