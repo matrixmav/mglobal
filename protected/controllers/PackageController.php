@@ -979,16 +979,16 @@ We are pleased to inform you that your direct referral commissions have credited
         
     }
     
-    public function actiontestScript() {
+    public function actiontestScript() { 
         	$datetime= gmdate('Y-m-d H:i:s');
-	$url = "https://test.httpapi.com/api/domains/available.json?auth-userid=607978&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&domain-name=ramhemareddy&tlds=com";
+	$url = "https://test.httpapi.com/api/domains/available.json?auth-userid=600184&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&domain-name=ramhemareddy&tlds=com";
 	//echo $url;
  //echo '<br>';
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_HTTPHEADER,
-				array("Content-type: text/html" ));
+		array("Content-type: text/html" ));
 					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 		curl_setopt($curl, CURLOPT_POST, true);
@@ -1006,7 +1006,7 @@ We are pleased to inform you that your direct referral commissions have credited
 			 print_r($response);
 			 echo '<br>';
         $datetime= gmdate('Y-m-d H:i:s');
-	$url = "https://test.httpapi.com/api/domains/v5/suggest-names.json?auth-userid=6079784&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&keyword=ram";
+	$url = "https://test.httpapi.com/api/domains/v5/suggest-names.json?auth-userid=600184&api-key=jUbevmFN0wWLQ8JK7QFjtKhThMVpSIxm&keyword=ram";
 	//echo $url;
  //echo '<br>';
 		$curl = curl_init($url);
