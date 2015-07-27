@@ -24,18 +24,19 @@ $empty = "sm-blank" ; //no Package
     <div class="col-sm-8 col-xs-12">
         <div class="row mytree">
             <ul>
+                
                 <li>
+                <?php if(empty($error)){ ?>    
                     <?php 
-                    $userObject = User::model()->findByAttributes(array('id' => $currentUserId  )); 
-                    
-                    $getColor =  BaseClass::getPackageName($currentUserId);
-                    
+                    $userObject = User::model()->findByAttributes(array('id' => base64_decode($currentUserId) ));                     
+                    $getColor =  BaseClass::getPackageName($currentUserId);                    
                     /* Getting left and Registration Count */
-                    $getUserInfoRight = BaseClass::getLeftRightMember($currentUserId ,'right');
-                    $getUserInfoLeft = BaseClass::getLeftRightMember($currentUserId ,'left');  
+                    $getUserInfoRight = BaseClass::getLeftRightMember(base64_decode($currentUserId) ,'right');
+                    $getUserInfoLeft = BaseClass::getLeftRightMember(base64_decode($currentUserId) ,'left');  
                     
                     /* Getiing left and right purchase */
-                    $getUserPurchase = BaseClass::getLeftRightPurchase($currentUserId);
+                    $getUserPurchase = BaseClass::getLeftRightPurchase(base64_decode($currentUserId));
+                    $smBlack = '<a class="sm-blank" href="#"><div><span></span></div></a>';
 
                     ?>
                     <a href="" class="<?php echo $getColor; ?>">
@@ -58,22 +59,23 @@ $empty = "sm-blank" ; //no Package
                                 if(count($genealogyLeftListObject) > 0 ){
                                   $getColor =  BaseClass::getPackageName($genealogyLeftListObject[0]->user_id);                                        
                             ?>
-                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftListObject[0]->user->name; ?></span></div></a>
+                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.base64_encode($genealogyLeftListObject[0]->user_id); ?>"><div><span><?php echo $genealogyLeftListObject[0]->user->name; ?></span></div></a>
                             <ul>
-                                <?php $genealogyLeftLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'left'"); ?>
+                                <?php $genealogyLeftLeftListObject = BaseClass::getGenoalogyTreeChild(base64_encode($genealogyLeftListObject[0]->user_id), "'left'"); ?>
                                 <?php if(count($genealogyLeftLeftListObject) > 0 ){ 
                                     $getColor =  BaseClass::getPackageName($genealogyLeftLeftListObject[0]->user_id);
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></span></div></a></li>
+                                 
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.base64_encode($genealogyLeftLeftListObject[0]->user_id); ?>"><div><span><?php echo $genealogyLeftLeftListObject[0]->user->name; ?></span></div></a></li>
                                 <?php }else{ ?>
                                      <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>    
                                 <?php } ?>     
 
-                                <?php $genealogyLeftRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyLeftListObject[0]->user_id, "'right'"); ?>   
+                                <?php $genealogyLeftRighttListObject = BaseClass::getGenoalogyTreeChild(base64_encode($genealogyLeftListObject[0]->user_id), "'right'"); ?>   
                                 <?php if(count($genealogyLeftRighttListObject) > 0 ){ 
                                      $getColor =  BaseClass::getPackageName($genealogyLeftRighttListObject[0]->user_id); 
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyLeftRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></span></div></a></li>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.base64_encode($genealogyLeftRighttListObject[0]->user_id); ?>"><div><span><?php echo $genealogyLeftRighttListObject[0]->user->name; ?></span></div></a></li>
                                 <?php }else{ ?>
                                     <li><a class="<?php echo $empty   ; ?>" href="<?php echo $regVar.$genealogyLeftListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>   
                                 <?php } ?> 
@@ -81,8 +83,8 @@ $empty = "sm-blank" ; //no Package
                             <?php } else { ?>
                                 <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=left"><div><span>+</span></div></a>
                                     <ul>
-                                        <li><a class="sm-blank" href="#"><div><span></span></div></a></li>  
-                                        <li><a class="sm-blank" href="#"><div><span></span></div></a></li>
+                                        <li><?php echo $smBlack ; ?></li> 
+                                        <li><?php echo $smBlack ; ?></li> 
                                     </ul>
                                 </li>
                                 
@@ -92,22 +94,22 @@ $empty = "sm-blank" ; //no Package
                             <?php if(count($genealogyRightListObject) > 0 ){                                    
                                  $getColor =  BaseClass::getPackageName($genealogyRightListObject[0]->user_id);                                    
                                 ?>
-                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightListObject[0]->user->name; ?> </span></div></a>
+                            <a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.base64_encode($genealogyRightListObject[0]->user_id); ?>"><div><span><?php echo $genealogyRightListObject[0]->user->name; ?> </span></div></a>
                             <ul>
-                                <?php $genealogyRightLeftListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'left'"); ?>
+                                <?php $genealogyRightLeftListObject = BaseClass::getGenoalogyTreeChild(base64_encode($genealogyRightListObject[0]->user_id), "'left'"); ?>
                                 <?php if(count($genealogyRightLeftListObject) > 0 ){ 
                                     $getColor =  BaseClass::getPackageName($genealogyRightLeftListObject[0]->user_id); 
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightLeftListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightLeftListObject[0]->user->name; ?> </span></div></a></li>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.base64_encode($genealogyRightLeftListObject[0]->user_id); ?>"><div><span><?php echo $genealogyRightLeftListObject[0]->user->name; ?> </span></div></a></li>
                                 <?php }else{ ?>
                                      <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=left"><div><span>+</span></div></a></li>  
                                 <?php } ?>     
 
-                                <?php $genealogyRightRighttListObject = BaseClass::getGenoalogyTreeChild($genealogyRightListObject[0]->user_id, "'right'"); ?>   
+                                <?php $genealogyRightRighttListObject = BaseClass::getGenoalogyTreeChild(base64_encode($genealogyRightListObject[0]->user_id), "'right'"); ?>   
                                 <?php if(count($genealogyRightRighttListObject) > 0 ){
                                     $getColor =  BaseClass::getPackageName($genealogyRightRighttListObject[0]->user_id); 
                                     ?>
-                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.$genealogyRightRighttListObject[0]->user_id; ?>"><div><span><?php echo $genealogyRightRighttListObject[0]->user->name; ?></span></div></a></li>
+                                    <li><a class="<?php echo $getColor ; ?>" href="<?php echo $treeVar.'?id='.base64_encode($genealogyRightRighttListObject[0]->user_id); ?>"><div><span><?php echo $genealogyRightRighttListObject[0]->user->name; ?></span></div></a></li>
                                 <?php }else{ ?>
                                      <li><a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$genealogyRightListObject[0]->user->name ; ?>&position=right"><div><span>+</span></div></a></li>
                                 <?php } ?> 
@@ -115,8 +117,8 @@ $empty = "sm-blank" ; //no Package
                             <?php } else { ?>
                                 <a class="<?php echo $empty ; ?>" href="<?php echo $regVar.$userObject->name; ?>&position=right"><div><span>+</span></div></a>
                                 <ul>
-                                    <li><a class="sm-blank" href="#"><div><span></span></div></a></li>  
-                                    <li><a class="sm-blank" href="#"><div><span></span></div></a></li>
+                                    <li><?php echo $smBlack ; ?></li>   
+                                    <li><?php echo $smBlack ; ?></li>                                       
                                 </ul>
                                 
                             </li>
@@ -124,22 +126,18 @@ $empty = "sm-blank" ; //no Package
                             <?php } ?>
                         </li>
                     </ul>
-                </li>
+                
+                <?php } else {                    
+                    
+                    echo '<p style="padding: 25px 41px 37px;" class="error error-new"><span class="span-error">'.$error.'</span></p>';
+                    
+                } ?>
+                    </li>
             </ul>
         </div> 
     </div>    
 </div>
-        
-<!--           <div class="col-sm-4 col-xs-12">
-                 <ul class="packageDetail">
-                     <li><p>Total Packages</p><span> 122</span> </li>
-                     <li><p>Total Packages Today</p><span> 122</span> </li>
-                      <li><p>Total Registration</p><span> 122</span> </li>
-                     
-                 </ul>
-             </div>
-    -->
-
+   
 <div class="row">
     
     <div class="col-sm-12 detailPackage">
