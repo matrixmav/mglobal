@@ -44,8 +44,8 @@ $empty = "sm-blank" ; //no Package
                             <span class="myPop" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content=""><?php echo $userObject->name; ?>
                                 <div id="popover_content_wrapper" style="display: none; ">
                                     <ul class="packageDetail">
-<!--                                        <li><p>Total Left Registration</p><span> <?php  //print_r($getUserInfoLeft); ?></span> </li>
-                                        <li><p>Total Right Registration</p><span> <?php //print_r($getUserInfoRight); ?></span> </li>-->
+                                        <li><p>Total Left Registration</p><span><?php  echo $getUserPurchase->left_user ; ?></span> </li>
+                                        <li><p>Total Right Registration</p><span><?php echo $getUserPurchase->right_user ; ?></span> </li>
                                         <li><p>Total Left Purchase</p><span> <?php echo $getUserPurchase->left_purchase; ?></span> </li>
                                         <li><p>Total Right Purchase</p><span> <?php echo $getUserPurchase->right_purchase; ?></span> </li>
                                     </ul>
