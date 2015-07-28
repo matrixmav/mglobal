@@ -91,10 +91,10 @@ class BaseClass extends Controller {
      */
 
     public static function sendMail($config) {
-        
+      define("API_KEY", "914ff9da");
+      define("API_SECRET", "e91037e9");  
       try {
-          define("API_KEY", "914ff9da");
-          define("API_SECRET", "e91037e9");
+          
 
           $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
                 'api_key' => API_KEY,
