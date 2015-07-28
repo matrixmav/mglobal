@@ -91,8 +91,7 @@ class BaseClass extends Controller {
      */
 
     public static function sendMail($config) {
-      define("API_KEY", "914ff9da");
-      define("API_SECRET", "e91037e9");  
+    
       try {
           
 
