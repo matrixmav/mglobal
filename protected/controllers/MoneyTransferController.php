@@ -355,7 +355,16 @@ class MoneyTransferController extends Controller {
     }
 
     public function actionStatus() {
-        $transactionObjectect = Transaction::model()->findByPk(base64_decode($_GET['transactionId']));
+        $error = "";
+        $transactionObjectect = "";
+        if(is_numeric(base64_decode($_GET['transactionId']))){
+            $tId =  base64_decode($_GET['transactionId']);
+            $transactionObjectect = Transaction::model()->findByPk($tId);
+        } else {
+            echo $error = "adsada"; 
+        }
+        
+        
         $this->render('status', array('transactionObject' => $transactionObjectect));
     }
 
