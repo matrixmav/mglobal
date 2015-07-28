@@ -96,8 +96,8 @@ class BaseClass extends Controller {
           
 
           $url = 'https://rest.nexmo.com/sms/json?' . http_build_query([
-                'api_key' => API_KEY,
-               'api_secret' => API_SECRET,
+                'api_key' => Yii::app()->params['API_KEY'],
+               'api_secret' => Yii::app()->params['API_SECRET'],
               'to' => $config['to'],
               'from' => 'Mglobally',
                 'text' => $config['text']
