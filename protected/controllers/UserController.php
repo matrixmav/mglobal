@@ -427,6 +427,10 @@ Your account is successful activated .check email for credentials. Purchase pack
 
     public function actionLogin() {
         
+//        $id = 513 ;
+//        BaseClass::userCountIncrement($id , 'left');        
+//        die;
+                
         $error = "";
         if (Yii::app()->session['userid'] != '') {
             $this->redirect('/profile/dashboard/');
@@ -618,6 +622,10 @@ Your account is successful activated .check email for credentials. Purchase pack
                     $modelGenealogy->position = $_POST['position'];
                     $modelGenealogy->save(false);
 
+                   // echo $modelGenealogy->user_id ; die;
+                    BaseClass::userCountIncrement($modelGenealogy->user_id);  
+                    
+                    
                     $successMsg = "<p class='success'>You have successfully registered. Please check your email to activate your account</p>";
                     /*  For Genealogy Data */
                     $config['to'] = $model->email;

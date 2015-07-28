@@ -263,7 +263,7 @@ class SiteController extends Controller
 	}
 
 
-        public function actionError() {
+        public function actionError() { 
             
             $error = Yii::app()->errorHandler->error;
 

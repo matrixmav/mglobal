@@ -1058,11 +1058,16 @@ class BaseClass extends Controller {
         return $genealogyListObject;
     }
 
-    public static function getGenoalogyTreeChild($userId, $position) {
-        $genealogyListObject = Genealogy::model()->findAll(array('condition' => 'parent = ' . $userId . ' AND position = ' . $position, 'order' => 'position asc'));
+    public static function getGenoalogyTreeChild($userId, $position) {       
+        $parentId = self::isNumber($userId); 
+        if(empty($parentId)){
+            return "no";
+        }
+        $genealogyListObject = Genealogy::model()->findAll(array('condition' => 'parent = ' . $parentId . ' AND position = ' . $position, 'order' => 'position asc'));
         return $genealogyListObject;
     }
-
+    
+   
     public static function getBinaryTreeChild($userId, $date, $position) {
         $genealogyListObject = Genealogy::model()->findAll(array('condition' => 'parent = ' . $userId . ' AND position = ' . $position . 'AND updated_at = "2015-05-19" ', 'order' => 'position asc'));
         return $genealogyListObject;
@@ -1312,17 +1317,18 @@ class BaseClass extends Controller {
     /* For the package info */
     public static function getPackageName($getPackageName) {
         
-        $orderListObject = Order::model()->findByAttributes(array('status' => 1 , 'user_id' => $getPackageName),array('order' => 'package_id DESC'));
-        $userObject = User::model()->findByPk($getPackageName);
-       
+        $orderListObject = Order::model()->findByAttributes(array('status' => 1 , 'user_id' => base64_decode($getPackageName)),array('order' => 'package_id DESC'));
+        $userObject = User::model()->findByPk(base64_decode($getPackageName));
+        
         $color = "sm-nothing";
         
-        if($userObject->status == 0 ){
+        if(isset($userObject->status) && $userObject->status == 0 ){
            $color = "sm-user-inactive";
         }
-        if($userObject->status == 1 ){
+        if(isset($userObject->status) && $userObject->status == 1 ){
             $color = "sm-user-active";
-        }        
+        }  
+        
         $orderArray = array();                 
         
         if (count($orderListObject) > 0) {
@@ -1617,23 +1623,33 @@ class BaseClass extends Controller {
         return $j.'_'.$k;
     }
     
-    public static function mySelfCount(){
-        $userId = 262;
-        $leftGenealogyCount = self::getLeftRightMember($userId, 'left');
-        $rightGenealogyCount = self::getLeftRightMember($userId, 'right');
-        
-        echo "<pre>"; print_r($leftGenealogyCount);
-        echo "<pre>"; print_r($rightGenealogyCount);
-        
-        
-        
-        
-        
-        
-        
-        
-        exit;
+    public static function isNumber($numb){
+        if(is_numeric(base64_decode($numb))){
+            return base64_decode($numb);
+        } else {
+            return "";
+        }
     }
-            
     
+    
+    public static function userCountIncrement($userId){                
+        $userObject = Genealogy::model()->findByAttributes(array('user_id' => $userId ));
+        echo "<br/>"."----";
+        echo $userId = $userObject->parent;
+        echo $userPosition = $userObject->position;
+        if($userId){
+            $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $userId ));
+            if($userPosition == 'right'){
+                $parentObject->right_user = $parentObject->right_user+1;
+            }
+            if($userPosition == 'left'){
+                $parentObject->left_user = $parentObject->left_user+1;
+            }
+            $parentObject->save();
+            $parentId = self::userCountIncrement($userId);         
+            
+        }
+        
+    }
+
 }

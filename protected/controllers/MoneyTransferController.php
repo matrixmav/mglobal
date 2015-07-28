@@ -281,9 +281,9 @@ class MoneyTransferController extends Controller {
                 $adminTransactionObject->created_at = $createdTime;
                 $adminTransactionObject->updated_at = $createdTime;
                 if (!$adminTransactionObject->save()) {
-                echo "<pre>";
-                print_r($adminTransactionObject->getErrors());
-                exit;
+                    echo "<pre>";
+                    print_r($adminTransactionObject->getErrors());
+                    exit;
                 }
                 //$adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
                 $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->actual_amount,1);
@@ -345,7 +345,7 @@ class MoneyTransferController extends Controller {
                     $responce = BaseClass::sendMail($configMsg1);
                 
                 
-                $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObject->id));
+                $this->redirect(array('MoneyTransfer/status', 'transactionId' => base64_encode($transactionObject->id)));
             } else {
                 $error = "Incorrect master pin";
                 //$this->redirect(array('MoneyTransfer/status', 'status' => 'F'));
@@ -355,7 +355,7 @@ class MoneyTransferController extends Controller {
     }
 
     public function actionStatus() {
-        $transactionObjectect = Transaction::model()->findByPk($_GET['transactionId']);
+        $transactionObjectect = Transaction::model()->findByPk(base64_decode($_GET['transactionId']));
         $this->render('status', array('transactionObject' => $transactionObjectect));
     }
 
