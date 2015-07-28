@@ -190,48 +190,35 @@ We are pleased to inform you that your binary commissions have credited to your 
     public function actionGenealogy() {
         $emailObject = User::model()->findAll(array('condition' => 'sponsor_id = "admin"'));
 
-//        if (!empty($_GET)) {
-//            $currentUserId = $_GET['id'];
-//            $userObject = User::model()->findByPK($currentUserId);
-//
-//            $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
-//            $this->render('viewGenealogy', array(
-//                'genealogyListObject' => $genealogyListObject,
-//                'currentUserId' => $currentUserId,
-//                'userObject' => $userObject,
-//                'emailObject' => $emailObject
-//            ));
-//        } else {
-//            $currentUserId = 1;
-//            $userObject = User::model()->findByPK($currentUserId);
-//            $genealogyListObject = BaseClass::getGenoalogyTree($currentUserId);
-//            $this->render('viewGenealogy', array(
-//                'genealogyListObject' => $genealogyListObject,
-//                'currentUserId' => $currentUserId,
-//                'userObject' => $userObject,
-//                'emailObject' => $emailObject
-//            ));
-//        }
+            if(!empty($_GET['id'])){           
+                
+                $currentUserId = $_GET['id'];
+                $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");
+                $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+                if($genealogyLeftListObject == "no" && $genealogyRightListObject == "no"){
+                    $error = "Invalid request!!!";
+                    $this->render('viewGenealogy', array(
+                        'error'=>$error
+                    ));
+                }
+                
+                $this->render('viewGenealogy',array(
+                            'genealogyLeftListObject'=>$genealogyLeftListObject,
+                            'genealogyRightListObject'=>$genealogyRightListObject,
+                            'currentUserId'=>$currentUserId
+                ));
+           }else{                
+                    $currentUserId = base64_encode(Yii::app()->session['userid']) ;       
+                    $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
+                    $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+                    $this->render('viewGenealogy',array(
+                                'genealogyLeftListObject'=>$genealogyLeftListObject,
+                                'genealogyRightListObject'=>$genealogyRightListObject,
+                                'currentUserId'=>$currentUserId
+                    ));
+                }
+        
 
-        if (!empty($_GET['id'])) {
-            $currentUserId = $_GET['id'];
-            $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");
-            $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
-            $this->render('viewGenealogy', array(
-                'genealogyLeftListObject' => $genealogyLeftListObject,
-                'genealogyRightListObject' => $genealogyRightListObject,
-                'currentUserId' => $currentUserId
-            ));
-        } else {
-            $currentUserId = Yii::app()->session['userid'];
-            $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");
-            $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
-            $this->render('viewGenealogy', array(
-                'genealogyLeftListObject' => $genealogyLeftListObject,
-                'genealogyRightListObject' => $genealogyRightListObject,
-                'currentUserId' => $currentUserId
-            ));
-        }
     }
 
     /**

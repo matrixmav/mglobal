@@ -281,9 +281,9 @@ class MoneyTransferController extends Controller {
                 $adminTransactionObject->created_at = $createdTime;
                 $adminTransactionObject->updated_at = $createdTime;
                 if (!$adminTransactionObject->save()) {
-                echo "<pre>";
-                print_r($adminTransactionObject->getErrors());
-                exit;
+                    echo "<pre>";
+                    print_r($adminTransactionObject->getErrors());
+                    exit;
                 }
                 //$adminTransactionObject = Transaction::model()->createTransaction($postDataArray, $adminObject,1);
                 $moneyTransferDataArray['fund'] = BaseClass::getPercentage($transactionObject->actual_amount,1);
@@ -333,25 +333,19 @@ class MoneyTransferController extends Controller {
                 /**
                  * msg for fund transfer to who is sending
                  */
-                $configMsg['to'] = $toUserObjectMail->country_code.$toUserObjectMail->phone; 
-                $configMsg['text'] = "Your transaction was successfully<br/>.
-                  User name: ".$fromUserObjectMail->name."<br/>
-                  Amount : ".$transactionObject->actual_amount."<br/>
-                  To : ".$toUserObjectMail->name."<br/>";
+                 $configMsg['to'] = $toUserObjectMail->country_code.$toUserObjectMail->phone; 
+                 $configMsg['text'] = "Money Transferred in your account from Mglobally. User name: ".$fromUserObjectMail->name.", Amount : $".$transactionObject->actual_amount." ,To : ".$toUserObjectMail->name;
                   $responce = BaseClass::sendMail($configMsg);
                   
                 /**
-                 * msg for fund transfer to whome sending
+                 * msg for fund transfer to whome sending*/
                   
                     $configMsg1['to'] = $fromUserObjectMail->country_code.$fromUserObjectMail->phone; 
-                    $configMsg1['text'] = "Your transaction was successfully.
-                    User name: ".$fromUserObjectMail->name."
-                    Amount : ".$transactionObject->actual_amount."
-                    To : ".$toUserObjectMail->name;
-                    $responce = BaseClass::sendMail($configMsg1);*/ 
+                    $configMsg1['text'] = "Your transaction was successfully. User name: ".$fromUserObjectMail->name." , Amount : $".$transactionObject->actual_amount." , To : ".$toUserObjectMail->name;
+                    $responce = BaseClass::sendMail($configMsg1);
                 
                 
-                $this->redirect(array('MoneyTransfer/status', 'transactionId' => $transactionObject->id));
+                $this->redirect(array('MoneyTransfer/status', 'transactionId' => base64_encode($transactionObject->id)));
             } else {
                 $error = "Incorrect master pin";
                 //$this->redirect(array('MoneyTransfer/status', 'status' => 'F'));
@@ -361,7 +355,16 @@ class MoneyTransferController extends Controller {
     }
 
     public function actionStatus() {
-        $transactionObjectect = Transaction::model()->findByPk($_GET['transactionId']);
+        $error = "";
+        $transactionObjectect = "";
+        if(is_numeric(base64_decode($_GET['transactionId']))){
+            $tId =  base64_decode($_GET['transactionId']);
+            $transactionObjectect = Transaction::model()->findByPk($tId);
+        } else {
+            echo $error = "adsada"; 
+        }
+        
+        
         $this->render('status', array('transactionObject' => $transactionObjectect));
     }
 

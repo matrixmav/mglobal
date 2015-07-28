@@ -196,3 +196,8 @@ ALTER TABLE `build_temp` ADD `rating` INT( 11 ) NOT NULL AFTER `main_div` ;
 
 
 ALTER TABLE `user_profile` ADD `testimonial_date` DATE NOT NULL AFTER `status` ;
+
+
+
+'API_KEY'=>'914ff9da',
+   'API_SECRET' => 'e91037e9'  
