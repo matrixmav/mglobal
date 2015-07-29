@@ -365,7 +365,7 @@ class MoneyTransferController extends Controller {
         }
         
         
-        $this->render('status', array('transactionObject' => $transactionObjectect));
+        $this->render('status', array('transactionObject' => $transactionObjectect , "error"=> $error));
     }
 
     /* add fund functionality for admin */
