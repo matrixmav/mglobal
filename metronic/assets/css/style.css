@@ -4770,3 +4770,7 @@ span.second-line{
   font-weight:bold;
     
 }
+
+.errorMsg{padding: 15px ! important;}
+.errorMsg i.icon-error{ margin-top: 0;}
+.errorMsg .span-error-2{margin-top: 0;}

@@ -137,6 +137,7 @@ border: solid 1px #d7d7d7;
 	background-color:#ffffff;
         padding: 10px 10px 0 10px;
         min-height: 350px;
+        position: relative;
 }
 .img-left,.img-midle, .img-right{
 	width:100%;
@@ -296,8 +297,7 @@ position: absolute;
 .colapse-items li{margin: 5px;}
 .colapse-items li a {font-size:14px !important; padding: 0 !important; color:#78828c; display: block;}
 .colapse-items li a:hover{text-decoration: none;}
-.left-img-1 >img{vertical-align: middle; text-align: center; display: inline-block;height: 100%;
-  max-height: 350px;}
+.left-img-1 >img{vertical-align: middle; text-align: center; display: inline-block;height: 100%; max-height: 350px; position: absolute; left: 0;}
 .img-footer {padding:10px 10px 0 10px; width: 100%;}
 .img-footer h6{margin: 2px;}
 .img-footer p{font-size: 14px; padding: 0 5px;}

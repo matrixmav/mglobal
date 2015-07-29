@@ -132,11 +132,14 @@ class AdsController extends Controller {
             $userprofileObject = Ads::model()->findByPk($_REQUEST['id']);
             if ($userprofileObject->status == 1) {
                 $userprofileObject->status = 0;
+                $msg = "Ads status changed to Inactive!." ;
             } else {
                 $userprofileObject->status = 1;
+                $msg = "Ads status changed to Active!.";
             }
             $userprofileObject->save(false);
-            $this->redirect(array('index', 'successMsg' => 1));
+           
+            $this->redirect(array('index', 'msg' => $msg));
         }
     }
 
@@ -172,13 +175,13 @@ class AdsController extends Controller {
                 $adsObject->attributes = $_POST;
                 $adsObject->name = $_POST['ads_name'];
                 $adsObject->description = $_POST['ads_desc'];
-                $successMsg = 1;
+                $successMsg = "Ads Update Successfully.";
                 if (!$adsObject->update(false)) {
                     echo "<pre>";
                     print_r($model->getErrors());
                     exit;
                 }
-                $this->redirect('index?successMsg=' . $successMsg, array('dataProvider' => $dataProvider));
+                $this->redirect('index?msg=' . $successMsg, array('dataProvider' => $dataProvider));
             }
             $this->render('edit', array('adsObject' => $adsObject));
         }

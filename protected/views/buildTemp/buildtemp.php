@@ -14,13 +14,14 @@ $this->breadcrumbs = array(
 </div>
 <div class="col-md-7 col-sm-7">
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();">
+         <?php if(!empty($_GET['m'])){?><div class="error error-2 errorMsg clearfix" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2 ">Invalid Password</div></span><?php }?>
         <div class="portlet box orange">
          <div class="portlet-title">
 							<div class="caption">
 								Build Website
 							</div>
     </div>
-         <?php if(!empty($_GET['m'])){?><div class="error" id="error_msg">Invalid Password</div><?php }?>
+        
 
         <fieldset>
                

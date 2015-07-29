@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 <link rel="stylesheet" type="text/css" href="/metronic/assets/plugins/select2/select2-metronic.css"/>
 <div class="col-md-7 col-sm-8">
     <div class="error" id="error_msg" style="display: none;"></div>
-    <?php if ($error) { ?><div class="error" id="error_msg"><?php echo $error; ?></div><?php } ?>
+    <?php if ($error) { ?><div class="error error-2 errorMsg clearfix" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2 "><?php echo $error; ?></span></div><?php } ?>
 <div class="portlet box orange   ">
     <div class="portlet-title">
 							<div class="caption">

@@ -32,8 +32,8 @@ class UserController extends Controller {
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view', 'changestatus', 'wallet',
                     'creditwallet', 'list', 'debitwallet', 'genealogy', 'add', 'deleteuser', 'edit',
-                    'verificationapproval', 'testimonialapproval', 'changeapprovalstatus', 
-                    'testimonialapprovalstatus','binarycalculation','resetpassword','binarymail','dashboard'),
+                    'verificationapproval', 'testimonialapproval', 'changeapprovalstatus',
+                    'testimonialapprovalstatus', 'binarycalculation', 'resetpassword', 'binarymail', 'dashboard'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -53,152 +53,140 @@ class UserController extends Controller {
     public function actionChangeStatus() {
         if ($_REQUEST['id']) {
             $userObject = User::model()->findByPk($_REQUEST['id']);
-            if(!empty($userObject) && $userObject->role_id==1)
-            {
-            if ($userObject->status == 1) {
-                $userObject->status = 0;
-                $userObject->save(false);
-                Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
+            if (!empty($userObject) && $userObject->role_id == 1) {
+                if ($userObject->status == 1) {
+                    $userObject->status = 0;
+                    $userObject->save(false);
+                    Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
+                } else {
+                    
+                    $masterPin = BaseClass::getUniqInt(5);
+                    $password = BaseClass::getPassword();
+                    $userObject->password = md5($password);
+                    $userObject->master_pin = md5($masterPin);
+                    $userObject->status = 1;
+                    $userObject->save(false);
+                    Yii::app()->user->setFlash('success', "User status changed to Active!.");
+                  /* array created for mailing values */
+
+                    $userObjectArr = array();
+                    $userObjectArr['name'] = $userObject->name;
+                    $userObjectArr['full_name'] = $userObject->full_name;
+                    $userObjectArr['password'] = $password;
+                    $userObjectArr['masterPin'] = $masterPin;
+                    /* code to send mail */
+
+                    $config['to'] = $userObject->email;
+                    $config['subject'] = 'Login Details';
+                    $config['body'] = $this->renderPartial('/mailTemplate/login-details', array('userObjectArr' => $userObjectArr), true);
+                    CommonHelper::sendMail($config);
+                }
             } else {
-                $masterPin = BaseClass::getUniqInt(5);
-                $password = BaseClass::getPassword();
-                $userObject->password = md5($password);
-                $userObject->master_pin = md5($masterPin);
-                $userObject->status = 1;
-                $userObject->save(false);
-                
-                
-                
-                /*array created for mailing values*/
-                
-                $userObjectArr = array();
-                $userObjectArr['name'] = $userObject->name;
-                $userObjectArr['full_name'] = $userObject->full_name;
-                $userObjectArr['password'] = $password;
-                $userObjectArr['masterPin'] = $masterPin;
-                /*code to send mail */ 
-                
-                $config['to'] = $userObject->email;
-                $config['subject'] = 'Login Details';
-                $config['body'] =  $this->renderPartial('/mailTemplate/login-details', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);
+                if ($userObject->status == 1) {
+                    $userObject->status = 0;
+                    $userObject->save(false);
+                    Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
+                } else {
+                    $userObject->status = 1;
+                    $userObject->save(false);
+                }
             }
-            }else{
-             if ($userObject->status == 1) {
-                $userObject->status = 0;
-                $userObject->save(false);
-                Yii::app()->user->setFlash('success', "User status changed to Inactive!.");
-            } else {
-                 $userObject->status = 1;
-                $userObject->save(false);   
-            }
-            }
-                Yii::app()->user->setFlash('success', "User status changed to Active!.");
-                
-           
-           $this->redirect('/admin/user');
+           // Yii::app()->user->setFlash('success', "User status changed to Active!.");
+
+
+            $this->redirect('/admin/user');
         }
     }
-    
+
     public function actionDashboard() {
-       
-      $transactionActiveObject = Order::model()->findAll(array('condition' => 'status= 1'));
-      $activeCount = count($transactionActiveObject);
-      
-      $transactionInactiveObject = Order::model()->findAll(array('condition' => 'status= 0 '));
-      $InactiveCount = count($transactionInactiveObject);
-      
-      $total =  $activeCount +  $InactiveCount;
-      
-      $userObject = User::model()->findAll(array('condition' => 'sponsor_id= "admin"'));
-      $userCount = count($userObject);
-      $userDate = date("Y-m-d", mktime(0, 0, 0, date("m") , date("d") - 7, date("Y")));
-      $userObject1 = User::model()->findAll(array('condition' => 'created_at BETWEEN "'.date('Y-m-d').'" AND '.$userDate));
-      
-      $str=  '';
-      for($i = 1; $i < 7; $i++)
-      {
-       $j =  $i*7;   
-       
-       $date = date('Y-m-d', mktime(0, 0, 0, date("m") , date("d") - $j, date("Y")));
-       
-       $date2 = date('Y-m-d', mktime(0, 0, 0, date("m") , date("d") - 14, date("Y")));
-       
-       $date1 = date('d/m/y', mktime(0, 0, 0, date("m") , date("d") - $j, date("Y")));
-       
-       $userObject = User::model()->findAll(array('condition' => 'created_at BETWEEN "'.$date.'" AND "'.$date2.'"'));
-       
-         $str .= "['".$date1."', ".count($userObject)."],";
-              
-      }
-      $strFinal = rtrim("['".$date = date('d-m-y')."', ".count($userObject1)."],".$str,',');
-      
-      /*code to fetch package code*/
-       $strMonth = '';
-       for($i = 1; $i < 10; $i++)
-       {
-           
-        $dateP = date('m', mktime(0, 0, 0, date("m")-$i , date("d"), date("Y")));
-        
-        $datePStr = date('M', mktime(0, 0, 0, date("m")-$i , date("d"), date("Y")));
-        
-        $dateCureent = date('m', mktime(0, 0, 0, date("m") , date("d"), date("Y")));
-        
-        $packageObject1 = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "'.$dateP.'"'));
-        
-        $packageObjectCurrent = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "'.$dateCureent.'"'));
-        
-        $strMonth .= "['".$datePStr."', ".count($packageObject1)."],";
-                   
-       } 
-       
-        $packageStr = rtrim("['".$date = date('M')."', ".count($packageObjectCurrent)."],".$strMonth,',');
-      
-        $this->render('/user/dashboard',array('activeCount'=>$activeCount,'InactiveCount'=> $InactiveCount,'total'=>$total,'userCount'=>$userCount,'str'=>$strFinal,'packageStr'=>$packageStr));
+
+        $transactionActiveObject = Order::model()->findAll(array('condition' => 'status= 1'));
+        $activeCount = count($transactionActiveObject);
+
+        $transactionInactiveObject = Order::model()->findAll(array('condition' => 'status= 0 '));
+        $InactiveCount = count($transactionInactiveObject);
+
+        $total = $activeCount + $InactiveCount;
+
+        $userObject = User::model()->findAll(array('condition' => 'sponsor_id= "admin"'));
+        $userCount = count($userObject);
+        $userDate = date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") - 7, date("Y")));
+        $userObject1 = User::model()->findAll(array('condition' => 'created_at BETWEEN "' . date('Y-m-d') . '" AND ' . $userDate));
+
+        $str = '';
+        for ($i = 1; $i < 7; $i++) {
+            $j = $i * 7;
+
+            $date = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") - $j, date("Y")));
+
+            $date2 = date('Y-m-d', mktime(0, 0, 0, date("m"), date("d") - 14, date("Y")));
+
+            $date1 = date('d/m/y', mktime(0, 0, 0, date("m"), date("d") - $j, date("Y")));
+
+            $userObject = User::model()->findAll(array('condition' => 'created_at BETWEEN "' . $date . '" AND "' . $date2 . '"'));
+
+            $str .= "['" . $date1 . "', " . count($userObject) . "],";
+        }
+        $strFinal = rtrim("['" . $date = date('d-m-y') . "', " . count($userObject1) . "]," . $str, ',');
+
+        /* code to fetch package code */
+        $strMonth = '';
+        for ($i = 1; $i < 10; $i++) {
+
+            $dateP = date('m', mktime(0, 0, 0, date("m") - $i, date("d"), date("Y")));
+
+            $datePStr = date('M', mktime(0, 0, 0, date("m") - $i, date("d"), date("Y")));
+
+            $dateCureent = date('m', mktime(0, 0, 0, date("m"), date("d"), date("Y")));
+
+            $packageObject1 = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "' . $dateP . '"'));
+
+            $packageObjectCurrent = Order::model()->findAll(array('condition' => 'MONTH(created_at) = "' . $dateCureent . '"'));
+
+            $strMonth .= "['" . $datePStr . "', " . count($packageObject1) . "],";
+        }
+
+        $packageStr = rtrim("['" . $date = date('M') . "', " . count($packageObjectCurrent) . "]," . $strMonth, ',');
+
+        $this->render('/user/dashboard', array('activeCount' => $activeCount, 'InactiveCount' => $InactiveCount, 'total' => $total, 'userCount' => $userCount, 'str' => $strFinal, 'packageStr' => $packageStr));
     }
 
-    
-    public function actionBinaryCalculation() {        
-        
-        $adminId = 1;
-        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId)); 
-        $parentObject = BaseClass::setPurchaseNode($parentObject);       
-        if($parentObject){
-            $currentUserId = Yii::app()->session['userid'] ;        
-            $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");          
-            $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
-             
-               
-            $this->render('viewGenealogy',array(
-                        'genealogyLeftListObject'=>$genealogyLeftListObject,
-                        'genealogyRightListObject'=>$genealogyRightListObject,
-                        'currentUserId'=>$currentUserId,
-                        'msg'=> "Binary Calculaton Generated Successfully."
-            ));
+    public function actionBinaryCalculation() {
 
-            
+        $adminId = 1;
+        $parentObject = Genealogy::model()->findByAttributes(array('user_id' => $adminId));
+        $parentObject = BaseClass::setPurchaseNode($parentObject);
+        if ($parentObject) {
+            $currentUserId = Yii::app()->session['userid'];
+            $genealogyLeftListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'left'");
+            $genealogyRightListObject = BaseClass::getGenoalogyTreeChild($currentUserId, "'right'");
+
+
+            $this->render('viewGenealogy', array(
+                'genealogyLeftListObject' => $genealogyLeftListObject,
+                'genealogyRightListObject' => $genealogyRightListObject,
+                'currentUserId' => $currentUserId,
+                'msg' => "Binary Calculaton Generated Successfully."
+            ));
         }
     }
-    
-   
-    public static function binaryMail($parentObject) {
-                $userObject = User::model()->findByPk($parentObject->user_id);
-                $userObjectArr = array();
-                $userObjectArr['to_name'] = $userObject->full_name;
-                $userObjectArr['user_name'] = $userObject->name;
-                $config['to'] = $userObject->email;
-                $config['subject'] = 'Binary Income Credited';
-                $config['body'] =  Yii::app()->controller->renderPartial('//mailTemp/binary_commission', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config); 
-                $configMsg['to'] = $userObject->country_code.$userObject->phone; 
-                $configMsg['text'] = "Congratulation!!!  
-We are pleased to inform you that your binary commissions have credited to your wallet successfully.";
-                    $responce = BaseClass::sendMail($configMsg);
-                return 1;
-    }
-        
 
-   
+    public static function binaryMail($parentObject) {
+        $userObject = User::model()->findByPk($parentObject->user_id);
+        $userObjectArr = array();
+        $userObjectArr['to_name'] = $userObject->full_name;
+        $userObjectArr['user_name'] = $userObject->name;
+        $config['to'] = $userObject->email;
+        $config['subject'] = 'Binary Income Credited';
+        $config['body'] = Yii::app()->controller->renderPartial('//mailTemp/binary_commission', array('userObjectArr' => $userObjectArr), true);
+        CommonHelper::sendMail($config);
+        $configMsg['to'] = $userObject->country_code . $userObject->phone;
+        $configMsg['text'] = "Congratulation!!!  
+We are pleased to inform you that your binary commissions have credited to your wallet successfully.";
+        $responce = BaseClass::sendMail($configMsg);
+        return 1;
+    }
+
     public function actionGenealogy() {
         $emailObject = User::model()->findAll(array('condition' => 'sponsor_id = "admin"'));
 
@@ -230,6 +218,7 @@ We are pleased to inform you that your binary commissions have credited to your 
                     ));
                 }
         
+
     }
 
     /**
@@ -319,7 +308,7 @@ We are pleased to inform you that your binary commissions have credited to your 
             }
             if (strtolower($_POST['search']) == 'inactive') {
                 $selected = "status_inactive";
-            }            
+            }
 
             //$dataProvider = CommonHelper::search(isset($_REQUEST['search']) ? $_REQUEST['search'] : "", $model, array('full_name', 'email', 'phone', 'sponsor_id', 'status'), array(), isset($_REQUEST['selected']) ? $_REQUEST['selected'] : "");
             $dataProvider = CommonHelper::search(isset($_REQUEST['search']) ? $_REQUEST['search'] : "", $model, array('full_name', 'email', 'phone', 'sponsor_id'), array(), isset($selected) ? $selected : "");
@@ -354,42 +343,39 @@ We are pleased to inform you that your binary commissions have credited to your 
         $walletType = "";
         //Cash wallet
         if (!empty($_POST['walletType'])) {
-             $walletType = $_POST['walletType'];
-        if($walletType !='')
-        {
-            $wallet = 'type = "'.$walletType.'"';
-        }else{
-            $wallet = 'type IN (1,2,3)'; 
-        }   
+            $walletType = $_POST['walletType'];
+            if ($walletType != '') {
+                $wallet = 'type = "' . $walletType . '"';
+            } else {
+                $wallet = 'type IN (1,2,3)';
+            }
+            $dataProvider = new CActiveDataProvider($model, array(
+                'criteria' => array(
+                    'condition' => ($wallet . 'AND status = 1' ), 'order' => 'id DESC',
+                ), 'pagination' => array('pageSize' => $pageSize),));
+        }
         $dataProvider = new CActiveDataProvider($model, array(
             'criteria' => array(
-                'condition' => ($wallet.'AND status = 1' ), 'order' => 'id DESC',
-            ), 'pagination' => array('pageSize' => $pageSize),));
-        }  
-            $dataProvider = new CActiveDataProvider($model, array(
-            'criteria' => array(
                 'condition' => ('type IN (1,2,3) AND status = 1' ), 'order' => 'id DESC',
-            ), 'pagination' => array('pageSize' => $pageSize),));    
-            
-         
+            ), 'pagination' => array('pageSize' => $pageSize),));
+
+
         if (!empty($_POST)) {
             $walletType = $_POST['walletType'];
-        if($walletType !='')
-        {
-            $wallet = 'type = "'.$walletType.'"';
-        }else{
-            $wallet = 'type IN (1,2,3)'; 
-        }   
-            $userObject = "";
-          if(!empty($_POST['search']))
-          {
-            $userObject = User::model()->findByAttributes(array('name' => $_POST['search']));
-          }          
-            $condition = $wallet. " AND status = 1";
-            if (!empty($userObject)) {
-                $condition = $wallet.' AND user_id = ' . $userObject->id . " AND status = 1";
+            if ($walletType != '') {
+                $wallet = 'type = "' . $walletType . '"';
+            } else {
+                $wallet = 'type IN (1,2,3)';
             }
-  
+            $userObject = "";
+            if (!empty($_POST['search'])) {
+                $userObject = User::model()->findByAttributes(array('name' => $_POST['search']));
+            }
+            $condition = $wallet . " AND status = 1";
+            if (!empty($userObject)) {
+                $condition = $wallet . ' AND user_id = ' . $userObject->id . " AND status = 1";
+            }
+
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ($condition), 'order' => 'id DESC',
@@ -402,47 +388,46 @@ We are pleased to inform you that your binary commissions have credited to your 
         ));
     }
 
-    public function actionCreditWallet() { 
+    public function actionCreditWallet() {
         $error = "";
         if ($_POST) {
             $userId = $_POST['userId'];
-           if($userId != 0)
-           {
-            $userObject = User::model()->findByPk($userId);
-            $type = $_POST['walletId'];
-            $fundAmount = $_POST['paid_amount'];
-            $postDataArray = $_POST;
-            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
-            $transactionObject = Transaction::model()->findByPk($transactionObject->id);
-            
-            
-            
-            /*user wallet object*/
-            $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
-            
-            if (!empty($walletObject)) {
-                $fundAmount = ($fundAmount + $walletObject->fund);
-                $walletObject->fund = $fundAmount;
-                $walletObject->update();
-            } else {
-                $walletObject = Wallet::model()->create($userId,$fundAmount,$type);
-            }
-            $postDataArray['walletId'] = $walletObject->id;
-            $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
-            $postDataArray['toWalletId'] = $adminWalletObject->id;
-            $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
-            $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
-            
-             try{
-             /*user wallet object*/
-              $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
-              if(!empty($adminWalletObject))
-              {
-                 if($userId != '1'){
-                 $adminWalletObject->fund = ($adminWalletObject->fund) - ($transactionObject->paid_amount);
-                 $adminWalletObject->update(false);
-                 }
-             }}catch (Exception $ex) {
+            if ($userId != 0) {
+                $userObject = User::model()->findByPk($userId);
+                $type = $_POST['walletId'];
+                $fundAmount = $_POST['paid_amount'];
+                $postDataArray = $_POST;
+                $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject, 'admin');
+                $transactionObject = Transaction::model()->findByPk($transactionObject->id);
+
+
+
+                /* user wallet object */
+                $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
+
+                if (!empty($walletObject)) {
+                    $fundAmount = ($fundAmount + $walletObject->fund);
+                    $walletObject->fund = $fundAmount;
+                    $walletObject->update();
+                } else {
+                    $walletObject = Wallet::model()->create($userId, $fundAmount, $type);
+                }
+                $postDataArray['walletId'] = $walletObject->id;
+                $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
+                $postDataArray['toWalletId'] = $adminWalletObject->id;
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount, 'admin');
+                $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
+
+                try {
+                    /* user wallet object */
+                    $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
+                    if (!empty($adminWalletObject)) {
+                        if ($userId != '1') {
+                            $adminWalletObject->fund = ($adminWalletObject->fund) - ($transactionObject->paid_amount);
+                            $adminWalletObject->update(false);
+                        }
+                    }
+                } catch (Exception $ex) {
                     $ex->getMessage();
                     exit;
                 }
@@ -452,27 +437,26 @@ We are pleased to inform you that your binary commissions have credited to your 
                 $userObjectArr['date'] = $transactionObject->created_at;
                 $userObjectArr['fund'] = $transactionObject->paid_amount;
                 $userObjectArr['transactionId'] = $transactionObject->transaction_id;
-                /*mail to user*/
+                /* mail to user */
                 $config['to'] = $toUserObjectMail->email;
                 $config['subject'] = 'Fund Transfered';
-                $config['body'] =  $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
+                $config['body'] = $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr' => $userObjectArr), true);
                 CommonHelper::sendMail($config);
-            
-            $this->redirect('/admin/user/wallet?successmsg=1');
-        }else{
-            $error .= "User does not exist.";
+
+                $this->redirect('/admin/user/wallet?successmsg=1');
+            } else {
+                $error .= "User does not exist.";
+            }
         }
-        }
-        
-        if(!empty($_GET))
-        {
-        $userId = $_GET['id'];
-        }else{
-         $userId = 0;   
+
+        if (!empty($_GET)) {
+            $userId = $_GET['id'];
+        } else {
+            $userId = 0;
         }
         $userObject = User::model()->findByPk($userId);
-        
-        $this->render('creditwallet', array('userObject' => $userObject,'error'=>$error));
+
+        $this->render('creditwallet', array('userObject' => $userObject, 'error' => $error));
     }
 
     public function actionDebitWallet() {
@@ -481,13 +465,12 @@ We are pleased to inform you that your binary commissions have credited to your 
             $userObject = User::model()->findByPk($userId);
             $type = $_POST['walletId'];
             $fundAmount = $_POST['paid_amount'];
-            if($_POST['comment']== '')
-            {
-               $_POST['comment'] = 'Fund deducted by admin'; 
+            if ($_POST['comment'] == '') {
+                $_POST['comment'] = 'Fund deducted by admin';
             }
             $postDataArray = $_POST;
-             
-            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject,'admin');
+
+            $transactionObject = Transaction::model()->createTransaction($postDataArray, $userObject, 'admin');
             $transactionObject = Transaction::model()->findByPk($transactionObject->id);
             $walletObject = Wallet::model()->findByAttributes(array('user_id' => $userId, 'type' => $type));
             $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => 1, 'type' => $type));
@@ -495,13 +478,12 @@ We are pleased to inform you that your binary commissions have credited to your 
             if (!empty($walletObject)) {
                 $fundAmount = ($walletObject->fund - $fundAmount);
                 $postDataArray['walletId'] = $walletObject->id;
-                
-                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
-             
+
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount, 'admin');
             } else {
                 $walletObject = new Wallet;
             }
-            
+
             $walletObject->user_id = $userId;
             $walletObject->fund = $fundAmount;
             $walletObject->type = $type; //fund added by admin
@@ -512,36 +494,36 @@ We are pleased to inform you that your binary commissions have credited to your 
                 echo "<pre>";
                 print_r($walletObject->getErrors());
                 exit;
-                var_dump($postDataArray);exit;
-             $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount,'admin');
-                
+                var_dump($postDataArray);
+                exit;
+                $moneyTransferObject = MoneyTransfer::model()->createMoneyTransfer($postDataArray, $userObject, $transactionObject->id, $transactionObject->paid_amount, 'admin');
             }
-            try{
-             /*user wallet object*/
-              $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
-              if(!empty($adminWalletObject))
-              {
-                 $adminWalletObject->fund = ($adminWalletObject->fund) + ($transactionObject->paid_amount);
-                 $adminWalletObject->update(false);
-             }}catch (Exception $ex) {
-                    $ex->getMessage();
-                    exit;
+            try {
+                /* user wallet object */
+                $adminWalletObject = Wallet::model()->findByAttributes(array('user_id' => Yii::app()->session['userid'], 'type' => $type));
+                if (!empty($adminWalletObject)) {
+                    $adminWalletObject->fund = ($adminWalletObject->fund) + ($transactionObject->paid_amount);
+                    $adminWalletObject->update(false);
                 }
-                $userObjectArr = array();
-                $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
-                $userObjectArr['to_name'] = $toUserObjectMail->name;
-                $userObjectArr['full_name'] = $toUserObjectMail->full_name;
-                $userObjectArr['from_name'] = 'Super Admin';
-                $userObjectArr['date'] = $transactionObject->created_at;
-                $userObjectArr['fund'] = $transactionObject->paid_amount;
-                $userObjectArr['transactionId'] = $transactionObject->transaction_id;
-                 
-                /*mail to user*/
-                $config['to'] = $toUserObjectMail->email;
-                $config['subject'] = 'Fund Deducted';
-                $config['body'] =  $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr'=>$userObjectArr),true);
-                CommonHelper::sendMail($config);
-              $this->redirect('/admin/user/wallet?successmsg=2');
+            } catch (Exception $ex) {
+                $ex->getMessage();
+                exit;
+            }
+            $userObjectArr = array();
+            $toUserObjectMail = User::model()->findByPK($moneyTransferObject->to_user_id);
+            $userObjectArr['to_name'] = $toUserObjectMail->name;
+            $userObjectArr['full_name'] = $toUserObjectMail->full_name;
+            $userObjectArr['from_name'] = 'Super Admin';
+            $userObjectArr['date'] = $transactionObject->created_at;
+            $userObjectArr['fund'] = $transactionObject->paid_amount;
+            $userObjectArr['transactionId'] = $transactionObject->transaction_id;
+
+            /* mail to user */
+            $config['to'] = $toUserObjectMail->email;
+            $config['subject'] = 'Fund Deducted';
+            $config['body'] = $this->renderPartial('../mailTemplate/fund_transfer', array('userObjectArr' => $userObjectArr), true);
+            CommonHelper::sendMail($config);
+            $this->redirect('/admin/user/wallet?successmsg=2');
         }
         $userId = $_GET['id'];
         $userObject = User::model()->findByPk($userId);
@@ -621,23 +603,22 @@ We are pleased to inform you that your binary commissions have credited to your 
             $todayDate = $_POST['from'];
             $fromDate = $_POST['to'];
             $status = $_POST['res_filter'];
-              if($status  != 'all')
-            {
-              $cond = 'updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate .'" AND document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
-            }else{
-              $cond = 'updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate .'" AND document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
+            if ($status != 'all') {
+                $cond = 'updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate . '" AND document_status = "' . $status . '" AND id_proof != "" AND address_proff != ""';
+            } else {
+                $cond = 'updated_at >= "' . $todayDate . '" AND updated_at <= "' . $fromDate . '" AND document_status IN (1,0) AND id_proof != "" AND address_proff != ""';
             }
-             
+
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
                     'condition' => ($cond), 'order' => 'id DESC',
                 ), 'pagination' => array('pageSize' => $pageSize),
             ));
         } else {
-           
+
             $dataProvider = new CActiveDataProvider($model, array(
                 'criteria' => array(
-                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate .'" AND id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
+                    'condition' => ('created_at >= "' . $todayDate . '" AND created_at <= "' . $fromDate . '" AND id_proof != "" AND address_proff != "" AND document_status = "' . $status . '"'), 'order' => 'id DESC',
                 ),
                 'pagination' => array('pageSize' => $pageSize),
             ));
@@ -703,7 +684,7 @@ We are pleased to inform you that your binary commissions have credited to your 
                 $userprofileObject->testimonial_status = 1;
             }
             $userprofileObject->save(false);
-            
+
             $this->redirect(array('/admin/user/testimonialapproval', 'successMsg' => 1));
         }
     }
@@ -775,35 +756,34 @@ We are pleased to inform you that your binary commissions have credited to your 
         $fullName = "'" . $data->name . "'";
         echo '<a onclick="OpenChatBox(' . $fullName . ')">Click to chat</a>';
     }
-    
-    public function actionResetPassword() { 
+
+    public function actionResetPassword() {
         $error = "";
         $success = "";
         $userObject = User::model()->findByPK(Yii::app()->session['userid']);
         if (!empty($_POST)) {
             if ($_POST['UserProfile']['old_password'] != '' && $_POST['UserProfile']['new_password'] != '' && $_POST['UserProfile']['confirm_password'] != '') {
-                 
-                    if ($userObject->password != md5($_POST['UserProfile']['old_password'])) {
-                        $error .= "Incorrect old password";
-                    } else {
-                        $userObject->password = md5($_POST['UserProfile']['new_password']);
-                        if ($userObject->update()) {
-                            /*$userObjectArr = array();
-                            $userObjectArr['full_name'] = $userObject->full_name;
-                            $userObjectArr['name'] = $userObject->name;
-                            $userObjectArr['ip'] = Yii::app()->params['ip'];
-                            $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
-                            $success .= "Your password changed successfully";
-                            $config['to'] = $userObject->email;
-                            $config['subject'] = 'mGlobally Password Changed';
-                            $config['body'] =  $this->renderPartial('//mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
-                        
-                            //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
-                            CommonHelper::sendMail($config);*/
-                            $success .= "Your password changed successfully";
-                        }
+
+                if ($userObject->password != md5($_POST['UserProfile']['old_password'])) {
+                    $error .= "Incorrect old password";
+                } else {
+                    $userObject->password = md5($_POST['UserProfile']['new_password']);
+                    if ($userObject->update()) {
+                        /* $userObjectArr = array();
+                          $userObjectArr['full_name'] = $userObject->full_name;
+                          $userObjectArr['name'] = $userObject->name;
+                          $userObjectArr['ip'] = Yii::app()->params['ip'];
+                          $userObjectArr['new_password'] = $_POST['UserProfile']['new_password'];
+                          $success .= "Your password changed successfully";
+                          $config['to'] = $userObject->email;
+                          $config['subject'] = 'mGlobally Password Changed';
+                          $config['body'] =  $this->renderPartial('//mailTemp/change_password', array('userObjectArr'=>$userObjectArr),true);
+
+                          //$config['body'] = 'Hey ' . $userObject->full_name . ',<br/>You recently changed your password. As a security precaution, this notification has been sent to your email addresses.';
+                          CommonHelper::sendMail($config); */
+                        $success .= "Your password changed successfully";
                     }
-                 
+                }
             } else {
                 $error .="Please fill all required(*) marked fields.";
             }
@@ -812,7 +792,6 @@ We are pleased to inform you that your binary commissions have credited to your 
         $this->render('resetpassword', array(
             'error' => $error, 'success' => $success,
         ));
-      
     }
 
     protected function gridAddressImagePopup($data, $row) {
@@ -840,12 +819,11 @@ We are pleased to inform you that your binary commissions have credited to your 
                         </div>
                 </div>';
     }
-    
-    
+
     public function actionAdd() {
-        $error ="";
-        $success ="";
-        if ($_POST) {            
+        $error = "";
+        $success = "";
+        if ($_POST) {
             /* Already Exits */
             $userObject = User::model()->findByAttributes(array('name' => $_POST['name']));
             if (count($userObject) == 0) {
@@ -880,7 +858,6 @@ We are pleased to inform you that your binary commissions have credited to your 
                 $accessObject->save();
                 $success = "User Created Successfully.";
             }
-            
         }
         $spnId = "";
         if ($_GET) {
@@ -892,8 +869,7 @@ We are pleased to inform you that your binary commissions have credited to your 
         }
         $countryObject = Country::model()->findAll();
 
-        $this->render('user_add', array('countryObject' => $countryObject, 'spnId' => $spnId,'error' => $error,'success'=>$success));
+        $this->render('user_add', array('countryObject' => $countryObject, 'spnId' => $spnId, 'error' => $error, 'success' => $success));
     }
-    
 
 }
