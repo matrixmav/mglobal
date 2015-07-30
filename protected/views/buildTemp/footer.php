@@ -20,10 +20,18 @@ $this->breadcrumbs = array(
 
     <?php if ($error) { ?><p class="error-2" id="error_msg"><i class="fa fa-times-circle icon-error"></i><span class="span-error-2"><?php echo $error; ?></span></p><?php } ?>
     <?php if ($success) { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $success; ?></span></p><?php } ?>
+   <div class="col-md-12 col-sm-12">
+    <div class="portlet box orange ">
+    <div class="portlet-title">
+							<div class="caption">
+								Contact Setting
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
-            <legend>Contact Setting</legend>          
+             <div class="form-body">  
                 <div class="form-group">
                     <label class="col-lg-2 control-label" for="lastname">Footer<span class="require">*</span></label>
                     <div class="col-lg-10">
@@ -31,16 +39,18 @@ $this->breadcrumbs = array(
                         <span id="contact_error"></span>
                     </div>
                 </div>
+             </div>
         </fieldset>
 
-        <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn orange">
-
+        
+        <div class="form-actions right">                     
+                    <input type="submit" name="submit" value="Submit" class="btn orange">
+                 
             </div>
-        </div>
+        
     </form>
 </div>
+    </div>
 
 <script type="text/javascript">
     function validation()

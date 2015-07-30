@@ -16,11 +16,18 @@ $this->breadcrumbs = array(
 <?php if ($success) { ?><p class="success-2" id="error_msg"><i class="fa fa-check-circle icon-success"></i><span class="span-success-2"><?php echo $success; ?></span></p><?php } ?>
 
 <div class="col-md-7 col-sm-7">
-    
+     <div class="portlet box orange ">
+    <div class="portlet-title">
+							<div class="caption">
+								Add Logo
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form action="" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
 
         <fieldset>
-            <legend>Add Logo</legend>
+           
+            <div class="form-body">
             <div class="form-group">
                 <label class="col-lg-4 control-label" for="lastname">Logo<span class="require">*</span></label>
                 <div class="col-lg-8 fileupload fileupload-new">
@@ -43,14 +50,14 @@ $this->breadcrumbs = array(
             
             <div class="form-group form-horizontal">
                <label class="col-sm-2 control-label" for="lastname">Width</label>
-               <div class="fileupload fileupload-new col-sm-10" data-provides="fileupload">
+               <div class="fileupload fileupload-new col-sm-9" data-provides="fileupload">
                    <input type="text" class="form-control" id="width" name="width" placeholder="Width" value="<?php echo $userhasObject->logo_width ? $userhasObject->logo_width : '';  ?>">
                </div>
            </div>
             
             <div class="form-group  form-horizontal">
                <label class="col-sm-2 control-label" for="lastname">Height</label>
-               <div class="fileupload fileupload-new col-sm-10" data-provides="fileupload">
+               <div class="fileupload fileupload-new col-sm-9" data-provides="fileupload">
                    <input type="text" class="form-control" id="height" name="height" placeholder="Height" value="<?php echo $userhasObject->logo_height ? $userhasObject->logo_height : '';  ?>">
                </div>
            </div>
@@ -58,19 +65,21 @@ $this->breadcrumbs = array(
                     
             <div class="form-group form-horizontal">
                 <label class="col-sm-2 control-label" for="lastname">Site Title</label>
-                <div class="fileupload fileupload-new col-sm-10" data-provides="fileupload">
+                <div class="fileupload fileupload-new col-sm-9" data-provides="fileupload">
                     <input type="text" value="<?php echo $userhasObject->site_title ? stripcslashes($userhasObject->site_title) : ''; ?>" name="site_title"  class="form-control" id="copyright">  
                 </div>
             </div> 
             
-            <div class="row">
-                <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                    <input type="submit" name="submit" value="Submit" class="btn orange">
-
-                </div>
+                
+                <div class="form-actions right">                     
+               <input type="submit" name="submit" value="Submit" class="btn orange">
+                 
             </div>
+            
+                </div>
         </fieldset>
     </form>
+    </div>
 </div>
 
 <!--<script type="text/javascript">

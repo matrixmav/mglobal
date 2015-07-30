@@ -17,11 +17,17 @@ $this->breadcrumbs = array(
     <div class="row"><div class="col-sm-12"><a href="/BuildTemp/managewebsite/<?php echo Yii::app()->session['orderID']; ?>/<?php echo $userpagesObject->page_slug ; ?>" class="btn green pull-right" target="_blank">Preview</a></div> </div>
    
     <?php echo BaseClass::buildWebsiteHeader(); ?> 
-    
+    <div class="portlet box orange ">
+    <div class="portlet-title">
+							<div class="caption">
+								Edit Pages
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form action="/BuildTemp/pagedit?id=<?php echo $_GET['id']; ?>" method="post" class="form-horizontal" onsubmit="return validation();" enctype="multipart/form-data">
      
         <fieldset>
-            <legend>Edit Pages</legend>
+            <div class="form-body">
              <div class="form-group">
                 <label class="col-sm-2 control-label" for="lastname">Page Title<span class="require">*</span></label>
                 <div class="col-sm-2">
@@ -67,18 +73,18 @@ $this->breadcrumbs = array(
                     <span id="page_content_error"></span>
                 </div>
             </div>
-            
+            </div>
           </fieldset>
 
-    <div class="row">
-            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">                        
-                <input type="submit" name="submit" value="Submit" class="btn orange">
+        <div class="form-actions right">                     
+               <input type="submit" name="submit" value="Submit" class="btn orange">
                  
             </div>
-        </div>
+    
     </form>
 </div>
-
+</div>
+</div>
 <script type="text/javascript">
     function validation()
     {

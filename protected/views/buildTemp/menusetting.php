@@ -21,8 +21,15 @@ $this->breadcrumbs = array(
     
 </div>
 <link rel="stylesheet" href="<?php echo Yii::app()->getBaseUrl(true); ?>/css/drag_drop.css">    
+<div class="portlet box orange ">
+    <div class="portlet-title">
+							<div class="caption">
+								Contact Setting
+							</div>
+    </div>
+    <div class="portlet-body form">
     <form method="post" action="">
-
+<div class="form-body">  
     <div class="cf nestable-lists">
         <div class="dd" id="nestable">
             <ol class="dd-list">
@@ -42,7 +49,7 @@ $this->breadcrumbs = array(
                                         }    
                                     echo '</ol>';
                                 }else{
-
+                                    
                                 }
                          echo  '</li>';
                     }
@@ -54,10 +61,16 @@ $this->breadcrumbs = array(
         <!--<textarea id="nestable-output" name="nestable1" class="form_control" hidden=""></textarea>-->
         <input type="hidden" id="nestable-output" name="nestable1" class="form_control" value="">
     </div>
+    <div class="form-actions right">                     
+                      <input type="submit" name="submit" value="submit" class="btn orange">
+                 
+            </div>
     
-        <input type="submit" name="submit" value="submit" class="btn orange">
+     
 </form>
-    
+    </div>
+    </div>
+</div>
 <script src="<?php echo Yii::app()->getBaseUrl(true); ?>/js/jquery.nestable.js"></script>
 <script>
 
