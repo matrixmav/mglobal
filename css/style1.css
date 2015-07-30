@@ -2115,7 +2115,8 @@ color:#FFF; background: #c9c9c9;}
 .testimonials-block .carousel-control .glyphicon-chevron-left,.testimonials-block .carousel-control .glyphicon-chevron-right, .testimonials-block .carousel-control .icon-next, .testimonials-block .carousel-control .icon-prev{top:105%; background: #c9c9c9;}
 .testimonials-block .carousel-control.right, .testimonials-block .carousel-control.left{ background-image: none;}
 /*--------------tyemplate search-------------*/
-.tempSearch .select-style{ border:none; color:#FFF; font-weight: bold; min-width: 200px;
+.tempSearch .select-style::-ms-expand { display: none; }
+.tempSearch .select-style{ border:none; color:#FFF; font-weight: bold; min-width: 200px; appearance: none;
 
     -moz-appearance: none; -webkit-appearance: none;
     background: #f15d2a url("../images/select-arrow.png") no-repeat scroll 95% 50%;
@@ -2132,7 +2133,8 @@ color:#FFF; background: #c9c9c9;}
     background: #f5f5f5;
     border-radius: 30px; box-shadow: 0 0 15px #cecece inset; -moz-box-shadow: 0 0 15px #cecece inset; -webkit-box-shadow: 0 0 15px #cecece inset;}
 .tempSearch{ padding: 10px 0 20px 0 !important;}
-.marqBox{display:inline-block; margin: auto 20px;}
+.marqBox{display:inline-block; margin: auto 20px; max-width: 125px;}
+.marqBox >img{max-width: 125px;}
 /*--------------testimonials-------------*/
 
 .testimonialBox {opacity:1;}
@@ -2350,6 +2352,6 @@ color:#FFF; background: #c9c9c9;}
 }
 .policy-section ul li
 {
-    margin: 0 6px;
+    margin: 0 6px;   
 }
 }
