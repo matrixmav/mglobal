@@ -311,6 +311,8 @@ position: absolute;
     border: medium none;}
 .navbar-toggle .icon-bar{background:#FFF;}
 #inputGroupSuccess3{color:#FFF;}
+.detailTxt{width: 90%; display: inline-block; word-break: break-all;}
+.detailTxt:focus{border:none;}
 @media (max-device-width: 480px) and (min-device-width: 320px)
 {
     .top-ul{padding:0;}
