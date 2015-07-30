@@ -1004,7 +1004,7 @@
           <img src="images/clients-logo/payza_logo.png" alt="gamescast">
         </div>
                <div class="marqBox">
-          <img src="images/clients-logo/perfectmoneylogo.png" alt="gamescast">
+          <img src="images/clients-logo/perfectmoney_logo.png" alt="gamescast">
         </div>
                <div class="marqBox">
           <img src="images/clients-logo/redPass_logo.png" alt="gamescast">
