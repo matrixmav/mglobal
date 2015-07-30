@@ -306,9 +306,10 @@ right connector from last child*/
 .basicP > p{display: inline-block; font-size: 14px; max-width: 160px;}
 .detailPackage tr{}
 .detailPackage th{ color: #aeaeae; font-size: 15px;}
-.packageDetail{ width: 300px;}
-.packageDetail li{ border-bottom: 1px dashed #c1c1c1; margin-top: 5px; background: url(/images/bullets-icon.png) left 30% no-repeat; list-style: none; font-size: 15px;width: 85%;}
-.packageDetail p{display: inline-block; width: 200px; padding-left: 20px;} 
+.packageDetail{ width: 100%; height: 100%;}
+#popover_content_wrapper{ box-shadow: none; margin: 0; padding: 0;}
+/*.packageDetail li{ border-bottom: 1px dashed #c1c1c1; margin-top: 5px; background: url(/images/bullets-icon.png) left 30% no-repeat; list-style: none; font-size: 15px;width: 85%;}
+.packageDetail p{display: inline-block; width: 200px; padding-left: 20px;} */
 
 .detailPackage .col-sm-3.col-xs-12{ border: 1px dashed #c1c1c1;}
 .detailPackage .col-sm-3.col-xs-12 table{width: 100%;}
