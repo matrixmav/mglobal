@@ -73,7 +73,7 @@
           <!-- END BOTTOM CONTACTS -->
           <div class="pre-footer-subscribe-box">
                 <a href=""><img src="/images/whatsapp-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +525527895477</span></a><br/><br/>
-                <a href=""><img src="/images/skype-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +525527895477</span></a><br/><br/>
+                <a href=""><img src="/images/call-icon.png" width="" height="" /><span class="con-f"> :&nbsp; +525527895477</span></a><br/><br/>
           </div>
         </div>
       </div>
