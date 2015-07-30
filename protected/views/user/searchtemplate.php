@@ -65,7 +65,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $categoryObjectList->name;?>" aria-expanded="false">
-                                <?php echo $categoryObjectList->name ; ?>
+                                <span class="detailTxt"> <?php echo $categoryObjectList->name ; ?></span>
                                 <span class="colapse-icon"><i class="indicator  pull-right accordin-icon glyphicon <?php if(!empty($_GET['key']) && strtolower($categoryObjectList->name) == $_GET['key']){?>glyphicon-minus <?php }else{?>glyphicon-plus<?php }?>"></i></span>  </a>
                         </h4>
                     </div>
