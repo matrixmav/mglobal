@@ -986,23 +986,37 @@
         
           <div class="row">
         <div class="marqBox">
-          <img src="images/cisco.png" alt="cisco">
+          <img src="images/clients-logo/bitcoin_logo.png" alt="cisco">
         </div>
         <div class="marqBox">
-          <img src="images/walmart.png" alt="walmart">
+          <img src="images/clients-logo/ok_pay_logo.png" alt="walmart">
         </div>
         <div class="marqBox">
-          <img src="images/gamescast.png" alt="gamescast">
+          <img src="images/clients-logo/paxum_logo.png" alt="gamescast">
         </div>
         <div class="marqBox">
-          <img src="images/spinwokrx.png" alt="spinwokrx">
+          <img src="images/clients-logo/paypal-logo.png" alt="spinwokrx">
         </div>
         <div class="marqBox">
-          <img src="images/ngreen.png" alt="ngreen">
+          <img src="images/clients-logo/payweb_logo.png" alt="ngreen">
         </div>
         <div class="marqBox">
-          <img src="images/gamescast.png" alt="gamescast">
+          <img src="images/clients-logo/payza_logo.png" alt="gamescast">
         </div>
+               <div class="marqBox">
+          <img src="images/clients-logo/perfectmoneylogo.png" alt="gamescast">
+        </div>
+               <div class="marqBox">
+          <img src="images/clients-logo/redPass_logo.png" alt="gamescast">
+        </div> 
+              <div class="marqBox">
+          <img src="images/clients-logo/solidtrustpay_logo.png" alt="gamescast">
+        </div> 
+              <div class="marqBox">
+          <img src="images/clients-logo/yandex-money-logo.png" alt="gamescast">
+        </div>
+              
+              
       </div>
     </div>
       </div>
