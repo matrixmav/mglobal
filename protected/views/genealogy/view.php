@@ -47,7 +47,7 @@ $empty = "sm-blank" ; //no Package
                         <div>
                             <span class="myPop" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content=""><?php echo $userObject->name; ?>
                                 <div id="popover_content_wrapper" style="display: none; ">
-                                    <ul class="packageDetail">
+<!--                                    <ul class="packageDetail">
                                         <li><p>Total Left Registration</p><span><?php  echo $getUserPurchase->left_user ; ?></span> </li>
                                         <li><p>Total Right Registration</p><span><?php echo $getUserPurchase->right_user ; ?></span> </li>
                                         <li><p>Total Left Purchase</p><span> <?php echo $getUserPurchase->left_purchase; ?></span> </li>
@@ -55,7 +55,28 @@ $empty = "sm-blank" ; //no Package
                                         <li><p>Total Left Sponsor</p><span><?php echo count($userObjectSponorLeft); ?></span> </li>
                                         <li><p>Total Right Sponsor</p><span><?php echo count($userObjectSponorRight); ?></span> </li>
                                     
-                                    </ul>
+                                    </ul>-->
+                                           <div class="packageDetail">
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                        <tr class="danger"> 
+                                                            <td>Description</td>
+                                                            <td>Left</td>
+                                                            <td>Right</td>
+                                                        </tr>
+                                                        <tr class="info">
+                                                             <td>Total  Registration</td>
+                                                            <td>1</td>
+                                                            <td>1</td>
+                                                        </tr>
+                                                        <tr>
+                                                              <td>Total  Registration pending</td>
+                                                            <td>1</td>
+                                                            <td>1</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                 </div>
                             </span>
                         </div>
@@ -143,6 +164,7 @@ $empty = "sm-blank" ; //no Package
             </ul>
         </div> 
     </div>    
+   
 </div>
    
 <div class="row">
